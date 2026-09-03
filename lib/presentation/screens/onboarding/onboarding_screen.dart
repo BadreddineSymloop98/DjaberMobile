@@ -203,7 +203,7 @@ class _SlideView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.gutter),
+      padding: EdgeInsets.symmetric(horizontal: AppSpacing.gutter),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -214,7 +214,7 @@ class _SlideView extends StatelessWidget {
             child: Center(
               child: RiseFade(
                 animate: reveal,
-                offset: 28,
+                offset: 3.32.h, // 28 on the 844-tall frame
                 duration: const Duration(milliseconds: 560),
                 // The artwork is drawn at the 350dp width of the design frame.
                 // Scaling it down is deliberate: these are dense compositions
@@ -232,7 +232,7 @@ class _SlideView extends StatelessWidget {
             delay: const Duration(milliseconds: 90),
             child: Text(slide.title, style: AppText.displayM),
           ),
-          const SizedBox(height: AppSpacing.md),
+          SizedBox(height: AppSpacing.md),
           RiseFade(
             animate: reveal,
             delay: const Duration(milliseconds: 160),
@@ -257,7 +257,7 @@ class _SkipBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 56,
+      height: 6.64.h, // 56
       child: Align(
         alignment: AlignmentDirectional.centerEnd,
         child: AnimatedOpacity(
@@ -266,7 +266,7 @@ class _SkipBar extends StatelessWidget {
           child: IgnorePointer(
             ignoring: !visible,
             child: Padding(
-              padding: const EdgeInsets.only(right: AppSpacing.sm),
+              padding: EdgeInsets.only(right: AppSpacing.sm),
               child: TextButton(
                 onPressed: onSkip,
                 child: Text(
@@ -301,7 +301,7 @@ class _Footer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(
+      padding: EdgeInsets.fromLTRB(
         AppSpacing.gutter,
         AppSpacing.lg,
         AppSpacing.gutter,
@@ -310,7 +310,7 @@ class _Footer extends StatelessWidget {
       child: Column(
         children: [
           _PageDots(count: count, index: index),
-          const SizedBox(height: AppSpacing.xl),
+          SizedBox(height: AppSpacing.xl),
           FilledButton(onPressed: onPressed, child: Text(label)),
         ],
       ),
@@ -336,9 +336,9 @@ class _PageDots extends StatelessWidget {
         return AnimatedContainer(
           duration: AppDuration.normal,
           curve: Curves.easeOutCubic,
-          margin: const EdgeInsets.symmetric(horizontal: AppSpacing.xs),
-          height: 3,
-          width: active ? 24 : 8,
+          margin: EdgeInsets.symmetric(horizontal: AppSpacing.xs),
+          height: 0.77.w, // 3
+          width: active ? 6.15.w : 2.05.w, // 24 / 8
           decoration: BoxDecoration(
             color: active ? AppColors.textPrimary : AppColors.ruleStrong,
             borderRadius: BorderRadius.circular(AppRadius.pill),

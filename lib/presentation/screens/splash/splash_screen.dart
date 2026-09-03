@@ -56,13 +56,13 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: AppColors.ink,
       body: Center(
         child: RiseFade(
           duration: SplashScreen._riseDuration,
-          offset: 28,
-          child: _SplashLogo(),
+          offset: 3.32.h, // 28 on the 844-tall frame
+          child: const _SplashLogo(),
         ),
       ),
     );

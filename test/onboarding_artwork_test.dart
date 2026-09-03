@@ -80,7 +80,8 @@ void main() {
     // so the card stretched the full height of the slide.
     final card = tester.getSize(find.byType(EscalationArtwork));
     expect(card.height, lessThan(600));
-    expect(card.width, 350, reason: 'drawn at the design frame width');
+    // 89.74% of the screen width — the design frame's 350 on a 390 frame.
+    expect(card.width, closeTo(400 * 0.8974, 0.1));
   });
 
   testWidgets('Arabic mirrors the layout', (tester) async {

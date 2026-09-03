@@ -1,3 +1,5 @@
+import 'dart:ui' show FlutterView;
+
 import 'package:flutter/widgets.dart';
 
 /// Holds the current screen metrics so the `.h` / `.w` extension can be a plain
@@ -44,6 +46,26 @@ class Screen {
   /// width is the realistic floor, not the exception.
   static bool get isSmall => shortestSide < 360;
   static bool get isTablet => shortestSide >= 600;
+
+  /// Seeds the metrics from the platform before the first frame.
+  ///
+  /// Necessary because the theme — which now sizes everything through `.w` —
+  /// is built inside `MaterialApp`'s constructor, which runs *before*
+  /// [ScreenInitializer] does. Without this the first frame would lay out
+  /// against a zero-width screen and then correct itself, which is visible.
+  static void seedFromView(FlutterView view) {
+    // Before the engine reports its first frame metrics this is 0x0. Seeding
+    // zeros would be worse than not seeding at all, so skip it — the real
+    // values arrive through MediaQuery a moment later.
+    if (view.physicalSize.isEmpty) return;
+    final ratio = view.devicePixelRatio;
+    _width = view.physicalSize.width / ratio;
+    _height = view.physicalSize.height / ratio;
+    _statusBar = view.padding.top / ratio;
+    _bottomInset = view.padding.bottom / ratio;
+    _devicePixelRatio = ratio;
+    _initialized = true;
+  }
 
   static void update(MediaQueryData mq) {
     _width = mq.size.width;

@@ -63,7 +63,28 @@ class _DjaberAppState extends State<DjaberApp> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
+    // A MediaQuery *above* MaterialApp, so [Screen] is populated before the
+    // theme is constructed.
+    //
+    // The theme now sizes buttons, icons and radii through `.w`, and it is
+    // built inside `MaterialApp`'s constructor — which runs before anything
+    // inside `MaterialApp.builder`. Without this the first theme is computed
+    // against a zero-width screen, and since the theme is not rebuilt when the
+    // metrics later arrive, it stays wrong: buttons collapse to their
+    // intrinsic height for the life of the app.
+    //
+    // `MediaQuery.fromView` also listens for metric changes, so a rotation,
+    // split screen or a font-scale change rebuilds the theme rather than
+    // leaving it stale.
+    return MediaQuery.fromView(
+      view: View.of(context),
+      child: Builder(builder: _buildApp),
+    );
+  }
+
+  Widget _buildApp(BuildContext context) {
     final localeModel = context.watch<LocaleViewModel>();
+    Screen.update(MediaQuery.of(context));
 
     return MaterialApp.router(
       title: 'Djaber.ai',

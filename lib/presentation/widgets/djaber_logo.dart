@@ -21,7 +21,7 @@ class DjaberLogo extends StatelessWidget {
     this.size = 40,
     this.showWordmark = true,
     this.showTagline = false,
-    this.gap = AppSpacing.md,
+    this.gap,
   });
 
   /// Width and height of the mark. The wordmark scales with it, keeping the
@@ -34,8 +34,9 @@ class DjaberLogo extends StatelessWidget {
   /// of the lockup. Off in headers, on where the brand is introduced.
   final bool showTagline;
 
-  /// Space between the mark and the wordmark.
-  final double gap;
+  /// Space between the mark and the wordmark. Defaults to `AppSpacing.md`,
+  /// which is a runtime value and so cannot be a default argument.
+  final double? gap;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,7 @@ class DjaberLogo extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         mark,
-        SizedBox(width: gap),
+        SizedBox(width: gap ?? AppSpacing.md),
         Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
