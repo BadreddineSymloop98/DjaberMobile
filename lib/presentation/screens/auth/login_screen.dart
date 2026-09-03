@@ -62,7 +62,6 @@ class _LoginView extends StatelessWidget {
       ),
       children: [
         AppTextField(
-          isRequired: true,
           label: l10n.authEmail,
           controller: model.email.controller,
           focusNode: model.email.focusNode,
@@ -83,7 +82,6 @@ class _LoginView extends StatelessWidget {
         ),
         SizedBox(height: AppSpacing.lg),
         AppTextField(
-          isRequired: true,
           label: l10n.authPassword,
           controller: model.password.controller,
           focusNode: model.password.focusNode,

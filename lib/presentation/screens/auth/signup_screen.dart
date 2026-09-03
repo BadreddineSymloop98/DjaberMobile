@@ -133,7 +133,7 @@ class _SignupView extends StatelessWidget {
           inputFormatters: [LengthLimitingTextInputFormatter(128)],
           onSubmitted: (_) => model.submit(),
         ),
-        SizedBox(height: AppSpacing.lg),
+        SizedBox(height: AppSpacing.beforeAction),
         AuthSubmitButton(label: l10n.authSignupSubmit, onPressed: model.submit),
       ],
     );

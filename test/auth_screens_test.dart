@@ -213,6 +213,54 @@ void main() {
     expect(firstName.width, greaterThan(411 / 2));
   });
 
+  /// Measured rather than asserted against the token, so a change to how the
+  /// gap is built still has to produce the number the frame specifies.
+  Future<double> signupButtonGap(WidgetTester tester, Size frame) async {
+    tester.view.physicalSize = frame;
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+
+    await tester.pumpWidget(host(const SignupScreen()));
+    await tester.pumpAndSettle();
+
+    final lastField = tester.getRect(
+      find
+          .ancestor(
+            of: find.byType(TextField).last,
+            matching: find.byType(Container),
+          )
+          .first,
+    );
+    return tester.getRect(find.byType(FilledButton)).top - lastField.bottom;
+  }
+
+  testWidgets('the sign-up button sits 34 below the last field', (tester) async {
+    // On the design frame the token resolves to the Figma number exactly.
+    expect(await signupButtonGap(tester, const Size(390, 844)), closeTo(34, 0.5));
+  });
+
+  testWidgets('that gap scales with the screen', (tester) async {
+    // On a wider handset it grows in proportion rather than staying put.
+    expect(
+      await signupButtonGap(tester, const Size(411, 914)),
+      closeTo(34 * 411 / 390, 0.5),
+    );
+  });
+
+  testWidgets('only sign-up marks its fields required', (tester) async {
+    tester.view.physicalSize = const Size(411, 914);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+
+    await tester.pumpWidget(host(const SignupScreen()));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('*', findRichText: true), findsWidgets);
+
+    await tester.pumpWidget(host(const LoginScreen()));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('*', findRichText: true), findsNothing);
+  });
+
   testWidgets('the email field refuses whitespace', (tester) async {
     tester.view.physicalSize = const Size(411, 914);
     tester.view.devicePixelRatio = 1;

@@ -33,6 +33,13 @@ class AppSpacing {
   /// The tighter gutter used inside a card.
   static double get gutterTight => 4.10.w; // 16
 
+  /// The room before a primary action on the sign-up form.
+  ///
+  /// Wider than the 16 between fields, so the button reads as the end of the
+  /// form rather than another row in it. Login keeps 16 — the control above
+  /// its button is a 16px checkbox, not a field, so it needs less air.
+  static double get beforeAction => 8.72.w; // 34
+
 }
 
 class AppRadius {
