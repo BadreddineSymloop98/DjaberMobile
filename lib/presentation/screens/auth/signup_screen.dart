@@ -75,6 +75,7 @@ class _SignupView extends StatelessWidget {
         // an error message no room — "Le prénom est requis" wrapped to two
         // lines under a 171dp field and shifted the one beside it.
         AppTextField(
+          isRequired: true,
           label: l10n.authFirstName,
           controller: model.firstName.controller,
           focusNode: model.firstName.focusNode,
@@ -88,6 +89,7 @@ class _SignupView extends StatelessWidget {
         ),
         SizedBox(height: AppSpacing.lg),
         AppTextField(
+          isRequired: true,
           label: l10n.authLastName,
           controller: model.lastName.controller,
           focusNode: model.lastName.focusNode,
@@ -101,6 +103,7 @@ class _SignupView extends StatelessWidget {
         ),
         SizedBox(height: AppSpacing.lg),
         AppTextField(
+          isRequired: true,
           label: l10n.authEmail,
           controller: model.email.controller,
           focusNode: model.email.focusNode,
@@ -117,6 +120,7 @@ class _SignupView extends StatelessWidget {
         ),
         SizedBox(height: AppSpacing.lg),
         AppTextField(
+          isRequired: true,
           label: l10n.authPassword,
           controller: model.password.controller,
           focusNode: model.password.focusNode,
@@ -129,7 +133,7 @@ class _SignupView extends StatelessWidget {
           inputFormatters: [LengthLimitingTextInputFormatter(128)],
           onSubmitted: (_) => model.submit(),
         ),
-        SizedBox(height: AppSpacing.beforeAction),
+        SizedBox(height: AppSpacing.lg),
         AuthSubmitButton(label: l10n.authSignupSubmit, onPressed: model.submit),
       ],
     );

@@ -62,6 +62,7 @@ class _LoginView extends StatelessWidget {
       ),
       children: [
         AppTextField(
+          isRequired: true,
           label: l10n.authEmail,
           controller: model.email.controller,
           focusNode: model.email.focusNode,
@@ -82,6 +83,7 @@ class _LoginView extends StatelessWidget {
         ),
         SizedBox(height: AppSpacing.lg),
         AppTextField(
+          isRequired: true,
           label: l10n.authPassword,
           controller: model.password.controller,
           focusNode: model.password.focusNode,
@@ -103,7 +105,7 @@ class _LoginView extends StatelessWidget {
           value: model.rememberMe,
           onTap: model.toggleRememberMe,
         ),
-        SizedBox(height: AppSpacing.beforeAction),
+        SizedBox(height: AppSpacing.lg),
         AuthSubmitButton(label: l10n.authLoginSubmit, onPressed: model.submit),
         SizedBox(height: AppSpacing.lg),
         Center(

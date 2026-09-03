@@ -26,6 +26,7 @@ class AppTextField extends StatelessWidget {
     required this.label,
     required this.controller,
     required this.focusNode,
+    this.isRequired = false,
     this.hint,
     this.placeholder,
     this.errorText,
@@ -42,6 +43,14 @@ class AppTextField extends StatelessWidget {
 
   /// Rendered uppercase, matching every other label in the app.
   final String label;
+
+  /// Appends a red asterisk to the label.
+  ///
+  /// Every field on the auth screens is required, so the marker does not
+  /// discriminate between them — it states a rule about the form rather than
+  /// singling any field out. It earns its place once a form has optional
+  /// fields too.
+  final bool isRequired;
 
   final TextEditingController controller;
   final FocusNode focusNode;
@@ -76,6 +85,7 @@ class AppTextField extends StatelessWidget {
       children: [
         _LabelRow(
           label: label,
+          isRequired: isRequired,
           action: action,
           onActionTap: onActionTap,
         ),
@@ -103,9 +113,15 @@ class AppTextField extends StatelessWidget {
 }
 
 class _LabelRow extends StatelessWidget {
-  const _LabelRow({required this.label, this.action, this.onActionTap});
+  const _LabelRow({
+    required this.label,
+    required this.isRequired,
+    this.action,
+    this.onActionTap,
+  });
 
   final String label;
+  final bool isRequired;
   final String? action;
   final VoidCallback? onActionTap;
 
@@ -115,8 +131,18 @@ class _LabelRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Flexible(
-          child: Text(
-            label.toUpperCase(),
+          child: Text.rich(
+            TextSpan(
+              text: label.toUpperCase(),
+              children: isRequired
+                  ? const [
+                      TextSpan(
+                        text: ' *',
+                        style: TextStyle(color: AppColors.accentAlert),
+                      ),
+                    ]
+                  : null,
+            ),
             style: AppText.labelMeta,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

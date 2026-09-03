@@ -33,13 +33,6 @@ class AppSpacing {
   /// The tighter gutter used inside a card.
   static double get gutterTight => 4.10.w; // 16
 
-  /// The room the frames leave before a primary action.
-  ///
-  /// The auth screens are a 16 rhythm with an explicit 12 spacer frame dropped
-  /// in before the button — so 16 + 12 + 16. Deliberately more than the gap
-  /// between two fields, so the button reads as the end of the form rather
-  /// than another row in it.
-  static double get beforeAction => 11.28.w; // 44
 }
 
 class AppRadius {
