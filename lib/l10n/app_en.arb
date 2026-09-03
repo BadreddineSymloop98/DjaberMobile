@@ -148,5 +148,20 @@
   "authSentTitle": "Check Your Email",
   "authSentMessage": "We’ve sent a password reset link to",
   "authSentNoReceive": "Didn’t receive the email?",
-  "authSentTryAnother": "Try another email address"
+  "authSentTryAnother": "Try another email address",
+  "@_backendErrors": {
+    "description": "Mapped from the backend response, mirroring translateBackendError in src/lib/i18n.ts. Strings are auth.errors.* verbatim."
+  },
+  "authErrInvalidCredentials": "Invalid email or password",
+  "authErrUserExists": "An account with this email already exists",
+  "authErrNetwork": "Cannot reach the server. Check your connection.",
+  "authErrUnknown": "Something went wrong. Please try again.",
+  "homeWelcome": "Welcome back, {name}",
+  "@homeWelcome": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

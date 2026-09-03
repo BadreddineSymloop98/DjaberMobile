@@ -1,35 +1,23 @@
-import 'package:djaber_mobile/core/utils/screen.dart';
-import 'package:djaber_mobile/l10n/gen/app_localizations.dart';
 import 'package:djaber_mobile/presentation/screens/auth/login_screen.dart';
 import 'package:djaber_mobile/presentation/screens/auth/signup_screen.dart';
 import 'package:djaber_mobile/presentation/screens/onboarding/onboarding_screen.dart';
-import 'package:djaber_mobile/presentation/theme/app_theme.dart';
+import 'package:djaber_mobile/presentation/viewmodels/session_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import 'support/auth_host.dart';
 
 /// These screens are the first in the app with a keyboard, a scroll view and a
 /// bottom-pinned footer at the same time — the combination that silently
 /// produces an unbounded-height layout error.
 void main() {
-  Widget host(Widget screen, {Locale locale = const Locale('fr')}) {
-    return MaterialApp(
-      locale: locale,
-      theme: AppTheme.build(locale),
-      supportedLocales: const [Locale('en'), Locale('fr'), Locale('ar')],
-      localizationsDelegates: const [
-        L10n.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      builder: (context, child) {
-        Screen.update(MediaQuery.of(context));
-        return child!;
-      },
-      home: screen,
-    );
-  }
+  late SessionViewModel session;
+
+  setUp(() async => session = await sessionForTest());
+  tearDown(() => session.dispose());
+
+  Widget host(Widget screen, {Locale locale = const Locale('fr')}) =>
+      authHost(screen, session, locale: locale);
 
   for (final size in const [
     Size(360, 640), // the low end of the market

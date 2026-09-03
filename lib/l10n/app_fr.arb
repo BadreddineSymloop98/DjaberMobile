@@ -114,5 +114,10 @@
   "authSentTitle": "Vérifiez votre e-mail",
   "authSentMessage": "Nous avons envoyé un lien de réinitialisation à",
   "authSentNoReceive": "Vous n’avez pas reçu l’e-mail ?",
-  "authSentTryAnother": "Essayez une autre adresse e-mail"
+  "authSentTryAnother": "Essayez une autre adresse e-mail",
+  "authErrInvalidCredentials": "E-mail ou mot de passe incorrect",
+  "authErrUserExists": "Un compte avec cet e-mail existe déjà",
+  "authErrNetwork": "Impossible de joindre le serveur. Vérifiez votre connexion.",
+  "authErrUnknown": "Une erreur s’est produite. Veuillez réessayer.",
+  "homeWelcome": "Bon retour, {name}"
 }

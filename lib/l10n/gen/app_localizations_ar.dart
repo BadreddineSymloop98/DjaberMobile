@@ -359,4 +359,22 @@ class L10nAr extends L10n {
 
   @override
   String get authSentTryAnother => 'جرّب عنوان بريد آخر';
+
+  @override
+  String get authErrInvalidCredentials =>
+      'البريد الإلكتروني أو كلمة المرور غير صحيحة';
+
+  @override
+  String get authErrUserExists => 'يوجد حساب بهذا البريد الإلكتروني بالفعل';
+
+  @override
+  String get authErrNetwork => 'لا يمكن الوصول إلى الخادم. تحقق من اتصالك.';
+
+  @override
+  String get authErrUnknown => 'حدث خطأ ما. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String homeWelcome(String name) {
+    return 'مرحباً بعودتك، $name';
+  }
 }

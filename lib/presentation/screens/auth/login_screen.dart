@@ -11,7 +11,9 @@ import '../../theme/app_colors.dart';
 import '../../theme/app_spacing.dart';
 import '../../theme/app_typography.dart';
 import '../../viewmodels/login_view_model.dart';
+import '../../viewmodels/session_view_model.dart';
 import '../../widgets/app_text_field.dart';
+import 'auth_error_message.dart';
 import 'auth_scaffold.dart';
 
 /// `05 — Connexion`.
@@ -35,6 +37,18 @@ class _LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
     final model = context.watch<LoginViewModel>();
+    final session = context.watch<SessionViewModel>();
+
+    void submit() {
+      if (!model.submit()) return;
+      // No navigation here. The router watches the session, so the redirect
+      // moves to home the moment the status flips — one rule instead of a
+      // `go` call on every success path.
+      session.signIn(
+        email: model.email.value.trim(),
+        password: model.password.value,
+      );
+    }
 
     // Exhaustive on FieldError, so adding a rule later fails to compile until
     // it has a message.
@@ -95,7 +109,7 @@ class _LoginView extends StatelessWidget {
           // character, and stripping one would change the merchant's secret
           // without telling them. Only an upper bound.
           inputFormatters: [LengthLimitingTextInputFormatter(128)],
-          onSubmitted: (_) => model.submit(),
+          onSubmitted: (_) => submit(),
         ),
         SizedBox(height: AppSpacing.lg),
         _RememberMe(
@@ -104,7 +118,12 @@ class _LoginView extends StatelessWidget {
           onTap: model.toggleRememberMe,
         ),
         SizedBox(height: AppSpacing.lg),
-        AuthSubmitButton(label: l10n.authLoginSubmit, onPressed: model.submit),
+        AuthErrorMessage(error: session.error),
+        AuthSubmitButton(
+          label: l10n.authLoginSubmit,
+          onPressed: submit,
+          isLoading: session.isBusy,
+        ),
         SizedBox(height: AppSpacing.lg),
         Center(
           child: GestureDetector(

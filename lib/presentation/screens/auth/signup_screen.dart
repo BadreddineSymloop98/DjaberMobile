@@ -7,8 +7,10 @@ import '../../../app/routes.dart';
 import '../../../core/utils/validators.dart';
 import '../../../l10n/gen/app_localizations.dart';
 import '../../theme/app_spacing.dart';
+import '../../viewmodels/session_view_model.dart';
 import '../../viewmodels/signup_view_model.dart';
 import '../../widgets/app_text_field.dart';
+import 'auth_error_message.dart';
 import 'auth_scaffold.dart';
 
 /// `06 — Créer un compte`.
@@ -41,6 +43,19 @@ class _SignupView extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
     final model = context.watch<SignupViewModel>();
+    final session = context.watch<SessionViewModel>();
+
+    void submit() {
+      if (!model.submit()) return;
+      // `plan` is not collected here, so the backend defaults it to
+      // "individual" — brief Q3 (owner or team) as a concrete gap.
+      session.signUp(
+        firstName: model.firstName.value.trim(),
+        lastName: model.lastName.value.trim(),
+        email: model.email.value.trim(),
+        password: model.password.value,
+      );
+    }
 
     String? nameError(field, String message) =>
         switch (model.visibleError(field)) {
@@ -131,10 +146,15 @@ class _SignupView extends StatelessWidget {
           textInputAction: TextInputAction.done,
           autofillHints: const [AutofillHints.newPassword],
           inputFormatters: [LengthLimitingTextInputFormatter(128)],
-          onSubmitted: (_) => model.submit(),
+          onSubmitted: (_) => submit(),
         ),
         SizedBox(height: AppSpacing.beforeAction),
-        AuthSubmitButton(label: l10n.authSignupSubmit, onPressed: model.submit),
+        AuthErrorMessage(error: session.error),
+        AuthSubmitButton(
+          label: l10n.authSignupSubmit,
+          onPressed: submit,
+          isLoading: session.isBusy,
+        ),
       ],
     );
   }

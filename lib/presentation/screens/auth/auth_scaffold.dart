@@ -140,14 +140,31 @@ class AuthSubmitButton extends StatelessWidget {
     super.key,
     required this.label,
     required this.onPressed,
+    this.isLoading = false,
   });
 
   final String label;
   final VoidCallback onPressed;
 
+  /// While true the button is disabled and shows a spinner in place of its
+  /// label. Disabling matters more than the spinner: without it a double tap
+  /// sends two registrations, and the second fails with "already exists" for
+  /// an account the merchant just successfully created.
+  final bool isLoading;
+
   @override
-  Widget build(BuildContext context) =>
-      FilledButton(onPressed: onPressed, child: Text(label));
+  Widget build(BuildContext context) => FilledButton(
+        onPressed: isLoading ? null : onPressed,
+        child: isLoading
+            ? SizedBox.square(
+                dimension: 4.1.w, // 16
+                child: const CircularProgressIndicator(
+                  strokeWidth: 2,
+                  color: AppColors.ink,
+                ),
+              )
+            : Text(label),
+      );
 }
 
 /// The back link at the top of the reset screens.

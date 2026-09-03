@@ -114,5 +114,10 @@
   "authSentTitle": "تحقق من بريدك",
   "authSentMessage": "أرسلنا رابط إعادة التعيين إلى",
   "authSentNoReceive": "لم تستلم البريد؟",
-  "authSentTryAnother": "جرّب عنوان بريد آخر"
+  "authSentTryAnother": "جرّب عنوان بريد آخر",
+  "authErrInvalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+  "authErrUserExists": "يوجد حساب بهذا البريد الإلكتروني بالفعل",
+  "authErrNetwork": "لا يمكن الوصول إلى الخادم. تحقق من اتصالك.",
+  "authErrUnknown": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+  "homeWelcome": "مرحباً بعودتك، {name}"
 }

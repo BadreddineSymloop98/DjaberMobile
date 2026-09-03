@@ -99,695 +99,725 @@ abstract class L10n {
     Locale('fr'),
   ];
 
-  /// No description provided for @appName.
+  /// Product name. Never translated. The wordmark renders 'Djaber' in primary text and '.ai' in secondary.
   ///
-  /// In fr, this message translates to:
+  /// In en, this message translates to:
   /// **'Djaber.ai'**
   String get appName;
 
-  /// No description provided for @appTagline.
+  /// From dash.tagline in src/lib/i18n.ts.
   ///
-  /// In fr, this message translates to:
-  /// **'Agent IA Social'**
+  /// In en, this message translates to:
+  /// **'Social AI Agent'**
   String get appTagline;
 
   /// No description provided for @commonBack.
   ///
-  /// In fr, this message translates to:
-  /// **'Retour'**
+  /// In en, this message translates to:
+  /// **'Back'**
   String get commonBack;
 
   /// No description provided for @commonDismiss.
   ///
-  /// In fr, this message translates to:
-  /// **'Fermer'**
+  /// In en, this message translates to:
+  /// **'Dismiss'**
   String get commonDismiss;
 
   /// No description provided for @commonCancel.
   ///
-  /// In fr, this message translates to:
-  /// **'Annuler'**
+  /// In en, this message translates to:
+  /// **'Cancel'**
   String get commonCancel;
 
   /// No description provided for @commonSave.
   ///
-  /// In fr, this message translates to:
-  /// **'Enregistrer'**
+  /// In en, this message translates to:
+  /// **'Save'**
   String get commonSave;
 
   /// No description provided for @commonRetry.
   ///
-  /// In fr, this message translates to:
-  /// **'Réessayer'**
+  /// In en, this message translates to:
+  /// **'Retry'**
   String get commonRetry;
 
   /// No description provided for @commonDelete.
   ///
-  /// In fr, this message translates to:
-  /// **'Supprimer'**
+  /// In en, this message translates to:
+  /// **'Delete'**
   String get commonDelete;
 
   /// No description provided for @commonConfirm.
   ///
-  /// In fr, this message translates to:
-  /// **'Confirmer'**
+  /// In en, this message translates to:
+  /// **'Confirm'**
   String get commonConfirm;
 
   /// No description provided for @commonSearch.
   ///
-  /// In fr, this message translates to:
-  /// **'Rechercher'**
+  /// In en, this message translates to:
+  /// **'Search'**
   String get commonSearch;
 
   /// No description provided for @commonLoading.
   ///
-  /// In fr, this message translates to:
-  /// **'Chargement…'**
+  /// In en, this message translates to:
+  /// **'Loading…'**
   String get commonLoading;
 
   /// No description provided for @commonSeeAll.
   ///
-  /// In fr, this message translates to:
-  /// **'Tout voir'**
+  /// In en, this message translates to:
+  /// **'See all'**
   String get commonSeeAll;
 
   /// No description provided for @commonEmpty.
   ///
-  /// In fr, this message translates to:
-  /// **'Rien ici'**
+  /// In en, this message translates to:
+  /// **'Nothing here'**
   String get commonEmpty;
 
   /// No description provided for @commonNext.
   ///
-  /// In fr, this message translates to:
-  /// **'Suivant'**
+  /// In en, this message translates to:
+  /// **'Next'**
   String get commonNext;
 
   /// No description provided for @commonSkip.
   ///
-  /// In fr, this message translates to:
-  /// **'Passer'**
+  /// In en, this message translates to:
+  /// **'Skip'**
   String get commonSkip;
 
   /// No description provided for @commonStart.
   ///
-  /// In fr, this message translates to:
-  /// **'Commencer'**
+  /// In en, this message translates to:
+  /// **'Get started'**
   String get commonStart;
 
   /// No description provided for @onboardingAnswersTitle.
   ///
-  /// In fr, this message translates to:
-  /// **'L\'agent répond à vos clients'**
+  /// In en, this message translates to:
+  /// **'The agent replies to your customers'**
   String get onboardingAnswersTitle;
 
   /// No description provided for @onboardingAnswersBody.
   ///
-  /// In fr, this message translates to:
-  /// **'Il connaît votre catalogue, votre stock et vos prix. Il répond aux messages Facebook et Instagram à votre place, jour et nuit.'**
+  /// In en, this message translates to:
+  /// **'It knows your catalogue, your stock and your prices. It answers Facebook and Instagram messages for you, day and night.'**
   String get onboardingAnswersBody;
 
   /// No description provided for @onboardingEscalationTitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Vous intervenez quand il le faut'**
+  /// In en, this message translates to:
+  /// **'You step in when it is needed'**
   String get onboardingEscalationTitle;
 
   /// No description provided for @onboardingEscalationBody.
   ///
-  /// In fr, this message translates to:
-  /// **'Quand l’IA ne peut plus suivre, elle s’arrête et vous prévient. Vous répondez depuis le téléphone, puis vous lui rendez la conversation.'**
+  /// In en, this message translates to:
+  /// **'When the AI can no longer follow, it stops and tells you. You reply from your phone, then hand the conversation back to it.'**
   String get onboardingEscalationBody;
 
   /// No description provided for @onboardingStockTitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Votre stock dans la poche'**
+  /// In en, this message translates to:
+  /// **'Your stock in your pocket'**
   String get onboardingStockTitle;
 
   /// No description provided for @onboardingStockBody.
   ///
-  /// In fr, this message translates to:
-  /// **'Produits, achats, ventes et commandes. Vérifiez une quantité pendant que le client attend, corrigez-la sur place.'**
+  /// In en, this message translates to:
+  /// **'Products, purchases, sales and orders. Check a quantity while the customer waits, and correct it on the spot.'**
   String get onboardingStockBody;
 
-  /// No description provided for @onboardingSampleCustomer.
+  /// Placeholder customer name in the onboarding artwork. Not a real person.
   ///
-  /// In fr, this message translates to:
+  /// In en, this message translates to:
   /// **'Amina B.'**
   String get onboardingSampleCustomer;
 
   /// No description provided for @onboardingSampleMessage.
   ///
-  /// In fr, this message translates to:
-  /// **'Le noir est dispo en M ?'**
+  /// In en, this message translates to:
+  /// **'Is the black one available in M?'**
   String get onboardingSampleMessage;
 
   /// No description provided for @onboardingSampleReply.
   ///
-  /// In fr, this message translates to:
-  /// **'Oui — il en reste 4 en M. Livraison Oran 600 DA.'**
+  /// In en, this message translates to:
+  /// **'Yes — 4 left in M. Delivery to Oran is 600 DA.'**
   String get onboardingSampleReply;
 
   /// No description provided for @onboardingSampleEscalation.
   ///
-  /// In fr, this message translates to:
-  /// **'La cliente demande un remboursement.'**
+  /// In en, this message translates to:
+  /// **'The customer is asking for a refund.'**
   String get onboardingSampleEscalation;
 
   /// No description provided for @onboardingSampleNeedsHuman.
   ///
-  /// In fr, this message translates to:
-  /// **'À traiter'**
+  /// In en, this message translates to:
+  /// **'Needs you'**
   String get onboardingSampleNeedsHuman;
 
   /// No description provided for @onboardingSampleHandling.
   ///
-  /// In fr, this message translates to:
-  /// **'Agent en cours'**
+  /// In en, this message translates to:
+  /// **'Agent handling'**
   String get onboardingSampleHandling;
 
   /// No description provided for @onboardingShortcutProducts.
   ///
-  /// In fr, this message translates to:
-  /// **'Produits'**
+  /// In en, this message translates to:
+  /// **'Products'**
   String get onboardingShortcutProducts;
 
   /// No description provided for @onboardingShortcutOrders.
   ///
-  /// In fr, this message translates to:
-  /// **'Commandes'**
+  /// In en, this message translates to:
+  /// **'Orders'**
   String get onboardingShortcutOrders;
 
   /// No description provided for @onboardingShortcutMovements.
   ///
-  /// In fr, this message translates to:
-  /// **'Mouvements'**
+  /// In en, this message translates to:
+  /// **'Movements'**
   String get onboardingShortcutMovements;
 
-  /// No description provided for @errorNetwork.
+  /// NetworkException. Shown with a retry action — this market drops connections constantly, so it must not read like a fatal error.
   ///
-  /// In fr, this message translates to:
-  /// **'Pas de connexion. Vérifiez votre réseau et réessayez.'**
+  /// In en, this message translates to:
+  /// **'No connection. Check your network and try again.'**
   String get errorNetwork;
 
   /// No description provided for @errorTimeout.
   ///
-  /// In fr, this message translates to:
-  /// **'La requête a pris trop de temps.'**
+  /// In en, this message translates to:
+  /// **'The request took too long.'**
   String get errorTimeout;
 
   /// No description provided for @errorUnauthorized.
   ///
-  /// In fr, this message translates to:
-  /// **'Votre session a expiré. Reconnectez-vous.'**
+  /// In en, this message translates to:
+  /// **'Your session expired. Sign in again.'**
   String get errorUnauthorized;
 
   /// No description provided for @errorNotFound.
   ///
-  /// In fr, this message translates to:
-  /// **'Introuvable.'**
+  /// In en, this message translates to:
+  /// **'Not found.'**
   String get errorNotFound;
 
   /// No description provided for @errorServer.
   ///
-  /// In fr, this message translates to:
-  /// **'Une erreur est survenue de notre côté.'**
+  /// In en, this message translates to:
+  /// **'Something went wrong on our side.'**
   String get errorServer;
 
   /// No description provided for @errorUnknown.
   ///
-  /// In fr, this message translates to:
-  /// **'Une erreur est survenue.'**
+  /// In en, this message translates to:
+  /// **'Something went wrong.'**
   String get errorUnknown;
 
   /// No description provided for @langEnglish.
   ///
-  /// In fr, this message translates to:
+  /// In en, this message translates to:
   /// **'English'**
   String get langEnglish;
 
   /// No description provided for @langFrench.
   ///
-  /// In fr, this message translates to:
+  /// In en, this message translates to:
   /// **'Français'**
   String get langFrench;
 
-  /// No description provided for @langArabic.
+  /// Language names always appear in their own language, matching LANGS in src/lib/i18n.ts.
   ///
-  /// In fr, this message translates to:
+  /// In en, this message translates to:
   /// **'العربية'**
   String get langArabic;
 
   /// No description provided for @obStockValue.
   ///
-  /// In fr, this message translates to:
-  /// **'1,24'**
+  /// In en, this message translates to:
+  /// **'1.24'**
   String get obStockValue;
 
   /// No description provided for @obStockValueUnit.
   ///
-  /// In fr, this message translates to:
+  /// In en, this message translates to:
   /// **'M DA'**
   String get obStockValueUnit;
 
   /// No description provided for @obStockValueLabel.
   ///
-  /// In fr, this message translates to:
-  /// **'Valeur du stock'**
+  /// In en, this message translates to:
+  /// **'Stock value'**
   String get obStockValueLabel;
 
   /// No description provided for @obKpiProducts.
   ///
-  /// In fr, this message translates to:
-  /// **'Produits'**
+  /// In en, this message translates to:
+  /// **'Products'**
   String get obKpiProducts;
 
   /// No description provided for @obKpiProductsValue.
   ///
-  /// In fr, this message translates to:
+  /// In en, this message translates to:
   /// **'128'**
   String get obKpiProductsValue;
 
   /// No description provided for @obKpiPurchases.
   ///
-  /// In fr, this message translates to:
-  /// **'Achats'**
+  /// In en, this message translates to:
+  /// **'Purchases'**
   String get obKpiPurchases;
 
   /// No description provided for @obKpiPurchasesValue.
   ///
-  /// In fr, this message translates to:
+  /// In en, this message translates to:
   /// **'6'**
   String get obKpiPurchasesValue;
 
   /// No description provided for @obKpiSales.
   ///
-  /// In fr, this message translates to:
-  /// **'Ventes'**
+  /// In en, this message translates to:
+  /// **'Sales'**
   String get obKpiSales;
 
   /// No description provided for @obKpiSalesValue.
   ///
-  /// In fr, this message translates to:
+  /// In en, this message translates to:
   /// **'24'**
   String get obKpiSalesValue;
 
   /// No description provided for @obKpiOrders.
   ///
-  /// In fr, this message translates to:
-  /// **'Cmd'**
+  /// In en, this message translates to:
+  /// **'Ord'**
   String get obKpiOrders;
 
   /// No description provided for @obKpiOrdersValue.
   ///
-  /// In fr, this message translates to:
+  /// In en, this message translates to:
   /// **'12'**
   String get obKpiOrdersValue;
 
   /// No description provided for @obInStock.
   ///
-  /// In fr, this message translates to:
-  /// **'En stock'**
+  /// In en, this message translates to:
+  /// **'In stock'**
   String get obInStock;
 
   /// No description provided for @obStockRow1Name.
   ///
-  /// In fr, this message translates to:
-  /// **'Robe satin — Noir — M'**
+  /// In en, this message translates to:
+  /// **'Satin dress — Black — M'**
   String get obStockRow1Name;
 
   /// No description provided for @obStockRow1Meta.
   ///
-  /// In fr, this message translates to:
-  /// **'Seuil 5 · Rupture'**
+  /// In en, this message translates to:
+  /// **'Threshold 5 · Out of stock'**
   String get obStockRow1Meta;
 
   /// No description provided for @obStockRow1Qty.
   ///
-  /// In fr, this message translates to:
+  /// In en, this message translates to:
   /// **'0'**
   String get obStockRow1Qty;
 
   /// No description provided for @obStockRow2Name.
   ///
-  /// In fr, this message translates to:
-  /// **'Parfum Oud 50 ml'**
+  /// In en, this message translates to:
+  /// **'Oud perfume 50 ml'**
   String get obStockRow2Name;
 
   /// No description provided for @obStockRow2Meta.
   ///
-  /// In fr, this message translates to:
-  /// **'Seuil 10'**
+  /// In en, this message translates to:
+  /// **'Threshold 10'**
   String get obStockRow2Meta;
 
   /// No description provided for @obStockRow2Qty.
   ///
-  /// In fr, this message translates to:
+  /// In en, this message translates to:
   /// **'3'**
   String get obStockRow2Qty;
 
   /// No description provided for @obStockRow3Name.
   ///
-  /// In fr, this message translates to:
-  /// **'Sac cuir — Camel'**
+  /// In en, this message translates to:
+  /// **'Leather bag — Camel'**
   String get obStockRow3Name;
 
   /// No description provided for @obStockRow3Meta.
   ///
-  /// In fr, this message translates to:
-  /// **'Seuil 5'**
+  /// In en, this message translates to:
+  /// **'Threshold 5'**
   String get obStockRow3Meta;
 
   /// No description provided for @obStockRow3Qty.
   ///
-  /// In fr, this message translates to:
+  /// In en, this message translates to:
   /// **'7'**
   String get obStockRow3Qty;
 
   /// No description provided for @obEsc1Kind.
   ///
-  /// In fr, this message translates to:
-  /// **'IA bloquée'**
+  /// In en, this message translates to:
+  /// **'AI stuck'**
   String get obEsc1Kind;
 
   /// No description provided for @obEsc1Time.
   ///
-  /// In fr, this message translates to:
+  /// In en, this message translates to:
   /// **'2 min'**
   String get obEsc1Time;
 
   /// No description provided for @obEsc1Name.
   ///
-  /// In fr, this message translates to:
+  /// In en, this message translates to:
   /// **'Amina B.'**
   String get obEsc1Name;
 
   /// No description provided for @obEsc1Body.
   ///
-  /// In fr, this message translates to:
-  /// **'Elle veut changer la taille — commande déjà payée.'**
+  /// In en, this message translates to:
+  /// **'She wants to change the size — order already paid.'**
   String get obEsc1Body;
 
   /// No description provided for @obEsc2Kind.
   ///
-  /// In fr, this message translates to:
-  /// **'Commande à valider'**
+  /// In en, this message translates to:
+  /// **'Order to approve'**
   String get obEsc2Kind;
 
   /// No description provided for @obEsc2Time.
   ///
-  /// In fr, this message translates to:
+  /// In en, this message translates to:
   /// **'18 min'**
   String get obEsc2Time;
 
   /// No description provided for @obEsc2Name.
   ///
-  /// In fr, this message translates to:
+  /// In en, this message translates to:
   /// **'#1042 — Bab Ezzouar'**
   String get obEsc2Name;
 
   /// No description provided for @obEsc2Body.
   ///
-  /// In fr, this message translates to:
-  /// **'2 400 DA · créée par l’IA'**
+  /// In en, this message translates to:
+  /// **'2,400 DA · created by the AI'**
   String get obEsc2Body;
 
   /// No description provided for @obEsc3Kind.
   ///
-  /// In fr, this message translates to:
-  /// **'Rupture de stock'**
+  /// In en, this message translates to:
+  /// **'Out of stock'**
   String get obEsc3Kind;
 
   /// No description provided for @obEsc3Time.
   ///
-  /// In fr, this message translates to:
+  /// In en, this message translates to:
   /// **'1 h'**
   String get obEsc3Time;
 
   /// No description provided for @obEsc3Name.
   ///
-  /// In fr, this message translates to:
-  /// **'Robe satin — Noir — M'**
+  /// In en, this message translates to:
+  /// **'Satin dress — Black — M'**
   String get obEsc3Name;
 
   /// No description provided for @obEsc3Body.
   ///
-  /// In fr, this message translates to:
-  /// **'0 en stock · 3 commandes en attente'**
+  /// In en, this message translates to:
+  /// **'0 in stock · 3 orders waiting'**
   String get obEsc3Body;
 
   /// No description provided for @obEsc4Kind.
   ///
-  /// In fr, this message translates to:
-  /// **'Négociation'**
+  /// In en, this message translates to:
+  /// **'Negotiation'**
   String get obEsc4Kind;
 
   /// No description provided for @obEsc4Time.
   ///
-  /// In fr, this message translates to:
+  /// In en, this message translates to:
   /// **'3 h'**
   String get obEsc4Time;
 
   /// No description provided for @obEsc4Name.
   ///
-  /// In fr, this message translates to:
+  /// In en, this message translates to:
   /// **'Sofiane K.'**
   String get obEsc4Name;
 
   /// No description provided for @obEsc4Body.
   ///
-  /// In fr, this message translates to:
+  /// In en, this message translates to:
   /// **'ndir lik 2 000 DA w nakhdo'**
   String get obEsc4Body;
 
   /// No description provided for @authLoginTitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Connexion'**
+  /// In en, this message translates to:
+  /// **'Sign in'**
   String get authLoginTitle;
 
   /// No description provided for @authLoginSubtitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Connectez-vous à votre compte pour continuer'**
+  /// In en, this message translates to:
+  /// **'Sign in to your account to continue'**
   String get authLoginSubtitle;
 
   /// No description provided for @authSignupTitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Création de compte'**
+  /// In en, this message translates to:
+  /// **'Create account'**
   String get authSignupTitle;
 
   /// No description provided for @authSignupSubtitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Commencez en moins d’une minute'**
+  /// In en, this message translates to:
+  /// **'Get started in less than a minute'**
   String get authSignupSubtitle;
 
   /// No description provided for @authEmail.
   ///
-  /// In fr, this message translates to:
-  /// **'E-mail'**
+  /// In en, this message translates to:
+  /// **'Email'**
   String get authEmail;
 
   /// No description provided for @authPassword.
   ///
-  /// In fr, this message translates to:
-  /// **'Mot de passe'**
+  /// In en, this message translates to:
+  /// **'Password'**
   String get authPassword;
 
   /// No description provided for @authFirstName.
   ///
-  /// In fr, this message translates to:
-  /// **'Prénom'**
+  /// In en, this message translates to:
+  /// **'First name'**
   String get authFirstName;
 
   /// No description provided for @authLastName.
   ///
-  /// In fr, this message translates to:
-  /// **'Nom'**
+  /// In en, this message translates to:
+  /// **'Last name'**
   String get authLastName;
 
   /// No description provided for @authPasswordHint.
   ///
-  /// In fr, this message translates to:
-  /// **'Au moins 8 caractères'**
+  /// In en, this message translates to:
+  /// **'At least 8 characters'**
   String get authPasswordHint;
 
   /// No description provided for @authRemember.
   ///
-  /// In fr, this message translates to:
-  /// **'Se souvenir de moi'**
+  /// In en, this message translates to:
+  /// **'Remember me'**
   String get authRemember;
 
   /// No description provided for @authLoginSubmit.
   ///
-  /// In fr, this message translates to:
-  /// **'Se connecter'**
+  /// In en, this message translates to:
+  /// **'Sign In'**
   String get authLoginSubmit;
 
   /// No description provided for @authSignupSubmit.
   ///
-  /// In fr, this message translates to:
-  /// **'Créer le compte'**
+  /// In en, this message translates to:
+  /// **'Create account'**
   String get authSignupSubmit;
 
   /// No description provided for @authForgot.
   ///
-  /// In fr, this message translates to:
-  /// **'Mot de passe oublié ?'**
+  /// In en, this message translates to:
+  /// **'Forgot your password?'**
   String get authForgot;
 
   /// No description provided for @authNoAccount.
   ///
-  /// In fr, this message translates to:
-  /// **'Vous n’avez pas de compte ?'**
+  /// In en, this message translates to:
+  /// **'Don’t have an account?'**
   String get authNoAccount;
 
   /// No description provided for @authSignupLink.
   ///
-  /// In fr, this message translates to:
-  /// **'Commencer'**
+  /// In en, this message translates to:
+  /// **'Get started'**
   String get authSignupLink;
 
   /// No description provided for @authHaveAccount.
   ///
-  /// In fr, this message translates to:
-  /// **'Vous avez déjà un compte ?'**
+  /// In en, this message translates to:
+  /// **'Already have an account?'**
   String get authHaveAccount;
 
   /// No description provided for @authSigninLink.
   ///
-  /// In fr, this message translates to:
-  /// **'Se connecter'**
+  /// In en, this message translates to:
+  /// **'Sign In'**
   String get authSigninLink;
 
   /// No description provided for @authEmailPlaceholder.
   ///
-  /// In fr, this message translates to:
+  /// In en, this message translates to:
   /// **'you@example.com'**
   String get authEmailPlaceholder;
 
   /// No description provided for @authFirstNamePlaceholder.
   ///
-  /// In fr, this message translates to:
+  /// In en, this message translates to:
   /// **'Jane'**
   String get authFirstNamePlaceholder;
 
   /// No description provided for @authLastNamePlaceholder.
   ///
-  /// In fr, this message translates to:
+  /// In en, this message translates to:
   /// **'Doe'**
   String get authLastNamePlaceholder;
 
   /// No description provided for @authErrEmailRequired.
   ///
-  /// In fr, this message translates to:
-  /// **'L’e-mail est requis'**
+  /// In en, this message translates to:
+  /// **'Email is required'**
   String get authErrEmailRequired;
 
   /// No description provided for @authErrInvalidEmail.
   ///
-  /// In fr, this message translates to:
-  /// **'Veuillez saisir une adresse e-mail valide'**
+  /// In en, this message translates to:
+  /// **'Please enter a valid email address'**
   String get authErrInvalidEmail;
 
   /// No description provided for @authErrPasswordRequired.
   ///
-  /// In fr, this message translates to:
-  /// **'Le mot de passe est requis'**
+  /// In en, this message translates to:
+  /// **'Password is required'**
   String get authErrPasswordRequired;
 
   /// No description provided for @authErrPasswordTooShort.
   ///
-  /// In fr, this message translates to:
-  /// **'Le mot de passe doit contenir au moins 8 caractères'**
+  /// In en, this message translates to:
+  /// **'Password must be at least 8 characters'**
   String get authErrPasswordTooShort;
 
   /// No description provided for @authErrFirstNameRequired.
   ///
-  /// In fr, this message translates to:
-  /// **'Le prénom est requis'**
+  /// In en, this message translates to:
+  /// **'First name is required'**
   String get authErrFirstNameRequired;
 
   /// No description provided for @authErrLastNameRequired.
   ///
-  /// In fr, this message translates to:
-  /// **'Le nom est requis'**
+  /// In en, this message translates to:
+  /// **'Last name is required'**
   String get authErrLastNameRequired;
 
   /// No description provided for @authForgotBack.
   ///
-  /// In fr, this message translates to:
-  /// **'Retour à la connexion'**
+  /// In en, this message translates to:
+  /// **'Back to Login'**
   String get authForgotBack;
 
   /// No description provided for @authForgotTitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Mot de passe oublié ?'**
+  /// In en, this message translates to:
+  /// **'Forgot Password?'**
   String get authForgotTitle;
 
   /// No description provided for @authForgotSubtitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Entrez votre e-mail pour recevoir un lien de réinitialisation'**
+  /// In en, this message translates to:
+  /// **'Enter your email to receive a reset link'**
   String get authForgotSubtitle;
 
   /// No description provided for @authForgotEmail.
   ///
-  /// In fr, this message translates to:
-  /// **'Adresse e-mail'**
+  /// In en, this message translates to:
+  /// **'Email Address'**
   String get authForgotEmail;
 
   /// No description provided for @authForgotEmailPlaceholder.
   ///
-  /// In fr, this message translates to:
-  /// **'vous@entreprise.com'**
+  /// In en, this message translates to:
+  /// **'you@company.com'**
   String get authForgotEmailPlaceholder;
 
   /// No description provided for @authForgotSubmit.
   ///
-  /// In fr, this message translates to:
-  /// **'Envoyer le lien'**
+  /// In en, this message translates to:
+  /// **'Send Reset Link'**
   String get authForgotSubmit;
 
   /// No description provided for @authForgotSecure.
   ///
-  /// In fr, this message translates to:
-  /// **'Votre lien de réinitialisation est chiffré et expire dans 1 heure'**
+  /// In en, this message translates to:
+  /// **'Your password reset link is encrypted and expires in 1 hour'**
   String get authForgotSecure;
 
   /// No description provided for @authForgotRemember.
   ///
-  /// In fr, this message translates to:
-  /// **'Vous vous souvenez de votre mot de passe ?'**
+  /// In en, this message translates to:
+  /// **'Remember your password?'**
   String get authForgotRemember;
 
   /// No description provided for @authSentTitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Vérifiez votre e-mail'**
+  /// In en, this message translates to:
+  /// **'Check Your Email'**
   String get authSentTitle;
 
   /// No description provided for @authSentMessage.
   ///
-  /// In fr, this message translates to:
-  /// **'Nous avons envoyé un lien de réinitialisation à'**
+  /// In en, this message translates to:
+  /// **'We’ve sent a password reset link to'**
   String get authSentMessage;
 
   /// No description provided for @authSentNoReceive.
   ///
-  /// In fr, this message translates to:
-  /// **'Vous n’avez pas reçu l’e-mail ?'**
+  /// In en, this message translates to:
+  /// **'Didn’t receive the email?'**
   String get authSentNoReceive;
 
   /// No description provided for @authSentTryAnother.
   ///
-  /// In fr, this message translates to:
-  /// **'Essayez une autre adresse e-mail'**
+  /// In en, this message translates to:
+  /// **'Try another email address'**
   String get authSentTryAnother;
+
+  /// No description provided for @authErrInvalidCredentials.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid email or password'**
+  String get authErrInvalidCredentials;
+
+  /// No description provided for @authErrUserExists.
+  ///
+  /// In en, this message translates to:
+  /// **'An account with this email already exists'**
+  String get authErrUserExists;
+
+  /// No description provided for @authErrNetwork.
+  ///
+  /// In en, this message translates to:
+  /// **'Cannot reach the server. Check your connection.'**
+  String get authErrNetwork;
+
+  /// No description provided for @authErrUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get authErrUnknown;
+
+  /// No description provided for @homeWelcome.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome back, {name}'**
+  String homeWelcome(String name);
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

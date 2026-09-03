@@ -364,4 +364,22 @@ class L10nFr extends L10n {
 
   @override
   String get authSentTryAnother => 'Essayez une autre adresse e-mail';
+
+  @override
+  String get authErrInvalidCredentials => 'E-mail ou mot de passe incorrect';
+
+  @override
+  String get authErrUserExists => 'Un compte avec cet e-mail existe déjà';
+
+  @override
+  String get authErrNetwork =>
+      'Impossible de joindre le serveur. Vérifiez votre connexion.';
+
+  @override
+  String get authErrUnknown => 'Une erreur s’est produite. Veuillez réessayer.';
+
+  @override
+  String homeWelcome(String name) {
+    return 'Bon retour, $name';
+  }
 }

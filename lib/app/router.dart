@@ -9,6 +9,7 @@ import '../presentation/screens/auth/forgot_password_screen.dart';
 import '../presentation/screens/auth/login_screen.dart';
 import '../presentation/screens/auth/password_sent_screen.dart';
 import '../presentation/screens/auth/signup_screen.dart';
+import '../presentation/screens/home/home_screen.dart';
 import '../presentation/screens/onboarding/onboarding_screen.dart';
 import '../presentation/screens/splash/splash_screen.dart';
 import '../presentation/viewmodels/session_view_model.dart';
@@ -95,7 +96,7 @@ class AppRouter {
         routes: [
           GoRoute(
             path: Routes.home,
-            builder: (_, _) => const PlaceholderScreen(title: 'Accueil'),
+            builder: (_, _) => const HomeScreen(),
           ),
           GoRoute(
             path: Routes.queue,

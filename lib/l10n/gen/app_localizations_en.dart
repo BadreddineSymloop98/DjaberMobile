@@ -360,4 +360,22 @@ class L10nEn extends L10n {
 
   @override
   String get authSentTryAnother => 'Try another email address';
+
+  @override
+  String get authErrInvalidCredentials => 'Invalid email or password';
+
+  @override
+  String get authErrUserExists => 'An account with this email already exists';
+
+  @override
+  String get authErrNetwork =>
+      'Cannot reach the server. Check your connection.';
+
+  @override
+  String get authErrUnknown => 'Something went wrong. Please try again.';
+
+  @override
+  String homeWelcome(String name) {
+    return 'Welcome back, $name';
+  }
 }
