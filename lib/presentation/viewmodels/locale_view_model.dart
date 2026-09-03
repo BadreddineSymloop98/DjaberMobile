@@ -23,9 +23,21 @@ enum AppLanguage {
   Locale get locale => Locale(code);
   bool get isRtl => direction == TextDirection.rtl;
 
+  /// The language the app opens in before anyone chooses one.
+  ///
+  /// French, not the web's English. The web defaults to English because it also
+  /// serves a marketing site; the app is only ever opened by an Algerian
+  /// merchant, and French is the working language of the design and the one
+  /// this market's back-office software is normally in.
+  ///
+  /// This is not the final answer — the market is Arabic-first, and a first-run
+  /// language step is still needed. Until it exists, French is the least wrong
+  /// default rather than the right one.
+  static const fallback = french;
+
   static AppLanguage fromCode(String? code) => values.firstWhere(
         (l) => l.code == code,
-        orElse: () => english,
+        orElse: () => fallback,
       );
 }
 
@@ -72,16 +84,8 @@ class LocaleViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Adopts the device language on first run, when it is one the app speaks.
-  /// Never overrides a choice the merchant made.
-  Future<void> adoptDeviceLocale(Locale deviceLocale) async {
-    if (_hasExplicitChoice) return;
-    final match = AppLanguage.values
-        .where((l) => l.code == deviceLocale.languageCode)
-        .firstOrNull;
-    if (match == null || match == _language) return;
-    _language = match;
-    _api.setLanguage(match.code);
-    notifyListeners();
-  }
+  // Deliberately no "adopt the device locale on first run". It was written and
+  // removed: it is unreferenced, and it would silently defeat the French
+  // default above on any handset set to English or Arabic. The first-run
+  // language step is the right answer, and it does not exist yet.
 }

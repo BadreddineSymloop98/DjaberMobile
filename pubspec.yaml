@@ -48,6 +48,7 @@ dependencies:
   intl: any
 
   cupertino_icons: ^1.0.8
+  path_drawing: ^1.0.1
 
   # NOT ADDED, deliberately: no push transport. The backend speaks Expo, which
   # Flutter cannot produce a token for, and Q5 — what replaces it — is open.

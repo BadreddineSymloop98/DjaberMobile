@@ -4,6 +4,7 @@ import '../../../l10n/gen/app_localizations.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/app_spacing.dart';
 import '../../theme/app_typography.dart';
+import '../../widgets/app_icon.dart';
 import '../../widgets/djaber_logo.dart';
 
 /// The artwork for the three onboarding slides.
@@ -95,19 +96,29 @@ class ShortcutsArtwork extends StatelessWidget {
     // Accents are the web's own six, used the way the web uses them: colour
     // marks a category, never decoration.
     final tiles = [
-      (l10n.onboardingShortcutProducts, AppColors.textMuted),
-      (l10n.onboardingShortcutOrders, AppColors.accentOrders),
-      (l10n.onboardingShortcutMovements, AppColors.accentInbound),
+      (l10n.onboardingShortcutProducts, AppIcons.box, AppColors.textMuted),
+      (
+        l10n.onboardingShortcutOrders,
+        AppIcons.shoppingCart,
+        AppColors.accentOrders,
+      ),
+      (
+        l10n.onboardingShortcutMovements,
+        AppIcons.history,
+        AppColors.accentInbound,
+      ),
     ];
 
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 320),
       child: Row(
         children: [
-          for (final (index, (label, accent)) in tiles.indexed) ...[
+          for (final (index, (label, icon, accent)) in tiles.indexed) ...[
             // Flexible rather than a fixed width, so three tiles still fit
             // inside the gutters on a 320dp handset.
-            Expanded(child: _ShortcutTile(label: label, accent: accent)),
+            Expanded(
+              child: _ShortcutTile(label: label, icon: icon, accent: accent),
+            ),
             if (index < tiles.length - 1) const SizedBox(width: AppSpacing.md),
           ],
         ],
@@ -243,9 +254,17 @@ class _Dot extends StatelessWidget {
 }
 
 class _ShortcutTile extends StatelessWidget {
-  const _ShortcutTile({required this.label, required this.accent});
+  const _ShortcutTile({
+    required this.label,
+    required this.icon,
+    required this.accent,
+  });
 
   final String label;
+
+  /// A `d` string from [AppIcons].
+  final String icon;
+
   final Color accent;
 
   @override
@@ -262,21 +281,20 @@ class _ShortcutTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Stands in for an Icon/* component. The real set is the web's 54
-          // hand-rolled Heroicons in src/components/ui/icons.tsx.
-          Container(
-            width: 22,
-            height: 22,
-            decoration: BoxDecoration(
-              border: Border.all(color: accent, width: 1.5),
-              borderRadius: BorderRadius.circular(4),
+          AppIcon(icon, size: 22, color: accent),
+          // Shrinks instead of wrapping. A mono label with letter-spacing runs
+          // wide, and "Mouvements" broke mid-word at 10sp; ellipsising it
+          // would be worse. Scaling down keeps one line in French, English and
+          // Arabic without hand-tuning a size per language.
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: AlignmentDirectional.centerStart,
+            child: Text(
+              label,
+              style: AppText.labelS.copyWith(color: AppColors.textSecondary),
+              maxLines: 1,
+              softWrap: false,
             ),
-          ),
-          Text(
-            label,
-            style: AppText.labelS.copyWith(color: AppColors.textSecondary),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
           ),
         ],
       ),
