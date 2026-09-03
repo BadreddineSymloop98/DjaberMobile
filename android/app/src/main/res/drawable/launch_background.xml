@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Modify this file to customize your launch splash screen -->
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@android:color/white" />
+<!--
+  The window background while the process starts, before Flutter paints.
 
-    <!-- You can insert your own image assets here -->
-    <!-- <item>
-        <bitmap
-            android:gravity="center"
-            android:src="@mipmap/launch_image" />
-    </item> -->
+  True black, matching AppColors.ink. The template's default was white, which
+  on a black app is a full-screen flash on every cold start — the first thing
+  a merchant sees, and it reads as a bug rather than as a launch.
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/ink" />
+    <item android:drawable="@drawable/djaber_mark" android:gravity="center" />
 </layer-list>

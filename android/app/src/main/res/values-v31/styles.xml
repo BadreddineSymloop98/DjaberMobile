@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      Android 12 replaced the window-background splash with its own API, and
+      by default it draws the *launcher icon* on the window background. That is
+      why a stock build shows the Flutter logo on white before the app's own
+      splash: neither value had been set.
+
+      Both are set here. The icon is the Djaber mark, the background true black.
+      windowSplashScreenAnimationDuration is 0 because the app's own splash
+      does the animating — two entrances in a row read as a stutter.
+    -->
+    <style name="LaunchTheme" parent="@android:style/Theme.Black.NoTitleBar">
+        <item name="android:windowBackground">@drawable/launch_background</item>
+        <item name="android:windowSplashScreenBackground">@color/ink</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/djaber_mark</item>
+        <item name="android:windowSplashScreenAnimationDuration">0</item>
+    </style>
+
+    <style name="NormalTheme" parent="@android:style/Theme.Black.NoTitleBar">
+        <item name="android:windowBackground">@color/ink</item>
+    </style>
+</resources>

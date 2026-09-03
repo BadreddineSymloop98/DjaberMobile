@@ -22,6 +22,32 @@
   "commonLoading": "Loading…",
   "commonSeeAll": "See all",
   "commonEmpty": "Nothing here",
+  "commonNext": "Next",
+  "commonSkip": "Skip",
+  "commonStart": "Get started",
+
+  "@_onboarding": {
+    "description": "INVENTED COPY — NOT YET APPROVED. There is no onboarding on the web, so none of this comes from src/lib/i18n.ts. The three slides state the §3 model in order: the AI does the work, the escalation is the point, stock is support. Reconcile with the Figma frames 02–04 before treating as settled."
+  },
+  "onboardingAnswersTitle": "The agent replies to your customers",
+  "onboardingAnswersBody": "It knows your catalogue, your stock and your prices. It answers Facebook and Instagram messages for you, day and night.",
+  "onboardingEscalationTitle": "You step in when it matters",
+  "onboardingEscalationBody": "When the agent can no longer carry a conversation, your phone rings. You take over, reply, and hand it back.",
+  "onboardingStockTitle": "Your stock in your pocket",
+  "onboardingStockBody": "Check availability, correct a count, receive a delivery — without going back to a desk.",
+
+  "onboardingSampleCustomer": "Amina B.",
+  "@onboardingSampleCustomer": {
+    "description": "Placeholder customer name in the onboarding artwork. Not a real person."
+  },
+  "onboardingSampleMessage": "Is the black one available in M?",
+  "onboardingSampleReply": "Yes — 4 left in M. Delivery to Oran is 600 DA.",
+  "onboardingSampleEscalation": "The customer is asking for a refund.",
+  "onboardingSampleNeedsHuman": "Needs you",
+  "onboardingSampleHandling": "Agent handling",
+  "onboardingShortcutProducts": "Products",
+  "onboardingShortcutOrders": "Orders",
+  "onboardingShortcutMovements": "Movements",
 
   "errorNetwork": "No connection. Check your network and try again.",
   "@errorNetwork": {

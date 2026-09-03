@@ -125,10 +125,14 @@ Future<_Bootstrap> _bootstrap() async {
     );
   }
 
-  // Restores the stored session and reads any notification that launched the
-  // app. Both are awaited so the router's first redirect already knows where
-  // the merchant belongs, rather than flashing login and then correcting.
-  await session.restore();
+  // Reads the notification that launched the app, if any, so the destination
+  // is buffered before the first redirect runs.
+  //
+  // `session.restore()` is deliberately NOT called here — the splash screen
+  // owns it. Awaiting it before the first frame would mean the app renders
+  // with the session already resolved, the router would redirect away
+  // immediately, and the splash would never be seen. Running it behind the
+  // splash gives the network call somewhere honest to happen.
   await router.consumeLaunchNotification();
 
   return _Bootstrap(

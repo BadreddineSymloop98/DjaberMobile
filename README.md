@@ -67,9 +67,25 @@ lib/
 └── presentation/
     ├── theme/              Colours, type, spacing — all from the web's tokens
     ├── viewmodels/         BaseViewModel + app-wide models
-    ├── widgets/            Shared widgets
-    └── screens/            (empty — nothing built yet)
+    ├── widgets/            Logo, RiseFade, shared pieces
+    └── screens/            splash/, onboarding/ — the rest are placeholders
 ```
+
+### Motion
+
+One entrance: `RiseFade` — translate up while fading in. The splash logo and
+every onboarding slide go through it, so the two screens read as one gesture.
+
+Translation and opacity only, ~520ms, no scale — on the low-end Android this
+app targets, a longer or heavier animation reads as lag, not polish. It is
+vertical, so it needs no mirroring for Arabic. It **latches**: once revealed, a
+slide stays revealed, so swiping back does not replay the entrance. It honours
+the OS "remove animations" setting by rendering the end state directly.
+
+The splash is not decoration — it runs `session.restore()` behind a 1150ms
+floor, then flips `SessionViewModel.isBootComplete`, which the router's redirect
+waits on. Without the floor, a restore that resolves in 150ms cuts the logo
+animation mid-rise.
 
 ### Responsive sizing
 
@@ -156,8 +172,13 @@ Numerals stay in Geist deliberately — Syne has no tabular figures.
   interface with a logging no-op behind it, and no vendor SDK is in
   `pubspec.yaml`, because the transport question is still open. Implement one
   subclass when it is answered — nothing above that file changes.
-- **No screens.** Every route renders `PlaceholderScreen`. The graph, the auth
-  redirect and the deep-link path are real and testable now.
+- **Only splash and onboarding are built.** Every other route renders
+  `PlaceholderScreen`. The graph, the auth redirect and the deep-link path are
+  real and testable now.
+- **Onboarding copy is invented and unapproved.** There is no onboarding on the
+  web, so none of it comes from `src/lib/i18n.ts`.
+- **The launcher icon is still Flutter's.** The native splash is fixed (black,
+  Djaber mark) but `mipmap/ic_launcher` was not replaced.
 - **Forgot password has no backend.** The web ships the page but it calls
   nothing, and there is no reset route on the server.
 - **No first-run language step.** The app defaults to the web's English while

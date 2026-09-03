@@ -5,15 +5,16 @@ import 'package:go_router/go_router.dart';
 
 import '../core/services/push_service.dart';
 import '../core/utils/logger.dart';
+import '../presentation/screens/onboarding/onboarding_screen.dart';
+import '../presentation/screens/splash/splash_screen.dart';
 import '../presentation/viewmodels/session_view_model.dart';
 import '../presentation/widgets/placeholder_screen.dart';
 import 'routes.dart';
 
 /// The navigation graph and the redirect policy.
 ///
-/// Every route below is wired to [PlaceholderScreen] — no screens are built
-/// yet. The graph, the auth redirect and the deep-link path are real and
-/// testable now; building a screen means replacing one `builder` line.
+/// Splash and onboarding are built. Every other route is still wired to
+/// [PlaceholderScreen] — building a screen means replacing one `builder` line.
 class AppRouter {
   AppRouter({required SessionViewModel session, required PushService push})
       : _session = session,
@@ -46,11 +47,11 @@ class AppRouter {
     routes: [
       GoRoute(
         path: Routes.splash,
-        builder: (_, _) => const PlaceholderScreen(title: 'Splash'),
+        builder: (_, _) => const SplashScreen(),
       ),
       GoRoute(
         path: Routes.onboarding,
-        builder: (_, _) => const PlaceholderScreen(title: 'Onboarding'),
+        builder: (_, _) => const OnboardingScreen(),
       ),
       GoRoute(
         path: Routes.login,
@@ -140,7 +141,9 @@ class AppRouter {
     final location = state.matchedLocation;
     final isPublic = Routes.publicPaths.contains(location);
 
-    if (status == AuthStatus.unknown) {
+    // The splash owns the boot: it runs the session restore and holds for the
+    // minimum display time, then flips the gate. Until then nothing moves.
+    if (!_session.isBootComplete) {
       return location == Routes.splash ? null : Routes.splash;
     }
 

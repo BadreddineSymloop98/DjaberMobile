@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The Djaber network mark, transcribed from the SVG in
+  src/components/Header.tsx of the web app — the same geometry the Flutter
+  DjaberMark painter draws.
+
+  Authored on a 108x108 canvas with the mark occupying the middle 56 units, so
+  it survives the circular crop Android 12's splash API applies. The gradient
+  stroke of the source is flattened to solid white: at launcher-icon size the
+  white-to-zinc ramp is invisible and costs an inline aapt attribute.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <path
+        android:pathData="M28.8,54 a25.2,25.2 0 1,0 50.4,0 a25.2,25.2 0 1,0 -50.4,0"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2.1" />
+
+    <path
+        android:pathData="M54,47 L45.6,56.8"
+        android:strokeColor="#99FFFFFF"
+        android:strokeWidth="2.1" />
+    <path
+        android:pathData="M54,47 L62.4,56.8"
+        android:strokeColor="#99FFFFFF"
+        android:strokeWidth="2.1" />
+    <path
+        android:pathData="M45.6,61 L54,65.2"
+        android:strokeColor="#99A1A1AA"
+        android:strokeWidth="2.1" />
+    <path
+        android:pathData="M62.4,61 L54,65.2"
+        android:strokeColor="#99A1A1AA"
+        android:strokeWidth="2.1" />
+
+    <path
+        android:pathData="M49.8,42.8 a4.2,4.2 0 1,0 8.4,0 a4.2,4.2 0 1,0 -8.4,0"
+        android:fillColor="#FFFFFF" />
+    <path
+        android:pathData="M38.6,59.6 a4.2,4.2 0 1,0 8.4,0 a4.2,4.2 0 1,0 -8.4,0"
+        android:fillColor="#FFFFFF" />
+    <path
+        android:pathData="M61,59.6 a4.2,4.2 0 1,0 8.4,0 a4.2,4.2 0 1,0 -8.4,0"
+        android:fillColor="#FFFFFF" />
+    <path
+        android:pathData="M51.2,65.2 a2.8,2.8 0 1,0 5.6,0 a2.8,2.8 0 1,0 -5.6,0"
+        android:fillColor="#A1A1AA" />
+</vector>

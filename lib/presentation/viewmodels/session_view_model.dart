@@ -43,11 +43,25 @@ class SessionViewModel extends BaseViewModel {
 
   AuthStatus _status = AuthStatus.unknown;
   User? _user;
+  bool _bootComplete = false;
 
   AuthStatus get status => _status;
   User? get user => _user;
   bool get isSignedIn => _status == AuthStatus.signedIn;
   bool get onboardingSeen => _prefs.onboardingSeen;
+
+  /// True once the splash has finished — the stored session has been checked
+  /// *and* the launch animation has had its minimum time. The router's redirect
+  /// holds every navigation on the splash until this flips, which is what stops
+  /// a fast restore from cutting the logo animation mid-rise.
+  bool get isBootComplete => _bootComplete;
+
+  /// Called by the splash screen, and only by it.
+  void markBootComplete() {
+    if (_bootComplete) return;
+    _bootComplete = true;
+    safeNotify();
+  }
 
   /// True when the merchant's AI credits are exhausted, which pauses the agent.
   /// The web dashboard banners this; on mobile it matters more, because it

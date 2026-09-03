@@ -177,6 +177,114 @@ abstract class L10n {
   /// **'Rien ici'**
   String get commonEmpty;
 
+  /// No description provided for @commonNext.
+  ///
+  /// In fr, this message translates to:
+  /// **'Suivant'**
+  String get commonNext;
+
+  /// No description provided for @commonSkip.
+  ///
+  /// In fr, this message translates to:
+  /// **'Passer'**
+  String get commonSkip;
+
+  /// No description provided for @commonStart.
+  ///
+  /// In fr, this message translates to:
+  /// **'Commencer'**
+  String get commonStart;
+
+  /// No description provided for @onboardingAnswersTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'L\'agent répond à vos clients'**
+  String get onboardingAnswersTitle;
+
+  /// No description provided for @onboardingAnswersBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Il connaît votre catalogue, votre stock et vos prix. Il répond aux messages Facebook et Instagram à votre place, jour et nuit.'**
+  String get onboardingAnswersBody;
+
+  /// No description provided for @onboardingEscalationTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vous intervenez quand il faut'**
+  String get onboardingEscalationTitle;
+
+  /// No description provided for @onboardingEscalationBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Quand l\'agent ne peut plus suivre la conversation, votre téléphone sonne. Vous reprenez la main, vous répondez, puis vous la lui rendez.'**
+  String get onboardingEscalationBody;
+
+  /// No description provided for @onboardingStockTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Votre stock dans votre poche'**
+  String get onboardingStockTitle;
+
+  /// No description provided for @onboardingStockBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vérifiez une disponibilité, corrigez une quantité, recevez une livraison — sans revenir au bureau.'**
+  String get onboardingStockBody;
+
+  /// No description provided for @onboardingSampleCustomer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Amina B.'**
+  String get onboardingSampleCustomer;
+
+  /// No description provided for @onboardingSampleMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le noir est dispo en M ?'**
+  String get onboardingSampleMessage;
+
+  /// No description provided for @onboardingSampleReply.
+  ///
+  /// In fr, this message translates to:
+  /// **'Oui — il en reste 4 en M. Livraison Oran 600 DA.'**
+  String get onboardingSampleReply;
+
+  /// No description provided for @onboardingSampleEscalation.
+  ///
+  /// In fr, this message translates to:
+  /// **'La cliente demande un remboursement.'**
+  String get onboardingSampleEscalation;
+
+  /// No description provided for @onboardingSampleNeedsHuman.
+  ///
+  /// In fr, this message translates to:
+  /// **'À traiter'**
+  String get onboardingSampleNeedsHuman;
+
+  /// No description provided for @onboardingSampleHandling.
+  ///
+  /// In fr, this message translates to:
+  /// **'Agent en cours'**
+  String get onboardingSampleHandling;
+
+  /// No description provided for @onboardingShortcutProducts.
+  ///
+  /// In fr, this message translates to:
+  /// **'Produits'**
+  String get onboardingShortcutProducts;
+
+  /// No description provided for @onboardingShortcutOrders.
+  ///
+  /// In fr, this message translates to:
+  /// **'Commandes'**
+  String get onboardingShortcutOrders;
+
+  /// No description provided for @onboardingShortcutMovements.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mouvements'**
+  String get onboardingShortcutMovements;
+
   /// No description provided for @errorNetwork.
   ///
   /// In fr, this message translates to:
