@@ -12,8 +12,13 @@ import '../../viewmodels/session_view_model.dart';
 import '../../widgets/rise_fade.dart';
 import 'onboarding_artwork.dart';
 
-/// Three slides, stating the §3 model in order: the AI does the work, the
-/// escalation is the point, stock is support.
+/// Three slides: stock, then the agent answering, then the escalation.
+///
+/// Stock leads by request (2026-09-03). Note that this inverts the ordering the
+/// brief's §3 model implies — the escalation is the reason the app exists and
+/// stock is support for it — so the last slide, not the first, now carries the
+/// product's actual promise. Worth revisiting alongside the copy, which is
+/// itself still unapproved.
 ///
 /// The artwork is **real UI, not illustration** — a message thread, an
 /// escalation card, a row of shortcut tiles. The promise on screen is the
@@ -75,6 +80,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     final l10n = L10n.of(context);
     final slides = <_Slide>[
       _Slide(
+        title: l10n.onboardingStockTitle,
+        body: l10n.onboardingStockBody,
+        artwork: const ShortcutsArtwork(),
+      ),
+      _Slide(
         title: l10n.onboardingAnswersTitle,
         body: l10n.onboardingAnswersBody,
         artwork: const ConversationArtwork(),
@@ -83,11 +93,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         title: l10n.onboardingEscalationTitle,
         body: l10n.onboardingEscalationBody,
         artwork: const EscalationArtwork(),
-      ),
-      _Slide(
-        title: l10n.onboardingStockTitle,
-        body: l10n.onboardingStockBody,
-        artwork: const ShortcutsArtwork(),
       ),
     ];
     final isLast = _page == slides.length - 1;
