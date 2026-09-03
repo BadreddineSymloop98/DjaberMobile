@@ -322,4 +322,41 @@ class L10nAr extends L10n {
 
   @override
   String get authErrLastNameRequired => 'اللقب مطلوب';
+
+  @override
+  String get authForgotBack => 'العودة إلى تسجيل الدخول';
+
+  @override
+  String get authForgotTitle => 'نسيت كلمة المرور؟';
+
+  @override
+  String get authForgotSubtitle => 'أدخل بريدك لاستلام رابط إعادة التعيين';
+
+  @override
+  String get authForgotEmail => 'البريد الإلكتروني';
+
+  @override
+  String get authForgotEmailPlaceholder => 'you@company.com';
+
+  @override
+  String get authForgotSubmit => 'إرسال الرابط';
+
+  @override
+  String get authForgotSecure =>
+      'رابط إعادة التعيين مشفر وتنتهي صلاحيته خلال ساعة';
+
+  @override
+  String get authForgotRemember => 'تتذكر كلمة المرور؟';
+
+  @override
+  String get authSentTitle => 'تحقق من بريدك';
+
+  @override
+  String get authSentMessage => 'أرسلنا رابط إعادة التعيين إلى';
+
+  @override
+  String get authSentNoReceive => 'لم تستلم البريد؟';
+
+  @override
+  String get authSentTryAnother => 'جرّب عنوان بريد آخر';
 }

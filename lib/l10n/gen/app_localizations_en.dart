@@ -323,4 +323,41 @@ class L10nEn extends L10n {
 
   @override
   String get authErrLastNameRequired => 'Last name is required';
+
+  @override
+  String get authForgotBack => 'Back to Login';
+
+  @override
+  String get authForgotTitle => 'Forgot Password?';
+
+  @override
+  String get authForgotSubtitle => 'Enter your email to receive a reset link';
+
+  @override
+  String get authForgotEmail => 'Email Address';
+
+  @override
+  String get authForgotEmailPlaceholder => 'you@company.com';
+
+  @override
+  String get authForgotSubmit => 'Send Reset Link';
+
+  @override
+  String get authForgotSecure =>
+      'Your password reset link is encrypted and expires in 1 hour';
+
+  @override
+  String get authForgotRemember => 'Remember your password?';
+
+  @override
+  String get authSentTitle => 'Check Your Email';
+
+  @override
+  String get authSentMessage => 'We’ve sent a password reset link to';
+
+  @override
+  String get authSentNoReceive => 'Didn’t receive the email?';
+
+  @override
+  String get authSentTryAnother => 'Try another email address';
 }

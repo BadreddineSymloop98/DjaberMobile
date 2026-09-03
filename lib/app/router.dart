@@ -5,7 +5,9 @@ import 'package:go_router/go_router.dart';
 
 import '../core/services/push_service.dart';
 import '../core/utils/logger.dart';
+import '../presentation/screens/auth/forgot_password_screen.dart';
 import '../presentation/screens/auth/login_screen.dart';
+import '../presentation/screens/auth/password_sent_screen.dart';
 import '../presentation/screens/auth/signup_screen.dart';
 import '../presentation/screens/onboarding/onboarding_screen.dart';
 import '../presentation/screens/splash/splash_screen.dart';
@@ -72,11 +74,15 @@ class AppRouter {
       ),
       GoRoute(
         path: Routes.forgotPassword,
-        builder: (_, _) => const PlaceholderScreen(
-          title: 'Mot de passe oublié',
-          // The web ships this page but it calls no endpoint, and the backend
-          // has no reset route. Needs building on both sides.
-          detail: 'No backend endpoint exists yet',
+        builder: (_, _) => const ForgotPasswordScreen(),
+      ),
+      GoRoute(
+        path: Routes.passwordSent,
+        // The address travels as `extra` so it never appears in a URL. A cold
+        // deep link therefore arrives without it, and the screen omits the
+        // address block rather than inventing one.
+        builder: (_, state) => PasswordSentScreen(
+          email: state.extra is String ? state.extra as String : null,
         ),
       ),
 

@@ -716,6 +716,78 @@ abstract class L10n {
   /// In fr, this message translates to:
   /// **'Le nom est requis'**
   String get authErrLastNameRequired;
+
+  /// No description provided for @authForgotBack.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retour à la connexion'**
+  String get authForgotBack;
+
+  /// No description provided for @authForgotTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mot de passe oublié ?'**
+  String get authForgotTitle;
+
+  /// No description provided for @authForgotSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Entrez votre e-mail pour recevoir un lien de réinitialisation'**
+  String get authForgotSubtitle;
+
+  /// No description provided for @authForgotEmail.
+  ///
+  /// In fr, this message translates to:
+  /// **'Adresse e-mail'**
+  String get authForgotEmail;
+
+  /// No description provided for @authForgotEmailPlaceholder.
+  ///
+  /// In fr, this message translates to:
+  /// **'vous@entreprise.com'**
+  String get authForgotEmailPlaceholder;
+
+  /// No description provided for @authForgotSubmit.
+  ///
+  /// In fr, this message translates to:
+  /// **'Envoyer le lien'**
+  String get authForgotSubmit;
+
+  /// No description provided for @authForgotSecure.
+  ///
+  /// In fr, this message translates to:
+  /// **'Votre lien de réinitialisation est chiffré et expire dans 1 heure'**
+  String get authForgotSecure;
+
+  /// No description provided for @authForgotRemember.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vous vous souvenez de votre mot de passe ?'**
+  String get authForgotRemember;
+
+  /// No description provided for @authSentTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vérifiez votre e-mail'**
+  String get authSentTitle;
+
+  /// No description provided for @authSentMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nous avons envoyé un lien de réinitialisation à'**
+  String get authSentMessage;
+
+  /// No description provided for @authSentNoReceive.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vous n’avez pas reçu l’e-mail ?'**
+  String get authSentNoReceive;
+
+  /// No description provided for @authSentTryAnother.
+  ///
+  /// In fr, this message translates to:
+  /// **'Essayez une autre adresse e-mail'**
+  String get authSentTryAnother;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

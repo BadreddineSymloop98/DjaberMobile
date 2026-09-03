@@ -102,5 +102,17 @@
   "authErrPasswordRequired": "كلمة المرور مطلوبة",
   "authErrPasswordTooShort": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
   "authErrFirstNameRequired": "الاسم مطلوب",
-  "authErrLastNameRequired": "اللقب مطلوب"
+  "authErrLastNameRequired": "اللقب مطلوب",
+  "authForgotBack": "العودة إلى تسجيل الدخول",
+  "authForgotTitle": "نسيت كلمة المرور؟",
+  "authForgotSubtitle": "أدخل بريدك لاستلام رابط إعادة التعيين",
+  "authForgotEmail": "البريد الإلكتروني",
+  "authForgotEmailPlaceholder": "you@company.com",
+  "authForgotSubmit": "إرسال الرابط",
+  "authForgotSecure": "رابط إعادة التعيين مشفر وتنتهي صلاحيته خلال ساعة",
+  "authForgotRemember": "تتذكر كلمة المرور؟",
+  "authSentTitle": "تحقق من بريدك",
+  "authSentMessage": "أرسلنا رابط إعادة التعيين إلى",
+  "authSentNoReceive": "لم تستلم البريد؟",
+  "authSentTryAnother": "جرّب عنوان بريد آخر"
 }

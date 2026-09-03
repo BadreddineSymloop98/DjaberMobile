@@ -102,5 +102,17 @@
   "authErrPasswordRequired": "Le mot de passe est requis",
   "authErrPasswordTooShort": "Le mot de passe doit contenir au moins 8 caractères",
   "authErrFirstNameRequired": "Le prénom est requis",
-  "authErrLastNameRequired": "Le nom est requis"
+  "authErrLastNameRequired": "Le nom est requis",
+  "authForgotBack": "Retour à la connexion",
+  "authForgotTitle": "Mot de passe oublié ?",
+  "authForgotSubtitle": "Entrez votre e-mail pour recevoir un lien de réinitialisation",
+  "authForgotEmail": "Adresse e-mail",
+  "authForgotEmailPlaceholder": "vous@entreprise.com",
+  "authForgotSubmit": "Envoyer le lien",
+  "authForgotSecure": "Votre lien de réinitialisation est chiffré et expire dans 1 heure",
+  "authForgotRemember": "Vous vous souvenez de votre mot de passe ?",
+  "authSentTitle": "Vérifiez votre e-mail",
+  "authSentMessage": "Nous avons envoyé un lien de réinitialisation à",
+  "authSentNoReceive": "Vous n’avez pas reçu l’e-mail ?",
+  "authSentTryAnother": "Essayez une autre adresse e-mail"
 }

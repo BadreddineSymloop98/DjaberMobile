@@ -133,5 +133,20 @@
   "authErrPasswordRequired": "Password is required",
   "authErrPasswordTooShort": "Password must be at least 8 characters",
   "authErrFirstNameRequired": "First name is required",
-  "authErrLastNameRequired": "Last name is required"
+  "authErrLastNameRequired": "Last name is required",
+  "@_authForgot": {
+    "description": "From auth.forgot.* in src/lib/i18n.ts, verbatim. The web also has reset.*/secure.title/verify.* for its two-column marketing panel — desktop furniture, dropped on mobile. The one fact kept from it is secure.desc, shown under the button."
+  },
+  "authForgotBack": "Back to Login",
+  "authForgotTitle": "Forgot Password?",
+  "authForgotSubtitle": "Enter your email to receive a reset link",
+  "authForgotEmail": "Email Address",
+  "authForgotEmailPlaceholder": "you@company.com",
+  "authForgotSubmit": "Send Reset Link",
+  "authForgotSecure": "Your password reset link is encrypted and expires in 1 hour",
+  "authForgotRemember": "Remember your password?",
+  "authSentTitle": "Check Your Email",
+  "authSentMessage": "We’ve sent a password reset link to",
+  "authSentNoReceive": "Didn’t receive the email?",
+  "authSentTryAnother": "Try another email address"
 }

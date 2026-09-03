@@ -325,4 +325,43 @@ class L10nFr extends L10n {
 
   @override
   String get authErrLastNameRequired => 'Le nom est requis';
+
+  @override
+  String get authForgotBack => 'Retour à la connexion';
+
+  @override
+  String get authForgotTitle => 'Mot de passe oublié ?';
+
+  @override
+  String get authForgotSubtitle =>
+      'Entrez votre e-mail pour recevoir un lien de réinitialisation';
+
+  @override
+  String get authForgotEmail => 'Adresse e-mail';
+
+  @override
+  String get authForgotEmailPlaceholder => 'vous@entreprise.com';
+
+  @override
+  String get authForgotSubmit => 'Envoyer le lien';
+
+  @override
+  String get authForgotSecure =>
+      'Votre lien de réinitialisation est chiffré et expire dans 1 heure';
+
+  @override
+  String get authForgotRemember => 'Vous vous souvenez de votre mot de passe ?';
+
+  @override
+  String get authSentTitle => 'Vérifiez votre e-mail';
+
+  @override
+  String get authSentMessage =>
+      'Nous avons envoyé un lien de réinitialisation à';
+
+  @override
+  String get authSentNoReceive => 'Vous n’avez pas reçu l’e-mail ?';
+
+  @override
+  String get authSentTryAnother => 'Essayez une autre adresse e-mail';
 }

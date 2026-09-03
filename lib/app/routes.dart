@@ -14,6 +14,7 @@ class Routes {
   static const login = '/login';
   static const signup = '/signup';
   static const forgotPassword = '/forgot-password';
+  static const passwordSent = '/password-sent';
 
   /// The shell routes — the five bottom-nav destinations of brief §16:
   /// Accueil, File, Boîte, Stock, Commandes.
@@ -43,5 +44,6 @@ class Routes {
     login,
     signup,
     forgotPassword,
+    passwordSent,
   };
 }

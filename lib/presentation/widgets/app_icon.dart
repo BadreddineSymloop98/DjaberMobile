@@ -51,6 +51,16 @@ class AppIcons {
         '9 0 11-18 0 9 9 0 0118 0z',
   ];
 
+  /// The arrow the web renders on its own back-to-login link — an arrow with
+  /// a shaft, not `ChevronLeftIcon`. Taken from src/app/forgot-password/page.tsx.
+  ///
+  /// The Figma frames still show a typographic "←" here; those two frames were
+  /// drawn before the icon set was imported, so the glyph is a leftover
+  /// stand-in rather than the intent.
+  static const arrowLeft = <String>[
+    'M10 19l-7-7m0 0l7-7m-7 7h18',
+  ];
+
   /// `ClipboardIcon` — orders awaiting action.
   static const clipboard = <String>[
     'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 '

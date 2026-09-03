@@ -4,6 +4,7 @@ import '../../../core/extensions/responsive_extension.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/app_spacing.dart';
 import '../../theme/app_typography.dart';
+import '../../widgets/app_icon.dart';
 import '../../widgets/app_text_field.dart';
 import '../../widgets/djaber_logo.dart';
 
@@ -28,6 +29,7 @@ class AuthScaffold extends StatelessWidget {
     required this.subtitle,
     required this.children,
     required this.footer,
+    this.leading,
   });
 
   final String title;
@@ -38,6 +40,9 @@ class AuthScaffold extends StatelessWidget {
 
   /// The line pinned to the bottom of the screen.
   final Widget footer;
+
+  /// Optional row above the logo — the back link on the reset screens.
+  final Widget? leading;
 
   @override
   Widget build(BuildContext context) {
@@ -56,11 +61,20 @@ class AuthScaffold extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    if (leading != null) ...[
+                      Align(
+                        alignment: AlignmentDirectional.centerStart,
+                        child: leading,
+                      ),
+                      SizedBox(height: AppSpacing.lg),
+                    ],
                     Align(
                       alignment: AlignmentDirectional.centerStart,
                       child: DjaberLogo(size: 8.72.w), // 34
                     ),
-                    SizedBox(height: 6.64.h), // 56
+                    // The reset screens leave less room under the logo — 30
+                    // rather than 40 — because they carry a back link above it.
+                    SizedBox(height: leading == null ? 6.64.h : 5.45.h),
                     Text(title, style: AppText.displayL),
                     SizedBox(height: AppSpacing.lg),
                     Text(subtitle, style: AppText.bodyM),
@@ -134,6 +148,44 @@ class AuthSubmitButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       FilledButton(onPressed: onPressed, child: Text(label));
+}
+
+/// The back link at the top of the reset screens.
+///
+/// Uses the arrow from the web's own back-to-login link rather than the
+/// typographic "←" still sitting in those two Figma frames — they were drawn
+/// before the icon set was imported.
+class AuthBackLink extends StatelessWidget {
+  const AuthBackLink({super.key, required this.label, required this.onTap});
+
+  final String label;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      behavior: HitTestBehavior.opaque,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Flipped for Arabic. Unlike the entrance animation — where the
+          // light source is physical, not linguistic — an arrow meaning "back"
+          // points whichever way "back" is, so it does follow the layout.
+          Transform.flip(
+            flipX: Directionality.of(context) == TextDirection.rtl,
+            child: AppIcon(
+              AppIcons.arrowLeft,
+              size: 4.1.w, // 16
+              color: AppColors.textSecondary,
+            ),
+          ),
+          SizedBox(width: AppSpacing.sm),
+          Text(label, style: AppText.bodyS),
+        ],
+      ),
+    );
+  }
 }
 
 /// Builds the three field messages once per screen from `L10n`.
