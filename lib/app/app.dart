@@ -38,12 +38,26 @@ class _DjaberAppState extends State<DjaberApp> with WidgetsBindingObserver {
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    // Coming back to the foreground is the moment the merchant's view is most
-    // likely stale — a push may have been missed, credits may have run out.
-    // Screens poll on their own; this refreshes the session-level facts.
-    if (state == AppLifecycleState.resumed) {
-      final session = context.read<SessionViewModel>();
-      if (session.isSignedIn) session.refreshProfile();
+    final session = context.read<SessionViewModel>();
+
+    switch (state) {
+      case AppLifecycleState.paused:
+        // Put the app back behind the splash, so it plays on every return and
+        // not only on a cold start. Done on the way out rather than on the way
+        // in: by the time the merchant is looking at the screen again the
+        // router has already settled on the splash, so there is no flash of
+        // the previous screen.
+        session.resetBoot();
+      case AppLifecycleState.resumed:
+        // Coming back to the foreground is the moment the merchant's view is
+        // most likely stale — a push may have been missed, credits may have
+        // run out. Screens poll on their own; this refreshes the
+        // session-level facts.
+        if (session.isSignedIn) session.refreshProfile();
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.hidden:
+      case AppLifecycleState.detached:
+        break;
     }
   }
 

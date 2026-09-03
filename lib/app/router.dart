@@ -34,6 +34,13 @@ class AppRouter {
   /// session was still being restored. Consumed once the app is signed in.
   String? _pendingDeepLink;
 
+  /// Where the merchant was when the splash took the screen back.
+  ///
+  /// The splash replays every time the app is backgrounded, so without this a
+  /// merchant who glances at another app mid-conversation comes back to the
+  /// home screen. Restored once the splash finishes.
+  String? _locationBeforeSplash;
+
   late final GoRouter router = GoRouter(
     navigatorKey: _rootKey,
     initialLocation: Routes.splash,
@@ -144,21 +151,35 @@ class AppRouter {
     // The splash owns the boot: it runs the session restore and holds for the
     // minimum display time, then flips the gate. Until then nothing moves.
     if (!_session.isBootComplete) {
-      return location == Routes.splash ? null : Routes.splash;
+      if (location == Routes.splash) return null;
+      // Remember a real destination so the splash hands it back afterwards.
+      // Auth routes are not worth restoring — the rules below place those.
+      if (_session.isSignedIn && !isPublic) _locationBeforeSplash = location;
+      return Routes.splash;
     }
 
     if (status == AuthStatus.signedOut) {
+      _locationBeforeSplash = null;
       if (isPublic && location != Routes.splash) return null;
       return _session.onboardingSeen ? Routes.login : Routes.onboarding;
     }
 
-    // Signed in.
+    // Signed in. A tapped notification outranks wherever they happened to be —
+    // it is a specific request, not a resumption.
     final pending = _pendingDeepLink;
     if (pending != null) {
       _pendingDeepLink = null;
+      _locationBeforeSplash = null;
       Log.i('opening deep link $pending', tag: 'push');
       return pending;
     }
+
+    final resume = _locationBeforeSplash;
+    if (resume != null) {
+      _locationBeforeSplash = null;
+      return resume;
+    }
+
     if (isPublic) return Routes.home;
     return null;
   }

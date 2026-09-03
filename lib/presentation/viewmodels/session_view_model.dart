@@ -63,6 +63,22 @@ class SessionViewModel extends BaseViewModel {
     safeNotify();
   }
 
+  /// Puts the app back behind the splash.
+  ///
+  /// Called when the app is backgrounded, so the splash plays on every return
+  /// and not only on a cold start — Android keeps the process alive, so
+  /// without this a merchant who task-switches away and back never sees it.
+  ///
+  /// The cost is real and worth knowing: it also sits in front of a tapped
+  /// notification, which is the one path in this app measured in seconds. If
+  /// that becomes a problem, gate this on how long the app was away rather
+  /// than removing it.
+  void resetBoot() {
+    if (!_bootComplete) return;
+    _bootComplete = false;
+    safeNotify();
+  }
+
   /// True when the merchant's AI credits are exhausted, which pauses the agent.
   /// The web dashboard banners this; on mobile it matters more, because it
   /// silently breaks the notification loop the app exists for.

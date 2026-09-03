@@ -76,6 +76,9 @@ class _SplashLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     // 18% of the shorter edge — about 72px on a 400dp phone. `.r` rather than
     // `.w` so the mark stays square and proportionate rather than stretching.
-    return DjaberLogo(size: 18.r);
+    //
+    // The tagline is on here and off in headers, matching the Figma frame.
+    // It reads from `appTagline`, which is the web's own `dash.tagline`.
+    return DjaberLogo(size: 18.r, showTagline: true);
   }
 }
