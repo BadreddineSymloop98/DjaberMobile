@@ -116,7 +116,7 @@ void main() {
     expect(find.text('Veuillez saisir une adresse e-mail valide'), findsNothing);
   });
 
-  testWidgets('the signup password hint gives way to the error and back',
+  testWidgets('the signup password shows no hint, only errors',
       (tester) async {
     tester.view.physicalSize = const Size(411, 914);
     tester.view.devicePixelRatio = 1;
@@ -125,8 +125,8 @@ void main() {
     await tester.pumpWidget(host(const SignupScreen()));
     await tester.pumpAndSettle();
 
-    // The standing rule is visible before anything is typed.
-    expect(find.text('AU MOINS 8 CARACTÈRES'), findsOneWidget);
+    // The hint was removed from the design; nothing states the rule up front.
+    expect(find.text('AU MOINS 8 CARACTÈRES'), findsNothing);
 
     final password = find.byType(TextField).last;
     await tester.enterText(password, 'court');
@@ -135,12 +135,13 @@ void main() {
       find.text('Le mot de passe doit contenir au moins 8 caractères'),
       findsOneWidget,
     );
-    expect(find.text('AU MOINS 8 CARACTÈRES'), findsNothing,
-        reason: 'error and hint share a slot so the field keeps its height');
 
     await tester.enterText(password, 'motdepasse');
     await tester.pumpAndSettle();
-    expect(find.text('AU MOINS 8 CARACTÈRES'), findsOneWidget);
+    expect(
+      find.text('Le mot de passe doit contenir au moins 8 caractères'),
+      findsNothing,
+    );
   });
 
   testWidgets('the name fields reject digits at the keyboard', (tester) async {

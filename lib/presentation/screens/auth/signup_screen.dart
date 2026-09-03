@@ -121,9 +121,6 @@ class _SignupView extends StatelessWidget {
           controller: model.password.controller,
           focusNode: model.password.focusNode,
           placeholder: '••••••••',
-          // The standing rule, shown until there is something wrong to say
-          // instead. Same slot, so the field keeps its height either way.
-          hint: l10n.authPasswordHint,
           errorText: passwordError(),
           obscureText: true,
           keyboardType: TextInputType.visiblePassword,
