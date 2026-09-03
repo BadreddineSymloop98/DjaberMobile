@@ -89,11 +89,14 @@ void main() {
     await tester.tap(find.text('Déconnexion'));
     await tester.pumpAndSettle();
 
-    // Onboarding has been seen in this flow only if prefs say so; a fresh
-    // install has not, so the redirect sends them to onboarding instead.
-    // Either way they must leave home.
-    expect(location(), isNot(Routes.home));
+    // The button navigates explicitly, and login is a public path the
+    // redirect leaves alone once signed out — so this holds whether or not
+    // onboarding has been seen.
+    expect(location(), Routes.login);
+    expect(session.status, AuthStatus.signedOut);
     expect(session.isSignedIn, isFalse);
+    expect(session.user, isNull);
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('after onboarding has been seen, sign out lands on login',

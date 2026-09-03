@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../../../app/routes.dart';
 import '../../../core/extensions/responsive_extension.dart';
 import '../../../l10n/gen/app_localizations.dart';
 import '../../theme/app_colors.dart';
@@ -45,7 +47,17 @@ class HomeScreen extends StatelessWidget {
               SizedBox(height: AppSpacing.huge),
               _SignOutButton(
                 label: l10n.menuSignOut,
-                onPressed: session.signOut,
+                onPressed: () async {
+                  // Awaited, and the order matters: navigating first would
+                  // send a public path to the redirect while the status is
+                  // still `signedIn`, which bounces straight back to home.
+                  await session.signOut();
+                  // Explicit, the way every web call site pushes a route of
+                  // its own after `logout()`. The redirect would also land
+                  // here on the status flip; this states the destination at
+                  // the point of the action rather than leaving it implied.
+                  if (context.mounted) context.go(Routes.login);
+                },
               ),
             ],
           ),

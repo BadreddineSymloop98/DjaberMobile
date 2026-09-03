@@ -171,10 +171,16 @@ class SessionViewModel extends BaseViewModel {
     }
   }
 
+  /// Ends the session.
+  ///
+  /// Local only, like the web app: `src/lib/api.ts` drops `token` and `user`
+  /// from localStorage and makes no request, because the backend has no logout
+  /// route and the JWT is not revocable. Nothing here can fail on the network.
   Future<void> signOut() async {
     // Unregister before the token is cleared — afterwards the call cannot
     // authenticate, and the device keeps receiving another merchant's alerts
-    // if the handset is shared.
+    // if the handset is shared. A no-op until Q5 picks a transport; the web
+    // has no equivalent because it never registers a device.
     await _push.deleteToken();
     await _auth.signOut();
     _user = null;
@@ -182,12 +188,15 @@ class SessionViewModel extends BaseViewModel {
   }
 
   /// The hard sign-out triggered by a 401 from anywhere in the app.
+  ///
+  /// Delegates to [signOut] so there is one way to end a session, the way
+  /// `AuthContext` calls the same `logout()` for a deliberate sign-out and for
+  /// a rejected token. The guard is ours: a burst of parallel requests can
+  /// return several 401s, and without it each would run the teardown again.
   Future<void> onUnauthorized() async {
     if (_status != AuthStatus.signedIn) return;
     Log.i('401 — ending session', tag: 'auth');
-    await _auth.signOut();
-    _user = null;
-    _setStatus(AuthStatus.signedOut);
+    await signOut();
   }
 
   Future<void> completeOnboarding() async {
