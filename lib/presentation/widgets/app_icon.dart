@@ -61,6 +61,12 @@ class AppIcons {
     'M10 19l-7-7m0 0l7-7m-7 7h18',
   ];
 
+  /// `LogoutIcon` — ending the session.
+  static const logout = <String>[
+    'M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 '
+        '3 0 013 3v1',
+  ];
+
   /// `ClipboardIcon` — orders awaiting action.
   static const clipboard = <String>[
     'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 '

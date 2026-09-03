@@ -61,6 +61,62 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  group('sign out', () {
+    testWidgets('the button is on the screen and labelled', (tester) async {
+      sizeTo(tester, const Size(411, 914));
+      session.debugSetUser(const User(
+        id: 'u-1',
+        email: 'amina@shop.dz',
+        firstName: 'Amina',
+      ));
+
+      await tester.pumpWidget(authHost(const HomeScreen(), session));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Déconnexion'), findsOneWidget);
+    });
+
+    testWidgets('tapping it ends the session and forgets the merchant',
+        (tester) async {
+      sizeTo(tester, const Size(411, 914));
+      session.debugSetUser(const User(
+        id: 'u-1',
+        email: 'amina@shop.dz',
+        firstName: 'Amina',
+      ));
+
+      await tester.pumpWidget(authHost(const HomeScreen(), session));
+      await tester.pumpAndSettle();
+      expect(session.isSignedIn, isTrue);
+
+      await tester.tap(find.text('Déconnexion'));
+      await tester.pumpAndSettle();
+
+      // The status flip is what the router's redirect watches, so this is
+      // what actually returns the merchant to login.
+      expect(session.status, AuthStatus.signedOut);
+      expect(session.isSignedIn, isFalse);
+      expect(session.user, isNull);
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('the stored token is cleared, not just the in-memory session',
+        (tester) async {
+      // The failure this guards against: signing out visually but leaving the
+      // token on the device, so the next cold start restores the session.
+      sizeTo(tester, const Size(411, 914));
+      session.debugSetUser(const User(id: 'u-1', email: 'amina@shop.dz'));
+
+      await tester.pumpWidget(authHost(const HomeScreen(), session));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Déconnexion'));
+      await tester.pumpAndSettle();
+
+      expect(await session.hasStoredSessionForTest(), isFalse);
+    });
+  });
+
   testWidgets('greets in Arabic too', (tester) async {
     sizeTo(tester, const Size(411, 914));
     session.debugSetUser(const User(

@@ -210,6 +210,15 @@ class SessionViewModel extends BaseViewModel {
   ///
   /// The alternative is stubbing Dio to fake a login response, which tests the
   /// HTTP client rather than the screen under test.
+  /// Whether a token is still on the device.
+  ///
+  /// Exposed so a sign-out test can assert the token was cleared, not just
+  /// that the in-memory session was dropped — signing out visually while
+  /// leaving the token behind would restore the session on the next cold
+  /// start.
+  @visibleForTesting
+  Future<bool> hasStoredSessionForTest() => _auth.hasStoredSession();
+
   @visibleForTesting
   void debugSetUser(User user) {
     _user = user;

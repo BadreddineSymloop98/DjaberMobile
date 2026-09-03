@@ -163,5 +163,9 @@
         "type": "String"
       }
     }
+  },
+  "menuSignOut": "Sign out",
+  "@menuSignOut": {
+    "description": "From menu.signout in src/lib/i18n.ts. Currently on the home stub as a temporary control; belongs in the hamburger menu (brief §16, tier 3) once that exists."
   }
 }

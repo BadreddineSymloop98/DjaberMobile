@@ -378,4 +378,7 @@ class L10nEn extends L10n {
   String homeWelcome(String name) {
     return 'Welcome back, $name';
   }
+
+  @override
+  String get menuSignOut => 'Sign out';
 }

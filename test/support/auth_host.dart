@@ -10,6 +10,7 @@ import 'package:djaber_mobile/presentation/theme/app_theme.dart';
 import 'package:djaber_mobile/presentation/viewmodels/session_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,13 +20,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// straight off it and a stub would let those getters drift from the ones the
 /// app actually uses.
 ///
-/// Nothing here reaches a platform channel or the network: `SharedPreferences`
-/// is given mock values, `SecureStorage` only hits the Keystore when read or
-/// written, and no test in this suite submits a valid form — so the API client
-/// is constructed but never called. A test that *does* need a request should
-/// stub Dio rather than extend this.
-Future<SessionViewModel> sessionForTest() async {
+/// Nothing here reaches the network: no test in this suite submits a valid
+/// form, so the API client is constructed but never called. A test that *does*
+/// need a request should stub Dio rather than extend this.
+///
+/// Both stores are given in-memory mocks. The secure one is seeded with a
+/// token on purpose, so a sign-out test can assert the token was actually
+/// removed rather than only that the in-memory session was dropped.
+Future<SessionViewModel> sessionForTest({String? token = 'test-token'}) async {
   SharedPreferences.setMockInitialValues({});
+  FlutterSecureStorage.setMockInitialValues(
+    token == null ? {} : {'auth_token': token},
+  );
   final prefs = await PrefsStorage.load();
   final secure = SecureStorage();
 

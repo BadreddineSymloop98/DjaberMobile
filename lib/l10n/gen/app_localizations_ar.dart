@@ -377,4 +377,7 @@ class L10nAr extends L10n {
   String homeWelcome(String name) {
     return 'مرحباً بعودتك، $name';
   }
+
+  @override
+  String get menuSignOut => 'تسجيل الخروج';
 }

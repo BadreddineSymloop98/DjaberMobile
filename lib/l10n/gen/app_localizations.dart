@@ -818,6 +818,12 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Welcome back, {name}'**
   String homeWelcome(String name);
+
+  /// From menu.signout in src/lib/i18n.ts. Currently on the home stub as a temporary control; belongs in the hamburger menu (brief §16, tier 3) once that exists.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out'**
+  String get menuSignOut;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

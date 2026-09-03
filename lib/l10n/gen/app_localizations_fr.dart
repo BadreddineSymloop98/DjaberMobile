@@ -382,4 +382,7 @@ class L10nFr extends L10n {
   String homeWelcome(String name) {
     return 'Bon retour, $name';
   }
+
+  @override
+  String get menuSignOut => 'Déconnexion';
 }

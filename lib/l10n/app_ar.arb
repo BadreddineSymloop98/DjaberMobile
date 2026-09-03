@@ -119,5 +119,6 @@
   "authErrUserExists": "يوجد حساب بهذا البريد الإلكتروني بالفعل",
   "authErrNetwork": "لا يمكن الوصول إلى الخادم. تحقق من اتصالك.",
   "authErrUnknown": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
-  "homeWelcome": "مرحباً بعودتك، {name}"
+  "homeWelcome": "مرحباً بعودتك، {name}",
+  "menuSignOut": "تسجيل الخروج"
 }

@@ -119,5 +119,6 @@
   "authErrUserExists": "Un compte avec cet e-mail existe déjà",
   "authErrNetwork": "Impossible de joindre le serveur. Vérifiez votre connexion.",
   "authErrUnknown": "Une erreur s’est produite. Veuillez réessayer.",
-  "homeWelcome": "Bon retour, {name}"
+  "homeWelcome": "Bon retour, {name}",
+  "menuSignOut": "Déconnexion"
 }
