@@ -1,0 +1,121 @@
+name: djaber_mobile
+description: "Djaber.ai companion app — the AI hands a conversation to the merchant, and their stock in their pocket."
+publish_to: 'none'
+
+# Bump the build number on every store upload.
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # State management and DI. Both jobs, one mechanism — see lib/app/providers.dart.
+  provider: ^6.1.5+1
+
+  # HTTP. Chosen over `package:http` for interceptors, which is where auth,
+  # retry and error mapping live.
+  dio: ^5.11.0
+
+  # Declarative routing with deep links — a notification tap has to open the
+  # conversation it is about (brief Q6).
+  go_router: ^18.0.1
+
+  # The auth token goes through the Android Keystore, not a plain prefs file.
+  flutter_secure_storage: ^11.0.0
+
+  # Non-secret device preferences: language, onboarding state.
+  shared_preferences: ^2.5.5
+
+  # Product photos, cached to disk. Algerian mobile data is metered — a
+  # product list must not refetch its images on every scroll.
+  cached_network_image: ^4.0.0
+
+  # Explains a failure as "you are offline" and triggers a retry when the
+  # connection returns.
+  connectivity_plus: ^7.3.1
+
+  # Version string, and the manufacturer check behind the autostart guidance
+  # this market needs (brief §9).
+  package_info_plus: ^10.2.1
+  device_info_plus: ^13.2.0
+
+  # Dates, numbers and currency in the merchant's locale.
+  intl: any
+
+  cupertino_icons: ^1.0.8
+
+  # NOT ADDED, deliberately: no push transport. The backend speaks Expo, which
+  # Flutter cannot produce a token for, and Q5 — what replaces it — is open.
+  # `core/services/push_service.dart` is the interface to implement once it is
+  # answered; nothing else changes.
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  # Material icons are pulled in for the widgets that need them, but the app's
+  # own icons come from the web's 54 hand-rolled Heroicons in
+  # src/components/ui/icons.tsx — the Material set is one of the four things
+  # that make an app read as Android (brief §15).
+  generate: true
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
+
+  # Bundled, not fetched at runtime. A first-run font download over Algerian
+  # mobile data means an app that opens unstyled or not at all. Static
+  # instances rather than variable fonts, so `fontWeight` works directly.
+  fonts:
+    # Body, titles and every numeral. Syne has no tabular figures, so numbers
+    # stay in Geist (brief §15).
+    - family: Geist
+      fonts:
+        - asset: assets/fonts/Geist-400.ttf
+          weight: 400
+        - asset: assets/fonts/Geist-500.ttf
+          weight: 500
+        - asset: assets/fonts/Geist-600.ttf
+          weight: 600
+        - asset: assets/fonts/Geist-700.ttf
+          weight: 700
+
+    # Display face. The web sets `fontFamily: 'Syne'` inline on page headings.
+    - family: Syne
+      fonts:
+        - asset: assets/fonts/Syne-600.ttf
+          weight: 600
+        - asset: assets/fonts/Syne-700.ttf
+          weight: 700
+        - asset: assets/fonts/Syne-800.ttf
+          weight: 800
+
+    # Every uppercase label — the web's `.label` primitive.
+    - family: JetBrainsMono
+      fonts:
+        - asset: assets/fonts/JetBrainsMono-400.ttf
+          weight: 400
+        - asset: assets/fonts/JetBrainsMono-500.ttf
+          weight: 500
+        - asset: assets/fonts/JetBrainsMono-600.ttf
+          weight: 600
+
+    # Arabic. The web binds it to html[lang="ar"].
+    - family: Changa
+      fonts:
+        - asset: assets/fonts/Changa-400.ttf
+          weight: 400
+        - asset: assets/fonts/Changa-500.ttf
+          weight: 500
+        - asset: assets/fonts/Changa-600.ttf
+          weight: 600
+        - asset: assets/fonts/Changa-700.ttf
+          weight: 700

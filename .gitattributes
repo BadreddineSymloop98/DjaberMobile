@@ -1,0 +1,16 @@
+# Normalise line endings. Without this, every file shows as fully modified
+# when the repo is opened on macOS or Linux.
+* text=auto eol=lf
+
+# Windows-only tooling keeps CRLF.
+*.bat        text eol=crlf
+*.cmd        text eol=crlf
+gradlew.bat  text eol=crlf
+
+# Never touched.
+*.ttf  binary
+*.otf  binary
+*.png  binary
+*.jpg  binary
+*.jar  binary
+*.keystore binary

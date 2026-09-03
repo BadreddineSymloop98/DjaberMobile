@@ -1,0 +1,29 @@
+{
+  "@@locale": "ar",
+
+  "appName": "Djaber.ai",
+  "appTagline": "وكيل ذكاء اصطناعي اجتماعي",
+
+  "commonBack": "رجوع",
+  "commonDismiss": "إغلاق",
+  "commonCancel": "إلغاء",
+  "commonSave": "حفظ",
+  "commonRetry": "إعادة المحاولة",
+  "commonDelete": "حذف",
+  "commonConfirm": "تأكيد",
+  "commonSearch": "بحث",
+  "commonLoading": "جارٍ التحميل…",
+  "commonSeeAll": "عرض الكل",
+  "commonEmpty": "لا يوجد شيء هنا",
+
+  "errorNetwork": "لا يوجد اتصال. تحقق من الشبكة وحاول مرة أخرى.",
+  "errorTimeout": "استغرق الطلب وقتًا طويلاً.",
+  "errorUnauthorized": "انتهت الجلسة. سجّل الدخول مرة أخرى.",
+  "errorNotFound": "غير موجود.",
+  "errorServer": "حدث خطأ من جانبنا.",
+  "errorUnknown": "حدث خطأ ما.",
+
+  "langEnglish": "English",
+  "langFrench": "Français",
+  "langArabic": "العربية"
+}

@@ -1,0 +1,42 @@
+{
+  "@@locale": "en",
+  "@@x-note": "Source dictionary. The web app's own source language is English (`DEFAULT_LANG` in src/lib/i18n.ts), so English is the template here too and fr/ar are translations of it. Screen copy is added as screens are built, taken verbatim from src/lib/i18n.ts — do not invent strings that already exist there.",
+
+  "appName": "Djaber.ai",
+  "@appName": {
+    "description": "Product name. Never translated. The wordmark renders 'Djaber' in primary text and '.ai' in secondary."
+  },
+  "appTagline": "Social AI Agent",
+  "@appTagline": {
+    "description": "From dash.tagline in src/lib/i18n.ts."
+  },
+
+  "commonBack": "Back",
+  "commonDismiss": "Dismiss",
+  "commonCancel": "Cancel",
+  "commonSave": "Save",
+  "commonRetry": "Retry",
+  "commonDelete": "Delete",
+  "commonConfirm": "Confirm",
+  "commonSearch": "Search",
+  "commonLoading": "Loading…",
+  "commonSeeAll": "See all",
+  "commonEmpty": "Nothing here",
+
+  "errorNetwork": "No connection. Check your network and try again.",
+  "@errorNetwork": {
+    "description": "NetworkException. Shown with a retry action — this market drops connections constantly, so it must not read like a fatal error."
+  },
+  "errorTimeout": "The request took too long.",
+  "errorUnauthorized": "Your session expired. Sign in again.",
+  "errorNotFound": "Not found.",
+  "errorServer": "Something went wrong on our side.",
+  "errorUnknown": "Something went wrong.",
+
+  "langEnglish": "English",
+  "langFrench": "Français",
+  "langArabic": "العربية",
+  "@langArabic": {
+    "description": "Language names always appear in their own language, matching LANGS in src/lib/i18n.ts."
+  }
+}

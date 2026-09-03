@@ -1,0 +1,49 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  errors:
+    # Missing a `.arb` key must fail the build, not warn — a screen shipping
+    # with an untranslated string is a real defect in a trilingual app.
+    missing_required_param: error
+    missing_return: error
+    todo: ignore
+  exclude:
+    - lib/l10n/gen/**
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - build/**
+    - android/**
+    - ios/**
+    - web/**
+    - windows/**
+    - macos/**
+    - linux/**
+
+linter:
+  rules:
+    # --- Correctness ---
+    always_use_package_imports: false
+    # The codebase deliberately takes public named params into private fields
+    # (`{required ApiClient api}` → `_api`), which this lint cannot express.
+    prefer_initializing_formals: false
+    avoid_dynamic_calls: true
+    avoid_empty_else: true
+    avoid_slow_async_io: true
+    cancel_subscriptions: true
+    close_sinks: true
+    unawaited_futures: true
+    use_build_context_synchronously: true
+
+    # --- Style, matching the code already written ---
+    always_declare_return_types: true
+    prefer_single_quotes: true
+    prefer_final_locals: true
+    prefer_const_constructors: true
+    prefer_const_declarations: true
+    prefer_const_literals_to_create_immutables: true
+    require_trailing_commas: true
+    sort_child_properties_last: true
+    directives_ordering: true
+    unnecessary_parenthesis: true
+    unnecessary_lambdas: true
+
