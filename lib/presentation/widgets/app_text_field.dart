@@ -180,15 +180,16 @@ class _Input extends StatelessWidget {
         }
 
         return Container(
+          // Same height as a Primary Button, from the one control token, so a
+          // field and the button under it line up.
+          height: AppSize.control,
+          alignment: AlignmentDirectional.centerStart,
           decoration: BoxDecoration(
             color: AppColors.surface,
             borderRadius: BorderRadius.circular(AppRadius.input),
             border: Border.all(color: border, width: AppStroke.hairline),
           ),
-          padding: EdgeInsets.symmetric(
-            horizontal: AppSpacing.md,
-            vertical: 0.6.h, // ~5 — the rest of the 12 comes from the field
-          ),
+          padding: EdgeInsets.symmetric(horizontal: AppSpacing.md),
           child: TextField(
             controller: controller,
             focusNode: focusNode,

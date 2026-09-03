@@ -50,6 +50,20 @@ class AppRadius {
   static const double pill = 999;
 }
 
+/// Fixed control heights.
+///
+/// One number for every tappable control, so a button and the field above it
+/// cannot drift apart. In Figma the Primary Button is 42 and the Text Field
+/// input is 41 — they differ only because the label inside each is a different
+/// size, not by intent. Pinning both to the button height makes them match and
+/// keeps every form on one rhythm.
+class AppSize {
+  const AppSize._();
+
+  /// 42 on the 844-tall design frame. Buttons and text inputs.
+  static double get control => 4.98.h;
+}
+
 class AppStroke {
   const AppStroke._();
 

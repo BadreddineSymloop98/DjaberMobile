@@ -2,6 +2,7 @@ import 'package:djaber_mobile/core/utils/screen.dart';
 import 'package:djaber_mobile/l10n/gen/app_localizations.dart';
 import 'package:djaber_mobile/presentation/screens/auth/login_screen.dart';
 import 'package:djaber_mobile/presentation/screens/auth/signup_screen.dart';
+import 'package:djaber_mobile/presentation/screens/onboarding/onboarding_screen.dart';
 import 'package:djaber_mobile/presentation/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -155,6 +156,60 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Amina'), findsOneWidget);
+  });
+
+  testWidgets('the button and the input are exactly the same height',
+      (tester) async {
+    tester.view.physicalSize = const Size(411, 914);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+
+    await tester.pumpWidget(host(const LoginScreen()));
+    await tester.pumpAndSettle();
+
+    final button = tester.getSize(find.byType(FilledButton));
+    // The Container that draws the input box is the TextField's parent.
+    final input = tester.getSize(
+      find
+          .ancestor(of: find.byType(TextField).first, matching: find.byType(Container))
+          .first,
+    );
+
+    expect(input.height, button.height,
+        reason: 'both come from AppSize.control');
+  });
+
+  testWidgets('the auth button matches the onboarding button', (tester) async {
+    tester.view.physicalSize = const Size(411, 914);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+
+    await tester.pumpWidget(host(const LoginScreen()));
+    await tester.pumpAndSettle();
+    final authButton = tester.getSize(find.byType(FilledButton)).height;
+
+    await tester.pumpWidget(host(const OnboardingScreen()));
+    await tester.pumpAndSettle();
+    final onboardingButton = tester.getSize(find.byType(FilledButton)).height;
+
+    expect(authButton, onboardingButton);
+  });
+
+  testWidgets('the name fields are stacked, not side by side', (tester) async {
+    tester.view.physicalSize = const Size(411, 914);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+
+    await tester.pumpWidget(host(const SignupScreen()));
+    await tester.pumpAndSettle();
+
+    final firstName = tester.getRect(find.byType(TextField).at(0));
+    final lastName = tester.getRect(find.byType(TextField).at(1));
+
+    expect(lastName.top, greaterThan(firstName.bottom));
+    expect(firstName.width, lastName.width);
+    // Full width, not half: a half-width field left no room for its error.
+    expect(firstName.width, greaterThan(411 / 2));
   });
 
   testWidgets('the email field refuses whitespace', (tester) async {

@@ -71,52 +71,33 @@ class _SignupView extends StatelessWidget {
         onTap: () => context.go(Routes.login),
       ),
       children: [
-        // Prénom and Nom sit side by side, as in the frame.
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: AppTextField(
-                label: l10n.authFirstName,
-                controller: model.firstName.controller,
-                focusNode: model.firstName.focusNode,
-                placeholder: l10n.authFirstNamePlaceholder,
-                errorText: nameError(
-                  model.firstName,
-                  l10n.authErrFirstNameRequired,
-                ),
-                textInputAction: TextInputAction.next,
-                textCapitalization: TextCapitalization.words,
-                autofillHints: const [AutofillHints.givenName],
-                inputFormatters: [
-                  _nameFilter,
-                  LengthLimitingTextInputFormatter(50),
-                ],
-                onSubmitted: (_) => model.lastName.focusNode.requestFocus(),
-              ),
-            ),
-            SizedBox(width: AppSpacing.sm),
-            Expanded(
-              child: AppTextField(
-                label: l10n.authLastName,
-                controller: model.lastName.controller,
-                focusNode: model.lastName.focusNode,
-                placeholder: l10n.authLastNamePlaceholder,
-                errorText: nameError(
-                  model.lastName,
-                  l10n.authErrLastNameRequired,
-                ),
-                textInputAction: TextInputAction.next,
-                textCapitalization: TextCapitalization.words,
-                autofillHints: const [AutofillHints.familyName],
-                inputFormatters: [
-                  _nameFilter,
-                  LengthLimitingTextInputFormatter(50),
-                ],
-                onSubmitted: (_) => model.email.focusNode.requestFocus(),
-              ),
-            ),
-          ],
+        // Prénom and Nom are stacked, not side by side. Half-width fields left
+        // an error message no room — "Le prénom est requis" wrapped to two
+        // lines under a 171dp field and shifted the one beside it.
+        AppTextField(
+          label: l10n.authFirstName,
+          controller: model.firstName.controller,
+          focusNode: model.firstName.focusNode,
+          placeholder: l10n.authFirstNamePlaceholder,
+          errorText: nameError(model.firstName, l10n.authErrFirstNameRequired),
+          textInputAction: TextInputAction.next,
+          textCapitalization: TextCapitalization.words,
+          autofillHints: const [AutofillHints.givenName],
+          inputFormatters: [_nameFilter, LengthLimitingTextInputFormatter(50)],
+          onSubmitted: (_) => model.lastName.focusNode.requestFocus(),
+        ),
+        SizedBox(height: AppSpacing.lg),
+        AppTextField(
+          label: l10n.authLastName,
+          controller: model.lastName.controller,
+          focusNode: model.lastName.focusNode,
+          placeholder: l10n.authLastNamePlaceholder,
+          errorText: nameError(model.lastName, l10n.authErrLastNameRequired),
+          textInputAction: TextInputAction.next,
+          textCapitalization: TextCapitalization.words,
+          autofillHints: const [AutofillHints.familyName],
+          inputFormatters: [_nameFilter, LengthLimitingTextInputFormatter(50)],
+          onSubmitted: (_) => model.email.focusNode.requestFocus(),
         ),
         SizedBox(height: AppSpacing.lg),
         AppTextField(

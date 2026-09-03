@@ -96,7 +96,14 @@ class AppTheme {
           foregroundColor: AppColors.ink,
           disabledBackgroundColor: AppColors.surfaceHigh,
           disabledForegroundColor: AppColors.textMuted,
-          minimumSize: Size.fromHeight(6.16.h), // 52
+          minimumSize: Size.fromHeight(AppSize.control),
+          maximumSize: Size.fromHeight(AppSize.control),
+          padding: EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+          // Material pads a button out to a 48dp tap target, which would make
+          // it taller than the field above it and taller than the design.
+          // These buttons run the full width of the screen, so the target is
+          // comfortable regardless; the design height wins.
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           textStyle: AppText.button,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppRadius.card),
@@ -106,7 +113,14 @@ class AppTheme {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           foregroundColor: AppColors.textPrimary,
-          minimumSize: Size.fromHeight(6.16.h), // 52
+          minimumSize: Size.fromHeight(AppSize.control),
+          maximumSize: Size.fromHeight(AppSize.control),
+          padding: EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+          // Material pads a button out to a 48dp tap target, which would make
+          // it taller than the field above it and taller than the design.
+          // These buttons run the full width of the screen, so the target is
+          // comfortable regardless; the design height wins.
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           side: const BorderSide(color: AppColors.rule),
           textStyle: AppText.button.copyWith(color: AppColors.textPrimary),
           shape: RoundedRectangleBorder(
