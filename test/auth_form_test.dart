@@ -105,7 +105,8 @@ void main() {
       );
     }
 
-    testWidgets('focusing a field is not yet a mistake', (tester) async {
+    testWidgets('focusing an empty required field says so immediately',
+        (tester) async {
       final model = LoginViewModel();
       addTearDown(model.dispose);
       await mount(tester, model);
@@ -114,9 +115,25 @@ void main() {
       await tester.pump();
 
       expect(model.email.hasFocus, isTrue);
-      // Nothing typed — the merchant is about to fill it in, and the form
-      // should not argue with them before they start.
+      expect(model.visibleError(model.email), FieldError.required);
+      // Only the focused field — the one beside it stays quiet.
+      expect(model.visibleError(model.password), isNull);
+    });
+
+    testWidgets('the message clears as soon as the value is valid, still focused',
+        (tester) async {
+      final model = LoginViewModel();
+      addTearDown(model.dispose);
+      await mount(tester, model);
+
+      model.email.focusNode.requestFocus();
+      await tester.pump();
+      expect(model.visibleError(model.email), FieldError.required);
+
+      await tester.enterText(find.byType(TextField).first, 'amina@shop.dz');
+      await tester.pump();
       expect(model.visibleError(model.email), isNull);
+      expect(model.email.hasFocus, isTrue);
     });
 
     testWidgets('typing an invalid value while focused shows the error live',

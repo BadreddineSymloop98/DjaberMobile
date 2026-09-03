@@ -103,7 +103,7 @@ class _LoginView extends StatelessWidget {
           value: model.rememberMe,
           onTap: model.toggleRememberMe,
         ),
-        SizedBox(height: 3.32.h), // 28
+        SizedBox(height: AppSpacing.beforeAction),
         AuthSubmitButton(label: l10n.authLoginSubmit, onPressed: model.submit),
         SizedBox(height: AppSpacing.lg),
         Center(

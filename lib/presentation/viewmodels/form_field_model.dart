@@ -16,29 +16,20 @@ class FormFieldModel {
   final FocusNode focusNode = FocusNode();
   final FieldValidator validator;
 
-  /// True once the merchant has typed into this field.
-  ///
-  /// This is what stops a required-field error from firing the instant a field
-  /// is tapped. An empty field the merchant is *about to* fill is not a
-  /// mistake yet, and telling them it is reads as the form arguing with them.
-  bool isDirty = false;
-
   String _lastText;
 
   String get value => controller.text;
   bool get hasFocus => focusNode.hasFocus;
 
-  /// Marks the field dirty only when the *text* changed, and reports whether
-  /// anything worth a repaint happened.
+  /// Reports whether the *text* changed, so the form only repaints when it
+  /// actually needs to.
   ///
   /// A [TextEditingController] also notifies on selection changes — and
-  /// focusing a `TextField` moves the caret, which counts. Without this
-  /// check, tapping into an empty required field marked it dirty and fired a
-  /// "required" error before a single key was pressed.
+  /// focusing a `TextField` moves the caret, which counts. Repainting on
+  /// every caret move is waste on the hardware this app targets.
   bool consumeTextChange() {
     if (controller.text == _lastText) return false;
     _lastText = controller.text;
-    isDirty = true;
     return true;
   }
 
@@ -86,21 +77,17 @@ abstract class FormViewModel extends BaseViewModel {
   ///
   /// An error is on screen when the field is invalid *and* either
   ///
-  /// - the merchant is in the field and has typed something — live feedback
-  ///   while they correct it, which disappears the moment the value is valid;
-  ///   or
+  /// - the field has focus — from the moment it is tapped, so an empty
+  ///   required field says so immediately, and the message clears as soon as
+  ///   the value becomes valid; or
   /// - the button has been pressed, which reveals everything at once,
-  ///   including fields they skipped entirely.
+  ///   including fields never touched.
   ///
-  /// Leaving a field does hide the message again until submit. That is the
-  /// specified behaviour; persisting it after blur is a one-line change here
-  /// if the flicker between fields turns out to bother anyone.
+  /// Leaving a field hides its message again until submit.
   FieldError? visibleError(FormFieldModel field) {
     final error = field.error;
     if (error == null) return null;
-    if (_submitAttempted) return error;
-    if (field.hasFocus && field.isDirty) return error;
-    return null;
+    return (field.hasFocus || _submitAttempted) ? error : null;
   }
 
   /// Validates, reveals everything if anything is wrong, and moves focus to
