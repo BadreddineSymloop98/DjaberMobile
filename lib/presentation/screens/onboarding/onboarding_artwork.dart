@@ -309,7 +309,7 @@ class _StockRow extends StatelessWidget {
                 // alert surface rather than spent on sample artwork.
                 Text(
                   row.meta.toUpperCase(),
-                  style: AppText.label,
+                  style: AppText.labelMeta,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -321,7 +321,7 @@ class _StockRow extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(row.qty, style: AppText.numeralM),
+              Text(row.qty, style: AppText.numeralS),
               SizedBox(height: AppSpacing.xxs),
               Text(inStockLabel.toUpperCase(), style: AppText.labelS),
             ],

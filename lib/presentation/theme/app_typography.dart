@@ -83,12 +83,16 @@ class AppText {
         color: AppColors.textPrimary,
       );
 
-  /// 15 — list row primary line.
+  /// 14 — the Figma `Title` style. List rows, card names, thread headers.
+  ///
+  /// Geist **Medium**, not SemiBold: the file has one Title style and this is
+  /// it. An earlier guess at 15/w600 made every row heavier than the design.
   static TextStyle get title => TextStyle(
         fontFamily: AppFonts.sans,
-        fontSize: 15.sp,
-        fontWeight: FontWeight.w600,
-        height: 1.35,
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w500,
+        height: 1.32,
+        letterSpacing: -0.14,
         color: AppColors.textPrimary,
       );
 
@@ -138,6 +142,17 @@ class AppText {
         fontSize: 17.sp,
         fontWeight: FontWeight.w600,
         height: 1.2,
+        fontFeatures: const [FontFeature.tabularFigures()],
+        color: AppColors.textPrimary,
+      );
+
+  /// 14 — the Figma `Value` style: the quantity on a list row. Set beside a
+  /// [title], so it matches its size and gains weight instead.
+  static TextStyle get numeralS => TextStyle(
+        fontFamily: AppFonts.sans,
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w600,
+        height: 1.32,
         fontFeatures: const [FontFeature.tabularFigures()],
         color: AppColors.textPrimary,
       );
