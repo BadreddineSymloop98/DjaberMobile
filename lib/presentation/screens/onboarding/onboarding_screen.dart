@@ -134,7 +134,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       _Slide(
         title: l10n.onboardingStockTitle,
         body: l10n.onboardingStockBody,
-        artwork: const ShortcutsArtwork(),
+        artwork: const StockArtwork(),
       ),
       _Slide(
         title: l10n.onboardingAnswersTitle,
@@ -216,7 +216,14 @@ class _SlideView extends StatelessWidget {
                 animate: reveal,
                 offset: 28,
                 duration: const Duration(milliseconds: 560),
-                child: slide.artwork,
+                // The artwork is drawn at the 350dp width of the design frame.
+                // Scaling it down is deliberate: these are dense compositions
+                // of real UI, and reflowing them on a short or narrow handset
+                // would break the very layouts they are advertising.
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: slide.artwork,
+                ),
               ),
             ),
           ),

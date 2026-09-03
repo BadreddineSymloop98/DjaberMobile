@@ -30,7 +30,9 @@ void main() {
         body: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: artwork,
+            // Mirrors what the slide does: the artwork is drawn at the design
+            // frame's 350dp and scaled down rather than reflowed.
+            child: FittedBox(fit: BoxFit.scaleDown, child: artwork),
           ),
         ),
       ),
@@ -40,7 +42,7 @@ void main() {
   final artworks = <String, Widget>{
     'conversation': const ConversationArtwork(),
     'escalation': const EscalationArtwork(),
-    'shortcuts': const ShortcutsArtwork(),
+    'stock': const StockArtwork(),
   };
 
   for (final locale in const [Locale('en'), Locale('fr'), Locale('ar')]) {
@@ -77,7 +79,8 @@ void main() {
     // Regression: the artwork column originally defaulted to MainAxisSize.max,
     // so the card stretched the full height of the slide.
     final card = tester.getSize(find.byType(EscalationArtwork));
-    expect(card.height, lessThan(300));
+    expect(card.height, lessThan(600));
+    expect(card.width, 350, reason: 'drawn at the design frame width');
   });
 
   testWidgets('Arabic mirrors the layout', (tester) async {

@@ -69,14 +69,14 @@ class L10nAr extends L10n {
 
   @override
   String get onboardingEscalationBody =>
-      'عندما لا يعود الوكيل قادراً على متابعة المحادثة، يرنّ هاتفك. تتولّى المحادثة وتردّ، ثم تعيدها إليه.';
+      'عندما لا يعود الذكاء الاصطناعي قادراً على المتابعة، يتوقّف وينبّهك. تردّ من هاتفك، ثم تعيد إليه المحادثة.';
 
   @override
   String get onboardingStockTitle => 'مخزونك في جيبك';
 
   @override
   String get onboardingStockBody =>
-      'تحقّق من التوفّر، صحّح كمية، استلم توصيلة — دون العودة إلى المكتب.';
+      'المنتجات والمشتريات والمبيعات والطلبات. تحقّق من كمية والزبون ينتظر، وصحّحها في مكانك.';
 
   @override
   String get onboardingSampleCustomer => 'أمينة ب.';
@@ -132,4 +132,115 @@ class L10nAr extends L10n {
 
   @override
   String get langArabic => 'العربية';
+
+  @override
+  String get obStockValue => '1,24';
+
+  @override
+  String get obStockValueUnit => 'م دج';
+
+  @override
+  String get obStockValueLabel => 'قيمة المخزون';
+
+  @override
+  String get obKpiProducts => 'منتجات';
+
+  @override
+  String get obKpiProductsValue => '128';
+
+  @override
+  String get obKpiPurchases => 'مشتريات';
+
+  @override
+  String get obKpiPurchasesValue => '6';
+
+  @override
+  String get obKpiSales => 'مبيعات';
+
+  @override
+  String get obKpiSalesValue => '24';
+
+  @override
+  String get obKpiOrders => 'طلبات';
+
+  @override
+  String get obKpiOrdersValue => '12';
+
+  @override
+  String get obInStock => 'في المخزون';
+
+  @override
+  String get obStockRow1Name => 'فستان ساتان — أسود — M';
+
+  @override
+  String get obStockRow1Meta => 'الحدّ 5 · نفد';
+
+  @override
+  String get obStockRow1Qty => '0';
+
+  @override
+  String get obStockRow2Name => 'عطر عود 50 مل';
+
+  @override
+  String get obStockRow2Meta => 'الحدّ 10';
+
+  @override
+  String get obStockRow2Qty => '3';
+
+  @override
+  String get obStockRow3Name => 'حقيبة جلد — بيج';
+
+  @override
+  String get obStockRow3Meta => 'الحدّ 5';
+
+  @override
+  String get obStockRow3Qty => '7';
+
+  @override
+  String get obEsc1Kind => 'الوكيل متوقّف';
+
+  @override
+  String get obEsc1Time => '2 د';
+
+  @override
+  String get obEsc1Name => 'أمينة ب.';
+
+  @override
+  String get obEsc1Body => 'تريد تغيير المقاس — الطلب مدفوع مسبقاً.';
+
+  @override
+  String get obEsc2Kind => 'طلب للتأكيد';
+
+  @override
+  String get obEsc2Time => '18 د';
+
+  @override
+  String get obEsc2Name => '‏#1042 — باب الزوار';
+
+  @override
+  String get obEsc2Body => '2 400 دج · أنشأه الوكيل';
+
+  @override
+  String get obEsc3Kind => 'نفاد المخزون';
+
+  @override
+  String get obEsc3Time => '1 س';
+
+  @override
+  String get obEsc3Name => 'فستان ساتان — أسود — M';
+
+  @override
+  String get obEsc3Body => '0 في المخزون · 3 طلبات في الانتظار';
+
+  @override
+  String get obEsc4Kind => 'مساومة';
+
+  @override
+  String get obEsc4Time => '3 س';
+
+  @override
+  String get obEsc4Name => 'سفيان ك.';
+
+  @override
+  String get obEsc4Body => 'ndir lik 2 000 DA w nakhdo';
 }

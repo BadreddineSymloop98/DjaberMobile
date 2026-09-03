@@ -65,18 +65,18 @@ class L10nEn extends L10n {
       'It knows your catalogue, your stock and your prices. It answers Facebook and Instagram messages for you, day and night.';
 
   @override
-  String get onboardingEscalationTitle => 'You step in when it matters';
+  String get onboardingEscalationTitle => 'You step in when it is needed';
 
   @override
   String get onboardingEscalationBody =>
-      'When the agent can no longer carry a conversation, your phone rings. You take over, reply, and hand it back.';
+      'When the AI can no longer follow, it stops and tells you. You reply from your phone, then hand the conversation back to it.';
 
   @override
   String get onboardingStockTitle => 'Your stock in your pocket';
 
   @override
   String get onboardingStockBody =>
-      'Check availability, correct a count, receive a delivery — without going back to a desk.';
+      'Products, purchases, sales and orders. Check a quantity while the customer waits, and correct it on the spot.';
 
   @override
   String get onboardingSampleCustomer => 'Amina B.';
@@ -133,4 +133,115 @@ class L10nEn extends L10n {
 
   @override
   String get langArabic => 'العربية';
+
+  @override
+  String get obStockValue => '1.24';
+
+  @override
+  String get obStockValueUnit => 'M DA';
+
+  @override
+  String get obStockValueLabel => 'Stock value';
+
+  @override
+  String get obKpiProducts => 'Products';
+
+  @override
+  String get obKpiProductsValue => '128';
+
+  @override
+  String get obKpiPurchases => 'Purchases';
+
+  @override
+  String get obKpiPurchasesValue => '6';
+
+  @override
+  String get obKpiSales => 'Sales';
+
+  @override
+  String get obKpiSalesValue => '24';
+
+  @override
+  String get obKpiOrders => 'Ord';
+
+  @override
+  String get obKpiOrdersValue => '12';
+
+  @override
+  String get obInStock => 'In stock';
+
+  @override
+  String get obStockRow1Name => 'Satin dress — Black — M';
+
+  @override
+  String get obStockRow1Meta => 'Threshold 5 · Out of stock';
+
+  @override
+  String get obStockRow1Qty => '0';
+
+  @override
+  String get obStockRow2Name => 'Oud perfume 50 ml';
+
+  @override
+  String get obStockRow2Meta => 'Threshold 10';
+
+  @override
+  String get obStockRow2Qty => '3';
+
+  @override
+  String get obStockRow3Name => 'Leather bag — Camel';
+
+  @override
+  String get obStockRow3Meta => 'Threshold 5';
+
+  @override
+  String get obStockRow3Qty => '7';
+
+  @override
+  String get obEsc1Kind => 'AI stuck';
+
+  @override
+  String get obEsc1Time => '2 min';
+
+  @override
+  String get obEsc1Name => 'Amina B.';
+
+  @override
+  String get obEsc1Body => 'She wants to change the size — order already paid.';
+
+  @override
+  String get obEsc2Kind => 'Order to approve';
+
+  @override
+  String get obEsc2Time => '18 min';
+
+  @override
+  String get obEsc2Name => '#1042 — Bab Ezzouar';
+
+  @override
+  String get obEsc2Body => '2,400 DA · created by the AI';
+
+  @override
+  String get obEsc3Kind => 'Out of stock';
+
+  @override
+  String get obEsc3Time => '1 h';
+
+  @override
+  String get obEsc3Name => 'Satin dress — Black — M';
+
+  @override
+  String get obEsc3Body => '0 in stock · 3 orders waiting';
+
+  @override
+  String get obEsc4Kind => 'Negotiation';
+
+  @override
+  String get obEsc4Time => '3 h';
+
+  @override
+  String get obEsc4Name => 'Sofiane K.';
+
+  @override
+  String get obEsc4Body => 'ndir lik 2 000 DA w nakhdo';
 }

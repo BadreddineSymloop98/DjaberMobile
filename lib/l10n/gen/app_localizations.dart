@@ -210,25 +210,25 @@ abstract class L10n {
   /// No description provided for @onboardingEscalationTitle.
   ///
   /// In fr, this message translates to:
-  /// **'Vous intervenez quand il faut'**
+  /// **'Vous intervenez quand il le faut'**
   String get onboardingEscalationTitle;
 
   /// No description provided for @onboardingEscalationBody.
   ///
   /// In fr, this message translates to:
-  /// **'Quand l\'agent ne peut plus suivre la conversation, votre téléphone sonne. Vous reprenez la main, vous répondez, puis vous la lui rendez.'**
+  /// **'Quand l’IA ne peut plus suivre, elle s’arrête et vous prévient. Vous répondez depuis le téléphone, puis vous lui rendez la conversation.'**
   String get onboardingEscalationBody;
 
   /// No description provided for @onboardingStockTitle.
   ///
   /// In fr, this message translates to:
-  /// **'Votre stock dans votre poche'**
+  /// **'Votre stock dans la poche'**
   String get onboardingStockTitle;
 
   /// No description provided for @onboardingStockBody.
   ///
   /// In fr, this message translates to:
-  /// **'Vérifiez une disponibilité, corrigez une quantité, recevez une livraison — sans revenir au bureau.'**
+  /// **'Produits, achats, ventes et commandes. Vérifiez une quantité pendant que le client attend, corrigez-la sur place.'**
   String get onboardingStockBody;
 
   /// No description provided for @onboardingSampleCustomer.
@@ -338,6 +338,228 @@ abstract class L10n {
   /// In fr, this message translates to:
   /// **'العربية'**
   String get langArabic;
+
+  /// No description provided for @obStockValue.
+  ///
+  /// In fr, this message translates to:
+  /// **'1,24'**
+  String get obStockValue;
+
+  /// No description provided for @obStockValueUnit.
+  ///
+  /// In fr, this message translates to:
+  /// **'M DA'**
+  String get obStockValueUnit;
+
+  /// No description provided for @obStockValueLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Valeur du stock'**
+  String get obStockValueLabel;
+
+  /// No description provided for @obKpiProducts.
+  ///
+  /// In fr, this message translates to:
+  /// **'Produits'**
+  String get obKpiProducts;
+
+  /// No description provided for @obKpiProductsValue.
+  ///
+  /// In fr, this message translates to:
+  /// **'128'**
+  String get obKpiProductsValue;
+
+  /// No description provided for @obKpiPurchases.
+  ///
+  /// In fr, this message translates to:
+  /// **'Achats'**
+  String get obKpiPurchases;
+
+  /// No description provided for @obKpiPurchasesValue.
+  ///
+  /// In fr, this message translates to:
+  /// **'6'**
+  String get obKpiPurchasesValue;
+
+  /// No description provided for @obKpiSales.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ventes'**
+  String get obKpiSales;
+
+  /// No description provided for @obKpiSalesValue.
+  ///
+  /// In fr, this message translates to:
+  /// **'24'**
+  String get obKpiSalesValue;
+
+  /// No description provided for @obKpiOrders.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cmd'**
+  String get obKpiOrders;
+
+  /// No description provided for @obKpiOrdersValue.
+  ///
+  /// In fr, this message translates to:
+  /// **'12'**
+  String get obKpiOrdersValue;
+
+  /// No description provided for @obInStock.
+  ///
+  /// In fr, this message translates to:
+  /// **'En stock'**
+  String get obInStock;
+
+  /// No description provided for @obStockRow1Name.
+  ///
+  /// In fr, this message translates to:
+  /// **'Robe satin — Noir — M'**
+  String get obStockRow1Name;
+
+  /// No description provided for @obStockRow1Meta.
+  ///
+  /// In fr, this message translates to:
+  /// **'Seuil 5 · Rupture'**
+  String get obStockRow1Meta;
+
+  /// No description provided for @obStockRow1Qty.
+  ///
+  /// In fr, this message translates to:
+  /// **'0'**
+  String get obStockRow1Qty;
+
+  /// No description provided for @obStockRow2Name.
+  ///
+  /// In fr, this message translates to:
+  /// **'Parfum Oud 50 ml'**
+  String get obStockRow2Name;
+
+  /// No description provided for @obStockRow2Meta.
+  ///
+  /// In fr, this message translates to:
+  /// **'Seuil 10'**
+  String get obStockRow2Meta;
+
+  /// No description provided for @obStockRow2Qty.
+  ///
+  /// In fr, this message translates to:
+  /// **'3'**
+  String get obStockRow2Qty;
+
+  /// No description provided for @obStockRow3Name.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sac cuir — Camel'**
+  String get obStockRow3Name;
+
+  /// No description provided for @obStockRow3Meta.
+  ///
+  /// In fr, this message translates to:
+  /// **'Seuil 5'**
+  String get obStockRow3Meta;
+
+  /// No description provided for @obStockRow3Qty.
+  ///
+  /// In fr, this message translates to:
+  /// **'7'**
+  String get obStockRow3Qty;
+
+  /// No description provided for @obEsc1Kind.
+  ///
+  /// In fr, this message translates to:
+  /// **'IA bloquée'**
+  String get obEsc1Kind;
+
+  /// No description provided for @obEsc1Time.
+  ///
+  /// In fr, this message translates to:
+  /// **'2 min'**
+  String get obEsc1Time;
+
+  /// No description provided for @obEsc1Name.
+  ///
+  /// In fr, this message translates to:
+  /// **'Amina B.'**
+  String get obEsc1Name;
+
+  /// No description provided for @obEsc1Body.
+  ///
+  /// In fr, this message translates to:
+  /// **'Elle veut changer la taille — commande déjà payée.'**
+  String get obEsc1Body;
+
+  /// No description provided for @obEsc2Kind.
+  ///
+  /// In fr, this message translates to:
+  /// **'Commande à valider'**
+  String get obEsc2Kind;
+
+  /// No description provided for @obEsc2Time.
+  ///
+  /// In fr, this message translates to:
+  /// **'18 min'**
+  String get obEsc2Time;
+
+  /// No description provided for @obEsc2Name.
+  ///
+  /// In fr, this message translates to:
+  /// **'#1042 — Bab Ezzouar'**
+  String get obEsc2Name;
+
+  /// No description provided for @obEsc2Body.
+  ///
+  /// In fr, this message translates to:
+  /// **'2 400 DA · créée par l’IA'**
+  String get obEsc2Body;
+
+  /// No description provided for @obEsc3Kind.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rupture de stock'**
+  String get obEsc3Kind;
+
+  /// No description provided for @obEsc3Time.
+  ///
+  /// In fr, this message translates to:
+  /// **'1 h'**
+  String get obEsc3Time;
+
+  /// No description provided for @obEsc3Name.
+  ///
+  /// In fr, this message translates to:
+  /// **'Robe satin — Noir — M'**
+  String get obEsc3Name;
+
+  /// No description provided for @obEsc3Body.
+  ///
+  /// In fr, this message translates to:
+  /// **'0 en stock · 3 commandes en attente'**
+  String get obEsc3Body;
+
+  /// No description provided for @obEsc4Kind.
+  ///
+  /// In fr, this message translates to:
+  /// **'Négociation'**
+  String get obEsc4Kind;
+
+  /// No description provided for @obEsc4Time.
+  ///
+  /// In fr, this message translates to:
+  /// **'3 h'**
+  String get obEsc4Time;
+
+  /// No description provided for @obEsc4Name.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sofiane K.'**
+  String get obEsc4Name;
+
+  /// No description provided for @obEsc4Body.
+  ///
+  /// In fr, this message translates to:
+  /// **'ndir lik 2 000 DA w nakhdo'**
+  String get obEsc4Body;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {
