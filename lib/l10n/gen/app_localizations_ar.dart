@@ -243,4 +243,83 @@ class L10nAr extends L10n {
 
   @override
   String get obEsc4Body => 'ndir lik 2 000 DA w nakhdo';
+
+  @override
+  String get authLoginTitle => 'تسجيل الدخول';
+
+  @override
+  String get authLoginSubtitle => 'سجّل الدخول إلى حسابك للمتابعة';
+
+  @override
+  String get authSignupTitle => 'إنشاء حساب';
+
+  @override
+  String get authSignupSubtitle => 'ابدأ في أقل من دقيقة';
+
+  @override
+  String get authEmail => 'البريد الإلكتروني';
+
+  @override
+  String get authPassword => 'كلمة المرور';
+
+  @override
+  String get authFirstName => 'الاسم';
+
+  @override
+  String get authLastName => 'اللقب';
+
+  @override
+  String get authPasswordHint => '8 أحرف على الأقل';
+
+  @override
+  String get authRemember => 'تذكرني';
+
+  @override
+  String get authLoginSubmit => 'تسجيل الدخول';
+
+  @override
+  String get authSignupSubmit => 'إنشاء الحساب';
+
+  @override
+  String get authForgot => 'نسيت كلمة المرور؟';
+
+  @override
+  String get authNoAccount => 'ليس لديك حساب؟';
+
+  @override
+  String get authSignupLink => 'ابدأ الآن';
+
+  @override
+  String get authHaveAccount => 'لديك حساب بالفعل؟';
+
+  @override
+  String get authSigninLink => 'تسجيل الدخول';
+
+  @override
+  String get authEmailPlaceholder => 'you@example.com';
+
+  @override
+  String get authFirstNamePlaceholder => 'أمينة';
+
+  @override
+  String get authLastNamePlaceholder => 'بن علي';
+
+  @override
+  String get authErrEmailRequired => 'البريد الإلكتروني مطلوب';
+
+  @override
+  String get authErrInvalidEmail => 'يرجى إدخال بريد إلكتروني صالح';
+
+  @override
+  String get authErrPasswordRequired => 'كلمة المرور مطلوبة';
+
+  @override
+  String get authErrPasswordTooShort =>
+      'يجب أن تتكون كلمة المرور من 8 أحرف على الأقل';
+
+  @override
+  String get authErrFirstNameRequired => 'الاسم مطلوب';
+
+  @override
+  String get authErrLastNameRequired => 'اللقب مطلوب';
 }

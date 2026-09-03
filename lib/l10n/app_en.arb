@@ -101,5 +101,37 @@
   "obEsc4Kind": "Negotiation",
   "obEsc4Time": "3 h",
   "obEsc4Name": "Sofiane K.",
-  "obEsc4Body": "ndir lik 2 000 DA w nakhdo"
+  "obEsc4Body": "ndir lik 2 000 DA w nakhdo",
+  "@_auth": {
+    "description": "Auth screen copy. Every string is the web app verbatim from src/lib/i18n.ts, EXCEPT authLoginTitle and authSignupTitle — those two deliberately diverge (the web keeps \"Welcome back\" / \"Create your account\"). See the brief."
+  },
+  "authLoginTitle": "Sign in",
+  "authLoginSubtitle": "Sign in to your account to continue",
+  "authSignupTitle": "Create account",
+  "authSignupSubtitle": "Get started in less than a minute",
+  "authEmail": "Email",
+  "authPassword": "Password",
+  "authFirstName": "First name",
+  "authLastName": "Last name",
+  "authPasswordHint": "At least 8 characters",
+  "authRemember": "Remember me",
+  "authLoginSubmit": "Sign In",
+  "authSignupSubmit": "Create account",
+  "authForgot": "Forgot your password?",
+  "authNoAccount": "Don’t have an account?",
+  "authSignupLink": "Get started",
+  "authHaveAccount": "Already have an account?",
+  "authSigninLink": "Sign In",
+  "authEmailPlaceholder": "you@example.com",
+  "authFirstNamePlaceholder": "Jane",
+  "authLastNamePlaceholder": "Doe",
+  "@_authErrors": {
+    "description": "From auth.errors.* in src/lib/i18n.ts, verbatim."
+  },
+  "authErrEmailRequired": "Email is required",
+  "authErrInvalidEmail": "Please enter a valid email address",
+  "authErrPasswordRequired": "Password is required",
+  "authErrPasswordTooShort": "Password must be at least 8 characters",
+  "authErrFirstNameRequired": "First name is required",
+  "authErrLastNameRequired": "Last name is required"
 }

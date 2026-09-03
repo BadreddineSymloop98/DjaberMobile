@@ -245,4 +245,84 @@ class L10nFr extends L10n {
 
   @override
   String get obEsc4Body => 'ndir lik 2 000 DA w nakhdo';
+
+  @override
+  String get authLoginTitle => 'Connexion';
+
+  @override
+  String get authLoginSubtitle =>
+      'Connectez-vous à votre compte pour continuer';
+
+  @override
+  String get authSignupTitle => 'Création de compte';
+
+  @override
+  String get authSignupSubtitle => 'Commencez en moins d’une minute';
+
+  @override
+  String get authEmail => 'E-mail';
+
+  @override
+  String get authPassword => 'Mot de passe';
+
+  @override
+  String get authFirstName => 'Prénom';
+
+  @override
+  String get authLastName => 'Nom';
+
+  @override
+  String get authPasswordHint => 'Au moins 8 caractères';
+
+  @override
+  String get authRemember => 'Se souvenir de moi';
+
+  @override
+  String get authLoginSubmit => 'Se connecter';
+
+  @override
+  String get authSignupSubmit => 'Créer le compte';
+
+  @override
+  String get authForgot => 'Mot de passe oublié ?';
+
+  @override
+  String get authNoAccount => 'Vous n’avez pas de compte ?';
+
+  @override
+  String get authSignupLink => 'Commencer';
+
+  @override
+  String get authHaveAccount => 'Vous avez déjà un compte ?';
+
+  @override
+  String get authSigninLink => 'Se connecter';
+
+  @override
+  String get authEmailPlaceholder => 'you@example.com';
+
+  @override
+  String get authFirstNamePlaceholder => 'Jane';
+
+  @override
+  String get authLastNamePlaceholder => 'Doe';
+
+  @override
+  String get authErrEmailRequired => 'L’e-mail est requis';
+
+  @override
+  String get authErrInvalidEmail => 'Veuillez saisir une adresse e-mail valide';
+
+  @override
+  String get authErrPasswordRequired => 'Le mot de passe est requis';
+
+  @override
+  String get authErrPasswordTooShort =>
+      'Le mot de passe doit contenir au moins 8 caractères';
+
+  @override
+  String get authErrFirstNameRequired => 'Le prénom est requis';
+
+  @override
+  String get authErrLastNameRequired => 'Le nom est requis';
 }

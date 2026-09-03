@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 
 import '../core/services/push_service.dart';
 import '../core/utils/logger.dart';
+import '../presentation/screens/auth/login_screen.dart';
+import '../presentation/screens/auth/signup_screen.dart';
 import '../presentation/screens/onboarding/onboarding_screen.dart';
 import '../presentation/screens/splash/splash_screen.dart';
 import '../presentation/viewmodels/session_view_model.dart';
@@ -62,11 +64,11 @@ class AppRouter {
       ),
       GoRoute(
         path: Routes.login,
-        builder: (_, _) => const PlaceholderScreen(title: 'Connexion'),
+        builder: (_, _) => const LoginScreen(),
       ),
       GoRoute(
         path: Routes.signup,
-        builder: (_, _) => const PlaceholderScreen(title: 'Créer un compte'),
+        builder: (_, _) => const SignupScreen(),
       ),
       GoRoute(
         path: Routes.forgotPassword,

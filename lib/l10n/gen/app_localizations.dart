@@ -560,6 +560,162 @@ abstract class L10n {
   /// In fr, this message translates to:
   /// **'ndir lik 2 000 DA w nakhdo'**
   String get obEsc4Body;
+
+  /// No description provided for @authLoginTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Connexion'**
+  String get authLoginTitle;
+
+  /// No description provided for @authLoginSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Connectez-vous à votre compte pour continuer'**
+  String get authLoginSubtitle;
+
+  /// No description provided for @authSignupTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Création de compte'**
+  String get authSignupTitle;
+
+  /// No description provided for @authSignupSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Commencez en moins d’une minute'**
+  String get authSignupSubtitle;
+
+  /// No description provided for @authEmail.
+  ///
+  /// In fr, this message translates to:
+  /// **'E-mail'**
+  String get authEmail;
+
+  /// No description provided for @authPassword.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mot de passe'**
+  String get authPassword;
+
+  /// No description provided for @authFirstName.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prénom'**
+  String get authFirstName;
+
+  /// No description provided for @authLastName.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nom'**
+  String get authLastName;
+
+  /// No description provided for @authPasswordHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Au moins 8 caractères'**
+  String get authPasswordHint;
+
+  /// No description provided for @authRemember.
+  ///
+  /// In fr, this message translates to:
+  /// **'Se souvenir de moi'**
+  String get authRemember;
+
+  /// No description provided for @authLoginSubmit.
+  ///
+  /// In fr, this message translates to:
+  /// **'Se connecter'**
+  String get authLoginSubmit;
+
+  /// No description provided for @authSignupSubmit.
+  ///
+  /// In fr, this message translates to:
+  /// **'Créer le compte'**
+  String get authSignupSubmit;
+
+  /// No description provided for @authForgot.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mot de passe oublié ?'**
+  String get authForgot;
+
+  /// No description provided for @authNoAccount.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vous n’avez pas de compte ?'**
+  String get authNoAccount;
+
+  /// No description provided for @authSignupLink.
+  ///
+  /// In fr, this message translates to:
+  /// **'Commencer'**
+  String get authSignupLink;
+
+  /// No description provided for @authHaveAccount.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vous avez déjà un compte ?'**
+  String get authHaveAccount;
+
+  /// No description provided for @authSigninLink.
+  ///
+  /// In fr, this message translates to:
+  /// **'Se connecter'**
+  String get authSigninLink;
+
+  /// No description provided for @authEmailPlaceholder.
+  ///
+  /// In fr, this message translates to:
+  /// **'you@example.com'**
+  String get authEmailPlaceholder;
+
+  /// No description provided for @authFirstNamePlaceholder.
+  ///
+  /// In fr, this message translates to:
+  /// **'Jane'**
+  String get authFirstNamePlaceholder;
+
+  /// No description provided for @authLastNamePlaceholder.
+  ///
+  /// In fr, this message translates to:
+  /// **'Doe'**
+  String get authLastNamePlaceholder;
+
+  /// No description provided for @authErrEmailRequired.
+  ///
+  /// In fr, this message translates to:
+  /// **'L’e-mail est requis'**
+  String get authErrEmailRequired;
+
+  /// No description provided for @authErrInvalidEmail.
+  ///
+  /// In fr, this message translates to:
+  /// **'Veuillez saisir une adresse e-mail valide'**
+  String get authErrInvalidEmail;
+
+  /// No description provided for @authErrPasswordRequired.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le mot de passe est requis'**
+  String get authErrPasswordRequired;
+
+  /// No description provided for @authErrPasswordTooShort.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le mot de passe doit contenir au moins 8 caractères'**
+  String get authErrPasswordTooShort;
+
+  /// No description provided for @authErrFirstNameRequired.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le prénom est requis'**
+  String get authErrFirstNameRequired;
+
+  /// No description provided for @authErrLastNameRequired.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le nom est requis'**
+  String get authErrLastNameRequired;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

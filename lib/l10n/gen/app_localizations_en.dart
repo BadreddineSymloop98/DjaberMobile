@@ -244,4 +244,83 @@ class L10nEn extends L10n {
 
   @override
   String get obEsc4Body => 'ndir lik 2 000 DA w nakhdo';
+
+  @override
+  String get authLoginTitle => 'Sign in';
+
+  @override
+  String get authLoginSubtitle => 'Sign in to your account to continue';
+
+  @override
+  String get authSignupTitle => 'Create account';
+
+  @override
+  String get authSignupSubtitle => 'Get started in less than a minute';
+
+  @override
+  String get authEmail => 'Email';
+
+  @override
+  String get authPassword => 'Password';
+
+  @override
+  String get authFirstName => 'First name';
+
+  @override
+  String get authLastName => 'Last name';
+
+  @override
+  String get authPasswordHint => 'At least 8 characters';
+
+  @override
+  String get authRemember => 'Remember me';
+
+  @override
+  String get authLoginSubmit => 'Sign In';
+
+  @override
+  String get authSignupSubmit => 'Create account';
+
+  @override
+  String get authForgot => 'Forgot your password?';
+
+  @override
+  String get authNoAccount => 'Don’t have an account?';
+
+  @override
+  String get authSignupLink => 'Get started';
+
+  @override
+  String get authHaveAccount => 'Already have an account?';
+
+  @override
+  String get authSigninLink => 'Sign In';
+
+  @override
+  String get authEmailPlaceholder => 'you@example.com';
+
+  @override
+  String get authFirstNamePlaceholder => 'Jane';
+
+  @override
+  String get authLastNamePlaceholder => 'Doe';
+
+  @override
+  String get authErrEmailRequired => 'Email is required';
+
+  @override
+  String get authErrInvalidEmail => 'Please enter a valid email address';
+
+  @override
+  String get authErrPasswordRequired => 'Password is required';
+
+  @override
+  String get authErrPasswordTooShort =>
+      'Password must be at least 8 characters';
+
+  @override
+  String get authErrFirstNameRequired => 'First name is required';
+
+  @override
+  String get authErrLastNameRequired => 'Last name is required';
 }
