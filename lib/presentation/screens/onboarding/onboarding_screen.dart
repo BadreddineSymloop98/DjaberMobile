@@ -42,10 +42,62 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   /// merchant lands on it and stays revealed after that, so swiping back does
   /// not replay the entrance — the reveal is a first impression, not a toll on
   /// every swipe.
-  final _revealed = <int>{0};
+  ///
+  /// Starts empty. The first slide is added by [_revealFirstSlide] rather than
+  /// seeded here — see why below.
+  final _revealed = <int>{};
+
+  Animation<double>? _routeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _revealFirstSlide());
+  }
+
+  /// Holds the first slide back until the route transition has finished.
+  ///
+  /// Slides 2 and 3 reveal on a settled page, against a static background, so
+  /// the rise reads clearly. The first slide arrives with the screen itself: if
+  /// it starts at mount, its 560ms runs underneath the route's own fade, the
+  /// page is barely visible for the first half of it, and what reaches the
+  /// merchant is the tail — which reads as no animation at all, not as a
+  /// faster one.
+  ///
+  /// Waiting for the transition gives it the same clean two-beat as the other
+  /// two: the page arrives, then the content rises into it.
+  void _revealFirstSlide() {
+    if (!mounted) return;
+
+    final animation = ModalRoute.of(context)?.animation;
+    // No transition to wait for — a direct entry, or a widget test.
+    if (animation == null || animation.isCompleted) {
+      _markRevealed(0);
+      return;
+    }
+
+    _routeAnimation = animation..addStatusListener(_onRouteStatus);
+  }
+
+  void _onRouteStatus(AnimationStatus status) {
+    if (status != AnimationStatus.completed) return;
+    _clearRouteListener();
+    _markRevealed(0);
+  }
+
+  void _clearRouteListener() {
+    _routeAnimation?.removeStatusListener(_onRouteStatus);
+    _routeAnimation = null;
+  }
+
+  void _markRevealed(int index) {
+    if (!mounted || _revealed.contains(index)) return;
+    setState(() => _revealed.add(index));
+  }
 
   @override
   void dispose() {
+    _clearRouteListener();
     _controller.dispose();
     super.dispose();
   }
