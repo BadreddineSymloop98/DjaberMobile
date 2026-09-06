@@ -1,12 +1,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="djaber_mobile"
+        android:label="Djaber.ai"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <!--
+             android:screenOrientation locks rotation at the OS level, not only
+             through SystemChrome.setPreferredOrientations. The Flutter call
+             takes effect once the engine is running, so on a device held
+             sideways the launch screen would still appear rotated and then
+             snap upright.
+        -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:taskAffinity=""
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
