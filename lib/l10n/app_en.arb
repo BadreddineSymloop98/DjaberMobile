@@ -1,7 +1,6 @@
 {
   "@@locale": "en",
   "@@x-note": "Source dictionary. The web app's own source language is English (`DEFAULT_LANG` in src/lib/i18n.ts), so English is the template here too and fr/ar are translations of it. Screen copy is added as screens are built, taken verbatim from src/lib/i18n.ts — do not invent strings that already exist there.",
-
   "appName": "Djaber.ai",
   "@appName": {
     "description": "Product name. Never translated. The wordmark renders 'Djaber' in primary text and '.ai' in secondary."
@@ -10,7 +9,6 @@
   "@appTagline": {
     "description": "From dash.tagline in src/lib/i18n.ts."
   },
-
   "commonBack": "Back",
   "commonDismiss": "Dismiss",
   "commonCancel": "Cancel",
@@ -25,17 +23,15 @@
   "commonNext": "Next",
   "commonSkip": "Skip",
   "commonStart": "Get started",
-
   "@_onboarding": {
     "description": "INVENTED COPY — NOT YET APPROVED. There is no onboarding on the web, so none of this comes from src/lib/i18n.ts. The three slides state the §3 model in order: the AI does the work, the escalation is the point, stock is support. Reconcile with the Figma frames 02–04 before treating as settled."
   },
   "onboardingAnswersTitle": "The agent replies to your customers",
   "onboardingAnswersBody": "It knows your catalogue, your stock and your prices. It answers Facebook and Instagram messages for you, day and night.",
-  "onboardingEscalationTitle": "You step in when it matters",
-  "onboardingEscalationBody": "When the agent can no longer carry a conversation, your phone rings. You take over, reply, and hand it back.",
+  "onboardingEscalationTitle": "You step in when it is needed",
+  "onboardingEscalationBody": "When the AI can no longer follow, it stops and tells you. You reply from your phone, then hand the conversation back to it.",
   "onboardingStockTitle": "Your stock in your pocket",
-  "onboardingStockBody": "Check availability, correct a count, receive a delivery — without going back to a desk.",
-
+  "onboardingStockBody": "Products, purchases, sales and orders. Check a quantity while the customer waits, and correct it on the spot.",
   "onboardingSampleCustomer": "Amina B.",
   "@onboardingSampleCustomer": {
     "description": "Placeholder customer name in the onboarding artwork. Not a real person."
@@ -48,7 +44,6 @@
   "onboardingShortcutProducts": "Products",
   "onboardingShortcutOrders": "Orders",
   "onboardingShortcutMovements": "Movements",
-
   "errorNetwork": "No connection. Check your network and try again.",
   "@errorNetwork": {
     "description": "NetworkException. Shown with a retry action — this market drops connections constantly, so it must not read like a fatal error."
@@ -58,11 +53,119 @@
   "errorNotFound": "Not found.",
   "errorServer": "Something went wrong on our side.",
   "errorUnknown": "Something went wrong.",
-
   "langEnglish": "English",
   "langFrench": "Français",
   "langArabic": "العربية",
   "@langArabic": {
     "description": "Language names always appear in their own language, matching LANGS in src/lib/i18n.ts."
+  },
+  "@_obStock": {
+    "description": "Sample data for the stock slide artwork. Illustrative, not live — but translated, because an Arabic first run showing French product names reads as broken."
+  },
+  "obStockValue": "1.24",
+  "obStockValueUnit": "M DA",
+  "obStockValueLabel": "Stock value",
+  "obKpiProducts": "Products",
+  "obKpiProductsValue": "128",
+  "obKpiPurchases": "Purchases",
+  "obKpiPurchasesValue": "6",
+  "obKpiSales": "Sales",
+  "obKpiSalesValue": "24",
+  "obKpiOrders": "Ord",
+  "obKpiOrdersValue": "12",
+  "obInStock": "In stock",
+  "obStockRow1Name": "Satin dress — Black — M",
+  "obStockRow1Meta": "Threshold 5 · Out of stock",
+  "obStockRow1Qty": "0",
+  "obStockRow2Name": "Oud perfume 50 ml",
+  "obStockRow2Meta": "Threshold 10",
+  "obStockRow2Qty": "3",
+  "obStockRow3Name": "Leather bag — Camel",
+  "obStockRow3Meta": "Threshold 5",
+  "obStockRow3Qty": "7",
+  "@_obEscalation": {
+    "description": "Sample data for the escalation slide. The four cards are the three escalation kinds the model predicts — conversational, consequential, operational — plus a negotiation, which is the case the AI understands perfectly and should still hand over."
+  },
+  "obEsc1Kind": "AI stuck",
+  "obEsc1Time": "2 min",
+  "obEsc1Name": "Amina B.",
+  "obEsc1Body": "She wants to change the size — order already paid.",
+  "obEsc2Kind": "Order to approve",
+  "obEsc2Time": "18 min",
+  "obEsc2Name": "#1042 — Bab Ezzouar",
+  "obEsc2Body": "2,400 DA · created by the AI",
+  "obEsc3Kind": "Out of stock",
+  "obEsc3Time": "1 h",
+  "obEsc3Name": "Satin dress — Black — M",
+  "obEsc3Body": "0 in stock · 3 orders waiting",
+  "obEsc4Kind": "Negotiation",
+  "obEsc4Time": "3 h",
+  "obEsc4Name": "Sofiane K.",
+  "obEsc4Body": "ndir lik 2 000 DA w nakhdo",
+  "@_auth": {
+    "description": "Auth screen copy. Every string is the web app verbatim from src/lib/i18n.ts, EXCEPT authLoginTitle and authSignupTitle — those two deliberately diverge (the web keeps \"Welcome back\" / \"Create your account\"). See the brief."
+  },
+  "authLoginTitle": "Sign in",
+  "authLoginSubtitle": "Sign in to your account to continue",
+  "authSignupTitle": "Create account",
+  "authSignupSubtitle": "Get started in less than a minute",
+  "authEmail": "Email",
+  "authPassword": "Password",
+  "authFirstName": "First name",
+  "authLastName": "Last name",
+  "authPasswordHint": "At least 8 characters",
+  "authRemember": "Remember me",
+  "authLoginSubmit": "Sign In",
+  "authSignupSubmit": "Create account",
+  "authForgot": "Forgot your password?",
+  "authNoAccount": "Don’t have an account?",
+  "authSignupLink": "Get started",
+  "authHaveAccount": "Already have an account?",
+  "authSigninLink": "Sign In",
+  "authEmailPlaceholder": "you@example.com",
+  "authFirstNamePlaceholder": "Jane",
+  "authLastNamePlaceholder": "Doe",
+  "@_authErrors": {
+    "description": "From auth.errors.* in src/lib/i18n.ts, verbatim."
+  },
+  "authErrEmailRequired": "Email is required",
+  "authErrInvalidEmail": "Please enter a valid email address",
+  "authErrPasswordRequired": "Password is required",
+  "authErrPasswordTooShort": "Password must be at least 8 characters",
+  "authErrFirstNameRequired": "First name is required",
+  "authErrLastNameRequired": "Last name is required",
+  "@_authForgot": {
+    "description": "From auth.forgot.* in src/lib/i18n.ts, verbatim. The web also has reset.*/secure.title/verify.* for its two-column marketing panel — desktop furniture, dropped on mobile. The one fact kept from it is secure.desc, shown under the button."
+  },
+  "authForgotBack": "Back to Login",
+  "authForgotTitle": "Forgot Password?",
+  "authForgotSubtitle": "Enter your email to receive a reset link",
+  "authForgotEmail": "Email Address",
+  "authForgotEmailPlaceholder": "you@company.com",
+  "authForgotSubmit": "Send Reset Link",
+  "authForgotSecure": "Your password reset link is encrypted and expires in 1 hour",
+  "authForgotRemember": "Remember your password?",
+  "authSentTitle": "Check Your Email",
+  "authSentMessage": "We’ve sent a password reset link to",
+  "authSentNoReceive": "Didn’t receive the email?",
+  "authSentTryAnother": "Try another email address",
+  "@_backendErrors": {
+    "description": "Mapped from the backend response, mirroring translateBackendError in src/lib/i18n.ts. Strings are auth.errors.* verbatim."
+  },
+  "authErrInvalidCredentials": "Invalid email or password",
+  "authErrUserExists": "An account with this email already exists",
+  "authErrNetwork": "Cannot reach the server. Check your connection.",
+  "authErrUnknown": "Something went wrong. Please try again.",
+  "homeWelcome": "Welcome back, {name}",
+  "@homeWelcome": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "menuSignOut": "Sign out",
+  "@menuSignOut": {
+    "description": "From menu.signout in src/lib/i18n.ts. Currently on the home stub as a temporary control; belongs in the hamburger menu (brief §16, tier 3) once that exists."
   }
 }

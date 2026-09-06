@@ -21,7 +21,7 @@ class DjaberLogo extends StatelessWidget {
     this.size = 40,
     this.showWordmark = true,
     this.showTagline = false,
-    this.gap = AppSpacing.md,
+    this.gap,
   });
 
   /// Width and height of the mark. The wordmark scales with it, keeping the
@@ -34,29 +34,46 @@ class DjaberLogo extends StatelessWidget {
   /// of the lockup. Off in headers, on where the brand is introduced.
   final bool showTagline;
 
-  /// Space between the mark and the wordmark.
-  final double gap;
+  /// Space between the mark and the wordmark. Defaults to `AppSpacing.md`,
+  /// which is a runtime value and so cannot be a default argument.
+  final double? gap;
 
   @override
   Widget build(BuildContext context) {
     final mark = DjaberMark(size: size);
     if (!showWordmark) return mark;
 
-    return Column(
+    // The tagline hangs under the wordmark and aligns to its left edge, not
+    // centred under the whole lockup — matching the splash frame. Keeping it
+    // inside the same column as the wordmark is what produces that alignment.
+    return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Row(
+        mark,
+        SizedBox(width: gap ?? AppSpacing.md),
+        Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            mark,
-            SizedBox(width: gap),
             DjaberWordmark(fontSize: size / 2),
+            if (showTagline) ...[
+              SizedBox(height: size * 0.06),
+              Text(
+                L10n.of(context).appTagline,
+                // Geist rather than the mono label style: the frame shows it
+                // in the body face at roughly half the wordmark, without the
+                // uppercase tracking a label carries.
+                style: TextStyle(
+                  fontFamily: AppFonts.sans,
+                  fontSize: size / 4,
+                  fontWeight: FontWeight.w400,
+                  height: 1.2,
+                  color: AppColors.textMuted,
+                ),
+              ),
+            ],
           ],
         ),
-        if (showTagline) ...[
-          SizedBox(height: size * 0.35),
-          Text(L10n.of(context).appTagline, style: AppText.label),
-        ],
       ],
     );
   }

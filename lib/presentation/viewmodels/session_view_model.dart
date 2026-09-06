@@ -1,3 +1,7 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
+
 import '../../core/error/app_exception.dart';
 import '../../core/error/result.dart';
 import '../../core/services/device_info_service.dart';
@@ -63,6 +67,22 @@ class SessionViewModel extends BaseViewModel {
     safeNotify();
   }
 
+  /// Puts the app back behind the splash.
+  ///
+  /// Called when the app is backgrounded, so the splash plays on every return
+  /// and not only on a cold start — Android keeps the process alive, so
+  /// without this a merchant who task-switches away and back never sees it.
+  ///
+  /// The cost is real and worth knowing: it also sits in front of a tapped
+  /// notification, which is the one path in this app measured in seconds. If
+  /// that becomes a problem, gate this on how long the app was away rather
+  /// than removing it.
+  void resetBoot() {
+    if (!_bootComplete) return;
+    _bootComplete = false;
+    safeNotify();
+  }
+
   /// True when the merchant's AI credits are exhausted, which pauses the agent.
   /// The web dashboard banners this; on mobile it matters more, because it
   /// silently breaks the notification loop the app exists for.
@@ -108,6 +128,9 @@ class SessionViewModel extends BaseViewModel {
     _user = user;
     _setStatus(AuthStatus.signedIn);
     await _syncPushToken();
+    // Login returns no credits; only /profile does. Fetched without awaiting
+    // so the merchant reaches home immediately and the credit state fills in.
+    unawaited(refreshProfile());
     return true;
   }
 
@@ -130,15 +153,20 @@ class SessionViewModel extends BaseViewModel {
     _user = user;
     _setStatus(AuthStatus.signedIn);
     await _syncPushToken();
+    unawaited(refreshProfile());
     return true;
   }
 
-  /// Refreshes the merchant record — credits, plan, company. Silent: it runs on
-  /// resume and must not put a spinner over the home screen.
+  /// Refreshes the merchant record. Silent: it runs on resume and after
+  /// signing in, and must not put a spinner over the home screen.
+  ///
+  /// Merged rather than assigned — `/profile` is the only endpoint that
+  /// returns credits, and login is the only one that returns `isAdmin`, so
+  /// replacing the record wholesale would keep discarding one or the other.
   Future<void> refreshProfile() async {
     final result = await _auth.fetchProfile();
     if (result case Success(:final value)) {
-      _user = value;
+      _user = _user?.mergedWith(value) ?? value;
       safeNotify();
     }
   }
@@ -176,6 +204,26 @@ class SessionViewModel extends BaseViewModel {
     // backend accepts the chosen transport's token format. It currently
     // validates Expo tokens, which Flutter cannot produce.
     Log.d('push token ready but device registration is not wired', tag: 'push');
+  }
+
+  /// Places a signed-in merchant without a network round trip, for tests.
+  ///
+  /// The alternative is stubbing Dio to fake a login response, which tests the
+  /// HTTP client rather than the screen under test.
+  /// Whether a token is still on the device.
+  ///
+  /// Exposed so a sign-out test can assert the token was cleared, not just
+  /// that the in-memory session was dropped — signing out visually while
+  /// leaving the token behind would restore the session on the next cold
+  /// start.
+  @visibleForTesting
+  Future<bool> hasStoredSessionForTest() => _auth.hasStoredSession();
+
+  @visibleForTesting
+  void debugSetUser(User user) {
+    _user = user;
+    _bootComplete = true;
+    _setStatus(AuthStatus.signedIn);
   }
 
   void _setStatus(AuthStatus value) {
