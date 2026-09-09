@@ -167,5 +167,119 @@
   "menuSignOut": "Sign out",
   "@menuSignOut": {
     "description": "From menu.signout in src/lib/i18n.ts. Currently on the home stub as a temporary control; belongs in the hamburger menu (brief §16, tier 3) once that exists."
-  }
+  },
+
+  "@_tutorial": {
+    "description": "The first-run tutorial, frames T1a–T1c. UNAPPROVED COPY: nothing in the web app sources a tutorial, so none of this comes from src/lib/i18n.ts. The French is the Figma file's own wording; the English here and the Arabic are new, because the file carries the tutorial in French only (brief §21.5, §21.10)."
+  },
+  "tutorialStepMode": "Choose your stock mode",
+  "@tutorialStepMode": {
+    "description": "Step 1 of 4. Precedes the product step deliberately: the merchant decides how they manage stock before being asked for an initial quantity."
+  },
+  "tutorialStepProduct": "Create your first product",
+  "tutorialStepAgent": "Create your AI agent",
+  "tutorialStepPage": "Connect your page",
+  "tutorialWelcomeTitle": "Welcome to Djaber.ai",
+  "tutorialWelcomeBody": "Let's get your shop running together. Four steps, and your agent starts answering your customers.",
+  "tutorialStockTitle": "First, your stock",
+  "tutorialStockBody": "You choose how to manage your stock, then you create your first product — name, price, quantity.",
+  "tutorialAgentTitle": "Then your agent",
+  "tutorialAgentBody": "Create it in three fields, connect your Facebook page, and it answers from the first question on.",
+
+  "commonContinue": "Continue",
+  "commonActive": "ACTIVE",
+  "@commonActive": {
+    "description": "The badge on the chosen Option Card. Uppercase in the Label/Micro style; the web's settings page hardcodes its own equivalent in English, so this wording is ours."
+  },
+  "tutorialStepCounter": "STEP {step} OF {total}",
+  "@tutorialStepCounter": {
+    "description": "The counter above the four-segment progress bar on tutorial steps T2-T5. Stored already uppercased per locale rather than upper-cased at the call site, because case does not apply in Arabic.",
+    "placeholders": {
+      "step": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "tutorialModeTitle": "How do you manage your stock?",
+  "tutorialModeSubtitle": "This choice decides what you see in the app. You can change it at any time in settings.",
+  "@_stockMode": {
+    "description": "SOURCED, not invented: these four are the web's own page.dash.settings.simple / .advanced / .simpleDesc / .advancedDesc from src/lib/i18n.ts, verbatim in all three languages. The Figma frame paraphrases the two descriptions; the web wins per brief §17."
+  },
+  "stockModeSimple": "Simple",
+  "stockModeAdvanced": "Advanced",
+  "stockModeSimpleDesc": "Products, Categories & Orders — manage your inventory and orders without the complexity.",
+  "stockModeAdvancedDesc": "Full suite — Suppliers, Clients, Sales, Purchases, Caisse, Movements, Delivery & more.",
+
+  "@_product": {
+    "description": "T3 — Produit. UNAPPROVED COPY: the web's product form labels are hardcoded English in src/app/dashboard/stock/products/page.tsx with no i18n.ts keys behind them, so there was nothing to source. The French is the Figma frame's own; English and Arabic are new. The error messages mirror what backend/src/controllers/user-stock.controller.ts actually enforces on createProduct."
+  },
+  "tutorialProductTitle": "Your first product",
+  "tutorialProductSubtitle": "This is what your agent will sell. The description is what it reads to answer customers.",
+  "tutorialProductSubmit": "Create the product",
+  "productName": "Name",
+  "productNamePlaceholder": "Satin dress — Black",
+  "productSku": "Reference (SKU)",
+  "productSkuPlaceholder": "PRD-001",
+  "productDescription": "Description",
+  "productDescriptionPlaceholder": "Describe the product — the agent uses this to sell it",
+  "productCostPrice": "Cost price (DA)",
+  "productSellingPrice": "Selling price (DA)",
+  "productQuantity": "Initial quantity",
+  "productErrRequired": "This field is required",
+  "productErrNotANumber": "Enter a number",
+  "productErrMustBePositive": "Must be greater than 0",
+  "@productErrMustBePositive": {
+    "description": "The backend rejects a cost price, selling price or initial quantity of 0 outright — so this is a distinct message from 'required', which would be wrong for a field that visibly contains 0."
+  },
+  "productErrBelowCost": "Must be greater than or equal to the cost price",
+
+  "@_agent": {
+    "description": "T4 — Agent IA. The four personality labels map to the backend's own enum values: professional / friendly / casual / technical (schema.prisma, Agent.personality, default professional). Copy is the Figma frame's; the web's agent form is hardcoded English with no i18n keys, so there was nothing to source."
+  },
+  "tutorialAgentSubtitle": "It answers your customers with your catalogue and your prices. Three fields are enough — everything else can be tuned later.",
+  "tutorialAgentSubmit": "Create the agent",
+  "agentName": "Agent name",
+  "agentNamePlaceholder": "e.g. Sales assistant",
+  "agentPersonality": "Personality",
+  "agentToneProfessional": "Professional",
+  "agentToneProfessionalDesc": "Formal and business-oriented",
+  "agentToneFriendly": "Friendly",
+  "agentToneFriendlyDesc": "Warm and approachable",
+  "agentToneCasual": "Casual",
+  "agentToneCasualDesc": "Relaxed and conversational",
+  "agentToneTechnical": "Technical",
+  "agentToneTechnicalDesc": "Detailed and precise",
+  "agentInstructions": "Instructions",
+  "agentInstructionsPlaceholder": "How it should answer, and when to hand over to you",
+
+  "@_connect": {
+    "description": "T5 — Connecter la page. The three permission lines are the human reading of the scopes connectFacebookPage actually requests: pages_show_list, pages_messaging, pages_read_engagement."
+  },
+  "tutorialConnectTitle": "Connect your page",
+  "tutorialConnectSubtitle": "This is the last step. Your agent answers in that page's inbox — the moment it is connected, it is working.",
+  "connectPermissionsHeading": "Facebook will ask you for",
+  "connectPermissionPages": "See the list of your pages",
+  "connectPermissionMessages": "Read and send the page's messages",
+  "connectPermissionInfo": "Access the page's information",
+  "connectFacebook": "Connect Facebook",
+  "connectInstagram": "Connect Instagram",
+  "oauthLoading": "Loading Facebook…",
+  "oauthLoadingHint": "Facebook's authorisation page appears here.",
+  "connectLater": "Connect later",
+  "@connectLater": {
+    "description": "The one way out of the tutorial, on T5 only. T5 is the only step that depends on a third party — the merchant may have no Page yet, or Meta may not grant access — so it is the only one that can be deferred. Worded as later, not skip: the step stays outstanding on home rather than being abandoned."
+  },
+  "oauthDenied": "Authorisation cancelled. You can try again whenever you like.",
+
+  "@_ready": {
+    "description": "T6 — Prêt, the tutorial's closing screen. Each line shows what the step actually created, read back from TutorialViewModel."
+  },
+  "tutorialReadyTitle": "Your agent is live",
+  "tutorialReadySubtitle": "It is already answering your page's messages, with your catalogue and your prices. Add more products whenever you like.",
+  "tutorialReadySubmit": "Open the app",
+  "tutorialReadyModeSimple": "Simple — products, categories and orders",
+  "tutorialReadyModeAdvanced": "Advanced — the full suite"
 }

@@ -12,6 +12,12 @@ import '../presentation/screens/auth/signup_screen.dart';
 import '../presentation/screens/home/home_screen.dart';
 import '../presentation/screens/onboarding/onboarding_screen.dart';
 import '../presentation/screens/splash/splash_screen.dart';
+import '../presentation/screens/tutorial/tutorial_agent_screen.dart';
+import '../presentation/screens/tutorial/tutorial_connect_screen.dart';
+import '../presentation/screens/tutorial/tutorial_intro_screen.dart';
+import '../presentation/screens/tutorial/tutorial_mode_screen.dart';
+import '../presentation/screens/tutorial/tutorial_product_screen.dart';
+import '../presentation/screens/tutorial/tutorial_ready_screen.dart';
 import '../presentation/viewmodels/session_view_model.dart';
 import '../presentation/widgets/placeholder_screen.dart';
 import 'routes.dart';
@@ -85,6 +91,34 @@ class AppRouter {
         builder: (_, state) => PasswordSentScreen(
           email: state.extra is String ? state.extra as String : null,
         ),
+      ),
+
+      // The first-run tutorial. Outside the shell: it owns the whole screen
+      // and has no bottom nav, because the merchant has nothing to navigate
+      // to yet.
+      GoRoute(
+        path: Routes.tutorial,
+        builder: (_, _) => const TutorialIntroScreen(),
+      ),
+      GoRoute(
+        path: Routes.tutorialMode,
+        builder: (_, _) => const TutorialModeScreen(),
+      ),
+      GoRoute(
+        path: Routes.tutorialProduct,
+        builder: (_, _) => const TutorialProductScreen(),
+      ),
+      GoRoute(
+        path: Routes.tutorialAgent,
+        builder: (_, _) => const TutorialAgentScreen(),
+      ),
+      GoRoute(
+        path: Routes.tutorialConnect,
+        builder: (_, _) => const TutorialConnectScreen(),
+      ),
+      GoRoute(
+        path: Routes.tutorialReady,
+        builder: (_, _) => const TutorialReadyScreen(),
       ),
 
       // The five bottom-nav destinations of brief §16. They live in a
@@ -181,6 +215,22 @@ class AppRouter {
       _locationBeforeSplash = null;
       Log.i('opening deep link $pending', tag: 'push');
       return pending;
+    }
+
+    // A merchant who has just created an account is walked through setup
+    // before they reach the app (brief §21.5). This outranks resuming where
+    // they were, and it applies to every route rather than only the public
+    // ones — otherwise a deep link or a `go(home)` would step around it.
+    //
+    // It does not outrank a tapped notification, above: that is a specific
+    // request from outside the app, and the tutorial will still be waiting.
+    if (_session.tutorialPending) {
+      if (location.startsWith(Routes.tutorial)) return null;
+      // Dropped rather than kept: the remembered location is from before the
+      // tutorial, and restoring it afterwards would bounce the merchant out
+      // of the flow they had just finished.
+      _locationBeforeSplash = null;
+      return Routes.tutorial;
     }
 
     final resume = _locationBeforeSplash;

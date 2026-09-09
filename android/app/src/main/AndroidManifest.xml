@@ -1,4 +1,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--
+      Required, and easy to miss: Flutter's template declares INTERNET only in
+      src/debug/ and src/profile/, where it exists so the dev tooling can reach
+      the VM service. Neither source set is part of a release build, so without
+      this line a release APK ships with no network permission and every
+      request fails while every debug build works.
+    -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!--
+      Lets the app tell "you are offline" apart from "the server is down", so
+      a failed call can say which. Read-only; it grants no network access of
+      its own.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
     <application
         android:label="Djaber.ai"
         android:name="${applicationName}"

@@ -28,6 +28,21 @@ enum FieldError {
 
   /// Shorter than the minimum the backend enforces.
   tooShort,
+
+  /// Not a number at all. Possible even behind a numeric keyboard: some
+  /// Android IMEs still offer a comma, and a merchant can paste anything.
+  notANumber,
+
+  /// Zero or negative where the backend demands greater than zero.
+  ///
+  /// `user-stock.controller.ts` rejects a cost price, selling price or
+  /// initial quantity of 0 outright — worth its own message, because "required"
+  /// would be wrong for a field that visibly contains `0`.
+  mustBePositive,
+
+  /// A selling price below the cost price. The backend refuses it:
+  /// *"Selling price must be greater than or equal to cost price"*.
+  belowCostPrice,
 }
 
 typedef FieldValidator = FieldError? Function(String value);
@@ -78,4 +93,62 @@ class Validators {
   /// holding only spaces does not pass.
   static FieldError? name(String value) =>
       value.trim().isEmpty ? FieldError.required : null;
+
+  // ---- Product form ----
+  //
+  // From `backend/src/controllers/user-stock.controller.ts` (`createProduct`),
+  // not from taste. The server is stricter than the form looks: a price or a
+  // quantity of zero is refused, and the selling price may not sit below the
+  // cost price.
+
+  /// Never invalid — the product description, which the backend accepts empty.
+  ///
+  /// Length ceilings (255 for name and SKU, 5000 for the description) are
+  /// enforced at the keyboard with a `LengthLimitingTextInputFormatter`, the
+  /// way the email field is capped at 254, rather than as an error message.
+  /// What the merchant sees stays what gets sent.
+  static FieldError? optional(String value) => null;
+
+  /// Parses the loose forms a merchant actually types: a comma decimal
+  /// separator, which is the French convention and what an Algerian handset
+  /// offers, and spaces used as thousands separators.
+  static double? parseAmount(String value) {
+    final cleaned = value.trim().replaceAll(' ', '').replaceAll(',', '.');
+    if (cleaned.isEmpty) return null;
+    return double.tryParse(cleaned);
+  }
+
+  /// A price in DA. Required, numeric, and strictly greater than zero.
+  static FieldError? price(String value) {
+    if (value.trim().isEmpty) return FieldError.required;
+    final amount = parseAmount(value);
+    if (amount == null) return FieldError.notANumber;
+    if (amount <= 0) return FieldError.mustBePositive;
+    return null;
+  }
+
+  /// The selling price, which must also clear the cost price.
+  ///
+  /// Cross-field, so it takes the other field's raw text rather than being a
+  /// bare [FieldValidator]. While the cost price is itself unreadable there is
+  /// nothing to compare against, and this stays quiet rather than blaming the
+  /// wrong field.
+  static FieldValidator sellingPrice(String Function() costPriceText) =>
+      (String value) {
+        final own = price(value);
+        if (own != null) return own;
+        final cost = parseAmount(costPriceText());
+        if (cost == null) return null;
+        return parseAmount(value)! < cost ? FieldError.belowCostPrice : null;
+      };
+
+  /// An initial quantity: a whole number, greater than zero.
+  static FieldError? quantity(String value) {
+    final trimmed = value.trim();
+    if (trimmed.isEmpty) return FieldError.required;
+    final parsed = int.tryParse(trimmed.replaceAll(' ', ''));
+    if (parsed == null) return FieldError.notANumber;
+    if (parsed <= 0) return FieldError.mustBePositive;
+    return null;
+  }
 }

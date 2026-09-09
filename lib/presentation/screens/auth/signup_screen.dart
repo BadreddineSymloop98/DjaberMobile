@@ -68,6 +68,11 @@ class _SignupView extends StatelessWidget {
           FieldError.required => l10n.authErrEmailRequired,
           FieldError.invalidEmail => l10n.authErrInvalidEmail,
           FieldError.tooShort => l10n.authErrPasswordTooShort,
+          // Product-form rules; no validator on this form can produce them.
+          FieldError.notANumber ||
+          FieldError.mustBePositive ||
+          FieldError.belowCostPrice =>
+            l10n.authErrEmailRequired,
         };
 
     String? passwordError() => switch (model.visibleError(model.password)) {
@@ -75,6 +80,11 @@ class _SignupView extends StatelessWidget {
           FieldError.required => l10n.authErrPasswordRequired,
           FieldError.tooShort => l10n.authErrPasswordTooShort,
           FieldError.invalidEmail => l10n.authErrInvalidEmail,
+          // Product-form rules; no validator on this form can produce them.
+          FieldError.notANumber ||
+          FieldError.mustBePositive ||
+          FieldError.belowCostPrice =>
+            l10n.authErrPasswordRequired,
         };
 
     return AuthScaffold(

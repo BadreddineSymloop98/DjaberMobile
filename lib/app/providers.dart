@@ -8,9 +8,14 @@ import '../core/services/device_info_service.dart';
 import '../core/services/push_service.dart';
 import '../core/storage/prefs_storage.dart';
 import '../core/storage/secure_storage.dart';
+import '../data/repositories/agent_repository.dart';
 import '../data/repositories/auth_repository.dart';
+import '../data/repositories/page_repository.dart';
+import '../data/repositories/product_repository.dart';
 import '../presentation/viewmodels/locale_view_model.dart';
 import '../presentation/viewmodels/session_view_model.dart';
+import '../presentation/viewmodels/stock_mode_view_model.dart';
+import '../presentation/viewmodels/tutorial_view_model.dart';
 
 /// Dependency injection.
 ///
@@ -55,6 +60,15 @@ class AppProviders {
       // ---- Repositories. Stateless, so `Provider` rather than
       // `ChangeNotifierProvider`: they answer questions, they do not hold
       // screen state.
+      Provider<ProductRepository>(
+        create: (context) => ProductRepository(api: context.read<ApiClient>()),
+      ),
+      Provider<AgentRepository>(
+        create: (context) => AgentRepository(api: context.read<ApiClient>()),
+      ),
+      Provider<PageRepository>(
+        create: (context) => PageRepository(api: context.read<ApiClient>()),
+      ),
       Provider<AuthRepository>(
         create: (context) => AuthRepository(
           api: context.read<ApiClient>(),
@@ -70,6 +84,21 @@ class AppProviders {
           prefs: context.read<PrefsStorage>(),
           api: context.read<ApiClient>(),
         ),
+      ),
+
+      // App-wide because the mode decides what several screens show, not one:
+      // the menu, the stock overview, and the settings section that changes
+      // it. A device preference, not a backend field — see [StockModeViewModel].
+      ChangeNotifierProvider<StockModeViewModel>(
+        create: (context) => StockModeViewModel(
+          prefs: context.read<PrefsStorage>(),
+        ),
+      ),
+
+      // What the tutorial has created so far. App-wide only because the four
+      // steps are separate routes; it is reset when the tutorial ends.
+      ChangeNotifierProvider<TutorialViewModel>(
+        create: (_) => TutorialViewModel(),
       ),
     ];
   }
@@ -87,6 +116,11 @@ extension AppContext on BuildContext {
 
   LocaleViewModel get localeModel => watch<LocaleViewModel>();
   LocaleViewModel get localeModelOnce => read<LocaleViewModel>();
+
+  /// Watch when a screen's *content* depends on the mode — hiding a section,
+  /// filtering a list. Read when only an action does.
+  StockModeViewModel get stockMode => watch<StockModeViewModel>();
+  StockModeViewModel get stockModeOnce => read<StockModeViewModel>();
 
   ConnectivityService get connectivity => watch<ConnectivityService>();
 

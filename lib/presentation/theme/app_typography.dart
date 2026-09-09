@@ -58,7 +58,7 @@ class AppText {
         fontFamily: AppFonts.display,
         fontSize: 27.sp,
         fontWeight: FontWeight.w700,
-        height: 1.2,
+        height: 1.15,
         letterSpacing: -0.5,
         color: AppColors.textPrimary,
       );
@@ -192,6 +192,17 @@ class AppText {
         fontSize: 9.sp,
         fontWeight: FontWeight.w500,
         letterSpacing: 9.sp * 0.14,
+        height: 1.3,
+        color: AppColors.textMuted,
+      );
+
+  /// 8 — the Figma `Label/Micro` style: the step number inside a Checklist
+  /// Row's ring, and other numerals too small for [labelMeta].
+  static TextStyle get labelMicro => TextStyle(
+        fontFamily: AppFonts.mono,
+        fontSize: 8.sp,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 8.sp * 0.10,
         height: 1.3,
         color: AppColors.textMuted,
       );
