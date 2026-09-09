@@ -52,6 +52,15 @@ class TutorialReadyScreen extends StatelessWidget {
     final mode = context.watch<StockModeViewModel>();
 
     final agent = tutorial.agent;
+
+    // The tutorial ends here however it was walked, including when the
+    // merchant chose *Connecter plus tard* on `T5`. Without a Page the agent
+    // is **not** answering anyone, so the screen says so: a different heading,
+    // a neutral mark instead of the live ring, and the fourth step left
+    // unticked below. Congratulating a merchant for a connection that did not
+    // happen would be the one lie the whole screen exists to avoid.
+    final isLive = tutorial.page != null;
+
     final steps = <({String label, String? subtitle})>[
       (
         label: l10n.tutorialStepMode,
@@ -88,15 +97,22 @@ class TutorialReadyScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     SizedBox(height: 10.9.h), // 92
-                    const Align(
+                    Align(
                       alignment: AlignmentDirectional.centerStart,
-                      child: _LiveMark(),
+                      child: _LiveMark(live: isLive),
                     ),
                     SizedBox(height: AppSpacing.xxl), // 24
-                    Text(l10n.tutorialReadyTitle, style: AppText.displayM),
+                    Text(
+                      isLive
+                          ? l10n.tutorialReadyTitle
+                          : l10n.tutorialReadyTitlePending,
+                      style: AppText.displayM,
+                    ),
                     SizedBox(height: 2.56.w), // 10
                     Text(
-                      l10n.tutorialReadySubtitle,
+                      isLive
+                          ? l10n.tutorialReadySubtitle
+                          : l10n.tutorialReadySubtitlePending,
                       style: AppText.bodyS.copyWith(height: 1.32),
                     ),
                     SizedBox(height: 3.32.h), // 28
@@ -147,23 +163,29 @@ class TutorialReadyScreen extends StatelessWidget {
 
 /// The 64px ring with a tick — the one place `signal/live` appears in the
 /// tutorial, and it means exactly what the token means: the agent is live.
+///
+/// With no Page connected it is not, so the ring drops to `text/muted`. The
+/// token is never spent on "nearly": brief §21.3 — `live` means live.
 class _LiveMark extends StatelessWidget {
-  const _LiveMark();
+  const _LiveMark({required this.live});
+
+  final bool live;
 
   @override
   Widget build(BuildContext context) {
+    final tint = live ? AppColors.live : AppColors.textMuted;
     return Container(
       width: 16.41.w, // 64
       height: 16.41.w, // 64
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        border: Border.all(color: AppColors.live, width: AppStroke.hairline),
+        border: Border.all(color: tint, width: AppStroke.hairline),
         borderRadius: BorderRadius.circular(AppRadius.pill),
       ),
       child: AppIcon(
         AppIcons.check,
         size: 7.18.w, // 28
-        color: AppColors.live,
+        color: tint,
       ),
     );
   }

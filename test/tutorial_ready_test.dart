@@ -136,15 +136,47 @@ void main() {
     expect(find.text(l10n.tutorialStepCounter(4, 4)), findsNothing);
   });
 
+  Iterable<BoxDecoration> ringsColoured(WidgetTester tester, Color colour) =>
+      tester
+          .widgetList<Container>(find.byType(Container))
+          .map((c) => c.decoration)
+          .whereType<BoxDecoration>()
+          .where((d) => d.border?.top.color == colour);
+
   testWidgets('the live mark uses signal/live, not white', (tester) async {
+    seedAFullRun();
     await pump(tester);
 
-    final ring = tester
-        .widgetList<Container>(find.byType(Container))
-        .map((c) => c.decoration)
-        .whereType<BoxDecoration>()
-        .where((d) => d.border?.top.color == AppColors.live);
-    expect(ring, isNotEmpty);
+    expect(ringsColoured(tester, AppColors.live), isNotEmpty);
+  });
+
+  group('reached without connecting a page', () {
+    testWidgets('it still ends here, and says what is outstanding',
+        (tester) async {
+      // Everything but the page — the merchant chose *Connecter plus tard*.
+      tutorial.productCreated(
+        const Product(id: 'p-1', sku: 'PRD-001', name: 'Robe satin'),
+      );
+      tutorial.agentCreated(const Agent(id: 'a-1', name: 'Assistant'));
+      await pump(tester);
+      final l10n = await L10n.delegate.load(const Locale('fr'));
+
+      // The screen is reached...
+      expect(find.text(l10n.tutorialReadySubmit), findsOneWidget);
+      // ...but does not claim the agent is answering anyone.
+      expect(find.text(l10n.tutorialReadyTitle), findsNothing);
+      expect(find.text(l10n.tutorialReadyTitlePending), findsOneWidget);
+
+      // The page step is on the list and unticked.
+      final rows =
+          tester.widgetList<ChecklistRow>(find.byType(ChecklistRow)).toList();
+      expect(rows.length, 4);
+      expect(rows[3].done, isFalse);
+
+      // And `live` is not spent on "nearly".
+      expect(ringsColoured(tester, AppColors.live), isEmpty);
+      expect(ringsColoured(tester, AppColors.textMuted), isNotEmpty);
+    });
   });
 
   for (final size in const [Size(320, 640), Size(360, 740)]) {

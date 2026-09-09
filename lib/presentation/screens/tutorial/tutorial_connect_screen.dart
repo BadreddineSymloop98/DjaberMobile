@@ -12,7 +12,6 @@ import '../../../l10n/gen/app_localizations.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/app_spacing.dart';
 import '../../theme/app_typography.dart';
-import '../../viewmodels/session_view_model.dart';
 import '../../viewmodels/tutorial_connect_view_model.dart';
 import '../../viewmodels/tutorial_view_model.dart';
 import '../../widgets/app_icon.dart';
@@ -93,19 +92,20 @@ class _TutorialConnectScreenState extends State<TutorialConnectScreen> {
   /// development mode). Without this, that merchant has an app they can never
   /// open.
   ///
-  /// It goes **straight home, not through `T6`**: that screen's heading is
-  /// "Votre agent est en ligne", which would be a lie with no Page connected.
+  /// It still goes **through `T6`**, which is where the tutorial ends however
+  /// it was walked. That screen reads its own state: with no Page it drops the
+  /// "Votre agent est en ligne" heading and leaves the fourth step unticked,
+  /// so the merchant is told plainly what is still outstanding rather than
+  /// being congratulated for something that did not happen.
   Future<void> _later() async {
-    final session = context.read<SessionViewModel>();
     final prefs = context.read<PrefsStorage>();
     final router = GoRouter.of(context);
 
-    // Recorded before the flag is cleared, so home's Démarrer checklist can
-    // show the step as still outstanding rather than the tutorial simply
-    // vanishing (brief §21.10).
+    // Recorded so home's Démarrer checklist can show the step as still
+    // outstanding rather than the tutorial simply vanishing (brief §21.10).
+    // The tutorial itself is closed by `T6`, not here.
     await prefs.setPageConnectionDeferred(true);
-    await session.completeTutorial();
-    router.go(Routes.home);
+    router.go(Routes.tutorialReady);
   }
 
   @override

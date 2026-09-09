@@ -10,6 +10,7 @@ import '../core/storage/prefs_storage.dart';
 import '../core/storage/secure_storage.dart';
 import '../data/repositories/agent_repository.dart';
 import '../data/repositories/auth_repository.dart';
+import '../data/repositories/dashboard_repository.dart';
 import '../data/repositories/page_repository.dart';
 import '../data/repositories/product_repository.dart';
 import '../presentation/viewmodels/locale_view_model.dart';
@@ -68,6 +69,10 @@ class AppProviders {
       ),
       Provider<PageRepository>(
         create: (context) => PageRepository(api: context.read<ApiClient>()),
+      ),
+      Provider<DashboardRepository>(
+        create: (context) =>
+            DashboardRepository(api: context.read<ApiClient>()),
       ),
       Provider<AuthRepository>(
         create: (context) => AuthRepository(

@@ -6,6 +6,7 @@ import 'package:djaber_mobile/core/utils/screen.dart';
 import 'package:djaber_mobile/data/models/stock_mode.dart';
 import 'package:djaber_mobile/data/models/user.dart';
 import 'package:djaber_mobile/data/repositories/agent_repository.dart';
+import 'package:djaber_mobile/data/repositories/dashboard_repository.dart';
 import 'package:djaber_mobile/data/repositories/page_repository.dart';
 import 'package:djaber_mobile/data/repositories/product_repository.dart';
 import 'package:djaber_mobile/l10n/gen/app_localizations.dart';
@@ -22,6 +23,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 
 import 'support/auth_host.dart';
+import 'support/fake_repositories.dart';
 
 /// Where a newly created account is sent, and what gets it out again.
 ///
@@ -81,6 +83,12 @@ void main() {
           Provider<ProductRepository>.value(value: products),
           Provider<PageRepository>.value(value: pages),
           Provider<AgentRepository>.value(value: agents),
+          // Home is one of the destinations these redirects land on, and it
+          // reads the dashboard. Answers from memory — this suite is about
+          // where a navigation goes, not about what home shows once there.
+          Provider<DashboardRepository>(
+            create: (_) => FakeDashboardRepository(),
+          ),
           ChangeNotifierProvider<TutorialViewModel>(
             create: (_) => TutorialViewModel(),
           ),
@@ -273,16 +281,21 @@ void main() {
     await tester.tap(find.text(l10n.connectLater));
     await tester.pumpAndSettle();
 
-    // Reaches the app...
-    expect(location(), Routes.home);
-    // ...and does not come back on the next launch.
-    expect(session.tutorialPending, isFalse);
-    // Recorded, not silently dropped: home's Démarrer checklist shows the
+    // Leaves the step behind...
+    expect(location(), Routes.tutorialReady);
+    // ...recorded, not silently dropped: home's Démarrer checklist shows the
     // step as still outstanding (brief §21.10).
     expect(prefs.pageConnectionDeferred, isTrue);
+
+    // The tutorial is closed by `T6`, not by the deferral itself.
+    await tester.tap(find.text(l10n.tutorialReadySubmit));
+    await tester.pumpAndSettle();
+    expect(location(), Routes.home);
+    expect(session.tutorialPending, isFalse);
   });
 
-  testWidgets('deferring does not pass through T6', (tester) async {
+  testWidgets('deferring still ends on T6, but does not claim the agent is live',
+      (tester) async {
     await boot(tutorialPending: true);
     session.debugSetUser(user);
     await pumpApp(tester);
@@ -294,10 +307,12 @@ void main() {
     await tester.tap(find.text(l10n.connectLater));
     await tester.pumpAndSettle();
 
-    // `T6`'s heading is "Votre agent est en ligne", which would be false with
-    // no Page connected. It stays the screen for the completed path.
+    expect(location(), Routes.tutorialReady);
+    // "Votre agent est en ligne" would be false with no Page connected.
     expect(find.text(l10n.tutorialReadyTitle), findsNothing);
-    expect(location(), Routes.home);
+    expect(find.text(l10n.tutorialReadyTitlePending), findsOneWidget);
+    // And the step it names stays on the list, unticked.
+    expect(find.text(l10n.tutorialStepPage), findsOneWidget);
   });
 
   testWidgets('T6 is the exit for a completed run — flag cleared, app opened',

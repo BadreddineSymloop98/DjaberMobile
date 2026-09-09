@@ -156,14 +156,6 @@
   "authErrUserExists": "An account with this email already exists",
   "authErrNetwork": "Cannot reach the server. Check your connection.",
   "authErrUnknown": "Something went wrong. Please try again.",
-  "homeWelcome": "Welcome back, {name}",
-  "@homeWelcome": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
   "menuSignOut": "Sign out",
   "@menuSignOut": {
     "description": "From menu.signout in src/lib/i18n.ts. Currently on the home stub as a temporary control; belongs in the hamburger menu (brief §16, tier 3) once that exists."
@@ -279,7 +271,134 @@
   },
   "tutorialReadyTitle": "Your agent is live",
   "tutorialReadySubtitle": "It is already answering your page's messages, with your catalogue and your prices. Add more products whenever you like.",
+  "tutorialReadyTitlePending": "Almost there",
+  "@tutorialReadyTitlePending": {
+    "description": "T6 when the merchant chose Connecter plus tard on T5. The tutorial still ends here, but with no Page the agent is answering nobody — so the live heading is replaced and the fourth step stays unticked."
+  },
+  "tutorialReadySubtitlePending": "Your catalogue and your agent are ready. All that is left is connecting your page — your agent starts answering the moment it is.",
   "tutorialReadySubmit": "Open the app",
   "tutorialReadyModeSimple": "Simple — products, categories and orders",
-  "tutorialReadyModeAdvanced": "Advanced — the full suite"
+  "tutorialReadyModeAdvanced": "Advanced — the full suite",
+
+  "@_home": {
+    "description": "09 — Accueil. Section headings and the two figure labels come from page.dash.* in src/lib/i18n.ts; the rest is the Figma frame's own French, translated here. À traiter has no web equivalent — the escalation queue is the mobile app's reason to exist (brief §2) — so that copy is ours."
+  },
+  "homeGreetingMorning": "Good morning",
+  "homeGreetingAfternoon": "Good afternoon",
+  "homeGreetingEvening": "Good evening",
+  "@homeGreetingEvening": {
+    "description": "From page.dash.greeting.* in src/lib/i18n.ts, which splits the day the same three ways. Rendered as '{greeting}, {firstName}'."
+  },
+  "homeSnapshot": "here is a snapshot",
+  "homeQueue": "To handle",
+  "homeQueueStuck": "AI stuck",
+  "@homeQueueStuck": {
+    "description": "The kind on an escalation card. Every item in this queue is a conversation the backend flagged aiPaused, which is exactly 'the AI stopped and is waiting for you' — so there is one kind, not several."
+  },
+  "homeQueueEmpty": "Nothing waiting. The agent is handling every conversation.",
+  "homeQueueNoPage": "No page connected, so no conversation can reach you yet.",
+  "homeQueueMore": "+ {count} more",
+  "@homeQueueMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeAgeMinutes": "{count} MIN",
+  "@homeAgeMinutes": {
+    "description": "How long an escalation has been waiting. Uppercase in the Label/Meta style, stored cased per locale because case does not apply in Arabic.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeAgeHours": "{count} H",
+  "@homeAgeHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeAgeDays": "{count} D",
+  "@homeAgeDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeNoPageTitle": "No page connected",
+  "homeNoPageBody": "Your agent has nowhere to answer yet. Connect your Facebook or Instagram page and it starts working on the first message.",
+  "@homeNoPageBody": {
+    "description": "Sits above À traiter when the merchant has no Page — including one who chose Connecter plus tard on T5. The queue can only be empty in that state, so the screen explains the silence instead of showing an empty section."
+  },
+  "homeOverview": "Overview",
+  "homeKpiPages": "Connected pages",
+  "homeKpiProducts": "Products",
+  "homeKpiLowStock": "{count} low stock",
+  "@homeKpiLowStock": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeKpiRevenue": "Revenue (30d)",
+  "homeKpiSales": "{count, plural, one{{count} sale} other{{count} sales}}",
+  "@homeKpiSales": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeKpiStockValue": "Stock value",
+  "homeQuickActions": "Quick actions",
+  "homeActionConnectTitle": "Connect a page",
+  "homeActionConnectBody": "Link your Facebook page",
+  "homeActionProductsTitle": "Add products",
+  "homeActionProductsBody": "Build your catalogue",
+  "homeActionAgentsTitle": "AI agents",
+  "homeActionAgentsBody": "Manage your assistants",
+  "homeYourPages": "Your pages",
+  "homeManageAll": "MANAGE ALL →",
+  "homePagesEmpty": "No page connected yet.",
+  "homePageActive": "ACTIVE",
+  "homePageInactive": "PAUSED",
+  "homePageConnectedOn": "CONNECTED {date}",
+  "@homePageConnectedOn": {
+    "description": "The second line of a page row, beside the network name. Uppercase in the Label/Meta style.",
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "MMMMd"
+      }
+    }
+  },
+  "platformFacebook": "Facebook",
+  "platformInstagram": "Instagram",
+  "homeGetStarted": "Get started",
+  "homeStepConnectTitle": "Connect a page",
+  "homeStepConnectBody": "Link Facebook to start chatting",
+  "homeStepProductsTitle": "Add products",
+  "homeStepProductsBody": "Build up your catalogue",
+  "homeStepAgentTitle": "Configure your AI agent",
+  "homeStepAgentBody": "Set the tone and the behaviour",
+  "homeStepSaleTitle": "Make your first sale",
+  "homeStepSaleBody": "Watch the AI handle the requests",
+  "@_nav": {
+    "description": "The five bottom-nav destinations of brief §16. Short by design — the frame gives each label 78px."
+  },
+  "navHome": "HOME",
+  "navQueue": "QUEUE",
+  "navInbox": "INBOX",
+  "navStock": "STOCK",
+  "navOrders": "ORD",
+  "commonNotBuilt": "not built yet",
+  "@commonNotBuilt": {
+    "description": "Shown when a control leads to a screen that does not exist yet. Says so rather than doing nothing, which reads as a broken tap."
+  }
 }

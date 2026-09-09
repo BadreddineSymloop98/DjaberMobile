@@ -10,6 +10,7 @@ import '../presentation/screens/auth/login_screen.dart';
 import '../presentation/screens/auth/password_sent_screen.dart';
 import '../presentation/screens/auth/signup_screen.dart';
 import '../presentation/screens/home/home_screen.dart';
+import '../presentation/screens/home/home_shell.dart';
 import '../presentation/screens/onboarding/onboarding_screen.dart';
 import '../presentation/screens/splash/splash_screen.dart';
 import '../presentation/screens/tutorial/tutorial_agent_screen.dart';
@@ -126,7 +127,7 @@ class AppRouter {
       // or animate when the tab changes.
       ShellRoute(
         navigatorKey: _shellKey,
-        builder: (_, _, child) => PlaceholderShell(child: child),
+        builder: (_, _, child) => HomeShell(child: child),
         routes: [
           GoRoute(
             path: Routes.home,

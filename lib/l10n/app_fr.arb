@@ -119,7 +119,6 @@
   "authErrUserExists": "Un compte avec cet e-mail existe déjà",
   "authErrNetwork": "Impossible de joindre le serveur. Vérifiez votre connexion.",
   "authErrUnknown": "Une erreur s’est produite. Veuillez réessayer.",
-  "homeWelcome": "Bon retour, {name}",
   "menuSignOut": "Déconnexion",
 
   "tutorialStepMode": "Choisir votre mode de stock",
@@ -137,7 +136,7 @@
   "commonActive": "ACTIF",
   "tutorialStepCounter": "ÉTAPE {step} SUR {total}",
   "tutorialModeTitle": "Comment gérez-vous votre stock ?",
-  "tutorialModeSubtitle": "Ce choix décide de ce que vous voyez dans l’application. Vous pouvez en changer à tout moment dans les paramètres.",
+  "tutorialModeSubtitle": "Ce choix décide de ce que vous voyez dans l’application. Vous pouvez le changer à tout moment dans les paramètres.",
   "stockModeSimple": "Simple",
   "stockModeAdvanced": "Avancé",
   "stockModeSimpleDesc": "Produits, Catégories & Commandes — gérez votre inventaire et commandes sans complexité.",
@@ -191,7 +190,111 @@
 
   "tutorialReadyTitle": "Votre agent est en ligne",
   "tutorialReadySubtitle": "Il répond déjà aux messages de votre page, avec votre catalogue et vos prix. Ajoutez d’autres produits quand vous voulez.",
+  "tutorialReadyTitlePending": "Vous y êtes presque",
+  "tutorialReadySubtitlePending": "Votre catalogue et votre agent sont prêts. Il ne reste qu’à connecter votre page — votre agent commencera à répondre dès ce moment-là.",
   "tutorialReadySubmit": "Ouvrir l’application",
   "tutorialReadyModeSimple": "Simple — produits, catégories et commandes",
-  "tutorialReadyModeAdvanced": "Avancé — la suite complète"
+  "tutorialReadyModeAdvanced": "Avancé — la suite complète",
+
+  "homeGreetingMorning": "Bonjour",
+  "homeGreetingAfternoon": "Bon après-midi",
+  "homeGreetingEvening": "Bonsoir",
+  "homeSnapshot": "voici un aperçu",
+  "homeQueue": "À traiter",
+  "homeQueueStuck": "IA bloquée",
+  "homeQueueEmpty": "Rien en attente. L’agent gère toutes les conversations.",
+  "homeQueueNoPage": "Aucune page connectée, donc aucune conversation ne peut encore vous parvenir.",
+  "homeQueueMore": "+ {count} autres",
+  "@homeQueueMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeAgeMinutes": "{count} MIN",
+  "@homeAgeMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeAgeHours": "{count} H",
+  "@homeAgeHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeAgeDays": "{count} J",
+  "@homeAgeDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeNoPageTitle": "Aucune page connectée",
+  "homeNoPageBody": "Votre agent n’a encore nulle part où répondre. Connectez votre page Facebook ou Instagram et il se met au travail dès le premier message.",
+  "homeOverview": "Aperçu",
+  "homeKpiPages": "Pages connectées",
+  "homeKpiProducts": "Produits",
+  "homeKpiLowStock": "{count} stock faible",
+  "@homeKpiLowStock": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeKpiRevenue": "Chiffre d’affaires (30j)",
+  "homeKpiSales": "{count, plural, one{{count} vente} other{{count} ventes}}",
+  "@homeKpiSales": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeKpiStockValue": "Valeur du stock",
+  "homeQuickActions": "Actions rapides",
+  "homeActionConnectTitle": "Connecter une page",
+  "homeActionConnectBody": "Liez votre page Facebook",
+  "homeActionProductsTitle": "Ajouter des produits",
+  "homeActionProductsBody": "Construisez votre catalogue",
+  "homeActionAgentsTitle": "Agents IA",
+  "homeActionAgentsBody": "Gérez vos assistants",
+  "homeYourPages": "Vos pages",
+  "homeManageAll": "TOUT GÉRER →",
+  "homePagesEmpty": "Aucune page connectée pour l’instant.",
+  "homePageActive": "ACTIVE",
+  "homePageInactive": "EN PAUSE",
+  "homePageConnectedOn": "CONNECTÉE LE {date}",
+  "@homePageConnectedOn": {
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "MMMMd"
+      }
+    }
+  },
+  "platformFacebook": "Facebook",
+  "platformInstagram": "Instagram",
+  "homeGetStarted": "Démarrer",
+  "homeStepConnectTitle": "Connecter une page",
+  "homeStepConnectBody": "Liez Facebook pour commencer à discuter",
+  "homeStepProductsTitle": "Ajouter des produits",
+  "homeStepProductsBody": "Constituez votre catalogue",
+  "homeStepAgentTitle": "Configurer votre agent IA",
+  "homeStepAgentBody": "Personnalisez le ton et le comportement",
+  "homeStepSaleTitle": "Réalisez votre première vente",
+  "homeStepSaleBody": "Regardez l’IA gérer les demandes",
+  "navHome": "ACCUEIL",
+  "navQueue": "FILE",
+  "navInbox": "BOÎTE",
+  "navStock": "STOCK",
+  "navOrders": "CMD",
+  "commonNotBuilt": "pas encore disponible"
 }

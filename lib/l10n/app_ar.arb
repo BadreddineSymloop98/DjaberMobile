@@ -119,7 +119,6 @@
   "authErrUserExists": "يوجد حساب بهذا البريد الإلكتروني بالفعل",
   "authErrNetwork": "لا يمكن الوصول إلى الخادم. تحقق من اتصالك.",
   "authErrUnknown": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
-  "homeWelcome": "مرحباً بعودتك، {name}",
   "menuSignOut": "تسجيل الخروج",
 
   "tutorialStepMode": "اختر وضع المخزون",
@@ -191,7 +190,111 @@
 
   "tutorialReadyTitle": "وكيلك متصل الآن",
   "tutorialReadySubtitle": "هو يردّ فعلًا على رسائل صفحتك، بالاعتماد على كتالوجك وأسعارك. أضف منتجات أخرى وقتما تشاء.",
+  "tutorialReadyTitlePending": "أوشكت على الانتهاء",
+  "tutorialReadySubtitlePending": "كتالوجك ووكيلك جاهزان. لم يبقَ سوى ربط صفحتك — سيبدأ وكيلك بالردّ فور ربطها.",
   "tutorialReadySubmit": "افتح التطبيق",
   "tutorialReadyModeSimple": "بسيط — المنتجات والفئات والطلبات",
-  "tutorialReadyModeAdvanced": "متقدم — المجموعة الكاملة"
+  "tutorialReadyModeAdvanced": "متقدم — المجموعة الكاملة",
+
+  "homeGreetingMorning": "صباح الخير",
+  "homeGreetingAfternoon": "طاب يومك",
+  "homeGreetingEvening": "مساء الخير",
+  "homeSnapshot": "إليك لمحة سريعة",
+  "homeQueue": "بانتظار تدخّلك",
+  "homeQueueStuck": "توقّف الذكاء الاصطناعي",
+  "homeQueueEmpty": "لا شيء في الانتظار. الوكيل يتولّى كل المحادثات.",
+  "homeQueueNoPage": "لا توجد صفحة مربوطة، لذا لا يمكن لأي محادثة أن تصلك بعد.",
+  "homeQueueMore": "+ {count} أخرى",
+  "@homeQueueMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeAgeMinutes": "{count} دقيقة",
+  "@homeAgeMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeAgeHours": "{count} ساعة",
+  "@homeAgeHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeAgeDays": "{count} يوم",
+  "@homeAgeDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeNoPageTitle": "لا توجد صفحة مربوطة",
+  "homeNoPageBody": "ليس لوكيلك مكان يردّ فيه بعد. اربط صفحتك على فيسبوك أو إنستغرام ليبدأ العمل من أول رسالة.",
+  "homeOverview": "لمحة",
+  "homeKpiPages": "الصفحات المربوطة",
+  "homeKpiProducts": "المنتجات",
+  "homeKpiLowStock": "{count} مخزون منخفض",
+  "@homeKpiLowStock": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeKpiRevenue": "رقم الأعمال (٣٠ يومًا)",
+  "homeKpiSales": "{count, plural, zero{لا مبيعات} one{بيعة واحدة} two{بيعتان} few{{count} مبيعات} many{{count} مبيعة} other{{count} مبيعة}}",
+  "@homeKpiSales": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeKpiStockValue": "قيمة المخزون",
+  "homeQuickActions": "إجراءات سريعة",
+  "homeActionConnectTitle": "اربط صفحة",
+  "homeActionConnectBody": "اربط صفحتك على فيسبوك",
+  "homeActionProductsTitle": "أضف منتجات",
+  "homeActionProductsBody": "كوّن كتالوجك",
+  "homeActionAgentsTitle": "وكلاء الذكاء الاصطناعي",
+  "homeActionAgentsBody": "أدِر مساعديك",
+  "homeYourPages": "صفحاتك",
+  "homeManageAll": "إدارة الكل ←",
+  "homePagesEmpty": "لا توجد صفحة مربوطة حتى الآن.",
+  "homePageActive": "نشطة",
+  "homePageInactive": "متوقفة",
+  "homePageConnectedOn": "مربوطة في {date}",
+  "@homePageConnectedOn": {
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "MMMMd"
+      }
+    }
+  },
+  "platformFacebook": "فيسبوك",
+  "platformInstagram": "إنستغرام",
+  "homeGetStarted": "ابدأ",
+  "homeStepConnectTitle": "اربط صفحة",
+  "homeStepConnectBody": "اربط فيسبوك لتبدأ المحادثات",
+  "homeStepProductsTitle": "أضف منتجات",
+  "homeStepProductsBody": "كوّن كتالوجك",
+  "homeStepAgentTitle": "اضبط وكيلك الذكي",
+  "homeStepAgentBody": "خصّص النبرة والسلوك",
+  "homeStepSaleTitle": "حقّق أول بيعة",
+  "homeStepSaleBody": "شاهد الذكاء الاصطناعي يتولّى الطلبات",
+  "navHome": "الرئيسية",
+  "navQueue": "القائمة",
+  "navInbox": "الرسائل",
+  "navStock": "المخزون",
+  "navOrders": "الطلبات",
+  "commonNotBuilt": "غير متاح بعد"
 }

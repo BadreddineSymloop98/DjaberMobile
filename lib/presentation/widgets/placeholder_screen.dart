@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../core/extensions/responsive_extension.dart';
-import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import '../theme/app_typography.dart';
 
@@ -50,33 +49,6 @@ class PlaceholderScreen extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-/// Wraps the five bottom-nav destinations until the custom nav bar is built.
-///
-/// The real bar is a custom widget, not Material's `NavigationBar` — brief §16
-/// names the stock nav as one of the four things that make the app read as
-/// Android.
-class PlaceholderShell extends StatelessWidget {
-  const PlaceholderShell({super.key, required this.child});
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: child,
-      bottomNavigationBar: Container(
-        height: 7.58.h, // 64
-        decoration: const BoxDecoration(
-          color: AppColors.ink,
-          border: Border(top: BorderSide(color: AppColors.rule)),
-        ),
-        alignment: Alignment.center,
-        child: Text('CUSTOM NAV — NOT BUILT', style: AppText.labelS),
       ),
     );
   }

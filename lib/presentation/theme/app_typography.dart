@@ -136,6 +136,22 @@ class AppText {
         color: AppColors.textPrimary,
       );
 
+  /// 21 — the figure on a KPI tile. The Figma file's own `Numeral/L`.
+  ///
+  /// Smaller than [numeralL], and the tile needs it to be: the frame's tile is
+  /// 88 tall and holds a label, the figure, and a footnote. At 28 the three
+  /// together overflow it. Where the file and the §15 ramp disagree the file
+  /// wins for the component it draws — one of the drifts §21.9 records.
+  static TextStyle get numeralKpi => TextStyle(
+        fontFamily: AppFonts.sans,
+        fontSize: 21.sp,
+        fontWeight: FontWeight.w600,
+        height: 1.3,
+        letterSpacing: -0.525,
+        fontFeatures: const [FontFeature.tabularFigures()],
+        color: AppColors.textPrimary,
+      );
+
   /// 17 — a quantity or an amount in a row.
   static TextStyle get numeralM => TextStyle(
         fontFamily: AppFonts.sans,
@@ -192,6 +208,20 @@ class AppText {
         fontSize: 9.sp,
         fontWeight: FontWeight.w500,
         letterSpacing: 9.sp * 0.14,
+        height: 1.3,
+        color: AppColors.textMuted,
+      );
+
+  /// 10.5 — the Figma `Label/Section` style: a section heading on home.
+  ///
+  /// Distinct from [label], which is 11 — the file's own value is 10.5, one of
+  /// the drifts §21.9 records. Pinned to the file here because home is built
+  /// entirely from these.
+  static TextStyle get labelSection => TextStyle(
+        fontFamily: AppFonts.mono,
+        fontSize: 10.5.sp,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 10.5.sp * 0.16,
         height: 1.3,
         color: AppColors.textMuted,
       );

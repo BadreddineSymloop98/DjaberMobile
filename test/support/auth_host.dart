@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
+import 'package:provider/single_child_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// A real [SessionViewModel] wired to dependencies that touch nothing.
@@ -81,6 +82,7 @@ Widget authHost(
   Locale locale = const Locale('fr'),
   PrefsStorage? prefs,
   StockModeViewModel? stockMode,
+  List<SingleChildWidget> extra = const [],
 }) {
   return MultiProvider(
     providers: [
@@ -88,6 +90,9 @@ Widget authHost(
       if (prefs != null) Provider<PrefsStorage>.value(value: prefs),
       if (stockMode != null)
         ChangeNotifierProvider<StockModeViewModel>.value(value: stockMode),
+      // Whatever the screen under test reads beyond the session — its
+      // repositories, usually as the fakes in `fake_repositories.dart`.
+      ...extra,
     ],
     // Mirrors `app.dart`: `MediaQuery.fromView` sits **above** `MaterialApp`
     // so `Screen` is live before the theme is built. The theme is constructed

@@ -375,11 +375,6 @@ class L10nEn extends L10n {
   String get authErrUnknown => 'Something went wrong. Please try again.';
 
   @override
-  String homeWelcome(String name) {
-    return 'Welcome back, $name';
-  }
-
-  @override
   String get menuSignOut => 'Sign out';
 
   @override
@@ -591,6 +586,13 @@ class L10nEn extends L10n {
       'It is already answering your page\'s messages, with your catalogue and your prices. Add more products whenever you like.';
 
   @override
+  String get tutorialReadyTitlePending => 'Almost there';
+
+  @override
+  String get tutorialReadySubtitlePending =>
+      'Your catalogue and your agent are ready. All that is left is connecting your page — your agent starts answering the moment it is.';
+
+  @override
   String get tutorialReadySubmit => 'Open the app';
 
   @override
@@ -599,4 +601,183 @@ class L10nEn extends L10n {
 
   @override
   String get tutorialReadyModeAdvanced => 'Advanced — the full suite';
+
+  @override
+  String get homeGreetingMorning => 'Good morning';
+
+  @override
+  String get homeGreetingAfternoon => 'Good afternoon';
+
+  @override
+  String get homeGreetingEvening => 'Good evening';
+
+  @override
+  String get homeSnapshot => 'here is a snapshot';
+
+  @override
+  String get homeQueue => 'To handle';
+
+  @override
+  String get homeQueueStuck => 'AI stuck';
+
+  @override
+  String get homeQueueEmpty =>
+      'Nothing waiting. The agent is handling every conversation.';
+
+  @override
+  String get homeQueueNoPage =>
+      'No page connected, so no conversation can reach you yet.';
+
+  @override
+  String homeQueueMore(int count) {
+    return '+ $count more';
+  }
+
+  @override
+  String homeAgeMinutes(int count) {
+    return '$count MIN';
+  }
+
+  @override
+  String homeAgeHours(int count) {
+    return '$count H';
+  }
+
+  @override
+  String homeAgeDays(int count) {
+    return '$count D';
+  }
+
+  @override
+  String get homeNoPageTitle => 'No page connected';
+
+  @override
+  String get homeNoPageBody =>
+      'Your agent has nowhere to answer yet. Connect your Facebook or Instagram page and it starts working on the first message.';
+
+  @override
+  String get homeOverview => 'Overview';
+
+  @override
+  String get homeKpiPages => 'Connected pages';
+
+  @override
+  String get homeKpiProducts => 'Products';
+
+  @override
+  String homeKpiLowStock(int count) {
+    return '$count low stock';
+  }
+
+  @override
+  String get homeKpiRevenue => 'Revenue (30d)';
+
+  @override
+  String homeKpiSales(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count sales',
+      one: '$count sale',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get homeKpiStockValue => 'Stock value';
+
+  @override
+  String get homeQuickActions => 'Quick actions';
+
+  @override
+  String get homeActionConnectTitle => 'Connect a page';
+
+  @override
+  String get homeActionConnectBody => 'Link your Facebook page';
+
+  @override
+  String get homeActionProductsTitle => 'Add products';
+
+  @override
+  String get homeActionProductsBody => 'Build your catalogue';
+
+  @override
+  String get homeActionAgentsTitle => 'AI agents';
+
+  @override
+  String get homeActionAgentsBody => 'Manage your assistants';
+
+  @override
+  String get homeYourPages => 'Your pages';
+
+  @override
+  String get homeManageAll => 'MANAGE ALL →';
+
+  @override
+  String get homePagesEmpty => 'No page connected yet.';
+
+  @override
+  String get homePageActive => 'ACTIVE';
+
+  @override
+  String get homePageInactive => 'PAUSED';
+
+  @override
+  String homePageConnectedOn(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.MMMMd(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return 'CONNECTED $dateString';
+  }
+
+  @override
+  String get platformFacebook => 'Facebook';
+
+  @override
+  String get platformInstagram => 'Instagram';
+
+  @override
+  String get homeGetStarted => 'Get started';
+
+  @override
+  String get homeStepConnectTitle => 'Connect a page';
+
+  @override
+  String get homeStepConnectBody => 'Link Facebook to start chatting';
+
+  @override
+  String get homeStepProductsTitle => 'Add products';
+
+  @override
+  String get homeStepProductsBody => 'Build up your catalogue';
+
+  @override
+  String get homeStepAgentTitle => 'Configure your AI agent';
+
+  @override
+  String get homeStepAgentBody => 'Set the tone and the behaviour';
+
+  @override
+  String get homeStepSaleTitle => 'Make your first sale';
+
+  @override
+  String get homeStepSaleBody => 'Watch the AI handle the requests';
+
+  @override
+  String get navHome => 'HOME';
+
+  @override
+  String get navQueue => 'QUEUE';
+
+  @override
+  String get navInbox => 'INBOX';
+
+  @override
+  String get navStock => 'STOCK';
+
+  @override
+  String get navOrders => 'ORD';
+
+  @override
+  String get commonNotBuilt => 'not built yet';
 }
