@@ -12,9 +12,11 @@ import '../../../l10n/gen/app_localizations.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/app_spacing.dart';
 import '../../theme/app_typography.dart';
+import '../../viewmodels/session_view_model.dart';
 import '../../viewmodels/tutorial_connect_view_model.dart';
 import '../../viewmodels/tutorial_view_model.dart';
 import '../../widgets/app_icon.dart';
+import '../../widgets/app_toast.dart';
 import 'oauth_web_view_screen.dart';
 import 'tutorial_messages.dart';
 import 'tutorial_step_scaffold.dart';
@@ -56,7 +58,7 @@ class _TutorialConnectScreenState extends State<TutorialConnectScreen> {
     final authUrl = await _model.startConnect(platform);
     if (authUrl == null || !mounted) return;
 
-    final outcome = await Navigator.of(context).push<OAuthOutcome>(
+    final result = await Navigator.of(context).push<OAuthResult>(
       MaterialPageRoute(
         builder: (_) => OAuthWebViewScreen(
           authUrl: authUrl,
@@ -67,18 +69,43 @@ class _TutorialConnectScreenState extends State<TutorialConnectScreen> {
     );
     if (!mounted) return;
 
-    // Backing out is not a failure — the merchant changed their mind, and the
-    // screen says nothing rather than accusing them of an error.
-    if (outcome != OAuthOutcome.granted) {
-      _model.connectAbandoned(denied: outcome == OAuthOutcome.denied);
-      return;
+    switch (result?.outcome ?? OAuthOutcome.dismissed) {
+      // Backing out is not a failure — the merchant changed their mind, and
+      // the screen says nothing rather than accusing them of an error.
+      case OAuthOutcome.dismissed:
+        _model.connectAbandoned(denied: false);
+        return;
+      case OAuthOutcome.denied:
+        _model.connectAbandoned(denied: true);
+        return;
+      // Meta granted, and our backend then said it could not save the page.
+      case OAuthOutcome.failed:
+        _model.connectFailed(result?.report?.reason);
+        return;
+      case OAuthOutcome.granted:
+        break;
     }
 
     final agentId = context.read<TutorialViewModel>().agent?.id;
-    final page = await _model.finishConnect(agentId: agentId);
+    final page = await _model.finishConnect(
+      platform: platform,
+      report: result?.report,
+      agentId: agentId,
+    );
     if (page == null || !mounted) return;
 
     context.read<TutorialViewModel>().pageConnected(page);
+    final l10n = L10n.of(context);
+    // The page is connected either way, so the step moves on — but a page the
+    // agent is not linked to is one it does not answer on, so say so.
+    if (_model.linkFailed) {
+      AppToast.info(context, l10n.connectLinkFailed);
+    } else {
+      AppToast.success(context, l10n.toastPageConnected);
+    }
+    await context.read<SessionViewModel>()
+        .rememberTutorialStep(Routes.tutorialReady);
+    if (!mounted) return;
     GoRouter.of(context).go(Routes.tutorialReady);
   }
 
@@ -99,12 +126,14 @@ class _TutorialConnectScreenState extends State<TutorialConnectScreen> {
   /// being congratulated for something that did not happen.
   Future<void> _later() async {
     final prefs = context.read<PrefsStorage>();
+    final session = context.read<SessionViewModel>();
     final router = GoRouter.of(context);
 
     // Recorded so home's Démarrer checklist can show the step as still
     // outstanding rather than the tutorial simply vanishing (brief §21.10).
     // The tutorial itself is closed by `T6`, not here.
     await prefs.setPageConnectionDeferred(true);
+    await session.rememberTutorialStep(Routes.tutorialReady);
     router.go(Routes.tutorialReady);
   }
 
@@ -124,6 +153,26 @@ class _TutorialConnectScreenState extends State<TutorialConnectScreen> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 TutorialErrorLine(error: model.submitError),
+                if (model.failed)
+                  Padding(
+                    padding: EdgeInsets.only(bottom: AppSpacing.sm),
+                    child: Text(
+                      l10n.connectFailed,
+                      style: AppText.actionS
+                          .copyWith(color: AppColors.accentAlert),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                if (model.nothingNew)
+                  Padding(
+                    padding: EdgeInsets.only(bottom: AppSpacing.sm),
+                    child: Text(
+                      l10n.connectNothingNew,
+                      style: AppText.actionS
+                          .copyWith(color: AppColors.textSecondary),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                 if (model.wasDenied)
                   Padding(
                     padding: EdgeInsets.only(bottom: AppSpacing.sm),

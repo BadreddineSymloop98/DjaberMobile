@@ -61,5 +61,9 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Take photos of your products.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Add photos of your products from your gallery.</string>
 </dict>
 </plist>

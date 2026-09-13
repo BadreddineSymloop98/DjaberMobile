@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/extensions/responsive_extension.dart';
@@ -7,6 +8,7 @@ import '../../../l10n/gen/app_localizations.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/app_spacing.dart';
 import '../../theme/app_typography.dart';
+import '../../viewmodels/session_view_model.dart';
 import '../../widgets/checklist_row.dart';
 
 /// `T1a — Bienvenue`, `T1b — Votre stock`, `T1c — Votre agent`.
@@ -56,14 +58,22 @@ class _TutorialIntroScreenState extends State<TutorialIntroScreen> {
   /// to the first step. `T2`, `T3` and `T4` remain mandatory — they are what
   /// actually sets the shop up — and `tutorialPending` deliberately stays
   /// armed.
-  void _skipIntro() => context.go(Routes.tutorialMode);
+  void _skipIntro() => _enterFirstStep();
+
+  /// `Passer` and `Commencer` both land on the same step, and both count as
+  /// having left the introduction behind.
+  void _enterFirstStep() {
+    final router = GoRouter.of(context);
+    context.read<SessionViewModel>().rememberTutorialStep(Routes.tutorialMode);
+    router.go(Routes.tutorialMode);
+  }
 
   void _next(int pageCount) {
     if (_page >= pageCount - 1) {
       // The last page hands over to the first real step. The flag stays
       // pending: the merchant has not finished the tutorial, only finished
       // being told what it is.
-      context.go(Routes.tutorialMode);
+      _enterFirstStep();
       return;
     }
     _controller.nextPage(

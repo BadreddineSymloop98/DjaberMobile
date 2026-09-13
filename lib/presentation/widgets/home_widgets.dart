@@ -5,6 +5,7 @@ import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import '../theme/app_typography.dart';
 import 'app_icon.dart';
+import 'icon_square_button.dart';
 
 /// The pieces `09 — Accueil` is assembled from, each one a component in the
 /// Figma file rather than a shape invented here.
@@ -290,6 +291,7 @@ class AppListRow extends StatelessWidget {
     required this.meta,
     this.value,
     this.unit,
+    this.unitColor,
     this.onTap,
   });
 
@@ -297,6 +299,12 @@ class AppListRow extends StatelessWidget {
   final String meta;
   final String? value;
   final String? unit;
+
+  /// Tints the label under the value. Used by `17 — Produits` to put
+  /// `accent/alert` on `RUPTURE`: a product with no stock cannot be sold, and
+  /// that is a state worth colour rather than decoration (brief §21.3).
+  final Color? unitColor;
+
   final VoidCallback? onTap;
 
   @override
@@ -331,7 +339,12 @@ class AppListRow extends StatelessWidget {
                     Text(value!, style: AppText.numeralS),
                   if (unit != null) ...[
                     SizedBox(height: AppSpacing.xxs),
-                    Text(unit!.toUpperCase(), style: AppText.labelMicro),
+                    Text(
+                      unit!.toUpperCase(),
+                      style: unitColor == null
+                          ? AppText.labelMicro
+                          : AppText.labelMicro.copyWith(color: unitColor),
+                    ),
                   ],
                 ],
               ),
@@ -395,37 +408,21 @@ class CreditsPill extends StatelessWidget {
 }
 
 /// `Menu Button` (node `31:11`) — *"Opens tier-3 navigation (brief §16)."*
+///
+/// The box itself is [IconSquareButton], which the back button on the product
+/// screens shares. Not flipped for Arabic: a hamburger has no direction.
 class MenuButton extends StatelessWidget {
-  const MenuButton({super.key, required this.onTap});
+  const MenuButton({super.key, required this.onTap, this.semanticLabel});
 
   final VoidCallback onTap;
+  final String? semanticLabel;
 
   @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      behavior: HitTestBehavior.opaque,
-      child: Container(
-        padding: EdgeInsets.all(AppSpacing.sm), // 8
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          // `line/edge` (12%) — the one place the design uses it, and the one
-          // token with no code equivalent (brief §21.9). Inlined here rather
-          // than invented as a palette entry.
-          border: Border.all(
-            color: const Color(0x1FFFFFFF),
-            width: AppStroke.hairline,
-          ),
-          borderRadius: BorderRadius.circular(AppRadius.card),
-        ),
-        child: AppIcon(
-          AppIcons.menu,
-          size: 6.15.w, // 24
-          color: AppColors.textPrimary,
-        ),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => IconSquareButton(
+        icon: AppIcons.menu,
+        onTap: onTap,
+        semanticLabel: semanticLabel,
+      );
 }
 
 /// A hairline between rows inside a boxed list.

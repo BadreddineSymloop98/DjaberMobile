@@ -36,11 +36,47 @@ class TutorialAgentViewModel extends FormViewModel {
     safeNotify();
   }
 
+  /// What has been chosen and typed but not sent, for
+  /// `TutorialViewModel.saveDraft` to hold while this step's screen is gone.
+  Map<String, String> get draft => {
+        'name': name.value,
+        'instructions': instructions.value,
+        'personality': _personality.wireName,
+      };
+
+  /// Puts back a [draft]. Anything it does not carry is left as it is.
+  void restore(Map<String, String> draft) {
+    final savedName = draft['name'];
+    if (savedName != null) name.controller.text = savedName;
+    final savedInstructions = draft['instructions'];
+    if (savedInstructions != null) {
+      instructions.controller.text = savedInstructions;
+    }
+    final savedPersonality = draft['personality'];
+    if (savedPersonality != null) {
+      _personality = AgentPersonality.fromName(savedPersonality);
+    }
+  }
+
   Agent? _created;
   Agent? get created => _created;
 
   AppException? _submitError;
   AppException? get submitError => _submitError;
+
+  /// True when the server refused because the account already has an agent.
+  ///
+  /// **This is the wall.** One agent per user is enforced, and `T4` only
+  /// advanced on a successful create — so a merchant who force-quit after this
+  /// step came back to a 403 they could never pass, with no `Passer` on the
+  /// steps, no sign-out inside the tutorial, and `T5`'s *Connecter plus tard*
+  /// unreachable behind it. Clearing app data or signing up again were the
+  /// only exits.
+  ///
+  /// `PLAN_LIMIT_REACHED` does not mean "you failed", it means "you already
+  /// have one" — which is the step's goal. So it advances.
+  bool _alreadyExists = false;
+  bool get alreadyExists => _alreadyExists;
 
   /// Validates, then creates. Returns the agent on success, null otherwise.
   ///
@@ -49,6 +85,7 @@ class TutorialAgentViewModel extends FormViewModel {
   /// surfaces as the server's own message rather than a generic error.
   Future<Agent?> submitAndCreate() async {
     _submitError = null;
+    _alreadyExists = false;
     if (!submit()) return null;
 
     final agent = await run(
@@ -57,7 +94,14 @@ class TutorialAgentViewModel extends FormViewModel {
         personality: _personality,
         customInstructions: instructions.value,
       ),
-      onError: (error) => _submitError = error,
+      onError: (error) {
+        if (error.code == 'PLAN_LIMIT_REACHED' ||
+            error.code == 'AGENT_LIMIT_REACHED') {
+          _alreadyExists = true;
+          return;
+        }
+        _submitError = error;
+      },
       tag: 'createAgent',
     );
 

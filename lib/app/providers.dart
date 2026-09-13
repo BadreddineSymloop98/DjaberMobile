@@ -10,9 +10,12 @@ import '../core/storage/prefs_storage.dart';
 import '../core/storage/secure_storage.dart';
 import '../data/repositories/agent_repository.dart';
 import '../data/repositories/auth_repository.dart';
+import '../data/repositories/catalogue_repository.dart';
 import '../data/repositories/dashboard_repository.dart';
+import '../data/repositories/notification_repository.dart';
 import '../data/repositories/page_repository.dart';
 import '../data/repositories/product_repository.dart';
+import '../presentation/viewmodels/form_draft_store.dart';
 import '../presentation/viewmodels/locale_view_model.dart';
 import '../presentation/viewmodels/session_view_model.dart';
 import '../presentation/viewmodels/stock_mode_view_model.dart';
@@ -64,6 +67,12 @@ class AppProviders {
       Provider<ProductRepository>(
         create: (context) => ProductRepository(api: context.read<ApiClient>()),
       ),
+      // Categories and units — the two lookup lists the product form fills
+      // its pickers from.
+      Provider<CatalogueRepository>(
+        create: (context) =>
+            CatalogueRepository(api: context.read<ApiClient>()),
+      ),
       Provider<AgentRepository>(
         create: (context) => AgentRepository(api: context.read<ApiClient>()),
       ),
@@ -73,6 +82,10 @@ class AppProviders {
       Provider<DashboardRepository>(
         create: (context) =>
             DashboardRepository(api: context.read<ApiClient>()),
+      ),
+      Provider<NotificationRepository>(
+        create: (context) =>
+            NotificationRepository(api: context.read<ApiClient>()),
       ),
       Provider<AuthRepository>(
         create: (context) => AuthRepository(
@@ -104,6 +117,13 @@ class AppProviders {
       // steps are separate routes; it is reset when the tutorial ends.
       ChangeNotifierProvider<TutorialViewModel>(
         create: (_) => TutorialViewModel(),
+      ),
+
+      // Unsent form values that must survive the splash replaying on return —
+      // see [FormDraftStore]. A plain `Provider`: nothing redraws on a draft.
+      Provider<FormDraftStore>(
+        create: (_) => FormDraftStore(session: session),
+        dispose: (_, store) => store.dispose(),
       ),
     ];
   }

@@ -10,9 +10,11 @@ import '../../../l10n/gen/app_localizations.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/app_spacing.dart';
 import '../../theme/app_typography.dart';
+import '../../viewmodels/session_view_model.dart';
 import '../../viewmodels/tutorial_agent_view_model.dart';
 import '../../viewmodels/tutorial_view_model.dart';
 import '../../widgets/app_text_field.dart';
+import '../../widgets/app_toast.dart';
 import '../../widgets/option_card.dart';
 import 'tutorial_messages.dart';
 import 'tutorial_step_scaffold.dart';
@@ -40,18 +42,50 @@ class _TutorialAgentScreenState extends State<TutorialAgentScreen> {
     agents: context.read<AgentRepository>(),
   );
 
+  /// Looked up once in [initState]: [dispose] runs too late to read the tree.
+  late final TutorialViewModel _tutorial;
+
+  @override
+  void initState() {
+    super.initState();
+    // Leaving the app replays the splash, which replaces this screen — so put
+    // back the name, instructions and personality from before it was torn
+    // down.
+    _tutorial = context.read<TutorialViewModel>();
+    _model.restore(_tutorial.draftFor(Routes.tutorialAgent));
+  }
+
   @override
   void dispose() {
+    // A step that went through has spent its values; any other close keeps
+    // them for when the step opens again.
+    if (_model.created != null || _model.alreadyExists) {
+      _tutorial.clearDraft(Routes.tutorialAgent);
+    } else {
+      _tutorial.saveDraft(Routes.tutorialAgent, _model.draft);
+    }
     _model.dispose();
     super.dispose();
   }
 
   Future<void> _create() async {
     final agent = await _model.submitAndCreate();
-    if (agent == null || !mounted) return;
+    // The wall this whole change exists to remove: one agent per user is
+    // enforced, so a merchant who force-quit after this step came back to a
+    // 403 they could never get past. `alreadyExists` treats that 403 as what
+    // it actually means — the step is done.
+    if ((agent == null && !_model.alreadyExists) || !mounted) return;
     // Recorded before navigating: step 4 needs the agent's id to attach the
     // page it connects.
-    context.read<TutorialViewModel>().agentCreated(agent);
+    if (agent != null) {
+      context.read<TutorialViewModel>().agentCreated(agent);
+      AppToast.success(context, L10n.of(context).toastAgentCreated);
+    } else {
+      AppToast.info(context, L10n.of(context).tutorialStepAlreadyDone);
+    }
+    await context.read<SessionViewModel>()
+        .rememberTutorialStep(Routes.tutorialConnect);
+    if (!mounted) return;
     GoRouter.of(context).go(Routes.tutorialConnect);
   }
 
@@ -120,6 +154,18 @@ class _TutorialAgentScreenState extends State<TutorialAgentScreen> {
                   placeholder: l10n.agentNamePlaceholder,
                   textCapitalization: TextCapitalization.sentences,
                   textInputAction: TextInputAction.next,
+                  // Named explicitly. Here four Option Cards sit between the
+                  // two inputs: traversal walked into them and the keyboard's
+                  // **next** key moved focus to nothing at all, so the key
+                  // advertised an action it did not perform.
+                  //
+                  // This used to record `T3` as the counter-example, where the
+                  // fields are adjacent and the default `nextFocus()` was
+                  // thought to land on the right one. It did in the widget
+                  // test and did not on a handset, so `T3` names its hops too
+                  // now — as do both auth screens and `18`. No form in the app
+                  // leaves this to traversal any more.
+                  onSubmitted: (_) => model.instructions.focusNode.requestFocus(),
                   inputFormatters: [LengthLimitingTextInputFormatter(255)],
                 ),
                 SizedBox(height: AppSpacing.xl), // 20

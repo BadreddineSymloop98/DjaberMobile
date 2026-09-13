@@ -168,6 +168,83 @@ class AppIcons {
         '2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h'
         '.01M9 16h.01',
   ];
+
+  // ---- Added for `09a — Menu`, the tier-3 drawer ----
+
+  /// `MessageIcon` — Réseaux sociaux. Distinct from [chat]: this is the
+  /// squared speech bubble the web uses for a channel, not a conversation.
+  static const message = <String>[
+    'M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 '
+        '012 2v8a2 2 0 01-2 2h-5l-5 5v-5z',
+  ];
+
+  /// `GridIcon` — the Services group.
+  static const grid = <String>[
+    'M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 '
+        '0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 '
+        '012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 '
+        '012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z',
+  ];
+
+  /// `ChartIcon` — Analyses. Stays muted: analytics live on the web.
+  static const chart = <String>[
+    'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 '
+        '2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 '
+        '012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
+  ];
+
+  /// `FileTextIcon` — Rapports. Also muted, for the same reason.
+  static const fileText = <String>[
+    'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 '
+        '01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+  ];
+
+  /// `SettingsIcon` — Paramètres. Two paths: the cog and its centre.
+  static const settings = <String>[
+    'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 '
+        '1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 '
+        '2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 '
+        '2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 '
+        '1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 '
+        '00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 '
+        '00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 '
+        '001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 '
+        '2.572-1.065z',
+    'M15 12a3 3 0 11-6 0 3 3 0 016 0z',
+  ];
+
+  /// `ChevronDownIcon` — an expanded menu group. Never mirrored under RTL:
+  /// down is down in every reading direction.
+  static const chevronDown = <String>[
+    'M19 9l-7 7-7-7',
+  ];
+
+  /// `BotIcon` — the AI agents subrow. Heroicons v2 in the source, unlike the
+  /// rest of the set, which is why it carries far more path than its
+  /// neighbours.
+  static const bot = <String>[
+    'M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 '
+        '3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 '
+        '0v5.714a2.25 2.25 0 00.659 1.591L19 14.5M14.25 3.104c.251.023.501.05.75'
+        '.082M19 14.5a2.25 2.25 0 00.75-1.661V8.706c0-.248-.034-.495-.1-.736M19 '
+        '14.5l-1.5 1.5M5 14.5a2.25 2.25 0 01-.75-1.661V8.706c0-.248.034-.495.1-'
+        '.736M5 14.5l1.5 1.5m0 0l.75.75M6.5 16l-.75.75M17.5 16l.75.75M17.5 '
+        '16l-.75.75M12 21a2.25 2.25 0 002.25-2.25V17.5m-4.5 0v1.25A2.25 2.25 0 '
+        '0012 21m0 0a2.25 2.25 0 002.25-2.25M12 21a2.25 2.25 0 01-2.25-2.25',
+  ];
+
+  /// `MegaphoneIcon` — the Commercial subrow, which is `BIENTÔT`.
+  static const megaphone = <String>[
+    'M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 110-9h.75c.704 0 '
+        '1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21'
+        '-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 '
+        '01-1.44-4.282m3.102.069a18.03 18.03 0 01-.59-4.59c0-1.586.205-3.124.59'
+        '-4.59m0 9.18a23.848 23.848 0 018.835 2.535M10.34 6.66a23.847 23.847 0 '
+        '008.835-2.535m0 0A23.74 23.74 0 0018.795 3m.38 1.125a23.91 23.91 0 '
+        '011.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 '
+        '23.91 0 001.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 '
+        '1.317-.811 1.73m0-3.46a24.347 24.347 0 010 3.46',
+  ];
 }
 
 /// Draws one of [AppIcons] at [size], in [color].

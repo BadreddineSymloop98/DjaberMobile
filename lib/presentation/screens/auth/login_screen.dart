@@ -4,14 +4,14 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../app/routes.dart';
-import '../../../core/extensions/responsive_extension.dart';
 import '../../../core/utils/validators.dart';
 import '../../../l10n/gen/app_localizations.dart';
-import '../../theme/app_colors.dart';
 import '../../theme/app_spacing.dart';
 import '../../theme/app_typography.dart';
+import '../../viewmodels/form_draft_store.dart';
 import '../../viewmodels/login_view_model.dart';
 import '../../viewmodels/session_view_model.dart';
+import '../../widgets/app_checkbox.dart';
 import '../../widgets/app_text_field.dart';
 import 'auth_error_message.dart';
 import 'auth_scaffold.dart';
@@ -25,7 +25,9 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
-        create: (_) => LoginViewModel(),
+        // Looked up optionally, so the screen still builds without the store.
+        create: (context) =>
+            LoginViewModel(drafts: context.read<FormDraftStore?>()),
         child: const _LoginView(),
       );
 }
@@ -122,10 +124,10 @@ class _LoginView extends StatelessWidget {
           onSubmitted: (_) => submit(),
         ),
         SizedBox(height: AppSpacing.lg),
-        _RememberMe(
+        AppCheckbox(
           label: l10n.authRemember,
           value: model.rememberMe,
-          onTap: model.toggleRememberMe,
+          onChanged: (_) => model.toggleRememberMe(),
         ),
         SizedBox(height: AppSpacing.lg),
         AuthErrorMessage(error: session.error),
@@ -147,50 +149,3 @@ class _LoginView extends StatelessWidget {
   }
 }
 
-/// The Checkbox component (`37:16`). Radius drops to 1px — at 16px a card
-/// radius reads as a rounded blob, which is why the design specifies it.
-class _RememberMe extends StatelessWidget {
-  const _RememberMe({
-    required this.label,
-    required this.value,
-    required this.onTap,
-  });
-
-  final String label;
-  final bool value;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      behavior: HitTestBehavior.opaque,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: 4.1.w, // 16
-            height: 4.1.w,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: value ? AppColors.textPrimary : Colors.transparent,
-              borderRadius: BorderRadius.circular(1),
-              border: Border.all(
-                color: AppColors.ruleStrong,
-                width: AppStroke.hairline,
-              ),
-            ),
-            child: value
-                ? Text(
-                    '✓',
-                    style: AppText.labelMeta.copyWith(color: AppColors.ink),
-                  )
-                : null,
-          ),
-          SizedBox(width: AppSpacing.sm),
-          Text(label, style: AppText.actionS.copyWith(fontSize: 12.sp)),
-        ],
-      ),
-    );
-  }
-}

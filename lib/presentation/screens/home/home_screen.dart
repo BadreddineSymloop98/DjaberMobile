@@ -21,6 +21,7 @@ import '../../widgets/app_icon.dart';
 import '../../widgets/checklist_row.dart';
 import '../../widgets/djaber_logo.dart';
 import '../../widgets/home_widgets.dart';
+import 'menu_drawer.dart';
 
 /// `09 — Accueil`.
 ///
@@ -87,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   physics: const AlwaysScrollableScrollPhysics(),
                   padding: EdgeInsets.only(bottom: AppSpacing.xxxl),
                   children: [
-                    _Header(user: user, onMenu: () => _openMenu(context)),
+                    _Header(user: user, onMenu: () => openMenuDrawer(context, connectedPages: model.pages.length)),
                     _Greeting(
                       name: user?.greetingName ?? '',
                       locale: locale,
@@ -148,55 +149,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget get _gap => SizedBox(height: AppSpacing.xxl); // 24
 
-  /// Tier-3 navigation — `09a — Menu` in the file, a full drawer of eight rows
-  /// and the plan box.
-  ///
-  /// **Not built yet**, and this stands in for it with the one row that cannot
-  /// wait: signing out was on the home stub this screen replaced, and it is
-  /// the only way out of a session. Losing it to a screen that does not exist
-  /// yet would be a regression, so it lives here until the drawer lands.
-  void _openMenu(BuildContext context) {
-    final l10n = L10n.of(context);
-    final session = context.read<SessionViewModel>();
-
-    showModalBottomSheet<void>(
-      context: context,
-      backgroundColor: AppColors.surface,
-      barrierColor: AppColors.scrim,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(AppRadius.sheet),
-        ),
-      ),
-      builder: (sheetContext) => SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: AppSpacing.sm),
-          child: ListTile(
-            leading: AppIcon(
-              AppIcons.logout,
-              size: 5.13.w, // 20
-              color: AppColors.textSecondary,
-            ),
-            title: Text(l10n.menuSignOut, style: AppText.title),
-            onTap: () async {
-              // Read before the await, and before the sheet goes: the widget
-              // this ran from is about to be replaced.
-              final router = GoRouter.of(context);
-              // The sheet first: the router's redirect replaces the screen
-              // under it the moment the session ends.
-              Navigator.of(sheetContext).pop();
-              await session.signOut();
-              // Explicitly, rather than leaving it to the redirect: a merchant
-              // who has signed in before has seen onboarding once, and the
-              // redirect would send them back through it. Login is a public
-              // path, so the redirect leaves this alone.
-              router.go(Routes.login);
-            },
-          ),
-        ),
-      ),
-    );
-  }
 
   /// Destinations that do not exist yet. Says so rather than doing nothing,
   /// which reads as a broken tap.
@@ -653,7 +605,7 @@ class _QuickActions extends StatelessWidget {
             subtitle: l10n.homeActionProductsBody,
             // TODO(stock): the product form outside the tutorial. Not the
             // Stock tab either — that is a list, and this card is a create.
-            onTap: () => onUnbuilt(l10n.homeActionProductsTitle),
+            onTap: () => context.go(Routes.products),
           ),
           SizedBox(height: AppSpacing.sm),
           ActionCard(

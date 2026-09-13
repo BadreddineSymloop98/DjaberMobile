@@ -191,7 +191,7 @@ void main() {
   });
 
   group('the OAuth web view rules', () {
-    const reader = OAuthFlowReader(backendBaseUrl: 'https://api.example.com');
+    const reader = OAuthFlowReader();
 
     test('Meta dialog navigation is left alone', () {
       expect(
@@ -204,21 +204,65 @@ void main() {
       );
     });
 
-    test('our own callback means the grant went through', () {
+    test('our own callback is recognised, so it can be let through', () {
       expect(
         reader.read('https://api.example.com/api/pages/callback/facebook?code=x'),
-        OAuthStep.finished,
+        OAuthStep.callback,
       );
       expect(
         reader.read('https://api.example.com/api/pages/callback/instagram?code=x'),
-        OAuthStep.finished,
+        OAuthStep.callback,
       );
     });
 
-    test('the web-app dashboard redirect is the backstop', () {
-      // With no `window.opener` the backend's closing page redirects to
-      // FRONTEND_URL/dashboard?section=pages — a desktop page the phone must
-      // never actually show.
+    test('a callback carrying a code is never the end of the flow', () {
+      // The regression. The callback request is what carries the code to the
+      // backend, which saves the Page while answering it. Reading it as
+      // `finished` made the web view prevent it and close: the code never left
+      // the phone, and nothing was ever connected.
+      for (final platform in const ['facebook', 'instagram']) {
+        expect(
+          reader.read('https://api.example.com/api/pages/callback/$platform'
+              '?code=AQB123&state=8f2c1a2b'),
+          isNot(OAuthStep.finished),
+          reason: 'the $platform callback must be allowed to load',
+        );
+      }
+    });
+
+    test('the callback is recognised whatever host it arrives on', () {
+      // `redirect_uri` is built server-side from `BACKEND_URL`, which the app
+      // cannot read. Matching on the app's own `API_BASE_URL` meant a callback
+      // on any other host went unseen.
+      for (final host in const [
+        'https://api.example.com',
+        'https://djaber.72-60-190-211.sslip.io',
+        'https://djaberio.symloop.com',
+        'http://localhost:6001',
+      ]) {
+        expect(
+          reader.read('$host/api/pages/callback/facebook?code=x'),
+          OAuthStep.callback,
+          reason: 'the callback must be seen when it comes back via $host',
+        );
+      }
+    });
+
+    test('a path that merely resembles the callback is not one', () {
+      expect(
+        reader.read('https://api.example.com/api/pages/callback/facebook/extra'),
+        OAuthStep.keepGoing,
+      );
+      expect(
+        reader.read('https://www.facebook.com/api/pages/connect/facebook'),
+        OAuthStep.keepGoing,
+      );
+    });
+
+    test('the web-app dashboard redirect ends the flow', () {
+      // With no `window.opener` the backend's callback page redirects to
+      // FRONTEND_URL/dashboard?section=pages once it has done the work — a
+      // desktop page the phone must never actually show.
       expect(
         reader.read('https://djaber.vercel.app/dashboard?section=pages'),
         OAuthStep.finished,
@@ -233,6 +277,58 @@ void main() {
       );
       expect(OAuthFlowReader.isDenial('https://x.test/cb?error_code=200'), isTrue);
       expect(OAuthFlowReader.isDenial('https://x.test/cb?code=ok'), isFalse);
+    });
+  });
+
+  group('reading the callback page', () {
+    // Built like the examples for `GET /api/pages/callback/*` in the live
+    // docs: the result sits in the script, the status is 200 either way.
+    String page(String payload) =>
+        '<html><body><script>(function(){var payload=$payload;'
+        'if(window.opener){try{window.opener.postMessage(payload,'
+        '"https://djaber.ai")}catch(e){}window.close()}else{'
+        'window.location.replace("https://djaber.ai/dashboard?section=pages")'
+        '}})();</script><p>Returning to Djaber…</p></body></html>';
+
+    test('a Facebook success carries the page count', () {
+      final report = OAuthFlowReader.parseCallbackPage(
+        page('{"type":"facebook-oauth-success","pages":2}'),
+      );
+      expect(report?.succeeded, isTrue);
+      expect(report?.pageCount, 2);
+    });
+
+    test('an Instagram success carries the username', () {
+      final report = OAuthFlowReader.parseCallbackPage(
+        page('{"type":"instagram-oauth-success","username":"boutique.sara"}'),
+      );
+      expect(report?.succeeded, isTrue);
+      expect(report?.username, 'boutique.sara');
+    });
+
+    test('an error is a failure, whatever the status said', () {
+      final report = OAuthFlowReader.parseCallbackPage(
+        page('{"type":"instagram-oauth-error",'
+            '"error":"Add this account as an Instagram Tester"}'),
+      );
+      expect(report?.succeeded, isFalse);
+      expect(report?.reason, 'Add this account as an Instagram Tester');
+    });
+
+    test('a page that is not the callback page reports nothing', () {
+      expect(
+        OAuthFlowReader.parseCallbackPage(
+          '<html><body><h1>Dashboard</h1></body></html>',
+        ),
+        isNull,
+      );
+    });
+
+    test("Android's quoted answer and iOS's bare one read the same", () {
+      final html = page('{"type":"facebook-oauth-success","pages":1}');
+      expect(OAuthFlowReader.unwrapJsString(jsonEncode(html)), html);
+      expect(OAuthFlowReader.unwrapJsString(html), html);
+      expect(OAuthFlowReader.unwrapJsString(null), isEmpty);
     });
   });
 }

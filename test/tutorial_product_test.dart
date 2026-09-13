@@ -159,10 +159,19 @@ void main() {
       expect(body.containsKey('description'), isFalse);
     });
 
-    test('a duplicate SKU comes back as a 400 carrying the reason', () async {
-      // Not a 409 — `@@unique([userId, sku])` surfaces as Prisma P2002 and the
-      // controller answers 400 { error: 'SKU already exists' }.
-      stub(400, {'error': 'SKU already exists'});
+    test('a duplicate SKU is a 409 with a translated message and a code',
+        () async {
+      // The real response, captured on 2026-09-10. This test used to assert a
+      // 400 carrying `{ error: 'SKU already exists' }` — the pre-contract
+      // shape, in English, read out of the `error` key. All three of those
+      // changed: it is a 409 now, the message is French, and `error` is a
+      // legacy HTTP label the app ignores.
+      stub(409, {
+        'error': 'Conflict',
+        'code': 'PRODUCT_SKU_ALREADY_EXISTS',
+        'message': 'Un produit avec la référence « PRD-001 » existe déjà.',
+        'params': {'sku': 'PRD-001'},
+      });
 
       final result = await repo.create(
         sku: 'PRD-001',
@@ -174,9 +183,15 @@ void main() {
 
       expect(result.isFailure, isTrue);
       final error = result.errorOrNull!;
-      expect(error, isA<ValidationException>());
-      // The server's own sentence survives, so the screen can show it.
-      expect(error.message, 'SKU already exists');
+      // A duplicate is a conflict, not a malformed payload: nothing about the
+      // input is wrong, the value is taken.
+      expect(error, isA<ConflictException>());
+      expect(error.isValidation, isFalse);
+      expect(error.code, 'PRODUCT_SKU_ALREADY_EXISTS');
+      // Shown as it is — already the merchant's language.
+      expect(error.message, 'Un produit avec la référence « PRD-001 » existe déjà.');
+      // And the value on its own, for copy that needs it outside the sentence.
+      expect(error.params['sku'], 'PRD-001');
     });
 
     test('a bare product object parses too', () async {

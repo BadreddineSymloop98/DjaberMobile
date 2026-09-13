@@ -1,4 +1,5 @@
 import '../../core/utils/validators.dart';
+import 'form_draft_store.dart';
 import 'form_field_model.dart';
 
 /// The sign-up form.
@@ -9,8 +10,14 @@ import 'form_field_model.dart';
 ///
 /// UI only for now — [submit] validates and stops.
 class SignupViewModel extends FormViewModel {
-  SignupViewModel() {
+  SignupViewModel({FormDraftStore? drafts}) {
     attachFields();
+    // Names and address survive the splash; the password never does.
+    keepDraft(drafts, 'signup', {
+      'firstName': firstName,
+      'lastName': lastName,
+      'email': email,
+    });
   }
 
   final firstName = FormFieldModel(validator: Validators.name);

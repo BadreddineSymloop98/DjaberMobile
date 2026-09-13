@@ -118,13 +118,19 @@ class L10nFr extends L10n {
   String get errorUnauthorized => 'Votre session a expiré. Reconnectez-vous.';
 
   @override
-  String get errorNotFound => 'Introuvable.';
-
-  @override
   String get errorServer => 'Une erreur est survenue de notre côté.';
 
   @override
-  String get errorUnknown => 'Une erreur est survenue.';
+  String get toastProductCreated => 'Produit créé';
+
+  @override
+  String get toastAgentCreated => 'Agent IA créé';
+
+  @override
+  String get toastPageConnected => 'Page connectée';
+
+  @override
+  String get errorGeneric => 'Une erreur s’est produite. Veuillez réessayer.';
 
   @override
   String get langEnglish => 'English';
@@ -220,7 +226,7 @@ class L10nFr extends L10n {
   String get obEsc2Name => '#1042 — Bab Ezzouar';
 
   @override
-  String get obEsc2Body => '2 400 DA · créée par l’IA';
+  String get obEsc2Body => '2400 DA · créée par l’IA';
 
   @override
   String get obEsc3Kind => 'Rupture de stock';
@@ -366,17 +372,58 @@ class L10nFr extends L10n {
   String get authSentTryAnother => 'Essayez une autre adresse e-mail';
 
   @override
-  String get authErrInvalidCredentials => 'E-mail ou mot de passe incorrect';
+  String get menuOverview => 'Vue d\'ensemble';
 
   @override
-  String get authErrUserExists => 'Un compte avec cet e-mail existe déjà';
+  String get menuInbox => 'Boîte de réception';
 
   @override
-  String get authErrNetwork =>
-      'Impossible de joindre le serveur. Vérifiez votre connexion.';
+  String get menuSocial => 'Réseaux sociaux';
 
   @override
-  String get authErrUnknown => 'Une erreur s’est produite. Veuillez réessayer.';
+  String get menuServices => 'Services';
+
+  @override
+  String get menuProducts => 'Produits';
+
+  @override
+  String get menuAgents => 'Agents';
+
+  @override
+  String get menuCommercial => 'Commercial';
+
+  @override
+  String get menuSoon => 'Bientôt';
+
+  @override
+  String get menuNotifications => 'Notifications';
+
+  @override
+  String get menuAnalytics => 'Analyses';
+
+  @override
+  String get menuReports => 'Rapports';
+
+  @override
+  String get menuSettings => 'Paramètres';
+
+  @override
+  String get menuWebOnly => 'sur le web';
+
+  @override
+  String get tutorialStepAlreadyDone => 'Déjà fait — on continue';
+
+  @override
+  String get exitHint => 'Appuyez encore pour quitter';
+
+  @override
+  String get menuPages => 'Pages';
+
+  @override
+  String get menuPlan => 'Votre plan';
+
+  @override
+  String get menuPlanUnknown => '—';
 
   @override
   String get menuSignOut => 'Déconnexion';
@@ -498,6 +545,147 @@ class L10nFr extends L10n {
       'Doit être supérieur ou égal au prix d’achat';
 
   @override
+  String get productsEyebrow => 'CATALOGUE';
+
+  @override
+  String get productsTitle => 'Produits';
+
+  @override
+  String productsSummary(int count, String value) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count produits',
+      one: '1 produit',
+      zero: 'Aucun produit',
+    );
+    return 'Ce que votre agent vend. $_temp0, $value de valeur de stock.';
+  }
+
+  @override
+  String get productsSearchLabel => 'RECHERCHE';
+
+  @override
+  String get productsSearchPlaceholder => 'Rechercher un produit…';
+
+  @override
+  String get productsFilterAll => 'Tous';
+
+  @override
+  String get productsFilterLowStock => 'Stock faible';
+
+  @override
+  String get productsSectionAll => 'TOUS LES PRODUITS';
+
+  @override
+  String get productsSectionLowStock => 'STOCK FAIBLE';
+
+  @override
+  String get productsInStock => 'EN STOCK';
+
+  @override
+  String get productsOutOfStock => 'RUPTURE';
+
+  @override
+  String productsThreshold(int count) {
+    return 'SEUIL $count';
+  }
+
+  @override
+  String get productsEmptyTitle => 'Aucun produit';
+
+  @override
+  String get productsEmptyBody =>
+      'Ajoutez votre premier produit et votre agent pourra le vendre.';
+
+  @override
+  String get productsNoMatchTitle => 'Aucun résultat';
+
+  @override
+  String get productsNoMatchBody =>
+      'Essayez un autre mot, ou retirez le filtre.';
+
+  @override
+  String get productsAdd => 'Ajouter un produit';
+
+  @override
+  String get productAddTitle => 'Ajouter un produit';
+
+  @override
+  String get productAlertThreshold => 'Seuil d’alerte';
+
+  @override
+  String get productAlertThresholdHint => 'Laissez vide pour aucune alerte';
+
+  @override
+  String get productCategory => 'Catégorie';
+
+  @override
+  String get productCategoryNone => 'Sans catégorie';
+
+  @override
+  String get productUnit => 'Unité';
+
+  @override
+  String get productUnitNone => 'Choisir une unité';
+
+  @override
+  String get productPhotos => 'Ajouter des photos';
+
+  @override
+  String get productPhotosHint => 'JPEG, PNG, WEBP · 5 MO MAX';
+
+  @override
+  String get productHasVariants => 'Ce produit a des variantes';
+
+  @override
+  String get productHasVariantsHint =>
+      'Tailles ou couleurs — la quantité se règle par variante';
+
+  @override
+  String get productAddSubmit => 'Ajouter le produit';
+
+  @override
+  String productsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count produits',
+      one: '1 produit',
+      zero: 'Aucun produit',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get productPhotosSoon =>
+      'Les photos s’ajoutent depuis le web pour l’instant';
+
+  @override
+  String get productPhotosTooLarge =>
+      'Les photos de plus de 5 Mo n’ont pas été ajoutées.';
+
+  @override
+  String get productPhotosWrongType =>
+      'Seules les photos JPEG, PNG, WEBP ou GIF peuvent être ajoutées.';
+
+  @override
+  String get productPhotosTooMany => '10 photos maximum par produit.';
+
+  @override
+  String get productPhotosUploadFailed =>
+      'Produit créé, mais ses photos n’ont pas pu être envoyées.';
+
+  @override
+  String get productPhotoRemove => 'Retirer la photo';
+
+  @override
+  String get productPhotoCamera => 'Prendre une photo';
+
+  @override
+  String get productPhotoGallery => 'Choisir dans la galerie';
+
+  @override
   String get tutorialAgentSubtitle =>
       'Il répond à vos clients avec votre catalogue et vos prix. Trois champs suffisent — tout s’ajuste plus tard.';
 
@@ -583,6 +771,18 @@ class L10nFr extends L10n {
   @override
   String get oauthDenied =>
       'Autorisation annulée. Vous pouvez réessayer quand vous voulez.';
+
+  @override
+  String get connectFailed =>
+      'Votre page n’a pas pu être connectée. Réessayez, ou connectez-la plus tard.';
+
+  @override
+  String get connectNothingNew =>
+      'Aucune nouvelle page n’a été connectée. Choisissez bien une page quand on vous le demande, puis réessayez.';
+
+  @override
+  String get connectLinkFailed =>
+      'Page connectée, mais pas encore liée à votre agent. Vous pouvez la lier depuis les réglages de l’agent.';
 
   @override
   String get tutorialReadyTitle => 'Votre agent est en ligne';

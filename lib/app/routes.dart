@@ -40,6 +40,22 @@ class Routes {
   /// `T6 — Prêt`, the closing screen.
   static const tutorialReady = '/tutorial/ready';
 
+  /// The tutorial's steps in order, which is what makes "how far did they
+  /// get?" a question with an answer.
+  ///
+  /// Used two ways: the router resumes at the furthest step a merchant
+  /// reached, and `T6` compares against it to decide which lines of its recap
+  /// are genuinely done. The intro is first because a merchant who has only
+  /// seen it has completed nothing.
+  static const tutorialFlow = <String>[
+    tutorial,
+    tutorialMode,
+    tutorialProduct,
+    tutorialAgent,
+    tutorialConnect,
+    tutorialReady,
+  ];
+
   /// The shell routes — the five bottom-nav destinations of brief §16:
   /// Accueil, File, Boîte, Stock, Commandes.
   static const home = '/home';
@@ -51,6 +67,18 @@ class Routes {
   // ---- Pushed on top of the shell ----
   static const conversation = '/conversation/:id';
   static String conversationOf(String id) => '/conversation/$id';
+
+  /// `17 — Produits` — the catalogue. Pushed over the shell rather than
+  /// living in it: the bottom nav's Stock tab is `16 — Aperçu du stock`, which
+  /// is still unbuilt, and this is reached from the drawer and from home.
+  static const products = '/products';
+
+  /// `18 — Ajouter un produit`.
+  ///
+  /// **Must be declared before [product] in the router.** go_router matches in
+  /// declaration order, so `/products/:id` would otherwise swallow this with
+  /// `id == 'new'`.
+  static const productNew = '/products/new';
 
   static const product = '/products/:id';
   static String productOf(String id) => '/products/$id';

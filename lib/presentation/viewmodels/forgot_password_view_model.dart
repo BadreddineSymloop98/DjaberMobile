@@ -1,4 +1,5 @@
 import '../../core/utils/validators.dart';
+import 'form_draft_store.dart';
 import 'form_field_model.dart';
 
 /// The password-reset request form.
@@ -11,8 +12,9 @@ import 'form_field_model.dart';
 ///
 /// That gap is the real blocker on this flow, not the UI.
 class ForgotPasswordViewModel extends FormViewModel {
-  ForgotPasswordViewModel() {
+  ForgotPasswordViewModel({FormDraftStore? drafts}) {
     attachFields();
+    keepDraft(drafts, 'forgotPassword', {'email': email});
   }
 
   final email = FormFieldModel(validator: Validators.email);

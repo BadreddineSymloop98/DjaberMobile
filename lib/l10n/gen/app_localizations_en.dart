@@ -117,13 +117,19 @@ class L10nEn extends L10n {
   String get errorUnauthorized => 'Your session expired. Sign in again.';
 
   @override
-  String get errorNotFound => 'Not found.';
-
-  @override
   String get errorServer => 'Something went wrong on our side.';
 
   @override
-  String get errorUnknown => 'Something went wrong.';
+  String get toastProductCreated => 'Product created';
+
+  @override
+  String get toastAgentCreated => 'AI agent created';
+
+  @override
+  String get toastPageConnected => 'Page connected';
+
+  @override
+  String get errorGeneric => 'Something went wrong. Please try again.';
 
   @override
   String get langEnglish => 'English';
@@ -219,7 +225,7 @@ class L10nEn extends L10n {
   String get obEsc2Name => '#1042 — Bab Ezzouar';
 
   @override
-  String get obEsc2Body => '2,400 DA · created by the AI';
+  String get obEsc2Body => '2400 DA · created by the AI';
 
   @override
   String get obEsc3Kind => 'Out of stock';
@@ -362,17 +368,58 @@ class L10nEn extends L10n {
   String get authSentTryAnother => 'Try another email address';
 
   @override
-  String get authErrInvalidCredentials => 'Invalid email or password';
+  String get menuOverview => 'Overview';
 
   @override
-  String get authErrUserExists => 'An account with this email already exists';
+  String get menuInbox => 'Inbox';
 
   @override
-  String get authErrNetwork =>
-      'Cannot reach the server. Check your connection.';
+  String get menuSocial => 'Social Media';
 
   @override
-  String get authErrUnknown => 'Something went wrong. Please try again.';
+  String get menuServices => 'Services';
+
+  @override
+  String get menuProducts => 'Products';
+
+  @override
+  String get menuAgents => 'Agents';
+
+  @override
+  String get menuCommercial => 'Commercial';
+
+  @override
+  String get menuSoon => 'Soon';
+
+  @override
+  String get menuNotifications => 'Notifications';
+
+  @override
+  String get menuAnalytics => 'Analytics';
+
+  @override
+  String get menuReports => 'Reports';
+
+  @override
+  String get menuSettings => 'Settings';
+
+  @override
+  String get menuWebOnly => 'on the web';
+
+  @override
+  String get tutorialStepAlreadyDone => 'Already done — moving on';
+
+  @override
+  String get exitHint => 'Tap back again to leave';
+
+  @override
+  String get menuPages => 'Pages';
+
+  @override
+  String get menuPlan => 'Your Plan';
+
+  @override
+  String get menuPlanUnknown => '—';
 
   @override
   String get menuSignOut => 'Sign out';
@@ -494,6 +541,144 @@ class L10nEn extends L10n {
       'Must be greater than or equal to the cost price';
 
   @override
+  String get productsEyebrow => 'CATALOGUE';
+
+  @override
+  String get productsTitle => 'Products';
+
+  @override
+  String productsSummary(int count, String value) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count products',
+      one: '1 product',
+      zero: 'No products yet',
+    );
+    return 'What your agent sells. $_temp0, $value of stock value.';
+  }
+
+  @override
+  String get productsSearchLabel => 'SEARCH';
+
+  @override
+  String get productsSearchPlaceholder => 'Search products…';
+
+  @override
+  String get productsFilterAll => 'All';
+
+  @override
+  String get productsFilterLowStock => 'Low stock';
+
+  @override
+  String get productsSectionAll => 'ALL PRODUCTS';
+
+  @override
+  String get productsSectionLowStock => 'LOW STOCK';
+
+  @override
+  String get productsInStock => 'IN STOCK';
+
+  @override
+  String get productsOutOfStock => 'OUT OF STOCK';
+
+  @override
+  String productsThreshold(int count) {
+    return 'THRESHOLD $count';
+  }
+
+  @override
+  String get productsEmptyTitle => 'No products yet';
+
+  @override
+  String get productsEmptyBody =>
+      'Add your first product and your agent will be able to sell it.';
+
+  @override
+  String get productsNoMatchTitle => 'Nothing matches';
+
+  @override
+  String get productsNoMatchBody => 'Try another word, or clear the filter.';
+
+  @override
+  String get productsAdd => 'Add Product';
+
+  @override
+  String get productAddTitle => 'Add Product';
+
+  @override
+  String get productAlertThreshold => 'Alert threshold';
+
+  @override
+  String get productAlertThresholdHint => 'Leave empty for no alert';
+
+  @override
+  String get productCategory => 'Category';
+
+  @override
+  String get productCategoryNone => 'No category';
+
+  @override
+  String get productUnit => 'Unit';
+
+  @override
+  String get productUnitNone => 'Select unit';
+
+  @override
+  String get productPhotos => 'Add photos';
+
+  @override
+  String get productPhotosHint => 'JPEG, PNG, WEBP · 5MB MAX';
+
+  @override
+  String get productHasVariants => 'This product has variants';
+
+  @override
+  String get productHasVariantsHint =>
+      'Sizes or colours — the quantity is set per variant';
+
+  @override
+  String get productAddSubmit => 'Create product';
+
+  @override
+  String productsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count products',
+      one: '1 product',
+      zero: 'No products',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get productPhotosSoon => 'Photos can be added from the web for now';
+
+  @override
+  String get productPhotosTooLarge => 'Photos over 5 MB were not added.';
+
+  @override
+  String get productPhotosWrongType =>
+      'Only JPEG, PNG, WEBP or GIF photos can be added.';
+
+  @override
+  String get productPhotosTooMany => 'Up to 10 photos per product.';
+
+  @override
+  String get productPhotosUploadFailed =>
+      'Product created, but its photos could not be uploaded.';
+
+  @override
+  String get productPhotoRemove => 'Remove photo';
+
+  @override
+  String get productPhotoCamera => 'Take a photo';
+
+  @override
+  String get productPhotoGallery => 'Choose from gallery';
+
+  @override
   String get tutorialAgentSubtitle =>
       'It answers your customers with your catalogue and your prices. Three fields are enough — everything else can be tuned later.';
 
@@ -577,6 +762,18 @@ class L10nEn extends L10n {
   @override
   String get oauthDenied =>
       'Authorisation cancelled. You can try again whenever you like.';
+
+  @override
+  String get connectFailed =>
+      'Your page could not be connected. Try again, or connect it later.';
+
+  @override
+  String get connectNothingNew =>
+      'No new page came through. Make sure you pick a page when asked, then try again.';
+
+  @override
+  String get connectLinkFailed =>
+      'Page connected, but not yet linked to your agent. You can link it from your agent\'s settings.';
 
   @override
   String get tutorialReadyTitle => 'Your agent is live';

@@ -1,4 +1,5 @@
 import '../../core/utils/validators.dart';
+import 'form_draft_store.dart';
 import 'form_field_model.dart';
 
 /// The sign-in form.
@@ -7,8 +8,13 @@ import 'form_field_model.dart';
 /// `SessionViewModel.signIn` is the next step and touches nothing here except
 /// the body of `submit`.
 class LoginViewModel extends FormViewModel {
-  LoginViewModel() {
+  LoginViewModel({FormDraftStore? drafts}) {
     attachFields();
+    // The address and the remember-me choice survive the splash; the
+    // password never does.
+    final saved = keepDraft(drafts, 'login', {'email': email});
+    final remember = saved['rememberMe'];
+    if (remember != null) _rememberMe = remember == 'true';
   }
 
   final email = FormFieldModel(validator: Validators.email);
@@ -28,8 +34,12 @@ class LoginViewModel extends FormViewModel {
 
   void toggleRememberMe() {
     _rememberMe = !_rememberMe;
+    saveDraft();
     safeNotify();
   }
+
+  @override
+  Map<String, String> get draftExtras => {'rememberMe': '$_rememberMe'};
 
   void togglePasswordVisibility() {
     _obscurePassword = !_obscurePassword;

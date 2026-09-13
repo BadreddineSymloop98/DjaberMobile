@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/extensions/responsive_extension.dart';
+import '../../../core/storage/prefs_storage.dart';
 import '../../../data/models/agent.dart';
 import '../../../l10n/gen/app_localizations.dart';
 import '../../theme/app_colors.dart';
@@ -27,9 +28,19 @@ import '../../widgets/checklist_row.dart';
 /// [TutorialViewModel], which the three creating steps wrote into.
 ///
 /// A step whose record is missing — the merchant reached the end without
-/// completing it, or a link failed — still shows, unticked and without a
-/// subtitle, rather than being hidden. A checklist that silently drops a line
-/// is worse than one that admits a gap.
+/// completing it, or a link failed — still shows, without a subtitle, rather
+/// than being hidden. A checklist that silently drops a line is worse than one
+/// that admits a gap.
+///
+/// **A resumed run is the interesting case.** [TutorialViewModel] is
+/// in-memory, so a merchant who force-quit mid-flow and came back reaches this
+/// screen with no records at all — every subtitle null. Ticking those steps
+/// off the records alone would then tell them they had done nothing, which is
+/// false: the work is on the server. So *done* is decided by how far they got
+/// — [SessionViewModel.tutorialStepIndex], which is persisted — and the
+/// subtitle is dropped when the detail is unknown. The step reads "done, and I
+/// cannot show you what", which is the honest version. Re-fetching the three
+/// records to fill those lines is the fuller fix and is not done here.
 class TutorialReadyScreen extends StatelessWidget {
   const TutorialReadyScreen({super.key});
 
@@ -61,26 +72,42 @@ class TutorialReadyScreen extends StatelessWidget {
     // happen would be the one lie the whole screen exists to avoid.
     final isLive = tutorial.page != null;
 
-    final steps = <({String label, String? subtitle})>[
+    // How far the merchant actually got, which survives a force-quit while
+    // the records themselves do not. The deferral flag is persisted too, so a
+    // resumed run still knows the page step was postponed rather than done.
+    final deferred = context.read<PrefsStorage>().pageConnectionDeferred;
+    final reached = context.read<SessionViewModel>().tutorialStepIndex;
+    const flow = Routes.tutorialFlow;
+    bool passed(String step) => reached >= flow.indexOf(step);
+
+    final steps = <({String label, String? subtitle, bool done})>[
       (
         label: l10n.tutorialStepMode,
+        // The mode is a device preference, so this one is always knowable.
         subtitle: mode.isAdvanced
             ? l10n.tutorialReadyModeAdvanced
             : l10n.tutorialReadyModeSimple,
+        done: passed(Routes.tutorialProduct),
       ),
       (
         label: l10n.tutorialStepProduct,
         subtitle: tutorial.product?.name,
+        done: passed(Routes.tutorialAgent),
       ),
       (
         label: l10n.tutorialStepAgent,
         subtitle: agent == null
             ? null
             : '${agent.name} · ${_toneLabel(agent.personality, l10n)}',
+        done: passed(Routes.tutorialConnect),
       ),
       (
         label: l10n.tutorialStepPage,
+        // The one step that can be reached and still not done, so it is the
+        // one that cannot be inferred from progress: a deferral counts as
+        // arriving here without connecting anything.
         subtitle: tutorial.page?.pageName,
+        done: isLive || (passed(Routes.tutorialReady) && !deferred),
       ),
     ];
 
@@ -125,7 +152,7 @@ class TutorialReadyScreen extends StatelessWidget {
                             subtitle: step.subtitle,
                             // Ticked only where there is a record to show for
                             // it. The mode always has one — it has a default.
-                            done: index == 0 || step.subtitle != null,
+                            done: step.done,
                           ),
                       ],
                     ),

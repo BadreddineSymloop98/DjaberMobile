@@ -3,6 +3,7 @@ import 'package:djaber_mobile/l10n/gen/app_localizations.dart';
 import 'package:djaber_mobile/presentation/screens/tutorial/tutorial_product_screen.dart';
 import 'package:djaber_mobile/presentation/theme/app_colors.dart';
 import 'package:djaber_mobile/presentation/viewmodels/session_view_model.dart';
+import 'package:djaber_mobile/presentation/viewmodels/tutorial_view_model.dart';
 import 'package:djaber_mobile/presentation/widgets/app_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -31,8 +32,14 @@ void main() {
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
     await tester.pumpWidget(
-      Provider<ProductRepository>.value(
-        value: products,
+      MultiProvider(
+        providers: [
+          Provider<ProductRepository>.value(value: products),
+          // Where the step keeps its unsent values across a rebuild.
+          ChangeNotifierProvider<TutorialViewModel>(
+            create: (_) => TutorialViewModel(),
+          ),
+        ],
         child: authHost(const TutorialProductScreen(), session, locale: locale),
       ),
     );

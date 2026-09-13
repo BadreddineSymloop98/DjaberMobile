@@ -41,20 +41,63 @@ class TutorialProductViewModel extends FormViewModel {
   Product? _created;
   Product? get created => _created;
 
-  /// Why the last attempt failed, unlocalised.
+  /// Why the last attempt failed.
   ///
-  /// Kept as the exception rather than a string so the screen can decide: a
-  /// transport failure gets the app's own message, while a 400 carries the
-  /// backend's own sentence — "SKU already exists", "Selling price must be
-  /// greater than or equal to cost price" — which is more use to the merchant
-  /// than a generic apology. Shown above the button, not as a toast, matching
-  /// the auth screens.
+  /// Kept as the exception rather than a string so the screen can read more
+  /// than its message: the error contract puts a stable `code` on it and, on
+  /// a 400, names the exact inputs at fault. Shown above the button, not as a
+  /// toast, matching the auth screens.
   AppException? _submitError;
   AppException? get submitError => _submitError;
+
+  /// True when the server refused because a product with that SKU already
+  /// exists.
+  ///
+  /// Not an error for this step. `T3` asks the merchant to create their first
+  /// product; a taken SKU means one is already there, so the step is done and
+  /// the flow should move on rather than blocking. Before the error contract
+  /// this was an untyped 400 carrying the English sentence "SKU already
+  /// exists", which could only be matched on text; it is now a 409 with the
+  /// stable code below, which is what makes this safe to branch on.
+  bool _alreadyExists = false;
+  bool get alreadyExists => _alreadyExists;
+
+  /// The server's own message for each input it faulted, keyed by the field
+  /// name **as the request sent it** — `sku`, `costPrice`, `quantity`.
+  ///
+  /// Already translated, so it goes straight onto the control. This is the
+  /// half of a 400 the app used to throw away: it showed the summary line and
+  /// left the merchant to guess which of six fields the server meant.
+  Map<String, String> get serverFieldErrors =>
+      _submitError?.fieldMessages ?? const {};
 
   /// Recomputed on every keystroke in the cost field, because the selling
   /// price's validity depends on it.
   void onCostPriceChanged() => safeNotify();
+
+  /// Every field, by the key its value is kept under in a draft.
+  Map<String, FormFieldModel> get _draftFields => {
+        'name': name,
+        'sku': sku,
+        'description': description,
+        'costPrice': costPrice,
+        'sellingPrice': sellingPrice,
+        'quantity': quantity,
+      };
+
+  /// What has been typed and not sent, for `TutorialViewModel.saveDraft` to
+  /// hold while this step's screen is gone.
+  Map<String, String> get draft => {
+        for (final entry in _draftFields.entries) entry.key: entry.value.value,
+      };
+
+  /// Puts back a [draft]. Keys this form does not know are ignored.
+  void restore(Map<String, String> draft) {
+    for (final entry in _draftFields.entries) {
+      final value = draft[entry.key];
+      if (value != null) entry.value.controller.text = value;
+    }
+  }
 
   /// Validates, then creates. Returns the product on success, null otherwise.
   ///
@@ -62,6 +105,7 @@ class TutorialProductViewModel extends FormViewModel {
   /// in this app states its own destination.
   Future<Product?> submitAndCreate() async {
     _submitError = null;
+    _alreadyExists = false;
     if (!submit()) return null;
 
     final product = await run(
@@ -74,7 +118,16 @@ class TutorialProductViewModel extends FormViewModel {
         sellingPrice: Validators.parseAmount(sellingPrice.value)!,
         quantity: int.parse(quantity.value.trim().replaceAll(' ', '')),
       ),
-      onError: (error) => _submitError = error,
+      onError: (error) {
+        if (error.code == 'PRODUCT_SKU_ALREADY_EXISTS') {
+          // Left out of `_submitError` on purpose: the screen advances on
+          // this, so showing it as a failure above the button would contradict
+          // the navigation that follows.
+          _alreadyExists = true;
+          return;
+        }
+        _submitError = error;
+      },
       tag: 'createProduct',
     );
 

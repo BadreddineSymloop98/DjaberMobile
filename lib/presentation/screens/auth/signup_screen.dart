@@ -7,6 +7,7 @@ import '../../../app/routes.dart';
 import '../../../core/utils/validators.dart';
 import '../../../l10n/gen/app_localizations.dart';
 import '../../theme/app_spacing.dart';
+import '../../viewmodels/form_draft_store.dart';
 import '../../viewmodels/session_view_model.dart';
 import '../../viewmodels/signup_view_model.dart';
 import '../../widgets/app_text_field.dart';
@@ -22,7 +23,9 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
-        create: (_) => SignupViewModel(),
+        // Looked up optionally, so the screen still builds without the store.
+        create: (context) =>
+            SignupViewModel(drafts: context.read<FormDraftStore?>()),
         child: const _SignupView(),
       );
 }
