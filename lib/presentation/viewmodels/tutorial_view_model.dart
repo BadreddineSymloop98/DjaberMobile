@@ -16,6 +16,14 @@ import '../../data/models/product.dart';
 /// merchant restarts at `T1a` — the coarse resume [PrefsStorage.tutorialPending]
 /// provides. Real per-step resume would mean reading the created records back
 /// from the server, which is a larger question than this holds.
+///
+/// **Unsent drafts.** A step's form lives in its screen, and the screen does
+/// not survive the merchant leaving the app: on return the splash replays
+/// (`SessionViewModel.resetBoot` runs on pause), the router swaps the step out
+/// for it, and the step comes back as a new, empty screen. Changing the phone's
+/// language in Settings is the everyday way to hit that. So `T3` and `T4` hand
+/// their unsent values here as they close and take them back as they open.
+/// Held in memory like everything else here — a process death still loses them.
 class TutorialViewModel extends ChangeNotifier {
   Product? _product;
   Agent? _agent;
@@ -46,12 +54,32 @@ class TutorialViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Unsent form values, by step route, then by field.
+  final Map<String, Map<String, String>> _drafts = {};
+
+  /// What [step] left unsent when it last closed. Empty when nothing was.
+  Map<String, String> draftFor(String step) => _drafts[step] ?? const {};
+
+  /// Keeps [values] until [step] opens again.
+  ///
+  /// Notifies nobody, deliberately: nothing on screen shows a draft, and this
+  /// is called from a screen's `dispose`, while the tree is being torn down.
+  void saveDraft(String step, Map<String, String> values) {
+    _drafts[step] = Map.unmodifiable(values);
+  }
+
+  /// Drops [step]'s draft once the step has succeeded — its values are spent.
+  void clearDraft(String step) {
+    _drafts.remove(step);
+  }
+
   /// Called when the tutorial finishes or is abandoned, so a second run in the
   /// same session does not inherit the first one's records.
   void reset() {
     _product = null;
     _agent = null;
     _page = null;
+    _drafts.clear();
     notifyListeners();
   }
 }

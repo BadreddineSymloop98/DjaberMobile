@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../core/extensions/responsive_extension.dart';
 import '../../theme/app_colors.dart';
+import '../../theme/app_spacing.dart';
 import '../../viewmodels/session_view_model.dart';
 import '../../widgets/djaber_logo.dart';
 import '../../widgets/rise_fade.dart';
@@ -80,6 +81,37 @@ class _SplashLogo extends StatelessWidget {
     //
     // The tagline is on here and off in headers, matching the frame. It reads
     // from `appTagline`, which is the web's own `dash.tagline`.
+    // Scaled down rather than allowed to overflow.
+    //
+    // The lockup's Row is `mainAxisSize.min` with no bound on the text
+    // column, so its width is whatever the wordmark and tagline need — and
+    // **the Arabic tagline is wider than the wordmark**. It overflowed at
+    // every width tested: 24px at 320, 27 at 360, 29 even at the frames' own
+    // 390, while French and English fit with room to spare. Nothing caught it
+    // because nothing had ever rendered this screen in Arabic.
+    //
+    // The same fix home's header and the drawer already use for the same
+    // widget (brief §23.9, §24.6): the lockup shrinks proportionally instead
+    // of clipping the wordmark. The gutter keeps it off the edges on a 320
+    // handset, which is this market's floor.
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: AppSpacing.gutter),
+      child: const FittedBox(
+        fit: BoxFit.scaleDown,
+        child: _SplashLockup(),
+      ),
+    );
+  }
+}
+
+/// The lockup itself, at the splash frame's size.
+class _SplashLockup extends StatelessWidget {
+  const _SplashLockup();
+
+  @override
+  Widget build(BuildContext context) {
+    // ~56px on the 390-wide design frame. `.r` rather than `.w` so the mark
+    // stays square and proportionate rather than stretching.
     return DjaberLogo(size: 14.4.r, showTagline: true);
   }
 }

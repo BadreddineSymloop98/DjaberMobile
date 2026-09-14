@@ -116,13 +116,19 @@ class L10nAr extends L10n {
   String get errorUnauthorized => 'انتهت الجلسة. سجّل الدخول مرة أخرى.';
 
   @override
-  String get errorNotFound => 'غير موجود.';
-
-  @override
   String get errorServer => 'حدث خطأ من جانبنا.';
 
   @override
-  String get errorUnknown => 'حدث خطأ ما.';
+  String get toastProductCreated => 'تم إنشاء المنتج';
+
+  @override
+  String get toastAgentCreated => 'تم إنشاء وكيل الذكاء الاصطناعي';
+
+  @override
+  String get toastPageConnected => 'تم ربط الصفحة';
+
+  @override
+  String get errorGeneric => 'حدث خطأ ما. يرجى المحاولة مرة أخرى.';
 
   @override
   String get langEnglish => 'English';
@@ -218,7 +224,7 @@ class L10nAr extends L10n {
   String get obEsc2Name => '‏#1042 — باب الزوار';
 
   @override
-  String get obEsc2Body => '2 400 دج · أنشأه الوكيل';
+  String get obEsc2Body => '2400 دج · أنشأه الوكيل';
 
   @override
   String get obEsc3Kind => 'نفاد المخزون';
@@ -361,17 +367,58 @@ class L10nAr extends L10n {
   String get authSentTryAnother => 'جرّب عنوان بريد آخر';
 
   @override
-  String get authErrInvalidCredentials =>
-      'البريد الإلكتروني أو كلمة المرور غير صحيحة';
+  String get menuOverview => 'نظرة عامة';
 
   @override
-  String get authErrUserExists => 'يوجد حساب بهذا البريد الإلكتروني بالفعل';
+  String get menuInbox => 'البريد الوارد';
 
   @override
-  String get authErrNetwork => 'لا يمكن الوصول إلى الخادم. تحقق من اتصالك.';
+  String get menuSocial => 'وسائل التواصل';
 
   @override
-  String get authErrUnknown => 'حدث خطأ ما. يرجى المحاولة مرة أخرى.';
+  String get menuServices => 'الخدمات';
+
+  @override
+  String get menuProducts => 'المنتجات';
+
+  @override
+  String get menuAgents => 'الوكلاء';
+
+  @override
+  String get menuCommercial => 'الإعلانات';
+
+  @override
+  String get menuSoon => 'قريبا';
+
+  @override
+  String get menuNotifications => 'الإشعارات';
+
+  @override
+  String get menuAnalytics => 'تحليلات';
+
+  @override
+  String get menuReports => 'التقارير';
+
+  @override
+  String get menuSettings => 'الإعدادات';
+
+  @override
+  String get menuWebOnly => 'على الويب';
+
+  @override
+  String get tutorialStepAlreadyDone => 'تم مسبقًا — نكمل';
+
+  @override
+  String get exitHint => 'اضغط مرة أخرى للخروج';
+
+  @override
+  String get menuPages => 'الصفحات';
+
+  @override
+  String get menuPlan => 'خطتك';
+
+  @override
+  String get menuPlanUnknown => '—';
 
   @override
   String get menuSignOut => 'تسجيل الخروج';
@@ -492,6 +539,151 @@ class L10nAr extends L10n {
   String get productErrBelowCost => 'يجب أن يكون أكبر من أو يساوي سعر الشراء';
 
   @override
+  String get productsEyebrow => 'الكتالوج';
+
+  @override
+  String get productsTitle => 'المنتجات';
+
+  @override
+  String productsSummary(int count, String value) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count منتج',
+      many: '$count منتجًا',
+      few: '$count منتجات',
+      two: 'منتجان',
+      one: 'منتج واحد',
+      zero: 'لا توجد منتجات',
+    );
+    return 'ما يبيعه وكيلك. $_temp0، $value قيمة المخزون.';
+  }
+
+  @override
+  String get productsSearchLabel => 'البحث';
+
+  @override
+  String get productsSearchPlaceholder => 'ابحث عن منتج…';
+
+  @override
+  String get productsFilterAll => 'الكل';
+
+  @override
+  String get productsFilterLowStock => 'مخزون منخفض';
+
+  @override
+  String get productsSectionAll => 'كل المنتجات';
+
+  @override
+  String get productsSectionLowStock => 'مخزون منخفض';
+
+  @override
+  String get productsInStock => 'متوفر';
+
+  @override
+  String get productsOutOfStock => 'نفد';
+
+  @override
+  String productsThreshold(int count) {
+    return 'الحد $count';
+  }
+
+  @override
+  String get productsEmptyTitle => 'لا توجد منتجات';
+
+  @override
+  String get productsEmptyBody =>
+      'أضف منتجك الأول ليصبح وكيلك قادرًا على بيعه.';
+
+  @override
+  String get productsNoMatchTitle => 'لا نتائج';
+
+  @override
+  String get productsNoMatchBody => 'جرّب كلمة أخرى، أو أزل عامل التصفية.';
+
+  @override
+  String get productsAdd => 'إضافة منتج';
+
+  @override
+  String get productAddTitle => 'إضافة منتج';
+
+  @override
+  String get productAlertThreshold => 'حد التنبيه';
+
+  @override
+  String get productAlertThresholdHint => 'اتركه فارغًا لإلغاء التنبيه';
+
+  @override
+  String get productCategory => 'الفئة';
+
+  @override
+  String get productCategoryNone => 'بدون فئة';
+
+  @override
+  String get productUnit => 'الوحدة';
+
+  @override
+  String get productUnitNone => 'اختر وحدة';
+
+  @override
+  String get productPhotos => 'أضف صورًا';
+
+  @override
+  String get productPhotosHint => 'JPEG, PNG, WEBP · 5 ميغابايت كحد أقصى';
+
+  @override
+  String get productHasVariants => 'هذا المنتج له متغيرات';
+
+  @override
+  String get productHasVariantsHint =>
+      'مقاسات أو ألوان — تُحدَّد الكمية لكل متغير';
+
+  @override
+  String get productAddSubmit => 'إضافة المنتج';
+
+  @override
+  String productsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count منتج',
+      many: '$count منتجًا',
+      few: '$count منتجات',
+      two: 'منتجان',
+      one: 'منتج واحد',
+      zero: 'لا توجد منتجات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get productPhotosSoon => 'تُضاف الصور من الويب في الوقت الحالي';
+
+  @override
+  String get productPhotosTooLarge =>
+      'لم تُضف الصور التي يتجاوز حجمها 5 ميغابايت.';
+
+  @override
+  String get productPhotosWrongType =>
+      'يمكن إضافة صور JPEG أو PNG أو WEBP أو GIF فقط.';
+
+  @override
+  String get productPhotosTooMany => '10 صور كحد أقصى لكل منتج.';
+
+  @override
+  String get productPhotosUploadFailed =>
+      'تم إنشاء المنتج، لكن تعذّر رفع صوره.';
+
+  @override
+  String get productPhotoRemove => 'إزالة الصورة';
+
+  @override
+  String get productPhotoCamera => 'التقاط صورة';
+
+  @override
+  String get productPhotoGallery => 'اختيار من المعرض';
+
+  @override
   String get tutorialAgentSubtitle =>
       'يردّ على زبائنك بالاعتماد على كتالوجك وأسعارك. ثلاثة حقول تكفي — والباقي يُضبط لاحقًا.';
 
@@ -575,6 +767,18 @@ class L10nAr extends L10n {
   @override
   String get oauthDenied =>
       'تمّ إلغاء الإذن. يمكنك المحاولة مرّة أخرى وقتما تشاء.';
+
+  @override
+  String get connectFailed =>
+      'تعذّر ربط صفحتك. أعد المحاولة، أو اربطها لاحقًا.';
+
+  @override
+  String get connectNothingNew =>
+      'لم يتم ربط أي صفحة جديدة. تأكّد من اختيار صفحة عندما يُطلب منك ذلك، ثم أعد المحاولة.';
+
+  @override
+  String get connectLinkFailed =>
+      'تم ربط الصفحة، لكنها لم تُربط بوكيلك بعد. يمكنك ربطها من إعدادات الوكيل.';
 
   @override
   String get tutorialReadyTitle => 'وكيلك متصل الآن';

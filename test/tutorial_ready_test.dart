@@ -1,3 +1,4 @@
+import 'package:djaber_mobile/app/routes.dart';
 import 'package:djaber_mobile/core/storage/prefs_storage.dart';
 import 'package:djaber_mobile/data/models/agent.dart';
 import 'package:djaber_mobile/data/models/connected_page.dart';
@@ -58,7 +59,14 @@ void main() {
   }
 
   /// What a full run leaves behind.
-  void seedAFullRun() {
+  ///
+  /// The records **and** the progress marker: each step persists its own
+  /// completion before navigating, so by the time a merchant reaches `T6` the
+  /// stored step is `tutorialReady`. `done` is read from that rather than
+  /// from the records, because the records do not survive a force-quit and the
+  /// work on the server does.
+  Future<void> seedAFullRun() async {
+    await session.rememberTutorialStep(Routes.tutorialReady);
     tutorial.productCreated(
       const Product(id: 'p-1', sku: 'PRD-001', name: 'Robe satin — Noir'),
     );
@@ -80,7 +88,7 @@ void main() {
   }
 
   testWidgets('shows what each step actually created', (tester) async {
-    seedAFullRun();
+    await seedAFullRun();
     await pump(tester);
     final l10n = await L10n.delegate.load(const Locale('fr'));
 
@@ -93,7 +101,7 @@ void main() {
   });
 
   testWidgets('all four rows are ticked after a full run', (tester) async {
-    seedAFullRun();
+    await seedAFullRun();
     await pump(tester);
 
     final rows = tester.widgetList<ChecklistRow>(find.byType(ChecklistRow));
@@ -101,21 +109,52 @@ void main() {
     expect(rows.every((r) => r.done), isTrue);
   });
 
-  testWidgets('a step with no record shows unticked rather than vanishing',
-      (tester) async {
-    // Only the agent was created — the merchant never finished the others.
-    tutorial.agentCreated(const Agent(id: 'a-1', name: 'Assistant'));
+  testWidgets('a resumed run ticks what was completed even though the '
+      'records are gone', (tester) async {
+    // The case this screen used to get wrong. `TutorialViewModel` is
+    // in-memory, so a merchant who force-quit after `T4` and came back has no
+    // records at all — but they did create a product and an agent, and those
+    // are on the server. Reading `done` off the records told them they had
+    // done nothing.
+    await session.rememberTutorialStep(Routes.tutorialConnect);
     await pump(tester);
 
-    final rows = tester.widgetList<ChecklistRow>(find.byType(ChecklistRow)).toList();
-    // Still four lines: a checklist that silently drops one is worse.
+    final rows = tester.widgetList<ChecklistRow>(find.byType(ChecklistRow))
+        .toList();
     expect(rows.length, 4);
-    // Mode is always ticked — it has a default. Agent is ticked. The product
-    // and the page are not.
-    expect(rows[0].done, isTrue);
-    expect(rows[1].done, isFalse);
-    expect(rows[2].done, isTrue);
+    expect(rows[0].done, isTrue, reason: 'mode was chosen');
+    expect(rows[1].done, isTrue, reason: 'the product exists on the server');
+    expect(rows[2].done, isTrue, reason: 'the agent exists on the server');
+    expect(rows[3].done, isFalse, reason: 'the page step was never reached');
+
+    // Ticked, but honest about not knowing what: no invented detail.
+    expect(find.text('Robe satin — Noir'), findsNothing);
+    expect(find.text('Boutique Amel'), findsNothing);
+  });
+
+  testWidgets('an unstarted run ticks nothing past the mode', (tester) async {
+    // Straight from the intro to here should be impossible, but if it happens
+    // the screen must not claim work that was never done.
+    await pump(tester);
+
+    final rows = tester.widgetList<ChecklistRow>(find.byType(ChecklistRow))
+        .toList();
+    expect(rows.map((r) => r.done).toList(), [false, false, false, false]);
+  });
+
+  testWidgets('deferring the page leaves that one line unticked, even though '
+      'the step was reached', (tester) async {
+    // The one step that can be reached and still not done — so it is the one
+    // that cannot be inferred from progress alone.
+    await session.rememberTutorialStep(Routes.tutorialReady);
+    await prefs.setPageConnectionDeferred(true);
+    await pump(tester);
+
+    final rows = tester.widgetList<ChecklistRow>(find.byType(ChecklistRow))
+        .toList();
     expect(rows[3].done, isFalse);
+    // And a checklist that drops the line would be worse than one admitting it.
+    expect(rows.length, 4);
   });
 
   testWidgets('the mode line follows the app-wide preference', (tester) async {
@@ -144,7 +183,7 @@ void main() {
           .where((d) => d.border?.top.color == colour);
 
   testWidgets('the live mark uses signal/live, not white', (tester) async {
-    seedAFullRun();
+    await seedAFullRun();
     await pump(tester);
 
     expect(ringsColoured(tester, AppColors.live), isNotEmpty);
@@ -182,7 +221,7 @@ void main() {
   for (final size in const [Size(320, 640), Size(360, 740)]) {
     testWidgets('renders without overflow at ${size.width.toInt()} wide',
         (tester) async {
-      seedAFullRun();
+      await seedAFullRun();
       await pump(tester, size: size);
       expect(tester.takeException(), isNull);
       expect(find.byType(ChecklistRow), findsNWidgets(4));
@@ -191,7 +230,7 @@ void main() {
 
   for (final locale in const [Locale('en'), Locale('ar')]) {
     testWidgets('renders in ${locale.languageCode}', (tester) async {
-      seedAFullRun();
+      await seedAFullRun();
       await pump(tester, size: const Size(320, 640), locale: locale);
       expect(tester.takeException(), isNull);
       final l10n = await L10n.delegate.load(locale);
@@ -201,7 +240,7 @@ void main() {
 
   group('the Checklist Row Done state', () {
     testWidgets('swaps the numbered ring for a filled tick', (tester) async {
-      seedAFullRun();
+      await seedAFullRun();
       await pump(tester);
 
       // The frame shows a tick, not the step number, once done.

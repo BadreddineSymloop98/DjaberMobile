@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 
+import '../../app/routes.dart';
 import '../../core/error/app_exception.dart';
 import '../../core/error/result.dart';
 import '../../core/services/device_info_service.dart';
@@ -78,9 +79,25 @@ class SessionViewModel extends BaseViewModel {
   /// that becomes a problem, gate this on how long the app was away rather
   /// than removing it.
   void resetBoot() {
-    if (!_bootComplete) return;
+    if (!_bootComplete || _splashHolds > 0) return;
     _bootComplete = false;
     safeNotify();
+  }
+
+  int _splashHolds = 0;
+
+  /// Stops the splash from replaying while something on screen cannot be
+  /// rebuilt after it.
+  ///
+  /// The replay makes the router rebuild its screens, and a window pushed on
+  /// top of them — Facebook's login, the system file picker's caller — is
+  /// dropped. Leaving the app is exactly what those flows make a merchant do:
+  /// fetch a Facebook security code, browse to a photo. Pair every call with
+  /// [releaseSplashReplay].
+  void holdSplashReplay() => _splashHolds++;
+
+  void releaseSplashReplay() {
+    if (_splashHolds > 0) _splashHolds--;
   }
 
   /// True when the merchant's AI credits are exhausted, which pauses the agent.
@@ -215,10 +232,45 @@ class SessionViewModel extends BaseViewModel {
   /// finished or skipped.
   bool get tutorialPending => _prefs.tutorialPending;
 
+  /// Where a returning merchant should re-enter the tutorial.
+  ///
+  /// The furthest step they reached, or the intro if they have not started or
+  /// the stored value is not a step this build knows. Validated rather than
+  /// trusted — a stale route from an older build must not be handed to the
+  /// router.
+  String get tutorialResumeRoute {
+    final stored = _prefs.tutorialStep;
+    if (stored == null) return Routes.tutorial;
+    return Routes.tutorialFlow.contains(stored) ? stored : Routes.tutorial;
+  }
+
+  /// How far the merchant has got, as an index into [Routes.tutorialFlow].
+  /// `T6` reads it to tell a step it actually completed from one it only
+  /// resumed past.
+  int get tutorialStepIndex =>
+      Routes.tutorialFlow.indexOf(tutorialResumeRoute);
+
+  /// Records that a step is done and the next one is owed.
+  ///
+  /// Called by each step on success, **before** it navigates, so a process
+  /// death between the write and the push still resumes forward rather than
+  /// back. Never moves backwards: re-walking an earlier step must not undo
+  /// progress already made.
+  Future<void> rememberTutorialStep(String route) async {
+    final next = Routes.tutorialFlow.indexOf(route);
+    if (next < 0 || next <= tutorialStepIndex) return;
+    await _prefs.setTutorialStep(route);
+    safeNotify();
+  }
+
   /// Ends the tutorial, whether it was completed or skipped. Notifies, because
   /// the router's redirect is what acts on it.
   Future<void> completeTutorial() async {
     await _prefs.setTutorialPending(false);
+    // The step goes with the flag: leaving it behind would resume a merchant
+    // who signs up again on this handset into the middle of a tutorial they
+    // have never seen.
+    await _prefs.setTutorialStep(null);
     safeNotify();
   }
 

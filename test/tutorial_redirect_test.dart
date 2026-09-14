@@ -359,6 +359,35 @@ void main() {
     expect(location(), Routes.home);
   });
 
+testWidgets('a returning merchant re-enters at the step they reached, not '
+      'at the intro', (tester) async {
+    await boot(tutorialPending: true);
+    session.debugSetUser(user);
+    // They got as far as connecting a page last time.
+    await session.rememberTutorialStep(Routes.tutorialConnect);
+    await pumpApp(tester);
+
+    // The redirect used to answer `Routes.tutorial` here, which walked them
+    // back into T4 — a step that cannot be repeated, because one agent per
+    // user is enforced. There was no `Passer`, no sign-out and no way to
+    // reach T5's deferral, so the only exits were clearing app data or
+    // signing up again.
+    expect(location(), Routes.tutorialConnect);
+  });
+
+  testWidgets('and a deep link still cannot step around it — it lands on the '
+      'remembered step', (tester) async {
+    await boot(tutorialPending: true);
+    session.debugSetUser(user);
+    await session.rememberTutorialStep(Routes.tutorialAgent);
+    await pumpApp(tester);
+
+    router.router.go(Routes.home);
+    await tester.pumpAndSettle();
+
+    expect(location(), Routes.tutorialAgent);
+  });
+
   testWidgets('signing out drops the flag with the session', (tester) async {
     await boot(tutorialPending: true);
     session.debugSetUser(user);

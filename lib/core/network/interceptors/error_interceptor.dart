@@ -4,6 +4,11 @@ import '../../error/app_exception.dart';
 
 /// Turns every `DioException` into an [AppException] before it leaves the
 /// network layer, so nothing above `core/network` imports Dio.
+///
+/// This is the single place that knows the backend's error contract. It reads
+/// `code`, `message`, `fields[]` and `params` (see [AppException] for the
+/// shape) and picks the exception type from the status, so the layers above
+/// branch on a Dart type and a `code` — never on message text.
 class ErrorInterceptor extends Interceptor {
   const ErrorInterceptor();
 
@@ -42,54 +47,120 @@ class ErrorInterceptor extends Interceptor {
     final status = response?.statusCode ?? 0;
     final body = response?.data;
     final map = body is Map<String, dynamic> ? body : null;
-    final message = _messageFrom(map) ?? 'HTTP $status';
+
+    final code = map?['code'] as String?;
+    final message = _messageFrom(map) ?? '';
+    final fields = _fieldsFrom(map);
+    final params = map?['params'] is Map
+        ? Map<String, dynamic>.from(map!['params'] as Map)
+        : const <String, dynamic>{};
 
     return switch (status) {
-      401 || 403 => UnauthorizedException(message),
-      404 => NotFoundException(message),
-      400 || 409 || 422 => ValidationException(
+      400 => ValidationException(
+          message,
+          statusCode: 400,
+          code: code,
+          fields: fields,
+          params: params,
+          data: map,
+        ),
+      401 => UnauthorizedException(
+          message,
+          code: code,
+          params: params,
+          data: map,
+        ),
+      402 => PaymentRequiredException(
+          message,
+          code: code,
+          params: params,
+          data: map,
+        ),
+      403 => ForbiddenException(message, code: code, params: params, data: map),
+      404 => NotFoundException(
+          message,
+          code: code,
+          params: params,
+          data: map,
+        ),
+      409 => ConflictException(message, code: code, params: params, data: map),
+      413 => PayloadTooLargeException(
+          message,
+          code: code,
+          params: params,
+          data: map,
+        ),
+      // 422 keeps `fields` too: a business rule can name the line of an order
+      // it objects to, and a form that has one should still mark it.
+      422 => BusinessRuleException(
+          message,
+          code: code,
+          params: params,
+          data: map,
+        ),
+      429 => RateLimitedException(
+          message,
+          code: code,
+          params: params,
+          data: map,
+        ),
+      >= 500 => ServerException(
           message,
           statusCode: status,
-          data: map,
-          fieldErrors: _fieldErrorsFrom(map),
+          code: code,
+          params: params,
         ),
-      >= 500 => ServerException(message, statusCode: status),
-      _ => UnknownException(message, data: map),
+      _ => UnknownException(message, statusCode: status, code: code, data: map),
     };
   }
 
-  /// The backend is not perfectly consistent about which key carries the human
-  /// message, so all the shapes it actually uses are checked.
+  /// The contract's `message`, which is already in the merchant's language.
+  ///
+  /// `message` first and alone in the normal case. The fallbacks below exist
+  /// only for a body that predates the contract or is malformed — and
+  /// deliberately **not** the `error` key, which the contract documents as a
+  /// legacy HTTP label ("Bad Request", "Conflict") and tells clients to
+  /// ignore. Reading it would put jargon in front of a merchant.
   static String? _messageFrom(Map<String, dynamic>? map) {
     if (map == null) return null;
-    for (final key in const ['message', 'error', 'msg', 'detail']) {
+    for (final key in const ['message', 'msg', 'detail']) {
       final value = map[key];
-      if (value is String && value.isNotEmpty) return value;
+      if (value is String && value.trim().isNotEmpty) return value;
     }
     return null;
   }
 
-  /// Express-validator returns `errors: [{ path/param, msg }]`; some routes
-  /// return `errors: { field: message }`. Both are flattened to one map.
-  static Map<String, String> _fieldErrorsFrom(Map<String, dynamic>? map) {
-    final errors = map?['errors'];
-    if (errors is Map) {
-      return {
-        for (final entry in errors.entries)
-          entry.key.toString(): entry.value.toString(),
-      };
-    }
-    if (errors is List) {
-      final result = <String, String>{};
-      for (final item in errors) {
-        if (item is Map) {
-          final field = (item['path'] ?? item['param'] ?? item['field'])?.toString();
-          final msg = (item['msg'] ?? item['message'])?.toString();
-          if (field != null && msg != null) result[field] = msg;
-        }
+  /// `fields[]` from the contract, falling back to express-validator's
+  /// `errors[]`, which the backend still sends alongside it for older clients.
+  static List<ApiFieldError> _fieldsFrom(Map<String, dynamic>? map) {
+    if (map == null) return const [];
+
+    for (final key in const ['fields', 'errors']) {
+      final raw = map[key];
+      if (raw is! List) continue;
+      final out = <ApiFieldError>[];
+      for (final item in raw) {
+        if (item is! Map) continue;
+        final parsed = ApiFieldError.fromJson(Map<String, dynamic>.from(item));
+        // A nameless or wordless entry cannot be bound to an input or shown,
+        // so it is dropped rather than rendered as an empty error.
+        if (parsed.field.isEmpty || parsed.message.isEmpty) continue;
+        out.add(parsed);
       }
-      return result;
+      if (out.isNotEmpty) return out;
     }
-    return const {};
+
+    // Some routes answer `errors: { field: message }` instead of a list.
+    final raw = map['errors'];
+    if (raw is Map) {
+      return [
+        for (final e in raw.entries)
+          ApiFieldError(
+            field: e.key.toString(),
+            message: e.value.toString(),
+          ),
+      ];
+    }
+    return const [];
   }
 }

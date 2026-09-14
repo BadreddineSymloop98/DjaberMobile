@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 
 import '../../core/utils/validators.dart';
 import 'base_view_model.dart';
+import 'form_draft_store.dart';
 
 /// One text field's state: its controller, its focus, and whether its error
 /// should currently be on screen.
@@ -70,7 +71,62 @@ abstract class FormViewModel extends BaseViewModel {
   }
 
   void _onChanged(FormFieldModel field) {
-    if (field.consumeTextChange()) safeNotify();
+    if (field.consumeTextChange()) {
+      saveDraft();
+      safeNotify();
+    }
+  }
+
+  FormDraftStore? _drafts;
+  String _draftKey = '';
+  Map<String, FormFieldModel> _draftFields = const {};
+
+  /// Keeps this form's values in [store] under [key], so they survive the
+  /// splash rebuilding the screen — see [FormDraftStore].
+  ///
+  /// Puts back whatever is stored, then writes on every text change. [fields]
+  /// names the inputs to keep, under keys of the form's own choosing; **never
+  /// include a password**. Returns what was stored, so a form can restore the
+  /// choices that are not text as well (see [draftExtras]).
+  ///
+  /// A null [store] keeps nothing — which is what a screen built without one,
+  /// such as in a widget test, gets.
+  @protected
+  Map<String, String> keepDraft(
+    FormDraftStore? store,
+    String key,
+    Map<String, FormFieldModel> fields,
+  ) {
+    if (store == null) return const {};
+    final saved = store.read(key);
+    // Restored before the store is attached, so putting the values back does
+    // not write them straight over the choices a subclass restores next.
+    for (final entry in fields.entries) {
+      final value = saved[entry.key];
+      if (value != null) entry.value.controller.text = value;
+    }
+    _drafts = store;
+    _draftKey = key;
+    _draftFields = fields;
+    return saved;
+  }
+
+  /// Non-text values to keep with the fields — a picker's choice, a checkbox.
+  /// Written with the fields; a form restores them itself from what
+  /// [keepDraft] returned.
+  @protected
+  Map<String, String> get draftExtras => const {};
+
+  /// Writes the current values. Runs on every text change; a form calls it
+  /// after changing one of its [draftExtras].
+  @protected
+  void saveDraft() {
+    final store = _drafts;
+    if (store == null) return;
+    store.write(_draftKey, {
+      for (final entry in _draftFields.entries) entry.key: entry.value.value,
+      ...draftExtras,
+    });
   }
 
   /// **The visibility rule.**
@@ -110,6 +166,8 @@ abstract class FormViewModel extends BaseViewModel {
 
   @override
   void dispose() {
+    // Kept only if the splash is what took the screen.
+    _drafts?.release(_draftKey);
     for (final field in fields) {
       field.dispose();
     }

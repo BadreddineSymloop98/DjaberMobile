@@ -54,12 +54,7 @@ dependencies:
 
   cupertino_icons: ^1.0.8
   path_drawing: ^1.0.1
-
-  # NOT ADDED, deliberately: no push transport. The backend speaks Expo, which
-  # Flutter cannot produce a token for, and Q5 — what replaces it — is open.
-  # `core/services/push_service.dart` is the interface to implement once it is
-  # answered; nothing else changes.
-
+  image_picker: ^1.2.3
 dev_dependencies:
   flutter_test:
     sdk: flutter

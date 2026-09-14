@@ -3,9 +3,7 @@ import 'package:flutter/widgets.dart';
 import '../../../core/error/app_exception.dart';
 import '../../../core/utils/validators.dart';
 import '../../../l10n/gen/app_localizations.dart';
-import '../../theme/app_colors.dart';
-import '../../theme/app_spacing.dart';
-import '../../theme/app_typography.dart';
+import '../../widgets/api_error_message.dart';
 
 /// The message for a field-level problem on a tutorial form.
 ///
@@ -20,21 +18,15 @@ String tutorialFieldMessage(FieldError error, L10n l10n) => switch (error) {
       FieldError.invalidEmail || FieldError.tooShort => l10n.productErrRequired,
     };
 
-/// The message for a failed create.
+/// The message for a failed create — now just [apiErrorMessage].
 ///
-/// A transport failure gets the app's own wording, because there is no server
-/// sentence to show. Anything the server refused shows **its** wording — the
-/// backend answers `{ error: "SKU already exists" }` or
-/// `{ error: "Agent limit reached" }`, which is more use than a generic
-/// apology. Those strings are English, the same limitation the web has and
-/// the one §21.6 records.
-String tutorialSubmitMessage(AppException error, L10n l10n) => switch (error) {
-      NetworkException() => l10n.errorNetwork,
-      TimeoutException() => l10n.errorTimeout,
-      ServerException() => l10n.errorServer,
-      UnauthorizedException() => l10n.errorUnauthorized,
-      _ => error.message,
-    };
+/// It used to end in `_ => error.message`, which put the backend's English
+/// in front of a French merchant: `SKU already exists`, `Agent limit
+/// reached`. The error contract fixed that at the source — those are now
+/// `PRODUCT_SKU_ALREADY_EXISTS` and `PLAN_LIMIT_REACHED` with translated
+/// messages — so the fallback is no longer a leak, it is the right answer.
+String tutorialSubmitMessage(AppException error, L10n l10n) =>
+    apiErrorMessage(error, l10n);
 
 /// The form-level error line above a step's action.
 ///
@@ -46,17 +38,5 @@ class TutorialErrorLine extends StatelessWidget {
   final AppException? error;
 
   @override
-  Widget build(BuildContext context) {
-    final current = error;
-    if (current == null) return const SizedBox.shrink();
-
-    return Padding(
-      padding: EdgeInsets.only(bottom: AppSpacing.sm),
-      child: Text(
-        tutorialSubmitMessage(current, L10n.of(context)),
-        style: AppText.actionS.copyWith(color: AppColors.accentAlert),
-        textAlign: TextAlign.center,
-      ),
-    );
-  }
+  Widget build(BuildContext context) => ApiErrorLine(error: error);
 }

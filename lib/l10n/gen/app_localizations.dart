@@ -303,23 +303,35 @@ abstract class L10n {
   /// **'Your session expired. Sign in again.'**
   String get errorUnauthorized;
 
-  /// No description provided for @errorNotFound.
-  ///
-  /// In en, this message translates to:
-  /// **'Not found.'**
-  String get errorNotFound;
-
   /// No description provided for @errorServer.
   ///
   /// In en, this message translates to:
   /// **'Something went wrong on our side.'**
   String get errorServer;
 
-  /// No description provided for @errorUnknown.
+  /// Success toast after POST /api/user-stock/products. Raised on the step that did the write and read on the next one — the root ScaffoldMessenger carries it across the navigation.
   ///
   /// In en, this message translates to:
-  /// **'Something went wrong.'**
-  String get errorUnknown;
+  /// **'Product created'**
+  String get toastProductCreated;
+
+  /// No description provided for @toastAgentCreated.
+  ///
+  /// In en, this message translates to:
+  /// **'AI agent created'**
+  String get toastAgentCreated;
+
+  /// Success toast after the Facebook grant completes and the page is linked to the agent. Not raised when the merchant defers the step — nothing was written.
+  ///
+  /// In en, this message translates to:
+  /// **'Page connected'**
+  String get toastPageConnected;
+
+  /// Shown when the backend rejected the request but did not return a message a merchant can act on — a bare status name like "Unauthorized", the global 404 handler's "Cannot GET /api/…", or an empty body. See preciseBackendMessage in core/error/backend_message.dart. Deliberately admits nothing more than that the action failed, because we genuinely do not know why.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get errorGeneric;
 
   /// No description provided for @langEnglish.
   ///
@@ -510,7 +522,7 @@ abstract class L10n {
   /// No description provided for @obEsc2Body.
   ///
   /// In en, this message translates to:
-  /// **'2,400 DA · created by the AI'**
+  /// **'2400 DA · created by the AI'**
   String get obEsc2Body;
 
   /// No description provided for @obEsc3Kind.
@@ -789,29 +801,113 @@ abstract class L10n {
   /// **'Try another email address'**
   String get authSentTryAnother;
 
-  /// No description provided for @authErrInvalidCredentials.
+  /// 09a — Menu. Every nav label in this block is nav.* in src/lib/i18n.ts verbatim — the drawer is a port of the web sidebar, which is what the web itself collapses behind a hamburger below lg.
   ///
   /// In en, this message translates to:
-  /// **'Invalid email or password'**
-  String get authErrInvalidCredentials;
+  /// **'Overview'**
+  String get menuOverview;
 
-  /// No description provided for @authErrUserExists.
+  /// No description provided for @menuInbox.
   ///
   /// In en, this message translates to:
-  /// **'An account with this email already exists'**
-  String get authErrUserExists;
+  /// **'Inbox'**
+  String get menuInbox;
 
-  /// No description provided for @authErrNetwork.
+  /// No description provided for @menuSocial.
   ///
   /// In en, this message translates to:
-  /// **'Cannot reach the server. Check your connection.'**
-  String get authErrNetwork;
+  /// **'Social Media'**
+  String get menuSocial;
 
-  /// No description provided for @authErrUnknown.
+  /// No description provided for @menuServices.
   ///
   /// In en, this message translates to:
-  /// **'Something went wrong. Please try again.'**
-  String get authErrUnknown;
+  /// **'Services'**
+  String get menuServices;
+
+  /// No description provided for @menuProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Products'**
+  String get menuProducts;
+
+  /// No description provided for @menuAgents.
+  ///
+  /// In en, this message translates to:
+  /// **'Agents'**
+  String get menuAgents;
+
+  /// The web ships this sub-item active:false with a null href, so it is inert on both clients and carries menuSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Commercial'**
+  String get menuCommercial;
+
+  /// No description provided for @menuSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Soon'**
+  String get menuSoon;
+
+  /// No description provided for @menuNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get menuNotifications;
+
+  /// No description provided for @menuAnalytics.
+  ///
+  /// In en, this message translates to:
+  /// **'Analytics'**
+  String get menuAnalytics;
+
+  /// No description provided for @menuReports.
+  ///
+  /// In en, this message translates to:
+  /// **'Reports'**
+  String get menuReports;
+
+  /// No description provided for @menuSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get menuSettings;
+
+  /// Appended for Analyses and Rapports, which are deliberately web-only (brief §14.3) rather than unbuilt. NOT from i18n.ts — ours, and unapproved.
+  ///
+  /// In en, this message translates to:
+  /// **'on the web'**
+  String get menuWebOnly;
+
+  /// Shown when a tutorial step turns out to be already satisfied — a taken SKU on T3, PLAN_LIMIT_REACHED on T4. Not an error: the step's goal is met, so the flow advances and says so. Ours, unapproved, like the rest of the tutorial copy.
+  ///
+  /// In en, this message translates to:
+  /// **'Already done — moving on'**
+  String get tutorialStepAlreadyDone;
+
+  /// First press of the system back button on a screen that would otherwise close the app. Ours, unapproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap back again to leave'**
+  String get exitHint;
+
+  /// Second row of the drawer's plan box. The web sidebar shows connected pages here, not credits (src/app/dashboard/layout.tsx:492) — and credits already have the header pill, so showing both was two readings of one account.
+  ///
+  /// In en, this message translates to:
+  /// **'Pages'**
+  String get menuPages;
+
+  /// Meta line of the plan box. The plan name and the credit figures are read from the session, not hardcoded — the frame's 'Pro / 2 / 10' is one of four conflicting answers in the file (§23.10) and the live account is Individual.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Plan'**
+  String get menuPlan;
+
+  /// Stands in for the plan name before /auth/profile answers. An em dash rather than a guess.
+  ///
+  /// In en, this message translates to:
+  /// **'—'**
+  String get menuPlanUnknown;
 
   /// From menu.signout in src/lib/i18n.ts. Currently on the home stub as a temporary control; belongs in the hamburger menu (brief §16, tier 3) once that exists.
   ///
@@ -1029,6 +1125,234 @@ abstract class L10n {
   /// **'Must be greater than or equal to the cost price'**
   String get productErrBelowCost;
 
+  /// No description provided for @productsEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'CATALOGUE'**
+  String get productsEyebrow;
+
+  /// No description provided for @productsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Products'**
+  String get productsTitle;
+
+  /// No description provided for @productsSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'What your agent sells. {count, plural, =0{No products yet} =1{1 product} other{{count} products}}, {value} of stock value.'**
+  String productsSummary(int count, String value);
+
+  /// No description provided for @productsSearchLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'SEARCH'**
+  String get productsSearchLabel;
+
+  /// No description provided for @productsSearchPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Search products…'**
+  String get productsSearchPlaceholder;
+
+  /// No description provided for @productsFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get productsFilterAll;
+
+  /// No description provided for @productsFilterLowStock.
+  ///
+  /// In en, this message translates to:
+  /// **'Low stock'**
+  String get productsFilterLowStock;
+
+  /// No description provided for @productsSectionAll.
+  ///
+  /// In en, this message translates to:
+  /// **'ALL PRODUCTS'**
+  String get productsSectionAll;
+
+  /// No description provided for @productsSectionLowStock.
+  ///
+  /// In en, this message translates to:
+  /// **'LOW STOCK'**
+  String get productsSectionLowStock;
+
+  /// No description provided for @productsInStock.
+  ///
+  /// In en, this message translates to:
+  /// **'IN STOCK'**
+  String get productsInStock;
+
+  /// No description provided for @productsOutOfStock.
+  ///
+  /// In en, this message translates to:
+  /// **'OUT OF STOCK'**
+  String get productsOutOfStock;
+
+  /// Shown on a row's meta line when the product has a low-stock threshold set. The number is the threshold, not the stock.
+  ///
+  /// In en, this message translates to:
+  /// **'THRESHOLD {count}'**
+  String productsThreshold(int count);
+
+  /// No description provided for @productsEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No products yet'**
+  String get productsEmptyTitle;
+
+  /// No description provided for @productsEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Add your first product and your agent will be able to sell it.'**
+  String get productsEmptyBody;
+
+  /// No description provided for @productsNoMatchTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing matches'**
+  String get productsNoMatchTitle;
+
+  /// No description provided for @productsNoMatchBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Try another word, or clear the filter.'**
+  String get productsNoMatchBody;
+
+  /// No description provided for @productsAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Product'**
+  String get productsAdd;
+
+  /// No description provided for @productAddTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Product'**
+  String get productAddTitle;
+
+  /// No description provided for @productAlertThreshold.
+  ///
+  /// In en, this message translates to:
+  /// **'Alert threshold'**
+  String get productAlertThreshold;
+
+  /// No description provided for @productAlertThresholdHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave empty for no alert'**
+  String get productAlertThresholdHint;
+
+  /// No description provided for @productCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get productCategory;
+
+  /// No description provided for @productCategoryNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No category'**
+  String get productCategoryNone;
+
+  /// No description provided for @productUnit.
+  ///
+  /// In en, this message translates to:
+  /// **'Unit'**
+  String get productUnit;
+
+  /// No description provided for @productUnitNone.
+  ///
+  /// In en, this message translates to:
+  /// **'Select unit'**
+  String get productUnitNone;
+
+  /// No description provided for @productPhotos.
+  ///
+  /// In en, this message translates to:
+  /// **'Add photos'**
+  String get productPhotos;
+
+  /// No description provided for @productPhotosHint.
+  ///
+  /// In en, this message translates to:
+  /// **'JPEG, PNG, WEBP · 5MB MAX'**
+  String get productPhotosHint;
+
+  /// No description provided for @productHasVariants.
+  ///
+  /// In en, this message translates to:
+  /// **'This product has variants'**
+  String get productHasVariants;
+
+  /// No description provided for @productHasVariantsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Sizes or colours — the quantity is set per variant'**
+  String get productHasVariantsHint;
+
+  /// No description provided for @productAddSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Create product'**
+  String get productAddSubmit;
+
+  /// The meta line under a category in the picker — how many products it holds.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No products} =1{1 product} other{{count} products}}'**
+  String productsCount(int count);
+
+  /// No description provided for @productPhotosSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Photos can be added from the web for now'**
+  String get productPhotosSoon;
+
+  /// No description provided for @productPhotosTooLarge.
+  ///
+  /// In en, this message translates to:
+  /// **'Photos over 5 MB were not added.'**
+  String get productPhotosTooLarge;
+
+  /// No description provided for @productPhotosWrongType.
+  ///
+  /// In en, this message translates to:
+  /// **'Only JPEG, PNG, WEBP or GIF photos can be added.'**
+  String get productPhotosWrongType;
+
+  /// No description provided for @productPhotosTooMany.
+  ///
+  /// In en, this message translates to:
+  /// **'Up to 10 photos per product.'**
+  String get productPhotosTooMany;
+
+  /// Toast on 18 when the product was created but the separate photo upload failed. The product exists either way.
+  ///
+  /// In en, this message translates to:
+  /// **'Product created, but its photos could not be uploaded.'**
+  String get productPhotosUploadFailed;
+
+  /// No description provided for @productPhotoRemove.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove photo'**
+  String get productPhotoRemove;
+
+  /// No description provided for @productPhotoCamera.
+  ///
+  /// In en, this message translates to:
+  /// **'Take a photo'**
+  String get productPhotoCamera;
+
+  /// No description provided for @productPhotoGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose from gallery'**
+  String get productPhotoGallery;
+
   /// No description provided for @tutorialAgentSubtitle.
   ///
   /// In en, this message translates to:
@@ -1190,6 +1514,24 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Authorisation cancelled. You can try again whenever you like.'**
   String get oauthDenied;
+
+  /// T5, above the connect buttons. Meta granted access but the backend could not save the page — its callback page reported an error. The backend's own reason is English and technical, so it goes to the log, not here.
+  ///
+  /// In en, this message translates to:
+  /// **'Your page could not be connected. Try again, or connect it later.'**
+  String get connectFailed;
+
+  /// T5, above the connect buttons. The grant went through but no page can be named as the one just connected — none was picked, or nothing new was saved.
+  ///
+  /// In en, this message translates to:
+  /// **'No new page came through. Make sure you pick a page when asked, then try again.'**
+  String get connectNothingNew;
+
+  /// Toast after a page connects but attaching it to the agent fails. The tutorial still moves on.
+  ///
+  /// In en, this message translates to:
+  /// **'Page connected, but not yet linked to your agent. You can link it from your agent\'s settings.'**
+  String get connectLinkFailed;
 
   /// No description provided for @tutorialReadyTitle.
   ///

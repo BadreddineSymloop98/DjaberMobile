@@ -18,6 +18,7 @@ class PrefsStorage {
   static const _kLocale = 'locale_code';
   static const _kOnboardingSeen = 'onboarding_seen';
   static const _kTutorialPending = 'tutorial_pending';
+  static const _kTutorialStep = 'tutorial_step';
 
   static const _kPageDeferred = 'page_connection_deferred';
 
@@ -55,6 +56,35 @@ class PrefsStorage {
   bool get tutorialPending => _prefs.getBool(_kTutorialPending) ?? false;
   Future<void> setTutorialPending(bool value) =>
       _prefs.setBool(_kTutorialPending, value);
+
+  /// The furthest tutorial step the merchant reached, as a route.
+  ///
+  /// **This is what stops the tutorial trapping people.** Without it the
+  /// router sent every returning merchant back to the intro, and the walk
+  /// forward is not repeatable: `T4` creates an agent, one agent per user is
+  /// enforced, and the step only advances on success — so a merchant who
+  /// force-quit after `T4` came back to a wall with no `Passer`, no sign-out
+  /// and no way to reach `T5`'s *Connecter plus tard*. Their only exits were
+  /// clearing app data or signing up again, which is how an app manufactures
+  /// duplicate accounts.
+  ///
+  /// Read back through [Routes.tutorialFlow] rather than trusted: a value from
+  /// an older build, or a hand-edited one, must not be able to send the router
+  /// somewhere that is not a tutorial step.
+  ///
+  /// Shares [tutorialPending]'s two limits, because it shares its storage: it
+  /// is dropped on sign-out (deliberately — the next merchant on a shared
+  /// handset must not inherit someone else's half-finished setup) and it does
+  /// not travel to a second device. Both want a field on the user record, the
+  /// same one [stockMode] wants.
+  String? get tutorialStep => _prefs.getString(_kTutorialStep);
+  Future<void> setTutorialStep(String? route) async {
+    if (route == null) {
+      await _prefs.remove(_kTutorialStep);
+    } else {
+      await _prefs.setString(_kTutorialStep, route);
+    }
+  }
 
   /// True when the merchant reached the end of the tutorial without connecting
   /// a Page, and chose to do it later.
@@ -113,6 +143,7 @@ class PrefsStorage {
     // someone else's half-finished tutorial, or show them someone else's
     // outstanding page connection.
     await _prefs.remove(_kTutorialPending);
+    await _prefs.remove(_kTutorialStep);
     await _prefs.remove(_kPageDeferred);
   }
 }

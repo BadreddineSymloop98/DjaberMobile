@@ -4,8 +4,10 @@ import 'package:djaber_mobile/core/services/push_service.dart';
 import 'package:djaber_mobile/core/utils/screen.dart';
 import 'package:djaber_mobile/data/models/user.dart';
 import 'package:djaber_mobile/data/repositories/agent_repository.dart';
+import 'package:djaber_mobile/data/repositories/catalogue_repository.dart';
 import 'package:djaber_mobile/data/repositories/dashboard_repository.dart';
 import 'package:djaber_mobile/data/repositories/page_repository.dart';
+import 'package:djaber_mobile/data/repositories/product_repository.dart';
 import 'package:djaber_mobile/l10n/gen/app_localizations.dart';
 import 'package:djaber_mobile/presentation/theme/app_colors.dart';
 import 'package:djaber_mobile/presentation/theme/app_theme.dart';
@@ -64,6 +66,12 @@ void main() {
           ),
           Provider<PageRepository>(create: (_) => FakePageRepository()),
           Provider<AgentRepository>(create: (_) => FakeAgentRepository()),
+          // Home's Produits card is a real destination now, so the route it
+          // opens has to be able to build inside this host.
+          Provider<ProductRepository>(create: (_) => FakeProductRepository()),
+          Provider<CatalogueRepository>(
+            create: (_) => FakeCatalogueRepository(),
+          ),
         ],
         child: MaterialApp.router(
           routerConfig: router.router,
@@ -121,8 +129,19 @@ void main() {
   testWidgets('only the current destination is lit', (tester) async {
     final l10n = await pumpApp(tester);
 
-    Color tintOf(String label) =>
-        tester.widget<Text>(find.text(label)).style!.color!;
+    // Scoped to the nav bar. The placeholder screens print their own title
+    // from the same `l10n` key as the tab that opens them — `navStock` is
+    // "STOCK" in both places — so an unscoped `find.text` matches twice the
+    // moment that tab is the active one.
+    Color tintOf(String label) => tester
+        .widget<Text>(
+          find.descendant(
+            of: find.byType(AppBottomNav),
+            matching: find.text(label),
+          ),
+        )
+        .style!
+        .color!;
 
     expect(tintOf(l10n.navHome), AppColors.textPrimary);
     expect(tintOf(l10n.navStock), AppColors.textMuted);
@@ -164,7 +183,7 @@ void main() {
       return l10n;
     }
 
-    for (final label in ['connect', 'products', 'agents']) {
+    for (final label in ['connect', 'agents']) {
       testWidgets('the $label quick action does not', (tester) async {
         final l10n = await pumpTall(tester);
         final title = switch (label) {
@@ -189,6 +208,26 @@ void main() {
         expect(find.byType(SnackBar), findsOneWidget);
       });
     }
+
+    testWidgets('the products quick action goes to the catalogue, not to T3',
+        (tester) async {
+      final l10n = await pumpTall(tester);
+
+      await tester.tap(
+        find.descendant(
+          of: find.byType(ActionCard),
+          matching: find.text(l10n.homeActionProductsTitle),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // `17 — Produits` exists, so this card is a real destination. The rule
+      // this group exists for still holds — and holds better: the standalone
+      // screen is *why* the card does not have to reach the tutorial's own
+      // product step.
+      expect(location(), Routes.products);
+      expect(location().startsWith(Routes.tutorial), isFalse);
+    });
 
     testWidgets('nor does the no-page section', (tester) async {
       final l10n = await pumpTall(tester);

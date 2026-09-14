@@ -6,6 +6,7 @@ import '../../../app/routes.dart';
 import '../../../data/models/stock_mode.dart';
 import '../../../l10n/gen/app_localizations.dart';
 import '../../theme/app_spacing.dart';
+import '../../viewmodels/session_view_model.dart';
 import '../../viewmodels/stock_mode_view_model.dart';
 import '../../widgets/app_icon.dart';
 import '../../widgets/option_card.dart';
@@ -49,10 +50,14 @@ class _TutorialModeScreenState extends State<TutorialModeScreen> {
 
   Future<void> _continue() async {
     final stockMode = context.read<StockModeViewModel>();
+    final session = context.read<SessionViewModel>();
     final router = GoRouter.of(context);
     // Committed on Continuer rather than on tap, so backing out of the step
     // does not leave the app-wide mode changed behind them.
     await stockMode.setMode(_selected);
+    // Recorded before navigating, so a process death between the two resumes
+    // forward rather than back at the intro.
+    await session.rememberTutorialStep(Routes.tutorialProduct);
     router.go(Routes.tutorialProduct);
   }
 

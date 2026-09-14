@@ -9,6 +9,7 @@ import '../../../l10n/gen/app_localizations.dart';
 import '../../theme/app_spacing.dart';
 import '../../theme/app_typography.dart';
 import '../../viewmodels/forgot_password_view_model.dart';
+import '../../viewmodels/form_draft_store.dart';
 import '../../widgets/app_text_field.dart';
 import 'auth_scaffold.dart';
 
@@ -23,7 +24,9 @@ class ForgotPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
-        create: (_) => ForgotPasswordViewModel(),
+        // Looked up optionally, so the screen still builds without the store.
+        create: (context) =>
+            ForgotPasswordViewModel(drafts: context.read<FormDraftStore?>()),
         child: const _ForgotPasswordView(),
       );
 }

@@ -36,7 +36,10 @@ class FakeAuthRepository extends AuthRepository {
   }) async {
     logins++;
     return fails
-        ? const Result.failure(UnauthorizedException())
+        ? const Result.failure(
+            UnauthorizedException('E-mail ou mot de passe incorrect.',
+                code: 'AUTH_INVALID_CREDENTIALS'),
+          )
         : const Result.success(merchant);
   }
 

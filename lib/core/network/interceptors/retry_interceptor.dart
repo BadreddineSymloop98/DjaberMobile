@@ -62,10 +62,19 @@ class RetryInterceptor extends Interceptor {
       DioExceptionType.sendTimeout ||
       DioExceptionType.connectionError =>
         true,
-      // A 502/503/504 from a restarting container is worth one more try;
-      // a 500 is a real bug and repeating it just delays the error.
+      // The contract's retryable set, minus 500.
+      //
+      // 502/503/504 mean Meta, the courier or the AI provider is down, or a
+      // container is restarting — all transient. **429** is retryable by
+      // definition, and the backoff below is exactly what it is asking for.
+      // A 500 is excluded on purpose: the contract calls it "our fault", and
+      // repeating a request the server crashed on just delays the error the
+      // merchant needs to see.
+      //
+      // No 4xx is ever retried. The server has already reasoned about the
+      // request; the answer will not change on its own.
       DioExceptionType.badResponse =>
-        const [502, 503, 504].contains(err.response?.statusCode),
+        const [429, 502, 503, 504].contains(err.response?.statusCode),
       _ => false,
     };
   }

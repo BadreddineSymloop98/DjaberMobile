@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:djaber_mobile/core/network/api_client.dart';
 import 'package:djaber_mobile/core/services/device_info_service.dart';
 import 'package:djaber_mobile/core/services/push_service.dart';
@@ -71,9 +72,16 @@ Future<PrefsStorage> prefsForTest() => PrefsStorage.load();
 /// reaches the network. A test that *does* need a request should inject a
 /// stubbed `Dio` through [ApiClient.new]'s `dio` parameter rather than reuse
 /// this.
-ApiClient apiForTest() => ApiClient(
+/// An [ApiClient] wired to nothing.
+///
+/// Pass [dio] to give it a stubbed transport — that is how
+/// `notification_repository_test` exercises real parsing against canned
+/// bodies without a network, which is the only way to keep a repository's
+/// envelope handling honest.
+ApiClient apiForTest({Dio? dio}) => ApiClient(
       storage: SecureStorage(),
       onUnauthorized: () async {},
+      dio: dio,
     );
 
 Widget authHost(

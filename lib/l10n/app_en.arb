@@ -50,9 +50,20 @@
   },
   "errorTimeout": "The request took too long.",
   "errorUnauthorized": "Your session expired. Sign in again.",
-  "errorNotFound": "Not found.",
   "errorServer": "Something went wrong on our side.",
-  "errorUnknown": "Something went wrong.",
+  "toastProductCreated": "Product created",
+  "@toastProductCreated": {
+    "description": "Success toast after POST /api/user-stock/products. Raised on the step that did the write and read on the next one — the root ScaffoldMessenger carries it across the navigation."
+  },
+  "toastAgentCreated": "AI agent created",
+  "toastPageConnected": "Page connected",
+  "@toastPageConnected": {
+    "description": "Success toast after the Facebook grant completes and the page is linked to the agent. Not raised when the merchant defers the step — nothing was written."
+  },
+  "errorGeneric": "Something went wrong. Please try again.",
+  "@errorGeneric": {
+    "description": "Shown when the backend rejected the request but did not return a message a merchant can act on — a bare status name like \"Unauthorized\", the global 404 handler's \"Cannot GET /api/…\", or an empty body. See preciseBackendMessage in core/error/backend_message.dart. Deliberately admits nothing more than that the action failed, because we genuinely do not know why."
+  },
   "langEnglish": "English",
   "langFrench": "Français",
   "langArabic": "العربية",
@@ -93,7 +104,7 @@
   "obEsc2Kind": "Order to approve",
   "obEsc2Time": "18 min",
   "obEsc2Name": "#1042 — Bab Ezzouar",
-  "obEsc2Body": "2,400 DA · created by the AI",
+  "obEsc2Body": "2400 DA · created by the AI",
   "obEsc3Kind": "Out of stock",
   "obEsc3Time": "1 h",
   "obEsc3Name": "Satin dress — Black — M",
@@ -150,12 +161,50 @@
   "authSentNoReceive": "Didn’t receive the email?",
   "authSentTryAnother": "Try another email address",
   "@_backendErrors": {
-    "description": "Mapped from the backend response, mirroring translateBackendError in src/lib/i18n.ts. Strings are auth.errors.* verbatim."
+    "description": "Field-level rules the CLIENT checks before a request goes out — empty input, malformed e-mail, short password. The server-side equivalents are NOT here any more: since the error contract (brief §24) the backend sends its own translated message and a stable code, so the app displays that instead of choosing copy. Do not add keys here for anything the server can answer."
   },
-  "authErrInvalidCredentials": "Invalid email or password",
-  "authErrUserExists": "An account with this email already exists",
-  "authErrNetwork": "Cannot reach the server. Check your connection.",
-  "authErrUnknown": "Something went wrong. Please try again.",
+  "menuOverview": "Overview",
+  "@menuOverview": {
+    "description": "09a — Menu. Every nav label in this block is nav.* in src/lib/i18n.ts verbatim — the drawer is a port of the web sidebar, which is what the web itself collapses behind a hamburger below lg."
+  },
+  "menuInbox": "Inbox",
+  "menuSocial": "Social Media",
+  "menuServices": "Services",
+  "menuProducts": "Products",
+  "menuAgents": "Agents",
+  "menuCommercial": "Commercial",
+  "@menuCommercial": {
+    "description": "The web ships this sub-item active:false with a null href, so it is inert on both clients and carries menuSoon."
+  },
+  "menuSoon": "Soon",
+  "menuNotifications": "Notifications",
+  "menuAnalytics": "Analytics",
+  "menuReports": "Reports",
+  "menuSettings": "Settings",
+  "menuWebOnly": "on the web",
+  "@menuWebOnly": {
+    "description": "Appended for Analyses and Rapports, which are deliberately web-only (brief §14.3) rather than unbuilt. NOT from i18n.ts — ours, and unapproved."
+  },
+  "tutorialStepAlreadyDone": "Already done — moving on",
+  "@tutorialStepAlreadyDone": {
+    "description": "Shown when a tutorial step turns out to be already satisfied — a taken SKU on T3, PLAN_LIMIT_REACHED on T4. Not an error: the step's goal is met, so the flow advances and says so. Ours, unapproved, like the rest of the tutorial copy."
+  },
+  "exitHint": "Tap back again to leave",
+  "@exitHint": {
+    "description": "First press of the system back button on a screen that would otherwise close the app. Ours, unapproved."
+  },
+  "menuPages": "Pages",
+  "@menuPages": {
+    "description": "Second row of the drawer's plan box. The web sidebar shows connected pages here, not credits (src/app/dashboard/layout.tsx:492) — and credits already have the header pill, so showing both was two readings of one account."
+  },
+  "menuPlan": "Your Plan",
+  "@menuPlan": {
+    "description": "Meta line of the plan box. The plan name and the credit figures are read from the session, not hardcoded — the frame's 'Pro / 2 / 10' is one of four conflicting answers in the file (§23.10) and the live account is Individual."
+  },
+  "menuPlanUnknown": "—",
+  "@menuPlanUnknown": {
+    "description": "Stands in for the plan name before /auth/profile answers. An em dash rather than a guess."
+  },
   "menuSignOut": "Sign out",
   "@menuSignOut": {
     "description": "From menu.signout in src/lib/i18n.ts. Currently on the home stub as a temporary control; belongs in the hamburger menu (brief §16, tier 3) once that exists."
@@ -228,6 +277,66 @@
   },
   "productErrBelowCost": "Must be greater than or equal to the cost price",
 
+  "@_products": {
+    "description": "17 — Produits and 18 — Ajouter un produit. NEW COPY, NOT YET APPROVED — see the note in the brief. The web's product page has i18n keys for its own toolbar (stock.products.*) and those were followed where they exist; its Add Product modal is hardcoded English with no keys at all, so every field label here is the Figma frame's own wording. The six labels shared with T3 are reused rather than duplicated."
+  },
+  "productsEyebrow": "CATALOGUE",
+  "productsTitle": "Products",
+  "productsSummary": "What your agent sells. {count, plural, =0{No products yet} =1{1 product} other{{count} products}}, {value} of stock value.",
+  "@productsSummary": {
+    "placeholders": {
+      "count": { "type": "int" },
+      "value": { "type": "String", "example": "1.24M DA" }
+    }
+  },
+  "productsSearchLabel": "SEARCH",
+  "productsSearchPlaceholder": "Search products…",
+  "productsFilterAll": "All",
+  "productsFilterLowStock": "Low stock",
+  "productsSectionAll": "ALL PRODUCTS",
+  "productsSectionLowStock": "LOW STOCK",
+  "productsInStock": "IN STOCK",
+  "productsOutOfStock": "OUT OF STOCK",
+  "productsThreshold": "THRESHOLD {count}",
+  "@productsThreshold": {
+    "description": "Shown on a row's meta line when the product has a low-stock threshold set. The number is the threshold, not the stock.",
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "productsEmptyTitle": "No products yet",
+  "productsEmptyBody": "Add your first product and your agent will be able to sell it.",
+  "productsNoMatchTitle": "Nothing matches",
+  "productsNoMatchBody": "Try another word, or clear the filter.",
+  "productsAdd": "Add Product",
+
+  "productAddTitle": "Add Product",
+  "productAlertThreshold": "Alert threshold",
+  "productAlertThresholdHint": "Leave empty for no alert",
+  "productCategory": "Category",
+  "productCategoryNone": "No category",
+  "productUnit": "Unit",
+  "productUnitNone": "Select unit",
+  "productPhotos": "Add photos",
+  "productPhotosHint": "JPEG, PNG, WEBP · 5MB MAX",
+  "productHasVariants": "This product has variants",
+  "productHasVariantsHint": "Sizes or colours — the quantity is set per variant",
+  "productAddSubmit": "Create product",
+  "productsCount": "{count, plural, =0{No products} =1{1 product} other{{count} products}}",
+  "@productsCount": {
+    "description": "The meta line under a category in the picker — how many products it holds.",
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "productPhotosSoon": "Photos can be added from the web for now",
+  "productPhotosTooLarge": "Photos over 5 MB were not added.",
+  "productPhotosWrongType": "Only JPEG, PNG, WEBP or GIF photos can be added.",
+  "productPhotosTooMany": "Up to 10 photos per product.",
+  "productPhotosUploadFailed": "Product created, but its photos could not be uploaded.",
+  "@productPhotosUploadFailed": {
+    "description": "Toast on 18 when the product was created but the separate photo upload failed. The product exists either way."
+  },
+  "productPhotoRemove": "Remove photo",
+  "productPhotoCamera": "Take a photo",
+  "productPhotoGallery": "Choose from gallery",
+
   "@_agent": {
     "description": "T4 — Agent IA. The four personality labels map to the backend's own enum values: professional / friendly / casual / technical (schema.prisma, Agent.personality, default professional). Copy is the Figma frame's; the web's agent form is hardcoded English with no i18n keys, so there was nothing to source."
   },
@@ -265,6 +374,18 @@
     "description": "The one way out of the tutorial, on T5 only. T5 is the only step that depends on a third party — the merchant may have no Page yet, or Meta may not grant access — so it is the only one that can be deferred. Worded as later, not skip: the step stays outstanding on home rather than being abandoned."
   },
   "oauthDenied": "Authorisation cancelled. You can try again whenever you like.",
+  "connectFailed": "Your page could not be connected. Try again, or connect it later.",
+  "@connectFailed": {
+    "description": "T5, above the connect buttons. Meta granted access but the backend could not save the page — its callback page reported an error. The backend's own reason is English and technical, so it goes to the log, not here."
+  },
+  "connectNothingNew": "No new page came through. Make sure you pick a page when asked, then try again.",
+  "@connectNothingNew": {
+    "description": "T5, above the connect buttons. The grant went through but no page can be named as the one just connected — none was picked, or nothing new was saved."
+  },
+  "connectLinkFailed": "Page connected, but not yet linked to your agent. You can link it from your agent's settings.",
+  "@connectLinkFailed": {
+    "description": "Toast after a page connects but attaching it to the agent fails. The tutorial still moves on."
+  },
 
   "@_ready": {
     "description": "T6 — Prêt, the tutorial's closing screen. Each line shows what the step actually created, read back from TutorialViewModel."

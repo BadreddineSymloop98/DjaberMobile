@@ -79,6 +79,21 @@ class ApiClient {
         parse,
       );
 
+  /// A multipart POST — file uploads.
+  ///
+  /// A [FormData] can be sent only once, which is safe here because POSTs are
+  /// never retried (see `RetryInterceptor`).
+  Future<Result<T>> postForm<T>(
+    String path, {
+    required FormData form,
+    T Function(dynamic json)? parse,
+    CancelToken? cancelToken,
+  }) =>
+      _send(
+        () => _dio.post<dynamic>(path, data: form, cancelToken: cancelToken),
+        parse,
+      );
+
   Future<Result<T>> put<T>(
     String path, {
     Object? body,

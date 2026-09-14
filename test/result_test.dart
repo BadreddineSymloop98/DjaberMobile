@@ -65,8 +65,8 @@ void main() {
 
     expect(describe(const Result.success(1)), 'value 1');
     expect(
-      describe(const Result.failure(NotFoundException())),
-      'error Not found',
+      describe(const Result.failure(NotFoundException('Produit introuvable.'))),
+      'error Produit introuvable.',
     );
   });
 }

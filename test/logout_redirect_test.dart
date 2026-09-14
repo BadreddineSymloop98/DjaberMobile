@@ -5,6 +5,7 @@ import 'package:djaber_mobile/core/utils/screen.dart';
 import 'package:djaber_mobile/data/models/user.dart';
 import 'package:djaber_mobile/data/repositories/agent_repository.dart';
 import 'package:djaber_mobile/data/repositories/dashboard_repository.dart';
+import 'package:djaber_mobile/data/repositories/notification_repository.dart';
 import 'package:djaber_mobile/data/repositories/page_repository.dart';
 import 'package:djaber_mobile/l10n/gen/app_localizations.dart';
 import 'package:djaber_mobile/presentation/theme/app_theme.dart';
@@ -55,6 +56,10 @@ void main() {
           // Home is a real screen now and reads these. They answer from
           // memory: this suite is about where a navigation lands, not about
           // what the dashboard says.
+          // Sign-out lives in the drawer now, which loads its notification badge.
+          Provider<NotificationRepository>(
+            create: (_) => FakeNotificationRepository(),
+          ),
           Provider<DashboardRepository>(create: (_) => FakeDashboardRepository()),
           Provider<PageRepository>(create: (_) => FakePageRepository()),
           Provider<AgentRepository>(create: (_) => FakeAgentRepository()),

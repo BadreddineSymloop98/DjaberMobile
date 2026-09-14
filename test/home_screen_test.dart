@@ -5,6 +5,7 @@ import 'package:djaber_mobile/data/models/dashboard_stats.dart';
 import 'package:djaber_mobile/data/models/user.dart';
 import 'package:djaber_mobile/data/repositories/agent_repository.dart';
 import 'package:djaber_mobile/data/repositories/dashboard_repository.dart';
+import 'package:djaber_mobile/data/repositories/notification_repository.dart';
 import 'package:djaber_mobile/data/repositories/page_repository.dart';
 import 'package:djaber_mobile/l10n/gen/app_localizations.dart';
 import 'package:djaber_mobile/presentation/screens/home/home_screen.dart';
@@ -95,6 +96,11 @@ void main() {
           Provider<PageRepository>.value(value: pages ?? FakePageRepository()),
           Provider<AgentRepository>.value(
             value: agents ?? FakeAgentRepository(),
+          ),
+          // The menu button opens the drawer, which reads its notification
+          // badge from this.
+          Provider<NotificationRepository>(
+            create: (_) => FakeNotificationRepository(),
           ),
         ],
       ),
@@ -438,8 +444,10 @@ void main() {
     testWidgets('is reachable from the menu button', (tester) async {
       final l10n = await pump(tester);
 
-      // It was on the home stub this screen replaced; the drawer that will
-      // own it (`09a — Menu`) is not built, so it must still be reachable.
+      // Now via the real drawer (`09a — Menu`), which took this over from
+      // the stand-in sheet. The frame draws no sign-out, so that row is a
+      // deliberate divergence — see `menu_drawer.dart`. This test passing
+      // unchanged across the swap is the evidence the path survived it.
       expect(find.text(l10n.menuSignOut), findsNothing);
       await tester.tap(find.byType(MenuButton));
       await tester.pumpAndSettle();

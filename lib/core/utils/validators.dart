@@ -142,6 +142,21 @@ class Validators {
         return parseAmount(value)! < cost ? FieldError.belowCostPrice : null;
       };
 
+  /// The low-stock alert threshold: optional, and legitimately zero.
+  ///
+  /// Deliberately not [quantity]. The server defaults `minQuantity` to 0 and
+  /// treats 0 as "no threshold set" — `Product.isLowStock` reads it that way
+  /// too — so a blank field and a typed `0` are both correct answers. Only a
+  /// negative number or something unparseable is wrong.
+  static FieldError? threshold(String value) {
+    final trimmed = value.trim();
+    if (trimmed.isEmpty) return null;
+    final parsed = int.tryParse(trimmed.replaceAll(' ', ''));
+    if (parsed == null) return FieldError.notANumber;
+    if (parsed < 0) return FieldError.mustBePositive;
+    return null;
+  }
+
   /// An initial quantity: a whole number, greater than zero.
   static FieldError? quantity(String value) {
     final trimmed = value.trim();
