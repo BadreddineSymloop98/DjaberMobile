@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/foundation.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 /// Device and build facts, read once at startup.
@@ -15,6 +16,21 @@ import 'package:package_info_plus/package_info_plus.dart';
 class DeviceInfoService {
   DeviceInfoService._(this.platform, this.manufacturer, this.model,
       this.osVersion, this.appVersion, this.buildNumber);
+
+  /// Fixed values, for tests.
+  ///
+  /// [load] reads two platform channels, which are unavailable in a widget
+  /// test — so anything that merely needs a `DeviceInfoService` to exist gets
+  /// this instead of a channel mock.
+  @visibleForTesting
+  const DeviceInfoService.fake({
+    this.platform = 'android',
+    this.manufacturer = 'Google',
+    this.model = 'Pixel',
+    this.osVersion = 'Android 15',
+    this.appVersion = '1.0.0',
+    this.buildNumber = '1',
+  });
 
   final String platform;
   final String manufacturer;

@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/widgets.dart';
 
+import '../../core/extensions/responsive_extension.dart';
+
 /// Reveals its child by sliding it up into place while fading it in.
 ///
 /// The app's one entrance motion. It is used for the splash logo and for the
@@ -19,7 +21,7 @@ class RiseFade extends StatefulWidget {
     this.animate = true,
     this.delay = Duration.zero,
     this.duration = const Duration(milliseconds: 520),
-    this.offset = 24,
+    this.offset,
     this.curve = Curves.easeOutCubic,
   });
 
@@ -36,14 +38,19 @@ class RiseFade extends StatefulWidget {
 
   final Duration duration;
 
-  /// How far below its final position the child starts, in logical pixels.
-  final double offset;
+  /// How far below its final position the child starts. Defaults to 2.4% of
+  /// the screen height — about 20dp on the 844-tall design frame. A runtime
+  /// value, so it cannot be a default argument.
+  final double? offset;
 
   final Curve curve;
 
   @override
   State<RiseFade> createState() => _RiseFadeState();
 }
+
+/// 2.4% of the screen height — about 20dp on the 844-tall design frame.
+const double _defaultRise = 2.4;
 
 class _RiseFadeState extends State<RiseFade>
     with SingleTickerProviderStateMixin {
@@ -56,6 +63,8 @@ class _RiseFadeState extends State<RiseFade>
     curve: widget.curve,
   );
   Timer? _timer;
+
+  double get _riseDistance => widget.offset ?? _defaultRise.h;
 
   @override
   void initState() {
@@ -104,7 +113,7 @@ class _RiseFadeState extends State<RiseFade>
         // transform is recomputed per frame.
         child: widget.child,
         builder: (context, child) => Transform.translate(
-          offset: Offset(0, widget.offset * (1 - _curve.value)),
+          offset: Offset(0, _riseDistance * (1 - _curve.value)),
           child: child,
         ),
       ),

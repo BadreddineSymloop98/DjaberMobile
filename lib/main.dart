@@ -14,6 +14,7 @@ import 'core/services/push_service.dart';
 import 'core/storage/prefs_storage.dart';
 import 'core/storage/secure_storage.dart';
 import 'core/utils/logger.dart';
+import 'core/utils/screen.dart';
 import 'data/repositories/auth_repository.dart';
 import 'presentation/theme/app_colors.dart';
 import 'presentation/viewmodels/session_view_model.dart';
@@ -36,11 +37,22 @@ void main() {
         );
       };
 
+      // Sizes come from the screen, and the theme is built before the first
+      // frame — so the metrics have to exist before anything is laid out.
+      Screen.seedFromView(
+        WidgetsBinding.instance.platformDispatcher.views.first,
+      );
+
       await SystemChrome.setPreferredOrientations([
-        // Portrait only. Every screen in the design is a phone frame, and the
-        // merchant uses this one-handed while standing with a customer.
+        // Portrait only, and upright only — the app is used one-handed while
+        // standing with a customer waiting, and every frame in the design is a
+        // 390×844 phone. Upside-down portrait is never useful on a phone and
+        // only produces an awkward flip when one is set down.
+        //
+        // This is the Flutter-side lock; the manifest and Info.plist lock it at
+        // the OS level too, which is what stops a rotation being visible during
+        // the launch window before Flutter is running.
         DeviceOrientation.portraitUp,
-        DeviceOrientation.portraitDown,
       ]);
 
       SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(

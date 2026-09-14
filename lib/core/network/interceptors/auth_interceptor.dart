@@ -48,7 +48,21 @@ class AuthInterceptor extends Interceptor {
   ) async {
     final status = err.response?.statusCode;
     final isPublic = _publicPaths.any(err.requestOptions.path.startsWith);
-    if ((status == 401 || status == 403) && !isPublic) {
+
+    // **401 only.**
+    //
+    // This used to end the session on 403 as well, on the reasonable old
+    // assumption that a rejected request meant a rejected token. The error
+    // contract made that wrong and dangerous: 403 is now `PLAN_LIMIT_REACHED`
+    // and `FORBIDDEN`, so a merchant on the Individual plan tapping "create
+    // agent" a second time would have been signed out — losing their place,
+    // for hitting a limit the app should simply have explained.
+    //
+    // 403 is a fact about what the plan allows; only 401 is a fact about the
+    // token. And a 401 has nothing to refresh against — tokens last 7 days
+    // and there is no refresh endpoint — so ending the session is the only
+    // correct response to it.
+    if (status == 401 && !isPublic) {
       await _onUnauthorized();
     }
     handler.next(err);

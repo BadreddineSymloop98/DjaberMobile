@@ -25,6 +25,18 @@ class Api {
 
   // ---- Pages (pages.routes.ts) ----
   static const pages = '/api/pages';
+
+  // OAuth initiation. **GET**, not POST — an earlier note in the brief had
+  // this the other way round. Each answers { authUrl } and the app opens that
+  // URL in a web view; Meta then redirects to the callback below, which the
+  // backend handles server-side.
+  static const connectFacebook = '/api/pages/connect/facebook';
+  static const connectInstagram = '/api/pages/connect/instagram';
+
+  /// The path Meta redirects back to when the merchant grants access. The web
+  /// view watches for it to know the grant is done.
+  static const facebookCallbackPath = '/api/pages/callback/facebook';
+  static const instagramCallbackPath = '/api/pages/callback/instagram';
   static String page(String pageId) => '/api/pages/$pageId';
   static String pageSummary(String pageId) => '/api/pages/$pageId/summary';
   static String pageInsights(String pageId) => '/api/pages/$pageId/insights';
@@ -101,11 +113,20 @@ class Api {
 
   // ---- Agents ----
   static const agents = '/api/user-stock/agents';
+
+  /// The LLM providers switched on, with their model ids — the agent form's
+  /// model picker.
+  static const aiProvidersActive = '/api/user-stock/ai-providers/active';
   static String agent(String id) => '/api/user-stock/agents/$id';
   static String agentTest(String id) => '/api/user-stock/agents/$id/test';
   static String agentMetrics(String id) => '/api/user-stock/agents/$id/metrics';
   static String agentInsights(String id) =>
       '/api/user-stock/agents/$id/insights';
+
+  /// Resolve or dismiss one insight. One segment deeper than [agent], so the
+  /// backend never confuses the two.
+  static String agentInsight(String insightId) =>
+      '/api/user-stock/agents/insights/$insightId';
 
   // ---- Notifications (brief Q7 — the API exists, mobile has never used it) ----
   static const notifications = '/api/user-stock/notifications';

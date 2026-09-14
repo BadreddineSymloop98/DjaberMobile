@@ -47,14 +47,14 @@ dependencies:
   # Dates, numbers and currency in the merchant's locale.
   intl: any
 
+  # The Meta OAuth dialog runs in an in-app web view: the merchant grants
+  # access to Facebook or Instagram without leaving the app, and the token
+  # exchange still happens on our backend, never on the device.
+  webview_flutter: ^4.14.1
+
   cupertino_icons: ^1.0.8
   path_drawing: ^1.0.1
-
-  # NOT ADDED, deliberately: no push transport. The backend speaks Expo, which
-  # Flutter cannot produce a token for, and Q5 — what replaces it — is open.
-  # `core/services/push_service.dart` is the interface to implement once it is
-  # answered; nothing else changes.
-
+  image_picker: ^1.2.3
 dev_dependencies:
   flutter_test:
     sdk: flutter

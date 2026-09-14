@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/extensions/responsive_extension.dart';
 import '../../../l10n/gen/app_localizations.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/app_spacing.dart';
@@ -7,36 +8,125 @@ import '../../theme/app_typography.dart';
 import '../../widgets/app_icon.dart';
 import '../../widgets/djaber_logo.dart';
 
-/// The artwork for the three onboarding slides.
+/// The artwork for the three onboarding slides, transcribed from Figma frames
+/// `02 — Onboarding 1 · Stock`, `03 — Onboarding 2 · IA` and
+/// `04 — Onboarding 3 · Escalade`.
 ///
-/// Real UI rather than illustration, following the Figma frames: the promise on
-/// screen is the product on screen. These are **stand-ins built from the same
-/// tokens**, not the real components — the Escalation Card, List Row and
-/// Shortcut Tile do not exist in code yet. When they do, replace the bodies
-/// here with instances of them and delete the private widgets at the bottom of
-/// this file.
+/// Real UI rather than illustration: the promise on screen is the product on
+/// screen. These are still **stand-ins** — the Escalation Card, List Row and
+/// KPI Tile do not exist as shared components yet — so when they land, replace
+/// the bodies here with instances and delete the private widgets below.
 ///
-/// Nothing here is interactive, and every string is a placeholder from the
-/// `onboardingSample*` keys, not live data.
+/// Every string comes from the `ob*` keys, which are illustrative sample data,
+/// not live values. They are translated all the same: an Arabic first run
+/// showing French product names reads as broken.
+///
+/// The lower items in each stack fade out. That is done with per-item opacity
+/// rather than a gradient `ShaderMask` — four cheap layers instead of one
+/// full-height `saveLayer`, which matters on the hardware in brief §9.
 
-/// Slide 1 — the agent answering a customer.
+/// The design frame is 390 wide with 20 gutters, so the artwork is 350 across
+/// — 89.74% of the screen width. Slides scale it down on a narrower handset
+/// rather than reflowing.
+double get _artworkWidth => 89.74.w;
+
+/// Slide 1 — the stock summary: value, four counters, and the product list.
+class StockArtwork extends StatelessWidget {
+  const StockArtwork({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = L10n.of(context);
+
+    return SizedBox(
+      width: _artworkWidth,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _Surface(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  textBaseline: TextBaseline.alphabetic,
+                  children: [
+                    Text(l10n.obStockValue, style: AppText.numeralL),
+                    SizedBox(width: AppSpacing.sm),
+                    Text(l10n.obStockValueUnit, style: AppText.labelS),
+                  ],
+                ),
+                SizedBox(height: AppSpacing.xs),
+                Text(l10n.obStockValueLabel.toUpperCase(), style: AppText.label),
+              ],
+            ),
+          ),
+          SizedBox(height: AppSpacing.md),
+          Row(
+            children: [
+              for (final (index, kpi) in _kpis(l10n).indexed) ...[
+                Expanded(child: _KpiTile(kpi: kpi)),
+                if (index < 3) SizedBox(width: AppSpacing.sm),
+              ],
+            ],
+          ),
+          SizedBox(height: AppSpacing.md),
+          // The list runs off the bottom of the frame rather than ending, so
+          // it reads as a real screen the merchant is looking into.
+          for (final (index, row) in _rows(l10n).indexed) ...[
+            Opacity(
+              opacity: _fade(index),
+              child: _StockRow(row: row, inStockLabel: l10n.obInStock),
+            ),
+            if (index < 2) SizedBox(height: AppSpacing.xs),
+          ],
+        ],
+      ),
+    );
+  }
+
+  static List<_Kpi> _kpis(L10n l10n) => [
+        _Kpi(l10n.obKpiProducts, l10n.obKpiProductsValue, AppIcons.box,
+            AppColors.textMuted),
+        _Kpi(l10n.obKpiPurchases, l10n.obKpiPurchasesValue, AppIcons.truck,
+            AppColors.textMuted),
+        _Kpi(l10n.obKpiSales, l10n.obKpiSalesValue, AppIcons.dollar,
+            AppColors.accentMoney),
+        _Kpi(l10n.obKpiOrders, l10n.obKpiOrdersValue, AppIcons.clipboard,
+            AppColors.accentOrders),
+      ];
+
+  static List<_StockRowData> _rows(L10n l10n) => [
+        _StockRowData(
+            l10n.obStockRow1Name, l10n.obStockRow1Meta, l10n.obStockRow1Qty),
+        _StockRowData(
+            l10n.obStockRow2Name, l10n.obStockRow2Meta, l10n.obStockRow2Qty),
+        _StockRowData(
+            l10n.obStockRow3Name, l10n.obStockRow3Meta, l10n.obStockRow3Qty),
+      ];
+}
+
+/// Slide 2 — the agent answering a customer. Unchanged.
 class ConversationArtwork extends StatelessWidget {
   const ConversationArtwork({super.key});
 
   @override
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
-    return _Frame(
+    return _Surface(
+      width: _artworkWidth,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _ThreadHeader(name: l10n.onboardingSampleCustomer),
-          const SizedBox(height: AppSpacing.lg),
+          SizedBox(height: AppSpacing.lg),
           _Bubble(text: l10n.onboardingSampleMessage, fromCustomer: true),
-          const SizedBox(height: AppSpacing.sm),
+          SizedBox(height: AppSpacing.sm),
           _Bubble(text: l10n.onboardingSampleReply, fromCustomer: false),
-          const SizedBox(height: AppSpacing.md),
+          SizedBox(height: AppSpacing.md),
           _LiveChip(label: l10n.onboardingSampleHandling),
         ],
       ),
@@ -44,82 +134,48 @@ class ConversationArtwork extends StatelessWidget {
   }
 }
 
-/// Slide 2 — the escalation card, which is the whole reason the app exists.
+/// Slide 3 — the queue.
+///
+/// Four cards, and the order is the argument: conversational, consequential,
+/// operational — the three kinds the model in brief §3 predicts — then a
+/// negotiation, which is the case the AI understands perfectly well and should
+/// hand over anyway (G2). Treated separately these are three features; stacked
+/// like this they are one queue.
 class EscalationArtwork extends StatelessWidget {
   const EscalationArtwork({super.key});
 
   @override
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
-    return _Frame(
-      // The waiting state takes the strong rule and primary-weight label; the
-      // handled state takes the hairline and muted text. That is the web's own
-      // mechanism (`--rule` versus `--rule-strong`) doing the work depth used
-      // to do before the flat decision.
-      border: AppColors.ruleStrong,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              const _Dot(color: AppColors.textPrimary),
-              const SizedBox(width: AppSpacing.sm),
-              Text(
-                l10n.onboardingSampleNeedsHuman.toUpperCase(),
-                style: AppText.label.copyWith(color: AppColors.textPrimary),
-              ),
-            ],
-          ),
-          const SizedBox(height: AppSpacing.lg),
-          Text(l10n.onboardingSampleCustomer, style: AppText.title),
-          const SizedBox(height: AppSpacing.xs),
-          Text(
-            l10n.onboardingSampleEscalation,
-            style: AppText.bodyS,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-/// Slide 3 — a row of shortcut tiles, standing for the stock modules.
-class ShortcutsArtwork extends StatelessWidget {
-  const ShortcutsArtwork({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = L10n.of(context);
-    // Accents are the web's own six, used the way the web uses them: colour
-    // marks a category, never decoration.
-    final tiles = [
-      (l10n.onboardingShortcutProducts, AppIcons.box, AppColors.textMuted),
-      (
-        l10n.onboardingShortcutOrders,
-        AppIcons.shoppingCart,
-        AppColors.accentOrders,
-      ),
-      (
-        l10n.onboardingShortcutMovements,
-        AppIcons.history,
-        AppColors.accentInbound,
-      ),
+    final cards = [
+      _EscalationData(
+          l10n.obEsc1Kind, l10n.obEsc1Time, l10n.obEsc1Name, l10n.obEsc1Body),
+      _EscalationData(
+          l10n.obEsc2Kind, l10n.obEsc2Time, l10n.obEsc2Name, l10n.obEsc2Body),
+      _EscalationData(
+          l10n.obEsc3Kind, l10n.obEsc3Time, l10n.obEsc3Name, l10n.obEsc3Body),
+      _EscalationData(
+          l10n.obEsc4Kind, l10n.obEsc4Time, l10n.obEsc4Name, l10n.obEsc4Body),
     ];
 
-    return ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: 320),
-      child: Row(
+    return SizedBox(
+      width: _artworkWidth,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          for (final (index, (label, icon, accent)) in tiles.indexed) ...[
-            // Flexible rather than a fixed width, so three tiles still fit
-            // inside the gutters on a 320dp handset.
-            Expanded(
-              child: _ShortcutTile(label: label, icon: icon, accent: accent),
+          for (final (index, card) in cards.indexed) ...[
+            Opacity(
+              opacity: _fade(index),
+              // Only the top card is waiting on the merchant, so only it takes
+              // the strong rule and the primary-weight kind label. That is the
+              // web's own `--rule` versus `--rule-strong` mechanism carrying
+              // urgency, which is what depth used to do before the flat
+              // decision in brief §15.
+              child: _EscalationCard(data: card, waiting: index == 0),
             ),
-            if (index < tiles.length - 1) const SizedBox(width: AppSpacing.md),
+            if (index < cards.length - 1)
+              SizedBox(height: AppSpacing.sm),
           ],
         ],
       ),
@@ -127,32 +183,201 @@ class ShortcutsArtwork extends StatelessWidget {
   }
 }
 
+/// How far down the stack an item sits, as an opacity.
+double _fade(int index) => switch (index) {
+      0 => 1,
+      1 => 0.55,
+      2 => 0.28,
+      _ => 0.12,
+    };
+
 // ---------------------------------------------------------------------------
 // Stand-ins. Delete once the real components land.
 // ---------------------------------------------------------------------------
 
+class _Kpi {
+  const _Kpi(this.label, this.value, this.icon, this.accent);
+  final String label;
+  final String value;
+  final List<String> icon;
+  final Color accent;
+}
+
+class _StockRowData {
+  const _StockRowData(this.name, this.meta, this.qty);
+  final String name;
+  final String meta;
+  final String qty;
+}
+
+class _EscalationData {
+  const _EscalationData(this.kind, this.time, this.name, this.body);
+  final String kind;
+  final String time;
+  final String name;
+  final String body;
+}
+
 /// A surface with a hairline — the shape every card in the app takes.
-class _Frame extends StatelessWidget {
-  const _Frame({required this.child, this.border = AppColors.rule});
+class _Surface extends StatelessWidget {
+  const _Surface({
+    required this.child,
+    this.border = AppColors.rule,
+    this.width,
+    this.padding,
+  });
 
   final Widget child;
   final Color border;
+  final double? width;
+  final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      // Fills the gutters on a phone but stops growing on a tablet. A fixed
-      // width would overflow a 320dp handset, which is inside the range this
-      // market actually ships on.
-      width: double.infinity,
-      constraints: const BoxConstraints(maxWidth: 320),
-      padding: const EdgeInsets.all(AppSpacing.gutterTight),
+      width: width,
+      padding: padding ?? EdgeInsets.all(AppSpacing.gutterTight),
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppRadius.card),
         border: Border.all(color: border),
       ),
       child: child,
+    );
+  }
+}
+
+class _KpiTile extends StatelessWidget {
+  const _KpiTile({required this.kpi});
+
+  final _Kpi kpi;
+
+  @override
+  Widget build(BuildContext context) {
+    return _Surface(
+      padding: EdgeInsets.symmetric(
+        horizontal: AppSpacing.sm,
+        vertical: AppSpacing.md,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          AppIcon(kpi.icon, size: 5.13.w, color: kpi.accent), // 20
+          SizedBox(height: AppSpacing.sm),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(kpi.label.toUpperCase(), style: AppText.labelS),
+          ),
+          SizedBox(height: AppSpacing.xs),
+          Text(kpi.value, style: AppText.numeralM),
+        ],
+      ),
+    );
+  }
+}
+
+class _StockRow extends StatelessWidget {
+  const _StockRow({required this.row, required this.inStockLabel});
+
+  final _StockRowData row;
+  final String inStockLabel;
+
+  @override
+  Widget build(BuildContext context) {
+    return _Surface(
+      padding: EdgeInsets.symmetric(
+        horizontal: AppSpacing.gutterTight,
+        vertical: AppSpacing.md,
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  row.name,
+                  style: AppText.title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                SizedBox(height: AppSpacing.xxs),
+                // The rupture row stays muted rather than red, matching the
+                // frame. Depth of the stack, not colour, is what separates
+                // these rows — and `accent/alert` is held back for a real
+                // alert surface rather than spent on sample artwork.
+                Text(
+                  row.meta.toUpperCase(),
+                  style: AppText.labelMeta,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+          SizedBox(width: AppSpacing.sm),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(row.qty, style: AppText.numeralS),
+              SizedBox(height: AppSpacing.xxs),
+              Text(inStockLabel.toUpperCase(), style: AppText.labelS),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _EscalationCard extends StatelessWidget {
+  const _EscalationCard({required this.data, required this.waiting});
+
+  final _EscalationData data;
+  final bool waiting;
+
+  @override
+  Widget build(BuildContext context) {
+    return _Surface(
+      border: waiting ? AppColors.ruleStrong : AppColors.rule,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  data.kind.toUpperCase(),
+                  style: waiting
+                      ? AppText.label.copyWith(color: AppColors.textPrimary)
+                      : AppText.label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              SizedBox(width: AppSpacing.sm),
+              Text(data.time.toUpperCase(), style: AppText.labelS),
+            ],
+          ),
+          SizedBox(height: AppSpacing.md),
+          Text(
+            data.name,
+            style: AppText.title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          SizedBox(height: AppSpacing.xxs),
+          Text(
+            data.body,
+            style: AppText.bodyS,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -166,8 +391,8 @@ class _ThreadHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const DjaberMark(size: 22),
-        const SizedBox(width: AppSpacing.sm),
+        DjaberMark(size: 5.64.w), // 22
+        SizedBox(width: AppSpacing.sm),
         Expanded(child: Text(name, style: AppText.title)),
       ],
     );
@@ -187,10 +412,10 @@ class _Bubble extends StatelessWidget {
           ? AlignmentDirectional.centerStart
           : AlignmentDirectional.centerEnd,
       child: Container(
-        constraints: const BoxConstraints(maxWidth: 220),
-        padding: const EdgeInsets.symmetric(
+        constraints: BoxConstraints(maxWidth: 61.54.w), // 240
+        padding: EdgeInsets.symmetric(
           horizontal: AppSpacing.md,
-          vertical: AppSpacing.sm + 2,
+          vertical: AppSpacing.sm,
         ),
         decoration: BoxDecoration(
           color: fromCustomer ? AppColors.surfaceHigh : AppColors.textPrimary,
@@ -216,9 +441,9 @@ class _LiveChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.sm + 2,
-        vertical: AppSpacing.xs + 2,
+      padding: EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.sm,
       ),
       decoration: BoxDecoration(
         color: AppColors.overlay,
@@ -228,73 +453,18 @@ class _LiveChip extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const _Dot(color: AppColors.live),
-          const SizedBox(width: AppSpacing.sm),
+          Container(
+            width: 1.79.w, // 7
+            height: 1.79.w,
+            decoration: const BoxDecoration(
+              color: AppColors.live,
+              shape: BoxShape.circle,
+            ),
+          ),
+          SizedBox(width: AppSpacing.sm),
           Text(
             label.toUpperCase(),
             style: AppText.labelS.copyWith(color: AppColors.textPrimary),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _Dot extends StatelessWidget {
-  const _Dot({required this.color});
-
-  final Color color;
-
-  @override
-  Widget build(BuildContext context) => Container(
-        width: 7,
-        height: 7,
-        decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-      );
-}
-
-class _ShortcutTile extends StatelessWidget {
-  const _ShortcutTile({
-    required this.label,
-    required this.icon,
-    required this.accent,
-  });
-
-  final String label;
-
-  /// A `d` string from [AppIcons].
-  final String icon;
-
-  final Color accent;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 92,
-      padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(AppRadius.card),
-        border: Border.all(color: AppColors.rule),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          AppIcon(icon, size: 22, color: accent),
-          // Shrinks instead of wrapping. A mono label with letter-spacing runs
-          // wide, and "Mouvements" broke mid-word at 10sp; ellipsising it
-          // would be worse. Scaling down keeps one line in French, English and
-          // Arabic without hand-tuning a size per language.
-          FittedBox(
-            fit: BoxFit.scaleDown,
-            alignment: AlignmentDirectional.centerStart,
-            child: Text(
-              label,
-              style: AppText.labelS.copyWith(color: AppColors.textSecondary),
-              maxLines: 1,
-              softWrap: false,
-            ),
           ),
         ],
       ),

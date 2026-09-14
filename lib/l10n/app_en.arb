@@ -1,7 +1,6 @@
 {
   "@@locale": "en",
   "@@x-note": "Source dictionary. The web app's own source language is English (`DEFAULT_LANG` in src/lib/i18n.ts), so English is the template here too and fr/ar are translations of it. Screen copy is added as screens are built, taken verbatim from src/lib/i18n.ts — do not invent strings that already exist there.",
-
   "appName": "Djaber.ai",
   "@appName": {
     "description": "Product name. Never translated. The wordmark renders 'Djaber' in primary text and '.ai' in secondary."
@@ -10,7 +9,6 @@
   "@appTagline": {
     "description": "From dash.tagline in src/lib/i18n.ts."
   },
-
   "commonBack": "Back",
   "commonDismiss": "Dismiss",
   "commonCancel": "Cancel",
@@ -25,17 +23,15 @@
   "commonNext": "Next",
   "commonSkip": "Skip",
   "commonStart": "Get started",
-
   "@_onboarding": {
     "description": "INVENTED COPY — NOT YET APPROVED. There is no onboarding on the web, so none of this comes from src/lib/i18n.ts. The three slides state the §3 model in order: the AI does the work, the escalation is the point, stock is support. Reconcile with the Figma frames 02–04 before treating as settled."
   },
   "onboardingAnswersTitle": "The agent replies to your customers",
   "onboardingAnswersBody": "It knows your catalogue, your stock and your prices. It answers Facebook and Instagram messages for you, day and night.",
-  "onboardingEscalationTitle": "You step in when it matters",
-  "onboardingEscalationBody": "When the agent can no longer carry a conversation, your phone rings. You take over, reply, and hand it back.",
+  "onboardingEscalationTitle": "You step in when it is needed",
+  "onboardingEscalationBody": "When the AI can no longer follow, it stops and tells you. You reply from your phone, then hand the conversation back to it.",
   "onboardingStockTitle": "Your stock in your pocket",
-  "onboardingStockBody": "Check availability, correct a count, receive a delivery — without going back to a desk.",
-
+  "onboardingStockBody": "Products, purchases, sales and orders. Check a quantity while the customer waits, and correct it on the spot.",
   "onboardingSampleCustomer": "Amina B.",
   "@onboardingSampleCustomer": {
     "description": "Placeholder customer name in the onboarding artwork. Not a real person."
@@ -48,21 +44,719 @@
   "onboardingShortcutProducts": "Products",
   "onboardingShortcutOrders": "Orders",
   "onboardingShortcutMovements": "Movements",
-
   "errorNetwork": "No connection. Check your network and try again.",
   "@errorNetwork": {
     "description": "NetworkException. Shown with a retry action — this market drops connections constantly, so it must not read like a fatal error."
   },
   "errorTimeout": "The request took too long.",
   "errorUnauthorized": "Your session expired. Sign in again.",
-  "errorNotFound": "Not found.",
   "errorServer": "Something went wrong on our side.",
-  "errorUnknown": "Something went wrong.",
-
+  "toastProductCreated": "Product created",
+  "@toastProductCreated": {
+    "description": "Success toast after POST /api/user-stock/products. Raised on the step that did the write and read on the next one — the root ScaffoldMessenger carries it across the navigation."
+  },
+  "toastAgentCreated": "AI agent created",
+  "toastPageConnected": "Page connected",
+  "@toastPageConnected": {
+    "description": "Success toast after the Facebook grant completes and the page is linked to the agent. Not raised when the merchant defers the step — nothing was written."
+  },
+  "errorGeneric": "Something went wrong. Please try again.",
+  "@errorGeneric": {
+    "description": "Shown when the backend rejected the request but did not return a message a merchant can act on — a bare status name like \"Unauthorized\", the global 404 handler's \"Cannot GET /api/…\", or an empty body. See preciseBackendMessage in core/error/backend_message.dart. Deliberately admits nothing more than that the action failed, because we genuinely do not know why."
+  },
   "langEnglish": "English",
   "langFrench": "Français",
   "langArabic": "العربية",
   "@langArabic": {
     "description": "Language names always appear in their own language, matching LANGS in src/lib/i18n.ts."
-  }
+  },
+  "@_obStock": {
+    "description": "Sample data for the stock slide artwork. Illustrative, not live — but translated, because an Arabic first run showing French product names reads as broken."
+  },
+  "obStockValue": "1.24",
+  "obStockValueUnit": "M DA",
+  "obStockValueLabel": "Stock value",
+  "obKpiProducts": "Products",
+  "obKpiProductsValue": "128",
+  "obKpiPurchases": "Purchases",
+  "obKpiPurchasesValue": "6",
+  "obKpiSales": "Sales",
+  "obKpiSalesValue": "24",
+  "obKpiOrders": "Ord",
+  "obKpiOrdersValue": "12",
+  "obInStock": "In stock",
+  "obStockRow1Name": "Satin dress — Black — M",
+  "obStockRow1Meta": "Threshold 5 · Out of stock",
+  "obStockRow1Qty": "0",
+  "obStockRow2Name": "Oud perfume 50 ml",
+  "obStockRow2Meta": "Threshold 10",
+  "obStockRow2Qty": "3",
+  "obStockRow3Name": "Leather bag — Camel",
+  "obStockRow3Meta": "Threshold 5",
+  "obStockRow3Qty": "7",
+  "@_obEscalation": {
+    "description": "Sample data for the escalation slide. The four cards are the three escalation kinds the model predicts — conversational, consequential, operational — plus a negotiation, which is the case the AI understands perfectly and should still hand over."
+  },
+  "obEsc1Kind": "AI stuck",
+  "obEsc1Time": "2 min",
+  "obEsc1Name": "Amina B.",
+  "obEsc1Body": "She wants to change the size — order already paid.",
+  "obEsc2Kind": "Order to approve",
+  "obEsc2Time": "18 min",
+  "obEsc2Name": "#1042 — Bab Ezzouar",
+  "obEsc2Body": "2400 DA · created by the AI",
+  "obEsc3Kind": "Out of stock",
+  "obEsc3Time": "1 h",
+  "obEsc3Name": "Satin dress — Black — M",
+  "obEsc3Body": "0 in stock · 3 orders waiting",
+  "obEsc4Kind": "Negotiation",
+  "obEsc4Time": "3 h",
+  "obEsc4Name": "Sofiane K.",
+  "obEsc4Body": "ndir lik 2 000 DA w nakhdo",
+  "@_auth": {
+    "description": "Auth screen copy. Every string is the web app verbatim from src/lib/i18n.ts, EXCEPT authLoginTitle and authSignupTitle — those two deliberately diverge (the web keeps \"Welcome back\" / \"Create your account\"). See the brief."
+  },
+  "authLoginTitle": "Sign in",
+  "authLoginSubtitle": "Sign in to your account to continue",
+  "authSignupTitle": "Create account",
+  "authSignupSubtitle": "Get started in less than a minute",
+  "authEmail": "Email",
+  "authPassword": "Password",
+  "authFirstName": "First name",
+  "authLastName": "Last name",
+  "authPasswordHint": "At least 8 characters",
+  "authRemember": "Remember me",
+  "authLoginSubmit": "Sign In",
+  "authSignupSubmit": "Create account",
+  "authForgot": "Forgot your password?",
+  "authNoAccount": "Don’t have an account?",
+  "authSignupLink": "Get started",
+  "authHaveAccount": "Already have an account?",
+  "authSigninLink": "Sign In",
+  "authEmailPlaceholder": "you@example.com",
+  "authFirstNamePlaceholder": "Jane",
+  "authLastNamePlaceholder": "Doe",
+  "@_authErrors": {
+    "description": "From auth.errors.* in src/lib/i18n.ts, verbatim."
+  },
+  "authErrEmailRequired": "Email is required",
+  "authErrInvalidEmail": "Please enter a valid email address",
+  "authErrPasswordRequired": "Password is required",
+  "authErrPasswordTooShort": "Password must be at least 8 characters",
+  "authErrFirstNameRequired": "First name is required",
+  "authErrLastNameRequired": "Last name is required",
+  "@_authForgot": {
+    "description": "From auth.forgot.* in src/lib/i18n.ts, verbatim. The web also has reset.*/secure.title/verify.* for its two-column marketing panel — desktop furniture, dropped on mobile. The one fact kept from it is secure.desc, shown under the button."
+  },
+  "authForgotBack": "Back to Login",
+  "authForgotTitle": "Forgot Password?",
+  "authForgotSubtitle": "Enter your email to receive a reset link",
+  "authForgotEmail": "Email Address",
+  "authForgotEmailPlaceholder": "you@company.com",
+  "authForgotSubmit": "Send Reset Link",
+  "authForgotSecure": "Your password reset link is encrypted and expires in 1 hour",
+  "authForgotRemember": "Remember your password?",
+  "authSentTitle": "Check Your Email",
+  "authSentMessage": "We’ve sent a password reset link to",
+  "authSentNoReceive": "Didn’t receive the email?",
+  "authSentTryAnother": "Try another email address",
+  "@_backendErrors": {
+    "description": "Field-level rules the CLIENT checks before a request goes out — empty input, malformed e-mail, short password. The server-side equivalents are NOT here any more: since the error contract (brief §24) the backend sends its own translated message and a stable code, so the app displays that instead of choosing copy. Do not add keys here for anything the server can answer."
+  },
+  "menuOverview": "Overview",
+  "@menuOverview": {
+    "description": "09a — Menu. Every nav label in this block is nav.* in src/lib/i18n.ts verbatim — the drawer is a port of the web sidebar, which is what the web itself collapses behind a hamburger below lg."
+  },
+  "menuInbox": "Inbox",
+  "menuSocial": "Social Media",
+  "menuServices": "Services",
+  "menuProducts": "Products",
+  "menuAgents": "Agents",
+  "menuCommercial": "Commercial",
+  "@menuCommercial": {
+    "description": "The web ships this sub-item active:false with a null href, so it is inert on both clients and carries menuSoon."
+  },
+  "menuSoon": "Soon",
+  "menuNotifications": "Notifications",
+  "menuAnalytics": "Analytics",
+  "menuReports": "Reports",
+  "menuSettings": "Settings",
+  "menuWebOnly": "on the web",
+  "@menuWebOnly": {
+    "description": "Appended for Analyses and Rapports, which are deliberately web-only (brief §14.3) rather than unbuilt. NOT from i18n.ts — ours, and unapproved."
+  },
+  "tutorialStepAlreadyDone": "Already done — moving on",
+  "@tutorialStepAlreadyDone": {
+    "description": "Shown when a tutorial step turns out to be already satisfied — a taken SKU on T3, PLAN_LIMIT_REACHED on T4. Not an error: the step's goal is met, so the flow advances and says so. Ours, unapproved, like the rest of the tutorial copy."
+  },
+  "exitHint": "Tap back again to leave",
+  "@exitHint": {
+    "description": "First press of the system back button on a screen that would otherwise close the app. Ours, unapproved."
+  },
+  "menuPages": "Pages",
+  "@menuPages": {
+    "description": "Second row of the drawer's plan box. The web sidebar shows connected pages here, not credits (src/app/dashboard/layout.tsx:492) — and credits already have the header pill, so showing both was two readings of one account."
+  },
+  "menuPlan": "Your Plan",
+  "@menuPlan": {
+    "description": "Meta line of the plan box. The plan name and the credit figures are read from the session, not hardcoded — the frame's 'Pro / 2 / 10' is one of four conflicting answers in the file (§23.10) and the live account is Individual."
+  },
+  "menuPlanUnknown": "—",
+  "@menuPlanUnknown": {
+    "description": "Stands in for the plan name before /auth/profile answers. An em dash rather than a guess."
+  },
+  "menuSignOut": "Sign out",
+  "@menuSignOut": {
+    "description": "From menu.signout in src/lib/i18n.ts. Currently on the home stub as a temporary control; belongs in the hamburger menu (brief §16, tier 3) once that exists."
+  },
+
+  "@_tutorial": {
+    "description": "The first-run tutorial, frames T1a–T1c. UNAPPROVED COPY: nothing in the web app sources a tutorial, so none of this comes from src/lib/i18n.ts. The French is the Figma file's own wording; the English here and the Arabic are new, because the file carries the tutorial in French only (brief §21.5, §21.10)."
+  },
+  "tutorialStepMode": "Choose your stock mode",
+  "@tutorialStepMode": {
+    "description": "Step 1 of 4. Precedes the product step deliberately: the merchant decides how they manage stock before being asked for an initial quantity."
+  },
+  "tutorialStepProduct": "Create your first product",
+  "tutorialStepAgent": "Create your AI agent",
+  "tutorialStepPage": "Connect your page",
+  "tutorialWelcomeTitle": "Welcome to Djaber.ai",
+  "tutorialWelcomeBody": "Let's get your shop running together. Four steps, and your agent starts answering your customers.",
+  "tutorialStockTitle": "First, your stock",
+  "tutorialStockBody": "You choose how to manage your stock, then you create your first product — name, price, quantity.",
+  "tutorialAgentTitle": "Then your agent",
+  "tutorialAgentBody": "Create it in three fields, connect your Facebook page, and it answers from the first question on.",
+
+  "commonContinue": "Continue",
+  "commonActive": "ACTIVE",
+  "@commonActive": {
+    "description": "The badge on the chosen Option Card. Uppercase in the Label/Micro style; the web's settings page hardcodes its own equivalent in English, so this wording is ours."
+  },
+  "tutorialStepCounter": "STEP {step} OF {total}",
+  "@tutorialStepCounter": {
+    "description": "The counter above the four-segment progress bar on tutorial steps T2-T5. Stored already uppercased per locale rather than upper-cased at the call site, because case does not apply in Arabic.",
+    "placeholders": {
+      "step": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "tutorialModeTitle": "How do you manage your stock?",
+  "tutorialModeSubtitle": "This choice decides what you see in the app. You can change it at any time in settings.",
+  "@_stockMode": {
+    "description": "SOURCED, not invented: these four are the web's own page.dash.settings.simple / .advanced / .simpleDesc / .advancedDesc from src/lib/i18n.ts, verbatim in all three languages. The Figma frame paraphrases the two descriptions; the web wins per brief §17."
+  },
+  "stockModeSimple": "Simple",
+  "stockModeAdvanced": "Advanced",
+  "stockModeSimpleDesc": "Products, Categories & Orders — manage your inventory and orders without the complexity.",
+  "stockModeAdvancedDesc": "Full suite — Suppliers, Clients, Sales, Purchases, Caisse, Movements, Delivery & more.",
+
+  "@_product": {
+    "description": "T3 — Produit. UNAPPROVED COPY: the web's product form labels are hardcoded English in src/app/dashboard/stock/products/page.tsx with no i18n.ts keys behind them, so there was nothing to source. The French is the Figma frame's own; English and Arabic are new. The error messages mirror what backend/src/controllers/user-stock.controller.ts actually enforces on createProduct."
+  },
+  "tutorialProductTitle": "Your first product",
+  "tutorialProductSubtitle": "This is what your agent will sell. The description is what it reads to answer customers.",
+  "tutorialProductSubmit": "Create the product",
+  "productName": "Name",
+  "productNamePlaceholder": "Satin dress — Black",
+  "productSku": "Reference (SKU)",
+  "productSkuPlaceholder": "PRD-001",
+  "productDescription": "Description",
+  "productDescriptionPlaceholder": "Describe the product — the agent uses this to sell it",
+  "productCostPrice": "Cost price (DA)",
+  "productSellingPrice": "Selling price (DA)",
+  "productQuantity": "Initial quantity",
+  "productErrRequired": "This field is required",
+  "productErrNotANumber": "Enter a number",
+  "productErrMustBePositive": "Must be greater than 0",
+  "@productErrMustBePositive": {
+    "description": "The backend rejects a cost price, selling price or initial quantity of 0 outright — so this is a distinct message from 'required', which would be wrong for a field that visibly contains 0."
+  },
+  "productErrBelowCost": "Must be greater than or equal to the cost price",
+
+  "@_products": {
+    "description": "17 — Produits and 18 — Ajouter un produit. NEW COPY, NOT YET APPROVED — see the note in the brief. The web's product page has i18n keys for its own toolbar (stock.products.*) and those were followed where they exist; its Add Product modal is hardcoded English with no keys at all, so every field label here is the Figma frame's own wording. The six labels shared with T3 are reused rather than duplicated."
+  },
+  "productsEyebrow": "CATALOGUE",
+  "productsTitle": "Products",
+  "productsSummary": "What your agent sells. {count, plural, =0{No products yet} =1{1 product} other{{count} products}}, {value} of stock value.",
+  "@productsSummary": {
+    "placeholders": {
+      "count": { "type": "int" },
+      "value": { "type": "String", "example": "1.24M DA" }
+    }
+  },
+  "productsSearchLabel": "SEARCH",
+  "productsSearchPlaceholder": "Search products…",
+  "productsFilterAll": "All",
+  "productsFilterLowStock": "Low stock",
+  "productsSectionAll": "ALL PRODUCTS",
+  "productsSectionLowStock": "LOW STOCK",
+  "productsInStock": "IN STOCK",
+  "productsOutOfStock": "OUT OF STOCK",
+  "productsThreshold": "THRESHOLD {count}",
+  "@productsThreshold": {
+    "description": "Shown on a row's meta line when the product has a low-stock threshold set. The number is the threshold, not the stock.",
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "productsEmptyTitle": "No products yet",
+  "productsEmptyBody": "Add your first product and your agent will be able to sell it.",
+  "productsNoMatchTitle": "Nothing matches",
+  "productsNoMatchBody": "Try another word, or clear the filter.",
+  "productsAdd": "Add Product",
+
+  "productAddTitle": "Add Product",
+  "productAlertThreshold": "Alert threshold",
+  "productAlertThresholdHint": "Leave empty for no alert",
+  "productCategory": "Category",
+  "productCategoryNone": "No category",
+  "productUnit": "Unit",
+  "productUnitNone": "Select unit",
+  "productPhotos": "Add photos",
+  "productPhotosHint": "JPEG, PNG, WEBP · 5MB MAX",
+  "productHasVariants": "This product has variants",
+  "productHasVariantsHint": "Sizes or colours — the quantity is set per variant",
+  "productAddSubmit": "Create product",
+  "productsCount": "{count, plural, =0{No products} =1{1 product} other{{count} products}}",
+  "@productsCount": {
+    "description": "The meta line under a category in the picker — how many products it holds.",
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "productPhotosSoon": "Photos can be added from the web for now",
+  "productPhotosTooLarge": "Photos over 5 MB were not added.",
+  "productPhotosWrongType": "Only JPEG, PNG, WEBP or GIF photos can be added.",
+  "productPhotosTooMany": "Up to 10 photos per product.",
+  "productPhotosUploadFailed": "Product created, but its photos could not be uploaded.",
+  "@productPhotosUploadFailed": {
+    "description": "Toast on 18 when the product was created but the separate photo upload failed. The product exists either way."
+  },
+  "productPhotoRemove": "Remove photo",
+  "productPhotoCamera": "Take a photo",
+  "productPhotoGallery": "Choose from gallery",
+
+  "@_agent": {
+    "description": "T4 — Agent IA. The four personality labels map to the backend's own enum values: professional / friendly / casual / technical (schema.prisma, Agent.personality, default professional). Copy is the Figma frame's; the web's agent form is hardcoded English with no i18n keys, so there was nothing to source."
+  },
+  "tutorialAgentSubtitle": "It answers your customers with your catalogue and your prices. Three fields are enough — everything else can be tuned later.",
+  "tutorialAgentSubmit": "Create the agent",
+  "agentName": "Agent name",
+  "agentNamePlaceholder": "e.g. Sales assistant",
+  "agentPersonality": "Personality",
+  "agentToneProfessional": "Professional",
+  "agentToneProfessionalDesc": "Formal and business-oriented",
+  "agentToneFriendly": "Friendly",
+  "agentToneFriendlyDesc": "Warm and approachable",
+  "agentToneCasual": "Casual",
+  "agentToneCasualDesc": "Relaxed and conversational",
+  "agentToneTechnical": "Technical",
+  "agentToneTechnicalDesc": "Detailed and precise",
+  "agentInstructions": "Instructions",
+  "agentInstructionsPlaceholder": "How it should answer, and when to hand over to you",
+
+  "@_connect": {
+    "description": "T5 — Connecter la page. The three permission lines are the human reading of the scopes connectFacebookPage actually requests: pages_show_list, pages_messaging, pages_read_engagement."
+  },
+  "tutorialConnectTitle": "Connect your page",
+  "tutorialConnectSubtitle": "This is the last step. Your agent answers in that page's inbox — the moment it is connected, it is working.",
+  "connectPermissionsHeading": "Facebook will ask you for",
+  "connectPermissionPages": "See the list of your pages",
+  "connectPermissionMessages": "Read and send the page's messages",
+  "connectPermissionInfo": "Access the page's information",
+  "connectFacebook": "Connect Facebook",
+  "connectInstagram": "Connect Instagram",
+  "oauthLoading": "Loading Facebook…",
+  "oauthLoadingHint": "Facebook's authorisation page appears here.",
+  "connectLater": "Connect later",
+  "@connectLater": {
+    "description": "The one way out of the tutorial, on T5 only. T5 is the only step that depends on a third party — the merchant may have no Page yet, or Meta may not grant access — so it is the only one that can be deferred. Worded as later, not skip: the step stays outstanding on home rather than being abandoned."
+  },
+  "oauthDenied": "Authorisation cancelled. You can try again whenever you like.",
+  "connectFailed": "Your page could not be connected. Try again, or connect it later.",
+  "@connectFailed": {
+    "description": "T5, above the connect buttons. Meta granted access but the backend could not save the page — its callback page reported an error. The backend's own reason is English and technical, so it goes to the log, not here."
+  },
+  "connectNothingNew": "No new page came through. Make sure you pick a page when asked, then try again.",
+  "@connectNothingNew": {
+    "description": "T5, above the connect buttons. The grant went through but no page can be named as the one just connected — none was picked, or nothing new was saved."
+  },
+  "connectLinkFailed": "Page connected, but not yet linked to your agent. You can link it from your agent's settings.",
+  "@connectLinkFailed": {
+    "description": "Toast after a page connects but attaching it to the agent fails. The tutorial still moves on."
+  },
+
+  "@_ready": {
+    "description": "T6 — Prêt, the tutorial's closing screen. Each line shows what the step actually created, read back from TutorialViewModel."
+  },
+  "tutorialReadyTitle": "Your agent is live",
+  "tutorialReadySubtitle": "It is already answering your page's messages, with your catalogue and your prices. Add more products whenever you like.",
+  "tutorialReadyTitlePending": "Almost there",
+  "@tutorialReadyTitlePending": {
+    "description": "T6 when the merchant chose Connecter plus tard on T5. The tutorial still ends here, but with no Page the agent is answering nobody — so the live heading is replaced and the fourth step stays unticked."
+  },
+  "tutorialReadySubtitlePending": "Your catalogue and your agent are ready. All that is left is connecting your page — your agent starts answering the moment it is.",
+  "tutorialReadySubmit": "Open the app",
+  "tutorialReadyModeSimple": "Simple — products, categories and orders",
+  "tutorialReadyModeAdvanced": "Advanced — the full suite",
+
+  "@_home": {
+    "description": "09 — Accueil. Section headings and the two figure labels come from page.dash.* in src/lib/i18n.ts; the rest is the Figma frame's own French, translated here. À traiter has no web equivalent — the escalation queue is the mobile app's reason to exist (brief §2) — so that copy is ours."
+  },
+  "homeGreetingMorning": "Good morning",
+  "homeGreetingAfternoon": "Good afternoon",
+  "homeGreetingEvening": "Good evening",
+  "@homeGreetingEvening": {
+    "description": "From page.dash.greeting.* in src/lib/i18n.ts, which splits the day the same three ways. Rendered as '{greeting}, {firstName}'."
+  },
+  "homeSnapshot": "here is a snapshot",
+  "homeQueue": "To handle",
+  "homeQueueStuck": "AI stuck",
+  "@homeQueueStuck": {
+    "description": "The kind on an escalation card. Every item in this queue is a conversation the backend flagged aiPaused, which is exactly 'the AI stopped and is waiting for you' — so there is one kind, not several."
+  },
+  "homeQueueEmpty": "Nothing waiting. The agent is handling every conversation.",
+  "homeQueueNoPage": "No page connected, so no conversation can reach you yet.",
+  "homeQueueMore": "+ {count} more",
+  "@homeQueueMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeAgeMinutes": "{count} MIN",
+  "@homeAgeMinutes": {
+    "description": "How long an escalation has been waiting. Uppercase in the Label/Meta style, stored cased per locale because case does not apply in Arabic.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeAgeHours": "{count} H",
+  "@homeAgeHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeAgeDays": "{count} D",
+  "@homeAgeDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeNoPageTitle": "No page connected",
+  "homeNoPageBody": "Your agent has nowhere to answer yet. Connect your Facebook or Instagram page and it starts working on the first message.",
+  "@homeNoPageBody": {
+    "description": "Sits above À traiter when the merchant has no Page — including one who chose Connecter plus tard on T5. The queue can only be empty in that state, so the screen explains the silence instead of showing an empty section."
+  },
+  "homeOverview": "Overview",
+  "homeKpiPages": "Connected pages",
+  "homeKpiProducts": "Products",
+  "homeKpiLowStock": "{count} low stock",
+  "@homeKpiLowStock": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeKpiRevenue": "Revenue (30d)",
+  "homeKpiSales": "{count, plural, one{{count} sale} other{{count} sales}}",
+  "@homeKpiSales": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeKpiStockValue": "Stock value",
+  "homeQuickActions": "Quick actions",
+  "homeActionConnectTitle": "Connect a page",
+  "homeActionConnectBody": "Link your Facebook page",
+  "homeActionProductsTitle": "Add products",
+  "homeActionProductsBody": "Build your catalogue",
+  "homeActionAgentsTitle": "AI agents",
+  "homeActionAgentsBody": "Manage your assistants",
+  "homeYourPages": "Your pages",
+  "homeManageAll": "MANAGE ALL →",
+  "homePagesEmpty": "No page connected yet.",
+  "homePageActive": "ACTIVE",
+  "homePageInactive": "PAUSED",
+  "homePageConnectedOn": "CONNECTED {date}",
+  "@homePageConnectedOn": {
+    "description": "The second line of a page row, beside the network name. Uppercase in the Label/Meta style.",
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "MMMMd"
+      }
+    }
+  },
+  "platformFacebook": "Facebook",
+  "platformInstagram": "Instagram",
+  "homeGetStarted": "Get started",
+  "homeStepConnectTitle": "Connect a page",
+  "homeStepConnectBody": "Link Facebook to start chatting",
+  "homeStepProductsTitle": "Add products",
+  "homeStepProductsBody": "Build up your catalogue",
+  "homeStepAgentTitle": "Configure your AI agent",
+  "homeStepAgentBody": "Set the tone and the behaviour",
+  "homeStepSaleTitle": "Make your first sale",
+  "homeStepSaleBody": "Watch the AI handle the requests",
+  "@_nav": {
+    "description": "The five bottom-nav destinations of brief §16. Short by design — the frame gives each label 78px."
+  },
+  "navHome": "HOME",
+  "navQueue": "QUEUE",
+  "navInbox": "INBOX",
+  "navStock": "STOCK",
+  "navOrders": "ORD",
+  "commonNotBuilt": "not built yet",
+  "@commonNotBuilt": {
+    "description": "Shown when a control leads to a screen that does not exist yet. Says so rather than doing nothing, which reads as a broken tap."
+  },
+  "agentsTitle": "AI Agents",
+  "agentsSubtitle": "Create and manage AI agents that sell your products on connected pages",
+  "agentsActive": "AI active",
+  "agentsInactive": "AI paused",
+  "agentsStatPages": "Pages",
+  "agentsStatProducts": "Products",
+  "agentsStatModel": "Model",
+  "agentsAllProducts": "All",
+  "agentsNoPages": "Not answering on any page yet",
+  "agentsPause": "Pause the agent",
+  "agentsResume": "Resume the agent",
+  "agentsPausedToast": "Agent paused — it no longer replies",
+  "agentsResumedToast": "Agent active — it replies again",
+  "agentsEmptyTitle": "No agent yet",
+  "agentsEmptyBody": "Create an AI agent to automatically respond to messages on your connected pages and sell your products.",
+  "agentsEmptyCta": "Create your agent",
+  "@agentsEmptyCta": {
+    "description": "14 — Agents IA, the button on the no-agent state. Leads to 15 — Agents · démarrer (F15), not built yet."
+  },
+  "agentsActionInsights": "Issues to review",
+  "agentsActionTest": "Test the agent",
+  "agentsActionDetails": "Details and stats",
+  "agentsActionDelete": "Delete the agent",
+  "agentsDeleteTitle": "Delete the agent?",
+  "agentsDeleteBody": "{name} will be deleted and will stop replying on your pages. You can create a new agent afterwards.",
+  "@agentsDeleteBody": {"placeholders":{"name":{"type":"String"}}},
+  "agentsDeleteConfirm": "Delete",
+  "agentsDeletedToast": "Agent deleted",
+  "agentsInsightsTitle": "Pending issues",
+  "agentsInsightsEmpty": "No pending issues — your agent is handling everything.",
+  "agentsInsightsNone": "Nothing here.",
+  "agentsInsightUnclear": "Unclear",
+  "agentsInsightUnknown": "Unknown topic",
+  "agentsInsightHandoff": "Handed to you",
+  "agentsInsightCustomer": "Customer",
+  "agentsInsightAgent": "AI response",
+  "agentsInsightResolve": "Resolve",
+  "agentsInsightDismiss": "Dismiss",
+  "agentsInsightAddAndResolve": "Add and resolve",
+  "agentsInsightInstructionHint": "Add an instruction so the agent handles this better next time…",
+  "agentsInsightResolved": "Resolved",
+  "agentsInsightDismissed": "Dismissed",
+  "agentsInsightPending": "Pending",
+  "agentsInsightFailed": "The issue could not be updated.",
+  "agentsTestTitle": "Test — {name}",
+  "@agentsTestTitle": {"placeholders":{"name":{"type":"String"}}},
+  "agentsTestEmpty": "Send a message to test",
+  "agentsTestNote": "A dry run: no credits used, no orders created.",
+  "agentsTestPlaceholder": "Type a message…",
+  "agentsTestSend": "Send",
+  "agentsTestFailed": "No reply — try again.",
+  "agentsDetailsConversations": "Conversations",
+  "agentsDetailsConversationsFoot": "{received} received · {sent} sent",
+  "@agentsDetailsConversationsFoot": {"placeholders":{"received":{"type":"int"},"sent":{"type":"int"}}},
+  "agentsDetailsMessages": "Messages",
+  "agentsDetailsLastActive": "Last: {date}",
+  "@agentsDetailsLastActive": {"placeholders":{"date":{"type":"String"}}},
+  "agentsDetailsNoActivity": "No activity yet",
+  "agentsDetailsOrders": "Orders created",
+  "agentsDetailsResolvedFoot": "{count} resolved",
+  "@agentsDetailsResolvedFoot": {"placeholders":{"count":{"type":"int"}}},
+  "agentsDetailsInsights": "Agent insights",
+  "agentsDetailsAll": "All",
+  "agentsDetailsInstructions": "Custom instructions",
+  "agentsDetailsNoInstructions": "No instructions yet.",
+  "agentsDetailsEdit": "Edit",
+  "agentsDetailsSave": "Save",
+  "agentsDetailsSaved": "Instructions saved",
+  "agentsDetailsSavedMerged": "Instructions saved — lines added on the web were kept",
+  "@agentsDetailsSavedMerged": {
+    "description": "Saving on the phone after the web appended instructions (an insight resolve) while the editor was open. Ours, unapproved."
+  },
+  "agentsDetailsConflictTitle": "Changed on the web",
+  "agentsDetailsConflictBody": "These instructions were changed while you were editing. The current version:",
+  "agentsDetailsUseLatest": "Use this version",
+  "agentsDetailsKeepMine": "Replace with mine",
+  "agentsNotFound": "Agent not found.",
+  "agentsTestEmptyFor": "Send a message to test {name}",
+  "@agentsTestEmptyFor": {"placeholders":{"name":{"type":"String"}}},
+  "agentsTestProduct": "Product",
+  "agentsTestProductId": "ID: {id}…",
+  "@agentsTestProductId": {"placeholders":{"id":{"type":"String"}}},
+  "agentsPresetsTitle": "Start with a ready-made agent",
+  "agentsPresetsBody": "Each one is fully configured for Algerian selling — Darija, Arabic and French, delivery quoting, and order handling. Pick one to launch in seconds, then fine-tune anything.",
+  "agentsPresetVisionVoice": "VISION + VOICE",
+  "agentsPresetVoice": "VOICE",
+  "agentsPresetCloserTagline": "Turns conversations into confirmed orders",
+  "agentsPresetCloser1": "Guides the customer from question to confirmed order",
+  "agentsPresetCloser2": "Quotes delivery per wilaya and closes with the full total",
+  "agentsPresetCloser3": "Understands photos and voice notes",
+  "agentsPresetSupportTagline": "Answers fast, escalates problems to you",
+  "agentsPresetSupport1": "Handles product and order questions politely",
+  "agentsPresetSupport2": "Escalates complaints and refunds to a human",
+  "agentsPresetSupport3": "Calm, accurate, and to the point",
+  "agentsPresetAdvisorTagline": "Helps customers pick the right product",
+  "agentsPresetAdvisor1": "Compares options and explains differences",
+  "agentsPresetAdvisor2": "Matches a customer photo to your catalog",
+  "agentsPresetAdvisor3": "Great for catalogs with variants and specs",
+  "agentsPresetExpressTagline": "Ultra-fast replies for high message volume",
+  "agentsPresetExpress1": "Short, quick answers for busy pages",
+  "agentsPresetExpress2": "Lowest credit use — text and voice only",
+  "agentsPresetExpress3": "Still places and cancels orders",
+  "agentsPresetUse": "Use this agent  →",
+  "agentsPresetOwn": "Prefer to build your own?",
+  "agentsPresetScratch": "Start from scratch",
+  "agentsCreatedToast": "Agent created",
+  "agentFormSubtitle": "Set up an agent to answer your conversations. Only the name is required — everything else has a default.",
+  "@agentFormSubtitle": {
+    "description": "15b — Partir de zéro, the full agent form. The web's AgentForm.tsx is hardcoded English and has no i18n keys; section names follow it, the rest is ours and unapproved."
+  },
+  "agentFormBasics": "Basic information",
+  "agentFormDescription": "Description",
+  "agentFormDescriptionPlaceholder": "Briefly describe what this agent does…",
+  "agentFormInstructions": "Custom instructions",
+  "agentFormInstructionsPlaceholder": "How to respond, what to avoid, how to handle certain cases…",
+  "agentFormInstructionsHint": "These instructions guide the agent’s behavior in conversations.",
+  "agentFormAdvanced": "Advanced settings",
+  "agentFormAdvancedHint": "Optional — sensible defaults apply.",
+  "agentFormBehavior": "Behavior",
+  "agentFormBehaviorSummary": "Closing · Human handoff",
+  "agentFormClosing": "Conversation closing",
+  "agentFormClosingPlaceholder": "Examples:\n• After an order: “Thank you! Your order is on its way.”\n• Customer says bye: “Thanks for chatting, come back anytime!”\n• Angry customer: “Sorry — let me get a human to help you.”",
+  "agentFormClosingHint": "When and how the AI closes conversations. If empty, it uses sensible defaults (thanks after an order, answers goodbyes).",
+  "agentFormHandoff": "Human intervention rules",
+  "agentFormHandoffPlaceholder": "Examples:\n• Refund or return → stop the AI, notify me\n• Discount request → let me handle it\n• Complaint → transfer the conversation to me",
+  "agentFormHandoffHint": "When the AI should stop and let a human take over. Normal greetings (slm, cava, hi) are always handled by the AI.",
+  "agentFormDisplay": "Product display",
+  "agentFormDisplayDefault": "Default style",
+  "agentFormDisplayCustom": "Custom",
+  "agentFormDisplayHint": "How the AI presents products. Tap a tag to insert it — the AI fills in real product data.",
+  "agentFormTemplate": "Template",
+  "agentFormTemplatePlaceholder": "Tap the tags above or type here…",
+  "agentFormTagCard": "Product card",
+  "agentFormTagName": "Name",
+  "agentFormTagPrice": "Price (DA)",
+  "agentFormTagDescription": "Description",
+  "agentFormTagStock": "Stock qty",
+  "agentFormTagNewLine": "↵ New line",
+  "agentFormPreview": "Preview",
+  "agentFormPreviewLive": "Live preview",
+  "agentFormPreviewCustomer": "Show me your products",
+  "agentFormPreviewDefault": "Here’s what we have!\n[PRODUCT_CARD]\nWould you like to order?",
+  "agentFormPreviewSampleName": "Sample product",
+  "agentFormPreviewSampleDescription": "A great product",
+  "agentFormModel": "AI model",
+  "agentFormModelSummary": "{model} · {temperature} · {tokens} tokens",
+  "@agentFormModelSummary": {
+    "placeholders": {
+      "model": {"type": "String"},
+      "temperature": {"type": "String"},
+      "tokens": {"type": "int"}
+    }
+  },
+  "agentFormModelPicker": "Model",
+  "agentFormModelCost": "≈ {usd} / 1000 msgs",
+  "@agentFormModelCost": {
+    "description": "The web's costPer1000Label. usd arrives with its dollar sign.",
+    "placeholders": {
+      "usd": {"type": "String"}
+    }
+  },
+  "agentFormModelsLoading": "Loading available models…",
+  "agentFormModelsUnavailable": "AI models are temporarily unavailable. Please try again later.",
+  "agentFormTraitBestQuality": "Best quality",
+  "agentFormTraitFastAffordable": "Fast & affordable",
+  "agentFormTraitLongContext128k": "128k context",
+  "agentFormTraitLegacyFast": "Legacy, fast",
+  "agentFormTraitBestBalanced": "Best balanced",
+  "agentFormTraitFastCheap": "Fast & cheap",
+  "agentFormTraitMostCapable": "Most capable",
+  "agentFormTraitLatestFast": "Latest, fast",
+  "agentFormTraitLongContext1m": "1M context",
+  "agentFormTraitBestOpenSource": "Best open-source",
+  "agentFormTraitUltraFast": "Ultra fast",
+  "agentFormTraitMixtureOfExperts": "MoE, 32k context",
+  "agentFormTraitReasoning": "Reasoning model",
+  "agentFormTemperature": "Temperature",
+  "agentFormPrecise": "Precise",
+  "agentFormCreative": "Creative",
+  "agentFormMaxTokens": "Max tokens",
+  "agentFormMaxTokensHint": "Maximum response length · 100 – 4096",
+  "agentFormImages": "Image recognition",
+  "agentFormImagesHint": "The AI sees customer photos and compares them with your products. 5 credits per image (vs 1 for text).",
+  "agentFormVoice": "Voice notes",
+  "agentFormVoiceHint": "The AI transcribes voice notes (AR, FR, EN, Darja). 3 credits per note. When off, the agent asks for a text instead.",
+  "agentFormDelay": "Response delay",
+  "agentFormDelayValue": "{seconds} s",
+  "@agentFormDelayValue": {
+    "placeholders": {
+      "seconds": {"type": "int"}
+    }
+  },
+  "agentFormDelayMax": "10 s",
+  "agentFormDelayHint": "Waits for more messages before replying — customers often send several short ones, and this combines them.",
+  "agentFormPages": "Connected pages",
+  "agentFormPagesHint": "The pages this agent answers on. Each page can only have one agent.",
+  "agentFormPagesSummary": "{selected} of {total} selected",
+  "@agentFormPagesSummary": {
+    "placeholders": {
+      "selected": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "agentFormPagesCount": "{selected} of {total}",
+  "@agentFormPagesCount": {
+    "placeholders": {
+      "selected": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "agentFormPagesNone": "No pages connected",
+  "agentFormPagesEmpty": "No pages connected yet. Connect a Facebook or Instagram page first, then link it to this agent.",
+  "agentFormPageTaken": "Already on {agent}",
+  "@agentFormPageTaken": {
+    "placeholders": {
+      "agent": {"type": "String"}
+    }
+  },
+  "agentFormPageActive": "Active",
+  "agentFormPageInactive": "Inactive",
+  "agentFormSelectAll": "Select all",
+  "agentFormClear": "Clear",
+  "agentFormProducts": "Products",
+  "agentFormSellAll": "Sell all products",
+  "agentFormSellAllHint": "The agent knows your entire catalog. Turn off to choose.",
+  "agentFormProductsAll": "All products",
+  "agentFormProductsChosen": "{count, plural, =0{No product chosen} =1{1 product chosen} other{{count} products chosen}}",
+  "@agentFormProductsChosen": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "agentFormProductSearch": "Search",
+  "agentFormProductSearchPlaceholder": "Search products…",
+  "agentFormProductsNone": "No products available",
+  "agentFormProductsNoMatch": "No products match your search",
+  "agentsNewTitle":"New agent"
 }
