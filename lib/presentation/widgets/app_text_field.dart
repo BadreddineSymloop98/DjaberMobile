@@ -28,6 +28,7 @@ class AppTextField extends StatelessWidget {
     required this.focusNode,
     this.isRequired = false,
     this.hint,
+    this.sentenceHint = false,
     this.placeholder,
     this.errorText,
     this.action,
@@ -39,6 +40,7 @@ class AppTextField extends StatelessWidget {
     this.textCapitalization = TextCapitalization.none,
     this.autofillHints,
     this.onSubmitted,
+    this.minLines = 1,
   });
 
   /// Rendered uppercase, matching every other label in the app.
@@ -58,6 +60,11 @@ class AppTextField extends StatelessWidget {
   /// Standing rule for the field, shown when there is no error.
   final String? hint;
 
+  /// Sets [hint] as a sentence in `Body`, `text/muted`, instead of the
+  /// uppercase mono rule. For hints that explain rather than constrain — the
+  /// agent form's run to two lines, which tracked 9px mono cannot carry.
+  final bool sentenceHint;
+
   final String? placeholder;
 
   /// When non-null the field is in its error state.
@@ -74,6 +81,10 @@ class AppTextField extends StatelessWidget {
   final TextCapitalization textCapitalization;
   final Iterable<String>? autofillHints;
   final ValueChanged<String>? onSubmitted;
+
+  /// Above 1 the input becomes a text area: it opens this many lines tall and
+  /// grows with its content. The web's `<textarea rows>`, for the agent form.
+  final int minLines;
 
   bool get _hasError => errorText != null;
 
@@ -102,10 +113,11 @@ class AppTextField extends StatelessWidget {
           textCapitalization: textCapitalization,
           autofillHints: autofillHints,
           onSubmitted: onSubmitted,
+          minLines: minLines,
         ),
         if (_hasError || hint != null) ...[
           SizedBox(height: 1.54.w), // 6
-          _Footnote(errorText: errorText, hint: hint),
+          _Footnote(errorText: errorText, hint: hint, sentence: sentenceHint),
         ],
       ],
     );
@@ -175,6 +187,7 @@ class _Input extends StatelessWidget {
     required this.textCapitalization,
     required this.autofillHints,
     required this.onSubmitted,
+    required this.minLines,
   });
 
   final TextEditingController controller;
@@ -188,9 +201,11 @@ class _Input extends StatelessWidget {
   final TextCapitalization textCapitalization;
   final Iterable<String>? autofillHints;
   final ValueChanged<String>? onSubmitted;
+  final int minLines;
 
   @override
   Widget build(BuildContext context) {
+    final multiline = minLines > 1;
     return AnimatedBuilder(
       // Repaints the border when focus changes, without making the whole
       // screen rebuild for it.
@@ -207,25 +222,31 @@ class _Input extends StatelessWidget {
 
         return Container(
           // Same height as a Primary Button, from the one control token, so a
-          // field and the button under it line up.
-          height: AppSize.control,
-          alignment: AlignmentDirectional.centerStart,
+          // field and the button under it line up. A text area sizes to its
+          // lines instead.
+          height: multiline ? null : AppSize.control,
+          alignment: multiline ? AlignmentDirectional.topStart : AlignmentDirectional.centerStart,
           decoration: BoxDecoration(
             color: AppColors.surface,
             borderRadius: BorderRadius.circular(AppRadius.input),
             border: Border.all(color: border, width: AppStroke.hairline),
           ),
-          padding: EdgeInsets.symmetric(horizontal: AppSpacing.md),
+          padding: EdgeInsets.symmetric(
+            horizontal: AppSpacing.md,
+            vertical: multiline ? AppSpacing.md : 0,
+          ),
           child: TextField(
             controller: controller,
             focusNode: focusNode,
-            keyboardType: keyboardType,
-            textInputAction: textInputAction,
+            keyboardType: multiline ? TextInputType.multiline : keyboardType,
+            textInputAction: multiline ? TextInputAction.newline : textInputAction,
             inputFormatters: inputFormatters,
             obscureText: obscureText,
             textCapitalization: textCapitalization,
             autofillHints: autofillHints,
             onSubmitted: onSubmitted,
+            minLines: multiline ? minLines : null,
+            maxLines: multiline ? null : 1,
             style: AppText.bodyS.copyWith(color: AppColors.textPrimary),
             cursorColor: AppColors.textPrimary,
             cursorWidth: 1.5,
@@ -240,6 +261,7 @@ class _Input extends StatelessWidget {
               errorBorder: InputBorder.none,
               focusedErrorBorder: InputBorder.none,
               hintText: placeholder,
+              hintMaxLines: multiline ? minLines + 2 : 1,
               // `text/muted`, not the `text/secondary` [AppText.bodyS] carries.
               //
               // Two reasons, and they agree. The Figma `Text Field` component
@@ -265,10 +287,11 @@ class _Input extends StatelessWidget {
 /// The hint slot — carries the error when there is one, the standing rule
 /// otherwise. Same slot for both so the field keeps its height.
 class _Footnote extends StatelessWidget {
-  const _Footnote({required this.errorText, required this.hint});
+  const _Footnote({required this.errorText, required this.hint, required this.sentence});
 
   final String? errorText;
   final String? hint;
+  final bool sentence;
 
   @override
   Widget build(BuildContext context) {
@@ -277,6 +300,9 @@ class _Footnote extends StatelessWidget {
         errorText!,
         style: AppText.actionS.copyWith(color: AppColors.accentAlert),
       );
+    }
+    if (sentence) {
+      return Text(hint!, style: AppText.bodyS.copyWith(color: AppColors.textMuted, height: 1.32));
     }
     return Text(hint!.toUpperCase(), style: AppText.labelMeta);
   }
