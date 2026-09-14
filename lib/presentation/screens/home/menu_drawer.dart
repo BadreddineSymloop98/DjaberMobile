@@ -133,15 +133,6 @@ class _MenuDrawerState extends State<MenuDrawer> {
     router.go(route);
   }
 
-  /// For a destination whose screen does not exist yet.
-  ///
-  /// The drawer stays open on purpose — closing it to show a toast would tell
-  /// the merchant "that did nothing" twice over. The same choice home makes
-  /// for its four unbuilt actions (§23.6).
-  void _notBuilt(String what) {
-    AppToast.info(context, '$what — ${L10n.of(context).commonNotBuilt}');
-  }
-
   /// For Analyses and Rapports, which are **not** unbuilt — they are
   /// deliberately web-only (brief §14.3: reports and analytics are desk work).
   /// Their icons stay muted for the same reason, so grey plus this line say
@@ -270,7 +261,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
           // row that would let them fix it; contrast the notifications badge
           // below, which the web hides at zero.
           count: widget.connectedPages?.toString(),
-          onTap: () => _notBuilt(l10n.menuSocial),
+          onTap: () => _goTo(Routes.pages),
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -296,7 +287,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
                 label: l10n.menuAgents,
                 // The AI is `signal/live`.
                 iconColor: AppColors.live,
-                onTap: () => _notBuilt(l10n.menuAgents),
+                onTap: () => _goTo(Routes.agents),
               ),
               MenuSubrow(
                 icon: AppIcons.megaphone,

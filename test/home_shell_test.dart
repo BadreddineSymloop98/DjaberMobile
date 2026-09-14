@@ -9,6 +9,7 @@ import 'package:djaber_mobile/data/repositories/dashboard_repository.dart';
 import 'package:djaber_mobile/data/repositories/page_repository.dart';
 import 'package:djaber_mobile/data/repositories/product_repository.dart';
 import 'package:djaber_mobile/l10n/gen/app_localizations.dart';
+import 'package:djaber_mobile/presentation/screens/pages/pages_screen.dart';
 import 'package:djaber_mobile/presentation/theme/app_colors.dart';
 import 'package:djaber_mobile/presentation/theme/app_theme.dart';
 import 'package:djaber_mobile/presentation/viewmodels/locale_view_model.dart';
@@ -172,8 +173,8 @@ void main() {
   group('home never routes into the tutorial', () {
     // Its steps are a first-run walkthrough — wizard chrome, a step counter, a
     // footer that advances. Reaching one from home would drop a merchant who
-    // has already finished it back into the middle of it. The standalone
-    // creation screens are not built, so these say so instead.
+    // has already finished it back into the middle of it. Each entry point
+    // opens the standalone screen instead.
     Future<L10n> pumpTall(WidgetTester tester) async {
       final l10n = await pumpApp(tester);
       // The frame is 1600 long; a phone-height view only builds as far as
@@ -183,31 +184,26 @@ void main() {
       return l10n;
     }
 
-    for (final label in ['connect', 'agents']) {
-      testWidgets('the $label quick action does not', (tester) async {
-        final l10n = await pumpTall(tester);
-        final title = switch (label) {
-          'connect' => l10n.homeActionConnectTitle,
-          'products' => l10n.homeActionProductsTitle,
-          _ => l10n.homeActionAgentsTitle,
-        };
+    testWidgets('the connect quick action goes to the pages screen, not to T5',
+        (tester) async {
+      final l10n = await pumpTall(tester);
 
-        // Scoped to the card: `Démarrer` names the same steps, so the bare
-        // string matches twice.
-        await tester.tap(
-          find.descendant(
-            of: find.byType(ActionCard),
-            matching: find.text(title),
-          ),
-        );
-        await tester.pumpAndSettle();
+      // Scoped to the card: `Démarrer` names the same steps, so the bare
+      // string matches twice.
+      await tester.tap(
+        find.descendant(
+          of: find.byType(ActionCard),
+          matching: find.text(l10n.homeActionConnectTitle),
+        ),
+      );
+      await tester.pumpAndSettle();
 
-        expect(location(), Routes.home);
-        expect(location().startsWith(Routes.tutorial), isFalse);
-        // It says so rather than doing nothing, which reads as a broken tap.
-        expect(find.byType(SnackBar), findsOneWidget);
-      });
-    }
+      // `12 / 13 — Pages` exists now, so this card is a real destination —
+      // and still never the tutorial's own connect step. Pushed, not `go`:
+      // the router's location stays home underneath, so look for the screen.
+      expect(find.byType(PagesScreen), findsOneWidget);
+      expect(location().startsWith(Routes.tutorial), isFalse);
+    });
 
     testWidgets('the products quick action goes to the catalogue, not to T3',
         (tester) async {
@@ -229,14 +225,33 @@ void main() {
       expect(location().startsWith(Routes.tutorial), isFalse);
     });
 
-    testWidgets('nor does the no-page section', (tester) async {
+    testWidgets('the agents quick action goes to the agents screen, not to T4',
+        (tester) async {
+      final l10n = await pumpTall(tester);
+
+      await tester.tap(
+        find.descendant(
+          of: find.byType(ActionCard),
+          matching: find.text(l10n.homeActionAgentsTitle),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // `14 — Agents IA` exists now, so this card is a real destination —
+      // and still never the tutorial's own agent step.
+      expect(location(), Routes.agents);
+      expect(location().startsWith(Routes.tutorial), isFalse);
+    });
+
+    testWidgets('nor does the no-page section — it opens the pages screen',
+        (tester) async {
       final l10n = await pumpTall(tester);
 
       await tester.tap(find.text(l10n.homeNoPageTitle));
       await tester.pumpAndSettle();
 
-      expect(location(), Routes.home);
-      expect(find.byType(SnackBar), findsOneWidget);
+      expect(find.byType(PagesScreen), findsOneWidget);
+      expect(location().startsWith(Routes.tutorial), isFalse);
     });
   });
 

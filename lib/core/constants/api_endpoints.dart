@@ -42,6 +42,8 @@ class Api {
   static String pageInsights(String pageId) => '/api/pages/$pageId/insights';
   static String pageAiSettings(String pageId) => '/api/pages/$pageId/ai-settings';
   static String pageSync(String pageId) => '/api/pages/$pageId/sync';
+  static String pageGenerateAgent(String pageId) => '/api/pages/$pageId/generate-agent';
+  static String pageApplyAgent(String pageId) => '/api/pages/$pageId/apply-agent';
 
   // ---- Conversations (page-config.routes.ts) ----
   static String pageConversations(String pageId) =>
@@ -113,11 +115,20 @@ class Api {
 
   // ---- Agents ----
   static const agents = '/api/user-stock/agents';
+
+  /// The LLM providers switched on, with their model ids — the agent form's
+  /// model picker.
+  static const aiProvidersActive = '/api/user-stock/ai-providers/active';
   static String agent(String id) => '/api/user-stock/agents/$id';
   static String agentTest(String id) => '/api/user-stock/agents/$id/test';
   static String agentMetrics(String id) => '/api/user-stock/agents/$id/metrics';
   static String agentInsights(String id) =>
       '/api/user-stock/agents/$id/insights';
+
+  /// Resolve or dismiss one insight. One segment deeper than [agent], so the
+  /// backend never confuses the two.
+  static String agentInsight(String insightId) =>
+      '/api/user-stock/agents/insights/$insightId';
 
   // ---- Notifications (brief Q7 — the API exists, mobile has never used it) ----
   static const notifications = '/api/user-stock/notifications';

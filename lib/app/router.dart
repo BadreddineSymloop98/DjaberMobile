@@ -5,7 +5,13 @@ import 'package:go_router/go_router.dart';
 
 import '../core/services/push_service.dart';
 import '../core/utils/logger.dart';
+import '../data/models/agent.dart';
 import '../l10n/gen/app_localizations.dart';
+import '../presentation/screens/agents/agent_details_screen.dart';
+import '../presentation/screens/agents/agent_new_screen.dart';
+import '../presentation/screens/agents/agent_presets_screen.dart';
+import '../presentation/screens/agents/agent_test_chat_screen.dart';
+import '../presentation/screens/agents/agents_screen.dart';
 import '../presentation/screens/auth/forgot_password_screen.dart';
 import '../presentation/screens/auth/login_screen.dart';
 import '../presentation/screens/auth/password_sent_screen.dart';
@@ -13,9 +19,11 @@ import '../presentation/screens/auth/signup_screen.dart';
 import '../presentation/screens/home/home_screen.dart';
 import '../presentation/screens/home/home_shell.dart';
 import '../presentation/screens/onboarding/onboarding_screen.dart';
+import '../presentation/screens/pages/pages_screen.dart';
 import '../presentation/screens/products/add_product_screen.dart';
 import '../presentation/screens/products/products_screen.dart';
 import '../presentation/screens/splash/splash_screen.dart';
+import '../presentation/screens/stock/stock_overview_screen.dart';
 import '../presentation/screens/tutorial/tutorial_agent_screen.dart';
 import '../presentation/screens/tutorial/tutorial_connect_screen.dart';
 import '../presentation/screens/tutorial/tutorial_intro_screen.dart';
@@ -171,8 +179,7 @@ class AppRouter {
           ),
           GoRoute(
             path: Routes.stock,
-            builder: (context, _) =>
-                PlaceholderScreen(title: L10n.of(context).navStock),
+            builder: (_, _) => const StockOverviewScreen(),
           ),
           GoRoute(
             path: Routes.orders,
@@ -200,6 +207,47 @@ class AppRouter {
         path: Routes.products,
         parentNavigatorKey: _rootKey,
         builder: (_, _) => _guard(const ProductsScreen()),
+      ),
+      GoRoute(
+        path: Routes.agents,
+        parentNavigatorKey: _rootKey,
+        builder: (_, _) => _guard(const AgentsScreen()),
+      ),
+      GoRoute(
+        path: Routes.pages,
+        parentNavigatorKey: _rootKey,
+        builder: (_, _) => _guard(const PagesScreen()),
+      ),
+      // Pushed over the agents screen, so not guarded — back pops to it.
+      // Before /agents/:id, which would otherwise match `new`.
+      GoRoute(
+        path: Routes.agentNew,
+        parentNavigatorKey: _rootKey,
+        builder: (_, _) => const AgentPresetsScreen(),
+      ),
+      GoRoute(
+        path: Routes.agentNewScratch,
+        parentNavigatorKey: _rootKey,
+        builder: (_, _) => const AgentNewScreen(),
+      ),
+      GoRoute(
+        path: Routes.agent,
+        parentNavigatorKey: _rootKey,
+        builder: (_, state) =>
+            AgentDetailsScreen(agentId: state.pathParameters['id']!),
+      ),
+      GoRoute(
+        path: Routes.agentTest,
+        parentNavigatorKey: _rootKey,
+        builder: (_, state) => AgentTestChatScreen(
+          agentId: state.pathParameters['id']!,
+          agent: state.extra is Agent ? state.extra as Agent : null,
+        ),
+      ),
+      GoRoute(
+        path: Routes.agentEdit,
+        parentNavigatorKey: _rootKey,
+        builder: (_, state) => AgentEditScreen(agentId: state.pathParameters['id']!),
       ),
       // Declared before `/products/:id`, which would otherwise match it — see
       // [Routes.productNew]. Deliberately **not** wrapped in `ExitGuard`: it
