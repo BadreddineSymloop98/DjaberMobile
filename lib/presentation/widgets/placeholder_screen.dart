@@ -23,22 +23,22 @@ class PlaceholderScreen extends StatelessWidget {
       body: SafeArea(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.all(AppSpacing.gutter),
+            padding: EdgeInsets.all(AppSpacing.gutter),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text('NOT BUILT', style: AppText.label),
-                const SizedBox(height: AppSpacing.sm),
+                SizedBox(height: AppSpacing.sm),
                 Text(title, style: AppText.displayS, textAlign: TextAlign.center),
                 if (detail != null) ...[
-                  const SizedBox(height: AppSpacing.xs),
+                  SizedBox(height: AppSpacing.xs),
                   Text(
                     detail!,
                     style: AppText.caption,
                     textAlign: TextAlign.center,
                   ),
                 ],
-                const SizedBox(height: AppSpacing.xxl),
+                SizedBox(height: AppSpacing.xxl),
                 // Proves the responsive extension is live at runtime.
                 Text(
                   '${Screenreadout.size}  ·  50.w = ${50.w.toStringAsFixed(1)}'
@@ -70,7 +70,7 @@ class PlaceholderShell extends StatelessWidget {
     return Scaffold(
       body: child,
       bottomNavigationBar: Container(
-        height: 64,
+        height: 7.58.h, // 64
         decoration: const BoxDecoration(
           color: AppColors.ink,
           border: Border(top: BorderSide(color: AppColors.rule)),

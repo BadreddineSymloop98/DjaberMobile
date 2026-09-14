@@ -65,18 +65,18 @@ class L10nFr extends L10n {
       'Il connaît votre catalogue, votre stock et vos prix. Il répond aux messages Facebook et Instagram à votre place, jour et nuit.';
 
   @override
-  String get onboardingEscalationTitle => 'Vous intervenez quand il faut';
+  String get onboardingEscalationTitle => 'Vous intervenez quand il le faut';
 
   @override
   String get onboardingEscalationBody =>
-      'Quand l\'agent ne peut plus suivre la conversation, votre téléphone sonne. Vous reprenez la main, vous répondez, puis vous la lui rendez.';
+      'Quand l’IA ne peut plus suivre, elle s’arrête et vous prévient. Vous répondez depuis le téléphone, puis vous lui rendez la conversation.';
 
   @override
-  String get onboardingStockTitle => 'Votre stock dans votre poche';
+  String get onboardingStockTitle => 'Votre stock dans la poche';
 
   @override
   String get onboardingStockBody =>
-      'Vérifiez une disponibilité, corrigez une quantité, recevez une livraison — sans revenir au bureau.';
+      'Produits, achats, ventes et commandes. Vérifiez une quantité pendant que le client attend, corrigez-la sur place.';
 
   @override
   String get onboardingSampleCustomer => 'Amina B.';
@@ -134,4 +134,255 @@ class L10nFr extends L10n {
 
   @override
   String get langArabic => 'العربية';
+
+  @override
+  String get obStockValue => '1,24';
+
+  @override
+  String get obStockValueUnit => 'M DA';
+
+  @override
+  String get obStockValueLabel => 'Valeur du stock';
+
+  @override
+  String get obKpiProducts => 'Produits';
+
+  @override
+  String get obKpiProductsValue => '128';
+
+  @override
+  String get obKpiPurchases => 'Achats';
+
+  @override
+  String get obKpiPurchasesValue => '6';
+
+  @override
+  String get obKpiSales => 'Ventes';
+
+  @override
+  String get obKpiSalesValue => '24';
+
+  @override
+  String get obKpiOrders => 'Cmd';
+
+  @override
+  String get obKpiOrdersValue => '12';
+
+  @override
+  String get obInStock => 'En stock';
+
+  @override
+  String get obStockRow1Name => 'Robe satin — Noir — M';
+
+  @override
+  String get obStockRow1Meta => 'Seuil 5 · Rupture';
+
+  @override
+  String get obStockRow1Qty => '0';
+
+  @override
+  String get obStockRow2Name => 'Parfum Oud 50 ml';
+
+  @override
+  String get obStockRow2Meta => 'Seuil 10';
+
+  @override
+  String get obStockRow2Qty => '3';
+
+  @override
+  String get obStockRow3Name => 'Sac cuir — Camel';
+
+  @override
+  String get obStockRow3Meta => 'Seuil 5';
+
+  @override
+  String get obStockRow3Qty => '7';
+
+  @override
+  String get obEsc1Kind => 'IA bloquée';
+
+  @override
+  String get obEsc1Time => '2 min';
+
+  @override
+  String get obEsc1Name => 'Amina B.';
+
+  @override
+  String get obEsc1Body => 'Elle veut changer la taille — commande déjà payée.';
+
+  @override
+  String get obEsc2Kind => 'Commande à valider';
+
+  @override
+  String get obEsc2Time => '18 min';
+
+  @override
+  String get obEsc2Name => '#1042 — Bab Ezzouar';
+
+  @override
+  String get obEsc2Body => '2 400 DA · créée par l’IA';
+
+  @override
+  String get obEsc3Kind => 'Rupture de stock';
+
+  @override
+  String get obEsc3Time => '1 h';
+
+  @override
+  String get obEsc3Name => 'Robe satin — Noir — M';
+
+  @override
+  String get obEsc3Body => '0 en stock · 3 commandes en attente';
+
+  @override
+  String get obEsc4Kind => 'Négociation';
+
+  @override
+  String get obEsc4Time => '3 h';
+
+  @override
+  String get obEsc4Name => 'Sofiane K.';
+
+  @override
+  String get obEsc4Body => 'ndir lik 2 000 DA w nakhdo';
+
+  @override
+  String get authLoginTitle => 'Connexion';
+
+  @override
+  String get authLoginSubtitle =>
+      'Connectez-vous à votre compte pour continuer';
+
+  @override
+  String get authSignupTitle => 'Création de compte';
+
+  @override
+  String get authSignupSubtitle => 'Commencez en moins d’une minute';
+
+  @override
+  String get authEmail => 'E-mail';
+
+  @override
+  String get authPassword => 'Mot de passe';
+
+  @override
+  String get authFirstName => 'Prénom';
+
+  @override
+  String get authLastName => 'Nom';
+
+  @override
+  String get authPasswordHint => 'Au moins 8 caractères';
+
+  @override
+  String get authRemember => 'Se souvenir de moi';
+
+  @override
+  String get authLoginSubmit => 'Se connecter';
+
+  @override
+  String get authSignupSubmit => 'Créer le compte';
+
+  @override
+  String get authForgot => 'Mot de passe oublié ?';
+
+  @override
+  String get authNoAccount => 'Vous n’avez pas de compte ?';
+
+  @override
+  String get authSignupLink => 'Commencer';
+
+  @override
+  String get authHaveAccount => 'Vous avez déjà un compte ?';
+
+  @override
+  String get authSigninLink => 'Se connecter';
+
+  @override
+  String get authEmailPlaceholder => 'you@example.com';
+
+  @override
+  String get authFirstNamePlaceholder => 'Jane';
+
+  @override
+  String get authLastNamePlaceholder => 'Doe';
+
+  @override
+  String get authErrEmailRequired => 'L’e-mail est requis';
+
+  @override
+  String get authErrInvalidEmail => 'Veuillez saisir une adresse e-mail valide';
+
+  @override
+  String get authErrPasswordRequired => 'Le mot de passe est requis';
+
+  @override
+  String get authErrPasswordTooShort =>
+      'Le mot de passe doit contenir au moins 8 caractères';
+
+  @override
+  String get authErrFirstNameRequired => 'Le prénom est requis';
+
+  @override
+  String get authErrLastNameRequired => 'Le nom est requis';
+
+  @override
+  String get authForgotBack => 'Retour à la connexion';
+
+  @override
+  String get authForgotTitle => 'Mot de passe oublié ?';
+
+  @override
+  String get authForgotSubtitle =>
+      'Entrez votre e-mail pour recevoir un lien de réinitialisation';
+
+  @override
+  String get authForgotEmail => 'Adresse e-mail';
+
+  @override
+  String get authForgotEmailPlaceholder => 'vous@entreprise.com';
+
+  @override
+  String get authForgotSubmit => 'Envoyer le lien';
+
+  @override
+  String get authForgotSecure =>
+      'Votre lien de réinitialisation est chiffré et expire dans 1 heure';
+
+  @override
+  String get authForgotRemember => 'Vous vous souvenez de votre mot de passe ?';
+
+  @override
+  String get authSentTitle => 'Vérifiez votre e-mail';
+
+  @override
+  String get authSentMessage =>
+      'Nous avons envoyé un lien de réinitialisation à';
+
+  @override
+  String get authSentNoReceive => 'Vous n’avez pas reçu l’e-mail ?';
+
+  @override
+  String get authSentTryAnother => 'Essayez une autre adresse e-mail';
+
+  @override
+  String get authErrInvalidCredentials => 'E-mail ou mot de passe incorrect';
+
+  @override
+  String get authErrUserExists => 'Un compte avec cet e-mail existe déjà';
+
+  @override
+  String get authErrNetwork =>
+      'Impossible de joindre le serveur. Vérifiez votre connexion.';
+
+  @override
+  String get authErrUnknown => 'Une erreur s’est produite. Veuillez réessayer.';
+
+  @override
+  String homeWelcome(String name) {
+    return 'Bon retour, $name';
+  }
+
+  @override
+  String get menuSignOut => 'Déconnexion';
 }

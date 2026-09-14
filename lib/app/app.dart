@@ -38,18 +38,53 @@ class _DjaberAppState extends State<DjaberApp> with WidgetsBindingObserver {
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    // Coming back to the foreground is the moment the merchant's view is most
-    // likely stale — a push may have been missed, credits may have run out.
-    // Screens poll on their own; this refreshes the session-level facts.
-    if (state == AppLifecycleState.resumed) {
-      final session = context.read<SessionViewModel>();
-      if (session.isSignedIn) session.refreshProfile();
+    final session = context.read<SessionViewModel>();
+
+    switch (state) {
+      case AppLifecycleState.paused:
+        // Put the app back behind the splash, so it plays on every return and
+        // not only on a cold start. Done on the way out rather than on the way
+        // in: by the time the merchant is looking at the screen again the
+        // router has already settled on the splash, so there is no flash of
+        // the previous screen.
+        session.resetBoot();
+      case AppLifecycleState.resumed:
+        // Coming back to the foreground is the moment the merchant's view is
+        // most likely stale — a push may have been missed, credits may have
+        // run out. Screens poll on their own; this refreshes the
+        // session-level facts.
+        if (session.isSignedIn) session.refreshProfile();
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.hidden:
+      case AppLifecycleState.detached:
+        break;
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    // A MediaQuery *above* MaterialApp, so [Screen] is populated before the
+    // theme is constructed.
+    //
+    // The theme now sizes buttons, icons and radii through `.w`, and it is
+    // built inside `MaterialApp`'s constructor — which runs before anything
+    // inside `MaterialApp.builder`. Without this the first theme is computed
+    // against a zero-width screen, and since the theme is not rebuilt when the
+    // metrics later arrive, it stays wrong: buttons collapse to their
+    // intrinsic height for the life of the app.
+    //
+    // `MediaQuery.fromView` also listens for metric changes, so a rotation,
+    // split screen or a font-scale change rebuilds the theme rather than
+    // leaving it stale.
+    return MediaQuery.fromView(
+      view: View.of(context),
+      child: Builder(builder: _buildApp),
+    );
+  }
+
+  Widget _buildApp(BuildContext context) {
     final localeModel = context.watch<LocaleViewModel>();
+    Screen.update(MediaQuery.of(context));
 
     return MaterialApp.router(
       title: 'Djaber.ai',

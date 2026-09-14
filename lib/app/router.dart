@@ -5,6 +5,11 @@ import 'package:go_router/go_router.dart';
 
 import '../core/services/push_service.dart';
 import '../core/utils/logger.dart';
+import '../presentation/screens/auth/forgot_password_screen.dart';
+import '../presentation/screens/auth/login_screen.dart';
+import '../presentation/screens/auth/password_sent_screen.dart';
+import '../presentation/screens/auth/signup_screen.dart';
+import '../presentation/screens/home/home_screen.dart';
 import '../presentation/screens/onboarding/onboarding_screen.dart';
 import '../presentation/screens/splash/splash_screen.dart';
 import '../presentation/viewmodels/session_view_model.dart';
@@ -34,6 +39,13 @@ class AppRouter {
   /// session was still being restored. Consumed once the app is signed in.
   String? _pendingDeepLink;
 
+  /// Where the merchant was when the splash took the screen back.
+  ///
+  /// The splash replays every time the app is backgrounded, so without this a
+  /// merchant who glances at another app mid-conversation comes back to the
+  /// home screen. Restored once the splash finishes.
+  String? _locationBeforeSplash;
+
   late final GoRouter router = GoRouter(
     navigatorKey: _rootKey,
     initialLocation: Routes.splash,
@@ -55,19 +67,23 @@ class AppRouter {
       ),
       GoRoute(
         path: Routes.login,
-        builder: (_, _) => const PlaceholderScreen(title: 'Connexion'),
+        builder: (_, _) => const LoginScreen(),
       ),
       GoRoute(
         path: Routes.signup,
-        builder: (_, _) => const PlaceholderScreen(title: 'Créer un compte'),
+        builder: (_, _) => const SignupScreen(),
       ),
       GoRoute(
         path: Routes.forgotPassword,
-        builder: (_, _) => const PlaceholderScreen(
-          title: 'Mot de passe oublié',
-          // The web ships this page but it calls no endpoint, and the backend
-          // has no reset route. Needs building on both sides.
-          detail: 'No backend endpoint exists yet',
+        builder: (_, _) => const ForgotPasswordScreen(),
+      ),
+      GoRoute(
+        path: Routes.passwordSent,
+        // The address travels as `extra` so it never appears in a URL. A cold
+        // deep link therefore arrives without it, and the screen omits the
+        // address block rather than inventing one.
+        builder: (_, state) => PasswordSentScreen(
+          email: state.extra is String ? state.extra as String : null,
         ),
       ),
 
@@ -80,7 +96,7 @@ class AppRouter {
         routes: [
           GoRoute(
             path: Routes.home,
-            builder: (_, _) => const PlaceholderScreen(title: 'Accueil'),
+            builder: (_, _) => const HomeScreen(),
           ),
           GoRoute(
             path: Routes.queue,
@@ -144,21 +160,35 @@ class AppRouter {
     // The splash owns the boot: it runs the session restore and holds for the
     // minimum display time, then flips the gate. Until then nothing moves.
     if (!_session.isBootComplete) {
-      return location == Routes.splash ? null : Routes.splash;
+      if (location == Routes.splash) return null;
+      // Remember a real destination so the splash hands it back afterwards.
+      // Auth routes are not worth restoring — the rules below place those.
+      if (_session.isSignedIn && !isPublic) _locationBeforeSplash = location;
+      return Routes.splash;
     }
 
     if (status == AuthStatus.signedOut) {
+      _locationBeforeSplash = null;
       if (isPublic && location != Routes.splash) return null;
       return _session.onboardingSeen ? Routes.login : Routes.onboarding;
     }
 
-    // Signed in.
+    // Signed in. A tapped notification outranks wherever they happened to be —
+    // it is a specific request, not a resumption.
     final pending = _pendingDeepLink;
     if (pending != null) {
       _pendingDeepLink = null;
+      _locationBeforeSplash = null;
       Log.i('opening deep link $pending', tag: 'push');
       return pending;
     }
+
+    final resume = _locationBeforeSplash;
+    if (resume != null) {
+      _locationBeforeSplash = null;
+      return resume;
+    }
+
     if (isPublic) return Routes.home;
     return null;
   }

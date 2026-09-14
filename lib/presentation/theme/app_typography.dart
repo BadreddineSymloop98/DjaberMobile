@@ -83,12 +83,16 @@ class AppText {
         color: AppColors.textPrimary,
       );
 
-  /// 15 — list row primary line.
+  /// 14 — the Figma `Title` style. List rows, card names, thread headers.
+  ///
+  /// Geist **Medium**, not SemiBold: the file has one Title style and this is
+  /// it. An earlier guess at 15/w600 made every row heavier than the design.
   static TextStyle get title => TextStyle(
         fontFamily: AppFonts.sans,
-        fontSize: 15.sp,
-        fontWeight: FontWeight.w600,
-        height: 1.35,
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w500,
+        height: 1.32,
+        letterSpacing: -0.14,
         color: AppColors.textPrimary,
       );
 
@@ -142,6 +146,17 @@ class AppText {
         color: AppColors.textPrimary,
       );
 
+  /// 14 — the Figma `Value` style: the quantity on a list row. Set beside a
+  /// [title], so it matches its size and gains weight instead.
+  static TextStyle get numeralS => TextStyle(
+        fontFamily: AppFonts.sans,
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w600,
+        height: 1.32,
+        fontFeatures: const [FontFeature.tabularFigures()],
+        color: AppColors.textPrimary,
+      );
+
   // ---- Labels — JetBrains Mono, uppercase ----
   //
   // The web's `.label`: 11px, 0.16em tracking, `--mute`.
@@ -170,12 +185,52 @@ class AppText {
         color: AppColors.textMuted,
       );
 
-  /// 15 — the label inside a primary button.
+  /// 9 — the Figma `Label/Meta` style: field labels and hints. Smaller and
+  /// more tightly tracked than [label], which is the section-heading size.
+  static TextStyle get labelMeta => TextStyle(
+        fontFamily: AppFonts.mono,
+        fontSize: 9.sp,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 9.sp * 0.14,
+        height: 1.3,
+        color: AppColors.textMuted,
+      );
+
+  /// 14 — subtitles under a display heading.
+  static TextStyle get bodyM => TextStyle(
+        fontFamily: AppFonts.sans,
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w400,
+        height: 1.32,
+        color: AppColors.textSecondary,
+      );
+
+  /// 11 — the inline action on a field label row, and the field error message.
+  static TextStyle get actionS => TextStyle(
+        fontFamily: AppFonts.sans,
+        fontSize: 11.sp,
+        fontWeight: FontWeight.w400,
+        height: 1.32,
+        color: AppColors.textSecondary,
+      );
+
+  /// 13 — a link in a footer or under a button.
+  static TextStyle get link => TextStyle(
+        fontFamily: AppFonts.sans,
+        fontSize: 13.sp,
+        fontWeight: FontWeight.w500,
+        height: 1.32,
+        letterSpacing: -0.13,
+        color: AppColors.textPrimary,
+      );
+
+  /// 14 — the label inside a primary button. The Figma `Title` style.
   static TextStyle get button => TextStyle(
         fontFamily: AppFonts.sans,
-        fontSize: 15.sp,
-        fontWeight: FontWeight.w600,
-        height: 1.2,
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w500,
+        height: 1.32,
+        letterSpacing: -0.14,
         color: AppColors.ink,
       );
 }

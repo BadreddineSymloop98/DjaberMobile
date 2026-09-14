@@ -65,18 +65,18 @@ class L10nEn extends L10n {
       'It knows your catalogue, your stock and your prices. It answers Facebook and Instagram messages for you, day and night.';
 
   @override
-  String get onboardingEscalationTitle => 'You step in when it matters';
+  String get onboardingEscalationTitle => 'You step in when it is needed';
 
   @override
   String get onboardingEscalationBody =>
-      'When the agent can no longer carry a conversation, your phone rings. You take over, reply, and hand it back.';
+      'When the AI can no longer follow, it stops and tells you. You reply from your phone, then hand the conversation back to it.';
 
   @override
   String get onboardingStockTitle => 'Your stock in your pocket';
 
   @override
   String get onboardingStockBody =>
-      'Check availability, correct a count, receive a delivery — without going back to a desk.';
+      'Products, purchases, sales and orders. Check a quantity while the customer waits, and correct it on the spot.';
 
   @override
   String get onboardingSampleCustomer => 'Amina B.';
@@ -133,4 +133,252 @@ class L10nEn extends L10n {
 
   @override
   String get langArabic => 'العربية';
+
+  @override
+  String get obStockValue => '1.24';
+
+  @override
+  String get obStockValueUnit => 'M DA';
+
+  @override
+  String get obStockValueLabel => 'Stock value';
+
+  @override
+  String get obKpiProducts => 'Products';
+
+  @override
+  String get obKpiProductsValue => '128';
+
+  @override
+  String get obKpiPurchases => 'Purchases';
+
+  @override
+  String get obKpiPurchasesValue => '6';
+
+  @override
+  String get obKpiSales => 'Sales';
+
+  @override
+  String get obKpiSalesValue => '24';
+
+  @override
+  String get obKpiOrders => 'Ord';
+
+  @override
+  String get obKpiOrdersValue => '12';
+
+  @override
+  String get obInStock => 'In stock';
+
+  @override
+  String get obStockRow1Name => 'Satin dress — Black — M';
+
+  @override
+  String get obStockRow1Meta => 'Threshold 5 · Out of stock';
+
+  @override
+  String get obStockRow1Qty => '0';
+
+  @override
+  String get obStockRow2Name => 'Oud perfume 50 ml';
+
+  @override
+  String get obStockRow2Meta => 'Threshold 10';
+
+  @override
+  String get obStockRow2Qty => '3';
+
+  @override
+  String get obStockRow3Name => 'Leather bag — Camel';
+
+  @override
+  String get obStockRow3Meta => 'Threshold 5';
+
+  @override
+  String get obStockRow3Qty => '7';
+
+  @override
+  String get obEsc1Kind => 'AI stuck';
+
+  @override
+  String get obEsc1Time => '2 min';
+
+  @override
+  String get obEsc1Name => 'Amina B.';
+
+  @override
+  String get obEsc1Body => 'She wants to change the size — order already paid.';
+
+  @override
+  String get obEsc2Kind => 'Order to approve';
+
+  @override
+  String get obEsc2Time => '18 min';
+
+  @override
+  String get obEsc2Name => '#1042 — Bab Ezzouar';
+
+  @override
+  String get obEsc2Body => '2,400 DA · created by the AI';
+
+  @override
+  String get obEsc3Kind => 'Out of stock';
+
+  @override
+  String get obEsc3Time => '1 h';
+
+  @override
+  String get obEsc3Name => 'Satin dress — Black — M';
+
+  @override
+  String get obEsc3Body => '0 in stock · 3 orders waiting';
+
+  @override
+  String get obEsc4Kind => 'Negotiation';
+
+  @override
+  String get obEsc4Time => '3 h';
+
+  @override
+  String get obEsc4Name => 'Sofiane K.';
+
+  @override
+  String get obEsc4Body => 'ndir lik 2 000 DA w nakhdo';
+
+  @override
+  String get authLoginTitle => 'Sign in';
+
+  @override
+  String get authLoginSubtitle => 'Sign in to your account to continue';
+
+  @override
+  String get authSignupTitle => 'Create account';
+
+  @override
+  String get authSignupSubtitle => 'Get started in less than a minute';
+
+  @override
+  String get authEmail => 'Email';
+
+  @override
+  String get authPassword => 'Password';
+
+  @override
+  String get authFirstName => 'First name';
+
+  @override
+  String get authLastName => 'Last name';
+
+  @override
+  String get authPasswordHint => 'At least 8 characters';
+
+  @override
+  String get authRemember => 'Remember me';
+
+  @override
+  String get authLoginSubmit => 'Sign In';
+
+  @override
+  String get authSignupSubmit => 'Create account';
+
+  @override
+  String get authForgot => 'Forgot your password?';
+
+  @override
+  String get authNoAccount => 'Don’t have an account?';
+
+  @override
+  String get authSignupLink => 'Get started';
+
+  @override
+  String get authHaveAccount => 'Already have an account?';
+
+  @override
+  String get authSigninLink => 'Sign In';
+
+  @override
+  String get authEmailPlaceholder => 'you@example.com';
+
+  @override
+  String get authFirstNamePlaceholder => 'Jane';
+
+  @override
+  String get authLastNamePlaceholder => 'Doe';
+
+  @override
+  String get authErrEmailRequired => 'Email is required';
+
+  @override
+  String get authErrInvalidEmail => 'Please enter a valid email address';
+
+  @override
+  String get authErrPasswordRequired => 'Password is required';
+
+  @override
+  String get authErrPasswordTooShort =>
+      'Password must be at least 8 characters';
+
+  @override
+  String get authErrFirstNameRequired => 'First name is required';
+
+  @override
+  String get authErrLastNameRequired => 'Last name is required';
+
+  @override
+  String get authForgotBack => 'Back to Login';
+
+  @override
+  String get authForgotTitle => 'Forgot Password?';
+
+  @override
+  String get authForgotSubtitle => 'Enter your email to receive a reset link';
+
+  @override
+  String get authForgotEmail => 'Email Address';
+
+  @override
+  String get authForgotEmailPlaceholder => 'you@company.com';
+
+  @override
+  String get authForgotSubmit => 'Send Reset Link';
+
+  @override
+  String get authForgotSecure =>
+      'Your password reset link is encrypted and expires in 1 hour';
+
+  @override
+  String get authForgotRemember => 'Remember your password?';
+
+  @override
+  String get authSentTitle => 'Check Your Email';
+
+  @override
+  String get authSentMessage => 'We’ve sent a password reset link to';
+
+  @override
+  String get authSentNoReceive => 'Didn’t receive the email?';
+
+  @override
+  String get authSentTryAnother => 'Try another email address';
+
+  @override
+  String get authErrInvalidCredentials => 'Invalid email or password';
+
+  @override
+  String get authErrUserExists => 'An account with this email already exists';
+
+  @override
+  String get authErrNetwork =>
+      'Cannot reach the server. Check your connection.';
+
+  @override
+  String get authErrUnknown => 'Something went wrong. Please try again.';
+
+  @override
+  String homeWelcome(String name) {
+    return 'Welcome back, $name';
+  }
+
+  @override
+  String get menuSignOut => 'Sign out';
 }

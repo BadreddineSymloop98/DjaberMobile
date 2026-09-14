@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../core/extensions/responsive_extension.dart';
 import 'app_colors.dart';
 import 'app_spacing.dart';
 import 'app_typography.dart';
@@ -79,7 +80,7 @@ class AppTheme {
         hintStyle: AppText.bodyS.copyWith(color: AppColors.textMuted),
         labelStyle: AppText.label,
         errorStyle: AppText.caption.copyWith(color: AppColors.accentAlert),
-        contentPadding: const EdgeInsets.symmetric(
+        contentPadding: EdgeInsets.symmetric(
           horizontal: AppSpacing.lg,
           vertical: AppSpacing.md + 2,
         ),
@@ -95,7 +96,14 @@ class AppTheme {
           foregroundColor: AppColors.ink,
           disabledBackgroundColor: AppColors.surfaceHigh,
           disabledForegroundColor: AppColors.textMuted,
-          minimumSize: const Size.fromHeight(52),
+          minimumSize: Size.fromHeight(AppSize.control),
+          maximumSize: Size.fromHeight(AppSize.control),
+          padding: EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+          // Material pads a button out to a 48dp tap target, which would make
+          // it taller than the field above it and taller than the design.
+          // These buttons run the full width of the screen, so the target is
+          // comfortable regardless; the design height wins.
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           textStyle: AppText.button,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppRadius.card),
@@ -105,7 +113,14 @@ class AppTheme {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           foregroundColor: AppColors.textPrimary,
-          minimumSize: const Size.fromHeight(52),
+          minimumSize: Size.fromHeight(AppSize.control),
+          maximumSize: Size.fromHeight(AppSize.control),
+          padding: EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+          // Material pads a button out to a 48dp tap target, which would make
+          // it taller than the field above it and taller than the design.
+          // These buttons run the full width of the screen, so the target is
+          // comfortable regardless; the design height wins.
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           side: const BorderSide(color: AppColors.rule),
           textStyle: AppText.button.copyWith(color: AppColors.textPrimary),
           shape: RoundedRectangleBorder(
@@ -119,7 +134,7 @@ class AppTheme {
           textStyle: AppText.bodyS.copyWith(color: AppColors.textPrimary),
         ),
       ),
-      bottomSheetTheme: const BottomSheetThemeData(
+      bottomSheetTheme: BottomSheetThemeData(
         backgroundColor: AppColors.surface,
         surfaceTintColor: Colors.transparent,
         modalBarrierColor: AppColors.scrim,
@@ -171,15 +186,17 @@ class AppTheme {
         ),
         checkColor: const WidgetStatePropertyAll(AppColors.ink),
         side: const BorderSide(color: AppColors.ruleStrong),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(1.03.w), // 4
+        ),
       ),
       progressIndicatorTheme: const ProgressIndicatorThemeData(
         color: AppColors.textPrimary,
         linearTrackColor: AppColors.surfaceHigh,
         circularTrackColor: Colors.transparent,
       ),
-      iconTheme: const IconThemeData(color: AppColors.textMuted, size: 24),
-      listTileTheme: const ListTileThemeData(
+      iconTheme: IconThemeData(color: AppColors.textMuted, size: 6.15.w), // 24
+      listTileTheme: ListTileThemeData(
         contentPadding: EdgeInsets.symmetric(horizontal: AppSpacing.gutter),
         iconColor: AppColors.textMuted,
       ),
