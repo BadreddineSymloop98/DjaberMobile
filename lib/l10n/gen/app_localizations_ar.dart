@@ -489,6 +489,87 @@ class L10nAr extends L10n {
       'مجموعة كاملة — الموردون والعملاء والمبيعات والمشتريات والصندوق والحركات والتوصيل والمزيد.';
 
   @override
+  String get stockOverviewTitle => 'نظرة عامة على المخزون';
+
+  @override
+  String get stockOverviewSubtitle => 'ملخص المخزون والمبيعات والمشتريات';
+
+  @override
+  String get stockOverviewHintSimple =>
+      'الوضع البسيط يعرض المنتجات والطلبات والعملاء. انتقل إلى المتقدم للمبيعات والمشتريات والموردين والصندوق والحركات.';
+
+  @override
+  String get stockOverviewHintAdvanced =>
+      'الوضع المتقدم: نظام متكامل — المبيعات والمشتريات والموردون والصندوق وحركات المخزون مفعّلة.';
+
+  @override
+  String get stockTotalProducts => 'إجمالي المنتجات';
+
+  @override
+  String get stockLowStock => 'مخزون منخفض';
+
+  @override
+  String get stockValue => 'قيمة المخزون';
+
+  @override
+  String get stockRetailValue => 'قيمة البيع';
+
+  @override
+  String get stockCategories => 'الفئات';
+
+  @override
+  String get stockSuppliers => 'الموردون';
+
+  @override
+  String get stockTotalItems => 'إجمالي العناصر في المخزون';
+
+  @override
+  String get stockSalesMonth => 'مبيعات هذا الشهر';
+
+  @override
+  String get stockTotalSales => 'إجمالي المبيعات';
+
+  @override
+  String get stockRevenue => 'الإيرادات';
+
+  @override
+  String get stockPaid => 'مدفوع';
+
+  @override
+  String get stockPending => 'قيد الانتظار';
+
+  @override
+  String get stockPurchasesMonth => 'مشتريات هذا الشهر';
+
+  @override
+  String get stockTotalPurchases => 'إجمالي المشتريات';
+
+  @override
+  String get stockTotalSpent => 'إجمالي الإنفاق';
+
+  @override
+  String get stockReceived => 'مستلم';
+
+  @override
+  String get stockRecentMovements => 'الحركات الأخيرة';
+
+  @override
+  String get stockMovementsEmpty =>
+      'لا توجد حركات مسجلة. ستظهر حركات المخزون هنا عند إضافة المنتجات أو بيعها أو تعديلها.';
+
+  @override
+  String get stockMoveIn => 'دخول';
+
+  @override
+  String get stockMoveOut => 'خروج';
+
+  @override
+  String get stockMoveAdjustment => 'تعديل';
+
+  @override
+  String get stockMoveReturn => 'إرجاع';
+
+  @override
   String get tutorialProductTitle => 'منتجك الأول';
 
   @override

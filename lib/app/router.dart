@@ -23,6 +23,7 @@ import '../presentation/screens/pages/pages_screen.dart';
 import '../presentation/screens/products/add_product_screen.dart';
 import '../presentation/screens/products/products_screen.dart';
 import '../presentation/screens/splash/splash_screen.dart';
+import '../presentation/screens/stock/stock_overview_screen.dart';
 import '../presentation/screens/tutorial/tutorial_agent_screen.dart';
 import '../presentation/screens/tutorial/tutorial_connect_screen.dart';
 import '../presentation/screens/tutorial/tutorial_intro_screen.dart';
@@ -178,8 +179,7 @@ class AppRouter {
           ),
           GoRoute(
             path: Routes.stock,
-            builder: (context, _) =>
-                PlaceholderScreen(title: L10n.of(context).navStock),
+            builder: (_, _) => const StockOverviewScreen(),
           ),
           GoRoute(
             path: Routes.orders,

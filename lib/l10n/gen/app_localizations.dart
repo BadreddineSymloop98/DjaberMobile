@@ -1029,6 +1029,162 @@ abstract class L10n {
   /// **'Full suite — Suppliers, Clients, Sales, Purchases, Caisse, Movements, Delivery & more.'**
   String get stockModeAdvancedDesc;
 
+  /// No description provided for @stockOverviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock overview'**
+  String get stockOverviewTitle;
+
+  /// No description provided for @stockOverviewSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Inventory, sales and purchase summary'**
+  String get stockOverviewSubtitle;
+
+  /// No description provided for @stockOverviewHintSimple.
+  ///
+  /// In en, this message translates to:
+  /// **'Simple mode shows products, orders and clients. Switch to Advanced for sales, purchases, suppliers, caisse and movements.'**
+  String get stockOverviewHintSimple;
+
+  /// No description provided for @stockOverviewHintAdvanced.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced mode: full ERP — sales, purchases, suppliers, caisse and stock movements are enabled.'**
+  String get stockOverviewHintAdvanced;
+
+  /// No description provided for @stockTotalProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Total products'**
+  String get stockTotalProducts;
+
+  /// No description provided for @stockLowStock.
+  ///
+  /// In en, this message translates to:
+  /// **'Low stock'**
+  String get stockLowStock;
+
+  /// No description provided for @stockValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock value'**
+  String get stockValue;
+
+  /// No description provided for @stockRetailValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Retail value'**
+  String get stockRetailValue;
+
+  /// No description provided for @stockCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'Categories'**
+  String get stockCategories;
+
+  /// No description provided for @stockSuppliers.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppliers'**
+  String get stockSuppliers;
+
+  /// No description provided for @stockTotalItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Total items in stock'**
+  String get stockTotalItems;
+
+  /// No description provided for @stockSalesMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Sales this month'**
+  String get stockSalesMonth;
+
+  /// No description provided for @stockTotalSales.
+  ///
+  /// In en, this message translates to:
+  /// **'Total sales'**
+  String get stockTotalSales;
+
+  /// No description provided for @stockRevenue.
+  ///
+  /// In en, this message translates to:
+  /// **'Revenue'**
+  String get stockRevenue;
+
+  /// No description provided for @stockPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid'**
+  String get stockPaid;
+
+  /// No description provided for @stockPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get stockPending;
+
+  /// No description provided for @stockPurchasesMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchases this month'**
+  String get stockPurchasesMonth;
+
+  /// No description provided for @stockTotalPurchases.
+  ///
+  /// In en, this message translates to:
+  /// **'Total purchases'**
+  String get stockTotalPurchases;
+
+  /// No description provided for @stockTotalSpent.
+  ///
+  /// In en, this message translates to:
+  /// **'Total spent'**
+  String get stockTotalSpent;
+
+  /// No description provided for @stockReceived.
+  ///
+  /// In en, this message translates to:
+  /// **'Received'**
+  String get stockReceived;
+
+  /// No description provided for @stockRecentMovements.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent movements'**
+  String get stockRecentMovements;
+
+  /// No description provided for @stockMovementsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No movements recorded yet. Stock movements will appear here when products are added, sold, or adjusted.'**
+  String get stockMovementsEmpty;
+
+  /// No description provided for @stockMoveIn.
+  ///
+  /// In en, this message translates to:
+  /// **'In'**
+  String get stockMoveIn;
+
+  /// No description provided for @stockMoveOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Out'**
+  String get stockMoveOut;
+
+  /// No description provided for @stockMoveAdjustment.
+  ///
+  /// In en, this message translates to:
+  /// **'Adjustment'**
+  String get stockMoveAdjustment;
+
+  /// No description provided for @stockMoveReturn.
+  ///
+  /// In en, this message translates to:
+  /// **'Return'**
+  String get stockMoveReturn;
+
   /// No description provided for @tutorialProductTitle.
   ///
   /// In en, this message translates to:

@@ -494,6 +494,87 @@ class L10nFr extends L10n {
       'Suite complète — Fournisseurs, Clients, Ventes, Achats, Caisse, Mouvements, Livraison et plus.';
 
   @override
+  String get stockOverviewTitle => 'Aperçu du stock';
+
+  @override
+  String get stockOverviewSubtitle => 'Résumé inventaire, ventes et achats';
+
+  @override
+  String get stockOverviewHintSimple =>
+      'Le mode Simple affiche produits, commandes et clients. Passez en Avancé pour les ventes, achats, fournisseurs, caisse et mouvements.';
+
+  @override
+  String get stockOverviewHintAdvanced =>
+      'Mode Avancé : ERP complet — ventes, achats, fournisseurs, caisse et mouvements de stock sont activés.';
+
+  @override
+  String get stockTotalProducts => 'Total produits';
+
+  @override
+  String get stockLowStock => 'Stock faible';
+
+  @override
+  String get stockValue => 'Valeur du stock';
+
+  @override
+  String get stockRetailValue => 'Valeur de vente';
+
+  @override
+  String get stockCategories => 'Catégories';
+
+  @override
+  String get stockSuppliers => 'Fournisseurs';
+
+  @override
+  String get stockTotalItems => 'Total articles en stock';
+
+  @override
+  String get stockSalesMonth => 'Ventes ce mois';
+
+  @override
+  String get stockTotalSales => 'Total ventes';
+
+  @override
+  String get stockRevenue => 'Chiffre d’affaires';
+
+  @override
+  String get stockPaid => 'Payé';
+
+  @override
+  String get stockPending => 'En attente';
+
+  @override
+  String get stockPurchasesMonth => 'Achats ce mois';
+
+  @override
+  String get stockTotalPurchases => 'Total achats';
+
+  @override
+  String get stockTotalSpent => 'Total dépensé';
+
+  @override
+  String get stockReceived => 'Reçu';
+
+  @override
+  String get stockRecentMovements => 'Mouvements récents';
+
+  @override
+  String get stockMovementsEmpty =>
+      'Aucun mouvement enregistré. Les mouvements apparaîtront ici quand des produits sont ajoutés, vendus ou ajustés.';
+
+  @override
+  String get stockMoveIn => 'Entrée';
+
+  @override
+  String get stockMoveOut => 'Sortie';
+
+  @override
+  String get stockMoveAdjustment => 'Ajustement';
+
+  @override
+  String get stockMoveReturn => 'Retour';
+
+  @override
   String get tutorialProductTitle => 'Votre premier produit';
 
   @override

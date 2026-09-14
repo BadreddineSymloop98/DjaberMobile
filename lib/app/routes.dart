@@ -69,8 +69,8 @@ class Routes {
   static String conversationOf(String id) => '/conversation/$id';
 
   /// `17 — Produits` — the catalogue. Pushed over the shell rather than
-  /// living in it: the bottom nav's Stock tab is `16 — Aperçu du stock`, which
-  /// is still unbuilt, and this is reached from the drawer and from home.
+  /// living in it: the bottom nav's Stock tab is `16 — Aperçu du stock`, and
+  /// this is reached from the drawer and from home.
   static const products = '/products';
 
   /// `14 — Agents IA` — the merchant's agent. Reached from home's action

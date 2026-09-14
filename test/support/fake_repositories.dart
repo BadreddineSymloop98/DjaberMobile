@@ -7,6 +7,7 @@ import 'package:djaber_mobile/data/models/conversation.dart';
 import 'package:djaber_mobile/data/models/dashboard_stats.dart';
 import 'package:djaber_mobile/data/models/page_summary.dart';
 import 'package:djaber_mobile/data/models/product.dart';
+import 'package:djaber_mobile/data/models/stock_overview.dart';
 import 'package:djaber_mobile/data/repositories/agent_repository.dart';
 import 'package:djaber_mobile/data/repositories/catalogue_repository.dart';
 import 'package:djaber_mobile/data/repositories/dashboard_repository.dart';
@@ -32,10 +33,28 @@ class FakeDashboardRepository extends DashboardRepository {
     this.conversations = const {},
     this.statsFails = false,
     this.salesFails = false,
+    this.movements = const [],
+    this.purchases0 = const PurchaseStats(),
+    this.purchasesFails = false,
   }) : super(api: apiForTest());
 
   final DashboardStats stats0;
   final SalesStats sales0;
+
+  /// `16 — Aperçu du stock`: the dashboard's movements, and the purchases block.
+  final List<StockMovement> movements;
+  final PurchaseStats purchases0;
+  final bool purchasesFails;
+
+  @override
+  Future<Result<StockOverview>> overview() async => statsFails
+      ? const Result.failure(ServerException('unreachable'))
+      : Result.success(StockOverview(stats: stats0, movements: movements));
+
+  @override
+  Future<Result<PurchaseStats>> purchaseStats() async => purchasesFails
+      ? const Result.failure(ServerException('unreachable'))
+      : Result.success(purchases0);
 
   /// Keyed by our own page row id, as [DashboardRepository.conversationsFor]
   /// takes it.

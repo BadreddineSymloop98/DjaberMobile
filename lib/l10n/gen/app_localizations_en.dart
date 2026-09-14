@@ -490,6 +490,87 @@ class L10nEn extends L10n {
       'Full suite — Suppliers, Clients, Sales, Purchases, Caisse, Movements, Delivery & more.';
 
   @override
+  String get stockOverviewTitle => 'Stock overview';
+
+  @override
+  String get stockOverviewSubtitle => 'Inventory, sales and purchase summary';
+
+  @override
+  String get stockOverviewHintSimple =>
+      'Simple mode shows products, orders and clients. Switch to Advanced for sales, purchases, suppliers, caisse and movements.';
+
+  @override
+  String get stockOverviewHintAdvanced =>
+      'Advanced mode: full ERP — sales, purchases, suppliers, caisse and stock movements are enabled.';
+
+  @override
+  String get stockTotalProducts => 'Total products';
+
+  @override
+  String get stockLowStock => 'Low stock';
+
+  @override
+  String get stockValue => 'Stock value';
+
+  @override
+  String get stockRetailValue => 'Retail value';
+
+  @override
+  String get stockCategories => 'Categories';
+
+  @override
+  String get stockSuppliers => 'Suppliers';
+
+  @override
+  String get stockTotalItems => 'Total items in stock';
+
+  @override
+  String get stockSalesMonth => 'Sales this month';
+
+  @override
+  String get stockTotalSales => 'Total sales';
+
+  @override
+  String get stockRevenue => 'Revenue';
+
+  @override
+  String get stockPaid => 'Paid';
+
+  @override
+  String get stockPending => 'Pending';
+
+  @override
+  String get stockPurchasesMonth => 'Purchases this month';
+
+  @override
+  String get stockTotalPurchases => 'Total purchases';
+
+  @override
+  String get stockTotalSpent => 'Total spent';
+
+  @override
+  String get stockReceived => 'Received';
+
+  @override
+  String get stockRecentMovements => 'Recent movements';
+
+  @override
+  String get stockMovementsEmpty =>
+      'No movements recorded yet. Stock movements will appear here when products are added, sold, or adjusted.';
+
+  @override
+  String get stockMoveIn => 'In';
+
+  @override
+  String get stockMoveOut => 'Out';
+
+  @override
+  String get stockMoveAdjustment => 'Adjustment';
+
+  @override
+  String get stockMoveReturn => 'Return';
+
+  @override
   String get tutorialProductTitle => 'Your first product';
 
   @override
