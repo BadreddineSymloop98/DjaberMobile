@@ -985,4 +985,920 @@ class L10nAr extends L10n {
 
   @override
   String get commonNotBuilt => 'غير متاح بعد';
+
+  @override
+  String get agentsTitle => 'وكلاء الذكاء الاصطناعي';
+
+  @override
+  String get agentsSubtitle =>
+      'أنشئ وأدر وكلاء ذكيين يبيعون منتجاتك على الصفحات المرتبطة';
+
+  @override
+  String get agentsActive => 'الذكاء الاصطناعي نشط';
+
+  @override
+  String get agentsInactive => 'الذكاء الاصطناعي متوقف';
+
+  @override
+  String get agentsStatPages => 'الصفحات';
+
+  @override
+  String get agentsStatProducts => 'المنتجات';
+
+  @override
+  String get agentsStatModel => 'النموذج';
+
+  @override
+  String get agentsAllProducts => 'الكل';
+
+  @override
+  String get agentsNoPages => 'لا يرد على أي صفحة بعد';
+
+  @override
+  String get agentsPause => 'إيقاف الوكيل مؤقتًا';
+
+  @override
+  String get agentsResume => 'إعادة تشغيل الوكيل';
+
+  @override
+  String get agentsPausedToast => 'تم إيقاف الوكيل — لم يعد يرد';
+
+  @override
+  String get agentsResumedToast => 'الوكيل نشط — يرد من جديد';
+
+  @override
+  String get agentsEmptyTitle => 'لا يوجد وكيل';
+
+  @override
+  String get agentsEmptyBody =>
+      'أنشئ وكيلا ذكيا للرد تلقائيا على الرسائل في صفحاتك وبيع منتجاتك.';
+
+  @override
+  String get agentsEmptyCta => 'أنشئ وكيلك';
+
+  @override
+  String get agentsActionInsights => 'مشاكل للمراجعة';
+
+  @override
+  String get agentsActionTest => 'اختبار الوكيل';
+
+  @override
+  String get agentsActionDetails => 'التفاصيل والإحصائيات';
+
+  @override
+  String get agentsActionDelete => 'حذف الوكيل';
+
+  @override
+  String get agentsDeleteTitle => 'حذف الوكيل؟';
+
+  @override
+  String agentsDeleteBody(String name) {
+    return 'سيتم حذف $name ولن يرد بعد الآن على صفحاتك. يمكنك إنشاء وكيل جديد بعد ذلك.';
+  }
+
+  @override
+  String get agentsDeleteConfirm => 'حذف';
+
+  @override
+  String get agentsDeletedToast => 'تم حذف الوكيل';
+
+  @override
+  String get agentsInsightsTitle => 'مشاكل معلّقة';
+
+  @override
+  String get agentsInsightsEmpty =>
+      'لا توجد مشاكل معلّقة — وكيلك يتولى كل شيء.';
+
+  @override
+  String get agentsInsightsNone => 'لا يوجد شيء هنا.';
+
+  @override
+  String get agentsInsightUnclear => 'غير واضح';
+
+  @override
+  String get agentsInsightUnknown => 'موضوع غير معروف';
+
+  @override
+  String get agentsInsightHandoff => 'مُحوّل إليك';
+
+  @override
+  String get agentsInsightCustomer => 'العميل';
+
+  @override
+  String get agentsInsightAgent => 'رد الذكاء الاصطناعي';
+
+  @override
+  String get agentsInsightResolve => 'حل';
+
+  @override
+  String get agentsInsightDismiss => 'تجاهل';
+
+  @override
+  String get agentsInsightAddAndResolve => 'إضافة وحل';
+
+  @override
+  String get agentsInsightInstructionHint =>
+      'أضف تعليمة ليتعامل الوكيل مع هذه الحالة بشكل أفضل في المرة القادمة…';
+
+  @override
+  String get agentsInsightResolved => 'تم الحل';
+
+  @override
+  String get agentsInsightDismissed => 'تم التجاهل';
+
+  @override
+  String get agentsInsightPending => 'معلّقة';
+
+  @override
+  String get agentsInsightFailed => 'تعذّر تحديث المشكلة.';
+
+  @override
+  String agentsTestTitle(String name) {
+    return 'اختبار — $name';
+  }
+
+  @override
+  String get agentsTestEmpty => 'أرسل رسالة للاختبار';
+
+  @override
+  String get agentsTestNote =>
+      'تجربة فقط: لا يُستهلك أي رصيد ولا تُنشأ أي طلبات.';
+
+  @override
+  String get agentsTestPlaceholder => 'اكتب رسالة…';
+
+  @override
+  String get agentsTestSend => 'إرسال';
+
+  @override
+  String get agentsTestFailed => 'لا يوجد رد — أعد المحاولة.';
+
+  @override
+  String get agentsDetailsConversations => 'المحادثات';
+
+  @override
+  String agentsDetailsConversationsFoot(int received, int sent) {
+    return '$received مستلمة · $sent مرسلة';
+  }
+
+  @override
+  String get agentsDetailsMessages => 'الرسائل';
+
+  @override
+  String agentsDetailsLastActive(String date) {
+    return 'آخر نشاط: $date';
+  }
+
+  @override
+  String get agentsDetailsNoActivity => 'لا يوجد نشاط بعد';
+
+  @override
+  String get agentsDetailsOrders => 'الطلبات المُنشأة';
+
+  @override
+  String agentsDetailsResolvedFoot(int count) {
+    return '$count تم حلها';
+  }
+
+  @override
+  String get agentsDetailsInsights => 'ملاحظات الوكيل';
+
+  @override
+  String get agentsDetailsAll => 'الكل';
+
+  @override
+  String get agentsDetailsInstructions => 'تعليمات مخصصة';
+
+  @override
+  String get agentsDetailsNoInstructions => 'لا توجد تعليمات بعد.';
+
+  @override
+  String get agentsDetailsEdit => 'تعديل';
+
+  @override
+  String get agentsDetailsSave => 'حفظ';
+
+  @override
+  String get agentsDetailsSaved => 'تم حفظ التعليمات';
+
+  @override
+  String get agentsDetailsSavedMerged =>
+      'تم حفظ التعليمات — مع الإبقاء على الأسطر المضافة من الويب';
+
+  @override
+  String get agentsDetailsConflictTitle => 'عُدّلت على الويب';
+
+  @override
+  String get agentsDetailsConflictBody =>
+      'عُدّلت هذه التعليمات أثناء كتابتك. النسخة الحالية:';
+
+  @override
+  String get agentsDetailsUseLatest => 'اعتماد هذه النسخة';
+
+  @override
+  String get agentsDetailsKeepMine => 'استبدالها بنسختي';
+
+  @override
+  String get agentsNotFound => 'الوكيل غير موجود.';
+
+  @override
+  String agentsTestEmptyFor(String name) {
+    return 'أرسل رسالة لاختبار $name';
+  }
+
+  @override
+  String get agentsTestProduct => 'منتج';
+
+  @override
+  String agentsTestProductId(String id) {
+    return 'المعرّف: $id…';
+  }
+
+  @override
+  String get agentsPresetsTitle => 'ابدأ بوكيل جاهز';
+
+  @override
+  String get agentsPresetsBody =>
+      'كل واحد مهيّأ للبيع في الجزائر — الدارجة والعربية والفرنسية، تسعير التوصيل وإدارة الطلبات. اختر واحدًا ثم عدّل ما تشاء.';
+
+  @override
+  String get agentsPresetVisionVoice => 'رؤية + صوت';
+
+  @override
+  String get agentsPresetVoice => 'صوت';
+
+  @override
+  String get agentsPresetCloserTagline => 'يحوّل المحادثات إلى طلبات مؤكدة';
+
+  @override
+  String get agentsPresetCloser1 => 'يرافق العميل من السؤال إلى الطلب المؤكد';
+
+  @override
+  String get agentsPresetCloser2 =>
+      'يسعّر التوصيل حسب الولاية ويُغلق بالمبلغ الإجمالي';
+
+  @override
+  String get agentsPresetCloser3 => 'يفهم الصور والرسائل الصوتية';
+
+  @override
+  String get agentsPresetSupportTagline => 'يردّ بسرعة ويحوّل المشاكل إليك';
+
+  @override
+  String get agentsPresetSupport1 => 'يجيب بلطف عن أسئلة المنتجات والطلبات';
+
+  @override
+  String get agentsPresetSupport2 => 'يحوّل الشكاوى والاسترجاعات إلى إنسان';
+
+  @override
+  String get agentsPresetSupport3 => 'هادئ ودقيق ومباشر';
+
+  @override
+  String get agentsPresetAdvisorTagline =>
+      'يساعد العميل على اختيار المنتج المناسب';
+
+  @override
+  String get agentsPresetAdvisor1 => 'يقارن الخيارات ويشرح الفروق';
+
+  @override
+  String get agentsPresetAdvisor2 => 'يجد المنتج انطلاقًا من صورة العميل';
+
+  @override
+  String get agentsPresetAdvisor3 =>
+      'مثالي للكتالوجات ذات المتغيرات والمواصفات';
+
+  @override
+  String get agentsPresetExpressTagline => 'ردود فائقة السرعة للحجم الكبير';
+
+  @override
+  String get agentsPresetExpress1 => 'ردود قصيرة وسريعة للصفحات المزدحمة';
+
+  @override
+  String get agentsPresetExpress2 => 'أقل استهلاك للأرصدة — نص وصوت فقط';
+
+  @override
+  String get agentsPresetExpress3 => 'ينشئ الطلبات ويلغيها أيضًا';
+
+  @override
+  String get agentsPresetUse => 'استخدم هذا الوكيل  ←';
+
+  @override
+  String get agentsPresetOwn => 'تفضّل إنشاء وكيلك؟';
+
+  @override
+  String get agentsPresetScratch => 'ابدأ من الصفر';
+
+  @override
+  String get agentsCreatedToast => 'تم إنشاء الوكيل';
+
+  @override
+  String get agentFormSubtitle =>
+      'اضبط وكيلًا يردّ على محادثاتك. الاسم وحده إلزامي — ولكل ما تبقّى قيمة افتراضية.';
+
+  @override
+  String get agentFormBasics => 'المعلومات الأساسية';
+
+  @override
+  String get agentFormDescription => 'الوصف';
+
+  @override
+  String get agentFormDescriptionPlaceholder =>
+      'صف باختصار ما يقوم به هذا الوكيل…';
+
+  @override
+  String get agentFormInstructions => 'تعليمات مخصصة';
+
+  @override
+  String get agentFormInstructionsPlaceholder =>
+      'كيف يردّ، ما الذي يتجنّبه، وكيف يتعامل مع حالات معيّنة…';
+
+  @override
+  String get agentFormInstructionsHint =>
+      'توجّه هذه التعليمات سلوك الوكيل في المحادثات.';
+
+  @override
+  String get agentFormAdvanced => 'إعدادات متقدمة';
+
+  @override
+  String get agentFormAdvancedHint => 'اختياري — تُطبَّق قيم افتراضية.';
+
+  @override
+  String get agentFormBehavior => 'السلوك';
+
+  @override
+  String get agentFormBehaviorSummary => 'الختام · التحويل إلى إنسان';
+
+  @override
+  String get agentFormClosing => 'ختام المحادثة';
+
+  @override
+  String get agentFormClosingPlaceholder =>
+      'أمثلة:\n• بعد الطلب: «شكرًا! طلبك في الطريق.»\n• الزبون يودّع: «شكرًا، نراك قريبًا!»\n• زبون غاضب: «عذرًا، سأحوّلك إلى الفريق.»';
+
+  @override
+  String get agentFormClosingHint =>
+      'متى وكيف ينهي الوكيل المحادثة. إن تُرك فارغًا: يشكر بعد الطلب ويردّ على التوديع.';
+
+  @override
+  String get agentFormHandoff => 'قواعد التدخّل البشري';
+
+  @override
+  String get agentFormHandoffPlaceholder =>
+      'أمثلة:\n• استرداد أو إرجاع ← أوقف الذكاء الاصطناعي ونبّهني\n• طلب تخفيض ← اتركه لي\n• شكوى ← حوّل المحادثة إليّ';
+
+  @override
+  String get agentFormHandoffHint =>
+      'متى يتوقف الوكيل ويسلّمك المحادثة. التحيات (slm، cava، hi) يتولاها الذكاء الاصطناعي دائمًا.';
+
+  @override
+  String get agentFormDisplay => 'عرض المنتجات';
+
+  @override
+  String get agentFormDisplayDefault => 'النمط الافتراضي';
+
+  @override
+  String get agentFormDisplayCustom => 'مخصّص';
+
+  @override
+  String get agentFormDisplayHint =>
+      'كيف يعرض الوكيل المنتج. المس وسمًا لإدراجه — ويملأ الوكيل البيانات الحقيقية.';
+
+  @override
+  String get agentFormTemplate => 'القالب';
+
+  @override
+  String get agentFormTemplatePlaceholder => 'المس الوسوم أعلاه أو اكتب هنا…';
+
+  @override
+  String get agentFormTagCard => 'بطاقة المنتج';
+
+  @override
+  String get agentFormTagName => 'الاسم';
+
+  @override
+  String get agentFormTagPrice => 'السعر (دج)';
+
+  @override
+  String get agentFormTagDescription => 'الوصف';
+
+  @override
+  String get agentFormTagStock => 'المخزون';
+
+  @override
+  String get agentFormTagNewLine => '↵ سطر جديد';
+
+  @override
+  String get agentFormPreview => 'معاينة';
+
+  @override
+  String get agentFormPreviewLive => 'معاينة مباشرة';
+
+  @override
+  String get agentFormPreviewCustomer => 'أرني منتجاتك';
+
+  @override
+  String get agentFormPreviewDefault =>
+      'إليك ما لدينا!\n[PRODUCT_CARD]\nهل تريد الطلب؟';
+
+  @override
+  String get agentFormPreviewSampleName => 'منتج تجريبي';
+
+  @override
+  String get agentFormPreviewSampleDescription => 'منتج رائع';
+
+  @override
+  String get agentFormModel => 'نموذج الذكاء الاصطناعي';
+
+  @override
+  String agentFormModelSummary(String model, String temperature, int tokens) {
+    return '$model · $temperature · $tokens رمزًا';
+  }
+
+  @override
+  String get agentFormModelPicker => 'النموذج';
+
+  @override
+  String agentFormModelCost(String usd) {
+    return '≈ $usd / 1000 رسالة';
+  }
+
+  @override
+  String get agentFormModelsLoading => 'جارٍ تحميل النماذج المتاحة…';
+
+  @override
+  String get agentFormModelsUnavailable =>
+      'نماذج الذكاء الاصطناعي غير متاحة مؤقتًا. أعد المحاولة لاحقًا.';
+
+  @override
+  String get agentFormTraitBestQuality => 'أفضل جودة';
+
+  @override
+  String get agentFormTraitFastAffordable => 'سريع وبسعر مناسب';
+
+  @override
+  String get agentFormTraitLongContext128k => 'سياق 128k';
+
+  @override
+  String get agentFormTraitLegacyFast => 'قديم، سريع';
+
+  @override
+  String get agentFormTraitBestBalanced => 'الأكثر توازنًا';
+
+  @override
+  String get agentFormTraitFastCheap => 'سريع واقتصادي';
+
+  @override
+  String get agentFormTraitMostCapable => 'الأقوى';
+
+  @override
+  String get agentFormTraitLatestFast => 'الأحدث، سريع';
+
+  @override
+  String get agentFormTraitLongContext1m => 'سياق 1M';
+
+  @override
+  String get agentFormTraitBestOpenSource => 'أفضل نموذج مفتوح المصدر';
+
+  @override
+  String get agentFormTraitUltraFast => 'فائق السرعة';
+
+  @override
+  String get agentFormTraitMixtureOfExperts => 'MoE، سياق 32k';
+
+  @override
+  String get agentFormTraitReasoning => 'نموذج استدلال';
+
+  @override
+  String get agentFormTemperature => 'درجة الإبداع';
+
+  @override
+  String get agentFormPrecise => 'دقيق';
+
+  @override
+  String get agentFormCreative => 'مبدع';
+
+  @override
+  String get agentFormMaxTokens => 'الحد الأقصى للرموز';
+
+  @override
+  String get agentFormMaxTokensHint => 'أقصى طول للرد · 100 – 4096';
+
+  @override
+  String get agentFormImages => 'التعرّف على الصور';
+
+  @override
+  String get agentFormImagesHint =>
+      'يرى الذكاء الاصطناعي صور الزبائن ويقارنها بمنتجاتك. 5 أرصدة لكل صورة (1 للنص).';
+
+  @override
+  String get agentFormVoice => 'الرسائل الصوتية';
+
+  @override
+  String get agentFormVoiceHint =>
+      'يستمع الذكاء الاصطناعي إلى الرسائل الصوتية ويكتبها (عربية، فرنسية، إنجليزية، دارجة). 3 أرصدة لكل رسالة. عند الإيقاف: يطلب الوكيل رسالة مكتوبة.';
+
+  @override
+  String get agentFormDelay => 'مهلة الرد';
+
+  @override
+  String agentFormDelayValue(int seconds) {
+    return '$seconds ث';
+  }
+
+  @override
+  String get agentFormDelayMax => '10 ث';
+
+  @override
+  String get agentFormDelayHint =>
+      'ينتظر رسائل أخرى قبل الرد — كثيرًا ما يرسل الزبائن عدة رسائل قصيرة، فيجمعها الوكيل.';
+
+  @override
+  String get agentFormPages => 'الصفحات المتصلة';
+
+  @override
+  String get agentFormPagesHint =>
+      'الصفحات التي يردّ عليها هذا الوكيل. لكل صفحة وكيل واحد فقط.';
+
+  @override
+  String agentFormPagesSummary(int selected, int total) {
+    return '$selected من $total محددة';
+  }
+
+  @override
+  String agentFormPagesCount(int selected, int total) {
+    return '$selected من $total';
+  }
+
+  @override
+  String get agentFormPagesNone => 'لا توجد صفحات متصلة';
+
+  @override
+  String get agentFormPagesEmpty =>
+      'لا توجد صفحات متصلة بعد. اربط صفحة فيسبوك أو إنستغرام أولًا، ثم اربطها بهذا الوكيل.';
+
+  @override
+  String agentFormPageTaken(String agent) {
+    return 'مرتبطة بـ $agent';
+  }
+
+  @override
+  String get agentFormPageActive => 'نشطة';
+
+  @override
+  String get agentFormPageInactive => 'غير نشطة';
+
+  @override
+  String get agentFormSelectAll => 'تحديد الكل';
+
+  @override
+  String get agentFormClear => 'مسح';
+
+  @override
+  String get agentFormProducts => 'المنتجات';
+
+  @override
+  String get agentFormSellAll => 'بيع كل الكتالوج';
+
+  @override
+  String get agentFormSellAllHint =>
+      'يعرف الوكيل كل منتجاتك. أوقف الخيار لتختار.';
+
+  @override
+  String get agentFormProductsAll => 'كل الكتالوج';
+
+  @override
+  String agentFormProductsChosen(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count منتجات مختارة',
+      two: 'منتجان مختاران',
+      one: 'منتج واحد مختار',
+      zero: 'لم يُختر أي منتج',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get agentFormProductSearch => 'بحث';
+
+  @override
+  String get agentFormProductSearchPlaceholder => 'ابحث عن منتجات…';
+
+  @override
+  String get agentFormProductsNone => 'لا توجد منتجات متاحة';
+
+  @override
+  String get agentFormProductsNoMatch => 'لا توجد منتجات تطابق بحثك';
+
+  @override
+  String get agentFormEditTitle => 'تعديل الوكيل';
+
+  @override
+  String get agentFormEditSubtitle =>
+      'حدّث إعدادات وكيل الذكاء الاصطناعي. تُطبَّق التغييرات على الرسائل القادمة.';
+
+  @override
+  String get agentFormEditAdvancedHint => 'المس قسمًا لتعديله.';
+
+  @override
+  String get agentFormActive => 'الوكيل نشط';
+
+  @override
+  String get agentFormActiveHint => 'يردّ على رسائل صفحاته ما دام نشطًا.';
+
+  @override
+  String get agentFormSave => 'حفظ التغييرات';
+
+  @override
+  String get agentFormSavedToast => 'تم تحديث الوكيل';
+
+  @override
+  String get agentFormSavedMergedToast =>
+      'تم تحديث الوكيل — مع الإبقاء على التعليمات المضافة من الويب';
+
+  @override
+  String get agentFormLeaveTitle => 'المغادرة دون حفظ؟';
+
+  @override
+  String agentFormLeaveBody(String name) {
+    return 'ستفقد تعديلاتك على $name.';
+  }
+
+  @override
+  String get agentFormKeepEditing => 'مواصلة التعديل';
+
+  @override
+  String get agentFormLeave => 'المغادرة دون حفظ';
+
+  @override
+  String get agentsDetailsEditAgent => 'تعديل الوكيل';
+
+  @override
+  String get pagesEyebrow => 'القنوات المتصلة';
+
+  @override
+  String get pagesTitle => 'الصفحات والبريد الوارد';
+
+  @override
+  String get pagesSubtitle =>
+      'لكل صفحة متصلة بريد وارد ومخزون ووكيل ذكاء اصطناعي خاص بها.';
+
+  @override
+  String get pagesStatTotal => 'إجمالي الصفحات';
+
+  @override
+  String get pagesStatPlanLimit => 'حد الخطة';
+
+  @override
+  String get pagesFilterAll => 'جميع المنصات';
+
+  @override
+  String get pagesEmptyTitle => 'لا توجد صفحة مربوطة';
+
+  @override
+  String get pagesEmptyBody => 'اربط صفحاتك لتبدأ إدارتها بالذكاء الاصطناعي.';
+
+  @override
+  String pagesEmptyPlatformTitle(String platform) {
+    return 'لا توجد صفحات $platform';
+  }
+
+  @override
+  String pagesEmptyPlatformBody(String platform) {
+    return 'اربط صفحات $platform لتبدأ.';
+  }
+
+  @override
+  String get pagesDisconnectTitle => 'فصل الصفحة؟';
+
+  @override
+  String pagesDisconnectBody(String name) {
+    return 'لن تصلك رسائل $name بعد الآن وسيتوقف وكيل الذكاء الاصطناعي عن الرد فيها.';
+  }
+
+  @override
+  String get pagesDisconnectConfirm => 'فصل';
+
+  @override
+  String get pagesDisconnectedToast => 'تم فصل الصفحة';
+
+  @override
+  String get pageCardAiOn => 'الذكاء الاصطناعي مفعّل';
+
+  @override
+  String get pageCardAiOff => 'الذكاء الاصطناعي معطّل';
+
+  @override
+  String get pageCardStatConvos => 'محادثات';
+
+  @override
+  String get pageCardStatMsgs7d => 'رسائل 7 أيام';
+
+  @override
+  String get pageCardStatUnread => 'غير مقروءة';
+
+  @override
+  String get pageCardStatStock => 'المخزون';
+
+  @override
+  String pageCardStatActive(int n) {
+    return '$n نشطة';
+  }
+
+  @override
+  String pageCardStatIn(int n) {
+    return '$n واردة';
+  }
+
+  @override
+  String get pageCardStatNeedsReply => 'بانتظار الرد';
+
+  @override
+  String get pageCardStatProducts => 'منتجات';
+
+  @override
+  String get pageCardAgentReady => 'وكيل الذكاء الاصطناعي جاهز';
+
+  @override
+  String get pageCardAgentTailored => 'مخصص لبريد هذه الصفحة.';
+
+  @override
+  String get pageCardAgentNotReady => 'لا يوجد وكيل مخصص بعد';
+
+  @override
+  String get pageCardAgentNotReadyHint =>
+      'ولّد واحدًا من المحادثات الأخيرة لهذه الصفحة.';
+
+  @override
+  String get pageCardAgentGenerate => 'توليد';
+
+  @override
+  String get pageCardAgentRegenerate => 'إعادة توليد';
+
+  @override
+  String get pageCardActionInbox => 'البريد';
+
+  @override
+  String get pageCardActionStock => 'المخزون';
+
+  @override
+  String get pageCardActionConfigure => 'إعداد';
+
+  @override
+  String get pageCardActionDisconnect => 'فصل';
+
+  @override
+  String get pageCardNoActivity => 'لا نشاط بعد';
+
+  @override
+  String get pageCardNow => 'الآن';
+
+  @override
+  String pageCardMinutesAgo(int n) {
+    return 'منذ $n د';
+  }
+
+  @override
+  String pageCardHoursAgo(int n) {
+    return 'منذ $n س';
+  }
+
+  @override
+  String pageCardDaysAgo(int n) {
+    return 'منذ $n ي';
+  }
+
+  @override
+  String get agentGenTitle => 'توليد وكيل ذكاء اصطناعي من البريد الوارد';
+
+  @override
+  String agentGenSubtitle(String pageName) {
+    return 'سنقرأ المحادثات الأخيرة على $pageName ونصمم وكيلًا مخصصًا.';
+  }
+
+  @override
+  String get agentGenWhatTitle => 'ماذا يفعل هذا';
+
+  @override
+  String get agentGenWhat1 =>
+      'يقرأ ما يصل إلى 25 محادثة حديثة (لا نخزن أي نسخ جديدة)';
+
+  @override
+  String get agentGenWhat2 =>
+      'يكتشف ما تبيعه واللغات المستخدمة وأكثر الأسئلة شيوعًا';
+
+  @override
+  String get agentGenWhat3 =>
+      'يصيغ شخصية ونبرة وطول الردود وتعليمات مخصصة لنشاطك';
+
+  @override
+  String get agentGenWhat4 =>
+      'تعاين وتعدّل وتطبق — لا شيء يتغير حتى تضغط تطبيق';
+
+  @override
+  String get agentGenStart => 'قراءة البريد وتوليد';
+
+  @override
+  String get agentGenPhaseReading => 'قراءة المحادثات الأخيرة…';
+
+  @override
+  String get agentGenPhaseAnalyzing => 'فهم السياق — المنتجات واللغة والنبرة…';
+
+  @override
+  String get agentGenPhaseDrafting => 'صياغة وكيل الذكاء الاصطناعي المخصص لك…';
+
+  @override
+  String get agentGenPhaseSubhint => 'تستغرق هذه العملية عادة 10 إلى 30 ثانية.';
+
+  @override
+  String get agentGenStepRead => 'قراءة';
+
+  @override
+  String get agentGenStepAnalyze => 'تحليل';
+
+  @override
+  String get agentGenStepDraft => 'صياغة';
+
+  @override
+  String get agentGenSummary => 'ملخص النشاط';
+
+  @override
+  String agentGenSampled(int conversations, int messages) {
+    return '$conversations محادثة · $messages رسالة';
+  }
+
+  @override
+  String get agentGenLanguages => 'اللغات';
+
+  @override
+  String get agentGenTopQuestions => 'أهم الأسئلة';
+
+  @override
+  String get agentGenPersonality => 'الشخصية';
+
+  @override
+  String get agentGenTone => 'النبرة';
+
+  @override
+  String get agentGenLength => 'الطول';
+
+  @override
+  String get agentGenInstructions => 'التعليمات المخصصة';
+
+  @override
+  String get agentGenEditHint =>
+      'عدّل قبل التطبيق. تُحفظ هذه التعليمات في إعدادات الذكاء الاصطناعي لهذه الصفحة.';
+
+  @override
+  String agentGenChars(int n) {
+    return '$n حرفًا';
+  }
+
+  @override
+  String get agentGenDiscard => 'تجاهل';
+
+  @override
+  String agentGenApply(String pageName) {
+    return 'تطبيق على $pageName';
+  }
+
+  @override
+  String get agentGenApplying => 'جاري تطبيق الإعدادات…';
+
+  @override
+  String agentGenCreated(String pageName) {
+    return 'تم إنشاء وكيل الذكاء الاصطناعي وربطه بـ $pageName';
+  }
+
+  @override
+  String agentGenUpdated(String pageName) {
+    return 'تم تحديث وكيل الذكاء الاصطناعي لـ $pageName';
+  }
+
+  @override
+  String get agentGenApplyFail => 'تعذر تطبيق الإعدادات';
+
+  @override
+  String get agentGenToneBalanced => 'متوازنة';
+
+  @override
+  String get agentGenToneFormal => 'رسمية';
+
+  @override
+  String get agentGenToneCasual => 'عفوية';
+
+  @override
+  String get agentGenToneEnthusiastic => 'متحمسة';
+
+  @override
+  String get agentGenLengthShort => 'قصيرة';
+
+  @override
+  String get agentGenLengthMedium => 'متوسطة';
+
+  @override
+  String get agentGenLengthDetailed => 'مفصّلة';
+
+  @override
+  String get agentsNewTitle => 'وكيل جديد';
 }

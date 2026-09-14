@@ -5,6 +5,7 @@ import '../../core/constants/api_endpoints.dart';
 import '../../core/error/result.dart';
 import '../../core/network/api_client.dart';
 import '../models/connected_page.dart';
+import '../models/page_summary.dart';
 
 /// Connected Pages, against `/api/pages`.
 class PageRepository {
@@ -28,6 +29,49 @@ class PageRepository {
             .map(ConnectedPage.fromJson)
             .toList(growable: false);
       },
+    );
+  }
+
+  /// `GET /api/pages/{id}/summary` — one card's counters, picture, agent status
+  /// and last activity. Read-only.
+  Future<Result<PageSummary>> summary(String pageId) {
+    return _api.get<PageSummary>(
+      Api.pageSummary(pageId),
+      parse: (json) => PageSummary.fromJson(json as Map<String, dynamic>),
+    );
+  }
+
+  /// `DELETE /api/pages/{id}` — a **soft** disconnect: the page leaves the
+  /// list and the webhook ignores it, but its conversations, agent links and
+  /// token are kept, and connecting it again reactivates the same row.
+  Future<Result<void>> disconnect(String pageId) {
+    return _api.delete<void>(Api.page(pageId));
+  }
+
+  /// `POST /api/pages/{id}/generate-agent` — a draft agent from the page's
+  /// recent inbox. Nothing is saved; see [applyAgent].
+  Future<Result<GeneratedAgentDraft>> generateAgent(String pageId) {
+    return _api.post<GeneratedAgentDraft>(
+      Api.pageGenerateAgent(pageId),
+      parse: (json) => GeneratedAgentDraft.fromJson(json as Map<String, dynamic>),
+    );
+  }
+
+  /// `POST /api/pages/{id}/apply-agent` → `{ agent, created }`. True when a
+  /// new agent was created, false when an existing one was updated.
+  ///
+  /// > Per the live docs the backend updates the merchant's **first** agent
+  /// > (`findFirst({ userId })`), not necessarily the one already on this
+  /// > page, and links it to the page in place of any other.
+  Future<Result<bool>> applyAgent(
+    String pageId,
+    GeneratedAgentDraft draft, {
+    required String instructions,
+  }) {
+    return _api.post<bool>(
+      Api.pageApplyAgent(pageId),
+      body: draft.applyBody(instructions),
+      parse: (json) => (json as Map<String, dynamic>)['created'] == true,
     );
   }
 

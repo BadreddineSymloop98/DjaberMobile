@@ -5,6 +5,7 @@ import 'package:djaber_mobile/data/models/catalogue.dart';
 import 'package:djaber_mobile/data/models/connected_page.dart';
 import 'package:djaber_mobile/data/models/conversation.dart';
 import 'package:djaber_mobile/data/models/dashboard_stats.dart';
+import 'package:djaber_mobile/data/models/page_summary.dart';
 import 'package:djaber_mobile/data/models/product.dart';
 import 'package:djaber_mobile/data/repositories/agent_repository.dart';
 import 'package:djaber_mobile/data/repositories/catalogue_repository.dart';
@@ -68,16 +69,59 @@ class FakeDashboardRepository extends DashboardRepository {
 }
 
 class FakePageRepository extends PageRepository {
-  FakePageRepository({this.pages = const [], this.fails = false})
-      : super(api: apiForTest());
+  FakePageRepository({
+    this.pages = const [],
+    this.fails = false,
+    this.summaries = const {},
+    this.draft,
+  }) : super(api: apiForTest());
 
-  final List<ConnectedPage> pages;
+  /// Reassign to play a page connected (or removed) behind the screen's back.
+  List<ConnectedPage> pages;
   final bool fails;
+
+  /// Page id → its card. A page with none answers with a failure.
+  final Map<String, PageSummary> summaries;
+
+  /// What `generate-agent` answers; null makes it fail.
+  final GeneratedAgentDraft? draft;
+
+  final disconnected = <String>[];
+  final applied = <({String pageId, String instructions})>[];
 
   @override
   Future<Result<List<ConnectedPage>>> list() async => fails
       ? const Result.failure(ServerException('unreachable'))
       : Result.success(pages);
+
+  @override
+  Future<Result<PageSummary>> summary(String pageId) async {
+    final summary = summaries[pageId];
+    return summary == null ? const Result.failure(ServerException('unreachable')) : Result.success(summary);
+  }
+
+  @override
+  Future<Result<void>> disconnect(String pageId) async {
+    disconnected.add(pageId);
+    pages = [for (final page in pages) if (page.id != pageId) page];
+    return const Result.success(null);
+  }
+
+  @override
+  Future<Result<String>> authUrlFor(PagePlatform platform) async =>
+      const Result.success('https://www.facebook.com/v18.0/dialog/oauth');
+
+  @override
+  Future<Result<GeneratedAgentDraft>> generateAgent(String pageId) async {
+    final value = draft;
+    return value == null ? const Result.failure(ServerException('unreachable')) : Result.success(value);
+  }
+
+  @override
+  Future<Result<bool>> applyAgent(String pageId, GeneratedAgentDraft draft, {required String instructions}) async {
+    applied.add((pageId: pageId, instructions: instructions));
+    return const Result.success(true);
+  }
 }
 
 class FakeAgentRepository extends AgentRepository {

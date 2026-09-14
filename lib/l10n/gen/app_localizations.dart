@@ -1880,6 +1880,1632 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'not built yet'**
   String get commonNotBuilt;
+
+  /// No description provided for @agentsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'AI Agents'**
+  String get agentsTitle;
+
+  /// No description provided for @agentsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create and manage AI agents that sell your products on connected pages'**
+  String get agentsSubtitle;
+
+  /// No description provided for @agentsActive.
+  ///
+  /// In en, this message translates to:
+  /// **'AI active'**
+  String get agentsActive;
+
+  /// No description provided for @agentsInactive.
+  ///
+  /// In en, this message translates to:
+  /// **'AI paused'**
+  String get agentsInactive;
+
+  /// No description provided for @agentsStatPages.
+  ///
+  /// In en, this message translates to:
+  /// **'Pages'**
+  String get agentsStatPages;
+
+  /// No description provided for @agentsStatProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Products'**
+  String get agentsStatProducts;
+
+  /// No description provided for @agentsStatModel.
+  ///
+  /// In en, this message translates to:
+  /// **'Model'**
+  String get agentsStatModel;
+
+  /// No description provided for @agentsAllProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get agentsAllProducts;
+
+  /// No description provided for @agentsNoPages.
+  ///
+  /// In en, this message translates to:
+  /// **'Not answering on any page yet'**
+  String get agentsNoPages;
+
+  /// No description provided for @agentsPause.
+  ///
+  /// In en, this message translates to:
+  /// **'Pause the agent'**
+  String get agentsPause;
+
+  /// No description provided for @agentsResume.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume the agent'**
+  String get agentsResume;
+
+  /// No description provided for @agentsPausedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Agent paused — it no longer replies'**
+  String get agentsPausedToast;
+
+  /// No description provided for @agentsResumedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Agent active — it replies again'**
+  String get agentsResumedToast;
+
+  /// No description provided for @agentsEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No agent yet'**
+  String get agentsEmptyTitle;
+
+  /// No description provided for @agentsEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Create an AI agent to automatically respond to messages on your connected pages and sell your products.'**
+  String get agentsEmptyBody;
+
+  /// 14 — Agents IA, the button on the no-agent state. Leads to 15 — Agents · démarrer (F15), not built yet.
+  ///
+  /// In en, this message translates to:
+  /// **'Create your agent'**
+  String get agentsEmptyCta;
+
+  /// No description provided for @agentsActionInsights.
+  ///
+  /// In en, this message translates to:
+  /// **'Issues to review'**
+  String get agentsActionInsights;
+
+  /// No description provided for @agentsActionTest.
+  ///
+  /// In en, this message translates to:
+  /// **'Test the agent'**
+  String get agentsActionTest;
+
+  /// No description provided for @agentsActionDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Details and stats'**
+  String get agentsActionDetails;
+
+  /// No description provided for @agentsActionDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete the agent'**
+  String get agentsActionDelete;
+
+  /// No description provided for @agentsDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete the agent?'**
+  String get agentsDeleteTitle;
+
+  /// No description provided for @agentsDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} will be deleted and will stop replying on your pages. You can create a new agent afterwards.'**
+  String agentsDeleteBody(String name);
+
+  /// No description provided for @agentsDeleteConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get agentsDeleteConfirm;
+
+  /// No description provided for @agentsDeletedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Agent deleted'**
+  String get agentsDeletedToast;
+
+  /// No description provided for @agentsInsightsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending issues'**
+  String get agentsInsightsTitle;
+
+  /// No description provided for @agentsInsightsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No pending issues — your agent is handling everything.'**
+  String get agentsInsightsEmpty;
+
+  /// No description provided for @agentsInsightsNone.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing here.'**
+  String get agentsInsightsNone;
+
+  /// No description provided for @agentsInsightUnclear.
+  ///
+  /// In en, this message translates to:
+  /// **'Unclear'**
+  String get agentsInsightUnclear;
+
+  /// No description provided for @agentsInsightUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown topic'**
+  String get agentsInsightUnknown;
+
+  /// No description provided for @agentsInsightHandoff.
+  ///
+  /// In en, this message translates to:
+  /// **'Handed to you'**
+  String get agentsInsightHandoff;
+
+  /// No description provided for @agentsInsightCustomer.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer'**
+  String get agentsInsightCustomer;
+
+  /// No description provided for @agentsInsightAgent.
+  ///
+  /// In en, this message translates to:
+  /// **'AI response'**
+  String get agentsInsightAgent;
+
+  /// No description provided for @agentsInsightResolve.
+  ///
+  /// In en, this message translates to:
+  /// **'Resolve'**
+  String get agentsInsightResolve;
+
+  /// No description provided for @agentsInsightDismiss.
+  ///
+  /// In en, this message translates to:
+  /// **'Dismiss'**
+  String get agentsInsightDismiss;
+
+  /// No description provided for @agentsInsightAddAndResolve.
+  ///
+  /// In en, this message translates to:
+  /// **'Add and resolve'**
+  String get agentsInsightAddAndResolve;
+
+  /// No description provided for @agentsInsightInstructionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add an instruction so the agent handles this better next time…'**
+  String get agentsInsightInstructionHint;
+
+  /// No description provided for @agentsInsightResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Resolved'**
+  String get agentsInsightResolved;
+
+  /// No description provided for @agentsInsightDismissed.
+  ///
+  /// In en, this message translates to:
+  /// **'Dismissed'**
+  String get agentsInsightDismissed;
+
+  /// No description provided for @agentsInsightPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get agentsInsightPending;
+
+  /// No description provided for @agentsInsightFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'The issue could not be updated.'**
+  String get agentsInsightFailed;
+
+  /// No description provided for @agentsTestTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Test — {name}'**
+  String agentsTestTitle(String name);
+
+  /// No description provided for @agentsTestEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Send a message to test'**
+  String get agentsTestEmpty;
+
+  /// No description provided for @agentsTestNote.
+  ///
+  /// In en, this message translates to:
+  /// **'A dry run: no credits used, no orders created.'**
+  String get agentsTestNote;
+
+  /// No description provided for @agentsTestPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Type a message…'**
+  String get agentsTestPlaceholder;
+
+  /// No description provided for @agentsTestSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get agentsTestSend;
+
+  /// No description provided for @agentsTestFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'No reply — try again.'**
+  String get agentsTestFailed;
+
+  /// No description provided for @agentsDetailsConversations.
+  ///
+  /// In en, this message translates to:
+  /// **'Conversations'**
+  String get agentsDetailsConversations;
+
+  /// No description provided for @agentsDetailsConversationsFoot.
+  ///
+  /// In en, this message translates to:
+  /// **'{received} received · {sent} sent'**
+  String agentsDetailsConversationsFoot(int received, int sent);
+
+  /// No description provided for @agentsDetailsMessages.
+  ///
+  /// In en, this message translates to:
+  /// **'Messages'**
+  String get agentsDetailsMessages;
+
+  /// No description provided for @agentsDetailsLastActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Last: {date}'**
+  String agentsDetailsLastActive(String date);
+
+  /// No description provided for @agentsDetailsNoActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'No activity yet'**
+  String get agentsDetailsNoActivity;
+
+  /// No description provided for @agentsDetailsOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders created'**
+  String get agentsDetailsOrders;
+
+  /// No description provided for @agentsDetailsResolvedFoot.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} resolved'**
+  String agentsDetailsResolvedFoot(int count);
+
+  /// No description provided for @agentsDetailsInsights.
+  ///
+  /// In en, this message translates to:
+  /// **'Agent insights'**
+  String get agentsDetailsInsights;
+
+  /// No description provided for @agentsDetailsAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get agentsDetailsAll;
+
+  /// No description provided for @agentsDetailsInstructions.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom instructions'**
+  String get agentsDetailsInstructions;
+
+  /// No description provided for @agentsDetailsNoInstructions.
+  ///
+  /// In en, this message translates to:
+  /// **'No instructions yet.'**
+  String get agentsDetailsNoInstructions;
+
+  /// No description provided for @agentsDetailsEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get agentsDetailsEdit;
+
+  /// No description provided for @agentsDetailsSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get agentsDetailsSave;
+
+  /// No description provided for @agentsDetailsSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Instructions saved'**
+  String get agentsDetailsSaved;
+
+  /// Saving on the phone after the web appended instructions (an insight resolve) while the editor was open. Ours, unapproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Instructions saved — lines added on the web were kept'**
+  String get agentsDetailsSavedMerged;
+
+  /// No description provided for @agentsDetailsConflictTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Changed on the web'**
+  String get agentsDetailsConflictTitle;
+
+  /// No description provided for @agentsDetailsConflictBody.
+  ///
+  /// In en, this message translates to:
+  /// **'These instructions were changed while you were editing. The current version:'**
+  String get agentsDetailsConflictBody;
+
+  /// No description provided for @agentsDetailsUseLatest.
+  ///
+  /// In en, this message translates to:
+  /// **'Use this version'**
+  String get agentsDetailsUseLatest;
+
+  /// No description provided for @agentsDetailsKeepMine.
+  ///
+  /// In en, this message translates to:
+  /// **'Replace with mine'**
+  String get agentsDetailsKeepMine;
+
+  /// No description provided for @agentsNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Agent not found.'**
+  String get agentsNotFound;
+
+  /// No description provided for @agentsTestEmptyFor.
+  ///
+  /// In en, this message translates to:
+  /// **'Send a message to test {name}'**
+  String agentsTestEmptyFor(String name);
+
+  /// No description provided for @agentsTestProduct.
+  ///
+  /// In en, this message translates to:
+  /// **'Product'**
+  String get agentsTestProduct;
+
+  /// No description provided for @agentsTestProductId.
+  ///
+  /// In en, this message translates to:
+  /// **'ID: {id}…'**
+  String agentsTestProductId(String id);
+
+  /// No description provided for @agentsPresetsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Start with a ready-made agent'**
+  String get agentsPresetsTitle;
+
+  /// No description provided for @agentsPresetsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Each one is fully configured for Algerian selling — Darija, Arabic and French, delivery quoting, and order handling. Pick one to launch in seconds, then fine-tune anything.'**
+  String get agentsPresetsBody;
+
+  /// No description provided for @agentsPresetVisionVoice.
+  ///
+  /// In en, this message translates to:
+  /// **'VISION + VOICE'**
+  String get agentsPresetVisionVoice;
+
+  /// No description provided for @agentsPresetVoice.
+  ///
+  /// In en, this message translates to:
+  /// **'VOICE'**
+  String get agentsPresetVoice;
+
+  /// No description provided for @agentsPresetCloserTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Turns conversations into confirmed orders'**
+  String get agentsPresetCloserTagline;
+
+  /// No description provided for @agentsPresetCloser1.
+  ///
+  /// In en, this message translates to:
+  /// **'Guides the customer from question to confirmed order'**
+  String get agentsPresetCloser1;
+
+  /// No description provided for @agentsPresetCloser2.
+  ///
+  /// In en, this message translates to:
+  /// **'Quotes delivery per wilaya and closes with the full total'**
+  String get agentsPresetCloser2;
+
+  /// No description provided for @agentsPresetCloser3.
+  ///
+  /// In en, this message translates to:
+  /// **'Understands photos and voice notes'**
+  String get agentsPresetCloser3;
+
+  /// No description provided for @agentsPresetSupportTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Answers fast, escalates problems to you'**
+  String get agentsPresetSupportTagline;
+
+  /// No description provided for @agentsPresetSupport1.
+  ///
+  /// In en, this message translates to:
+  /// **'Handles product and order questions politely'**
+  String get agentsPresetSupport1;
+
+  /// No description provided for @agentsPresetSupport2.
+  ///
+  /// In en, this message translates to:
+  /// **'Escalates complaints and refunds to a human'**
+  String get agentsPresetSupport2;
+
+  /// No description provided for @agentsPresetSupport3.
+  ///
+  /// In en, this message translates to:
+  /// **'Calm, accurate, and to the point'**
+  String get agentsPresetSupport3;
+
+  /// No description provided for @agentsPresetAdvisorTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Helps customers pick the right product'**
+  String get agentsPresetAdvisorTagline;
+
+  /// No description provided for @agentsPresetAdvisor1.
+  ///
+  /// In en, this message translates to:
+  /// **'Compares options and explains differences'**
+  String get agentsPresetAdvisor1;
+
+  /// No description provided for @agentsPresetAdvisor2.
+  ///
+  /// In en, this message translates to:
+  /// **'Matches a customer photo to your catalog'**
+  String get agentsPresetAdvisor2;
+
+  /// No description provided for @agentsPresetAdvisor3.
+  ///
+  /// In en, this message translates to:
+  /// **'Great for catalogs with variants and specs'**
+  String get agentsPresetAdvisor3;
+
+  /// No description provided for @agentsPresetExpressTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Ultra-fast replies for high message volume'**
+  String get agentsPresetExpressTagline;
+
+  /// No description provided for @agentsPresetExpress1.
+  ///
+  /// In en, this message translates to:
+  /// **'Short, quick answers for busy pages'**
+  String get agentsPresetExpress1;
+
+  /// No description provided for @agentsPresetExpress2.
+  ///
+  /// In en, this message translates to:
+  /// **'Lowest credit use — text and voice only'**
+  String get agentsPresetExpress2;
+
+  /// No description provided for @agentsPresetExpress3.
+  ///
+  /// In en, this message translates to:
+  /// **'Still places and cancels orders'**
+  String get agentsPresetExpress3;
+
+  /// No description provided for @agentsPresetUse.
+  ///
+  /// In en, this message translates to:
+  /// **'Use this agent  →'**
+  String get agentsPresetUse;
+
+  /// No description provided for @agentsPresetOwn.
+  ///
+  /// In en, this message translates to:
+  /// **'Prefer to build your own?'**
+  String get agentsPresetOwn;
+
+  /// No description provided for @agentsPresetScratch.
+  ///
+  /// In en, this message translates to:
+  /// **'Start from scratch'**
+  String get agentsPresetScratch;
+
+  /// No description provided for @agentsCreatedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Agent created'**
+  String get agentsCreatedToast;
+
+  /// 15b — Partir de zéro, the full agent form. The web's AgentForm.tsx is hardcoded English and has no i18n keys; section names follow it, the rest is ours and unapproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Set up an agent to answer your conversations. Only the name is required — everything else has a default.'**
+  String get agentFormSubtitle;
+
+  /// No description provided for @agentFormBasics.
+  ///
+  /// In en, this message translates to:
+  /// **'Basic information'**
+  String get agentFormBasics;
+
+  /// No description provided for @agentFormDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get agentFormDescription;
+
+  /// No description provided for @agentFormDescriptionPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Briefly describe what this agent does…'**
+  String get agentFormDescriptionPlaceholder;
+
+  /// No description provided for @agentFormInstructions.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom instructions'**
+  String get agentFormInstructions;
+
+  /// No description provided for @agentFormInstructionsPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'How to respond, what to avoid, how to handle certain cases…'**
+  String get agentFormInstructionsPlaceholder;
+
+  /// No description provided for @agentFormInstructionsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'These instructions guide the agent’s behavior in conversations.'**
+  String get agentFormInstructionsHint;
+
+  /// No description provided for @agentFormAdvanced.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced settings'**
+  String get agentFormAdvanced;
+
+  /// No description provided for @agentFormAdvancedHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional — sensible defaults apply.'**
+  String get agentFormAdvancedHint;
+
+  /// No description provided for @agentFormBehavior.
+  ///
+  /// In en, this message translates to:
+  /// **'Behavior'**
+  String get agentFormBehavior;
+
+  /// No description provided for @agentFormBehaviorSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Closing · Human handoff'**
+  String get agentFormBehaviorSummary;
+
+  /// No description provided for @agentFormClosing.
+  ///
+  /// In en, this message translates to:
+  /// **'Conversation closing'**
+  String get agentFormClosing;
+
+  /// No description provided for @agentFormClosingPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Examples:\n• After an order: “Thank you! Your order is on its way.”\n• Customer says bye: “Thanks for chatting, come back anytime!”\n• Angry customer: “Sorry — let me get a human to help you.”'**
+  String get agentFormClosingPlaceholder;
+
+  /// No description provided for @agentFormClosingHint.
+  ///
+  /// In en, this message translates to:
+  /// **'When and how the AI closes conversations. If empty, it uses sensible defaults (thanks after an order, answers goodbyes).'**
+  String get agentFormClosingHint;
+
+  /// No description provided for @agentFormHandoff.
+  ///
+  /// In en, this message translates to:
+  /// **'Human intervention rules'**
+  String get agentFormHandoff;
+
+  /// No description provided for @agentFormHandoffPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Examples:\n• Refund or return → stop the AI, notify me\n• Discount request → let me handle it\n• Complaint → transfer the conversation to me'**
+  String get agentFormHandoffPlaceholder;
+
+  /// No description provided for @agentFormHandoffHint.
+  ///
+  /// In en, this message translates to:
+  /// **'When the AI should stop and let a human take over. Normal greetings (slm, cava, hi) are always handled by the AI.'**
+  String get agentFormHandoffHint;
+
+  /// No description provided for @agentFormDisplay.
+  ///
+  /// In en, this message translates to:
+  /// **'Product display'**
+  String get agentFormDisplay;
+
+  /// No description provided for @agentFormDisplayDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'Default style'**
+  String get agentFormDisplayDefault;
+
+  /// No description provided for @agentFormDisplayCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom'**
+  String get agentFormDisplayCustom;
+
+  /// No description provided for @agentFormDisplayHint.
+  ///
+  /// In en, this message translates to:
+  /// **'How the AI presents products. Tap a tag to insert it — the AI fills in real product data.'**
+  String get agentFormDisplayHint;
+
+  /// No description provided for @agentFormTemplate.
+  ///
+  /// In en, this message translates to:
+  /// **'Template'**
+  String get agentFormTemplate;
+
+  /// No description provided for @agentFormTemplatePlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the tags above or type here…'**
+  String get agentFormTemplatePlaceholder;
+
+  /// No description provided for @agentFormTagCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Product card'**
+  String get agentFormTagCard;
+
+  /// No description provided for @agentFormTagName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get agentFormTagName;
+
+  /// No description provided for @agentFormTagPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Price (DA)'**
+  String get agentFormTagPrice;
+
+  /// No description provided for @agentFormTagDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get agentFormTagDescription;
+
+  /// No description provided for @agentFormTagStock.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock qty'**
+  String get agentFormTagStock;
+
+  /// No description provided for @agentFormTagNewLine.
+  ///
+  /// In en, this message translates to:
+  /// **'↵ New line'**
+  String get agentFormTagNewLine;
+
+  /// No description provided for @agentFormPreview.
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get agentFormPreview;
+
+  /// No description provided for @agentFormPreviewLive.
+  ///
+  /// In en, this message translates to:
+  /// **'Live preview'**
+  String get agentFormPreviewLive;
+
+  /// No description provided for @agentFormPreviewCustomer.
+  ///
+  /// In en, this message translates to:
+  /// **'Show me your products'**
+  String get agentFormPreviewCustomer;
+
+  /// No description provided for @agentFormPreviewDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'Here’s what we have!\n[PRODUCT_CARD]\nWould you like to order?'**
+  String get agentFormPreviewDefault;
+
+  /// No description provided for @agentFormPreviewSampleName.
+  ///
+  /// In en, this message translates to:
+  /// **'Sample product'**
+  String get agentFormPreviewSampleName;
+
+  /// No description provided for @agentFormPreviewSampleDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'A great product'**
+  String get agentFormPreviewSampleDescription;
+
+  /// No description provided for @agentFormModel.
+  ///
+  /// In en, this message translates to:
+  /// **'AI model'**
+  String get agentFormModel;
+
+  /// No description provided for @agentFormModelSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'{model} · {temperature} · {tokens} tokens'**
+  String agentFormModelSummary(String model, String temperature, int tokens);
+
+  /// No description provided for @agentFormModelPicker.
+  ///
+  /// In en, this message translates to:
+  /// **'Model'**
+  String get agentFormModelPicker;
+
+  /// The web's costPer1000Label. usd arrives with its dollar sign.
+  ///
+  /// In en, this message translates to:
+  /// **'≈ {usd} / 1000 msgs'**
+  String agentFormModelCost(String usd);
+
+  /// No description provided for @agentFormModelsLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading available models…'**
+  String get agentFormModelsLoading;
+
+  /// No description provided for @agentFormModelsUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'AI models are temporarily unavailable. Please try again later.'**
+  String get agentFormModelsUnavailable;
+
+  /// No description provided for @agentFormTraitBestQuality.
+  ///
+  /// In en, this message translates to:
+  /// **'Best quality'**
+  String get agentFormTraitBestQuality;
+
+  /// No description provided for @agentFormTraitFastAffordable.
+  ///
+  /// In en, this message translates to:
+  /// **'Fast & affordable'**
+  String get agentFormTraitFastAffordable;
+
+  /// No description provided for @agentFormTraitLongContext128k.
+  ///
+  /// In en, this message translates to:
+  /// **'128k context'**
+  String get agentFormTraitLongContext128k;
+
+  /// No description provided for @agentFormTraitLegacyFast.
+  ///
+  /// In en, this message translates to:
+  /// **'Legacy, fast'**
+  String get agentFormTraitLegacyFast;
+
+  /// No description provided for @agentFormTraitBestBalanced.
+  ///
+  /// In en, this message translates to:
+  /// **'Best balanced'**
+  String get agentFormTraitBestBalanced;
+
+  /// No description provided for @agentFormTraitFastCheap.
+  ///
+  /// In en, this message translates to:
+  /// **'Fast & cheap'**
+  String get agentFormTraitFastCheap;
+
+  /// No description provided for @agentFormTraitMostCapable.
+  ///
+  /// In en, this message translates to:
+  /// **'Most capable'**
+  String get agentFormTraitMostCapable;
+
+  /// No description provided for @agentFormTraitLatestFast.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest, fast'**
+  String get agentFormTraitLatestFast;
+
+  /// No description provided for @agentFormTraitLongContext1m.
+  ///
+  /// In en, this message translates to:
+  /// **'1M context'**
+  String get agentFormTraitLongContext1m;
+
+  /// No description provided for @agentFormTraitBestOpenSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Best open-source'**
+  String get agentFormTraitBestOpenSource;
+
+  /// No description provided for @agentFormTraitUltraFast.
+  ///
+  /// In en, this message translates to:
+  /// **'Ultra fast'**
+  String get agentFormTraitUltraFast;
+
+  /// No description provided for @agentFormTraitMixtureOfExperts.
+  ///
+  /// In en, this message translates to:
+  /// **'MoE, 32k context'**
+  String get agentFormTraitMixtureOfExperts;
+
+  /// No description provided for @agentFormTraitReasoning.
+  ///
+  /// In en, this message translates to:
+  /// **'Reasoning model'**
+  String get agentFormTraitReasoning;
+
+  /// No description provided for @agentFormTemperature.
+  ///
+  /// In en, this message translates to:
+  /// **'Temperature'**
+  String get agentFormTemperature;
+
+  /// No description provided for @agentFormPrecise.
+  ///
+  /// In en, this message translates to:
+  /// **'Precise'**
+  String get agentFormPrecise;
+
+  /// No description provided for @agentFormCreative.
+  ///
+  /// In en, this message translates to:
+  /// **'Creative'**
+  String get agentFormCreative;
+
+  /// No description provided for @agentFormMaxTokens.
+  ///
+  /// In en, this message translates to:
+  /// **'Max tokens'**
+  String get agentFormMaxTokens;
+
+  /// No description provided for @agentFormMaxTokensHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum response length · 100 – 4096'**
+  String get agentFormMaxTokensHint;
+
+  /// No description provided for @agentFormImages.
+  ///
+  /// In en, this message translates to:
+  /// **'Image recognition'**
+  String get agentFormImages;
+
+  /// No description provided for @agentFormImagesHint.
+  ///
+  /// In en, this message translates to:
+  /// **'The AI sees customer photos and compares them with your products. 5 credits per image (vs 1 for text).'**
+  String get agentFormImagesHint;
+
+  /// No description provided for @agentFormVoice.
+  ///
+  /// In en, this message translates to:
+  /// **'Voice notes'**
+  String get agentFormVoice;
+
+  /// No description provided for @agentFormVoiceHint.
+  ///
+  /// In en, this message translates to:
+  /// **'The AI transcribes voice notes (AR, FR, EN, Darja). 3 credits per note. When off, the agent asks for a text instead.'**
+  String get agentFormVoiceHint;
+
+  /// No description provided for @agentFormDelay.
+  ///
+  /// In en, this message translates to:
+  /// **'Response delay'**
+  String get agentFormDelay;
+
+  /// No description provided for @agentFormDelayValue.
+  ///
+  /// In en, this message translates to:
+  /// **'{seconds} s'**
+  String agentFormDelayValue(int seconds);
+
+  /// No description provided for @agentFormDelayMax.
+  ///
+  /// In en, this message translates to:
+  /// **'10 s'**
+  String get agentFormDelayMax;
+
+  /// No description provided for @agentFormDelayHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Waits for more messages before replying — customers often send several short ones, and this combines them.'**
+  String get agentFormDelayHint;
+
+  /// No description provided for @agentFormPages.
+  ///
+  /// In en, this message translates to:
+  /// **'Connected pages'**
+  String get agentFormPages;
+
+  /// No description provided for @agentFormPagesHint.
+  ///
+  /// In en, this message translates to:
+  /// **'The pages this agent answers on. Each page can only have one agent.'**
+  String get agentFormPagesHint;
+
+  /// No description provided for @agentFormPagesSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'{selected} of {total} selected'**
+  String agentFormPagesSummary(int selected, int total);
+
+  /// No description provided for @agentFormPagesCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{selected} of {total}'**
+  String agentFormPagesCount(int selected, int total);
+
+  /// No description provided for @agentFormPagesNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No pages connected'**
+  String get agentFormPagesNone;
+
+  /// No description provided for @agentFormPagesEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No pages connected yet. Connect a Facebook or Instagram page first, then link it to this agent.'**
+  String get agentFormPagesEmpty;
+
+  /// No description provided for @agentFormPageTaken.
+  ///
+  /// In en, this message translates to:
+  /// **'Already on {agent}'**
+  String agentFormPageTaken(String agent);
+
+  /// No description provided for @agentFormPageActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get agentFormPageActive;
+
+  /// No description provided for @agentFormPageInactive.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get agentFormPageInactive;
+
+  /// No description provided for @agentFormSelectAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Select all'**
+  String get agentFormSelectAll;
+
+  /// No description provided for @agentFormClear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get agentFormClear;
+
+  /// No description provided for @agentFormProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Products'**
+  String get agentFormProducts;
+
+  /// No description provided for @agentFormSellAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Sell all products'**
+  String get agentFormSellAll;
+
+  /// No description provided for @agentFormSellAllHint.
+  ///
+  /// In en, this message translates to:
+  /// **'The agent knows your entire catalog. Turn off to choose.'**
+  String get agentFormSellAllHint;
+
+  /// No description provided for @agentFormProductsAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All products'**
+  String get agentFormProductsAll;
+
+  /// No description provided for @agentFormProductsChosen.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No product chosen} =1{1 product chosen} other{{count} products chosen}}'**
+  String agentFormProductsChosen(int count);
+
+  /// No description provided for @agentFormProductSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get agentFormProductSearch;
+
+  /// No description provided for @agentFormProductSearchPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Search products…'**
+  String get agentFormProductSearchPlaceholder;
+
+  /// No description provided for @agentFormProductsNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No products available'**
+  String get agentFormProductsNone;
+
+  /// No description provided for @agentFormProductsNoMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'No products match your search'**
+  String get agentFormProductsNoMatch;
+
+  /// 15c — the agent form in edit mode. The web says Edit Agent / Update your AI agent configuration; the rest is ours, unapproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit agent'**
+  String get agentFormEditTitle;
+
+  /// No description provided for @agentFormEditSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Update your AI agent configuration. Changes apply to the next messages.'**
+  String get agentFormEditSubtitle;
+
+  /// No description provided for @agentFormEditAdvancedHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a section to change it.'**
+  String get agentFormEditAdvancedHint;
+
+  /// No description provided for @agentFormActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get agentFormActive;
+
+  /// No description provided for @agentFormActiveHint.
+  ///
+  /// In en, this message translates to:
+  /// **'The agent responds to messages on its pages while active.'**
+  String get agentFormActiveHint;
+
+  /// No description provided for @agentFormSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get agentFormSave;
+
+  /// No description provided for @agentFormSavedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Agent updated'**
+  String get agentFormSavedToast;
+
+  /// No description provided for @agentFormSavedMergedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Agent updated — instructions added on the web were kept'**
+  String get agentFormSavedMergedToast;
+
+  /// No description provided for @agentFormLeaveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave without saving?'**
+  String get agentFormLeaveTitle;
+
+  /// No description provided for @agentFormLeaveBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your changes to {name} will be lost.'**
+  String agentFormLeaveBody(String name);
+
+  /// No description provided for @agentFormKeepEditing.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep editing'**
+  String get agentFormKeepEditing;
+
+  /// No description provided for @agentFormLeave.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave without saving'**
+  String get agentFormLeave;
+
+  /// No description provided for @agentsDetailsEditAgent.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit agent'**
+  String get agentsDetailsEditAgent;
+
+  /// 12 / 13 — the pages screen. pages.* and pageCard.* are the web's i18n verbatim; empty states, relative times and the disconnect sheet are ours (the web hardcodes English there), unapproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Connected channels'**
+  String get pagesEyebrow;
+
+  /// No description provided for @pagesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pages & inboxes'**
+  String get pagesTitle;
+
+  /// No description provided for @pagesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Each connected page has its own inbox, stock and tailored AI agent.'**
+  String get pagesSubtitle;
+
+  /// No description provided for @pagesStatTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total pages'**
+  String get pagesStatTotal;
+
+  /// No description provided for @pagesStatPlanLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'Plan limit'**
+  String get pagesStatPlanLimit;
+
+  /// No description provided for @pagesFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All Platforms'**
+  String get pagesFilterAll;
+
+  /// No description provided for @pagesEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No pages connected'**
+  String get pagesEmptyTitle;
+
+  /// No description provided for @pagesEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect your pages to start managing them with AI.'**
+  String get pagesEmptyBody;
+
+  /// No description provided for @pagesEmptyPlatformTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No {platform} pages'**
+  String pagesEmptyPlatformTitle(String platform);
+
+  /// No description provided for @pagesEmptyPlatformBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect your {platform} pages to get started.'**
+  String pagesEmptyPlatformBody(String platform);
+
+  /// No description provided for @pagesDisconnectTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Disconnect page?'**
+  String get pagesDisconnectTitle;
+
+  /// No description provided for @pagesDisconnectBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You won’t receive messages from {name} anymore and the AI agent will stop replying there.'**
+  String pagesDisconnectBody(String name);
+
+  /// No description provided for @pagesDisconnectConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Disconnect'**
+  String get pagesDisconnectConfirm;
+
+  /// No description provided for @pagesDisconnectedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Page disconnected'**
+  String get pagesDisconnectedToast;
+
+  /// No description provided for @pageCardAiOn.
+  ///
+  /// In en, this message translates to:
+  /// **'AI on'**
+  String get pageCardAiOn;
+
+  /// No description provided for @pageCardAiOff.
+  ///
+  /// In en, this message translates to:
+  /// **'AI off'**
+  String get pageCardAiOff;
+
+  /// No description provided for @pageCardStatConvos.
+  ///
+  /// In en, this message translates to:
+  /// **'Convos'**
+  String get pageCardStatConvos;
+
+  /// No description provided for @pageCardStatMsgs7d.
+  ///
+  /// In en, this message translates to:
+  /// **'Msgs 7d'**
+  String get pageCardStatMsgs7d;
+
+  /// No description provided for @pageCardStatUnread.
+  ///
+  /// In en, this message translates to:
+  /// **'Unread'**
+  String get pageCardStatUnread;
+
+  /// No description provided for @pageCardStatStock.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock'**
+  String get pageCardStatStock;
+
+  /// No description provided for @pageCardStatActive.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} active'**
+  String pageCardStatActive(int n);
+
+  /// No description provided for @pageCardStatIn.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} in'**
+  String pageCardStatIn(int n);
+
+  /// No description provided for @pageCardStatNeedsReply.
+  ///
+  /// In en, this message translates to:
+  /// **'needs reply'**
+  String get pageCardStatNeedsReply;
+
+  /// No description provided for @pageCardStatProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'products'**
+  String get pageCardStatProducts;
+
+  /// No description provided for @pageCardAgentReady.
+  ///
+  /// In en, this message translates to:
+  /// **'AI agent ready'**
+  String get pageCardAgentReady;
+
+  /// No description provided for @pageCardAgentTailored.
+  ///
+  /// In en, this message translates to:
+  /// **'Tailored to this page’s inbox.'**
+  String get pageCardAgentTailored;
+
+  /// No description provided for @pageCardAgentNotReady.
+  ///
+  /// In en, this message translates to:
+  /// **'No tailored agent yet'**
+  String get pageCardAgentNotReady;
+
+  /// No description provided for @pageCardAgentNotReadyHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Generate one from this page’s recent conversations.'**
+  String get pageCardAgentNotReadyHint;
+
+  /// No description provided for @pageCardAgentGenerate.
+  ///
+  /// In en, this message translates to:
+  /// **'Generate'**
+  String get pageCardAgentGenerate;
+
+  /// No description provided for @pageCardAgentRegenerate.
+  ///
+  /// In en, this message translates to:
+  /// **'Regenerate'**
+  String get pageCardAgentRegenerate;
+
+  /// No description provided for @pageCardActionInbox.
+  ///
+  /// In en, this message translates to:
+  /// **'Inbox'**
+  String get pageCardActionInbox;
+
+  /// No description provided for @pageCardActionStock.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock'**
+  String get pageCardActionStock;
+
+  /// No description provided for @pageCardActionConfigure.
+  ///
+  /// In en, this message translates to:
+  /// **'Configure'**
+  String get pageCardActionConfigure;
+
+  /// No description provided for @pageCardActionDisconnect.
+  ///
+  /// In en, this message translates to:
+  /// **'Disconnect'**
+  String get pageCardActionDisconnect;
+
+  /// No description provided for @pageCardNoActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'No activity yet'**
+  String get pageCardNoActivity;
+
+  /// No description provided for @pageCardNow.
+  ///
+  /// In en, this message translates to:
+  /// **'just now'**
+  String get pageCardNow;
+
+  /// No description provided for @pageCardMinutesAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} min ago'**
+  String pageCardMinutesAgo(int n);
+
+  /// No description provided for @pageCardHoursAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} h ago'**
+  String pageCardHoursAgo(int n);
+
+  /// No description provided for @pageCardDaysAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} d ago'**
+  String pageCardDaysAgo(int n);
+
+  /// The web's agentGen.* verbatim — its GenerateAgentModal, as a sheet.
+  ///
+  /// In en, this message translates to:
+  /// **'Generate AI agent from inbox'**
+  String get agentGenTitle;
+
+  /// No description provided for @agentGenSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'We’ll read the recent conversations on {pageName} and draft a tailored agent.'**
+  String agentGenSubtitle(String pageName);
+
+  /// No description provided for @agentGenWhatTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What this does'**
+  String get agentGenWhatTitle;
+
+  /// No description provided for @agentGenWhat1.
+  ///
+  /// In en, this message translates to:
+  /// **'Reads up to 25 recent conversations on this page (we don’t store any new copy)'**
+  String get agentGenWhat1;
+
+  /// No description provided for @agentGenWhat2.
+  ///
+  /// In en, this message translates to:
+  /// **'Detects what you sell, the languages your customers use, and the most common questions'**
+  String get agentGenWhat2;
+
+  /// No description provided for @agentGenWhat3.
+  ///
+  /// In en, this message translates to:
+  /// **'Drafts a personality, tone, response length, and custom instructions tailored to your business'**
+  String get agentGenWhat3;
+
+  /// No description provided for @agentGenWhat4.
+  ///
+  /// In en, this message translates to:
+  /// **'You preview, edit, and apply — nothing is changed until you tap Apply'**
+  String get agentGenWhat4;
+
+  /// No description provided for @agentGenStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Read inbox & generate'**
+  String get agentGenStart;
+
+  /// No description provided for @agentGenPhaseReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Reading recent conversations…'**
+  String get agentGenPhaseReading;
+
+  /// No description provided for @agentGenPhaseAnalyzing.
+  ///
+  /// In en, this message translates to:
+  /// **'Understanding context — products, language, tone…'**
+  String get agentGenPhaseAnalyzing;
+
+  /// No description provided for @agentGenPhaseDrafting.
+  ///
+  /// In en, this message translates to:
+  /// **'Drafting your tailored AI agent…'**
+  String get agentGenPhaseDrafting;
+
+  /// No description provided for @agentGenPhaseSubhint.
+  ///
+  /// In en, this message translates to:
+  /// **'This usually takes 10–30 seconds.'**
+  String get agentGenPhaseSubhint;
+
+  /// No description provided for @agentGenStepRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Read'**
+  String get agentGenStepRead;
+
+  /// No description provided for @agentGenStepAnalyze.
+  ///
+  /// In en, this message translates to:
+  /// **'Analyze'**
+  String get agentGenStepAnalyze;
+
+  /// No description provided for @agentGenStepDraft.
+  ///
+  /// In en, this message translates to:
+  /// **'Draft'**
+  String get agentGenStepDraft;
+
+  /// No description provided for @agentGenSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Business summary'**
+  String get agentGenSummary;
+
+  /// No description provided for @agentGenSampled.
+  ///
+  /// In en, this message translates to:
+  /// **'{conversations} conversations · {messages} messages'**
+  String agentGenSampled(int conversations, int messages);
+
+  /// No description provided for @agentGenLanguages.
+  ///
+  /// In en, this message translates to:
+  /// **'Languages'**
+  String get agentGenLanguages;
+
+  /// No description provided for @agentGenTopQuestions.
+  ///
+  /// In en, this message translates to:
+  /// **'Top questions'**
+  String get agentGenTopQuestions;
+
+  /// No description provided for @agentGenPersonality.
+  ///
+  /// In en, this message translates to:
+  /// **'Personality'**
+  String get agentGenPersonality;
+
+  /// No description provided for @agentGenTone.
+  ///
+  /// In en, this message translates to:
+  /// **'Tone'**
+  String get agentGenTone;
+
+  /// No description provided for @agentGenLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Length'**
+  String get agentGenLength;
+
+  /// No description provided for @agentGenInstructions.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom instructions'**
+  String get agentGenInstructions;
+
+  /// No description provided for @agentGenEditHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit anything before applying. These instructions are saved on this page’s AI settings.'**
+  String get agentGenEditHint;
+
+  /// No description provided for @agentGenChars.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} chars'**
+  String agentGenChars(int n);
+
+  /// No description provided for @agentGenDiscard.
+  ///
+  /// In en, this message translates to:
+  /// **'Discard'**
+  String get agentGenDiscard;
+
+  /// No description provided for @agentGenApply.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply to {pageName}'**
+  String agentGenApply(String pageName);
+
+  /// No description provided for @agentGenApplying.
+  ///
+  /// In en, this message translates to:
+  /// **'Applying settings…'**
+  String get agentGenApplying;
+
+  /// No description provided for @agentGenCreated.
+  ///
+  /// In en, this message translates to:
+  /// **'AI agent created and linked to {pageName}'**
+  String agentGenCreated(String pageName);
+
+  /// No description provided for @agentGenUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'AI agent updated for {pageName}'**
+  String agentGenUpdated(String pageName);
+
+  /// No description provided for @agentGenApplyFail.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not apply settings'**
+  String get agentGenApplyFail;
+
+  /// No description provided for @agentGenToneBalanced.
+  ///
+  /// In en, this message translates to:
+  /// **'Balanced'**
+  String get agentGenToneBalanced;
+
+  /// No description provided for @agentGenToneFormal.
+  ///
+  /// In en, this message translates to:
+  /// **'Formal'**
+  String get agentGenToneFormal;
+
+  /// No description provided for @agentGenToneCasual.
+  ///
+  /// In en, this message translates to:
+  /// **'Casual'**
+  String get agentGenToneCasual;
+
+  /// No description provided for @agentGenToneEnthusiastic.
+  ///
+  /// In en, this message translates to:
+  /// **'Enthusiastic'**
+  String get agentGenToneEnthusiastic;
+
+  /// No description provided for @agentGenLengthShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Short'**
+  String get agentGenLengthShort;
+
+  /// No description provided for @agentGenLengthMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get agentGenLengthMedium;
+
+  /// No description provided for @agentGenLengthDetailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Detailed'**
+  String get agentGenLengthDetailed;
+
+  /// No description provided for @agentsNewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New agent'**
+  String get agentsNewTitle;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

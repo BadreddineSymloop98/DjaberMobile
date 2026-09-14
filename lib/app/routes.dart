@@ -73,6 +73,37 @@ class Routes {
   /// is still unbuilt, and this is reached from the drawer and from home.
   static const products = '/products';
 
+  /// `14 — Agents IA` — the merchant's agent. Reached from home's action
+  /// card and the drawer, like [products].
+  static const agents = '/agents';
+
+  /// `15 — Agents · démarrer` — ready-made agents, or start from scratch.
+  /// **Declared before [agent] in the router**, which would otherwise read
+  /// `new` as an agent id.
+  static const agentNew = '/agents/new';
+
+  /// "Partir de zéro": name, personality, instructions.
+  static const agentNewScratch = '/agents/new/scratch';
+
+  /// An agent's details, KPIs and instructions — the web's
+  /// `/dashboard/agents/{id}`. Pushed over [agents].
+  static const agent = '/agents/:id';
+  static String agentOf(String id) => '/agents/$id';
+
+  /// Its sandbox test chat. Pushed over [agents].
+  static const agentTest = '/agents/:id/test';
+  static String agentTestOf(String id) => '/agents/$id/test';
+
+  /// `15c — Modifier l'agent`: the full agent form, filled. Pushed over
+  /// [agent], whose *Modifier l'agent* button opens it, as the web's details
+  /// page does.
+  static const agentEdit = '/agents/:id/edit';
+  static String agentEditOf(String id) => '/agents/$id/edit';
+
+  /// `12 — Pages connectées` (`13 — Connecter une page` when there are none).
+  /// Reached from home and from the drawer's *Réseaux sociaux*.
+  static const pages = '/pages';
+
   /// `18 — Ajouter un produit`.
   ///
   /// **Must be declared before [product] in the router.** go_router matches in
