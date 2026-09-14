@@ -183,7 +183,7 @@ void main() {
       return l10n;
     }
 
-    for (final label in ['connect', 'agents']) {
+    for (final label in ['connect']) {
       testWidgets('the $label quick action does not', (tester) async {
         final l10n = await pumpTall(tester);
         final title = switch (label) {
@@ -226,6 +226,24 @@ void main() {
       // screen is *why* the card does not have to reach the tutorial's own
       // product step.
       expect(location(), Routes.products);
+      expect(location().startsWith(Routes.tutorial), isFalse);
+    });
+
+    testWidgets('the agents quick action goes to the agents screen, not to T4',
+        (tester) async {
+      final l10n = await pumpTall(tester);
+
+      await tester.tap(
+        find.descendant(
+          of: find.byType(ActionCard),
+          matching: find.text(l10n.homeActionAgentsTitle),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // `14 — Agents IA` exists now, so this card is a real destination —
+      // and still never the tutorial's own agent step.
+      expect(location(), Routes.agents);
       expect(location().startsWith(Routes.tutorial), isFalse);
     });
 

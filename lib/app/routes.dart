@@ -73,6 +73,27 @@ class Routes {
   /// is still unbuilt, and this is reached from the drawer and from home.
   static const products = '/products';
 
+  /// `14 — Agents IA` — the merchant's agent. Reached from home's action
+  /// card and the drawer, like [products].
+  static const agents = '/agents';
+
+  /// `15 — Agents · démarrer` — ready-made agents, or start from scratch.
+  /// **Declared before [agent] in the router**, which would otherwise read
+  /// `new` as an agent id.
+  static const agentNew = '/agents/new';
+
+  /// "Partir de zéro": name, personality, instructions.
+  static const agentNewScratch = '/agents/new/scratch';
+
+  /// An agent's details, KPIs and instructions — the web's
+  /// `/dashboard/agents/{id}`. Pushed over [agents].
+  static const agent = '/agents/:id';
+  static String agentOf(String id) => '/agents/$id';
+
+  /// Its sandbox test chat. Pushed over [agents].
+  static const agentTest = '/agents/:id/test';
+  static String agentTestOf(String id) => '/agents/$id/test';
+
   /// `18 — Ajouter un produit`.
   ///
   /// **Must be declared before [product] in the router.** go_router matches in

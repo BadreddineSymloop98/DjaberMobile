@@ -977,4 +977,616 @@ class L10nEn extends L10n {
 
   @override
   String get commonNotBuilt => 'not built yet';
+
+  @override
+  String get agentsTitle => 'AI Agents';
+
+  @override
+  String get agentsSubtitle =>
+      'Create and manage AI agents that sell your products on connected pages';
+
+  @override
+  String get agentsActive => 'AI active';
+
+  @override
+  String get agentsInactive => 'AI paused';
+
+  @override
+  String get agentsStatPages => 'Pages';
+
+  @override
+  String get agentsStatProducts => 'Products';
+
+  @override
+  String get agentsStatModel => 'Model';
+
+  @override
+  String get agentsAllProducts => 'All';
+
+  @override
+  String get agentsNoPages => 'Not answering on any page yet';
+
+  @override
+  String get agentsPause => 'Pause the agent';
+
+  @override
+  String get agentsResume => 'Resume the agent';
+
+  @override
+  String get agentsPausedToast => 'Agent paused — it no longer replies';
+
+  @override
+  String get agentsResumedToast => 'Agent active — it replies again';
+
+  @override
+  String get agentsEmptyTitle => 'No agent yet';
+
+  @override
+  String get agentsEmptyBody =>
+      'Create an AI agent to automatically respond to messages on your connected pages and sell your products.';
+
+  @override
+  String get agentsEmptyCta => 'Create your agent';
+
+  @override
+  String get agentsActionInsights => 'Issues to review';
+
+  @override
+  String get agentsActionTest => 'Test the agent';
+
+  @override
+  String get agentsActionDetails => 'Details and stats';
+
+  @override
+  String get agentsActionDelete => 'Delete the agent';
+
+  @override
+  String get agentsDeleteTitle => 'Delete the agent?';
+
+  @override
+  String agentsDeleteBody(String name) {
+    return '$name will be deleted and will stop replying on your pages. You can create a new agent afterwards.';
+  }
+
+  @override
+  String get agentsDeleteConfirm => 'Delete';
+
+  @override
+  String get agentsDeletedToast => 'Agent deleted';
+
+  @override
+  String get agentsInsightsTitle => 'Pending issues';
+
+  @override
+  String get agentsInsightsEmpty =>
+      'No pending issues — your agent is handling everything.';
+
+  @override
+  String get agentsInsightsNone => 'Nothing here.';
+
+  @override
+  String get agentsInsightUnclear => 'Unclear';
+
+  @override
+  String get agentsInsightUnknown => 'Unknown topic';
+
+  @override
+  String get agentsInsightHandoff => 'Handed to you';
+
+  @override
+  String get agentsInsightCustomer => 'Customer';
+
+  @override
+  String get agentsInsightAgent => 'AI response';
+
+  @override
+  String get agentsInsightResolve => 'Resolve';
+
+  @override
+  String get agentsInsightDismiss => 'Dismiss';
+
+  @override
+  String get agentsInsightAddAndResolve => 'Add and resolve';
+
+  @override
+  String get agentsInsightInstructionHint =>
+      'Add an instruction so the agent handles this better next time…';
+
+  @override
+  String get agentsInsightResolved => 'Resolved';
+
+  @override
+  String get agentsInsightDismissed => 'Dismissed';
+
+  @override
+  String get agentsInsightPending => 'Pending';
+
+  @override
+  String get agentsInsightFailed => 'The issue could not be updated.';
+
+  @override
+  String agentsTestTitle(String name) {
+    return 'Test — $name';
+  }
+
+  @override
+  String get agentsTestEmpty => 'Send a message to test';
+
+  @override
+  String get agentsTestNote => 'A dry run: no credits used, no orders created.';
+
+  @override
+  String get agentsTestPlaceholder => 'Type a message…';
+
+  @override
+  String get agentsTestSend => 'Send';
+
+  @override
+  String get agentsTestFailed => 'No reply — try again.';
+
+  @override
+  String get agentsDetailsConversations => 'Conversations';
+
+  @override
+  String agentsDetailsConversationsFoot(int received, int sent) {
+    return '$received received · $sent sent';
+  }
+
+  @override
+  String get agentsDetailsMessages => 'Messages';
+
+  @override
+  String agentsDetailsLastActive(String date) {
+    return 'Last: $date';
+  }
+
+  @override
+  String get agentsDetailsNoActivity => 'No activity yet';
+
+  @override
+  String get agentsDetailsOrders => 'Orders created';
+
+  @override
+  String agentsDetailsResolvedFoot(int count) {
+    return '$count resolved';
+  }
+
+  @override
+  String get agentsDetailsInsights => 'Agent insights';
+
+  @override
+  String get agentsDetailsAll => 'All';
+
+  @override
+  String get agentsDetailsInstructions => 'Custom instructions';
+
+  @override
+  String get agentsDetailsNoInstructions => 'No instructions yet.';
+
+  @override
+  String get agentsDetailsEdit => 'Edit';
+
+  @override
+  String get agentsDetailsSave => 'Save';
+
+  @override
+  String get agentsDetailsSaved => 'Instructions saved';
+
+  @override
+  String get agentsDetailsSavedMerged =>
+      'Instructions saved — lines added on the web were kept';
+
+  @override
+  String get agentsDetailsConflictTitle => 'Changed on the web';
+
+  @override
+  String get agentsDetailsConflictBody =>
+      'These instructions were changed while you were editing. The current version:';
+
+  @override
+  String get agentsDetailsUseLatest => 'Use this version';
+
+  @override
+  String get agentsDetailsKeepMine => 'Replace with mine';
+
+  @override
+  String get agentsNotFound => 'Agent not found.';
+
+  @override
+  String agentsTestEmptyFor(String name) {
+    return 'Send a message to test $name';
+  }
+
+  @override
+  String get agentsTestProduct => 'Product';
+
+  @override
+  String agentsTestProductId(String id) {
+    return 'ID: $id…';
+  }
+
+  @override
+  String get agentsPresetsTitle => 'Start with a ready-made agent';
+
+  @override
+  String get agentsPresetsBody =>
+      'Each one is fully configured for Algerian selling — Darija, Arabic and French, delivery quoting, and order handling. Pick one to launch in seconds, then fine-tune anything.';
+
+  @override
+  String get agentsPresetVisionVoice => 'VISION + VOICE';
+
+  @override
+  String get agentsPresetVoice => 'VOICE';
+
+  @override
+  String get agentsPresetCloserTagline =>
+      'Turns conversations into confirmed orders';
+
+  @override
+  String get agentsPresetCloser1 =>
+      'Guides the customer from question to confirmed order';
+
+  @override
+  String get agentsPresetCloser2 =>
+      'Quotes delivery per wilaya and closes with the full total';
+
+  @override
+  String get agentsPresetCloser3 => 'Understands photos and voice notes';
+
+  @override
+  String get agentsPresetSupportTagline =>
+      'Answers fast, escalates problems to you';
+
+  @override
+  String get agentsPresetSupport1 =>
+      'Handles product and order questions politely';
+
+  @override
+  String get agentsPresetSupport2 =>
+      'Escalates complaints and refunds to a human';
+
+  @override
+  String get agentsPresetSupport3 => 'Calm, accurate, and to the point';
+
+  @override
+  String get agentsPresetAdvisorTagline =>
+      'Helps customers pick the right product';
+
+  @override
+  String get agentsPresetAdvisor1 =>
+      'Compares options and explains differences';
+
+  @override
+  String get agentsPresetAdvisor2 => 'Matches a customer photo to your catalog';
+
+  @override
+  String get agentsPresetAdvisor3 =>
+      'Great for catalogs with variants and specs';
+
+  @override
+  String get agentsPresetExpressTagline =>
+      'Ultra-fast replies for high message volume';
+
+  @override
+  String get agentsPresetExpress1 => 'Short, quick answers for busy pages';
+
+  @override
+  String get agentsPresetExpress2 => 'Lowest credit use — text and voice only';
+
+  @override
+  String get agentsPresetExpress3 => 'Still places and cancels orders';
+
+  @override
+  String get agentsPresetUse => 'Use this agent  →';
+
+  @override
+  String get agentsPresetOwn => 'Prefer to build your own?';
+
+  @override
+  String get agentsPresetScratch => 'Start from scratch';
+
+  @override
+  String get agentsCreatedToast => 'Agent created';
+
+  @override
+  String get agentFormSubtitle =>
+      'Set up an agent to answer your conversations. Only the name is required — everything else has a default.';
+
+  @override
+  String get agentFormBasics => 'Basic information';
+
+  @override
+  String get agentFormDescription => 'Description';
+
+  @override
+  String get agentFormDescriptionPlaceholder =>
+      'Briefly describe what this agent does…';
+
+  @override
+  String get agentFormInstructions => 'Custom instructions';
+
+  @override
+  String get agentFormInstructionsPlaceholder =>
+      'How to respond, what to avoid, how to handle certain cases…';
+
+  @override
+  String get agentFormInstructionsHint =>
+      'These instructions guide the agent’s behavior in conversations.';
+
+  @override
+  String get agentFormAdvanced => 'Advanced settings';
+
+  @override
+  String get agentFormAdvancedHint => 'Optional — sensible defaults apply.';
+
+  @override
+  String get agentFormBehavior => 'Behavior';
+
+  @override
+  String get agentFormBehaviorSummary => 'Closing · Human handoff';
+
+  @override
+  String get agentFormClosing => 'Conversation closing';
+
+  @override
+  String get agentFormClosingPlaceholder =>
+      'Examples:\n• After an order: “Thank you! Your order is on its way.”\n• Customer says bye: “Thanks for chatting, come back anytime!”\n• Angry customer: “Sorry — let me get a human to help you.”';
+
+  @override
+  String get agentFormClosingHint =>
+      'When and how the AI closes conversations. If empty, it uses sensible defaults (thanks after an order, answers goodbyes).';
+
+  @override
+  String get agentFormHandoff => 'Human intervention rules';
+
+  @override
+  String get agentFormHandoffPlaceholder =>
+      'Examples:\n• Refund or return → stop the AI, notify me\n• Discount request → let me handle it\n• Complaint → transfer the conversation to me';
+
+  @override
+  String get agentFormHandoffHint =>
+      'When the AI should stop and let a human take over. Normal greetings (slm, cava, hi) are always handled by the AI.';
+
+  @override
+  String get agentFormDisplay => 'Product display';
+
+  @override
+  String get agentFormDisplayDefault => 'Default style';
+
+  @override
+  String get agentFormDisplayCustom => 'Custom';
+
+  @override
+  String get agentFormDisplayHint =>
+      'How the AI presents products. Tap a tag to insert it — the AI fills in real product data.';
+
+  @override
+  String get agentFormTemplate => 'Template';
+
+  @override
+  String get agentFormTemplatePlaceholder => 'Tap the tags above or type here…';
+
+  @override
+  String get agentFormTagCard => 'Product card';
+
+  @override
+  String get agentFormTagName => 'Name';
+
+  @override
+  String get agentFormTagPrice => 'Price (DA)';
+
+  @override
+  String get agentFormTagDescription => 'Description';
+
+  @override
+  String get agentFormTagStock => 'Stock qty';
+
+  @override
+  String get agentFormTagNewLine => '↵ New line';
+
+  @override
+  String get agentFormPreview => 'Preview';
+
+  @override
+  String get agentFormPreviewLive => 'Live preview';
+
+  @override
+  String get agentFormPreviewCustomer => 'Show me your products';
+
+  @override
+  String get agentFormPreviewDefault =>
+      'Here’s what we have!\n[PRODUCT_CARD]\nWould you like to order?';
+
+  @override
+  String get agentFormPreviewSampleName => 'Sample product';
+
+  @override
+  String get agentFormPreviewSampleDescription => 'A great product';
+
+  @override
+  String get agentFormModel => 'AI model';
+
+  @override
+  String agentFormModelSummary(String model, String temperature, int tokens) {
+    return '$model · $temperature · $tokens tokens';
+  }
+
+  @override
+  String get agentFormModelPicker => 'Model';
+
+  @override
+  String agentFormModelCost(String usd) {
+    return '≈ $usd / 1000 msgs';
+  }
+
+  @override
+  String get agentFormModelsLoading => 'Loading available models…';
+
+  @override
+  String get agentFormModelsUnavailable =>
+      'AI models are temporarily unavailable. Please try again later.';
+
+  @override
+  String get agentFormTraitBestQuality => 'Best quality';
+
+  @override
+  String get agentFormTraitFastAffordable => 'Fast & affordable';
+
+  @override
+  String get agentFormTraitLongContext128k => '128k context';
+
+  @override
+  String get agentFormTraitLegacyFast => 'Legacy, fast';
+
+  @override
+  String get agentFormTraitBestBalanced => 'Best balanced';
+
+  @override
+  String get agentFormTraitFastCheap => 'Fast & cheap';
+
+  @override
+  String get agentFormTraitMostCapable => 'Most capable';
+
+  @override
+  String get agentFormTraitLatestFast => 'Latest, fast';
+
+  @override
+  String get agentFormTraitLongContext1m => '1M context';
+
+  @override
+  String get agentFormTraitBestOpenSource => 'Best open-source';
+
+  @override
+  String get agentFormTraitUltraFast => 'Ultra fast';
+
+  @override
+  String get agentFormTraitMixtureOfExperts => 'MoE, 32k context';
+
+  @override
+  String get agentFormTraitReasoning => 'Reasoning model';
+
+  @override
+  String get agentFormTemperature => 'Temperature';
+
+  @override
+  String get agentFormPrecise => 'Precise';
+
+  @override
+  String get agentFormCreative => 'Creative';
+
+  @override
+  String get agentFormMaxTokens => 'Max tokens';
+
+  @override
+  String get agentFormMaxTokensHint => 'Maximum response length · 100 – 4096';
+
+  @override
+  String get agentFormImages => 'Image recognition';
+
+  @override
+  String get agentFormImagesHint =>
+      'The AI sees customer photos and compares them with your products. 5 credits per image (vs 1 for text).';
+
+  @override
+  String get agentFormVoice => 'Voice notes';
+
+  @override
+  String get agentFormVoiceHint =>
+      'The AI transcribes voice notes (AR, FR, EN, Darja). 3 credits per note. When off, the agent asks for a text instead.';
+
+  @override
+  String get agentFormDelay => 'Response delay';
+
+  @override
+  String agentFormDelayValue(int seconds) {
+    return '$seconds s';
+  }
+
+  @override
+  String get agentFormDelayMax => '10 s';
+
+  @override
+  String get agentFormDelayHint =>
+      'Waits for more messages before replying — customers often send several short ones, and this combines them.';
+
+  @override
+  String get agentFormPages => 'Connected pages';
+
+  @override
+  String get agentFormPagesHint =>
+      'The pages this agent answers on. Each page can only have one agent.';
+
+  @override
+  String agentFormPagesSummary(int selected, int total) {
+    return '$selected of $total selected';
+  }
+
+  @override
+  String agentFormPagesCount(int selected, int total) {
+    return '$selected of $total';
+  }
+
+  @override
+  String get agentFormPagesNone => 'No pages connected';
+
+  @override
+  String get agentFormPagesEmpty =>
+      'No pages connected yet. Connect a Facebook or Instagram page first, then link it to this agent.';
+
+  @override
+  String agentFormPageTaken(String agent) {
+    return 'Already on $agent';
+  }
+
+  @override
+  String get agentFormPageActive => 'Active';
+
+  @override
+  String get agentFormPageInactive => 'Inactive';
+
+  @override
+  String get agentFormSelectAll => 'Select all';
+
+  @override
+  String get agentFormClear => 'Clear';
+
+  @override
+  String get agentFormProducts => 'Products';
+
+  @override
+  String get agentFormSellAll => 'Sell all products';
+
+  @override
+  String get agentFormSellAllHint =>
+      'The agent knows your entire catalog. Turn off to choose.';
+
+  @override
+  String get agentFormProductsAll => 'All products';
+
+  @override
+  String agentFormProductsChosen(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count products chosen',
+      one: '1 product chosen',
+      zero: 'No product chosen',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get agentFormProductSearch => 'Search';
+
+  @override
+  String get agentFormProductSearchPlaceholder => 'Search products…';
+
+  @override
+  String get agentFormProductsNone => 'No products available';
+
+  @override
+  String get agentFormProductsNoMatch => 'No products match your search';
+
+  @override
+  String get agentsNewTitle => 'New agent';
 }

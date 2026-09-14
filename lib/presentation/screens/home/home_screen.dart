@@ -613,9 +613,7 @@ class _QuickActions extends StatelessWidget {
             iconColor: AppColors.live,
             title: l10n.homeActionAgentsTitle,
             subtitle: l10n.homeActionAgentsBody,
-            // TODO(agents): the agents list, which is where a second agent is
-            // created — not `T4`, which creates the first one.
-            onTap: () => onUnbuilt(l10n.homeActionAgentsTitle),
+            onTap: () => context.go(Routes.agents),
           ),
         ],
       ),

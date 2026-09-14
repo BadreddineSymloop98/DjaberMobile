@@ -296,7 +296,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
                 label: l10n.menuAgents,
                 // The AI is `signal/live`.
                 iconColor: AppColors.live,
-                onTap: () => _notBuilt(l10n.menuAgents),
+                onTap: () => _goTo(Routes.agents),
               ),
               MenuSubrow(
                 icon: AppIcons.megaphone,
