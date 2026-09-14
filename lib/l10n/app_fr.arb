@@ -548,5 +548,18 @@
   "agentFormProductSearchPlaceholder": "Rechercher des produits…",
   "agentFormProductsNone": "Aucun produit disponible",
   "agentFormProductsNoMatch": "Aucun produit ne correspond à votre recherche",
+  "agentFormEditTitle": "Modifier l’agent",
+  "agentFormEditSubtitle": "Mettez à jour la configuration de votre agent IA. Les changements s’appliquent aux prochains messages.",
+  "agentFormEditAdvancedHint": "Touchez une section pour la modifier.",
+  "agentFormActive": "Agent actif",
+  "agentFormActiveHint": "Il répond aux messages de ses pages tant qu’il est actif.",
+  "agentFormSave": "Enregistrer les modifications",
+  "agentFormSavedToast": "Agent mis à jour",
+  "agentFormSavedMergedToast": "Agent mis à jour — les consignes ajoutées sur le web sont conservées",
+  "agentFormLeaveTitle": "Quitter sans enregistrer ?",
+  "agentFormLeaveBody": "Vos modifications de {name} seront perdues.",
+  "agentFormKeepEditing": "Continuer à modifier",
+  "agentFormLeave": "Quitter sans enregistrer",
+  "agentsDetailsEditAgent": "Modifier l’agent",
   "agentsNewTitle":"Nouvel agent"
 }

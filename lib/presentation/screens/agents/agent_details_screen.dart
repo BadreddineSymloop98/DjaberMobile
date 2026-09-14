@@ -59,6 +59,12 @@ class _AgentDetailsScreenState extends State<AgentDetailsScreen> {
     }
   }
 
+  /// Opens `15c`, then reloads: the agent may have changed, saved or not.
+  Future<void> _edit() async {
+    await GoRouter.of(context).push<bool>(Routes.agentEditOf(widget.agentId));
+    if (mounted) await _model.load();
+  }
+
   Future<void> _save({bool overwrite = false}) async {
     final outcome = await _model.saveInstructions(overwrite: overwrite);
     if (!mounted) return;
@@ -156,6 +162,14 @@ class _AgentDetailsScreenState extends State<AgentDetailsScreen> {
 
     return [
       _Header(agent: agent),
+      SizedBox(height: AppSpacing.lg),
+      // The web's details page carries "Edit Agent" in its header; the full
+      // form is `15c`. Instructions keep their own quick edit below.
+      OutlinedButton.icon(
+        onPressed: _edit,
+        icon: AppIcon(AppIcons.edit, size: 4.1.w, color: AppColors.textPrimary),
+        label: Text(l10n.agentsDetailsEditAgent),
+      ),
       SizedBox(height: AppSpacing.xl),
       if (metrics != null) ...[
         Row(

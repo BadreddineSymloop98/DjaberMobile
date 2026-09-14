@@ -148,6 +148,160 @@ void main() {
     });
   });
 
+  group('editing (15c)', () {
+    const saved = AgentDraft(
+      name: 'Sara',
+      description: 'Vend des robes',
+      personality: AgentPersonality.friendly,
+      customInstructions: '- Vouvoyer',
+      aiModel: 'gpt-4o',
+      temperature: 0.6,
+      maxTokens: 1200,
+      sellAllProducts: false,
+      pageIds: ['p-1'],
+      productIds: ['x-1'],
+    );
+
+    NewAgentViewModel editor(_Agents agents) => NewAgentViewModel(
+          agents: agents,
+          pages: FakePageRepository(pages: pages),
+          products: FakeProductRepository(),
+          agentId: 'a-1',
+        );
+
+    test('the form opens on the agent as saved; its own page is not held', () async {
+      final agents = _Agents(existing: true)..stored = saved;
+      final model = editor(agents);
+      addTearDown(model.dispose);
+      await model.load();
+
+      expect(model.name.value, 'Sara');
+      expect(model.personality, AgentPersonality.friendly);
+      expect(model.aiModel, 'gpt-4o');
+      expect(model.tokens, 1200);
+      expect(model.sellAllProducts, isFalse);
+      expect(model.isProductSelected('x-1'), isTrue);
+      expect(model.takenBy('p-1'), isNull, reason: 'Sara is the agent being edited');
+      expect(model.isPageSelected('p-1'), isTrue);
+      expect(model.isPageSelected('p-2'), isFalse, reason: 'no pre-ticking when editing');
+      expect(model.hasChanges, isFalse, reason: 'reading the agent in is not a change');
+    });
+
+    test('a save sends only what changed, and a cleared text as null', () async {
+      final agents = _Agents(existing: true)..stored = saved;
+      final model = editor(agents);
+      addTearDown(model.dispose);
+      await model.load();
+
+      model.setActive(false);
+      model.description.controller.text = '';
+      model.togglePage('p-2');
+      expect(model.hasChanges, isTrue);
+
+      expect(await model.submitAndSave(), AgentSaveOutcome.saved);
+      final changes = agents.updates.single.changes;
+      expect(changes.keys, unorderedEquals(['isActive', 'description', 'pageIds']));
+      expect(changes['isActive'], isFalse);
+      expect(changes['description'], isNull);
+      expect(changes['pageIds'], ['p-1', 'p-2']);
+      expect(model.hasChanges, isFalse);
+    });
+
+    test('nothing changed: nothing is sent', () async {
+      final agents = _Agents(existing: true)..stored = saved;
+      final model = editor(agents);
+      addTearDown(model.dispose);
+      await model.load();
+
+      expect(await model.submitAndSave(), AgentSaveOutcome.unchanged);
+      expect(agents.updates, isEmpty);
+    });
+
+    test('instructions the web appended meanwhile are kept', () async {
+      final agents = _Agents(existing: true)..stored = saved;
+      final model = editor(agents);
+      addTearDown(model.dispose);
+      await model.load();
+
+      model.instructions.controller.text = '- Toujours vouvoyer';
+      agents.stored = saved.withCustomInstructions('- Vouvoyer\n- Pas de livraison hors Algérie');
+
+      expect(await model.submitAndSave(), AgentSaveOutcome.savedWithWebChanges);
+      expect(agents.updates.single.changes['customInstructions'], '- Toujours vouvoyer\n- Pas de livraison hors Algérie');
+    });
+
+    test('a rewrite on the web stops the save until the merchant chooses', () async {
+      final agents = _Agents(existing: true)..stored = saved;
+      final model = editor(agents);
+      addTearDown(model.dispose);
+      await model.load();
+
+      model.instructions.controller.text = '- Ma version';
+      agents.stored = saved.withCustomInstructions('- Réécrit sur le web');
+
+      expect(await model.submitAndSave(), AgentSaveOutcome.conflict);
+      expect(agents.updates, isEmpty);
+      expect(model.instructionsConflict, '- Réécrit sur le web');
+
+      expect(await model.submitAndSave(overwrite: true), AgentSaveOutcome.saved);
+      expect(agents.updates.single.changes['customInstructions'], '- Ma version');
+    });
+
+    test('taking the newer instructions makes them the base of the next save', () async {
+      final agents = _Agents(existing: true)..stored = saved;
+      final model = editor(agents);
+      addTearDown(model.dispose);
+      await model.load();
+
+      model.instructions.controller.text = '- Ma version';
+      agents.stored = saved.withCustomInstructions('- Réécrit sur le web');
+      await model.submitAndSave();
+      model.useLatestInstructions();
+
+      expect(model.instructions.value, '- Réécrit sur le web');
+      expect(model.hasChanges, isFalse);
+    });
+
+    test('an agent that cannot be read leaves an error to retry', () async {
+      final agents = _Agents(existing: true);
+      final model = editor(agents);
+      addTearDown(model.dispose);
+      await model.load();
+      expect(model.loadError, isNotNull);
+      expect(model.isLoaded, isFalse);
+
+      agents.stored = saved;
+      await model.retryLoad();
+      expect(model.loadError, isNull);
+      expect(model.name.value, 'Sara');
+    });
+
+    test('the draft reads the agent as the live docs show it', () {
+      final draft = AgentDraft.fromJson({
+        'name': 'Sara',
+        'description': null,
+        'personality': 'technical',
+        'aiModel': 'gpt-4o-mini',
+        'temperature': 0.7,
+        'maxTokens': 1000,
+        'sellAllProducts': false,
+        'isActive': false,
+        'pages': [
+          {'pageId': 'p-9'},
+        ],
+        'products': [
+          {'productId': 'pr-1', 'product': {'id': 'pr-1'}},
+        ],
+      });
+      expect(draft.description, '');
+      expect(draft.personality, AgentPersonality.technical);
+      expect(draft.maxTokens, 1000);
+      expect(draft.isActive, isFalse);
+      expect(draft.pageIds, ['p-9']);
+      expect(draft.productIds, ['pr-1']);
+    });
+  });
+
   group('back on the agents list', () {
     Future<L10n> pumpRouted(WidgetTester tester, _Agents agents) async {
       tester.view.physicalSize = const Size(390, 844);
@@ -368,4 +522,21 @@ class _Agents extends AgentRepository {
   Future<Result<List<AiProvider>>> activeProviders() async => const Result.success([
         AiProvider(provider: 'openai', displayName: 'OpenAI', models: ['gpt-4o', 'gpt-4o-mini']),
       ]);
+
+  /// The agent as the backend holds it, for the edit form. Change it after
+  /// the form loaded to play the web changing the agent meanwhile.
+  AgentDraft? stored;
+  final updates = <({String id, Map<String, Object?> changes})>[];
+
+  @override
+  Future<Result<AgentDraft>> getDraft(String agentId) async {
+    final agent = stored;
+    return agent == null ? const Result.failure(ServerException('unreachable')) : Result.success(agent);
+  }
+
+  @override
+  Future<Result<Agent>> update({required String agentId, required Map<String, Object?> changes}) async {
+    updates.add((id: agentId, changes: changes));
+    return Result.success(Agent(id: agentId, name: stored?.name ?? ''));
+  }
 }

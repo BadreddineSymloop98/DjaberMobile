@@ -56,6 +56,28 @@ class AgentRepository {
     return _api.post<Agent>(Api.agents, body: draft.toJson(), parse: _parseAgent);
   }
 
+  /// `GET /api/user-stock/agents/:id`, read as the whole form — `15c`.
+  Future<Result<AgentDraft>> getDraft(String agentId) {
+    return _api.get<AgentDraft>(
+      Api.agent(agentId),
+      parse: (json) {
+        final map = json as Map<String, dynamic>;
+        final agent = map['agent'];
+        return AgentDraft.fromJson(agent is Map<String, dynamic> ? agent : map);
+      },
+    );
+  }
+
+  /// `PUT /api/user-stock/agents/:id` with only [changes] — a partial update:
+  /// keys left out stay as the server holds them. `pageIds` / `productIds`,
+  /// when present, replace the agent's links whole.
+  Future<Result<Agent>> update({
+    required String agentId,
+    required Map<String, Object?> changes,
+  }) {
+    return _api.put<Agent>(Api.agent(agentId), body: changes, parse: _parseAgent);
+  }
+
   /// `GET /api/user-stock/ai-providers/active` → `{ providers }`: the models
   /// the administrator has switched on, for the form's model picker.
   Future<Result<List<AiProvider>>> activeProviders() {

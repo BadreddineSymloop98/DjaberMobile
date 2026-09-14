@@ -1588,5 +1588,49 @@ class L10nEn extends L10n {
   String get agentFormProductsNoMatch => 'No products match your search';
 
   @override
+  String get agentFormEditTitle => 'Edit agent';
+
+  @override
+  String get agentFormEditSubtitle =>
+      'Update your AI agent configuration. Changes apply to the next messages.';
+
+  @override
+  String get agentFormEditAdvancedHint => 'Tap a section to change it.';
+
+  @override
+  String get agentFormActive => 'Active';
+
+  @override
+  String get agentFormActiveHint =>
+      'The agent responds to messages on its pages while active.';
+
+  @override
+  String get agentFormSave => 'Save changes';
+
+  @override
+  String get agentFormSavedToast => 'Agent updated';
+
+  @override
+  String get agentFormSavedMergedToast =>
+      'Agent updated — instructions added on the web were kept';
+
+  @override
+  String get agentFormLeaveTitle => 'Leave without saving?';
+
+  @override
+  String agentFormLeaveBody(String name) {
+    return 'Your changes to $name will be lost.';
+  }
+
+  @override
+  String get agentFormKeepEditing => 'Keep editing';
+
+  @override
+  String get agentFormLeave => 'Leave without saving';
+
+  @override
+  String get agentsDetailsEditAgent => 'Edit agent';
+
+  @override
   String get agentsNewTitle => 'New agent';
 }

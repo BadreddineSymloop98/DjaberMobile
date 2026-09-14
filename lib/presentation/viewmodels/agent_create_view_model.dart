@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 import '../../core/error/app_exception.dart';
+import '../../core/error/result.dart';
 import '../../core/utils/validators.dart';
 import '../../data/models/agent.dart';
 import '../../data/models/agent_draft.dart';
@@ -11,11 +12,30 @@ import '../../data/models/product.dart';
 import '../../data/repositories/agent_repository.dart';
 import '../../data/repositories/page_repository.dart';
 import '../../data/repositories/product_repository.dart';
+import 'agent_details_view_model.dart';
 import 'base_view_model.dart';
 import 'form_field_model.dart';
 
 /// What creating an agent came to.
 enum AgentCreateOutcome { created, limitReached, failed }
+
+/// What saving an edited agent came to.
+enum AgentSaveOutcome {
+  saved,
+
+  /// Saved, with instructions the web appended while the form was open kept
+  /// after the merchant's own.
+  savedWithWebChanges,
+
+  /// Nothing differed from the agent as loaded, so nothing was sent.
+  unchanged,
+
+  /// Not saved: the instructions were rewritten elsewhere and the merchant
+  /// changed them too. [NewAgentViewModel.instructionsConflict] holds the
+  /// newer text.
+  conflict,
+  failed,
+}
 
 /// The part every way of creating an agent shares.
 ///
@@ -104,32 +124,37 @@ class AgentPresetsViewModel extends BaseViewModel {
   }
 }
 
-/// The parts of "Partir de zéro" that fold away — every section of the web
+/// The parts of the agent form that fold away — every section of the web
 /// form past name, description, personality and instructions.
 enum AgentFormSection { behavior, display, model, pages, products }
 
-/// "Partir de zéro" (`15b`): the web's full agent form (`AgentForm.tsx`),
-/// arranged for a phone — the essentials open, the rest folded, each fold
-/// carrying its current value so nothing is hidden by being closed.
+/// The web's full agent form (`AgentForm.tsx`), arranged for a phone — the
+/// essentials open, the rest folded, each fold carrying its current value so
+/// nothing is hidden by being closed.
 ///
-/// **Pages are chosen, not assumed.** The web makes the merchant pick; so does
-/// this, but it starts with every page no other agent holds already ticked —
-/// a first agent answers everywhere without a trip into the fold — and shows
-/// a held page as held, since a create naming it is refused whole
-/// (`One or more pages are already assigned to another agent`).
+/// Two modes, as on the web, where one component serves both pages:
+/// - **Create** (`15b — Partir de zéro`, [agentId] null). Pages are chosen,
+///   not assumed: the form starts with every page no other agent holds
+///   ticked, and shows a held page as held, since a create naming it is
+///   refused whole.
+/// - **Edit** (`15c — Modifier l'agent`, [agentId] set). The form opens on the
+///   agent as saved, adds the *Active* switch, and a save sends **only what
+///   changed** — see [submitAndSave].
 class NewAgentViewModel extends FormViewModel {
   NewAgentViewModel({
     required AgentRepository agents,
     required PageRepository pages,
     required ProductRepository products,
+    this.agentId,
   })  : _agents = agents,
         _pages = pages,
         _products = products {
     attachFields();
-    // The template feeds the live preview and two folds read their summary
-    // from a field, so those redraw as the merchant types.
-    template.controller.addListener(safeNotify);
-    maxTokens.controller.addListener(safeNotify);
+    // Every field feeds a fold summary, the preview or the unsaved-changes
+    // check, so the screen redraws as the merchant types.
+    for (final field in fields) {
+      field.controller.addListener(safeNotify);
+    }
     productQuery.addListener(safeNotify);
   }
 
@@ -138,6 +163,11 @@ class NewAgentViewModel extends FormViewModel {
   final AgentRepository _agents;
   final PageRepository _pages;
   final ProductRepository _products;
+
+  /// The agent being edited; null when creating one.
+  final String? agentId;
+
+  bool get isEditing => agentId != null;
 
   final name = FormFieldModel(validator: Validators.name);
   final description = FormFieldModel(validator: Validators.optional);
@@ -219,6 +249,16 @@ class NewAgentViewModel extends FormViewModel {
     safeNotify();
   }
 
+  bool _isActive = _defaults.isActive;
+
+  /// Edit only — the web's *Active* toggle.
+  bool get isActive => _isActive;
+
+  void setActive(bool value) {
+    _isActive = value;
+    safeNotify();
+  }
+
   /// Inserts a template tag where the cursor is, replacing any selection —
   /// the web's tag chips. At the end when the field has never had focus.
   void insertTag(String tag) {
@@ -249,9 +289,18 @@ class NewAgentViewModel extends FormViewModel {
   Future<void>? _loading;
   bool _loaded = false;
 
-  /// True once pages, agents, products and models have answered — each may
-  /// have failed on its own, in which case its list is simply empty.
+  /// True once pages, agents, products and models — and, when editing, the
+  /// agent itself — have answered. The lists may each have failed on their
+  /// own, leaving them empty; the agent may not (see [loadError]).
   bool get isLoaded => _loaded;
+
+  AppException? _loadError;
+
+  /// Edit only: the agent could not be read, so there is no form to show.
+  AppException? get loadError => _loadError;
+
+  /// The agent as loaded, or as last saved — what [hasChanges] compares with.
+  AgentDraft? _original;
 
   List<AiProvider> _providers = const [];
   List<AiProvider> get providers => _providers;
@@ -259,7 +308,8 @@ class NewAgentViewModel extends FormViewModel {
   List<ConnectedPage> _pageRows = const [];
   List<ConnectedPage> get pages => _pageRows;
 
-  /// Page id → the name of the agent already answering on it.
+  /// Page id → the name of the agent already answering on it. Never the agent
+  /// being edited: its own pages are its to keep or drop.
   Map<String, String> _takenBy = const {};
   String? takenBy(String pageId) => _takenBy[pageId];
 
@@ -279,35 +329,90 @@ class NewAgentViewModel extends FormViewModel {
   /// Safe to call more than once; later calls wait on the first.
   Future<void> load() => _loading ??= _load();
 
+  /// After [loadError]: tries again from scratch.
+  Future<void> retryLoad() {
+    _loading = null;
+    return load();
+  }
+
   Future<void> _load() async {
-    final (agentList, pageList, productPage, providerList) = await (
+    final editing = agentId;
+    _loadError = null;
+    _loaded = false;
+    safeNotify();
+
+    final (agentList, pageList, productPage, providerList, saved) = await (
       _agents.list(),
       _pages.list(),
       // The web loads the first 200 and filters them in the browser.
       _products.list(limit: 200),
       _agents.activeProviders(),
+      editing == null ? Future<Result<AgentDraft>?>.value() : _agents.getDraft(editing),
     ).wait;
     if (isDisposed) return;
+
+    final original = saved?.valueOrNull;
+    if (editing != null && original == null) {
+      _loadError = saved?.errorOrNull;
+      _loading = null;
+      safeNotify();
+      return;
+    }
 
     final current = agentList.valueOrNull;
     _takenBy = {
       for (final agent in current ?? const <Agent>[])
-        for (final id in {...agent.pageIds, ...agent.pages.map((p) => p.id)}) id: agent.name,
+        if (agent.id != editing)
+          for (final id in {...agent.pageIds, ...agent.pages.map((p) => p.id)}) id: agent.name,
     };
     _pageRows = pageList.valueOrNull ?? const [];
-    // Without the current agents there is no knowing which pages are free, and
-    // naming a held one fails the whole create — so nothing is pre-ticked then.
-    if (current != null) {
-      _selectedPageIds.addAll([for (final page in _pageRows) if (!_takenBy.containsKey(page.id)) page.id]);
-    }
     _productRows = productPage.valueOrNull?.products ?? const [];
     _providers = providerList.valueOrNull ?? const [];
-    // Keep the model one the administrator actually offers.
-    final offered = [for (final provider in _providers) ...provider.models];
-    if (offered.isNotEmpty && !offered.contains(_aiModel)) _aiModel = offered.first;
+
+    if (original != null) {
+      _apply(original);
+    } else {
+      // Without the current agents there is no knowing which pages are free,
+      // and naming a held one fails the whole create — so nothing is pre-ticked.
+      if (current != null) {
+        _selectedPageIds.addAll([for (final page in _pageRows) if (!_takenBy.containsKey(page.id)) page.id]);
+      }
+      // Keep the model one the administrator actually offers. Not when
+      // editing: that would change a saved agent without being asked.
+      final offered = [for (final provider in _providers) ...provider.models];
+      if (offered.isNotEmpty && !offered.contains(_aiModel)) _aiModel = offered.first;
+    }
 
     _loaded = true;
     safeNotify();
+  }
+
+  /// Fills the form with a saved agent.
+  void _apply(AgentDraft saved) {
+    name.controller.text = saved.name;
+    description.controller.text = saved.description;
+    instructions.controller.text = saved.customInstructions;
+    closing.controller.text = saved.closingInstructions;
+    handoff.controller.text = saved.humanHandoffRules;
+    template.controller.text = saved.productTemplate;
+    maxTokens.controller.text = '${saved.maxTokens}';
+    _personality = saved.personality;
+    _aiModel = saved.aiModel;
+    _temperature = saved.temperature;
+    _imageRecognition = saved.imageRecognition;
+    _voiceTranscription = saved.voiceTranscription;
+    _responseDelay = saved.responseDelay.clamp(minDelay, AgentDraft.maxDelay);
+    _sellAll = saved.sellAllProducts;
+    _isActive = saved.isActive;
+    _selectedPageIds
+      ..clear()
+      ..addAll(saved.pageIds);
+    _selectedProductIds
+      ..clear()
+      ..addAll(saved.productIds);
+    // Compare with what the form now shows, so reading the agent in is not
+    // itself a change (a 0 delay shows as 1, a stray id as unticked, …).
+    _original = draft;
   }
 
   void togglePage(String pageId) {
@@ -359,9 +464,11 @@ class NewAgentViewModel extends FormViewModel {
     return null;
   }
 
-  // ---- Creating ----
+  // ---- Creating and saving ----
 
   bool _creating = false;
+
+  /// A create or a save is on its way.
   bool get isCreating => _creating;
 
   AppException? _createError;
@@ -382,9 +489,24 @@ class NewAgentViewModel extends FormViewModel {
         voiceTranscription: _voiceTranscription,
         responseDelay: _responseDelay,
         sellAllProducts: _sellAll,
-        pageIds: [for (final page in _pageRows) if (_selectedPageIds.contains(page.id)) page.id],
-        productIds: [for (final product in _productRows) if (_selectedProductIds.contains(product.id)) product.id],
+        isActive: _isActive,
+        // Ids no longer listed (a page since disconnected) are kept, not
+        // silently dropped — the backend decides what they still mean.
+        pageIds: [
+          for (final page in _pageRows) if (_selectedPageIds.contains(page.id)) page.id,
+          for (final id in _selectedPageIds) if (!_pageRows.any((page) => page.id == id)) id,
+        ],
+        productIds: [
+          for (final product in _productRows) if (_selectedProductIds.contains(product.id)) product.id,
+          for (final id in _selectedProductIds) if (!_productRows.any((product) => product.id == id)) id,
+        ],
       );
+
+  /// Edit only: the form differs from the agent as loaded or last saved.
+  bool get hasChanges {
+    final original = _original;
+    return original != null && draft.changesFrom(original).isNotEmpty;
+  }
 
   /// Null when the form is not valid yet — its errors are now showing.
   Future<AgentCreateOutcome?> submitAndCreate() async {
@@ -407,6 +529,92 @@ class NewAgentViewModel extends FormViewModel {
     if (result.valueOrNull != null) return AgentCreateOutcome.created;
     final limit = error?.code == 'PLAN_LIMIT_REACHED' || error?.code == 'AGENT_LIMIT_REACHED';
     return limit ? AgentCreateOutcome.limitReached : AgentCreateOutcome.failed;
+  }
+
+  String? _instructionsConflict;
+
+  /// The server's newer instructions, when a save found them rewritten.
+  String? get instructionsConflict => _instructionsConflict;
+
+  /// Saves an edited agent without undoing what changed elsewhere meanwhile.
+  ///
+  /// **Only the changed settings are sent** (`PUT` is a partial update), so
+  /// anything the web changed that the merchant did not touch stays as the
+  /// web left it. The one field both can change is the instructions — the web
+  /// appends to them when an insight is resolved (§24.17) — so when they are
+  /// among the changes the agent is read again first: lines appended
+  /// meanwhile are added after the merchant's text; a rewrite stops the save
+  /// and [instructionsConflict] asks. [overwrite] skips that check.
+  ///
+  /// Null when the form is not valid yet, or not ready to save.
+  Future<AgentSaveOutcome?> submitAndSave({bool overwrite = false}) async {
+    final id = agentId;
+    final original = _original;
+    if (id == null || original == null || _creating || !submit()) return null;
+    var changes = draft.changesFrom(original);
+    if (changes.isEmpty) return AgentSaveOutcome.unchanged;
+
+    _creating = true;
+    _createError = null;
+    _instructionsConflict = null;
+    safeNotify();
+
+    var merged = false;
+    if (!overwrite && changes.containsKey('customInstructions')) {
+      final latest = await _agents.getDraft(id);
+      if (isDisposed) return AgentSaveOutcome.failed;
+      final server = latest.valueOrNull;
+      if (server == null) {
+        _creating = false;
+        _createError = latest.errorOrNull;
+        safeNotify();
+        return AgentSaveOutcome.failed;
+      }
+      if (server.customInstructions.trim() != original.customInstructions.trim()) {
+        final added = AgentDetailsViewModel.appendedLines(
+          base: original.customInstructions,
+          server: server.customInstructions,
+        );
+        if (added == null) {
+          _creating = false;
+          _instructionsConflict = server.customInstructions;
+          safeNotify();
+          return AgentSaveOutcome.conflict;
+        }
+        final mine = instructions.value.trim();
+        if (added.isNotEmpty && !mine.contains(added)) {
+          final text = mine.isEmpty ? added : '$mine\n$added';
+          instructions.controller.text = text;
+          changes = {...changes, 'customInstructions': text};
+          merged = true;
+        }
+      }
+    }
+
+    final result = await _agents.update(agentId: id, changes: changes);
+    if (isDisposed) return result.valueOrNull == null ? AgentSaveOutcome.failed : AgentSaveOutcome.saved;
+
+    _creating = false;
+    if (result.valueOrNull == null) {
+      _createError = result.errorOrNull;
+      safeNotify();
+      return AgentSaveOutcome.failed;
+    }
+    _original = draft;
+    safeNotify();
+    return merged ? AgentSaveOutcome.savedWithWebChanges : AgentSaveOutcome.saved;
+  }
+
+  /// Takes the newer instructions into the form instead of the merchant's,
+  /// and bases the next save on them.
+  void useLatestInstructions() {
+    final server = _instructionsConflict;
+    final original = _original;
+    if (server == null || original == null) return;
+    _original = original.withCustomInstructions(server);
+    instructions.controller.text = server;
+    _instructionsConflict = null;
+    safeNotify();
   }
 
   @override

@@ -548,5 +548,18 @@
   "agentFormProductSearchPlaceholder": "ابحث عن منتجات…",
   "agentFormProductsNone": "لا توجد منتجات متاحة",
   "agentFormProductsNoMatch": "لا توجد منتجات تطابق بحثك",
+  "agentFormEditTitle": "تعديل الوكيل",
+  "agentFormEditSubtitle": "حدّث إعدادات وكيل الذكاء الاصطناعي. تُطبَّق التغييرات على الرسائل القادمة.",
+  "agentFormEditAdvancedHint": "المس قسمًا لتعديله.",
+  "agentFormActive": "الوكيل نشط",
+  "agentFormActiveHint": "يردّ على رسائل صفحاته ما دام نشطًا.",
+  "agentFormSave": "حفظ التغييرات",
+  "agentFormSavedToast": "تم تحديث الوكيل",
+  "agentFormSavedMergedToast": "تم تحديث الوكيل — مع الإبقاء على التعليمات المضافة من الويب",
+  "agentFormLeaveTitle": "المغادرة دون حفظ؟",
+  "agentFormLeaveBody": "ستفقد تعديلاتك على {name}.",
+  "agentFormKeepEditing": "مواصلة التعديل",
+  "agentFormLeave": "المغادرة دون حفظ",
+  "agentsDetailsEditAgent": "تعديل الوكيل",
   "agentsNewTitle":"وكيل جديد"
 }

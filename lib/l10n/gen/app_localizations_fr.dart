@@ -1604,5 +1604,50 @@ class L10nFr extends L10n {
       'Aucun produit ne correspond à votre recherche';
 
   @override
+  String get agentFormEditTitle => 'Modifier l’agent';
+
+  @override
+  String get agentFormEditSubtitle =>
+      'Mettez à jour la configuration de votre agent IA. Les changements s’appliquent aux prochains messages.';
+
+  @override
+  String get agentFormEditAdvancedHint =>
+      'Touchez une section pour la modifier.';
+
+  @override
+  String get agentFormActive => 'Agent actif';
+
+  @override
+  String get agentFormActiveHint =>
+      'Il répond aux messages de ses pages tant qu’il est actif.';
+
+  @override
+  String get agentFormSave => 'Enregistrer les modifications';
+
+  @override
+  String get agentFormSavedToast => 'Agent mis à jour';
+
+  @override
+  String get agentFormSavedMergedToast =>
+      'Agent mis à jour — les consignes ajoutées sur le web sont conservées';
+
+  @override
+  String get agentFormLeaveTitle => 'Quitter sans enregistrer ?';
+
+  @override
+  String agentFormLeaveBody(String name) {
+    return 'Vos modifications de $name seront perdues.';
+  }
+
+  @override
+  String get agentFormKeepEditing => 'Continuer à modifier';
+
+  @override
+  String get agentFormLeave => 'Quitter sans enregistrer';
+
+  @override
+  String get agentsDetailsEditAgent => 'Modifier l’agent';
+
+  @override
   String get agentsNewTitle => 'Nouvel agent';
 }

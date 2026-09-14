@@ -1591,5 +1591,48 @@ class L10nAr extends L10n {
   String get agentFormProductsNoMatch => 'لا توجد منتجات تطابق بحثك';
 
   @override
+  String get agentFormEditTitle => 'تعديل الوكيل';
+
+  @override
+  String get agentFormEditSubtitle =>
+      'حدّث إعدادات وكيل الذكاء الاصطناعي. تُطبَّق التغييرات على الرسائل القادمة.';
+
+  @override
+  String get agentFormEditAdvancedHint => 'المس قسمًا لتعديله.';
+
+  @override
+  String get agentFormActive => 'الوكيل نشط';
+
+  @override
+  String get agentFormActiveHint => 'يردّ على رسائل صفحاته ما دام نشطًا.';
+
+  @override
+  String get agentFormSave => 'حفظ التغييرات';
+
+  @override
+  String get agentFormSavedToast => 'تم تحديث الوكيل';
+
+  @override
+  String get agentFormSavedMergedToast =>
+      'تم تحديث الوكيل — مع الإبقاء على التعليمات المضافة من الويب';
+
+  @override
+  String get agentFormLeaveTitle => 'المغادرة دون حفظ؟';
+
+  @override
+  String agentFormLeaveBody(String name) {
+    return 'ستفقد تعديلاتك على $name.';
+  }
+
+  @override
+  String get agentFormKeepEditing => 'مواصلة التعديل';
+
+  @override
+  String get agentFormLeave => 'المغادرة دون حفظ';
+
+  @override
+  String get agentsDetailsEditAgent => 'تعديل الوكيل';
+
+  @override
   String get agentsNewTitle => 'وكيل جديد';
 }

@@ -758,5 +758,26 @@
   "agentFormProductSearchPlaceholder": "Search products…",
   "agentFormProductsNone": "No products available",
   "agentFormProductsNoMatch": "No products match your search",
+  "agentFormEditTitle": "Edit agent",
+  "@agentFormEditTitle": {
+    "description": "15c — the agent form in edit mode. The web says Edit Agent / Update your AI agent configuration; the rest is ours, unapproved."
+  },
+  "agentFormEditSubtitle": "Update your AI agent configuration. Changes apply to the next messages.",
+  "agentFormEditAdvancedHint": "Tap a section to change it.",
+  "agentFormActive": "Active",
+  "agentFormActiveHint": "The agent responds to messages on its pages while active.",
+  "agentFormSave": "Save changes",
+  "agentFormSavedToast": "Agent updated",
+  "agentFormSavedMergedToast": "Agent updated — instructions added on the web were kept",
+  "agentFormLeaveTitle": "Leave without saving?",
+  "agentFormLeaveBody": "Your changes to {name} will be lost.",
+  "@agentFormLeaveBody": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "agentFormKeepEditing": "Keep editing",
+  "agentFormLeave": "Leave without saving",
+  "agentsDetailsEditAgent": "Edit agent",
   "agentsNewTitle":"New agent"
 }

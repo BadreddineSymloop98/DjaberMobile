@@ -2961,6 +2961,84 @@ abstract class L10n {
   /// **'No products match your search'**
   String get agentFormProductsNoMatch;
 
+  /// 15c — the agent form in edit mode. The web says Edit Agent / Update your AI agent configuration; the rest is ours, unapproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit agent'**
+  String get agentFormEditTitle;
+
+  /// No description provided for @agentFormEditSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Update your AI agent configuration. Changes apply to the next messages.'**
+  String get agentFormEditSubtitle;
+
+  /// No description provided for @agentFormEditAdvancedHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a section to change it.'**
+  String get agentFormEditAdvancedHint;
+
+  /// No description provided for @agentFormActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get agentFormActive;
+
+  /// No description provided for @agentFormActiveHint.
+  ///
+  /// In en, this message translates to:
+  /// **'The agent responds to messages on its pages while active.'**
+  String get agentFormActiveHint;
+
+  /// No description provided for @agentFormSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get agentFormSave;
+
+  /// No description provided for @agentFormSavedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Agent updated'**
+  String get agentFormSavedToast;
+
+  /// No description provided for @agentFormSavedMergedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Agent updated — instructions added on the web were kept'**
+  String get agentFormSavedMergedToast;
+
+  /// No description provided for @agentFormLeaveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave without saving?'**
+  String get agentFormLeaveTitle;
+
+  /// No description provided for @agentFormLeaveBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your changes to {name} will be lost.'**
+  String agentFormLeaveBody(String name);
+
+  /// No description provided for @agentFormKeepEditing.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep editing'**
+  String get agentFormKeepEditing;
+
+  /// No description provided for @agentFormLeave.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave without saving'**
+  String get agentFormLeave;
+
+  /// No description provided for @agentsDetailsEditAgent.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit agent'**
+  String get agentsDetailsEditAgent;
+
   /// No description provided for @agentsNewTitle.
   ///
   /// In en, this message translates to:

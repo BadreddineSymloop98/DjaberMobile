@@ -238,6 +238,11 @@ class AppRouter {
           agent: state.extra is Agent ? state.extra as Agent : null,
         ),
       ),
+      GoRoute(
+        path: Routes.agentEdit,
+        parentNavigatorKey: _rootKey,
+        builder: (_, state) => AgentEditScreen(agentId: state.pathParameters['id']!),
+      ),
       // Declared before `/products/:id`, which would otherwise match it — see
       // [Routes.productNew]. Deliberately **not** wrapped in `ExitGuard`: it
       // is always pushed on top of the list, so back has somewhere to go and

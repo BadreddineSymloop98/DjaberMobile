@@ -94,6 +94,12 @@ class Routes {
   static const agentTest = '/agents/:id/test';
   static String agentTestOf(String id) => '/agents/$id/test';
 
+  /// `15c — Modifier l'agent`: the full agent form, filled. Pushed over
+  /// [agent], whose *Modifier l'agent* button opens it, as the web's details
+  /// page does.
+  static const agentEdit = '/agents/:id/edit';
+  static String agentEditOf(String id) => '/agents/$id/edit';
+
   /// `18 — Ajouter un produit`.
   ///
   /// **Must be declared before [product] in the router.** go_router matches in
