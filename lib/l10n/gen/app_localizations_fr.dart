@@ -379,10 +379,411 @@ class L10nFr extends L10n {
   String get authErrUnknown => 'Une erreur s’est produite. Veuillez réessayer.';
 
   @override
-  String homeWelcome(String name) {
-    return 'Bon retour, $name';
+  String get menuSignOut => 'Déconnexion';
+
+  @override
+  String get tutorialStepMode => 'Choisir votre mode de stock';
+
+  @override
+  String get tutorialStepProduct => 'Créer votre premier produit';
+
+  @override
+  String get tutorialStepAgent => 'Créer votre agent IA';
+
+  @override
+  String get tutorialStepPage => 'Connecter votre page';
+
+  @override
+  String get tutorialWelcomeTitle => 'Bienvenue sur Djaber.ai';
+
+  @override
+  String get tutorialWelcomeBody =>
+      'On met votre boutique en route ensemble. Quatre étapes, et votre agent commence à répondre à vos clients.';
+
+  @override
+  String get tutorialStockTitle => 'D’abord, votre stock';
+
+  @override
+  String get tutorialStockBody =>
+      'Vous choisissez comment gérer votre stock, puis vous créez votre premier produit — nom, prix, quantité.';
+
+  @override
+  String get tutorialAgentTitle => 'Puis votre agent';
+
+  @override
+  String get tutorialAgentBody =>
+      'Créez-le en trois champs, connectez votre page Facebook, et il répond dès la première question.';
+
+  @override
+  String get commonContinue => 'Continuer';
+
+  @override
+  String get commonActive => 'ACTIF';
+
+  @override
+  String tutorialStepCounter(int step, int total) {
+    return 'ÉTAPE $step SUR $total';
   }
 
   @override
-  String get menuSignOut => 'Déconnexion';
+  String get tutorialModeTitle => 'Comment gérez-vous votre stock ?';
+
+  @override
+  String get tutorialModeSubtitle =>
+      'Ce choix décide de ce que vous voyez dans l’application. Vous pouvez le changer à tout moment dans les paramètres.';
+
+  @override
+  String get stockModeSimple => 'Simple';
+
+  @override
+  String get stockModeAdvanced => 'Avancé';
+
+  @override
+  String get stockModeSimpleDesc =>
+      'Produits, Catégories & Commandes — gérez votre inventaire et commandes sans complexité.';
+
+  @override
+  String get stockModeAdvancedDesc =>
+      'Suite complète — Fournisseurs, Clients, Ventes, Achats, Caisse, Mouvements, Livraison et plus.';
+
+  @override
+  String get tutorialProductTitle => 'Votre premier produit';
+
+  @override
+  String get tutorialProductSubtitle =>
+      'C’est ce que votre agent vendra. La description est ce qu’il lira pour répondre aux clients.';
+
+  @override
+  String get tutorialProductSubmit => 'Créer le produit';
+
+  @override
+  String get productName => 'Nom';
+
+  @override
+  String get productNamePlaceholder => 'Robe satin — Noir';
+
+  @override
+  String get productSku => 'Référence (SKU)';
+
+  @override
+  String get productSkuPlaceholder => 'PRD-001';
+
+  @override
+  String get productDescription => 'Description';
+
+  @override
+  String get productDescriptionPlaceholder =>
+      'Décrivez le produit — l’agent s’en sert pour le vendre';
+
+  @override
+  String get productCostPrice => 'Prix d’achat (DA)';
+
+  @override
+  String get productSellingPrice => 'Prix de vente (DA)';
+
+  @override
+  String get productQuantity => 'Quantité initiale';
+
+  @override
+  String get productErrRequired => 'Ce champ est requis';
+
+  @override
+  String get productErrNotANumber => 'Entrez un nombre';
+
+  @override
+  String get productErrMustBePositive => 'Doit être supérieur à 0';
+
+  @override
+  String get productErrBelowCost =>
+      'Doit être supérieur ou égal au prix d’achat';
+
+  @override
+  String get tutorialAgentSubtitle =>
+      'Il répond à vos clients avec votre catalogue et vos prix. Trois champs suffisent — tout s’ajuste plus tard.';
+
+  @override
+  String get tutorialAgentSubmit => 'Créer l’agent';
+
+  @override
+  String get agentName => 'Nom de l’agent';
+
+  @override
+  String get agentNamePlaceholder => 'ex. Assistant de vente';
+
+  @override
+  String get agentPersonality => 'Personnalité';
+
+  @override
+  String get agentToneProfessional => 'Professionnel';
+
+  @override
+  String get agentToneProfessionalDesc => 'Formel et orienté business';
+
+  @override
+  String get agentToneFriendly => 'Amical';
+
+  @override
+  String get agentToneFriendlyDesc => 'Chaleureux et accessible';
+
+  @override
+  String get agentToneCasual => 'Décontracté';
+
+  @override
+  String get agentToneCasualDesc => 'Détendu et conversationnel';
+
+  @override
+  String get agentToneTechnical => 'Technique';
+
+  @override
+  String get agentToneTechnicalDesc => 'Détaillé et précis';
+
+  @override
+  String get agentInstructions => 'Instructions';
+
+  @override
+  String get agentInstructionsPlaceholder =>
+      'Comment doit-il répondre, et quand vous passer la main';
+
+  @override
+  String get tutorialConnectTitle => 'Connectez votre page';
+
+  @override
+  String get tutorialConnectSubtitle =>
+      'C’est la dernière étape. Votre agent répond dans la boîte de réception de cette page — dès qu’elle est connectée, il travaille.';
+
+  @override
+  String get connectPermissionsHeading => 'Facebook vous demandera';
+
+  @override
+  String get connectPermissionPages => 'Voir la liste de vos pages';
+
+  @override
+  String get connectPermissionMessages =>
+      'Lire et envoyer les messages de la page';
+
+  @override
+  String get connectPermissionInfo => 'Accéder aux informations de la page';
+
+  @override
+  String get connectFacebook => 'Connecter Facebook';
+
+  @override
+  String get connectInstagram => 'Connecter Instagram';
+
+  @override
+  String get oauthLoading => 'Chargement de Facebook…';
+
+  @override
+  String get oauthLoadingHint =>
+      'La page d’autorisation de Facebook s’affiche ici.';
+
+  @override
+  String get connectLater => 'Connecter plus tard';
+
+  @override
+  String get oauthDenied =>
+      'Autorisation annulée. Vous pouvez réessayer quand vous voulez.';
+
+  @override
+  String get tutorialReadyTitle => 'Votre agent est en ligne';
+
+  @override
+  String get tutorialReadySubtitle =>
+      'Il répond déjà aux messages de votre page, avec votre catalogue et vos prix. Ajoutez d’autres produits quand vous voulez.';
+
+  @override
+  String get tutorialReadyTitlePending => 'Vous y êtes presque';
+
+  @override
+  String get tutorialReadySubtitlePending =>
+      'Votre catalogue et votre agent sont prêts. Il ne reste qu’à connecter votre page — votre agent commencera à répondre dès ce moment-là.';
+
+  @override
+  String get tutorialReadySubmit => 'Ouvrir l’application';
+
+  @override
+  String get tutorialReadyModeSimple =>
+      'Simple — produits, catégories et commandes';
+
+  @override
+  String get tutorialReadyModeAdvanced => 'Avancé — la suite complète';
+
+  @override
+  String get homeGreetingMorning => 'Bonjour';
+
+  @override
+  String get homeGreetingAfternoon => 'Bon après-midi';
+
+  @override
+  String get homeGreetingEvening => 'Bonsoir';
+
+  @override
+  String get homeSnapshot => 'voici un aperçu';
+
+  @override
+  String get homeQueue => 'À traiter';
+
+  @override
+  String get homeQueueStuck => 'IA bloquée';
+
+  @override
+  String get homeQueueEmpty =>
+      'Rien en attente. L’agent gère toutes les conversations.';
+
+  @override
+  String get homeQueueNoPage =>
+      'Aucune page connectée, donc aucune conversation ne peut encore vous parvenir.';
+
+  @override
+  String homeQueueMore(int count) {
+    return '+ $count autres';
+  }
+
+  @override
+  String homeAgeMinutes(int count) {
+    return '$count MIN';
+  }
+
+  @override
+  String homeAgeHours(int count) {
+    return '$count H';
+  }
+
+  @override
+  String homeAgeDays(int count) {
+    return '$count J';
+  }
+
+  @override
+  String get homeNoPageTitle => 'Aucune page connectée';
+
+  @override
+  String get homeNoPageBody =>
+      'Votre agent n’a encore nulle part où répondre. Connectez votre page Facebook ou Instagram et il se met au travail dès le premier message.';
+
+  @override
+  String get homeOverview => 'Aperçu';
+
+  @override
+  String get homeKpiPages => 'Pages connectées';
+
+  @override
+  String get homeKpiProducts => 'Produits';
+
+  @override
+  String homeKpiLowStock(int count) {
+    return '$count stock faible';
+  }
+
+  @override
+  String get homeKpiRevenue => 'Chiffre d’affaires (30j)';
+
+  @override
+  String homeKpiSales(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ventes',
+      one: '$count vente',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get homeKpiStockValue => 'Valeur du stock';
+
+  @override
+  String get homeQuickActions => 'Actions rapides';
+
+  @override
+  String get homeActionConnectTitle => 'Connecter une page';
+
+  @override
+  String get homeActionConnectBody => 'Liez votre page Facebook';
+
+  @override
+  String get homeActionProductsTitle => 'Ajouter des produits';
+
+  @override
+  String get homeActionProductsBody => 'Construisez votre catalogue';
+
+  @override
+  String get homeActionAgentsTitle => 'Agents IA';
+
+  @override
+  String get homeActionAgentsBody => 'Gérez vos assistants';
+
+  @override
+  String get homeYourPages => 'Vos pages';
+
+  @override
+  String get homeManageAll => 'TOUT GÉRER →';
+
+  @override
+  String get homePagesEmpty => 'Aucune page connectée pour l’instant.';
+
+  @override
+  String get homePageActive => 'ACTIVE';
+
+  @override
+  String get homePageInactive => 'EN PAUSE';
+
+  @override
+  String homePageConnectedOn(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.MMMMd(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return 'CONNECTÉE LE $dateString';
+  }
+
+  @override
+  String get platformFacebook => 'Facebook';
+
+  @override
+  String get platformInstagram => 'Instagram';
+
+  @override
+  String get homeGetStarted => 'Démarrer';
+
+  @override
+  String get homeStepConnectTitle => 'Connecter une page';
+
+  @override
+  String get homeStepConnectBody => 'Liez Facebook pour commencer à discuter';
+
+  @override
+  String get homeStepProductsTitle => 'Ajouter des produits';
+
+  @override
+  String get homeStepProductsBody => 'Constituez votre catalogue';
+
+  @override
+  String get homeStepAgentTitle => 'Configurer votre agent IA';
+
+  @override
+  String get homeStepAgentBody => 'Personnalisez le ton et le comportement';
+
+  @override
+  String get homeStepSaleTitle => 'Réalisez votre première vente';
+
+  @override
+  String get homeStepSaleBody => 'Regardez l’IA gérer les demandes';
+
+  @override
+  String get navHome => 'ACCUEIL';
+
+  @override
+  String get navQueue => 'FILE';
+
+  @override
+  String get navInbox => 'BOÎTE';
+
+  @override
+  String get navStock => 'STOCK';
+
+  @override
+  String get navOrders => 'CMD';
+
+  @override
+  String get commonNotBuilt => 'pas encore disponible';
 }

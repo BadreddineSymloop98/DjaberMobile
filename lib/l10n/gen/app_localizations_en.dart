@@ -375,10 +375,409 @@ class L10nEn extends L10n {
   String get authErrUnknown => 'Something went wrong. Please try again.';
 
   @override
-  String homeWelcome(String name) {
-    return 'Welcome back, $name';
+  String get menuSignOut => 'Sign out';
+
+  @override
+  String get tutorialStepMode => 'Choose your stock mode';
+
+  @override
+  String get tutorialStepProduct => 'Create your first product';
+
+  @override
+  String get tutorialStepAgent => 'Create your AI agent';
+
+  @override
+  String get tutorialStepPage => 'Connect your page';
+
+  @override
+  String get tutorialWelcomeTitle => 'Welcome to Djaber.ai';
+
+  @override
+  String get tutorialWelcomeBody =>
+      'Let\'s get your shop running together. Four steps, and your agent starts answering your customers.';
+
+  @override
+  String get tutorialStockTitle => 'First, your stock';
+
+  @override
+  String get tutorialStockBody =>
+      'You choose how to manage your stock, then you create your first product — name, price, quantity.';
+
+  @override
+  String get tutorialAgentTitle => 'Then your agent';
+
+  @override
+  String get tutorialAgentBody =>
+      'Create it in three fields, connect your Facebook page, and it answers from the first question on.';
+
+  @override
+  String get commonContinue => 'Continue';
+
+  @override
+  String get commonActive => 'ACTIVE';
+
+  @override
+  String tutorialStepCounter(int step, int total) {
+    return 'STEP $step OF $total';
   }
 
   @override
-  String get menuSignOut => 'Sign out';
+  String get tutorialModeTitle => 'How do you manage your stock?';
+
+  @override
+  String get tutorialModeSubtitle =>
+      'This choice decides what you see in the app. You can change it at any time in settings.';
+
+  @override
+  String get stockModeSimple => 'Simple';
+
+  @override
+  String get stockModeAdvanced => 'Advanced';
+
+  @override
+  String get stockModeSimpleDesc =>
+      'Products, Categories & Orders — manage your inventory and orders without the complexity.';
+
+  @override
+  String get stockModeAdvancedDesc =>
+      'Full suite — Suppliers, Clients, Sales, Purchases, Caisse, Movements, Delivery & more.';
+
+  @override
+  String get tutorialProductTitle => 'Your first product';
+
+  @override
+  String get tutorialProductSubtitle =>
+      'This is what your agent will sell. The description is what it reads to answer customers.';
+
+  @override
+  String get tutorialProductSubmit => 'Create the product';
+
+  @override
+  String get productName => 'Name';
+
+  @override
+  String get productNamePlaceholder => 'Satin dress — Black';
+
+  @override
+  String get productSku => 'Reference (SKU)';
+
+  @override
+  String get productSkuPlaceholder => 'PRD-001';
+
+  @override
+  String get productDescription => 'Description';
+
+  @override
+  String get productDescriptionPlaceholder =>
+      'Describe the product — the agent uses this to sell it';
+
+  @override
+  String get productCostPrice => 'Cost price (DA)';
+
+  @override
+  String get productSellingPrice => 'Selling price (DA)';
+
+  @override
+  String get productQuantity => 'Initial quantity';
+
+  @override
+  String get productErrRequired => 'This field is required';
+
+  @override
+  String get productErrNotANumber => 'Enter a number';
+
+  @override
+  String get productErrMustBePositive => 'Must be greater than 0';
+
+  @override
+  String get productErrBelowCost =>
+      'Must be greater than or equal to the cost price';
+
+  @override
+  String get tutorialAgentSubtitle =>
+      'It answers your customers with your catalogue and your prices. Three fields are enough — everything else can be tuned later.';
+
+  @override
+  String get tutorialAgentSubmit => 'Create the agent';
+
+  @override
+  String get agentName => 'Agent name';
+
+  @override
+  String get agentNamePlaceholder => 'e.g. Sales assistant';
+
+  @override
+  String get agentPersonality => 'Personality';
+
+  @override
+  String get agentToneProfessional => 'Professional';
+
+  @override
+  String get agentToneProfessionalDesc => 'Formal and business-oriented';
+
+  @override
+  String get agentToneFriendly => 'Friendly';
+
+  @override
+  String get agentToneFriendlyDesc => 'Warm and approachable';
+
+  @override
+  String get agentToneCasual => 'Casual';
+
+  @override
+  String get agentToneCasualDesc => 'Relaxed and conversational';
+
+  @override
+  String get agentToneTechnical => 'Technical';
+
+  @override
+  String get agentToneTechnicalDesc => 'Detailed and precise';
+
+  @override
+  String get agentInstructions => 'Instructions';
+
+  @override
+  String get agentInstructionsPlaceholder =>
+      'How it should answer, and when to hand over to you';
+
+  @override
+  String get tutorialConnectTitle => 'Connect your page';
+
+  @override
+  String get tutorialConnectSubtitle =>
+      'This is the last step. Your agent answers in that page\'s inbox — the moment it is connected, it is working.';
+
+  @override
+  String get connectPermissionsHeading => 'Facebook will ask you for';
+
+  @override
+  String get connectPermissionPages => 'See the list of your pages';
+
+  @override
+  String get connectPermissionMessages => 'Read and send the page\'s messages';
+
+  @override
+  String get connectPermissionInfo => 'Access the page\'s information';
+
+  @override
+  String get connectFacebook => 'Connect Facebook';
+
+  @override
+  String get connectInstagram => 'Connect Instagram';
+
+  @override
+  String get oauthLoading => 'Loading Facebook…';
+
+  @override
+  String get oauthLoadingHint => 'Facebook\'s authorisation page appears here.';
+
+  @override
+  String get connectLater => 'Connect later';
+
+  @override
+  String get oauthDenied =>
+      'Authorisation cancelled. You can try again whenever you like.';
+
+  @override
+  String get tutorialReadyTitle => 'Your agent is live';
+
+  @override
+  String get tutorialReadySubtitle =>
+      'It is already answering your page\'s messages, with your catalogue and your prices. Add more products whenever you like.';
+
+  @override
+  String get tutorialReadyTitlePending => 'Almost there';
+
+  @override
+  String get tutorialReadySubtitlePending =>
+      'Your catalogue and your agent are ready. All that is left is connecting your page — your agent starts answering the moment it is.';
+
+  @override
+  String get tutorialReadySubmit => 'Open the app';
+
+  @override
+  String get tutorialReadyModeSimple =>
+      'Simple — products, categories and orders';
+
+  @override
+  String get tutorialReadyModeAdvanced => 'Advanced — the full suite';
+
+  @override
+  String get homeGreetingMorning => 'Good morning';
+
+  @override
+  String get homeGreetingAfternoon => 'Good afternoon';
+
+  @override
+  String get homeGreetingEvening => 'Good evening';
+
+  @override
+  String get homeSnapshot => 'here is a snapshot';
+
+  @override
+  String get homeQueue => 'To handle';
+
+  @override
+  String get homeQueueStuck => 'AI stuck';
+
+  @override
+  String get homeQueueEmpty =>
+      'Nothing waiting. The agent is handling every conversation.';
+
+  @override
+  String get homeQueueNoPage =>
+      'No page connected, so no conversation can reach you yet.';
+
+  @override
+  String homeQueueMore(int count) {
+    return '+ $count more';
+  }
+
+  @override
+  String homeAgeMinutes(int count) {
+    return '$count MIN';
+  }
+
+  @override
+  String homeAgeHours(int count) {
+    return '$count H';
+  }
+
+  @override
+  String homeAgeDays(int count) {
+    return '$count D';
+  }
+
+  @override
+  String get homeNoPageTitle => 'No page connected';
+
+  @override
+  String get homeNoPageBody =>
+      'Your agent has nowhere to answer yet. Connect your Facebook or Instagram page and it starts working on the first message.';
+
+  @override
+  String get homeOverview => 'Overview';
+
+  @override
+  String get homeKpiPages => 'Connected pages';
+
+  @override
+  String get homeKpiProducts => 'Products';
+
+  @override
+  String homeKpiLowStock(int count) {
+    return '$count low stock';
+  }
+
+  @override
+  String get homeKpiRevenue => 'Revenue (30d)';
+
+  @override
+  String homeKpiSales(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count sales',
+      one: '$count sale',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get homeKpiStockValue => 'Stock value';
+
+  @override
+  String get homeQuickActions => 'Quick actions';
+
+  @override
+  String get homeActionConnectTitle => 'Connect a page';
+
+  @override
+  String get homeActionConnectBody => 'Link your Facebook page';
+
+  @override
+  String get homeActionProductsTitle => 'Add products';
+
+  @override
+  String get homeActionProductsBody => 'Build your catalogue';
+
+  @override
+  String get homeActionAgentsTitle => 'AI agents';
+
+  @override
+  String get homeActionAgentsBody => 'Manage your assistants';
+
+  @override
+  String get homeYourPages => 'Your pages';
+
+  @override
+  String get homeManageAll => 'MANAGE ALL →';
+
+  @override
+  String get homePagesEmpty => 'No page connected yet.';
+
+  @override
+  String get homePageActive => 'ACTIVE';
+
+  @override
+  String get homePageInactive => 'PAUSED';
+
+  @override
+  String homePageConnectedOn(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.MMMMd(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return 'CONNECTED $dateString';
+  }
+
+  @override
+  String get platformFacebook => 'Facebook';
+
+  @override
+  String get platformInstagram => 'Instagram';
+
+  @override
+  String get homeGetStarted => 'Get started';
+
+  @override
+  String get homeStepConnectTitle => 'Connect a page';
+
+  @override
+  String get homeStepConnectBody => 'Link Facebook to start chatting';
+
+  @override
+  String get homeStepProductsTitle => 'Add products';
+
+  @override
+  String get homeStepProductsBody => 'Build up your catalogue';
+
+  @override
+  String get homeStepAgentTitle => 'Configure your AI agent';
+
+  @override
+  String get homeStepAgentBody => 'Set the tone and the behaviour';
+
+  @override
+  String get homeStepSaleTitle => 'Make your first sale';
+
+  @override
+  String get homeStepSaleBody => 'Watch the AI handle the requests';
+
+  @override
+  String get navHome => 'HOME';
+
+  @override
+  String get navQueue => 'QUEUE';
+
+  @override
+  String get navInbox => 'INBOX';
+
+  @override
+  String get navStock => 'STOCK';
+
+  @override
+  String get navOrders => 'ORD';
+
+  @override
+  String get commonNotBuilt => 'not built yet';
 }

@@ -813,17 +813,731 @@ abstract class L10n {
   /// **'Something went wrong. Please try again.'**
   String get authErrUnknown;
 
-  /// No description provided for @homeWelcome.
-  ///
-  /// In en, this message translates to:
-  /// **'Welcome back, {name}'**
-  String homeWelcome(String name);
-
   /// From menu.signout in src/lib/i18n.ts. Currently on the home stub as a temporary control; belongs in the hamburger menu (brief §16, tier 3) once that exists.
   ///
   /// In en, this message translates to:
   /// **'Sign out'**
   String get menuSignOut;
+
+  /// Step 1 of 4. Precedes the product step deliberately: the merchant decides how they manage stock before being asked for an initial quantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your stock mode'**
+  String get tutorialStepMode;
+
+  /// No description provided for @tutorialStepProduct.
+  ///
+  /// In en, this message translates to:
+  /// **'Create your first product'**
+  String get tutorialStepProduct;
+
+  /// No description provided for @tutorialStepAgent.
+  ///
+  /// In en, this message translates to:
+  /// **'Create your AI agent'**
+  String get tutorialStepAgent;
+
+  /// No description provided for @tutorialStepPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect your page'**
+  String get tutorialStepPage;
+
+  /// No description provided for @tutorialWelcomeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Djaber.ai'**
+  String get tutorialWelcomeTitle;
+
+  /// No description provided for @tutorialWelcomeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s get your shop running together. Four steps, and your agent starts answering your customers.'**
+  String get tutorialWelcomeBody;
+
+  /// No description provided for @tutorialStockTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'First, your stock'**
+  String get tutorialStockTitle;
+
+  /// No description provided for @tutorialStockBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You choose how to manage your stock, then you create your first product — name, price, quantity.'**
+  String get tutorialStockBody;
+
+  /// No description provided for @tutorialAgentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Then your agent'**
+  String get tutorialAgentTitle;
+
+  /// No description provided for @tutorialAgentBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Create it in three fields, connect your Facebook page, and it answers from the first question on.'**
+  String get tutorialAgentBody;
+
+  /// No description provided for @commonContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get commonContinue;
+
+  /// The badge on the chosen Option Card. Uppercase in the Label/Micro style; the web's settings page hardcodes its own equivalent in English, so this wording is ours.
+  ///
+  /// In en, this message translates to:
+  /// **'ACTIVE'**
+  String get commonActive;
+
+  /// The counter above the four-segment progress bar on tutorial steps T2-T5. Stored already uppercased per locale rather than upper-cased at the call site, because case does not apply in Arabic.
+  ///
+  /// In en, this message translates to:
+  /// **'STEP {step} OF {total}'**
+  String tutorialStepCounter(int step, int total);
+
+  /// No description provided for @tutorialModeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How do you manage your stock?'**
+  String get tutorialModeTitle;
+
+  /// No description provided for @tutorialModeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'This choice decides what you see in the app. You can change it at any time in settings.'**
+  String get tutorialModeSubtitle;
+
+  /// No description provided for @stockModeSimple.
+  ///
+  /// In en, this message translates to:
+  /// **'Simple'**
+  String get stockModeSimple;
+
+  /// No description provided for @stockModeAdvanced.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced'**
+  String get stockModeAdvanced;
+
+  /// No description provided for @stockModeSimpleDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Products, Categories & Orders — manage your inventory and orders without the complexity.'**
+  String get stockModeSimpleDesc;
+
+  /// No description provided for @stockModeAdvancedDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Full suite — Suppliers, Clients, Sales, Purchases, Caisse, Movements, Delivery & more.'**
+  String get stockModeAdvancedDesc;
+
+  /// No description provided for @tutorialProductTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your first product'**
+  String get tutorialProductTitle;
+
+  /// No description provided for @tutorialProductSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'This is what your agent will sell. The description is what it reads to answer customers.'**
+  String get tutorialProductSubtitle;
+
+  /// No description provided for @tutorialProductSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Create the product'**
+  String get tutorialProductSubmit;
+
+  /// No description provided for @productName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get productName;
+
+  /// No description provided for @productNamePlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Satin dress — Black'**
+  String get productNamePlaceholder;
+
+  /// No description provided for @productSku.
+  ///
+  /// In en, this message translates to:
+  /// **'Reference (SKU)'**
+  String get productSku;
+
+  /// No description provided for @productSkuPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'PRD-001'**
+  String get productSkuPlaceholder;
+
+  /// No description provided for @productDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get productDescription;
+
+  /// No description provided for @productDescriptionPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Describe the product — the agent uses this to sell it'**
+  String get productDescriptionPlaceholder;
+
+  /// No description provided for @productCostPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Cost price (DA)'**
+  String get productCostPrice;
+
+  /// No description provided for @productSellingPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Selling price (DA)'**
+  String get productSellingPrice;
+
+  /// No description provided for @productQuantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Initial quantity'**
+  String get productQuantity;
+
+  /// No description provided for @productErrRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'This field is required'**
+  String get productErrRequired;
+
+  /// No description provided for @productErrNotANumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a number'**
+  String get productErrNotANumber;
+
+  /// The backend rejects a cost price, selling price or initial quantity of 0 outright — so this is a distinct message from 'required', which would be wrong for a field that visibly contains 0.
+  ///
+  /// In en, this message translates to:
+  /// **'Must be greater than 0'**
+  String get productErrMustBePositive;
+
+  /// No description provided for @productErrBelowCost.
+  ///
+  /// In en, this message translates to:
+  /// **'Must be greater than or equal to the cost price'**
+  String get productErrBelowCost;
+
+  /// No description provided for @tutorialAgentSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'It answers your customers with your catalogue and your prices. Three fields are enough — everything else can be tuned later.'**
+  String get tutorialAgentSubtitle;
+
+  /// No description provided for @tutorialAgentSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Create the agent'**
+  String get tutorialAgentSubmit;
+
+  /// No description provided for @agentName.
+  ///
+  /// In en, this message translates to:
+  /// **'Agent name'**
+  String get agentName;
+
+  /// No description provided for @agentNamePlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. Sales assistant'**
+  String get agentNamePlaceholder;
+
+  /// No description provided for @agentPersonality.
+  ///
+  /// In en, this message translates to:
+  /// **'Personality'**
+  String get agentPersonality;
+
+  /// No description provided for @agentToneProfessional.
+  ///
+  /// In en, this message translates to:
+  /// **'Professional'**
+  String get agentToneProfessional;
+
+  /// No description provided for @agentToneProfessionalDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Formal and business-oriented'**
+  String get agentToneProfessionalDesc;
+
+  /// No description provided for @agentToneFriendly.
+  ///
+  /// In en, this message translates to:
+  /// **'Friendly'**
+  String get agentToneFriendly;
+
+  /// No description provided for @agentToneFriendlyDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Warm and approachable'**
+  String get agentToneFriendlyDesc;
+
+  /// No description provided for @agentToneCasual.
+  ///
+  /// In en, this message translates to:
+  /// **'Casual'**
+  String get agentToneCasual;
+
+  /// No description provided for @agentToneCasualDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Relaxed and conversational'**
+  String get agentToneCasualDesc;
+
+  /// No description provided for @agentToneTechnical.
+  ///
+  /// In en, this message translates to:
+  /// **'Technical'**
+  String get agentToneTechnical;
+
+  /// No description provided for @agentToneTechnicalDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Detailed and precise'**
+  String get agentToneTechnicalDesc;
+
+  /// No description provided for @agentInstructions.
+  ///
+  /// In en, this message translates to:
+  /// **'Instructions'**
+  String get agentInstructions;
+
+  /// No description provided for @agentInstructionsPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'How it should answer, and when to hand over to you'**
+  String get agentInstructionsPlaceholder;
+
+  /// No description provided for @tutorialConnectTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect your page'**
+  String get tutorialConnectTitle;
+
+  /// No description provided for @tutorialConnectSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'This is the last step. Your agent answers in that page\'s inbox — the moment it is connected, it is working.'**
+  String get tutorialConnectSubtitle;
+
+  /// No description provided for @connectPermissionsHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Facebook will ask you for'**
+  String get connectPermissionsHeading;
+
+  /// No description provided for @connectPermissionPages.
+  ///
+  /// In en, this message translates to:
+  /// **'See the list of your pages'**
+  String get connectPermissionPages;
+
+  /// No description provided for @connectPermissionMessages.
+  ///
+  /// In en, this message translates to:
+  /// **'Read and send the page\'s messages'**
+  String get connectPermissionMessages;
+
+  /// No description provided for @connectPermissionInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Access the page\'s information'**
+  String get connectPermissionInfo;
+
+  /// No description provided for @connectFacebook.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect Facebook'**
+  String get connectFacebook;
+
+  /// No description provided for @connectInstagram.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect Instagram'**
+  String get connectInstagram;
+
+  /// No description provided for @oauthLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading Facebook…'**
+  String get oauthLoading;
+
+  /// No description provided for @oauthLoadingHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Facebook\'s authorisation page appears here.'**
+  String get oauthLoadingHint;
+
+  /// The one way out of the tutorial, on T5 only. T5 is the only step that depends on a third party — the merchant may have no Page yet, or Meta may not grant access — so it is the only one that can be deferred. Worded as later, not skip: the step stays outstanding on home rather than being abandoned.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect later'**
+  String get connectLater;
+
+  /// No description provided for @oauthDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Authorisation cancelled. You can try again whenever you like.'**
+  String get oauthDenied;
+
+  /// No description provided for @tutorialReadyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your agent is live'**
+  String get tutorialReadyTitle;
+
+  /// No description provided for @tutorialReadySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'It is already answering your page\'s messages, with your catalogue and your prices. Add more products whenever you like.'**
+  String get tutorialReadySubtitle;
+
+  /// T6 when the merchant chose Connecter plus tard on T5. The tutorial still ends here, but with no Page the agent is answering nobody — so the live heading is replaced and the fourth step stays unticked.
+  ///
+  /// In en, this message translates to:
+  /// **'Almost there'**
+  String get tutorialReadyTitlePending;
+
+  /// No description provided for @tutorialReadySubtitlePending.
+  ///
+  /// In en, this message translates to:
+  /// **'Your catalogue and your agent are ready. All that is left is connecting your page — your agent starts answering the moment it is.'**
+  String get tutorialReadySubtitlePending;
+
+  /// No description provided for @tutorialReadySubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Open the app'**
+  String get tutorialReadySubmit;
+
+  /// No description provided for @tutorialReadyModeSimple.
+  ///
+  /// In en, this message translates to:
+  /// **'Simple — products, categories and orders'**
+  String get tutorialReadyModeSimple;
+
+  /// No description provided for @tutorialReadyModeAdvanced.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced — the full suite'**
+  String get tutorialReadyModeAdvanced;
+
+  /// No description provided for @homeGreetingMorning.
+  ///
+  /// In en, this message translates to:
+  /// **'Good morning'**
+  String get homeGreetingMorning;
+
+  /// No description provided for @homeGreetingAfternoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Good afternoon'**
+  String get homeGreetingAfternoon;
+
+  /// From page.dash.greeting.* in src/lib/i18n.ts, which splits the day the same three ways. Rendered as '{greeting}, {firstName}'.
+  ///
+  /// In en, this message translates to:
+  /// **'Good evening'**
+  String get homeGreetingEvening;
+
+  /// No description provided for @homeSnapshot.
+  ///
+  /// In en, this message translates to:
+  /// **'here is a snapshot'**
+  String get homeSnapshot;
+
+  /// No description provided for @homeQueue.
+  ///
+  /// In en, this message translates to:
+  /// **'To handle'**
+  String get homeQueue;
+
+  /// The kind on an escalation card. Every item in this queue is a conversation the backend flagged aiPaused, which is exactly 'the AI stopped and is waiting for you' — so there is one kind, not several.
+  ///
+  /// In en, this message translates to:
+  /// **'AI stuck'**
+  String get homeQueueStuck;
+
+  /// No description provided for @homeQueueEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing waiting. The agent is handling every conversation.'**
+  String get homeQueueEmpty;
+
+  /// No description provided for @homeQueueNoPage.
+  ///
+  /// In en, this message translates to:
+  /// **'No page connected, so no conversation can reach you yet.'**
+  String get homeQueueNoPage;
+
+  /// No description provided for @homeQueueMore.
+  ///
+  /// In en, this message translates to:
+  /// **'+ {count} more'**
+  String homeQueueMore(int count);
+
+  /// How long an escalation has been waiting. Uppercase in the Label/Meta style, stored cased per locale because case does not apply in Arabic.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} MIN'**
+  String homeAgeMinutes(int count);
+
+  /// No description provided for @homeAgeHours.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} H'**
+  String homeAgeHours(int count);
+
+  /// No description provided for @homeAgeDays.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} D'**
+  String homeAgeDays(int count);
+
+  /// No description provided for @homeNoPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No page connected'**
+  String get homeNoPageTitle;
+
+  /// Sits above À traiter when the merchant has no Page — including one who chose Connecter plus tard on T5. The queue can only be empty in that state, so the screen explains the silence instead of showing an empty section.
+  ///
+  /// In en, this message translates to:
+  /// **'Your agent has nowhere to answer yet. Connect your Facebook or Instagram page and it starts working on the first message.'**
+  String get homeNoPageBody;
+
+  /// No description provided for @homeOverview.
+  ///
+  /// In en, this message translates to:
+  /// **'Overview'**
+  String get homeOverview;
+
+  /// No description provided for @homeKpiPages.
+  ///
+  /// In en, this message translates to:
+  /// **'Connected pages'**
+  String get homeKpiPages;
+
+  /// No description provided for @homeKpiProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Products'**
+  String get homeKpiProducts;
+
+  /// No description provided for @homeKpiLowStock.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} low stock'**
+  String homeKpiLowStock(int count);
+
+  /// No description provided for @homeKpiRevenue.
+  ///
+  /// In en, this message translates to:
+  /// **'Revenue (30d)'**
+  String get homeKpiRevenue;
+
+  /// No description provided for @homeKpiSales.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{{count} sale} other{{count} sales}}'**
+  String homeKpiSales(int count);
+
+  /// No description provided for @homeKpiStockValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock value'**
+  String get homeKpiStockValue;
+
+  /// No description provided for @homeQuickActions.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick actions'**
+  String get homeQuickActions;
+
+  /// No description provided for @homeActionConnectTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect a page'**
+  String get homeActionConnectTitle;
+
+  /// No description provided for @homeActionConnectBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Link your Facebook page'**
+  String get homeActionConnectBody;
+
+  /// No description provided for @homeActionProductsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add products'**
+  String get homeActionProductsTitle;
+
+  /// No description provided for @homeActionProductsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Build your catalogue'**
+  String get homeActionProductsBody;
+
+  /// No description provided for @homeActionAgentsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'AI agents'**
+  String get homeActionAgentsTitle;
+
+  /// No description provided for @homeActionAgentsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage your assistants'**
+  String get homeActionAgentsBody;
+
+  /// No description provided for @homeYourPages.
+  ///
+  /// In en, this message translates to:
+  /// **'Your pages'**
+  String get homeYourPages;
+
+  /// No description provided for @homeManageAll.
+  ///
+  /// In en, this message translates to:
+  /// **'MANAGE ALL →'**
+  String get homeManageAll;
+
+  /// No description provided for @homePagesEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No page connected yet.'**
+  String get homePagesEmpty;
+
+  /// No description provided for @homePageActive.
+  ///
+  /// In en, this message translates to:
+  /// **'ACTIVE'**
+  String get homePageActive;
+
+  /// No description provided for @homePageInactive.
+  ///
+  /// In en, this message translates to:
+  /// **'PAUSED'**
+  String get homePageInactive;
+
+  /// The second line of a page row, beside the network name. Uppercase in the Label/Meta style.
+  ///
+  /// In en, this message translates to:
+  /// **'CONNECTED {date}'**
+  String homePageConnectedOn(DateTime date);
+
+  /// No description provided for @platformFacebook.
+  ///
+  /// In en, this message translates to:
+  /// **'Facebook'**
+  String get platformFacebook;
+
+  /// No description provided for @platformInstagram.
+  ///
+  /// In en, this message translates to:
+  /// **'Instagram'**
+  String get platformInstagram;
+
+  /// No description provided for @homeGetStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Get started'**
+  String get homeGetStarted;
+
+  /// No description provided for @homeStepConnectTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect a page'**
+  String get homeStepConnectTitle;
+
+  /// No description provided for @homeStepConnectBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Link Facebook to start chatting'**
+  String get homeStepConnectBody;
+
+  /// No description provided for @homeStepProductsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add products'**
+  String get homeStepProductsTitle;
+
+  /// No description provided for @homeStepProductsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Build up your catalogue'**
+  String get homeStepProductsBody;
+
+  /// No description provided for @homeStepAgentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Configure your AI agent'**
+  String get homeStepAgentTitle;
+
+  /// No description provided for @homeStepAgentBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Set the tone and the behaviour'**
+  String get homeStepAgentBody;
+
+  /// No description provided for @homeStepSaleTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Make your first sale'**
+  String get homeStepSaleTitle;
+
+  /// No description provided for @homeStepSaleBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch the AI handle the requests'**
+  String get homeStepSaleBody;
+
+  /// No description provided for @navHome.
+  ///
+  /// In en, this message translates to:
+  /// **'HOME'**
+  String get navHome;
+
+  /// No description provided for @navQueue.
+  ///
+  /// In en, this message translates to:
+  /// **'QUEUE'**
+  String get navQueue;
+
+  /// No description provided for @navInbox.
+  ///
+  /// In en, this message translates to:
+  /// **'INBOX'**
+  String get navInbox;
+
+  /// No description provided for @navStock.
+  ///
+  /// In en, this message translates to:
+  /// **'STOCK'**
+  String get navStock;
+
+  /// No description provided for @navOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'ORD'**
+  String get navOrders;
+
+  /// Shown when a control leads to a screen that does not exist yet. Says so rather than doing nothing, which reads as a broken tap.
+  ///
+  /// In en, this message translates to:
+  /// **'not built yet'**
+  String get commonNotBuilt;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

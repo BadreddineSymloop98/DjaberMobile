@@ -240,7 +240,19 @@ class _Input extends StatelessWidget {
               errorBorder: InputBorder.none,
               focusedErrorBorder: InputBorder.none,
               hintText: placeholder,
-              hintStyle: AppText.bodyS,
+              // `text/muted`, not the `text/secondary` [AppText.bodyS] carries.
+              //
+              // Two reasons, and they agree. The Figma `Text Field` component
+              // sets its value text in `text/muted` (#666), so the brighter
+              // #A3A3A3 was drift. And at that brightness a placeholder reads
+              // as a **filled value**: on the sign-up screen "Jane" and "Doe"
+              // looked like autofilled content — they fooled me while testing
+              // on the handset, and the form was rejecting fields that
+              // appeared to have text in them.
+              //
+              // Entered text stays `text/primary`, so the gap between "empty"
+              // and "typed" is now the full ramp rather than one step.
+              hintStyle: AppText.bodyS.copyWith(color: AppColors.textMuted),
               filled: false,
             ),
           ),
@@ -279,6 +291,11 @@ String messageFor(FieldError error, AppFieldMessages messages) =>
       FieldError.required => messages.required,
       FieldError.invalidEmail => messages.invalidEmail,
       FieldError.tooShort => messages.tooShort,
+      // Product-form rules; no validator on this form can produce them.
+      FieldError.notANumber ||
+      FieldError.mustBePositive ||
+      FieldError.belowCostPrice =>
+        messages.required,
     };
 
 /// The three messages a field can show, supplied by the screen from `L10n`.

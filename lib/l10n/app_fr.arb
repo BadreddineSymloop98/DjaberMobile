@@ -119,6 +119,182 @@
   "authErrUserExists": "Un compte avec cet e-mail existe déjà",
   "authErrNetwork": "Impossible de joindre le serveur. Vérifiez votre connexion.",
   "authErrUnknown": "Une erreur s’est produite. Veuillez réessayer.",
-  "homeWelcome": "Bon retour, {name}",
-  "menuSignOut": "Déconnexion"
+  "menuSignOut": "Déconnexion",
+
+  "tutorialStepMode": "Choisir votre mode de stock",
+  "tutorialStepProduct": "Créer votre premier produit",
+  "tutorialStepAgent": "Créer votre agent IA",
+  "tutorialStepPage": "Connecter votre page",
+  "tutorialWelcomeTitle": "Bienvenue sur Djaber.ai",
+  "tutorialWelcomeBody": "On met votre boutique en route ensemble. Quatre étapes, et votre agent commence à répondre à vos clients.",
+  "tutorialStockTitle": "D’abord, votre stock",
+  "tutorialStockBody": "Vous choisissez comment gérer votre stock, puis vous créez votre premier produit — nom, prix, quantité.",
+  "tutorialAgentTitle": "Puis votre agent",
+  "tutorialAgentBody": "Créez-le en trois champs, connectez votre page Facebook, et il répond dès la première question.",
+
+  "commonContinue": "Continuer",
+  "commonActive": "ACTIF",
+  "tutorialStepCounter": "ÉTAPE {step} SUR {total}",
+  "tutorialModeTitle": "Comment gérez-vous votre stock ?",
+  "tutorialModeSubtitle": "Ce choix décide de ce que vous voyez dans l’application. Vous pouvez le changer à tout moment dans les paramètres.",
+  "stockModeSimple": "Simple",
+  "stockModeAdvanced": "Avancé",
+  "stockModeSimpleDesc": "Produits, Catégories & Commandes — gérez votre inventaire et commandes sans complexité.",
+  "stockModeAdvancedDesc": "Suite complète — Fournisseurs, Clients, Ventes, Achats, Caisse, Mouvements, Livraison et plus.",
+
+  "tutorialProductTitle": "Votre premier produit",
+  "tutorialProductSubtitle": "C’est ce que votre agent vendra. La description est ce qu’il lira pour répondre aux clients.",
+  "tutorialProductSubmit": "Créer le produit",
+  "productName": "Nom",
+  "productNamePlaceholder": "Robe satin — Noir",
+  "productSku": "Référence (SKU)",
+  "productSkuPlaceholder": "PRD-001",
+  "productDescription": "Description",
+  "productDescriptionPlaceholder": "Décrivez le produit — l’agent s’en sert pour le vendre",
+  "productCostPrice": "Prix d’achat (DA)",
+  "productSellingPrice": "Prix de vente (DA)",
+  "productQuantity": "Quantité initiale",
+  "productErrRequired": "Ce champ est requis",
+  "productErrNotANumber": "Entrez un nombre",
+  "productErrMustBePositive": "Doit être supérieur à 0",
+  "productErrBelowCost": "Doit être supérieur ou égal au prix d’achat",
+
+  "tutorialAgentSubtitle": "Il répond à vos clients avec votre catalogue et vos prix. Trois champs suffisent — tout s’ajuste plus tard.",
+  "tutorialAgentSubmit": "Créer l’agent",
+  "agentName": "Nom de l’agent",
+  "agentNamePlaceholder": "ex. Assistant de vente",
+  "agentPersonality": "Personnalité",
+  "agentToneProfessional": "Professionnel",
+  "agentToneProfessionalDesc": "Formel et orienté business",
+  "agentToneFriendly": "Amical",
+  "agentToneFriendlyDesc": "Chaleureux et accessible",
+  "agentToneCasual": "Décontracté",
+  "agentToneCasualDesc": "Détendu et conversationnel",
+  "agentToneTechnical": "Technique",
+  "agentToneTechnicalDesc": "Détaillé et précis",
+  "agentInstructions": "Instructions",
+  "agentInstructionsPlaceholder": "Comment doit-il répondre, et quand vous passer la main",
+
+  "tutorialConnectTitle": "Connectez votre page",
+  "tutorialConnectSubtitle": "C’est la dernière étape. Votre agent répond dans la boîte de réception de cette page — dès qu’elle est connectée, il travaille.",
+  "connectPermissionsHeading": "Facebook vous demandera",
+  "connectPermissionPages": "Voir la liste de vos pages",
+  "connectPermissionMessages": "Lire et envoyer les messages de la page",
+  "connectPermissionInfo": "Accéder aux informations de la page",
+  "connectFacebook": "Connecter Facebook",
+  "connectInstagram": "Connecter Instagram",
+  "oauthLoading": "Chargement de Facebook…",
+  "oauthLoadingHint": "La page d’autorisation de Facebook s’affiche ici.",
+  "connectLater": "Connecter plus tard",
+  "oauthDenied": "Autorisation annulée. Vous pouvez réessayer quand vous voulez.",
+
+  "tutorialReadyTitle": "Votre agent est en ligne",
+  "tutorialReadySubtitle": "Il répond déjà aux messages de votre page, avec votre catalogue et vos prix. Ajoutez d’autres produits quand vous voulez.",
+  "tutorialReadyTitlePending": "Vous y êtes presque",
+  "tutorialReadySubtitlePending": "Votre catalogue et votre agent sont prêts. Il ne reste qu’à connecter votre page — votre agent commencera à répondre dès ce moment-là.",
+  "tutorialReadySubmit": "Ouvrir l’application",
+  "tutorialReadyModeSimple": "Simple — produits, catégories et commandes",
+  "tutorialReadyModeAdvanced": "Avancé — la suite complète",
+
+  "homeGreetingMorning": "Bonjour",
+  "homeGreetingAfternoon": "Bon après-midi",
+  "homeGreetingEvening": "Bonsoir",
+  "homeSnapshot": "voici un aperçu",
+  "homeQueue": "À traiter",
+  "homeQueueStuck": "IA bloquée",
+  "homeQueueEmpty": "Rien en attente. L’agent gère toutes les conversations.",
+  "homeQueueNoPage": "Aucune page connectée, donc aucune conversation ne peut encore vous parvenir.",
+  "homeQueueMore": "+ {count} autres",
+  "@homeQueueMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeAgeMinutes": "{count} MIN",
+  "@homeAgeMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeAgeHours": "{count} H",
+  "@homeAgeHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeAgeDays": "{count} J",
+  "@homeAgeDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeNoPageTitle": "Aucune page connectée",
+  "homeNoPageBody": "Votre agent n’a encore nulle part où répondre. Connectez votre page Facebook ou Instagram et il se met au travail dès le premier message.",
+  "homeOverview": "Aperçu",
+  "homeKpiPages": "Pages connectées",
+  "homeKpiProducts": "Produits",
+  "homeKpiLowStock": "{count} stock faible",
+  "@homeKpiLowStock": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeKpiRevenue": "Chiffre d’affaires (30j)",
+  "homeKpiSales": "{count, plural, one{{count} vente} other{{count} ventes}}",
+  "@homeKpiSales": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeKpiStockValue": "Valeur du stock",
+  "homeQuickActions": "Actions rapides",
+  "homeActionConnectTitle": "Connecter une page",
+  "homeActionConnectBody": "Liez votre page Facebook",
+  "homeActionProductsTitle": "Ajouter des produits",
+  "homeActionProductsBody": "Construisez votre catalogue",
+  "homeActionAgentsTitle": "Agents IA",
+  "homeActionAgentsBody": "Gérez vos assistants",
+  "homeYourPages": "Vos pages",
+  "homeManageAll": "TOUT GÉRER →",
+  "homePagesEmpty": "Aucune page connectée pour l’instant.",
+  "homePageActive": "ACTIVE",
+  "homePageInactive": "EN PAUSE",
+  "homePageConnectedOn": "CONNECTÉE LE {date}",
+  "@homePageConnectedOn": {
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "MMMMd"
+      }
+    }
+  },
+  "platformFacebook": "Facebook",
+  "platformInstagram": "Instagram",
+  "homeGetStarted": "Démarrer",
+  "homeStepConnectTitle": "Connecter une page",
+  "homeStepConnectBody": "Liez Facebook pour commencer à discuter",
+  "homeStepProductsTitle": "Ajouter des produits",
+  "homeStepProductsBody": "Constituez votre catalogue",
+  "homeStepAgentTitle": "Configurer votre agent IA",
+  "homeStepAgentBody": "Personnalisez le ton et le comportement",
+  "homeStepSaleTitle": "Réalisez votre première vente",
+  "homeStepSaleBody": "Regardez l’IA gérer les demandes",
+  "navHome": "ACCUEIL",
+  "navQueue": "FILE",
+  "navInbox": "BOÎTE",
+  "navStock": "STOCK",
+  "navOrders": "CMD",
+  "commonNotBuilt": "pas encore disponible"
 }

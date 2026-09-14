@@ -374,10 +374,411 @@ class L10nAr extends L10n {
   String get authErrUnknown => 'حدث خطأ ما. يرجى المحاولة مرة أخرى.';
 
   @override
-  String homeWelcome(String name) {
-    return 'مرحباً بعودتك، $name';
+  String get menuSignOut => 'تسجيل الخروج';
+
+  @override
+  String get tutorialStepMode => 'اختر وضع المخزون';
+
+  @override
+  String get tutorialStepProduct => 'أنشئ منتجك الأول';
+
+  @override
+  String get tutorialStepAgent => 'أنشئ وكيل الذكاء الاصطناعي';
+
+  @override
+  String get tutorialStepPage => 'اربط صفحتك';
+
+  @override
+  String get tutorialWelcomeTitle => 'مرحبًا بك في Djaber.ai';
+
+  @override
+  String get tutorialWelcomeBody =>
+      'نُشغّل متجرك معًا. أربع خطوات، ويبدأ وكيلك بالردّ على زبائنك.';
+
+  @override
+  String get tutorialStockTitle => 'أولًا، مخزونك';
+
+  @override
+  String get tutorialStockBody =>
+      'تختار طريقة إدارة مخزونك، ثم تنشئ منتجك الأول — الاسم والسعر والكمية.';
+
+  @override
+  String get tutorialAgentTitle => 'ثم وكيلك';
+
+  @override
+  String get tutorialAgentBody =>
+      'أنشئه بثلاثة حقول، اربط صفحتك على فيسبوك، ويردّ من أول سؤال.';
+
+  @override
+  String get commonContinue => 'متابعة';
+
+  @override
+  String get commonActive => 'نشط';
+
+  @override
+  String tutorialStepCounter(int step, int total) {
+    return 'الخطوة $step من $total';
   }
 
   @override
-  String get menuSignOut => 'تسجيل الخروج';
+  String get tutorialModeTitle => 'كيف تدير مخزونك ؟';
+
+  @override
+  String get tutorialModeSubtitle =>
+      'هذا الاختيار يحدّد ما تراه في التطبيق. يمكنك تغييره في أي وقت من الإعدادات.';
+
+  @override
+  String get stockModeSimple => 'بسيط';
+
+  @override
+  String get stockModeAdvanced => 'متقدم';
+
+  @override
+  String get stockModeSimpleDesc =>
+      'المنتجات والفئات والطلبات — أدر المخزون والطلبات دون تعقيد.';
+
+  @override
+  String get stockModeAdvancedDesc =>
+      'مجموعة كاملة — الموردون والعملاء والمبيعات والمشتريات والصندوق والحركات والتوصيل والمزيد.';
+
+  @override
+  String get tutorialProductTitle => 'منتجك الأول';
+
+  @override
+  String get tutorialProductSubtitle =>
+      'هذا ما سيبيعه وكيلك. الوصف هو ما يقرأه للردّ على الزبائن.';
+
+  @override
+  String get tutorialProductSubmit => 'إنشاء المنتج';
+
+  @override
+  String get productName => 'الاسم';
+
+  @override
+  String get productNamePlaceholder => 'فستان ساتان — أسود';
+
+  @override
+  String get productSku => 'المرجع (SKU)';
+
+  @override
+  String get productSkuPlaceholder => 'PRD-001';
+
+  @override
+  String get productDescription => 'الوصف';
+
+  @override
+  String get productDescriptionPlaceholder =>
+      'صف المنتج — يستعمله الوكيل لبيعه';
+
+  @override
+  String get productCostPrice => 'سعر الشراء (دج)';
+
+  @override
+  String get productSellingPrice => 'سعر البيع (دج)';
+
+  @override
+  String get productQuantity => 'الكمية الأولية';
+
+  @override
+  String get productErrRequired => 'هذا الحقل مطلوب';
+
+  @override
+  String get productErrNotANumber => 'أدخل رقمًا';
+
+  @override
+  String get productErrMustBePositive => 'يجب أن يكون أكبر من 0';
+
+  @override
+  String get productErrBelowCost => 'يجب أن يكون أكبر من أو يساوي سعر الشراء';
+
+  @override
+  String get tutorialAgentSubtitle =>
+      'يردّ على زبائنك بالاعتماد على كتالوجك وأسعارك. ثلاثة حقول تكفي — والباقي يُضبط لاحقًا.';
+
+  @override
+  String get tutorialAgentSubmit => 'إنشاء الوكيل';
+
+  @override
+  String get agentName => 'اسم الوكيل';
+
+  @override
+  String get agentNamePlaceholder => 'مثال: مساعد المبيعات';
+
+  @override
+  String get agentPersonality => 'الشخصية';
+
+  @override
+  String get agentToneProfessional => 'احترافي';
+
+  @override
+  String get agentToneProfessionalDesc => 'رسمي وموجّه للأعمال';
+
+  @override
+  String get agentToneFriendly => 'ودود';
+
+  @override
+  String get agentToneFriendlyDesc => 'دافئ وسهل التعامل';
+
+  @override
+  String get agentToneCasual => 'عفوي';
+
+  @override
+  String get agentToneCasualDesc => 'مرتاح وحواري';
+
+  @override
+  String get agentToneTechnical => 'تقني';
+
+  @override
+  String get agentToneTechnicalDesc => 'مفصّل ودقيق';
+
+  @override
+  String get agentInstructions => 'التعليمات';
+
+  @override
+  String get agentInstructionsPlaceholder =>
+      'كيف يردّ، ومتى يحوّل المحادثة إليك';
+
+  @override
+  String get tutorialConnectTitle => 'اربط صفحتك';
+
+  @override
+  String get tutorialConnectSubtitle =>
+      'هذه آخر خطوة. وكيلك يردّ في صندوق رسائل هذه الصفحة — وبمجرد ربطها يبدأ العمل.';
+
+  @override
+  String get connectPermissionsHeading => 'فيسبوك سيطلب منك';
+
+  @override
+  String get connectPermissionPages => 'الاطّلاع على قائمة صفحاتك';
+
+  @override
+  String get connectPermissionMessages => 'قراءة رسائل الصفحة وإرسالها';
+
+  @override
+  String get connectPermissionInfo => 'الوصول إلى معلومات الصفحة';
+
+  @override
+  String get connectFacebook => 'ربط فيسبوك';
+
+  @override
+  String get connectInstagram => 'ربط إنستغرام';
+
+  @override
+  String get oauthLoading => 'جارٍ تحميل فيسبوك…';
+
+  @override
+  String get oauthLoadingHint => 'تظهر هنا صفحة الإذن الخاصة بفيسبوك.';
+
+  @override
+  String get connectLater => 'اربطها لاحقًا';
+
+  @override
+  String get oauthDenied =>
+      'تمّ إلغاء الإذن. يمكنك المحاولة مرّة أخرى وقتما تشاء.';
+
+  @override
+  String get tutorialReadyTitle => 'وكيلك متصل الآن';
+
+  @override
+  String get tutorialReadySubtitle =>
+      'هو يردّ فعلًا على رسائل صفحتك، بالاعتماد على كتالوجك وأسعارك. أضف منتجات أخرى وقتما تشاء.';
+
+  @override
+  String get tutorialReadyTitlePending => 'أوشكت على الانتهاء';
+
+  @override
+  String get tutorialReadySubtitlePending =>
+      'كتالوجك ووكيلك جاهزان. لم يبقَ سوى ربط صفحتك — سيبدأ وكيلك بالردّ فور ربطها.';
+
+  @override
+  String get tutorialReadySubmit => 'افتح التطبيق';
+
+  @override
+  String get tutorialReadyModeSimple => 'بسيط — المنتجات والفئات والطلبات';
+
+  @override
+  String get tutorialReadyModeAdvanced => 'متقدم — المجموعة الكاملة';
+
+  @override
+  String get homeGreetingMorning => 'صباح الخير';
+
+  @override
+  String get homeGreetingAfternoon => 'طاب يومك';
+
+  @override
+  String get homeGreetingEvening => 'مساء الخير';
+
+  @override
+  String get homeSnapshot => 'إليك لمحة سريعة';
+
+  @override
+  String get homeQueue => 'بانتظار تدخّلك';
+
+  @override
+  String get homeQueueStuck => 'توقّف الذكاء الاصطناعي';
+
+  @override
+  String get homeQueueEmpty =>
+      'لا شيء في الانتظار. الوكيل يتولّى كل المحادثات.';
+
+  @override
+  String get homeQueueNoPage =>
+      'لا توجد صفحة مربوطة، لذا لا يمكن لأي محادثة أن تصلك بعد.';
+
+  @override
+  String homeQueueMore(int count) {
+    return '+ $count أخرى';
+  }
+
+  @override
+  String homeAgeMinutes(int count) {
+    return '$count دقيقة';
+  }
+
+  @override
+  String homeAgeHours(int count) {
+    return '$count ساعة';
+  }
+
+  @override
+  String homeAgeDays(int count) {
+    return '$count يوم';
+  }
+
+  @override
+  String get homeNoPageTitle => 'لا توجد صفحة مربوطة';
+
+  @override
+  String get homeNoPageBody =>
+      'ليس لوكيلك مكان يردّ فيه بعد. اربط صفحتك على فيسبوك أو إنستغرام ليبدأ العمل من أول رسالة.';
+
+  @override
+  String get homeOverview => 'لمحة';
+
+  @override
+  String get homeKpiPages => 'الصفحات المربوطة';
+
+  @override
+  String get homeKpiProducts => 'المنتجات';
+
+  @override
+  String homeKpiLowStock(int count) {
+    return '$count مخزون منخفض';
+  }
+
+  @override
+  String get homeKpiRevenue => 'رقم الأعمال (٣٠ يومًا)';
+
+  @override
+  String homeKpiSales(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count مبيعة',
+      many: '$count مبيعة',
+      few: '$count مبيعات',
+      two: 'بيعتان',
+      one: 'بيعة واحدة',
+      zero: 'لا مبيعات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get homeKpiStockValue => 'قيمة المخزون';
+
+  @override
+  String get homeQuickActions => 'إجراءات سريعة';
+
+  @override
+  String get homeActionConnectTitle => 'اربط صفحة';
+
+  @override
+  String get homeActionConnectBody => 'اربط صفحتك على فيسبوك';
+
+  @override
+  String get homeActionProductsTitle => 'أضف منتجات';
+
+  @override
+  String get homeActionProductsBody => 'كوّن كتالوجك';
+
+  @override
+  String get homeActionAgentsTitle => 'وكلاء الذكاء الاصطناعي';
+
+  @override
+  String get homeActionAgentsBody => 'أدِر مساعديك';
+
+  @override
+  String get homeYourPages => 'صفحاتك';
+
+  @override
+  String get homeManageAll => 'إدارة الكل ←';
+
+  @override
+  String get homePagesEmpty => 'لا توجد صفحة مربوطة حتى الآن.';
+
+  @override
+  String get homePageActive => 'نشطة';
+
+  @override
+  String get homePageInactive => 'متوقفة';
+
+  @override
+  String homePageConnectedOn(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.MMMMd(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return 'مربوطة في $dateString';
+  }
+
+  @override
+  String get platformFacebook => 'فيسبوك';
+
+  @override
+  String get platformInstagram => 'إنستغرام';
+
+  @override
+  String get homeGetStarted => 'ابدأ';
+
+  @override
+  String get homeStepConnectTitle => 'اربط صفحة';
+
+  @override
+  String get homeStepConnectBody => 'اربط فيسبوك لتبدأ المحادثات';
+
+  @override
+  String get homeStepProductsTitle => 'أضف منتجات';
+
+  @override
+  String get homeStepProductsBody => 'كوّن كتالوجك';
+
+  @override
+  String get homeStepAgentTitle => 'اضبط وكيلك الذكي';
+
+  @override
+  String get homeStepAgentBody => 'خصّص النبرة والسلوك';
+
+  @override
+  String get homeStepSaleTitle => 'حقّق أول بيعة';
+
+  @override
+  String get homeStepSaleBody => 'شاهد الذكاء الاصطناعي يتولّى الطلبات';
+
+  @override
+  String get navHome => 'الرئيسية';
+
+  @override
+  String get navQueue => 'القائمة';
+
+  @override
+  String get navInbox => 'الرسائل';
+
+  @override
+  String get navStock => 'المخزون';
+
+  @override
+  String get navOrders => 'الطلبات';
+
+  @override
+  String get commonNotBuilt => 'غير متاح بعد';
 }

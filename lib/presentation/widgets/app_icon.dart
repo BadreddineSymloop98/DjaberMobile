@@ -30,6 +30,11 @@ class AppIcons {
         '0 014 0z',
   ];
 
+  /// `BoltIcon` — the advanced stock mode, and anything "powered up".
+  static const bolt = <String>[
+    'M13 10V3L4 14h7v7l9-11h-7z',
+  ];
+
   /// `HistoryIcon` — stock movements.
   static const history = <String>[
     'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z',
@@ -67,6 +72,96 @@ class AppIcons {
         '3 0 013 3v1',
   ];
 
+  /// A bare tick. **The one glyph not in the web's set** — `icons.tsx` has
+  /// `CheckCircleIcon` but no plain check, so this is the Heroicons v1 outline
+  /// check from the same family the rest of the set is drawn from.
+  static const check = <String>[
+    'M5 13l4 4L19 7',
+  ];
+
+  /// `FacebookIcon` — **filled**, not stroked. Pass `filled: true`.
+  static const facebook = <String>[
+    'M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 '
+        '10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 '
+        '4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 '
+        '0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 '
+        '23.027 24 18.062 24 12.073z',
+  ];
+
+  /// `InstagramIcon` — **filled**, not stroked. Pass `filled: true`.
+  static const instagram = <String>[
+    'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 '
+        '4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 '
+        '4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-'
+        '3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-'
+        '1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 '
+        '1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 '
+        '0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 '
+        '0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 '
+        '23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 '
+        '6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-'
+        '3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 '
+        '0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 '
+        '000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 '
+        '100 2.881 1.44 1.44 0 000-2.881z',
+  ];
+
+  /// `MenuIcon` — the tier-3 drawer (brief §16).
+  static const menu = <String>[
+    'M4 6h16M4 12h16M4 18h16',
+  ];
+
+  /// `ChevronRightIcon` — onwards. Flip it under RTL.
+  static const chevronRight = <String>[
+    'M9 5l7 7-7 7',
+  ];
+
+  /// `HomeIcon` — the first bottom-nav destination.
+  static const home = <String>[
+    'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 '
+        '01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 '
+        '1m-6 0h6',
+  ];
+
+  /// `BellIcon` — the escalation queue, `File`.
+  static const bell = <String>[
+    'M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 '
+        '00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 '
+        '.538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9',
+  ];
+
+  /// `ChatIcon` — conversations, and the connected-pages KPI.
+  static const chat = <String>[
+    'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 '
+        '01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 '
+        '4.03-8 9-8s9 3.582 9 8z',
+  ];
+
+  /// `SparklesIcon` — the AI agent.
+  static const sparkles = <String>[
+    'M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846'
+        '-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 '
+        '3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 '
+        '9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a'
+        '3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 '
+        '2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 '
+        '20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 '
+        '18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 '
+        '2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z',
+  ];
+
+  /// `CloseIcon` — dismissing a sheet or a web view.
+  static const close = <String>[
+    'M6 18L18 6M6 6l12 12',
+  ];
+
+  /// `GlobeIcon` — the host shown in the web view's address pill.
+  static const globe = <String>[
+    'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 '
+        '2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 '
+        '20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+  ];
+
   /// `ClipboardIcon` — orders awaiting action.
   static const clipboard = <String>[
     'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 '
@@ -87,6 +182,7 @@ class AppIcon extends StatelessWidget {
     this.size = 24,
     this.color = AppColors.textMuted,
     this.strokeWidth = 2,
+    this.filled = false,
   });
 
   /// A glyph from [AppIcons]. A list because some of the source icons — the
@@ -100,6 +196,11 @@ class AppIcon extends StatelessWidget {
   /// the same visual weight as a 24px one rather than looking heavier.
   final double strokeWidth;
 
+  /// Filled rather than stroked. The brand marks — Facebook and Instagram —
+  /// are authored `fill="currentColor"` in `icons.tsx`; everything else in
+  /// the set is `fill="none"` with a stroke.
+  final bool filled;
+
   @override
   Widget build(BuildContext context) => SizedBox.square(
         dimension: size,
@@ -108,6 +209,7 @@ class AppIcon extends StatelessWidget {
             paths: _parse(paths),
             color: color,
             strokeWidth: strokeWidth,
+            filled: filled,
           ),
         ),
       );
@@ -126,6 +228,7 @@ class _IconPainter extends CustomPainter {
     required this.paths,
     required this.color,
     required this.strokeWidth,
+    required this.filled,
   });
 
   /// The source viewBox. Every icon in `icons.tsx` is authored on it.
@@ -134,12 +237,13 @@ class _IconPainter extends CustomPainter {
   final List<Path> paths;
   final Color color;
   final double strokeWidth;
+  final bool filled;
 
   @override
   void paint(Canvas canvas, Size size) {
     final scale = size.width / _viewBox;
     final paint = Paint()
-      ..style = PaintingStyle.stroke
+      ..style = filled ? PaintingStyle.fill : PaintingStyle.stroke
       ..color = color
       ..strokeWidth = strokeWidth
       ..strokeCap = StrokeCap.round
@@ -158,5 +262,6 @@ class _IconPainter extends CustomPainter {
   bool shouldRepaint(_IconPainter oldDelegate) =>
       oldDelegate.paths != paths ||
       oldDelegate.color != color ||
-      oldDelegate.strokeWidth != strokeWidth;
+      oldDelegate.strokeWidth != strokeWidth ||
+      oldDelegate.filled != filled;
 }

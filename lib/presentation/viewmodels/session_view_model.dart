@@ -151,6 +151,12 @@ class SessionViewModel extends BaseViewModel {
     );
     if (user == null) return false;
     _user = user;
+    // Armed here and nowhere else. The tutorial runs once, immediately after
+    // account creation (brief §21.5) — signing in to an existing account, on
+    // this handset or another, must never trigger it. Set before the status
+    // flips, so the router's redirect sees it on the very first pass and the
+    // merchant never lands on home first.
+    await _prefs.setTutorialPending(true);
     _setStatus(AuthStatus.signedIn);
     await _syncPushToken();
     unawaited(refreshProfile());
@@ -201,6 +207,18 @@ class SessionViewModel extends BaseViewModel {
 
   Future<void> completeOnboarding() async {
     await _prefs.setOnboardingSeen(true);
+    safeNotify();
+  }
+
+  /// True while a newly created account still owes the first-run tutorial.
+  /// The router reads this to hold a merchant on `/tutorial` until it is
+  /// finished or skipped.
+  bool get tutorialPending => _prefs.tutorialPending;
+
+  /// Ends the tutorial, whether it was completed or skipped. Notifies, because
+  /// the router's redirect is what acts on it.
+  Future<void> completeTutorial() async {
+    await _prefs.setTutorialPending(false);
     safeNotify();
   }
 

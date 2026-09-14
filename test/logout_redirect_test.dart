@@ -3,20 +3,28 @@ import 'package:djaber_mobile/app/routes.dart';
 import 'package:djaber_mobile/core/services/push_service.dart';
 import 'package:djaber_mobile/core/utils/screen.dart';
 import 'package:djaber_mobile/data/models/user.dart';
+import 'package:djaber_mobile/data/repositories/agent_repository.dart';
+import 'package:djaber_mobile/data/repositories/dashboard_repository.dart';
+import 'package:djaber_mobile/data/repositories/page_repository.dart';
 import 'package:djaber_mobile/l10n/gen/app_localizations.dart';
 import 'package:djaber_mobile/presentation/theme/app_theme.dart';
 import 'package:djaber_mobile/presentation/viewmodels/locale_view_model.dart';
 import 'package:djaber_mobile/presentation/viewmodels/session_view_model.dart';
+import 'package:djaber_mobile/presentation/widgets/home_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 
 import 'support/auth_host.dart';
+import 'support/fake_repositories.dart';
 
 /// Signing out has to *land* somewhere, and nothing on the home screen makes
 /// that happen — the router's redirect does, by watching the session. So the
 /// behaviour worth testing is the redirect, not the button.
+///
+/// The control itself now lives behind home's menu button, which is where the
+/// `09a — Menu` drawer will put it — so each test opens the menu first.
 void main() {
   late SessionViewModel session;
   late AppRouter router;
@@ -44,6 +52,12 @@ void main() {
       MultiProvider(
         providers: [
           ChangeNotifierProvider<SessionViewModel>.value(value: session),
+          // Home is a real screen now and reads these. They answer from
+          // memory: this suite is about where a navigation lands, not about
+          // what the dashboard says.
+          Provider<DashboardRepository>(create: (_) => FakeDashboardRepository()),
+          Provider<PageRepository>(create: (_) => FakePageRepository()),
+          Provider<AgentRepository>(create: (_) => FakeAgentRepository()),
         ],
         child: MaterialApp.router(
           routerConfig: router.router,
@@ -65,6 +79,14 @@ void main() {
     await tester.pumpAndSettle();
   }
 
+  /// Opens home's menu and taps the one row in it.
+  Future<void> signOutFromMenu(WidgetTester tester) async {
+    await tester.tap(find.byType(MenuButton));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Déconnexion'));
+    await tester.pumpAndSettle();
+  }
+
   testWidgets('a signed-in merchant lands on home', (tester) async {
     session.debugSetUser(const User(
       id: 'u-1',
@@ -74,7 +96,8 @@ void main() {
     await pumpApp(tester);
 
     expect(location(), Routes.home);
-    expect(find.text('Bon retour, Amina'), findsOneWidget);
+    // Named, whichever greeting the hour picks.
+    expect(find.textContaining('Amina'), findsWidgets);
   });
 
   testWidgets('tapping sign out returns them to login', (tester) async {
@@ -86,8 +109,7 @@ void main() {
     await pumpApp(tester);
     expect(location(), Routes.home);
 
-    await tester.tap(find.text('Déconnexion'));
-    await tester.pumpAndSettle();
+    await signOutFromMenu(tester);
 
     // The button navigates explicitly, and login is a public path the
     // redirect leaves alone once signed out — so this holds whether or not
@@ -109,8 +131,7 @@ void main() {
     ));
     await pumpApp(tester);
 
-    await tester.tap(find.text('Déconnexion'));
-    await tester.pumpAndSettle();
+    await signOutFromMenu(tester);
 
     expect(location(), Routes.login);
     expect(find.text('Connexion'), findsOneWidget);
@@ -124,8 +145,7 @@ void main() {
 
     expect(await session.hasStoredSessionForTest(), isTrue);
 
-    await tester.tap(find.text('Déconnexion'));
-    await tester.pumpAndSettle();
+    await signOutFromMenu(tester);
 
     expect(await session.hasStoredSessionForTest(), isFalse);
   });
