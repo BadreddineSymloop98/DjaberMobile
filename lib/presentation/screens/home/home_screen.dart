@@ -384,7 +384,13 @@ class _Queue extends StatelessWidget {
               time: _age(conversation, l10n),
               who: conversation.displayName,
               message: conversation.lastMessage ?? '',
-              onTap: () => context.go(Routes.conversationOf(conversation.id)),
+              // Pushed, so back returns to home; re-read on the way back,
+              // since a reply or a status change may have cleared the card.
+              onTap: () async {
+                await GoRouter.of(context)
+                    .push(Routes.conversationOf(conversation.id));
+                if (context.mounted) await model.load(silent: true);
+              },
             ),
             SizedBox(height: AppSpacing.sm), // 8
           ],
@@ -594,9 +600,8 @@ class _QuickActions extends StatelessWidget {
             iconColor: AppColors.accentStarred,
             title: l10n.homeActionProductsTitle,
             subtitle: l10n.homeActionProductsBody,
-            // TODO(stock): the product form outside the tutorial. Not the
-            // Stock tab either — that is a list, and this card is a create.
-            onTap: () => context.go(Routes.products),
+            // Pushed, so back returns to home instead of asking to leave.
+            onTap: () => GoRouter.of(context).push(Routes.products),
           ),
           SizedBox(height: AppSpacing.sm),
           ActionCard(

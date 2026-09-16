@@ -275,6 +275,22 @@ class AppIcons {
         '23.91 0 001.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 '
         '1.317-.811 1.73m0-3.46a24.347 24.347 0 010 3.46',
   ];
+
+  /// `SearchIcon` — the inbox's search field.
+  static const search = <String>[
+    'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z',
+  ];
+
+  /// `RefreshIcon` — the inbox's Sync.
+  static const refresh = <String>[
+    'M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 '
+        '0a8.003 8.003 0 01-15.357-2m15.357 2H15',
+  ];
+
+  /// `CheckCircleIcon` — *Marquer terminé* on a conversation.
+  static const checkCircle = <String>[
+    'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+  ];
 }
 
 /// Draws one of [AppIcons] at [size], in [color].

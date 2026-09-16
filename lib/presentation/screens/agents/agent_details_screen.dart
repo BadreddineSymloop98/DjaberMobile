@@ -18,8 +18,10 @@ import '../../widgets/api_error_message.dart';
 import '../../widgets/app_filter_chip.dart';
 import '../../widgets/app_icon.dart';
 import '../../widgets/app_toast.dart';
+import '../../widgets/back_scope.dart';
 import '../../widgets/home_widgets.dart';
 import '../../widgets/icon_square_button.dart';
+import '../../widgets/leave_sheet.dart';
 import 'agent_widgets.dart';
 
 /// The agent's details: KPIs, its insights, and its custom instructions —
@@ -62,14 +64,10 @@ class _AgentDetailsScreenState extends State<AgentDetailsScreen> {
     super.dispose();
   }
 
-  void _back() {
-    final router = GoRouter.of(context);
-    if (router.canPop()) {
-      router.pop();
-    } else {
-      router.go(Routes.agents);
-    }
-  }
+  /// Unsaved instructions, or an instruction typed to resolve an insight,
+  /// ask before back drops them.
+  Future<bool> _onBack() =>
+      showLeaveSheet(context, body: L10n.of(context).agentDetailsLeaveBody);
 
   /// Opens `15c`, then reloads: the agent may have changed, saved or not.
   Future<void> _edit() async {
@@ -99,8 +97,17 @@ class _AgentDetailsScreenState extends State<AgentDetailsScreen> {
     final l10n = L10n.of(context);
 
     return ListenableBuilder(
-      listenable: Listenable.merge([_model, _model.insights]),
-      builder: (context, _) => Scaffold(
+      // The two text fields too, so the intercept follows the typing.
+      listenable: Listenable.merge([
+        _model,
+        _model.insights,
+        _model.instructions,
+        _model.insights.instructionController,
+      ]),
+      builder: (context, _) => BackIntercept(
+        active: _model.hasUnsavedInstructions || _model.insights.hasUnsavedResolve,
+        onBack: _onBack,
+        child: Scaffold(
         backgroundColor: AppColors.ink,
         body: SafeArea(
           child: Column(
@@ -115,7 +122,7 @@ class _AgentDetailsScreenState extends State<AgentDetailsScreen> {
                 ),
                 child: Align(
                   alignment: AlignmentDirectional.centerStart,
-                  child: AppBackButton(onBack: _back, semanticLabel: l10n.commonBack),
+                  child: AppBackButton(semanticLabel: l10n.commonBack),
                 ),
               ),
               Expanded(
@@ -138,6 +145,7 @@ class _AgentDetailsScreenState extends State<AgentDetailsScreen> {
             ],
           ),
         ),
+      ),
       ),
     );
   }

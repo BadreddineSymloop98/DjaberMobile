@@ -358,13 +358,60 @@ class L10nAr extends L10n {
   String get authSentTitle => 'تحقق من بريدك';
 
   @override
-  String get authSentMessage => 'أرسلنا رابط إعادة التعيين إلى';
+  String get authSentMessage =>
+      'إذا كان هناك حساب بهذا العنوان، فقد أُرسل إليه رابط إعادة التعيين للتو';
 
   @override
   String get authSentNoReceive => 'لم تستلم البريد؟';
 
   @override
   String get authSentTryAnother => 'جرّب عنوان بريد آخر';
+
+  @override
+  String get authSentResend => 'إعادة إرسال الرابط';
+
+  @override
+  String authSentResendIn(int seconds) {
+    return 'إعادة إرسال الرابط بعد $seconds ث';
+  }
+
+  @override
+  String get authSentResent => 'تم إرسال رابط جديد';
+
+  @override
+  String get authSentNextStep =>
+      'افتح الرابط الوارد في البريد لاختيار كلمة مرور جديدة.';
+
+  @override
+  String get authResetTitle => 'كلمة مرور جديدة';
+
+  @override
+  String get authResetSubtitle => 'اختر كلمة مرور جديدة لحسابك';
+
+  @override
+  String get authResetDeadSubtitle =>
+      'اطلب رابطًا جديدًا لإعادة تعيين كلمة المرور';
+
+  @override
+  String get authResetChecking => 'جارٍ التحقق من الرابط…';
+
+  @override
+  String get authResetPasswordLabel => 'كلمة المرور الجديدة';
+
+  @override
+  String get authResetConfirmLabel => 'تأكيد كلمة المرور';
+
+  @override
+  String get authErrPasswordMismatch => 'كلمتا المرور غير متطابقتين';
+
+  @override
+  String get authResetSubmit => 'حفظ كلمة المرور';
+
+  @override
+  String get authResetDone => 'تم تحديث كلمة المرور';
+
+  @override
+  String get authResetRequestNew => 'طلب رابط جديد';
 
   @override
   String get menuOverview => 'نظرة عامة';
@@ -570,6 +617,441 @@ class L10nAr extends L10n {
   String get stockMoveReturn => 'إرجاع';
 
   @override
+  String get settingsTitle => 'الإعدادات';
+
+  @override
+  String get settingsSubtitle => 'أدر حسابك وإعدادات التطبيق';
+
+  @override
+  String get settingsStockMode => 'إدارة المخزون';
+
+  @override
+  String get settingsLanguage => 'اللغة';
+
+  @override
+  String get settingsLanguageFrench => 'الفرنسية';
+
+  @override
+  String get settingsLanguageEnglish => 'الإنجليزية';
+
+  @override
+  String get settingsLanguageArabic => 'العربية';
+
+  @override
+  String get settingsLanguageHelp =>
+      'يبقى التطبيق باللغة التي تختارها، حتى لو تغيّرت لغة الهاتف.';
+
+  @override
+  String get planNameIndividual => 'فردي';
+
+  @override
+  String get planNamePro => 'احترافي';
+
+  @override
+  String get planNameTeams => 'فِرق';
+
+  @override
+  String get planDescIndividual =>
+      'للبدء: اربط صفحتك ودع الذكاء الاصطناعي يرد على عملائك.';
+
+  @override
+  String get planDescPro =>
+      'للبائعين النشطين: التعرّف على الصور، الرسائل الصوتية وحجم أكبر.';
+
+  @override
+  String get planDescTeams => 'للمتاجر الراسخة: أقصى حجم ودعم ذو أولوية.';
+
+  @override
+  String planFeaturePages(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count صفحة على فيسبوك / إنستغرام',
+      few: '$count صفحات على فيسبوك / إنستغرام',
+      two: 'صفحتان على فيسبوك / إنستغرام',
+      one: 'صفحة واحدة على فيسبوك أو إنستغرام',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String planFeatureCredits(String amount) {
+    return '$amount رصيد ذكاء اصطناعي / شهريًا';
+  }
+
+  @override
+  String planFeatureProducts(String amount) {
+    return '$amount منتج';
+  }
+
+  @override
+  String planFeatureDelivery(int count, String carriers) {
+    return 'التوصيل إلى $count ولاية ($carriers)';
+  }
+
+  @override
+  String get planFeatureAgentText => 'وكيل ذكاء اصطناعي 24/7 (نص)';
+
+  @override
+  String get planFeatureAgentFull => 'وكيل ذكاء اصطناعي 24/7 (نص + صور + صوت)';
+
+  @override
+  String get planFeatureStock => 'إدارة المخزون والطلبات';
+
+  @override
+  String get planFeatureCallConfirmation => 'تأكيد الطلبات بالاتصال الهاتفي';
+
+  @override
+  String get planFeatureVision => 'التعرّف على الصور (الرؤية)';
+
+  @override
+  String get planFeatureVoiceNotes => 'الرسائل الصوتية (تفريغ نصي)';
+
+  @override
+  String get planFeatureCrossSell =>
+      'البيع المتقاطع والبيع الإضافي بالذكاء الاصطناعي';
+
+  @override
+  String get planFeatureUnlimitedProducts => 'منتجات غير محدودة';
+
+  @override
+  String get planFeatureUnlimitedConversations => 'محادثات غير محدودة';
+
+  @override
+  String get planFeatureEverythingPro => 'جميع ميزات الخطة الاحترافية';
+
+  @override
+  String get planFeaturePrioritySupport => 'دعم ذو أولوية';
+
+  @override
+  String get settingsAccount => 'معلومات الحساب';
+
+  @override
+  String get settingsBilling => 'الخطة والفوترة';
+
+  @override
+  String get settingsCurrentPlan => 'الخطة الحالية';
+
+  @override
+  String get settingsMonthly => 'شهري';
+
+  @override
+  String get settingsYearly => 'سنوي';
+
+  @override
+  String get settingsFree => 'مجاني';
+
+  @override
+  String settingsPerMonth(String currency) {
+    return '$currency / شهر';
+  }
+
+  @override
+  String settingsPerYear(String currency) {
+    return '$currency / سنة';
+  }
+
+  @override
+  String get settingsBadgeCurrent => 'الحالية';
+
+  @override
+  String get settingsBadgePopular => 'الأكثر شيوعا';
+
+  @override
+  String get settingsYourPlan => 'خطتك الحالية';
+
+  @override
+  String get settingsFreeNoPayment => 'مجاني — لا حاجة للدفع';
+
+  @override
+  String settingsSubscribe(String price) {
+    return 'اشترك — $price';
+  }
+
+  @override
+  String get settingsRedirecting => 'جارٍ التحويل…';
+
+  @override
+  String get settingsVerifying => 'جارٍ التحقق من الدفع…';
+
+  @override
+  String get settingsNoPlans => 'لا توجد خطط متاحة حاليًا.';
+
+  @override
+  String settingsCheckoutPaid(String plan) {
+    return 'تم تأكيد الدفع — خطتك $plan مفعّلة.';
+  }
+
+  @override
+  String get settingsCheckoutPending =>
+      'لم يتم تأكيد الدفع بعد. إذا تمّ، ستُفعَّل خطتك قريبًا.';
+
+  @override
+  String get settingsCheckoutFailed => 'لم تتم عملية الدفع.';
+
+  @override
+  String get settingsFbTitle => 'صلاحيات واجهة فيسبوك';
+
+  @override
+  String get settingsFbActive => 'الصلاحيات المفعّلة حاليًا';
+
+  @override
+  String get settingsFbAvailable => 'الصلاحيات المتقدمة المتاحة';
+
+  @override
+  String get settingsFbReviewHint =>
+      'تحتاج هذه الصلاحيات إلى موافقة مراجعة تطبيق فيسبوك.';
+
+  @override
+  String get settingsDangerTitle => 'منطقة الخطر';
+
+  @override
+  String get settingsDeleteAccount => 'حذف الحساب';
+
+  @override
+  String get settingsDeleteHelp =>
+      'احذف حسابك وجميع البيانات المرتبطة به نهائيًا.';
+
+  @override
+  String get inboxTitle => 'البريد الوارد';
+
+  @override
+  String get inboxSubtitle => 'اقرأ ورد على رسائل عملائك.';
+
+  @override
+  String get inboxNoPagesTitle => 'لا توجد صفحات متصلة';
+
+  @override
+  String get inboxNoPagesBody =>
+      'اربط صفحة فيسبوك أو إنستغرام لتبدأ في استقبال الرسائل هنا.';
+
+  @override
+  String get inboxConnectPage => 'ربط صفحة';
+
+  @override
+  String get inboxPlatformMessenger => 'ماسنجر';
+
+  @override
+  String get inboxPlatformInstagram => 'رسائل إنستغرام';
+
+  @override
+  String inboxSynced(String time) {
+    return 'تمت المزامنة $time';
+  }
+
+  @override
+  String get inboxSwitchPage => 'تبديل الصفحة';
+
+  @override
+  String get inboxConnectAnother => 'ربط صفحة أخرى';
+
+  @override
+  String get inboxSync => 'مزامنة';
+
+  @override
+  String get inboxSyncing => 'جاري المزامنة…';
+
+  @override
+  String get inboxTabAll => 'الكل';
+
+  @override
+  String get inboxTabActive => 'نشطة';
+
+  @override
+  String get inboxTabResolved => 'منتهية';
+
+  @override
+  String get inboxTabArchived => 'مؤرشفة';
+
+  @override
+  String get inboxSearchHint => 'ابحث بالاسم أو الرسالة…';
+
+  @override
+  String get inboxNoMatches => 'لا توجد نتائج';
+
+  @override
+  String get inboxNoConversations => 'لا توجد محادثات بعد';
+
+  @override
+  String get inboxNothingHere => 'لا شيء في هذا العرض';
+
+  @override
+  String get inboxPullFromFacebook => 'سحب من فيسبوك';
+
+  @override
+  String get inboxUpToDate => 'محدّث';
+
+  @override
+  String inboxSyncedCount(int n) {
+    return 'تمت المزامنة — $n رسالة جديدة';
+  }
+
+  @override
+  String get inboxAttachment => 'مرفق';
+
+  @override
+  String get inboxEmptyMessage => 'رسالة فارغة';
+
+  @override
+  String get inboxAiPaused => 'الذكاء الاصطناعي متوقف';
+
+  @override
+  String get inboxStatusActive => 'نشطة';
+
+  @override
+  String get inboxStatusResolved => 'منتهية';
+
+  @override
+  String get inboxStatusArchived => 'مؤرشفة';
+
+  @override
+  String get inboxTimeNow => 'الآن';
+
+  @override
+  String inboxTimeMinutes(int n) {
+    return '$n د';
+  }
+
+  @override
+  String inboxTimeHours(int n) {
+    return '$n س';
+  }
+
+  @override
+  String get conversationMarkResolved => 'وضع علامة منتهي';
+
+  @override
+  String get conversationArchive => 'أرشفة المحادثة';
+
+  @override
+  String get conversationReopen => 'إعادة فتح';
+
+  @override
+  String get conversationResumeAi => 'إعادة تشغيل الذكاء الاصطناعي';
+
+  @override
+  String get conversationPausedNotice =>
+      'لم يعد الوكيل يرد على هذا العميل. رد عليه هنا.';
+
+  @override
+  String get conversationReplyHint => 'اكتب ردك…';
+
+  @override
+  String get conversationSend => 'إرسال';
+
+  @override
+  String get conversationSending => 'جاري الإرسال…';
+
+  @override
+  String get conversationReopenHint => 'أعد فتح هذه المحادثة للرد.';
+
+  @override
+  String get conversationEmpty => 'لا توجد رسائل بعد';
+
+  @override
+  String get conversationResolvedToast => 'تم وضع علامة منتهي';
+
+  @override
+  String get conversationArchivedToast => 'تمت الأرشفة';
+
+  @override
+  String get conversationReopenedToast => 'تمت إعادة فتح المحادثة';
+
+  @override
+  String get conversationAiResumedToast => 'عاد الذكاء الاصطناعي للرد';
+
+  @override
+  String get conversationAuthorAi => 'الوكيل';
+
+  @override
+  String get conversationAuthorYou => 'أنت';
+
+  @override
+  String get productVariantsTitle => 'المتغيرات';
+
+  @override
+  String productVariantsTotal(int count) {
+    return 'إجمالي الكمية: $count';
+  }
+
+  @override
+  String get productVariantAdd => 'إضافة متغير';
+
+  @override
+  String get productVariantsEmpty =>
+      'لا توجد متغيرات. اضغط «إضافة متغير» لإنشاء واحد.';
+
+  @override
+  String get productVariantName => 'الاسم';
+
+  @override
+  String get productVariantNamePlaceholder => 'مثال: أحمر - L';
+
+  @override
+  String get productVariantSku => 'SKU';
+
+  @override
+  String get productVariantSkuPlaceholder => 'اختياري';
+
+  @override
+  String get productVariantCost => 'التكلفة';
+
+  @override
+  String get productVariantPrice => 'السعر';
+
+  @override
+  String get productVariantQuantity => 'الكمية';
+
+  @override
+  String get productVariantMinQuantity => 'الحد الأدنى';
+
+  @override
+  String get productVariantRemove => 'حذف المتغير';
+
+  @override
+  String get productVariantDuplicate => 'لا يمكن أن يكون لمتغيرين نفس الاسم';
+
+  @override
+  String get productVariantsRequired =>
+      'أضف متغيرًا واحدًا على الأقل، أو ألغِ تحديد الخانة.';
+
+  @override
+  String get productVariantsRetryHint =>
+      'تم إنشاء المنتج — سيتم إرسال المتغيرات المفقودة فقط.';
+
+  @override
+  String get productDetailEyebrow => 'تفاصيل المنتج';
+
+  @override
+  String get productDetailNoImages => 'لا توجد صور';
+
+  @override
+  String get productDetailCost => 'سعر التكلفة';
+
+  @override
+  String get productDetailSelling => 'سعر البيع';
+
+  @override
+  String get productDetailProfit => 'الربح / الهامش';
+
+  @override
+  String get productDetailInStock => 'في المخزون';
+
+  @override
+  String get productDetailStatus => 'الحالة';
+
+  @override
+  String get productDetailActive => 'نشط';
+
+  @override
+  String get productDetailInactive => 'غير نشط';
+
+  @override
+  String productDetailVariants(int count) {
+    return 'المتغيرات ($count)';
+  }
+
+  @override
   String get tutorialProductTitle => 'منتجك الأول';
 
   @override
@@ -667,6 +1149,19 @@ class L10nAr extends L10n {
   @override
   String productsThreshold(int count) {
     return 'الحد $count';
+  }
+
+  @override
+  String productsVariantCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count متغير',
+      few: '$count متغيرات',
+      two: 'متغيران',
+      one: 'متغير واحد',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1704,6 +2199,27 @@ class L10nAr extends L10n {
   String agentFormLeaveBody(String name) {
     return 'ستفقد تعديلاتك على $name.';
   }
+
+  @override
+  String get productFormLeaveBody => 'سيُفقد المنتج الذي بدأته.';
+
+  @override
+  String get conversationLeaveBody => 'سيُفقد ردك غير المرسل.';
+
+  @override
+  String get agentDetailsLeaveBody => 'ستُفقد تعديلاتك على التعليمات.';
+
+  @override
+  String get agentGenerateLeaveBody => 'سيتم تجاهل الوكيل المُنشأ.';
+
+  @override
+  String get tutorialAgentLeaveBody => 'سيُفقد الوكيل الذي بدأته.';
+
+  @override
+  String get checkoutLeaveTitle => 'مغادرة صفحة الدفع؟';
+
+  @override
+  String get checkoutLeaveBody => 'لم يكتمل الدفع بعد.';
 
   @override
   String get agentFormKeepEditing => 'مواصلة التعديل';

@@ -10,6 +10,7 @@ import 'package:djaber_mobile/data/repositories/page_repository.dart';
 import 'package:djaber_mobile/data/repositories/product_repository.dart';
 import 'package:djaber_mobile/l10n/gen/app_localizations.dart';
 import 'package:djaber_mobile/presentation/screens/pages/pages_screen.dart';
+import 'package:djaber_mobile/presentation/screens/products/products_screen.dart';
 import 'package:djaber_mobile/presentation/theme/app_colors.dart';
 import 'package:djaber_mobile/presentation/theme/app_theme.dart';
 import 'package:djaber_mobile/presentation/viewmodels/locale_view_model.dart';
@@ -220,8 +221,9 @@ void main() {
       // `17 — Produits` exists, so this card is a real destination. The rule
       // this group exists for still holds — and holds better: the standalone
       // screen is *why* the card does not have to reach the tutorial's own
-      // product step.
-      expect(location(), Routes.products);
+      // product step. Pushed, not `go`, so back returns home: the router's
+      // location stays home underneath, so look for the screen.
+      expect(find.byType(ProductsScreen), findsOneWidget);
       expect(location().startsWith(Routes.tutorial), isFalse);
     });
 

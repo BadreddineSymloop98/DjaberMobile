@@ -5,6 +5,7 @@ import '../../../l10n/gen/app_localizations.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/app_spacing.dart';
 import '../../theme/app_typography.dart';
+import '../../widgets/back_scope.dart';
 
 /// The chrome every tutorial **step** shares — `T2` through `T5`.
 ///
@@ -44,7 +45,19 @@ class TutorialStepScaffold extends StatelessWidget {
     required this.child,
     required this.footer,
     this.totalSteps = stepCount,
+    this.busy = false,
+    this.dirty = false,
+    this.onLeave,
   });
+
+  /// A request is in flight, or the step is moving on after one succeeded:
+  /// back is ignored. See the comment in [build].
+  final bool busy;
+
+  /// The step holds typed values that back would lose, and [onLeave] confirms
+  /// before letting it go on. Only `T4` uses it, where back leaves the app.
+  final bool dirty;
+  final Future<bool> Function()? onLeave;
 
   /// The four steps the tutorial performs: mode, product, agent, page.
   static const stepCount = 4;
@@ -68,22 +81,19 @@ class TutorialStepScaffold extends StatelessWidget {
     final l10n = L10n.of(context);
     final gutter = EdgeInsets.symmetric(horizontal: AppSpacing.gutter);
 
-    // Back does nothing on a step.
+    // Where back goes on a step is declared on its route in `router.dart`:
+    // `T2` and `T3` go back one step (nothing has been created on them), `T4`
+    // and `T5` are roots that ask before leaving, because the step below each
+    // is spent (a second product, a 403 on a second agent). Steps are reached
+    // with `go`, so there is never a route below to pop.
     //
-    // Every step is reached with `context.go`, which *replaces* the route
-    // rather than pushing, so the navigator has nothing to pop and the pop
-    // reaches Android — which closes the app. On `T3` that means a merchant
-    // who has just typed six fields loses all of them and relaunches into the
-    // intro, which reads as a crash. Back is the most-pressed control on
-    // Android and is routinely used to dismiss a keyboard, so this is not an
-    // edge case on the hardware in brief §9.
-    //
-    // Swallowed rather than sent backwards: the tutorial is mandatory, so
-    // there is nowhere to go, and returning from `T4` to `T3` would invite
-    // creating a second product. `Connecter plus tard` on `T5` remains the
-    // only way out.
-    return PopScope(
-      canPop: false,
+    // What the scaffold adds is [busy]: while a step's request is in flight,
+    // or while it moves on after one succeeded, back is ignored, so a record
+    // is never left half-written and a created step is never walked back.
+    final leave = onLeave;
+    return BackIntercept(
+      active: busy || (dirty && leave != null),
+      onBack: () async => !busy && (leave == null || await leave()),
       child: Scaffold(
         backgroundColor: AppColors.ink,
         resizeToAvoidBottomInset: true,

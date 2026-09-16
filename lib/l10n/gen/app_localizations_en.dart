@@ -359,13 +359,60 @@ class L10nEn extends L10n {
   String get authSentTitle => 'Check Your Email';
 
   @override
-  String get authSentMessage => 'We’ve sent a password reset link to';
+  String get authSentMessage =>
+      'If an account exists for this address, a reset link has just been sent to it';
 
   @override
   String get authSentNoReceive => 'Didn’t receive the email?';
 
   @override
   String get authSentTryAnother => 'Try another email address';
+
+  @override
+  String get authSentResend => 'Resend link';
+
+  @override
+  String authSentResendIn(int seconds) {
+    return 'Resend link in ${seconds}s';
+  }
+
+  @override
+  String get authSentResent => 'A new link has been sent';
+
+  @override
+  String get authSentNextStep =>
+      'Open the link in the e-mail to choose a new password.';
+
+  @override
+  String get authResetTitle => 'New Password';
+
+  @override
+  String get authResetSubtitle => 'Choose a new password for your account';
+
+  @override
+  String get authResetDeadSubtitle =>
+      'Request a new link to reset your password';
+
+  @override
+  String get authResetChecking => 'Checking the link…';
+
+  @override
+  String get authResetPasswordLabel => 'New password';
+
+  @override
+  String get authResetConfirmLabel => 'Confirm password';
+
+  @override
+  String get authErrPasswordMismatch => 'Passwords don’t match';
+
+  @override
+  String get authResetSubmit => 'Save password';
+
+  @override
+  String get authResetDone => 'Password updated';
+
+  @override
+  String get authResetRequestNew => 'Request a new link';
 
   @override
   String get menuOverview => 'Overview';
@@ -571,6 +618,446 @@ class L10nEn extends L10n {
   String get stockMoveReturn => 'Return';
 
   @override
+  String get settingsTitle => 'Settings';
+
+  @override
+  String get settingsSubtitle => 'Manage your account and application settings';
+
+  @override
+  String get settingsStockMode => 'Stock management';
+
+  @override
+  String get settingsLanguage => 'Language';
+
+  @override
+  String get settingsLanguageFrench => 'French';
+
+  @override
+  String get settingsLanguageEnglish => 'English';
+
+  @override
+  String get settingsLanguageArabic => 'Arabic';
+
+  @override
+  String get settingsLanguageHelp =>
+      'The app stays in the language you choose, even if your phone\'s language changes.';
+
+  @override
+  String get planNameIndividual => 'Individual';
+
+  @override
+  String get planNamePro => 'Pro';
+
+  @override
+  String get planNameTeams => 'Teams';
+
+  @override
+  String get planDescIndividual =>
+      'To get started: connect your page and let the AI answer your customers.';
+
+  @override
+  String get planDescPro =>
+      'For active sellers: vision, voice notes and more volume.';
+
+  @override
+  String get planDescTeams =>
+      'For established shops: maximum volume and priority support.';
+
+  @override
+  String planFeaturePages(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Facebook / Instagram pages',
+      one: '1 Facebook or Instagram page',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String planFeatureCredits(String amount) {
+    return '$amount AI credits / month';
+  }
+
+  @override
+  String planFeatureProducts(String amount) {
+    return '$amount products';
+  }
+
+  @override
+  String planFeatureDelivery(int count, String carriers) {
+    return 'Delivery to $count wilayas ($carriers)';
+  }
+
+  @override
+  String get planFeatureAgentText => '24/7 AI agent (text)';
+
+  @override
+  String get planFeatureAgentFull => '24/7 AI agent (text + images + voice)';
+
+  @override
+  String get planFeatureStock => 'Stock & order management';
+
+  @override
+  String get planFeatureCallConfirmation => 'Order confirmation by phone call';
+
+  @override
+  String get planFeatureVision => 'Image recognition (vision)';
+
+  @override
+  String get planFeatureVoiceNotes => 'Voice notes (transcription)';
+
+  @override
+  String get planFeatureCrossSell => 'AI cross-sell / up-sell';
+
+  @override
+  String get planFeatureUnlimitedProducts => 'Unlimited products';
+
+  @override
+  String get planFeatureUnlimitedConversations => 'Unlimited conversations';
+
+  @override
+  String get planFeatureEverythingPro => 'Everything in Pro';
+
+  @override
+  String get planFeaturePrioritySupport => 'Priority support';
+
+  @override
+  String get settingsAccount => 'Account information';
+
+  @override
+  String get settingsBilling => 'Plan & billing';
+
+  @override
+  String get settingsCurrentPlan => 'Current plan';
+
+  @override
+  String get settingsMonthly => 'Monthly';
+
+  @override
+  String get settingsYearly => 'Yearly';
+
+  @override
+  String get settingsFree => 'Free';
+
+  @override
+  String settingsPerMonth(String currency) {
+    return '$currency / mo';
+  }
+
+  @override
+  String settingsPerYear(String currency) {
+    return '$currency / yr';
+  }
+
+  @override
+  String get settingsBadgeCurrent => 'Current';
+
+  @override
+  String get settingsBadgePopular => 'Popular';
+
+  @override
+  String get settingsYourPlan => 'Your current plan';
+
+  @override
+  String get settingsFreeNoPayment => 'Free — no payment needed';
+
+  @override
+  String settingsSubscribe(String price) {
+    return 'Subscribe — $price';
+  }
+
+  @override
+  String get settingsRedirecting => 'Redirecting…';
+
+  @override
+  String get settingsVerifying => 'Verifying payment…';
+
+  @override
+  String get settingsNoPlans => 'No plans available yet.';
+
+  @override
+  String settingsCheckoutPaid(String plan) {
+    return 'Payment confirmed — your $plan plan is active.';
+  }
+
+  @override
+  String get settingsCheckoutPending =>
+      'Payment not confirmed yet. If it went through, your plan will be activated shortly.';
+
+  @override
+  String get settingsCheckoutFailed => 'The payment did not go through.';
+
+  @override
+  String get settingsFbTitle => 'Facebook API permissions';
+
+  @override
+  String get settingsFbActive => 'Currently active permissions';
+
+  @override
+  String get settingsFbAvailable => 'Available advanced permissions';
+
+  @override
+  String get settingsFbReviewHint =>
+      'These permissions require Facebook App Review approval.';
+
+  @override
+  String get settingsDangerTitle => 'Danger zone';
+
+  @override
+  String get settingsDeleteAccount => 'Delete account';
+
+  @override
+  String get settingsDeleteHelp =>
+      'Permanently delete your account and all associated data.';
+
+  @override
+  String get inboxTitle => 'Inbox';
+
+  @override
+  String get inboxSubtitle => 'Read and reply to your customer messages.';
+
+  @override
+  String get inboxNoPagesTitle => 'No pages connected';
+
+  @override
+  String get inboxNoPagesBody =>
+      'Connect a Facebook or Instagram page to start receiving messages here.';
+
+  @override
+  String get inboxConnectPage => 'Connect a page';
+
+  @override
+  String get inboxPlatformMessenger => 'Messenger';
+
+  @override
+  String get inboxPlatformInstagram => 'Instagram DMs';
+
+  @override
+  String inboxSynced(String time) {
+    return 'synced $time';
+  }
+
+  @override
+  String get inboxSwitchPage => 'Switch page';
+
+  @override
+  String get inboxConnectAnother => 'Connect another page';
+
+  @override
+  String get inboxSync => 'Sync';
+
+  @override
+  String get inboxSyncing => 'Syncing…';
+
+  @override
+  String get inboxTabAll => 'All';
+
+  @override
+  String get inboxTabActive => 'Active';
+
+  @override
+  String get inboxTabResolved => 'Done';
+
+  @override
+  String get inboxTabArchived => 'Archived';
+
+  @override
+  String get inboxSearchHint => 'Search by name or message…';
+
+  @override
+  String get inboxNoMatches => 'No matches';
+
+  @override
+  String get inboxNoConversations => 'No conversations yet';
+
+  @override
+  String get inboxNothingHere => 'Nothing in this view';
+
+  @override
+  String get inboxPullFromFacebook => 'Pull from Facebook';
+
+  @override
+  String get inboxUpToDate => 'Up to date';
+
+  @override
+  String inboxSyncedCount(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'Synced — $n new messages',
+      one: 'Synced — 1 new message',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get inboxAttachment => 'Attachment';
+
+  @override
+  String get inboxEmptyMessage => 'Empty message';
+
+  @override
+  String get inboxAiPaused => 'AI paused';
+
+  @override
+  String get inboxStatusActive => 'Active';
+
+  @override
+  String get inboxStatusResolved => 'Resolved';
+
+  @override
+  String get inboxStatusArchived => 'Archived';
+
+  @override
+  String get inboxTimeNow => 'now';
+
+  @override
+  String inboxTimeMinutes(int n) {
+    return '${n}m';
+  }
+
+  @override
+  String inboxTimeHours(int n) {
+    return '${n}h';
+  }
+
+  @override
+  String get conversationMarkResolved => 'Mark resolved';
+
+  @override
+  String get conversationArchive => 'Archive conversation';
+
+  @override
+  String get conversationReopen => 'Reopen';
+
+  @override
+  String get conversationResumeAi => 'Resume the AI';
+
+  @override
+  String get conversationPausedNotice =>
+      'The agent no longer replies to this customer. Reply here.';
+
+  @override
+  String get conversationReplyHint => 'Type your reply…';
+
+  @override
+  String get conversationSend => 'Send';
+
+  @override
+  String get conversationSending => 'Sending…';
+
+  @override
+  String get conversationReopenHint => 'Reopen this conversation to reply.';
+
+  @override
+  String get conversationEmpty => 'No messages yet';
+
+  @override
+  String get conversationResolvedToast => 'Marked as resolved';
+
+  @override
+  String get conversationArchivedToast => 'Archived';
+
+  @override
+  String get conversationReopenedToast => 'Conversation reopened';
+
+  @override
+  String get conversationAiResumedToast => 'The AI is replying again';
+
+  @override
+  String get conversationAuthorAi => 'AI';
+
+  @override
+  String get conversationAuthorYou => 'You';
+
+  @override
+  String get productVariantsTitle => 'Variants';
+
+  @override
+  String productVariantsTotal(int count) {
+    return 'Total qty: $count';
+  }
+
+  @override
+  String get productVariantAdd => 'Add variant';
+
+  @override
+  String get productVariantsEmpty =>
+      'No variants. Tap “Add variant” to create one.';
+
+  @override
+  String get productVariantName => 'Name';
+
+  @override
+  String get productVariantNamePlaceholder => 'e.g., Red - Large';
+
+  @override
+  String get productVariantSku => 'SKU';
+
+  @override
+  String get productVariantSkuPlaceholder => 'Optional SKU';
+
+  @override
+  String get productVariantCost => 'Cost';
+
+  @override
+  String get productVariantPrice => 'Price';
+
+  @override
+  String get productVariantQuantity => 'Qty';
+
+  @override
+  String get productVariantMinQuantity => 'Min qty';
+
+  @override
+  String get productVariantRemove => 'Remove variant';
+
+  @override
+  String get productVariantDuplicate =>
+      'Two variants cannot have the same name';
+
+  @override
+  String get productVariantsRequired =>
+      'Add at least one variant, or untick the box.';
+
+  @override
+  String get productVariantsRetryHint =>
+      'The product is created — only the missing variants will be sent again.';
+
+  @override
+  String get productDetailEyebrow => 'PRODUCT DETAILS';
+
+  @override
+  String get productDetailNoImages => 'No images';
+
+  @override
+  String get productDetailCost => 'Cost price';
+
+  @override
+  String get productDetailSelling => 'Selling price';
+
+  @override
+  String get productDetailProfit => 'Profit / margin';
+
+  @override
+  String get productDetailInStock => 'In stock';
+
+  @override
+  String get productDetailStatus => 'Status';
+
+  @override
+  String get productDetailActive => 'Active';
+
+  @override
+  String get productDetailInactive => 'Inactive';
+
+  @override
+  String productDetailVariants(int count) {
+    return 'Variants ($count)';
+  }
+
+  @override
   String get tutorialProductTitle => 'Your first product';
 
   @override
@@ -666,6 +1153,17 @@ class L10nEn extends L10n {
   @override
   String productsThreshold(int count) {
     return 'THRESHOLD $count';
+  }
+
+  @override
+  String productsVariantCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count VARIANTS',
+      one: '1 VARIANT',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1702,6 +2200,28 @@ class L10nEn extends L10n {
   String agentFormLeaveBody(String name) {
     return 'Your changes to $name will be lost.';
   }
+
+  @override
+  String get productFormLeaveBody => 'The product you started will be lost.';
+
+  @override
+  String get conversationLeaveBody => 'Your unsent reply will be lost.';
+
+  @override
+  String get agentDetailsLeaveBody =>
+      'Your changes to the instructions will be lost.';
+
+  @override
+  String get agentGenerateLeaveBody => 'The generated agent will be discarded.';
+
+  @override
+  String get tutorialAgentLeaveBody => 'The agent you started will be lost.';
+
+  @override
+  String get checkoutLeaveTitle => 'Leave the payment page?';
+
+  @override
+  String get checkoutLeaveBody => 'Your payment is not finished.';
 
   @override
   String get agentFormKeepEditing => 'Keep editing';

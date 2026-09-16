@@ -10,6 +10,7 @@ import '../core/storage/prefs_storage.dart';
 import '../core/storage/secure_storage.dart';
 import '../data/repositories/agent_repository.dart';
 import '../data/repositories/auth_repository.dart';
+import '../data/repositories/billing_repository.dart';
 import '../data/repositories/catalogue_repository.dart';
 import '../data/repositories/dashboard_repository.dart';
 import '../data/repositories/notification_repository.dart';
@@ -86,6 +87,10 @@ class AppProviders {
       Provider<NotificationRepository>(
         create: (context) =>
             NotificationRepository(api: context.read<ApiClient>()),
+      ),
+      // Plans and checkout — `11 — Paramètres`.
+      Provider<BillingRepository>(
+        create: (context) => BillingRepository(api: context.read<ApiClient>()),
       ),
       Provider<AuthRepository>(
         create: (context) => AuthRepository(

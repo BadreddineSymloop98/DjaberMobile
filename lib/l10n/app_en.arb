@@ -157,9 +157,39 @@
   "authForgotSecure": "Your password reset link is encrypted and expires in 1 hour",
   "authForgotRemember": "Remember your password?",
   "authSentTitle": "Check Your Email",
-  "authSentMessage": "We’ve sent a password reset link to",
+  "authSentMessage": "If an account exists for this address, a reset link has just been sent to it",
+  "@authSentMessage": {
+    "description": "Neutral on purpose: POST /api/auth/forgot-password answers the same whether or not the account exists. Diverges from the web's 'We’ve sent a password reset link to'."
+  },
   "authSentNoReceive": "Didn’t receive the email?",
   "authSentTryAnother": "Try another email address",
+  "authSentResend": "Resend link",
+  "authSentResendIn": "Resend link in {seconds}s",
+  "@authSentResendIn": {
+    "description": "Countdown before resend is offered: the server sends nothing new within 60 seconds of the last request.",
+    "placeholders": { "seconds": { "type": "int" } }
+  },
+  "authSentResent": "A new link has been sent",
+  "authSentNextStep": "Open the link in the e-mail to choose a new password.",
+  "@authSentNextStep": {
+    "description": "08: the reset happens through the e-mail's link (the web page, or the app when Android hands the link over). Nothing on this screen leads to the reset."
+  },
+  "authResetTitle": "New Password",
+  "@authResetTitle": {
+    "description": "08b — the reset screen, opened only by the e-mail's link handed to the app (App Link or the web page's intent)."
+  },
+  "authResetSubtitle": "Choose a new password for your account",
+  "authResetDeadSubtitle": "Request a new link to reset your password",
+  "authResetChecking": "Checking the link…",
+  "authResetPasswordLabel": "New password",
+  "authResetConfirmLabel": "Confirm password",
+  "@authResetConfirmLabel": {
+    "description": "08b: the new password is typed twice; the button stays disabled until both match."
+  },
+  "authErrPasswordMismatch": "Passwords don’t match",
+  "authResetSubmit": "Save password",
+  "authResetDone": "Password updated",
+  "authResetRequestNew": "Request a new link",
   "@_backendErrors": {
     "description": "Field-level rules the CLIENT checks before a request goes out — empty input, malformed e-mail, short password. The server-side equivalents are NOT here any more: since the error contract (brief §24) the backend sends its own translated message and a stable code, so the app displays that instead of choosing copy. Do not add keys here for anything the server can answer."
   },
@@ -191,7 +221,7 @@
   },
   "exitHint": "Tap back again to leave",
   "@exitHint": {
-    "description": "First press of the system back button on a screen that would otherwise close the app. Ours, unapproved."
+    "description": "First press of the system back button on a root screen (home, login, onboarding, tutorial roots), where back would otherwise close the app. Root screens only. Ours, unapproved."
   },
   "menuPages": "Pages",
   "@menuPages": {
@@ -279,6 +309,192 @@
   "stockMoveOut": "Out",
   "stockMoveAdjustment": "Adjustment",
   "stockMoveReturn": "Return",
+  "settingsTitle": "Settings",
+  "settingsSubtitle": "Manage your account and application settings",
+  "settingsStockMode": "Stock management",
+  "settingsLanguage": "Language",
+  "@settingsLanguage": {
+    "description": "Settings section title for the interface language. The three options show each language's own name, with this locale's name for it underneath."
+  },
+  "settingsLanguageFrench": "French",
+  "settingsLanguageEnglish": "English",
+  "settingsLanguageArabic": "Arabic",
+  "settingsLanguageHelp": "The app stays in the language you choose, even if your phone's language changes.",
+  "@settingsLanguageHelp": {
+    "description": "Under the three language options: a chosen language is kept and the phone's system language is no longer followed."
+  },
+  "planNameIndividual": "Individual",
+  "@planNameIndividual": {
+    "description": "Plan names, descriptions and features: GET /api/plans sends French admin text and ignores Accept-Language, so the app translates the texts it recognises (plan_copy.dart). Unrecognised server text is shown as sent."
+  },
+  "planNamePro": "Pro",
+  "planNameTeams": "Teams",
+  "planDescIndividual": "To get started: connect your page and let the AI answer your customers.",
+  "planDescPro": "For active sellers: vision, voice notes and more volume.",
+  "planDescTeams": "For established shops: maximum volume and priority support.",
+  "planFeaturePages": "{count, plural, =1{1 Facebook or Instagram page} other{{count} Facebook / Instagram pages}}",
+  "@planFeaturePages": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "planFeatureCredits": "{amount} AI credits / month",
+  "@planFeatureCredits": {
+    "description": "amount is already grouped for the locale (5 000).",
+    "placeholders": { "amount": { "type": "String" } }
+  },
+  "planFeatureProducts": "{amount} products",
+  "@planFeatureProducts": {
+    "placeholders": { "amount": { "type": "String" } }
+  },
+  "planFeatureDelivery": "Delivery to {count} wilayas ({carriers})",
+  "@planFeatureDelivery": {
+    "description": "carriers are brand names from the server (Yalidine, ZR Express, Maystro), not translated.",
+    "placeholders": { "count": { "type": "int" }, "carriers": { "type": "String" } }
+  },
+  "planFeatureAgentText": "24/7 AI agent (text)",
+  "planFeatureAgentFull": "24/7 AI agent (text + images + voice)",
+  "planFeatureStock": "Stock & order management",
+  "planFeatureCallConfirmation": "Order confirmation by phone call",
+  "planFeatureVision": "Image recognition (vision)",
+  "planFeatureVoiceNotes": "Voice notes (transcription)",
+  "planFeatureCrossSell": "AI cross-sell / up-sell",
+  "planFeatureUnlimitedProducts": "Unlimited products",
+  "planFeatureUnlimitedConversations": "Unlimited conversations",
+  "planFeatureEverythingPro": "Everything in Pro",
+  "planFeaturePrioritySupport": "Priority support",
+  "settingsAccount": "Account information",
+  "settingsBilling": "Plan & billing",
+  "settingsCurrentPlan": "Current plan",
+  "settingsMonthly": "Monthly",
+  "settingsYearly": "Yearly",
+  "settingsFree": "Free",
+  "settingsPerMonth": "{currency} / mo",
+  "@settingsPerMonth": {
+    "placeholders": { "currency": { "type": "String" } }
+  },
+  "settingsPerYear": "{currency} / yr",
+  "@settingsPerYear": {
+    "placeholders": { "currency": { "type": "String" } }
+  },
+  "settingsBadgeCurrent": "Current",
+  "settingsBadgePopular": "Popular",
+  "settingsYourPlan": "Your current plan",
+  "settingsFreeNoPayment": "Free — no payment needed",
+  "settingsSubscribe": "Subscribe — {price}",
+  "@settingsSubscribe": {
+    "description": "The plan card's button. {price} is the grouped amount and the plan's currency label, e.g. 2,900 DA.",
+    "placeholders": { "price": { "type": "String" } }
+  },
+  "settingsRedirecting": "Redirecting…",
+  "settingsVerifying": "Verifying payment…",
+  "settingsNoPlans": "No plans available yet.",
+  "settingsCheckoutPaid": "Payment confirmed — your {plan} plan is active.",
+  "@settingsCheckoutPaid": {
+    "placeholders": { "plan": { "type": "String" } }
+  },
+  "settingsCheckoutPending": "Payment not confirmed yet. If it went through, your plan will be activated shortly.",
+  "settingsCheckoutFailed": "The payment did not go through.",
+  "settingsFbTitle": "Facebook API permissions",
+  "settingsFbActive": "Currently active permissions",
+  "settingsFbAvailable": "Available advanced permissions",
+  "settingsFbReviewHint": "These permissions require Facebook App Review approval.",
+  "settingsDangerTitle": "Danger zone",
+  "settingsDeleteAccount": "Delete account",
+  "settingsDeleteHelp": "Permanently delete your account and all associated data.",
+  "inboxTitle": "Inbox",
+  "inboxSubtitle": "Read and reply to your customer messages.",
+  "inboxNoPagesTitle": "No pages connected",
+  "inboxNoPagesBody": "Connect a Facebook or Instagram page to start receiving messages here.",
+  "inboxConnectPage": "Connect a page",
+  "inboxPlatformMessenger": "Messenger",
+  "inboxPlatformInstagram": "Instagram DMs",
+  "inboxSynced": "synced {time}",
+  "@inboxSynced": {
+    "placeholders": { "time": { "type": "String" } }
+  },
+  "inboxSwitchPage": "Switch page",
+  "inboxConnectAnother": "Connect another page",
+  "inboxSync": "Sync",
+  "inboxSyncing": "Syncing…",
+  "inboxTabAll": "All",
+  "inboxTabActive": "Active",
+  "inboxTabResolved": "Done",
+  "inboxTabArchived": "Archived",
+  "inboxSearchHint": "Search by name or message…",
+  "inboxNoMatches": "No matches",
+  "inboxNoConversations": "No conversations yet",
+  "inboxNothingHere": "Nothing in this view",
+  "inboxPullFromFacebook": "Pull from Facebook",
+  "inboxUpToDate": "Up to date",
+  "inboxSyncedCount": "{n, plural, =1{Synced — 1 new message} other{Synced — {n} new messages}}",
+  "@inboxSyncedCount": {
+    "placeholders": { "n": { "type": "int" } }
+  },
+  "inboxAttachment": "Attachment",
+  "inboxEmptyMessage": "Empty message",
+  "inboxAiPaused": "AI paused",
+  "@inboxAiPaused": {
+    "description": "Mobile addition, not on the web inbox: the AI handed the conversation over (Conversation.aiPaused)."
+  },
+  "inboxStatusActive": "Active",
+  "inboxStatusResolved": "Resolved",
+  "inboxStatusArchived": "Archived",
+  "inboxTimeNow": "now",
+  "inboxTimeMinutes": "{n}m",
+  "@inboxTimeMinutes": {
+    "placeholders": { "n": { "type": "int" } }
+  },
+  "inboxTimeHours": "{n}h",
+  "@inboxTimeHours": {
+    "placeholders": { "n": { "type": "int" } }
+  },
+  "conversationMarkResolved": "Mark resolved",
+  "conversationArchive": "Archive conversation",
+  "conversationReopen": "Reopen",
+  "conversationResumeAi": "Resume the AI",
+  "conversationPausedNotice": "The agent no longer replies to this customer. Reply here.",
+  "conversationReplyHint": "Type your reply…",
+  "conversationSend": "Send",
+  "conversationSending": "Sending…",
+  "conversationReopenHint": "Reopen this conversation to reply.",
+  "conversationEmpty": "No messages yet",
+  "conversationResolvedToast": "Marked as resolved",
+  "conversationArchivedToast": "Archived",
+  "conversationReopenedToast": "Conversation reopened",
+  "conversationAiResumedToast": "The AI is replying again",
+  "conversationAuthorAi": "AI",
+  "conversationAuthorYou": "You",
+  "productVariantsTitle": "Variants",
+  "productVariantsTotal": "Total qty: {count}",
+  "@productVariantsTotal": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "productVariantAdd": "Add variant",
+  "productVariantsEmpty": "No variants. Tap “Add variant” to create one.",
+  "productVariantName": "Name",
+  "productVariantNamePlaceholder": "e.g., Red - Large",
+  "productVariantSku": "SKU",
+  "productVariantSkuPlaceholder": "Optional SKU",
+  "productVariantCost": "Cost",
+  "productVariantPrice": "Price",
+  "productVariantQuantity": "Qty",
+  "productVariantMinQuantity": "Min qty",
+  "productVariantRemove": "Remove variant",
+  "productVariantDuplicate": "Two variants cannot have the same name",
+  "productVariantsRequired": "Add at least one variant, or untick the box.",
+  "productVariantsRetryHint": "The product is created — only the missing variants will be sent again.",
+  "productDetailEyebrow": "PRODUCT DETAILS",
+  "productDetailNoImages": "No images",
+  "productDetailCost": "Cost price",
+  "productDetailSelling": "Selling price",
+  "productDetailProfit": "Profit / margin",
+  "productDetailInStock": "In stock",
+  "productDetailStatus": "Status",
+  "productDetailActive": "Active",
+  "productDetailInactive": "Inactive",
+  "productDetailVariants": "Variants ({count})",
+  "@productDetailVariants": {
+    "placeholders": { "count": { "type": "int" } }
+  },
 
   "@_product": {
     "description": "T3 — Produit. UNAPPROVED COPY: the web's product form labels are hardcoded English in src/app/dashboard/stock/products/page.tsx with no i18n.ts keys behind them, so there was nothing to source. The French is the Figma frame's own; English and Arabic are new. The error messages mirror what backend/src/controllers/user-stock.controller.ts actually enforces on createProduct."
@@ -326,6 +542,11 @@
   "productsThreshold": "THRESHOLD {count}",
   "@productsThreshold": {
     "description": "Shown on a row's meta line when the product has a low-stock threshold set. The number is the threshold, not the stock.",
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "productsVariantCount": "{count, plural, =1{1 VARIANT} other{{count} VARIANTS}}",
+  "@productsVariantCount": {
+    "description": "Shown on a row's meta line when the product has variants, like the web's 'N variants' badge next to the product name.",
     "placeholders": { "count": { "type": "int" } }
   },
   "productsEmptyTitle": "No products yet",
@@ -801,6 +1022,34 @@
     "placeholders": {
       "name": {"type": "String"}
     }
+  },
+  "productFormLeaveBody": "The product you started will be lost.",
+  "@productFormLeaveBody": {
+    "description": "Leave sheet body when backing out of a dirty Add product form. Ours, unapproved."
+  },
+  "conversationLeaveBody": "Your unsent reply will be lost.",
+  "@conversationLeaveBody": {
+    "description": "Leave sheet body when backing out of a conversation with text in the composer. Ours, unapproved."
+  },
+  "agentDetailsLeaveBody": "Your changes to the instructions will be lost.",
+  "@agentDetailsLeaveBody": {
+    "description": "Leave sheet body when backing out of agent details with unsaved instructions or a typed resolve instruction. Ours, unapproved."
+  },
+  "agentGenerateLeaveBody": "The generated agent will be discarded.",
+  "@agentGenerateLeaveBody": {
+    "description": "Leave sheet body when closing the generate-agent sheet on its preview. Ours, unapproved."
+  },
+  "tutorialAgentLeaveBody": "The agent you started will be lost.",
+  "@tutorialAgentLeaveBody": {
+    "description": "Leave sheet body when backing out of the app from tutorial step T4 with typed values. Ours, unapproved."
+  },
+  "checkoutLeaveTitle": "Leave the payment page?",
+  "@checkoutLeaveTitle": {
+    "description": "Leave sheet title before abandoning the Chargily checkout web view. Ours, unapproved."
+  },
+  "checkoutLeaveBody": "Your payment is not finished.",
+  "@checkoutLeaveBody": {
+    "description": "Leave sheet body before abandoning the Chargily checkout web view. Ours, unapproved."
   },
   "agentFormKeepEditing": "Keep editing",
   "agentFormLeave": "Leave without saving",

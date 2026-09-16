@@ -180,6 +180,56 @@ class ProductRepository {
     );
   }
 
+  /// `GET /api/user-stock/products/{id}` → `{ product }` — the web's Product
+  /// Details: category and unit, **every** image, **every** variant (active
+  /// and inactive, oldest first) and the last 10 movements. Read-only.
+  Future<Result<Product>> get(String productId) {
+    return _api.get<Product>(
+      Api.product(productId),
+      parse: (json) {
+        final map = json as Map<String, dynamic>;
+        final product = map['product'];
+        return Product.fromJson(product is Map<String, dynamic> ? product : map);
+      },
+    );
+  }
+
+  /// `POST /api/user-stock/products/{id}/variants` → **201** `{ variant }` —
+  /// the web's `createProductVariant`.
+  ///
+  /// Per the live docs, in one transaction the backend sets the product's
+  /// `hasVariants`, recomputes its quantity as the sum of the active variants,
+  /// and writes an `in` movement for [quantity] when it is above 0. `name` is
+  /// required and unique per product (a duplicate is a 400); `sku` is optional
+  /// and sent only when typed, as the web's `row.sku || undefined`. Numbers
+  /// are clamped to `>= 0` server-side, with no selling-above-cost rule.
+  Future<Result<ProductVariant>> createVariant({
+    required String productId,
+    required String name,
+    String? sku,
+    double costPrice = 0,
+    double sellingPrice = 0,
+    int quantity = 0,
+    int minQuantity = 0,
+  }) {
+    return _api.post<ProductVariant>(
+      Api.productVariants(productId),
+      body: {
+        'name': name.trim(),
+        if (sku != null && sku.trim().isNotEmpty) 'sku': sku.trim(),
+        'costPrice': costPrice,
+        'sellingPrice': sellingPrice,
+        'quantity': quantity,
+        'minQuantity': minQuantity,
+      },
+      parse: (json) {
+        final map = json as Map<String, dynamic>;
+        final variant = map['variant'];
+        return ProductVariant.fromJson(variant is Map<String, dynamic> ? variant : map);
+      },
+    );
+  }
+
   /// `POST /api/user-stock/products/{id}/images` → `{ images }`, multipart.
   ///
   /// Every photo goes under the **same** field name, `images`. Per the live

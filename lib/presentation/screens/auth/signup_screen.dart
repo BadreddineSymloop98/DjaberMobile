@@ -74,7 +74,8 @@ class _SignupView extends StatelessWidget {
           // Product-form rules; no validator on this form can produce them.
           FieldError.notANumber ||
           FieldError.mustBePositive ||
-          FieldError.belowCostPrice =>
+          FieldError.belowCostPrice ||
+          FieldError.mismatch =>
             l10n.authErrEmailRequired,
         };
 
@@ -86,7 +87,8 @@ class _SignupView extends StatelessWidget {
           // Product-form rules; no validator on this form can produce them.
           FieldError.notANumber ||
           FieldError.mustBePositive ||
-          FieldError.belowCostPrice =>
+          FieldError.belowCostPrice ||
+          FieldError.mismatch =>
             l10n.authErrPasswordRequired,
         };
 

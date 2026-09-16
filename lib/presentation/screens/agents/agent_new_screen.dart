@@ -23,7 +23,9 @@ import '../../widgets/api_error_message.dart';
 import '../../widgets/app_icon.dart';
 import '../../widgets/app_text_field.dart';
 import '../../widgets/app_toast.dart';
+import '../../widgets/back_scope.dart';
 import '../../widgets/icon_square_button.dart';
+import '../../widgets/leave_sheet.dart';
 import '../tutorial/tutorial_messages.dart';
 import 'agent_form_widgets.dart';
 import 'agent_widgets.dart' show compactButton;
@@ -89,56 +91,20 @@ class _AgentFormScreenState extends State<AgentFormScreen> {
     super.dispose();
   }
 
-  Future<void> _back() async {
-    if (_model.hasChanges && !await _confirmLeave()) return;
-    if (!mounted) return;
-    final router = GoRouter.of(context);
-    if (router.canPop()) {
-      router.pop();
-    } else {
-      router.go(_editing ? Routes.agentOf(widget.agentId!) : Routes.agentNew);
-    }
-  }
-
-  /// `15c.2`: leaving an edit with unsaved changes asks first. The web has no
-  /// such guard; on a phone a Back gesture is easy to fire and the form is long.
-  Future<bool> _confirmLeave() async {
+  /// `15b` / `15c.2`: leaving with unsaved changes asks first, in create mode
+  /// too, and a create or save in flight ignores back. The web has no such
+  /// guard; on a phone a Back gesture is easy to fire and the form is long.
+  /// Where back then lands (the screen below, or the route's parent) is the
+  /// route's [BackScope]'s business.
+  Future<bool> _onBack() async {
+    if (_model.isCreating) return false;
+    if (!_model.hasChanges) return true;
     final l10n = L10n.of(context);
     final name = _model.name.value.trim();
-    final leave = await showModalBottomSheet<bool>(
-      context: context,
-      backgroundColor: AppColors.surface,
-      barrierColor: AppColors.scrim,
-      builder: (sheet) => SafeArea(
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(AppSpacing.gutter, AppSpacing.xl, AppSpacing.gutter, AppSpacing.lg),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(l10n.agentFormLeaveTitle, style: AppText.title),
-              SizedBox(height: AppSpacing.xs),
-              Text(
-                l10n.agentFormLeaveBody(name.isEmpty ? l10n.agentsTitle : name),
-                style: AppText.bodyS.copyWith(color: AppColors.textMuted, height: 1.32),
-              ),
-              SizedBox(height: AppSpacing.xl),
-              FilledButton(
-                onPressed: () => Navigator.of(sheet).pop(false),
-                child: Text(l10n.agentFormKeepEditing),
-              ),
-              SizedBox(height: AppSpacing.sm),
-              TextButton(
-                style: TextButton.styleFrom(foregroundColor: AppColors.accentAlert),
-                onPressed: () => Navigator.of(sheet).pop(true),
-                child: Text(l10n.agentFormLeave),
-              ),
-            ],
-          ),
-        ),
-      ),
+    return showLeaveSheet(
+      context,
+      body: l10n.agentFormLeaveBody(name.isEmpty ? l10n.agentsTitle : name),
     );
-    return leave ?? false;
   }
 
   /// Back to where the form was opened from, telling it something changed.
@@ -199,11 +165,9 @@ class _AgentFormScreenState extends State<AgentFormScreen> {
         final m = _model;
         final ready = !_editing || m.isLoaded;
 
-        return PopScope(
-          canPop: !m.hasChanges,
-          onPopInvokedWithResult: (didPop, _) {
-            if (!didPop) _back();
-          },
+        return BackIntercept(
+          active: m.hasChanges || m.isCreating,
+          onBack: _onBack,
           child: Scaffold(
             backgroundColor: AppColors.ink,
             body: SafeArea(
@@ -214,7 +178,7 @@ class _AgentFormScreenState extends State<AgentFormScreen> {
                     padding: EdgeInsets.fromLTRB(AppSpacing.gutter, 0.47.h, AppSpacing.gutter, AppSpacing.lg),
                     child: Align(
                       alignment: AlignmentDirectional.centerStart,
-                      child: AppBackButton(onBack: _back, semanticLabel: l10n.commonBack),
+                      child: AppBackButton(semanticLabel: l10n.commonBack),
                     ),
                   ),
                   Expanded(

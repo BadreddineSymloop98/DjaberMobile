@@ -61,15 +61,6 @@ class _PagesScreenState extends State<PagesScreen> {
     super.dispose();
   }
 
-  void _back() {
-    final router = GoRouter.of(context);
-    if (router.canPop()) {
-      router.pop();
-    } else {
-      router.go(Routes.home);
-    }
-  }
-
   Future<void> _connect(PagePlatform platform) async {
     final url = await _model.startConnect(platform);
     if (!mounted) return;
@@ -204,7 +195,7 @@ class _PagesScreenState extends State<PagesScreen> {
                     padding: EdgeInsets.fromLTRB(AppSpacing.gutter, 0.47.h, AppSpacing.gutter, AppSpacing.lg),
                     child: Align(
                       alignment: AlignmentDirectional.centerStart,
-                      child: AppBackButton(onBack: _back, semanticLabel: l10n.commonBack),
+                      child: AppBackButton(semanticLabel: l10n.commonBack),
                     ),
                   ),
                   Expanded(
