@@ -15,7 +15,7 @@ String tutorialFieldMessage(FieldError error, L10n l10n) => switch (error) {
       FieldError.mustBePositive => l10n.productErrMustBePositive,
       FieldError.belowCostPrice => l10n.productErrBelowCost,
       // Auth-form rules; no validator on these forms produces them.
-      FieldError.invalidEmail || FieldError.tooShort => l10n.productErrRequired,
+      FieldError.invalidEmail || FieldError.tooShort || FieldError.mismatch => l10n.productErrRequired,
     };
 
 /// The message for a failed create — now just [apiErrorMessage].
