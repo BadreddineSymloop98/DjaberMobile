@@ -15,6 +15,18 @@ class Api {
   static const login = '/api/auth/login';
   static const register = '/api/auth/register';
   static const profile = '/api/auth/profile';
+
+  /// Password recovery. The e-mailed link is
+  /// `https://djaber.vercel.app/reset-password?token=<64 hex>`: the web app's
+  /// page, or `08b` when Android hands the link to the app.
+  static const forgotPassword = '/api/auth/forgot-password';
+  static const resetPassword = '/api/auth/reset-password';
+  static String resetPasswordToken(String token) => '/api/auth/reset-password/$token';
+
+  // ---- Plans & payments ----
+  static const plans = '/api/plans';
+  static const paymentsCheckout = '/api/payments/checkout';
+  static String paymentVerify(String checkoutId) => '/api/payments/verify/$checkoutId';
   // NOTE: the web ships a /forgot-password page but it calls nothing — there is
   // no reset endpoint on the backend yet. The mobile screen will need one built
   // before it can work.

@@ -16,6 +16,12 @@ class Routes {
   static const forgotPassword = '/forgot-password';
   static const passwordSent = '/password-sent';
 
+  /// `08b — Nouveau mot de passe`. **The same path as the e-mail's link**
+  /// (`https://djaber.vercel.app/reset-password?token=…`, or the web page's
+  /// `djaber://app/reset-password?token=…`), so Android hands it straight
+  /// here. Reached from nothing inside the app.
+  static const resetPassword = '/reset-password';
+
   // ---- The first-run tutorial (brief §21.5) ----
   //
   // Reached only after account creation, and only until it is finished or
@@ -61,6 +67,10 @@ class Routes {
   static const home = '/home';
   static const queue = '/queue';
   static const inbox = '/inbox';
+
+  /// The inbox on one page — a page card's *Boîte*. The shell still matches
+  /// [inbox], so the Boîte tab stays lit.
+  static String inboxFor(String pageId) => '$inbox?pageId=${Uri.encodeQueryComponent(pageId)}';
   static const stock = '/stock';
   static const orders = '/orders';
 
@@ -128,5 +138,6 @@ class Routes {
     signup,
     forgotPassword,
     passwordSent,
+    resetPassword,
   };
 }

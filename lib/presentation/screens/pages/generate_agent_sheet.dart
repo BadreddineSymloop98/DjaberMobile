@@ -15,6 +15,8 @@ import '../../widgets/api_error_message.dart';
 import '../../widgets/app_icon.dart';
 import '../../widgets/app_text_field.dart';
 import '../../widgets/app_toast.dart';
+import '../../widgets/back_scope.dart';
+import '../../widgets/leave_sheet.dart';
 import '../agents/agent_widgets.dart' show agentPersonalityLabel;
 
 /// The web's `GenerateAgentModal`, as a sheet: what it does → reading,
@@ -87,9 +89,17 @@ class _GenerateAgentSheetState extends State<_GenerateAgentSheet> {
         child: ListenableBuilder(
           // The instructions too, so the character count follows the typing.
           listenable: Listenable.merge([_model, _model.instructions]),
-          builder: (context, _) => PopScope(
-            // Not while applying: closing then would lose the result.
-            canPop: _model.phase != AgentGenPhase.applying,
+          // Standalone BackIntercept: a sheet is pageless, with no BackScope.
+          // Idle, reading, analysing or drafting: closes as before, since
+          // nothing exists to lose yet. Preview: asks, because the generated
+          // agent would be discarded. Applying: ignored, since closing then
+          // would lose the result.
+          builder: (context, _) => BackIntercept(
+            active: _model.phase == AgentGenPhase.preview ||
+                _model.phase == AgentGenPhase.applying,
+            onBack: () async =>
+                _model.phase == AgentGenPhase.preview &&
+                await showLeaveSheet(context, body: l10n.agentGenerateLeaveBody),
             child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -124,7 +134,10 @@ class _GenerateAgentSheetState extends State<_GenerateAgentSheet> {
                       ),
                     ),
                     IconButton(
-                      onPressed: _model.phase == AgentGenPhase.applying ? null : () => Navigator.of(context).pop(),
+                      // `maybePop`, so the × asks exactly when back does.
+                      onPressed: _model.phase == AgentGenPhase.applying
+                          ? null
+                          : () => Navigator.of(context).maybePop(),
                       tooltip: l10n.commonCancel,
                       icon: AppIcon(AppIcons.close, size: 5.13.w, color: AppColors.textMuted),
                     ),

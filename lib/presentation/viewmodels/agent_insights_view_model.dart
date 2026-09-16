@@ -45,6 +45,10 @@ class AgentInsightsViewModel extends BaseViewModel {
   /// The insight whose instruction field is open.
   String? get resolvingId => _resolvingId;
 
+  /// An instruction is being typed for an insight and not sent yet.
+  bool get hasUnsavedResolve =>
+      _resolvingId != null && instructionController.text.trim().isNotEmpty;
+
   String? _savingId;
 
   /// The insight being resolved or dismissed right now.

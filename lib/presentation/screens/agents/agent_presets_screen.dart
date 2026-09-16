@@ -15,6 +15,7 @@ import '../../viewmodels/agent_create_view_model.dart';
 import '../../widgets/api_error_message.dart';
 import '../../widgets/app_icon.dart';
 import '../../widgets/app_toast.dart';
+import '../../widgets/back_scope.dart';
 import '../../widgets/icon_square_button.dart';
 
 /// `15 — Agents · démarrer`: start with a ready-made agent, or from scratch.
@@ -41,15 +42,6 @@ class _AgentPresetsScreenState extends State<AgentPresetsScreen> {
   void dispose() {
     _model.dispose();
     super.dispose();
-  }
-
-  void _back() {
-    final router = GoRouter.of(context);
-    if (router.canPop()) {
-      router.pop();
-    } else {
-      router.go(Routes.agents);
-    }
   }
 
   /// Back to `14` once an agent exists. Popping, not `go`: `go` swaps the
@@ -95,7 +87,12 @@ class _AgentPresetsScreenState extends State<AgentPresetsScreen> {
 
     return ListenableBuilder(
       listenable: _model,
-      builder: (context, _) => Scaffold(
+      // Back is ignored while a preset create is in flight: leaving then
+      // would orphan the agent and skip the list's reload.
+      builder: (context, _) => BackIntercept(
+        active: _model.creatingKey != null,
+        onBack: () => false,
+        child: Scaffold(
         backgroundColor: AppColors.ink,
         body: SafeArea(
           child: Column(
@@ -105,7 +102,7 @@ class _AgentPresetsScreenState extends State<AgentPresetsScreen> {
                 padding: EdgeInsets.fromLTRB(AppSpacing.gutter, 0.47.h, AppSpacing.gutter, AppSpacing.lg),
                 child: Align(
                   alignment: AlignmentDirectional.centerStart,
-                  child: AppBackButton(onBack: _back, semanticLabel: l10n.commonBack),
+                  child: AppBackButton(semanticLabel: l10n.commonBack),
                 ),
               ),
               Expanded(
@@ -158,6 +155,7 @@ class _AgentPresetsScreenState extends State<AgentPresetsScreen> {
             ],
           ),
         ),
+      ),
       ),
     );
   }

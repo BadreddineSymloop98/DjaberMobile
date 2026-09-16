@@ -65,14 +65,12 @@ class _StockOverviewScreenState extends State<StockOverviewScreen> {
     super.dispose();
   }
 
-  /// A tab has nothing to pop to: back goes home, like the frame's arrow.
-  void _back() {
-    final router = GoRouter.of(context);
-    if (router.canPop()) {
-      router.pop();
-    } else {
-      router.go(Routes.home);
-    }
+  /// The frame's *Ajouter un produit*. Pushed, as from `17`, so back returns
+  /// here; a created product makes every figure and the movements stale.
+  Future<void> _addProduct() async {
+    final created = await GoRouter.of(context).push<bool>(Routes.productNew);
+    if (created != true || !mounted) return;
+    await _model.load();
   }
 
   void _setMode(StockModeViewModel? modes, StockMode mode) {
@@ -106,7 +104,7 @@ class _StockOverviewScreenState extends State<StockOverviewScreen> {
                 ),
                 child: Align(
                   alignment: AlignmentDirectional.centerStart,
-                  child: AppBackButton(onBack: _back, semanticLabel: l10n.commonBack),
+                  child: AppBackButton(semanticLabel: l10n.commonBack),
                 ),
               ),
               Expanded(
@@ -122,6 +120,19 @@ class _StockOverviewScreenState extends State<StockOverviewScreen> {
                       ..._content(context, l10n, mode),
                     ],
                   ),
+                ),
+              ),
+              // Pinned, as on `17`: the list above scrolls, the action does not.
+              Padding(
+                padding: EdgeInsets.fromLTRB(
+                  AppSpacing.gutter,
+                  AppSpacing.md, // 12
+                  AppSpacing.gutter,
+                  3.32.h, // 28
+                ),
+                child: FilledButton(
+                  onPressed: _addProduct,
+                  child: Text(l10n.productsAdd),
                 ),
               ),
             ],

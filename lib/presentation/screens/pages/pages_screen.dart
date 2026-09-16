@@ -61,15 +61,6 @@ class _PagesScreenState extends State<PagesScreen> {
     super.dispose();
   }
 
-  void _back() {
-    final router = GoRouter.of(context);
-    if (router.canPop()) {
-      router.pop();
-    } else {
-      router.go(Routes.home);
-    }
-  }
-
   Future<void> _connect(PagePlatform platform) async {
     final url = await _model.startConnect(platform);
     if (!mounted) return;
@@ -204,7 +195,7 @@ class _PagesScreenState extends State<PagesScreen> {
                     padding: EdgeInsets.fromLTRB(AppSpacing.gutter, 0.47.h, AppSpacing.gutter, AppSpacing.lg),
                     child: Align(
                       alignment: AlignmentDirectional.centerStart,
-                      child: AppBackButton(onBack: _back, semanticLabel: l10n.commonBack),
+                      child: AppBackButton(semanticLabel: l10n.commonBack),
                     ),
                   ),
                   Expanded(
@@ -307,8 +298,11 @@ class _PagesScreenState extends State<PagesScreen> {
             agentsKnown: model.agentsKnown,
             busy: model.busyPageId == page.id,
             enabled: model.busyPageId == null,
-            // The inbox tab; a page-filtered inbox is not built yet.
-            onInbox: () => GoRouter.of(context).go(Routes.inbox),
+            // The inbox tab, opened on this page. `go`, not `push`: /inbox is
+            // a shell tab, and pushing it from this root-navigator page would
+            // add a second shell match with the same navigator key. Back from
+            // the inbox therefore goes home, the tabs' parent.
+            onInbox: () => GoRouter.of(context).go(Routes.inboxFor(page.id)),
             onStock: () => GoRouter.of(context).push(Routes.products),
             // The web's page configuration (`/dashboard/page/{id}`) is not
             // built on mobile.

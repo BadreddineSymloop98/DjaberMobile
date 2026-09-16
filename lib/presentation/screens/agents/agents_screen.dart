@@ -54,17 +54,6 @@ class _AgentsScreenState extends State<AgentsScreen> {
     super.dispose();
   }
 
-  /// Reached with `go` from home and the drawer, so there is usually nothing
-  /// to pop — home is where both entry points live.
-  void _back() {
-    final router = GoRouter.of(context);
-    if (router.canPop()) {
-      router.pop();
-    } else {
-      router.go(Routes.home);
-    }
-  }
-
   /// `15 — Agents · démarrer`, from the empty state's button and from
   /// `Nouvel agent` under the cards. Reloads on return, so a new agent is on
   /// the list the moment the merchant is back.
@@ -146,8 +135,7 @@ class _AgentsScreenState extends State<AgentsScreen> {
                     child: Align(
                       alignment: AlignmentDirectional.centerStart,
                       child: AppBackButton(
-                        onBack: _back,
-                        semanticLabel: l10n.commonBack,
+                                                semanticLabel: l10n.commonBack,
                       ),
                     ),
                   ),

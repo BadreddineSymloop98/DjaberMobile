@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -122,15 +124,28 @@ class _MenuDrawerState extends State<MenuDrawer> {
 
   void _close() => Navigator.of(context).pop();
 
-  /// Closes the drawer, then goes.
+  /// Closes the drawer, then switches tab with `go`: tabs are peers and never
+  /// stack.
   ///
   /// In this order because the drawer is a route: leaving it on the stack
   /// while `go` replaces what is underneath would strand it over the new
   /// screen.
-  void _goTo(String route) {
+  void _goToTab(String route) {
     final router = GoRouter.of(context);
     _close();
     router.go(route);
+  }
+
+  /// Closes the drawer, then **pushes** [route] over home.
+  ///
+  /// The drawer opens only from home, so home is the previous screen, and back
+  /// from Settings or Products must return there instead of asking to leave the
+  /// app. The pop removes the drawer from the history at once (only its exit
+  /// animation remains), so the push lands directly on home.
+  void _open(String route) {
+    final router = GoRouter.of(context);
+    _close();
+    unawaited(router.push(route));
   }
 
   /// For Analyses and Rapports, which are **not** unbuilt — they are
@@ -246,7 +261,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
           // colour — which said "the agent is here" on the one row that is
           // about the customer rather than the agent.
           iconColor: AppColors.accentInbound,
-          onTap: () => _goTo(Routes.inbox),
+          onTap: () => _goToTab(Routes.inbox),
         ),
         MenuRow(
           icon: AppIcons.chat,
@@ -261,7 +276,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
           // row that would let them fix it; contrast the notifications badge
           // below, which the web hides at zero.
           count: widget.connectedPages?.toString(),
-          onTap: () => _goTo(Routes.pages),
+          onTap: () => _open(Routes.pages),
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -280,14 +295,14 @@ class _MenuDrawerState extends State<MenuDrawer> {
                 label: l10n.menuProducts,
                 // Catalogue is amber (§21.3).
                 iconColor: AppColors.accentStarred,
-                onTap: () => _goTo(Routes.products),
+                onTap: () => _open(Routes.products),
               ),
               MenuSubrow(
                 icon: AppIcons.bot,
                 label: l10n.menuAgents,
                 // The AI is `signal/live`.
                 iconColor: AppColors.live,
-                onTap: () => _goTo(Routes.agents),
+                onTap: () => _open(Routes.agents),
               ),
               MenuSubrow(
                 icon: AppIcons.megaphone,
@@ -309,7 +324,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
           // (`item.id === 'notifications' && unreadCount > 0`). A standing
           // `0` next to a bell would read as a broken badge.
           count: (_unread ?? 0) > 0 ? _unread.toString() : null,
-          onTap: () => _goTo(Routes.notifications),
+          onTap: () => _open(Routes.notifications),
         ),
         MenuRow(
           icon: AppIcons.chart,
@@ -325,7 +340,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
           icon: AppIcons.settings,
           label: l10n.menuSettings,
           iconColor: AppColors.textPrimary,
-          onTap: () => _goTo(Routes.settings),
+          onTap: () => _open(Routes.settings),
         ),
         // NOT IN THE FRAME. Added because the frame has no way out of a
         // session and this drawer replaces the stand-in sheet that held the

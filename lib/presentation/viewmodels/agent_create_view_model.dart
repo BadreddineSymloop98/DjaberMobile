@@ -485,6 +485,13 @@ class NewAgentViewModel extends FormViewModel {
       if (offered.isNotEmpty && !offered.contains(_aiModel)) _aiModel = offered.first;
     }
 
+    // Create mode's "untouched" form: the defaults, the pre-ticked pages and
+    // the coerced model, taken once every list has answered (they arrive
+    // together above), so an untouched form never counts as changed. Before
+    // the draft restore, so restored typing does count. Taken once only: a
+    // reload inside submit must not reset it to the merchant's own edits.
+    if (editing == null) _createBaseline ??= draft;
+
     // After loading, which filled the form from the server or the defaults.
     _restoreDraft();
 
@@ -607,10 +614,15 @@ class NewAgentViewModel extends FormViewModel {
         ],
       );
 
-  /// Edit only: the form differs from the agent as loaded or last saved.
+  /// Create mode's untouched form, taken in [_load]. Kept apart from
+  /// [_original], which means "the saved agent" to the save path.
+  AgentDraft? _createBaseline;
+
+  /// The form differs from the agent as loaded or last saved (edit), or from
+  /// the untouched form (create). False until the form has loaded.
   bool get hasChanges {
-    final original = _original;
-    return original != null && draft.changesFrom(original).isNotEmpty;
+    final baseline = _original ?? _createBaseline;
+    return baseline != null && draft.changesFrom(baseline).isNotEmpty;
   }
 
   /// Null when the form is not valid yet — its errors are now showing.

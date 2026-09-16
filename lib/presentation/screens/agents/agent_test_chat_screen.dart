@@ -1,10 +1,8 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../../../app/routes.dart';
 import '../../../core/extensions/responsive_extension.dart';
 import '../../../data/models/agent.dart';
 import '../../../data/repositories/agent_repository.dart';
@@ -70,15 +68,6 @@ class _AgentTestChatScreenState extends State<AgentTestChatScreen> {
     });
   }
 
-  void _back() {
-    final router = GoRouter.of(context);
-    if (router.canPop()) {
-      router.pop();
-    } else {
-      router.go(Routes.agents);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
@@ -104,7 +93,7 @@ class _AgentTestChatScreenState extends State<AgentTestChatScreen> {
                   ),
                   child: Row(
                     children: [
-                      AppBackButton(onBack: _back, semanticLabel: l10n.commonBack),
+                      AppBackButton(semanticLabel: l10n.commonBack),
                       SizedBox(width: AppSpacing.md),
                       Expanded(
                         child: Text(

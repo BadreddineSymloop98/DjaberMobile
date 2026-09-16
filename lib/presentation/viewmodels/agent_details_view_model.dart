@@ -63,6 +63,11 @@ class AgentDetailsViewModel extends BaseViewModel {
   bool _saving = false;
   bool get isSaving => _saving;
 
+  /// The instructions editor is open with text that differs from what was
+  /// loaded or last saved: what back would throw away.
+  bool get hasUnsavedInstructions =>
+      _editing && instructions.text.trim() != _base.trim();
+
   AppException? _saveError;
   AppException? get saveError => _saveError;
 

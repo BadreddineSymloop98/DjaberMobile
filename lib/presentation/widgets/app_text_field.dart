@@ -320,7 +320,8 @@ String messageFor(FieldError error, AppFieldMessages messages) =>
       // Product-form rules; no validator on this form can produce them.
       FieldError.notANumber ||
       FieldError.mustBePositive ||
-      FieldError.belowCostPrice =>
+      FieldError.belowCostPrice ||
+      FieldError.mismatch =>
         messages.required,
     };
 

@@ -91,21 +91,6 @@ class _ProductsScreenState extends State<ProductsScreen> {
     );
   }
 
-  /// Back, which cannot simply pop.
-  ///
-  /// This screen is reached with `go` from the drawer and from home's action
-  /// card, so the navigator is usually empty and `pop()` would reach Android
-  /// and close the app. Home is the honest fallback: it is where both entry
-  /// points live.
-  void _back() {
-    final router = GoRouter.of(context);
-    if (router.canPop()) {
-      router.pop();
-    } else {
-      router.go(Routes.home);
-    }
-  }
-
   Future<void> _add() async {
     // `push`, not `go`: the merchant comes back to the list they were reading,
     // with the filter and the search they had set still on it.
@@ -140,8 +125,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                     child: Align(
                       alignment: AlignmentDirectional.centerStart,
                       child: AppBackButton(
-                        onBack: _back,
-                        semanticLabel: l10n.commonBack,
+                                                semanticLabel: l10n.commonBack,
                       ),
                     ),
                   ),
@@ -329,22 +313,29 @@ class _Rows extends StatelessWidget {
             value: Money.grouped(product.quantity, tag),
             unit: _stockLabel(product, l10n),
             unitColor: product.isOutOfStock ? AppColors.accentAlert : null,
-            onTap: () => GoRouter.of(context).go(Routes.productOf(product.id)),
+            // Pushed, so back returns to this list with its filter and search.
+            onTap: () => GoRouter.of(context).push(Routes.productOf(product.id)),
           ),
       ],
     );
   }
 
-  /// `PRD-001 · 2 400 DA`, plus the threshold when one is set.
+  /// `PRD-001 · 2 400 DA`, plus the variant count and the threshold when set.
+  ///
+  /// The variant count is the web's `N variants` badge beside the name, and
+  /// like it shows only on a product with variants. The count under the row is
+  /// then their sum, which is what the server keeps on the product.
   ///
   /// The frames put the stock state here as a third segment. It moved to the
   /// label under the count instead, where it reads as what it is — the state
   /// of *that* number — rather than sitting next to the price as though it
   /// were another attribute of the product.
   static String _meta(Product product, L10n l10n, String tag) {
+    final variants = product.variantCount ?? product.variants.length;
     final parts = <String>[
       product.sku,
       Money.price(product.sellingPrice, tag),
+      if (product.hasVariants && variants > 0) l10n.productsVariantCount(variants),
       if (product.minQuantity > 0) l10n.productsThreshold(product.minQuantity),
     ];
     return parts.join(' · ');

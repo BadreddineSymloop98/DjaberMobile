@@ -783,10 +783,10 @@ abstract class L10n {
   /// **'Check Your Email'**
   String get authSentTitle;
 
-  /// No description provided for @authSentMessage.
+  /// Neutral on purpose: POST /api/auth/forgot-password answers the same whether or not the account exists. Diverges from the web's 'We’ve sent a password reset link to'.
   ///
   /// In en, this message translates to:
-  /// **'We’ve sent a password reset link to'**
+  /// **'If an account exists for this address, a reset link has just been sent to it'**
   String get authSentMessage;
 
   /// No description provided for @authSentNoReceive.
@@ -800,6 +800,90 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Try another email address'**
   String get authSentTryAnother;
+
+  /// No description provided for @authSentResend.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend link'**
+  String get authSentResend;
+
+  /// Countdown before resend is offered: the server sends nothing new within 60 seconds of the last request.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend link in {seconds}s'**
+  String authSentResendIn(int seconds);
+
+  /// No description provided for @authSentResent.
+  ///
+  /// In en, this message translates to:
+  /// **'A new link has been sent'**
+  String get authSentResent;
+
+  /// 08: the reset happens through the e-mail's link (the web page, or the app when Android hands the link over). Nothing on this screen leads to the reset.
+  ///
+  /// In en, this message translates to:
+  /// **'Open the link in the e-mail to choose a new password.'**
+  String get authSentNextStep;
+
+  /// 08b — the reset screen, opened only by the e-mail's link handed to the app (App Link or the web page's intent).
+  ///
+  /// In en, this message translates to:
+  /// **'New Password'**
+  String get authResetTitle;
+
+  /// No description provided for @authResetSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a new password for your account'**
+  String get authResetSubtitle;
+
+  /// No description provided for @authResetDeadSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Request a new link to reset your password'**
+  String get authResetDeadSubtitle;
+
+  /// No description provided for @authResetChecking.
+  ///
+  /// In en, this message translates to:
+  /// **'Checking the link…'**
+  String get authResetChecking;
+
+  /// No description provided for @authResetPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'New password'**
+  String get authResetPasswordLabel;
+
+  /// 08b: the new password is typed twice; the button stays disabled until both match.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm password'**
+  String get authResetConfirmLabel;
+
+  /// No description provided for @authErrPasswordMismatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords don’t match'**
+  String get authErrPasswordMismatch;
+
+  /// No description provided for @authResetSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Save password'**
+  String get authResetSubmit;
+
+  /// No description provided for @authResetDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Password updated'**
+  String get authResetDone;
+
+  /// No description provided for @authResetRequestNew.
+  ///
+  /// In en, this message translates to:
+  /// **'Request a new link'**
+  String get authResetRequestNew;
 
   /// 09a — Menu. Every nav label in this block is nav.* in src/lib/i18n.ts verbatim — the drawer is a port of the web sidebar, which is what the web itself collapses behind a hamburger below lg.
   ///
@@ -885,7 +969,7 @@ abstract class L10n {
   /// **'Already done — moving on'**
   String get tutorialStepAlreadyDone;
 
-  /// First press of the system back button on a screen that would otherwise close the app. Ours, unapproved.
+  /// First press of the system back button on a root screen (home, login, onboarding, tutorial roots), where back would otherwise close the app. Root screens only. Ours, unapproved.
   ///
   /// In en, this message translates to:
   /// **'Tap back again to leave'**
@@ -1185,6 +1269,780 @@ abstract class L10n {
   /// **'Return'**
   String get stockMoveReturn;
 
+  /// No description provided for @settingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsTitle;
+
+  /// No description provided for @settingsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage your account and application settings'**
+  String get settingsSubtitle;
+
+  /// No description provided for @settingsStockMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock management'**
+  String get settingsStockMode;
+
+  /// Settings section title for the interface language. The three options show each language's own name, with this locale's name for it underneath.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get settingsLanguage;
+
+  /// No description provided for @settingsLanguageFrench.
+  ///
+  /// In en, this message translates to:
+  /// **'French'**
+  String get settingsLanguageFrench;
+
+  /// No description provided for @settingsLanguageEnglish.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get settingsLanguageEnglish;
+
+  /// No description provided for @settingsLanguageArabic.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic'**
+  String get settingsLanguageArabic;
+
+  /// Under the three language options: a chosen language is kept and the phone's system language is no longer followed.
+  ///
+  /// In en, this message translates to:
+  /// **'The app stays in the language you choose, even if your phone\'s language changes.'**
+  String get settingsLanguageHelp;
+
+  /// Plan names, descriptions and features: GET /api/plans sends French admin text and ignores Accept-Language, so the app translates the texts it recognises (plan_copy.dart). Unrecognised server text is shown as sent.
+  ///
+  /// In en, this message translates to:
+  /// **'Individual'**
+  String get planNameIndividual;
+
+  /// No description provided for @planNamePro.
+  ///
+  /// In en, this message translates to:
+  /// **'Pro'**
+  String get planNamePro;
+
+  /// No description provided for @planNameTeams.
+  ///
+  /// In en, this message translates to:
+  /// **'Teams'**
+  String get planNameTeams;
+
+  /// No description provided for @planDescIndividual.
+  ///
+  /// In en, this message translates to:
+  /// **'To get started: connect your page and let the AI answer your customers.'**
+  String get planDescIndividual;
+
+  /// No description provided for @planDescPro.
+  ///
+  /// In en, this message translates to:
+  /// **'For active sellers: vision, voice notes and more volume.'**
+  String get planDescPro;
+
+  /// No description provided for @planDescTeams.
+  ///
+  /// In en, this message translates to:
+  /// **'For established shops: maximum volume and priority support.'**
+  String get planDescTeams;
+
+  /// No description provided for @planFeaturePages.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 Facebook or Instagram page} other{{count} Facebook / Instagram pages}}'**
+  String planFeaturePages(int count);
+
+  /// amount is already grouped for the locale (5 000).
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} AI credits / month'**
+  String planFeatureCredits(String amount);
+
+  /// No description provided for @planFeatureProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} products'**
+  String planFeatureProducts(String amount);
+
+  /// carriers are brand names from the server (Yalidine, ZR Express, Maystro), not translated.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery to {count} wilayas ({carriers})'**
+  String planFeatureDelivery(int count, String carriers);
+
+  /// No description provided for @planFeatureAgentText.
+  ///
+  /// In en, this message translates to:
+  /// **'24/7 AI agent (text)'**
+  String get planFeatureAgentText;
+
+  /// No description provided for @planFeatureAgentFull.
+  ///
+  /// In en, this message translates to:
+  /// **'24/7 AI agent (text + images + voice)'**
+  String get planFeatureAgentFull;
+
+  /// No description provided for @planFeatureStock.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock & order management'**
+  String get planFeatureStock;
+
+  /// No description provided for @planFeatureCallConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Order confirmation by phone call'**
+  String get planFeatureCallConfirmation;
+
+  /// No description provided for @planFeatureVision.
+  ///
+  /// In en, this message translates to:
+  /// **'Image recognition (vision)'**
+  String get planFeatureVision;
+
+  /// No description provided for @planFeatureVoiceNotes.
+  ///
+  /// In en, this message translates to:
+  /// **'Voice notes (transcription)'**
+  String get planFeatureVoiceNotes;
+
+  /// No description provided for @planFeatureCrossSell.
+  ///
+  /// In en, this message translates to:
+  /// **'AI cross-sell / up-sell'**
+  String get planFeatureCrossSell;
+
+  /// No description provided for @planFeatureUnlimitedProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlimited products'**
+  String get planFeatureUnlimitedProducts;
+
+  /// No description provided for @planFeatureUnlimitedConversations.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlimited conversations'**
+  String get planFeatureUnlimitedConversations;
+
+  /// No description provided for @planFeatureEverythingPro.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything in Pro'**
+  String get planFeatureEverythingPro;
+
+  /// No description provided for @planFeaturePrioritySupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Priority support'**
+  String get planFeaturePrioritySupport;
+
+  /// No description provided for @settingsAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Account information'**
+  String get settingsAccount;
+
+  /// No description provided for @settingsBilling.
+  ///
+  /// In en, this message translates to:
+  /// **'Plan & billing'**
+  String get settingsBilling;
+
+  /// No description provided for @settingsCurrentPlan.
+  ///
+  /// In en, this message translates to:
+  /// **'Current plan'**
+  String get settingsCurrentPlan;
+
+  /// No description provided for @settingsMonthly.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly'**
+  String get settingsMonthly;
+
+  /// No description provided for @settingsYearly.
+  ///
+  /// In en, this message translates to:
+  /// **'Yearly'**
+  String get settingsYearly;
+
+  /// No description provided for @settingsFree.
+  ///
+  /// In en, this message translates to:
+  /// **'Free'**
+  String get settingsFree;
+
+  /// No description provided for @settingsPerMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'{currency} / mo'**
+  String settingsPerMonth(String currency);
+
+  /// No description provided for @settingsPerYear.
+  ///
+  /// In en, this message translates to:
+  /// **'{currency} / yr'**
+  String settingsPerYear(String currency);
+
+  /// No description provided for @settingsBadgeCurrent.
+  ///
+  /// In en, this message translates to:
+  /// **'Current'**
+  String get settingsBadgeCurrent;
+
+  /// No description provided for @settingsBadgePopular.
+  ///
+  /// In en, this message translates to:
+  /// **'Popular'**
+  String get settingsBadgePopular;
+
+  /// No description provided for @settingsYourPlan.
+  ///
+  /// In en, this message translates to:
+  /// **'Your current plan'**
+  String get settingsYourPlan;
+
+  /// No description provided for @settingsFreeNoPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Free — no payment needed'**
+  String get settingsFreeNoPayment;
+
+  /// The plan card's button. {price} is the grouped amount and the plan's currency label, e.g. 2,900 DA.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscribe — {price}'**
+  String settingsSubscribe(String price);
+
+  /// No description provided for @settingsRedirecting.
+  ///
+  /// In en, this message translates to:
+  /// **'Redirecting…'**
+  String get settingsRedirecting;
+
+  /// No description provided for @settingsVerifying.
+  ///
+  /// In en, this message translates to:
+  /// **'Verifying payment…'**
+  String get settingsVerifying;
+
+  /// No description provided for @settingsNoPlans.
+  ///
+  /// In en, this message translates to:
+  /// **'No plans available yet.'**
+  String get settingsNoPlans;
+
+  /// No description provided for @settingsCheckoutPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment confirmed — your {plan} plan is active.'**
+  String settingsCheckoutPaid(String plan);
+
+  /// No description provided for @settingsCheckoutPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment not confirmed yet. If it went through, your plan will be activated shortly.'**
+  String get settingsCheckoutPending;
+
+  /// No description provided for @settingsCheckoutFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'The payment did not go through.'**
+  String get settingsCheckoutFailed;
+
+  /// No description provided for @settingsFbTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Facebook API permissions'**
+  String get settingsFbTitle;
+
+  /// No description provided for @settingsFbActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Currently active permissions'**
+  String get settingsFbActive;
+
+  /// No description provided for @settingsFbAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Available advanced permissions'**
+  String get settingsFbAvailable;
+
+  /// No description provided for @settingsFbReviewHint.
+  ///
+  /// In en, this message translates to:
+  /// **'These permissions require Facebook App Review approval.'**
+  String get settingsFbReviewHint;
+
+  /// No description provided for @settingsDangerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Danger zone'**
+  String get settingsDangerTitle;
+
+  /// No description provided for @settingsDeleteAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account'**
+  String get settingsDeleteAccount;
+
+  /// No description provided for @settingsDeleteHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Permanently delete your account and all associated data.'**
+  String get settingsDeleteHelp;
+
+  /// No description provided for @inboxTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Inbox'**
+  String get inboxTitle;
+
+  /// No description provided for @inboxSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Read and reply to your customer messages.'**
+  String get inboxSubtitle;
+
+  /// No description provided for @inboxNoPagesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No pages connected'**
+  String get inboxNoPagesTitle;
+
+  /// No description provided for @inboxNoPagesBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect a Facebook or Instagram page to start receiving messages here.'**
+  String get inboxNoPagesBody;
+
+  /// No description provided for @inboxConnectPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect a page'**
+  String get inboxConnectPage;
+
+  /// No description provided for @inboxPlatformMessenger.
+  ///
+  /// In en, this message translates to:
+  /// **'Messenger'**
+  String get inboxPlatformMessenger;
+
+  /// No description provided for @inboxPlatformInstagram.
+  ///
+  /// In en, this message translates to:
+  /// **'Instagram DMs'**
+  String get inboxPlatformInstagram;
+
+  /// No description provided for @inboxSynced.
+  ///
+  /// In en, this message translates to:
+  /// **'synced {time}'**
+  String inboxSynced(String time);
+
+  /// No description provided for @inboxSwitchPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch page'**
+  String get inboxSwitchPage;
+
+  /// No description provided for @inboxConnectAnother.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect another page'**
+  String get inboxConnectAnother;
+
+  /// No description provided for @inboxSync.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync'**
+  String get inboxSync;
+
+  /// No description provided for @inboxSyncing.
+  ///
+  /// In en, this message translates to:
+  /// **'Syncing…'**
+  String get inboxSyncing;
+
+  /// No description provided for @inboxTabAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get inboxTabAll;
+
+  /// No description provided for @inboxTabActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get inboxTabActive;
+
+  /// No description provided for @inboxTabResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get inboxTabResolved;
+
+  /// No description provided for @inboxTabArchived.
+  ///
+  /// In en, this message translates to:
+  /// **'Archived'**
+  String get inboxTabArchived;
+
+  /// No description provided for @inboxSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by name or message…'**
+  String get inboxSearchHint;
+
+  /// No description provided for @inboxNoMatches.
+  ///
+  /// In en, this message translates to:
+  /// **'No matches'**
+  String get inboxNoMatches;
+
+  /// No description provided for @inboxNoConversations.
+  ///
+  /// In en, this message translates to:
+  /// **'No conversations yet'**
+  String get inboxNoConversations;
+
+  /// No description provided for @inboxNothingHere.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing in this view'**
+  String get inboxNothingHere;
+
+  /// No description provided for @inboxPullFromFacebook.
+  ///
+  /// In en, this message translates to:
+  /// **'Pull from Facebook'**
+  String get inboxPullFromFacebook;
+
+  /// No description provided for @inboxUpToDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Up to date'**
+  String get inboxUpToDate;
+
+  /// No description provided for @inboxSyncedCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{n, plural, =1{Synced — 1 new message} other{Synced — {n} new messages}}'**
+  String inboxSyncedCount(int n);
+
+  /// No description provided for @inboxAttachment.
+  ///
+  /// In en, this message translates to:
+  /// **'Attachment'**
+  String get inboxAttachment;
+
+  /// No description provided for @inboxEmptyMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Empty message'**
+  String get inboxEmptyMessage;
+
+  /// Mobile addition, not on the web inbox: the AI handed the conversation over (Conversation.aiPaused).
+  ///
+  /// In en, this message translates to:
+  /// **'AI paused'**
+  String get inboxAiPaused;
+
+  /// No description provided for @inboxStatusActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get inboxStatusActive;
+
+  /// No description provided for @inboxStatusResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Resolved'**
+  String get inboxStatusResolved;
+
+  /// No description provided for @inboxStatusArchived.
+  ///
+  /// In en, this message translates to:
+  /// **'Archived'**
+  String get inboxStatusArchived;
+
+  /// No description provided for @inboxTimeNow.
+  ///
+  /// In en, this message translates to:
+  /// **'now'**
+  String get inboxTimeNow;
+
+  /// No description provided for @inboxTimeMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'{n}m'**
+  String inboxTimeMinutes(int n);
+
+  /// No description provided for @inboxTimeHours.
+  ///
+  /// In en, this message translates to:
+  /// **'{n}h'**
+  String inboxTimeHours(int n);
+
+  /// No description provided for @conversationMarkResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark resolved'**
+  String get conversationMarkResolved;
+
+  /// No description provided for @conversationArchive.
+  ///
+  /// In en, this message translates to:
+  /// **'Archive conversation'**
+  String get conversationArchive;
+
+  /// No description provided for @conversationReopen.
+  ///
+  /// In en, this message translates to:
+  /// **'Reopen'**
+  String get conversationReopen;
+
+  /// No description provided for @conversationResumeAi.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume the AI'**
+  String get conversationResumeAi;
+
+  /// No description provided for @conversationPausedNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'The agent no longer replies to this customer. Reply here.'**
+  String get conversationPausedNotice;
+
+  /// No description provided for @conversationReplyHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Type your reply…'**
+  String get conversationReplyHint;
+
+  /// No description provided for @conversationSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get conversationSend;
+
+  /// No description provided for @conversationSending.
+  ///
+  /// In en, this message translates to:
+  /// **'Sending…'**
+  String get conversationSending;
+
+  /// No description provided for @conversationReopenHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Reopen this conversation to reply.'**
+  String get conversationReopenHint;
+
+  /// No description provided for @conversationEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No messages yet'**
+  String get conversationEmpty;
+
+  /// No description provided for @conversationResolvedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Marked as resolved'**
+  String get conversationResolvedToast;
+
+  /// No description provided for @conversationArchivedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Archived'**
+  String get conversationArchivedToast;
+
+  /// No description provided for @conversationReopenedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Conversation reopened'**
+  String get conversationReopenedToast;
+
+  /// No description provided for @conversationAiResumedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'The AI is replying again'**
+  String get conversationAiResumedToast;
+
+  /// No description provided for @conversationAuthorAi.
+  ///
+  /// In en, this message translates to:
+  /// **'AI'**
+  String get conversationAuthorAi;
+
+  /// No description provided for @conversationAuthorYou.
+  ///
+  /// In en, this message translates to:
+  /// **'You'**
+  String get conversationAuthorYou;
+
+  /// No description provided for @productVariantsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Variants'**
+  String get productVariantsTitle;
+
+  /// No description provided for @productVariantsTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total qty: {count}'**
+  String productVariantsTotal(int count);
+
+  /// No description provided for @productVariantAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Add variant'**
+  String get productVariantAdd;
+
+  /// No description provided for @productVariantsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No variants. Tap “Add variant” to create one.'**
+  String get productVariantsEmpty;
+
+  /// No description provided for @productVariantName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get productVariantName;
+
+  /// No description provided for @productVariantNamePlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., Red - Large'**
+  String get productVariantNamePlaceholder;
+
+  /// No description provided for @productVariantSku.
+  ///
+  /// In en, this message translates to:
+  /// **'SKU'**
+  String get productVariantSku;
+
+  /// No description provided for @productVariantSkuPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional SKU'**
+  String get productVariantSkuPlaceholder;
+
+  /// No description provided for @productVariantCost.
+  ///
+  /// In en, this message translates to:
+  /// **'Cost'**
+  String get productVariantCost;
+
+  /// No description provided for @productVariantPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Price'**
+  String get productVariantPrice;
+
+  /// No description provided for @productVariantQuantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Qty'**
+  String get productVariantQuantity;
+
+  /// No description provided for @productVariantMinQuantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Min qty'**
+  String get productVariantMinQuantity;
+
+  /// No description provided for @productVariantRemove.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove variant'**
+  String get productVariantRemove;
+
+  /// No description provided for @productVariantDuplicate.
+  ///
+  /// In en, this message translates to:
+  /// **'Two variants cannot have the same name'**
+  String get productVariantDuplicate;
+
+  /// No description provided for @productVariantsRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Add at least one variant, or untick the box.'**
+  String get productVariantsRequired;
+
+  /// No description provided for @productVariantsRetryHint.
+  ///
+  /// In en, this message translates to:
+  /// **'The product is created — only the missing variants will be sent again.'**
+  String get productVariantsRetryHint;
+
+  /// No description provided for @productDetailEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'PRODUCT DETAILS'**
+  String get productDetailEyebrow;
+
+  /// No description provided for @productDetailNoImages.
+  ///
+  /// In en, this message translates to:
+  /// **'No images'**
+  String get productDetailNoImages;
+
+  /// No description provided for @productDetailCost.
+  ///
+  /// In en, this message translates to:
+  /// **'Cost price'**
+  String get productDetailCost;
+
+  /// No description provided for @productDetailSelling.
+  ///
+  /// In en, this message translates to:
+  /// **'Selling price'**
+  String get productDetailSelling;
+
+  /// No description provided for @productDetailProfit.
+  ///
+  /// In en, this message translates to:
+  /// **'Profit / margin'**
+  String get productDetailProfit;
+
+  /// No description provided for @productDetailInStock.
+  ///
+  /// In en, this message translates to:
+  /// **'In stock'**
+  String get productDetailInStock;
+
+  /// No description provided for @productDetailStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get productDetailStatus;
+
+  /// No description provided for @productDetailActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get productDetailActive;
+
+  /// No description provided for @productDetailInactive.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get productDetailInactive;
+
+  /// No description provided for @productDetailVariants.
+  ///
+  /// In en, this message translates to:
+  /// **'Variants ({count})'**
+  String productDetailVariants(int count);
+
   /// No description provided for @tutorialProductTitle.
   ///
   /// In en, this message translates to:
@@ -1352,6 +2210,12 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'THRESHOLD {count}'**
   String productsThreshold(int count);
+
+  /// Shown on a row's meta line when the product has variants, like the web's 'N variants' badge next to the product name.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 VARIANT} other{{count} VARIANTS}}'**
+  String productsVariantCount(int count);
 
   /// No description provided for @productsEmptyTitle.
   ///
@@ -3176,6 +4040,48 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Your changes to {name} will be lost.'**
   String agentFormLeaveBody(String name);
+
+  /// Leave sheet body when backing out of a dirty Add product form. Ours, unapproved.
+  ///
+  /// In en, this message translates to:
+  /// **'The product you started will be lost.'**
+  String get productFormLeaveBody;
+
+  /// Leave sheet body when backing out of a conversation with text in the composer. Ours, unapproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Your unsent reply will be lost.'**
+  String get conversationLeaveBody;
+
+  /// Leave sheet body when backing out of agent details with unsaved instructions or a typed resolve instruction. Ours, unapproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Your changes to the instructions will be lost.'**
+  String get agentDetailsLeaveBody;
+
+  /// Leave sheet body when closing the generate-agent sheet on its preview. Ours, unapproved.
+  ///
+  /// In en, this message translates to:
+  /// **'The generated agent will be discarded.'**
+  String get agentGenerateLeaveBody;
+
+  /// Leave sheet body when backing out of the app from tutorial step T4 with typed values. Ours, unapproved.
+  ///
+  /// In en, this message translates to:
+  /// **'The agent you started will be lost.'**
+  String get tutorialAgentLeaveBody;
+
+  /// Leave sheet title before abandoning the Chargily checkout web view. Ours, unapproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave the payment page?'**
+  String get checkoutLeaveTitle;
+
+  /// Leave sheet body before abandoning the Chargily checkout web view. Ours, unapproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Your payment is not finished.'**
+  String get checkoutLeaveBody;
 
   /// No description provided for @agentFormKeepEditing.
   ///
