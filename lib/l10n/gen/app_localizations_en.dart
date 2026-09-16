@@ -359,13 +359,60 @@ class L10nEn extends L10n {
   String get authSentTitle => 'Check Your Email';
 
   @override
-  String get authSentMessage => 'We’ve sent a password reset link to';
+  String get authSentMessage =>
+      'If an account exists for this address, a reset link has just been sent to it';
 
   @override
   String get authSentNoReceive => 'Didn’t receive the email?';
 
   @override
   String get authSentTryAnother => 'Try another email address';
+
+  @override
+  String get authSentResend => 'Resend link';
+
+  @override
+  String authSentResendIn(int seconds) {
+    return 'Resend link in ${seconds}s';
+  }
+
+  @override
+  String get authSentResent => 'A new link has been sent';
+
+  @override
+  String get authSentNextStep =>
+      'Open the link in the e-mail to choose a new password.';
+
+  @override
+  String get authResetTitle => 'New Password';
+
+  @override
+  String get authResetSubtitle => 'Choose a new password for your account';
+
+  @override
+  String get authResetDeadSubtitle =>
+      'Request a new link to reset your password';
+
+  @override
+  String get authResetChecking => 'Checking the link…';
+
+  @override
+  String get authResetPasswordLabel => 'New password';
+
+  @override
+  String get authResetConfirmLabel => 'Confirm password';
+
+  @override
+  String get authErrPasswordMismatch => 'Passwords don’t match';
+
+  @override
+  String get authResetSubmit => 'Save password';
+
+  @override
+  String get authResetDone => 'Password updated';
+
+  @override
+  String get authResetRequestNew => 'Request a new link';
 
   @override
   String get menuOverview => 'Overview';
@@ -490,6 +537,527 @@ class L10nEn extends L10n {
       'Full suite — Suppliers, Clients, Sales, Purchases, Caisse, Movements, Delivery & more.';
 
   @override
+  String get stockOverviewTitle => 'Stock overview';
+
+  @override
+  String get stockOverviewSubtitle => 'Inventory, sales and purchase summary';
+
+  @override
+  String get stockOverviewHintSimple =>
+      'Simple mode shows products, orders and clients. Switch to Advanced for sales, purchases, suppliers, caisse and movements.';
+
+  @override
+  String get stockOverviewHintAdvanced =>
+      'Advanced mode: full ERP — sales, purchases, suppliers, caisse and stock movements are enabled.';
+
+  @override
+  String get stockTotalProducts => 'Total products';
+
+  @override
+  String get stockLowStock => 'Low stock';
+
+  @override
+  String get stockValue => 'Stock value';
+
+  @override
+  String get stockRetailValue => 'Retail value';
+
+  @override
+  String get stockCategories => 'Categories';
+
+  @override
+  String get stockSuppliers => 'Suppliers';
+
+  @override
+  String get stockTotalItems => 'Total items in stock';
+
+  @override
+  String get stockSalesMonth => 'Sales this month';
+
+  @override
+  String get stockTotalSales => 'Total sales';
+
+  @override
+  String get stockRevenue => 'Revenue';
+
+  @override
+  String get stockPaid => 'Paid';
+
+  @override
+  String get stockPending => 'Pending';
+
+  @override
+  String get stockPurchasesMonth => 'Purchases this month';
+
+  @override
+  String get stockTotalPurchases => 'Total purchases';
+
+  @override
+  String get stockTotalSpent => 'Total spent';
+
+  @override
+  String get stockReceived => 'Received';
+
+  @override
+  String get stockRecentMovements => 'Recent movements';
+
+  @override
+  String get stockMovementsEmpty =>
+      'No movements recorded yet. Stock movements will appear here when products are added, sold, or adjusted.';
+
+  @override
+  String get stockMoveIn => 'In';
+
+  @override
+  String get stockMoveOut => 'Out';
+
+  @override
+  String get stockMoveAdjustment => 'Adjustment';
+
+  @override
+  String get stockMoveReturn => 'Return';
+
+  @override
+  String get settingsTitle => 'Settings';
+
+  @override
+  String get settingsSubtitle => 'Manage your account and application settings';
+
+  @override
+  String get settingsStockMode => 'Stock management';
+
+  @override
+  String get settingsLanguage => 'Language';
+
+  @override
+  String get settingsLanguageFrench => 'French';
+
+  @override
+  String get settingsLanguageEnglish => 'English';
+
+  @override
+  String get settingsLanguageArabic => 'Arabic';
+
+  @override
+  String get settingsLanguageHelp =>
+      'The app stays in the language you choose, even if your phone\'s language changes.';
+
+  @override
+  String get planNameIndividual => 'Individual';
+
+  @override
+  String get planNamePro => 'Pro';
+
+  @override
+  String get planNameTeams => 'Teams';
+
+  @override
+  String get planDescIndividual =>
+      'To get started: connect your page and let the AI answer your customers.';
+
+  @override
+  String get planDescPro =>
+      'For active sellers: vision, voice notes and more volume.';
+
+  @override
+  String get planDescTeams =>
+      'For established shops: maximum volume and priority support.';
+
+  @override
+  String planFeaturePages(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Facebook / Instagram pages',
+      one: '1 Facebook or Instagram page',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String planFeatureCredits(String amount) {
+    return '$amount AI credits / month';
+  }
+
+  @override
+  String planFeatureProducts(String amount) {
+    return '$amount products';
+  }
+
+  @override
+  String planFeatureDelivery(int count, String carriers) {
+    return 'Delivery to $count wilayas ($carriers)';
+  }
+
+  @override
+  String get planFeatureAgentText => '24/7 AI agent (text)';
+
+  @override
+  String get planFeatureAgentFull => '24/7 AI agent (text + images + voice)';
+
+  @override
+  String get planFeatureStock => 'Stock & order management';
+
+  @override
+  String get planFeatureCallConfirmation => 'Order confirmation by phone call';
+
+  @override
+  String get planFeatureVision => 'Image recognition (vision)';
+
+  @override
+  String get planFeatureVoiceNotes => 'Voice notes (transcription)';
+
+  @override
+  String get planFeatureCrossSell => 'AI cross-sell / up-sell';
+
+  @override
+  String get planFeatureUnlimitedProducts => 'Unlimited products';
+
+  @override
+  String get planFeatureUnlimitedConversations => 'Unlimited conversations';
+
+  @override
+  String get planFeatureEverythingPro => 'Everything in Pro';
+
+  @override
+  String get planFeaturePrioritySupport => 'Priority support';
+
+  @override
+  String get settingsAccount => 'Account information';
+
+  @override
+  String get settingsBilling => 'Plan & billing';
+
+  @override
+  String get settingsCurrentPlan => 'Current plan';
+
+  @override
+  String get settingsMonthly => 'Monthly';
+
+  @override
+  String get settingsYearly => 'Yearly';
+
+  @override
+  String get settingsFree => 'Free';
+
+  @override
+  String settingsPerMonth(String currency) {
+    return '$currency / mo';
+  }
+
+  @override
+  String settingsPerYear(String currency) {
+    return '$currency / yr';
+  }
+
+  @override
+  String get settingsBadgeCurrent => 'Current';
+
+  @override
+  String get settingsBadgePopular => 'Popular';
+
+  @override
+  String get settingsYourPlan => 'Your current plan';
+
+  @override
+  String get settingsFreeNoPayment => 'Free — no payment needed';
+
+  @override
+  String settingsSubscribe(String price) {
+    return 'Subscribe — $price';
+  }
+
+  @override
+  String get settingsRedirecting => 'Redirecting…';
+
+  @override
+  String get settingsVerifying => 'Verifying payment…';
+
+  @override
+  String get settingsNoPlans => 'No plans available yet.';
+
+  @override
+  String settingsCheckoutPaid(String plan) {
+    return 'Payment confirmed — your $plan plan is active.';
+  }
+
+  @override
+  String get settingsCheckoutPending =>
+      'Payment not confirmed yet. If it went through, your plan will be activated shortly.';
+
+  @override
+  String get settingsCheckoutFailed => 'The payment did not go through.';
+
+  @override
+  String get settingsFbTitle => 'Facebook API permissions';
+
+  @override
+  String get settingsFbActive => 'Currently active permissions';
+
+  @override
+  String get settingsFbAvailable => 'Available advanced permissions';
+
+  @override
+  String get settingsFbReviewHint =>
+      'These permissions require Facebook App Review approval.';
+
+  @override
+  String get settingsDangerTitle => 'Danger zone';
+
+  @override
+  String get settingsDeleteAccount => 'Delete account';
+
+  @override
+  String get settingsDeleteHelp =>
+      'Permanently delete your account and all associated data.';
+
+  @override
+  String get inboxTitle => 'Inbox';
+
+  @override
+  String get inboxSubtitle => 'Read and reply to your customer messages.';
+
+  @override
+  String get inboxNoPagesTitle => 'No pages connected';
+
+  @override
+  String get inboxNoPagesBody =>
+      'Connect a Facebook or Instagram page to start receiving messages here.';
+
+  @override
+  String get inboxConnectPage => 'Connect a page';
+
+  @override
+  String get inboxPlatformMessenger => 'Messenger';
+
+  @override
+  String get inboxPlatformInstagram => 'Instagram DMs';
+
+  @override
+  String inboxSynced(String time) {
+    return 'synced $time';
+  }
+
+  @override
+  String get inboxSwitchPage => 'Switch page';
+
+  @override
+  String get inboxConnectAnother => 'Connect another page';
+
+  @override
+  String get inboxSync => 'Sync';
+
+  @override
+  String get inboxSyncing => 'Syncing…';
+
+  @override
+  String get inboxTabAll => 'All';
+
+  @override
+  String get inboxTabActive => 'Active';
+
+  @override
+  String get inboxTabResolved => 'Done';
+
+  @override
+  String get inboxTabArchived => 'Archived';
+
+  @override
+  String get inboxSearchHint => 'Search by name or message…';
+
+  @override
+  String get inboxNoMatches => 'No matches';
+
+  @override
+  String get inboxNoConversations => 'No conversations yet';
+
+  @override
+  String get inboxNothingHere => 'Nothing in this view';
+
+  @override
+  String get inboxPullFromFacebook => 'Pull from Facebook';
+
+  @override
+  String get inboxUpToDate => 'Up to date';
+
+  @override
+  String inboxSyncedCount(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'Synced — $n new messages',
+      one: 'Synced — 1 new message',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get inboxAttachment => 'Attachment';
+
+  @override
+  String get inboxEmptyMessage => 'Empty message';
+
+  @override
+  String get inboxAiPaused => 'AI paused';
+
+  @override
+  String get inboxStatusActive => 'Active';
+
+  @override
+  String get inboxStatusResolved => 'Resolved';
+
+  @override
+  String get inboxStatusArchived => 'Archived';
+
+  @override
+  String get inboxTimeNow => 'now';
+
+  @override
+  String inboxTimeMinutes(int n) {
+    return '${n}m';
+  }
+
+  @override
+  String inboxTimeHours(int n) {
+    return '${n}h';
+  }
+
+  @override
+  String get conversationMarkResolved => 'Mark resolved';
+
+  @override
+  String get conversationArchive => 'Archive conversation';
+
+  @override
+  String get conversationReopen => 'Reopen';
+
+  @override
+  String get conversationResumeAi => 'Resume the AI';
+
+  @override
+  String get conversationPausedNotice =>
+      'The agent no longer replies to this customer. Reply here.';
+
+  @override
+  String get conversationReplyHint => 'Type your reply…';
+
+  @override
+  String get conversationSend => 'Send';
+
+  @override
+  String get conversationSending => 'Sending…';
+
+  @override
+  String get conversationReopenHint => 'Reopen this conversation to reply.';
+
+  @override
+  String get conversationEmpty => 'No messages yet';
+
+  @override
+  String get conversationResolvedToast => 'Marked as resolved';
+
+  @override
+  String get conversationArchivedToast => 'Archived';
+
+  @override
+  String get conversationReopenedToast => 'Conversation reopened';
+
+  @override
+  String get conversationAiResumedToast => 'The AI is replying again';
+
+  @override
+  String get conversationAuthorAi => 'AI';
+
+  @override
+  String get conversationAuthorYou => 'You';
+
+  @override
+  String get productVariantsTitle => 'Variants';
+
+  @override
+  String productVariantsTotal(int count) {
+    return 'Total qty: $count';
+  }
+
+  @override
+  String get productVariantAdd => 'Add variant';
+
+  @override
+  String get productVariantsEmpty =>
+      'No variants. Tap “Add variant” to create one.';
+
+  @override
+  String get productVariantName => 'Name';
+
+  @override
+  String get productVariantNamePlaceholder => 'e.g., Red - Large';
+
+  @override
+  String get productVariantSku => 'SKU';
+
+  @override
+  String get productVariantSkuPlaceholder => 'Optional SKU';
+
+  @override
+  String get productVariantCost => 'Cost';
+
+  @override
+  String get productVariantPrice => 'Price';
+
+  @override
+  String get productVariantQuantity => 'Qty';
+
+  @override
+  String get productVariantMinQuantity => 'Min qty';
+
+  @override
+  String get productVariantRemove => 'Remove variant';
+
+  @override
+  String get productVariantDuplicate =>
+      'Two variants cannot have the same name';
+
+  @override
+  String get productVariantsRequired =>
+      'Add at least one variant, or untick the box.';
+
+  @override
+  String get productVariantsRetryHint =>
+      'The product is created — only the missing variants will be sent again.';
+
+  @override
+  String get productDetailEyebrow => 'PRODUCT DETAILS';
+
+  @override
+  String get productDetailNoImages => 'No images';
+
+  @override
+  String get productDetailCost => 'Cost price';
+
+  @override
+  String get productDetailSelling => 'Selling price';
+
+  @override
+  String get productDetailProfit => 'Profit / margin';
+
+  @override
+  String get productDetailInStock => 'In stock';
+
+  @override
+  String get productDetailStatus => 'Status';
+
+  @override
+  String get productDetailActive => 'Active';
+
+  @override
+  String get productDetailInactive => 'Inactive';
+
+  @override
+  String productDetailVariants(int count) {
+    return 'Variants ($count)';
+  }
+
+  @override
   String get tutorialProductTitle => 'Your first product';
 
   @override
@@ -585,6 +1153,17 @@ class L10nEn extends L10n {
   @override
   String productsThreshold(int count) {
     return 'THRESHOLD $count';
+  }
+
+  @override
+  String productsVariantCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count VARIANTS',
+      one: '1 VARIANT',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -977,4 +1556,950 @@ class L10nEn extends L10n {
 
   @override
   String get commonNotBuilt => 'not built yet';
+
+  @override
+  String get agentsTitle => 'AI Agents';
+
+  @override
+  String get agentsSubtitle =>
+      'Create and manage AI agents that sell your products on connected pages';
+
+  @override
+  String get agentsActive => 'AI active';
+
+  @override
+  String get agentsInactive => 'AI paused';
+
+  @override
+  String get agentsStatPages => 'Pages';
+
+  @override
+  String get agentsStatProducts => 'Products';
+
+  @override
+  String get agentsStatModel => 'Model';
+
+  @override
+  String get agentsAllProducts => 'All';
+
+  @override
+  String get agentsNoPages => 'Not answering on any page yet';
+
+  @override
+  String get agentsPause => 'Pause the agent';
+
+  @override
+  String get agentsResume => 'Resume the agent';
+
+  @override
+  String get agentsPausedToast => 'Agent paused — it no longer replies';
+
+  @override
+  String get agentsResumedToast => 'Agent active — it replies again';
+
+  @override
+  String get agentsEmptyTitle => 'No agent yet';
+
+  @override
+  String get agentsEmptyBody =>
+      'Create an AI agent to automatically respond to messages on your connected pages and sell your products.';
+
+  @override
+  String get agentsEmptyCta => 'Create your agent';
+
+  @override
+  String get agentsActionInsights => 'Issues to review';
+
+  @override
+  String get agentsActionTest => 'Test the agent';
+
+  @override
+  String get agentsActionDetails => 'Details and stats';
+
+  @override
+  String get agentsActionDelete => 'Delete the agent';
+
+  @override
+  String get agentsDeleteTitle => 'Delete the agent?';
+
+  @override
+  String agentsDeleteBody(String name) {
+    return '$name will be deleted and will stop replying on your pages. You can create a new agent afterwards.';
+  }
+
+  @override
+  String get agentsDeleteConfirm => 'Delete';
+
+  @override
+  String get agentsDeletedToast => 'Agent deleted';
+
+  @override
+  String get agentsInsightsTitle => 'Pending issues';
+
+  @override
+  String get agentsInsightsEmpty =>
+      'No pending issues — your agent is handling everything.';
+
+  @override
+  String get agentsInsightsNone => 'Nothing here.';
+
+  @override
+  String get agentsInsightUnclear => 'Unclear';
+
+  @override
+  String get agentsInsightUnknown => 'Unknown topic';
+
+  @override
+  String get agentsInsightHandoff => 'Handed to you';
+
+  @override
+  String get agentsInsightCustomer => 'Customer';
+
+  @override
+  String get agentsInsightAgent => 'AI response';
+
+  @override
+  String get agentsInsightResolve => 'Resolve';
+
+  @override
+  String get agentsInsightDismiss => 'Dismiss';
+
+  @override
+  String get agentsInsightAddAndResolve => 'Add and resolve';
+
+  @override
+  String get agentsInsightInstructionHint =>
+      'Add an instruction so the agent handles this better next time…';
+
+  @override
+  String get agentsInsightResolved => 'Resolved';
+
+  @override
+  String get agentsInsightDismissed => 'Dismissed';
+
+  @override
+  String get agentsInsightPending => 'Pending';
+
+  @override
+  String get agentsInsightFailed => 'The issue could not be updated.';
+
+  @override
+  String agentsTestTitle(String name) {
+    return 'Test — $name';
+  }
+
+  @override
+  String get agentsTestEmpty => 'Send a message to test';
+
+  @override
+  String get agentsTestNote => 'A dry run: no credits used, no orders created.';
+
+  @override
+  String get agentsTestPlaceholder => 'Type a message…';
+
+  @override
+  String get agentsTestSend => 'Send';
+
+  @override
+  String get agentsTestFailed => 'No reply — try again.';
+
+  @override
+  String get agentsDetailsConversations => 'Conversations';
+
+  @override
+  String agentsDetailsConversationsFoot(int received, int sent) {
+    return '$received received · $sent sent';
+  }
+
+  @override
+  String get agentsDetailsMessages => 'Messages';
+
+  @override
+  String agentsDetailsLastActive(String date) {
+    return 'Last: $date';
+  }
+
+  @override
+  String get agentsDetailsNoActivity => 'No activity yet';
+
+  @override
+  String get agentsDetailsOrders => 'Orders created';
+
+  @override
+  String agentsDetailsResolvedFoot(int count) {
+    return '$count resolved';
+  }
+
+  @override
+  String get agentsDetailsInsights => 'Agent insights';
+
+  @override
+  String get agentsDetailsAll => 'All';
+
+  @override
+  String get agentsDetailsInstructions => 'Custom instructions';
+
+  @override
+  String get agentsDetailsNoInstructions => 'No instructions yet.';
+
+  @override
+  String get agentsDetailsEdit => 'Edit';
+
+  @override
+  String get agentsDetailsSave => 'Save';
+
+  @override
+  String get agentsDetailsSaved => 'Instructions saved';
+
+  @override
+  String get agentsDetailsSavedMerged =>
+      'Instructions saved — lines added on the web were kept';
+
+  @override
+  String get agentsDetailsConflictTitle => 'Changed on the web';
+
+  @override
+  String get agentsDetailsConflictBody =>
+      'These instructions were changed while you were editing. The current version:';
+
+  @override
+  String get agentsDetailsUseLatest => 'Use this version';
+
+  @override
+  String get agentsDetailsKeepMine => 'Replace with mine';
+
+  @override
+  String get agentsNotFound => 'Agent not found.';
+
+  @override
+  String agentsTestEmptyFor(String name) {
+    return 'Send a message to test $name';
+  }
+
+  @override
+  String get agentsTestProduct => 'Product';
+
+  @override
+  String agentsTestProductId(String id) {
+    return 'ID: $id…';
+  }
+
+  @override
+  String get agentsPresetsTitle => 'Start with a ready-made agent';
+
+  @override
+  String get agentsPresetsBody =>
+      'Each one is fully configured for Algerian selling — Darija, Arabic and French, delivery quoting, and order handling. Pick one to launch in seconds, then fine-tune anything.';
+
+  @override
+  String get agentsPresetVisionVoice => 'VISION + VOICE';
+
+  @override
+  String get agentsPresetVoice => 'VOICE';
+
+  @override
+  String get agentsPresetCloserTagline =>
+      'Turns conversations into confirmed orders';
+
+  @override
+  String get agentsPresetCloser1 =>
+      'Guides the customer from question to confirmed order';
+
+  @override
+  String get agentsPresetCloser2 =>
+      'Quotes delivery per wilaya and closes with the full total';
+
+  @override
+  String get agentsPresetCloser3 => 'Understands photos and voice notes';
+
+  @override
+  String get agentsPresetSupportTagline =>
+      'Answers fast, escalates problems to you';
+
+  @override
+  String get agentsPresetSupport1 =>
+      'Handles product and order questions politely';
+
+  @override
+  String get agentsPresetSupport2 =>
+      'Escalates complaints and refunds to a human';
+
+  @override
+  String get agentsPresetSupport3 => 'Calm, accurate, and to the point';
+
+  @override
+  String get agentsPresetAdvisorTagline =>
+      'Helps customers pick the right product';
+
+  @override
+  String get agentsPresetAdvisor1 =>
+      'Compares options and explains differences';
+
+  @override
+  String get agentsPresetAdvisor2 => 'Matches a customer photo to your catalog';
+
+  @override
+  String get agentsPresetAdvisor3 =>
+      'Great for catalogs with variants and specs';
+
+  @override
+  String get agentsPresetExpressTagline =>
+      'Ultra-fast replies for high message volume';
+
+  @override
+  String get agentsPresetExpress1 => 'Short, quick answers for busy pages';
+
+  @override
+  String get agentsPresetExpress2 => 'Lowest credit use — text and voice only';
+
+  @override
+  String get agentsPresetExpress3 => 'Still places and cancels orders';
+
+  @override
+  String get agentsPresetUse => 'Use this agent  →';
+
+  @override
+  String get agentsPresetOwn => 'Prefer to build your own?';
+
+  @override
+  String get agentsPresetScratch => 'Start from scratch';
+
+  @override
+  String get agentsCreatedToast => 'Agent created';
+
+  @override
+  String get agentFormSubtitle =>
+      'Set up an agent to answer your conversations. Only the name is required — everything else has a default.';
+
+  @override
+  String get agentFormBasics => 'Basic information';
+
+  @override
+  String get agentFormDescription => 'Description';
+
+  @override
+  String get agentFormDescriptionPlaceholder =>
+      'Briefly describe what this agent does…';
+
+  @override
+  String get agentFormInstructions => 'Custom instructions';
+
+  @override
+  String get agentFormInstructionsPlaceholder =>
+      'How to respond, what to avoid, how to handle certain cases…';
+
+  @override
+  String get agentFormInstructionsHint =>
+      'These instructions guide the agent’s behavior in conversations.';
+
+  @override
+  String get agentFormAdvanced => 'Advanced settings';
+
+  @override
+  String get agentFormAdvancedHint => 'Optional — sensible defaults apply.';
+
+  @override
+  String get agentFormBehavior => 'Behavior';
+
+  @override
+  String get agentFormBehaviorSummary => 'Closing · Human handoff';
+
+  @override
+  String get agentFormClosing => 'Conversation closing';
+
+  @override
+  String get agentFormClosingPlaceholder =>
+      'Examples:\n• After an order: “Thank you! Your order is on its way.”\n• Customer says bye: “Thanks for chatting, come back anytime!”\n• Angry customer: “Sorry — let me get a human to help you.”';
+
+  @override
+  String get agentFormClosingHint =>
+      'When and how the AI closes conversations. If empty, it uses sensible defaults (thanks after an order, answers goodbyes).';
+
+  @override
+  String get agentFormHandoff => 'Human intervention rules';
+
+  @override
+  String get agentFormHandoffPlaceholder =>
+      'Examples:\n• Refund or return → stop the AI, notify me\n• Discount request → let me handle it\n• Complaint → transfer the conversation to me';
+
+  @override
+  String get agentFormHandoffHint =>
+      'When the AI should stop and let a human take over. Normal greetings (slm, cava, hi) are always handled by the AI.';
+
+  @override
+  String get agentFormDisplay => 'Product display';
+
+  @override
+  String get agentFormDisplayDefault => 'Default style';
+
+  @override
+  String get agentFormDisplayCustom => 'Custom';
+
+  @override
+  String get agentFormDisplayHint =>
+      'How the AI presents products. Tap a tag to insert it — the AI fills in real product data.';
+
+  @override
+  String get agentFormTemplate => 'Template';
+
+  @override
+  String get agentFormTemplatePlaceholder => 'Tap the tags above or type here…';
+
+  @override
+  String get agentFormTagCard => 'Product card';
+
+  @override
+  String get agentFormTagName => 'Name';
+
+  @override
+  String get agentFormTagPrice => 'Price (DA)';
+
+  @override
+  String get agentFormTagDescription => 'Description';
+
+  @override
+  String get agentFormTagStock => 'Stock qty';
+
+  @override
+  String get agentFormTagNewLine => '↵ New line';
+
+  @override
+  String get agentFormPreview => 'Preview';
+
+  @override
+  String get agentFormPreviewLive => 'Live preview';
+
+  @override
+  String get agentFormPreviewCustomer => 'Show me your products';
+
+  @override
+  String get agentFormPreviewDefault =>
+      'Here’s what we have!\n[PRODUCT_CARD]\nWould you like to order?';
+
+  @override
+  String get agentFormPreviewSampleName => 'Sample product';
+
+  @override
+  String get agentFormPreviewSampleDescription => 'A great product';
+
+  @override
+  String get agentFormModel => 'AI model';
+
+  @override
+  String agentFormModelSummary(String model, String temperature, int tokens) {
+    return '$model · $temperature · $tokens tokens';
+  }
+
+  @override
+  String get agentFormModelPicker => 'Model';
+
+  @override
+  String agentFormModelCost(String usd) {
+    return '≈ $usd / 1000 msgs';
+  }
+
+  @override
+  String get agentFormModelsLoading => 'Loading available models…';
+
+  @override
+  String get agentFormModelsUnavailable =>
+      'AI models are temporarily unavailable. Please try again later.';
+
+  @override
+  String get agentFormTraitBestQuality => 'Best quality';
+
+  @override
+  String get agentFormTraitFastAffordable => 'Fast & affordable';
+
+  @override
+  String get agentFormTraitLongContext128k => '128k context';
+
+  @override
+  String get agentFormTraitLegacyFast => 'Legacy, fast';
+
+  @override
+  String get agentFormTraitBestBalanced => 'Best balanced';
+
+  @override
+  String get agentFormTraitFastCheap => 'Fast & cheap';
+
+  @override
+  String get agentFormTraitMostCapable => 'Most capable';
+
+  @override
+  String get agentFormTraitLatestFast => 'Latest, fast';
+
+  @override
+  String get agentFormTraitLongContext1m => '1M context';
+
+  @override
+  String get agentFormTraitBestOpenSource => 'Best open-source';
+
+  @override
+  String get agentFormTraitUltraFast => 'Ultra fast';
+
+  @override
+  String get agentFormTraitMixtureOfExperts => 'MoE, 32k context';
+
+  @override
+  String get agentFormTraitReasoning => 'Reasoning model';
+
+  @override
+  String get agentFormTemperature => 'Temperature';
+
+  @override
+  String get agentFormPrecise => 'Precise';
+
+  @override
+  String get agentFormCreative => 'Creative';
+
+  @override
+  String get agentFormMaxTokens => 'Max tokens';
+
+  @override
+  String get agentFormMaxTokensHint => 'Maximum response length · 100 – 4096';
+
+  @override
+  String get agentFormImages => 'Image recognition';
+
+  @override
+  String get agentFormImagesHint =>
+      'The AI sees customer photos and compares them with your products. 5 credits per image (vs 1 for text).';
+
+  @override
+  String get agentFormVoice => 'Voice notes';
+
+  @override
+  String get agentFormVoiceHint =>
+      'The AI transcribes voice notes (AR, FR, EN, Darja). 3 credits per note. When off, the agent asks for a text instead.';
+
+  @override
+  String get agentFormDelay => 'Response delay';
+
+  @override
+  String agentFormDelayValue(int seconds) {
+    return '$seconds s';
+  }
+
+  @override
+  String get agentFormDelayMax => '10 s';
+
+  @override
+  String get agentFormDelayHint =>
+      'Waits for more messages before replying — customers often send several short ones, and this combines them.';
+
+  @override
+  String get agentFormPages => 'Connected pages';
+
+  @override
+  String get agentFormPagesHint =>
+      'The pages this agent answers on. Each page can only have one agent.';
+
+  @override
+  String agentFormPagesSummary(int selected, int total) {
+    return '$selected of $total selected';
+  }
+
+  @override
+  String agentFormPagesCount(int selected, int total) {
+    return '$selected of $total';
+  }
+
+  @override
+  String get agentFormPagesNone => 'No pages connected';
+
+  @override
+  String get agentFormPagesEmpty =>
+      'No pages connected yet. Connect a Facebook or Instagram page first, then link it to this agent.';
+
+  @override
+  String agentFormPageTaken(String agent) {
+    return 'Already on $agent';
+  }
+
+  @override
+  String get agentFormPageActive => 'Active';
+
+  @override
+  String get agentFormPageInactive => 'Inactive';
+
+  @override
+  String get agentFormSelectAll => 'Select all';
+
+  @override
+  String get agentFormClear => 'Clear';
+
+  @override
+  String get agentFormProducts => 'Products';
+
+  @override
+  String get agentFormSellAll => 'Sell all products';
+
+  @override
+  String get agentFormSellAllHint =>
+      'The agent knows your entire catalog. Turn off to choose.';
+
+  @override
+  String get agentFormProductsAll => 'All products';
+
+  @override
+  String agentFormProductsChosen(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count products chosen',
+      one: '1 product chosen',
+      zero: 'No product chosen',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get agentFormProductSearch => 'Search';
+
+  @override
+  String get agentFormProductSearchPlaceholder => 'Search products…';
+
+  @override
+  String get agentFormProductsNone => 'No products available';
+
+  @override
+  String get agentFormProductsNoMatch => 'No products match your search';
+
+  @override
+  String get agentFormEditTitle => 'Edit agent';
+
+  @override
+  String get agentFormEditSubtitle =>
+      'Update your AI agent configuration. Changes apply to the next messages.';
+
+  @override
+  String get agentFormEditAdvancedHint => 'Tap a section to change it.';
+
+  @override
+  String get agentFormActive => 'Active';
+
+  @override
+  String get agentFormActiveHint =>
+      'The agent responds to messages on its pages while active.';
+
+  @override
+  String get agentFormSave => 'Save changes';
+
+  @override
+  String get agentFormSavedToast => 'Agent updated';
+
+  @override
+  String get agentFormSavedMergedToast =>
+      'Agent updated — instructions added on the web were kept';
+
+  @override
+  String get agentFormLeaveTitle => 'Leave without saving?';
+
+  @override
+  String agentFormLeaveBody(String name) {
+    return 'Your changes to $name will be lost.';
+  }
+
+  @override
+  String get productFormLeaveBody => 'The product you started will be lost.';
+
+  @override
+  String get conversationLeaveBody => 'Your unsent reply will be lost.';
+
+  @override
+  String get agentDetailsLeaveBody =>
+      'Your changes to the instructions will be lost.';
+
+  @override
+  String get agentGenerateLeaveBody => 'The generated agent will be discarded.';
+
+  @override
+  String get tutorialAgentLeaveBody => 'The agent you started will be lost.';
+
+  @override
+  String get checkoutLeaveTitle => 'Leave the payment page?';
+
+  @override
+  String get checkoutLeaveBody => 'Your payment is not finished.';
+
+  @override
+  String get agentFormKeepEditing => 'Keep editing';
+
+  @override
+  String get agentFormLeave => 'Leave without saving';
+
+  @override
+  String get agentsDetailsEditAgent => 'Edit agent';
+
+  @override
+  String get pagesEyebrow => 'Connected channels';
+
+  @override
+  String get pagesTitle => 'Pages & inboxes';
+
+  @override
+  String get pagesSubtitle =>
+      'Each connected page has its own inbox, stock and tailored AI agent.';
+
+  @override
+  String get pagesStatTotal => 'Total pages';
+
+  @override
+  String get pagesStatPlanLimit => 'Plan limit';
+
+  @override
+  String get pagesFilterAll => 'All Platforms';
+
+  @override
+  String get pagesEmptyTitle => 'No pages connected';
+
+  @override
+  String get pagesEmptyBody =>
+      'Connect your pages to start managing them with AI.';
+
+  @override
+  String pagesEmptyPlatformTitle(String platform) {
+    return 'No $platform pages';
+  }
+
+  @override
+  String pagesEmptyPlatformBody(String platform) {
+    return 'Connect your $platform pages to get started.';
+  }
+
+  @override
+  String get pagesDisconnectTitle => 'Disconnect page?';
+
+  @override
+  String pagesDisconnectBody(String name) {
+    return 'You won’t receive messages from $name anymore and the AI agent will stop replying there.';
+  }
+
+  @override
+  String get pagesDisconnectConfirm => 'Disconnect';
+
+  @override
+  String get pagesDisconnectedToast => 'Page disconnected';
+
+  @override
+  String get pageCardAiOn => 'AI on';
+
+  @override
+  String get pageCardAiOff => 'AI off';
+
+  @override
+  String get pageCardStatConvos => 'Convos';
+
+  @override
+  String get pageCardStatMsgs7d => 'Msgs 7d';
+
+  @override
+  String get pageCardStatUnread => 'Unread';
+
+  @override
+  String get pageCardStatStock => 'Stock';
+
+  @override
+  String pageCardStatActive(int n) {
+    return '$n active';
+  }
+
+  @override
+  String pageCardStatIn(int n) {
+    return '$n in';
+  }
+
+  @override
+  String get pageCardStatNeedsReply => 'needs reply';
+
+  @override
+  String get pageCardStatProducts => 'products';
+
+  @override
+  String get pageCardAgentReady => 'AI agent ready';
+
+  @override
+  String get pageCardAgentTailored => 'Tailored to this page’s inbox.';
+
+  @override
+  String get pageCardAgentNotReady => 'No tailored agent yet';
+
+  @override
+  String get pageCardAgentNotReadyHint =>
+      'Generate one from this page’s recent conversations.';
+
+  @override
+  String get pageCardAgentGenerate => 'Generate';
+
+  @override
+  String get pageCardAgentRegenerate => 'Regenerate';
+
+  @override
+  String get pageCardActionInbox => 'Inbox';
+
+  @override
+  String get pageCardActionStock => 'Stock';
+
+  @override
+  String get pageCardActionConfigure => 'Configure';
+
+  @override
+  String get pageCardActionDisconnect => 'Disconnect';
+
+  @override
+  String get pageCardNoActivity => 'No activity yet';
+
+  @override
+  String get pageCardNow => 'just now';
+
+  @override
+  String pageCardMinutesAgo(int n) {
+    return '$n min ago';
+  }
+
+  @override
+  String pageCardHoursAgo(int n) {
+    return '$n h ago';
+  }
+
+  @override
+  String pageCardDaysAgo(int n) {
+    return '$n d ago';
+  }
+
+  @override
+  String get agentGenTitle => 'Generate AI agent from inbox';
+
+  @override
+  String agentGenSubtitle(String pageName) {
+    return 'We’ll read the recent conversations on $pageName and draft a tailored agent.';
+  }
+
+  @override
+  String get agentGenWhatTitle => 'What this does';
+
+  @override
+  String get agentGenWhat1 =>
+      'Reads up to 25 recent conversations on this page (we don’t store any new copy)';
+
+  @override
+  String get agentGenWhat2 =>
+      'Detects what you sell, the languages your customers use, and the most common questions';
+
+  @override
+  String get agentGenWhat3 =>
+      'Drafts a personality, tone, response length, and custom instructions tailored to your business';
+
+  @override
+  String get agentGenWhat4 =>
+      'You preview, edit, and apply — nothing is changed until you tap Apply';
+
+  @override
+  String get agentGenStart => 'Read inbox & generate';
+
+  @override
+  String get agentGenPhaseReading => 'Reading recent conversations…';
+
+  @override
+  String get agentGenPhaseAnalyzing =>
+      'Understanding context — products, language, tone…';
+
+  @override
+  String get agentGenPhaseDrafting => 'Drafting your tailored AI agent…';
+
+  @override
+  String get agentGenPhaseSubhint => 'This usually takes 10–30 seconds.';
+
+  @override
+  String get agentGenStepRead => 'Read';
+
+  @override
+  String get agentGenStepAnalyze => 'Analyze';
+
+  @override
+  String get agentGenStepDraft => 'Draft';
+
+  @override
+  String get agentGenSummary => 'Business summary';
+
+  @override
+  String agentGenSampled(int conversations, int messages) {
+    return '$conversations conversations · $messages messages';
+  }
+
+  @override
+  String get agentGenLanguages => 'Languages';
+
+  @override
+  String get agentGenTopQuestions => 'Top questions';
+
+  @override
+  String get agentGenPersonality => 'Personality';
+
+  @override
+  String get agentGenTone => 'Tone';
+
+  @override
+  String get agentGenLength => 'Length';
+
+  @override
+  String get agentGenInstructions => 'Custom instructions';
+
+  @override
+  String get agentGenEditHint =>
+      'Edit anything before applying. These instructions are saved on this page’s AI settings.';
+
+  @override
+  String agentGenChars(int n) {
+    return '$n chars';
+  }
+
+  @override
+  String get agentGenDiscard => 'Discard';
+
+  @override
+  String agentGenApply(String pageName) {
+    return 'Apply to $pageName';
+  }
+
+  @override
+  String get agentGenApplying => 'Applying settings…';
+
+  @override
+  String agentGenCreated(String pageName) {
+    return 'AI agent created and linked to $pageName';
+  }
+
+  @override
+  String agentGenUpdated(String pageName) {
+    return 'AI agent updated for $pageName';
+  }
+
+  @override
+  String get agentGenApplyFail => 'Could not apply settings';
+
+  @override
+  String get agentGenToneBalanced => 'Balanced';
+
+  @override
+  String get agentGenToneFormal => 'Formal';
+
+  @override
+  String get agentGenToneCasual => 'Casual';
+
+  @override
+  String get agentGenToneEnthusiastic => 'Enthusiastic';
+
+  @override
+  String get agentGenLengthShort => 'Short';
+
+  @override
+  String get agentGenLengthMedium => 'Medium';
+
+  @override
+  String get agentGenLengthDetailed => 'Detailed';
+
+  @override
+  String get agentsNewTitle => 'New agent';
 }

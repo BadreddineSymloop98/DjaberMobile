@@ -4,6 +4,7 @@ import '../../core/extensions/responsive_extension.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import 'app_icon.dart';
+import 'back_scope.dart';
 
 /// A 40×40 boxed icon control — the shape `Menu Button` (node `31:11`) already
 /// used, generalised when `17 — Produits` and `18 — Ajouter un produit`
@@ -69,27 +70,28 @@ class IconSquareButton extends StatelessWidget {
   }
 }
 
-/// The back control at the top of a pushed screen.
+/// The back control at the top of a screen.
 ///
-/// Pops when there is something to pop and falls back to [fallback]
-/// otherwise. That second half is load-bearing in this app: navigation uses
-/// `go`, which *replaces*, so a screen opened from the drawer has an empty
-/// stack and a bare `pop()` would reach Android and close the app — the same
-/// failure `ExitGuard` exists to soften.
+/// By default it runs [BackScope.back], **the same path as Android back**: it
+/// pops what is below, asks first if the screen has unsaved work, and
+/// otherwise goes to the parent that `router.dart` declares for the route.
+/// A screen therefore never writes its own "pop or go" logic, and the arrow
+/// and the system button cannot disagree. Pass [onBack] only for a control
+/// that means something else.
 class AppBackButton extends StatelessWidget {
   const AppBackButton({
     super.key,
-    required this.onBack,
+    this.onBack,
     this.semanticLabel,
   });
 
-  final VoidCallback onBack;
+  final VoidCallback? onBack;
   final String? semanticLabel;
 
   @override
   Widget build(BuildContext context) => IconSquareButton(
         icon: AppIcons.arrowLeft,
-        onTap: onBack,
+        onTap: onBack ?? () => BackScope.back(context),
         semanticLabel: semanticLabel,
         flipInRtl: true,
       );

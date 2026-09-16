@@ -291,6 +291,7 @@ class AppListRow extends StatelessWidget {
     required this.meta,
     this.value,
     this.unit,
+    this.valueColor,
     this.unitColor,
     this.onTap,
   });
@@ -299,6 +300,10 @@ class AppListRow extends StatelessWidget {
   final String meta;
   final String? value;
   final String? unit;
+
+  /// Tints the value. `16 — Aperçu du stock` mutes a stock exit, as the web
+  /// greys `out`.
+  final Color? valueColor;
 
   /// Tints the label under the value. Used by `17 — Produits` to put
   /// `accent/alert` on `RUPTURE`: a product with no stock cannot be sold, and
@@ -336,7 +341,12 @@ class AppListRow extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if (value != null)
-                    Text(value!, style: AppText.numeralS),
+                    Text(
+                      value!,
+                      style: valueColor == null
+                          ? AppText.numeralS
+                          : AppText.numeralS.copyWith(color: valueColor),
+                    ),
                   if (unit != null) ...[
                     SizedBox(height: AppSpacing.xxs),
                     Text(

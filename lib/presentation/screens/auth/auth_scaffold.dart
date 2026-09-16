@@ -141,10 +141,15 @@ class AuthSubmitButton extends StatelessWidget {
     required this.label,
     required this.onPressed,
     this.isLoading = false,
+    this.enabled = true,
   });
 
   final String label;
   final VoidCallback onPressed;
+
+  /// False greys the button out until the form can be sent — the reset
+  /// screen's, until both passwords are valid and match.
+  final bool enabled;
 
   /// While true the button is disabled and shows a spinner in place of its
   /// label. Disabling matters more than the spinner: without it a double tap
@@ -154,7 +159,7 @@ class AuthSubmitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => FilledButton(
-        onPressed: isLoading ? null : onPressed,
+        onPressed: isLoading || !enabled ? null : onPressed,
         child: isLoading
             ? SizedBox.square(
                 dimension: 4.1.w, // 16
