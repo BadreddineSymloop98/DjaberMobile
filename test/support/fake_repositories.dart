@@ -5,7 +5,9 @@ import 'package:djaber_mobile/data/models/catalogue.dart';
 import 'package:djaber_mobile/data/models/connected_page.dart';
 import 'package:djaber_mobile/data/models/conversation.dart';
 import 'package:djaber_mobile/data/models/dashboard_stats.dart';
+import 'package:djaber_mobile/data/models/page_summary.dart';
 import 'package:djaber_mobile/data/models/product.dart';
+import 'package:djaber_mobile/data/models/stock_overview.dart';
 import 'package:djaber_mobile/data/repositories/agent_repository.dart';
 import 'package:djaber_mobile/data/repositories/catalogue_repository.dart';
 import 'package:djaber_mobile/data/repositories/dashboard_repository.dart';
@@ -31,10 +33,28 @@ class FakeDashboardRepository extends DashboardRepository {
     this.conversations = const {},
     this.statsFails = false,
     this.salesFails = false,
+    this.movements = const [],
+    this.purchases0 = const PurchaseStats(),
+    this.purchasesFails = false,
   }) : super(api: apiForTest());
 
   final DashboardStats stats0;
   final SalesStats sales0;
+
+  /// `16 — Aperçu du stock`: the dashboard's movements, and the purchases block.
+  final List<StockMovement> movements;
+  final PurchaseStats purchases0;
+  final bool purchasesFails;
+
+  @override
+  Future<Result<StockOverview>> overview() async => statsFails
+      ? const Result.failure(ServerException('unreachable'))
+      : Result.success(StockOverview(stats: stats0, movements: movements));
+
+  @override
+  Future<Result<PurchaseStats>> purchaseStats() async => purchasesFails
+      ? const Result.failure(ServerException('unreachable'))
+      : Result.success(purchases0);
 
   /// Keyed by our own page row id, as [DashboardRepository.conversationsFor]
   /// takes it.
@@ -68,16 +88,59 @@ class FakeDashboardRepository extends DashboardRepository {
 }
 
 class FakePageRepository extends PageRepository {
-  FakePageRepository({this.pages = const [], this.fails = false})
-      : super(api: apiForTest());
+  FakePageRepository({
+    this.pages = const [],
+    this.fails = false,
+    this.summaries = const {},
+    this.draft,
+  }) : super(api: apiForTest());
 
-  final List<ConnectedPage> pages;
+  /// Reassign to play a page connected (or removed) behind the screen's back.
+  List<ConnectedPage> pages;
   final bool fails;
+
+  /// Page id → its card. A page with none answers with a failure.
+  final Map<String, PageSummary> summaries;
+
+  /// What `generate-agent` answers; null makes it fail.
+  final GeneratedAgentDraft? draft;
+
+  final disconnected = <String>[];
+  final applied = <({String pageId, String instructions})>[];
 
   @override
   Future<Result<List<ConnectedPage>>> list() async => fails
       ? const Result.failure(ServerException('unreachable'))
       : Result.success(pages);
+
+  @override
+  Future<Result<PageSummary>> summary(String pageId) async {
+    final summary = summaries[pageId];
+    return summary == null ? const Result.failure(ServerException('unreachable')) : Result.success(summary);
+  }
+
+  @override
+  Future<Result<void>> disconnect(String pageId) async {
+    disconnected.add(pageId);
+    pages = [for (final page in pages) if (page.id != pageId) page];
+    return const Result.success(null);
+  }
+
+  @override
+  Future<Result<String>> authUrlFor(PagePlatform platform) async =>
+      const Result.success('https://www.facebook.com/v18.0/dialog/oauth');
+
+  @override
+  Future<Result<GeneratedAgentDraft>> generateAgent(String pageId) async {
+    final value = draft;
+    return value == null ? const Result.failure(ServerException('unreachable')) : Result.success(value);
+  }
+
+  @override
+  Future<Result<bool>> applyAgent(String pageId, GeneratedAgentDraft draft, {required String instructions}) async {
+    applied.add((pageId: pageId, instructions: instructions));
+    return const Result.success(true);
+  }
 }
 
 class FakeAgentRepository extends AgentRepository {

@@ -52,6 +52,7 @@
   "errorUnauthorized": "Your session expired. Sign in again.",
   "errorServer": "Something went wrong on our side.",
   "toastProductCreated": "Product created",
+  "toastProductUpdated": "Product updated",
   "@toastProductCreated": {
     "description": "Success toast after POST /api/user-stock/products. Raised on the step that did the write and read on the next one — the root ScaffoldMessenger carries it across the navigation."
   },
@@ -157,9 +158,39 @@
   "authForgotSecure": "Your password reset link is encrypted and expires in 1 hour",
   "authForgotRemember": "Remember your password?",
   "authSentTitle": "Check Your Email",
-  "authSentMessage": "We’ve sent a password reset link to",
+  "authSentMessage": "If an account exists for this address, a reset link has just been sent to it",
+  "@authSentMessage": {
+    "description": "Neutral on purpose: POST /api/auth/forgot-password answers the same whether or not the account exists. Diverges from the web's 'We’ve sent a password reset link to'."
+  },
   "authSentNoReceive": "Didn’t receive the email?",
   "authSentTryAnother": "Try another email address",
+  "authSentResend": "Resend link",
+  "authSentResendIn": "Resend link in {seconds}s",
+  "@authSentResendIn": {
+    "description": "Countdown before resend is offered: the server sends nothing new within 60 seconds of the last request.",
+    "placeholders": { "seconds": { "type": "int" } }
+  },
+  "authSentResent": "A new link has been sent",
+  "authSentNextStep": "Open the link in the e-mail to choose a new password.",
+  "@authSentNextStep": {
+    "description": "08: the reset happens through the e-mail's link (the web page, or the app when Android hands the link over). Nothing on this screen leads to the reset."
+  },
+  "authResetTitle": "New Password",
+  "@authResetTitle": {
+    "description": "08b — the reset screen, opened only by the e-mail's link handed to the app (App Link or the web page's intent)."
+  },
+  "authResetSubtitle": "Choose a new password for your account",
+  "authResetDeadSubtitle": "Request a new link to reset your password",
+  "authResetChecking": "Checking the link…",
+  "authResetPasswordLabel": "New password",
+  "authResetConfirmLabel": "Confirm password",
+  "@authResetConfirmLabel": {
+    "description": "08b: the new password is typed twice; the button stays disabled until both match."
+  },
+  "authErrPasswordMismatch": "Passwords don’t match",
+  "authResetSubmit": "Save password",
+  "authResetDone": "Password updated",
+  "authResetRequestNew": "Request a new link",
   "@_backendErrors": {
     "description": "Field-level rules the CLIENT checks before a request goes out — empty input, malformed e-mail, short password. The server-side equivalents are NOT here any more: since the error contract (brief §24) the backend sends its own translated message and a stable code, so the app displays that instead of choosing copy. Do not add keys here for anything the server can answer."
   },
@@ -191,7 +222,7 @@
   },
   "exitHint": "Tap back again to leave",
   "@exitHint": {
-    "description": "First press of the system back button on a screen that would otherwise close the app. Ours, unapproved."
+    "description": "First press of the system back button on a root screen (home, login, onboarding, tutorial roots), where back would otherwise close the app. Root screens only. Ours, unapproved."
   },
   "menuPages": "Pages",
   "@menuPages": {
@@ -253,6 +284,218 @@
   "stockModeAdvanced": "Advanced",
   "stockModeSimpleDesc": "Products, Categories & Orders — manage your inventory and orders without the complexity.",
   "stockModeAdvancedDesc": "Full suite — Suppliers, Clients, Sales, Purchases, Caisse, Movements, Delivery & more.",
+  "stockOverviewTitle": "Stock overview",
+  "stockOverviewSubtitle": "Inventory, sales and purchase summary",
+  "stockOverviewHintSimple": "Simple mode shows products, orders and clients. Switch to Advanced for sales, purchases, suppliers, caisse and movements.",
+  "stockOverviewHintAdvanced": "Advanced mode: full ERP — sales, purchases, suppliers, caisse and stock movements are enabled.",
+  "stockTotalProducts": "Total products",
+  "stockLowStock": "Low stock",
+  "stockValue": "Stock value",
+  "stockRetailValue": "Retail value",
+  "stockCategories": "Categories",
+  "stockSuppliers": "Suppliers",
+  "stockTotalItems": "Total items in stock",
+  "stockSalesMonth": "Sales this month",
+  "stockTotalSales": "Total sales",
+  "stockRevenue": "Revenue",
+  "stockPaid": "Paid",
+  "stockPending": "Pending",
+  "stockPurchasesMonth": "Purchases this month",
+  "stockTotalPurchases": "Total purchases",
+  "stockTotalSpent": "Total spent",
+  "stockReceived": "Received",
+  "stockRecentMovements": "Recent movements",
+  "stockMovementsEmpty": "No movements recorded yet. Stock movements will appear here when products are added, sold, or adjusted.",
+  "stockMoveIn": "In",
+  "stockMoveOut": "Out",
+  "stockMoveAdjustment": "Adjustment",
+  "stockMoveReturn": "Return",
+  "settingsTitle": "Settings",
+  "settingsSubtitle": "Manage your account and application settings",
+  "settingsStockMode": "Stock management",
+  "settingsLanguage": "Language",
+  "@settingsLanguage": {
+    "description": "Settings section title for the interface language. The three options show each language's own name, with this locale's name for it underneath."
+  },
+  "settingsLanguageFrench": "French",
+  "settingsLanguageEnglish": "English",
+  "settingsLanguageArabic": "Arabic",
+  "settingsLanguageHelp": "The app stays in the language you choose, even if your phone's language changes.",
+  "@settingsLanguageHelp": {
+    "description": "Under the three language options: a chosen language is kept and the phone's system language is no longer followed."
+  },
+  "planNameIndividual": "Individual",
+  "@planNameIndividual": {
+    "description": "Plan names, descriptions and features: GET /api/plans sends French admin text and ignores Accept-Language, so the app translates the texts it recognises (plan_copy.dart). Unrecognised server text is shown as sent."
+  },
+  "planNamePro": "Pro",
+  "planNameTeams": "Teams",
+  "planDescIndividual": "To get started: connect your page and let the AI answer your customers.",
+  "planDescPro": "For active sellers: vision, voice notes and more volume.",
+  "planDescTeams": "For established shops: maximum volume and priority support.",
+  "planFeaturePages": "{count, plural, =1{1 Facebook or Instagram page} other{{count} Facebook / Instagram pages}}",
+  "@planFeaturePages": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "planFeatureCredits": "{amount} AI credits / month",
+  "@planFeatureCredits": {
+    "description": "amount is already grouped for the locale (5 000).",
+    "placeholders": { "amount": { "type": "String" } }
+  },
+  "planFeatureProducts": "{amount} products",
+  "@planFeatureProducts": {
+    "placeholders": { "amount": { "type": "String" } }
+  },
+  "planFeatureDelivery": "Delivery to {count} wilayas ({carriers})",
+  "@planFeatureDelivery": {
+    "description": "carriers are brand names from the server (Yalidine, ZR Express, Maystro), not translated.",
+    "placeholders": { "count": { "type": "int" }, "carriers": { "type": "String" } }
+  },
+  "planFeatureAgentText": "24/7 AI agent (text)",
+  "planFeatureAgentFull": "24/7 AI agent (text + images + voice)",
+  "planFeatureStock": "Stock & order management",
+  "planFeatureCallConfirmation": "Order confirmation by phone call",
+  "planFeatureVision": "Image recognition (vision)",
+  "planFeatureVoiceNotes": "Voice notes (transcription)",
+  "planFeatureCrossSell": "AI cross-sell / up-sell",
+  "planFeatureUnlimitedProducts": "Unlimited products",
+  "planFeatureUnlimitedConversations": "Unlimited conversations",
+  "planFeatureEverythingPro": "Everything in Pro",
+  "planFeaturePrioritySupport": "Priority support",
+  "settingsAccount": "Account information",
+  "settingsBilling": "Plan & billing",
+  "settingsCurrentPlan": "Current plan",
+  "settingsMonthly": "Monthly",
+  "settingsYearly": "Yearly",
+  "settingsFree": "Free",
+  "settingsPerMonth": "{currency} / mo",
+  "@settingsPerMonth": {
+    "placeholders": { "currency": { "type": "String" } }
+  },
+  "settingsPerYear": "{currency} / yr",
+  "@settingsPerYear": {
+    "placeholders": { "currency": { "type": "String" } }
+  },
+  "settingsBadgeCurrent": "Current",
+  "settingsBadgePopular": "Popular",
+  "settingsYourPlan": "Your current plan",
+  "settingsFreeNoPayment": "Free — no payment needed",
+  "settingsSubscribe": "Subscribe — {price}",
+  "@settingsSubscribe": {
+    "description": "The plan card's button. {price} is the grouped amount and the plan's currency label, e.g. 2,900 DA.",
+    "placeholders": { "price": { "type": "String" } }
+  },
+  "settingsRedirecting": "Redirecting…",
+  "settingsVerifying": "Verifying payment…",
+  "settingsNoPlans": "No plans available yet.",
+  "settingsCheckoutPaid": "Payment confirmed — your {plan} plan is active.",
+  "@settingsCheckoutPaid": {
+    "placeholders": { "plan": { "type": "String" } }
+  },
+  "settingsCheckoutPending": "Payment not confirmed yet. If it went through, your plan will be activated shortly.",
+  "settingsCheckoutFailed": "The payment did not go through.",
+  "settingsFbTitle": "Facebook API permissions",
+  "settingsFbActive": "Currently active permissions",
+  "settingsFbAvailable": "Available advanced permissions",
+  "settingsFbReviewHint": "These permissions require Facebook App Review approval.",
+  "settingsDangerTitle": "Danger zone",
+  "settingsDeleteAccount": "Delete account",
+  "settingsDeleteHelp": "Permanently delete your account and all associated data.",
+  "inboxTitle": "Inbox",
+  "inboxSubtitle": "Read and reply to your customer messages.",
+  "inboxNoPagesTitle": "No pages connected",
+  "inboxNoPagesBody": "Connect a Facebook or Instagram page to start receiving messages here.",
+  "inboxConnectPage": "Connect a page",
+  "inboxPlatformMessenger": "Messenger",
+  "inboxPlatformInstagram": "Instagram DMs",
+  "inboxSynced": "synced {time}",
+  "@inboxSynced": {
+    "placeholders": { "time": { "type": "String" } }
+  },
+  "inboxSwitchPage": "Switch page",
+  "inboxConnectAnother": "Connect another page",
+  "inboxSync": "Sync",
+  "inboxSyncing": "Syncing…",
+  "inboxTabAll": "All",
+  "inboxTabActive": "Active",
+  "inboxTabResolved": "Done",
+  "inboxTabArchived": "Archived",
+  "inboxSearchHint": "Search by name or message…",
+  "inboxNoMatches": "No matches",
+  "inboxNoConversations": "No conversations yet",
+  "inboxNothingHere": "Nothing in this view",
+  "inboxPullFromFacebook": "Pull from Facebook",
+  "inboxUpToDate": "Up to date",
+  "inboxSyncedCount": "{n, plural, =1{Synced — 1 new message} other{Synced — {n} new messages}}",
+  "@inboxSyncedCount": {
+    "placeholders": { "n": { "type": "int" } }
+  },
+  "inboxAttachment": "Attachment",
+  "inboxEmptyMessage": "Empty message",
+  "inboxAiPaused": "AI paused",
+  "@inboxAiPaused": {
+    "description": "Mobile addition, not on the web inbox: the AI handed the conversation over (Conversation.aiPaused)."
+  },
+  "inboxStatusActive": "Active",
+  "inboxStatusResolved": "Resolved",
+  "inboxStatusArchived": "Archived",
+  "inboxTimeNow": "now",
+  "inboxTimeMinutes": "{n}m",
+  "@inboxTimeMinutes": {
+    "placeholders": { "n": { "type": "int" } }
+  },
+  "inboxTimeHours": "{n}h",
+  "@inboxTimeHours": {
+    "placeholders": { "n": { "type": "int" } }
+  },
+  "conversationMarkResolved": "Mark resolved",
+  "conversationArchive": "Archive conversation",
+  "conversationReopen": "Reopen",
+  "conversationResumeAi": "Resume the AI",
+  "conversationPausedNotice": "The agent no longer replies to this customer. Reply here.",
+  "conversationReplyHint": "Type your reply…",
+  "conversationSend": "Send",
+  "conversationSending": "Sending…",
+  "conversationReopenHint": "Reopen this conversation to reply.",
+  "conversationEmpty": "No messages yet",
+  "conversationResolvedToast": "Marked as resolved",
+  "conversationArchivedToast": "Archived",
+  "conversationReopenedToast": "Conversation reopened",
+  "conversationAiResumedToast": "The AI is replying again",
+  "conversationAuthorAi": "AI",
+  "conversationAuthorYou": "You",
+  "productVariantsTitle": "Variants",
+  "productVariantsTotal": "Total qty: {count}",
+  "@productVariantsTotal": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "productVariantAdd": "Add variant",
+  "productVariantsEmpty": "No variants. Tap “Add variant” to create one.",
+  "productVariantName": "Name",
+  "productVariantNamePlaceholder": "e.g., Red - Large",
+  "productVariantSku": "SKU",
+  "productVariantSkuPlaceholder": "Optional SKU",
+  "productVariantCost": "Cost",
+  "productVariantPrice": "Price",
+  "productVariantQuantity": "Qty",
+  "productVariantMinQuantity": "Min qty",
+  "productVariantRemove": "Remove variant",
+  "productVariantDuplicate": "Two variants cannot have the same name",
+  "productVariantsRequired": "Add at least one variant, or untick the box.",
+  "productVariantsRetryHint": "The product is created — only the missing variants will be sent again.",
+  "productDetailEyebrow": "PRODUCT DETAILS",
+  "productDetailNoImages": "No images",
+  "productDetailCost": "Cost price",
+  "productDetailSelling": "Selling price",
+  "productDetailProfit": "Profit / margin",
+  "productDetailInStock": "In stock",
+  "productDetailStatus": "Status",
+  "productDetailActive": "Active",
+  "productDetailInactive": "Inactive",
+  "productDetailVariants": "Variants ({count})",
+  "@productDetailVariants": {
+    "placeholders": { "count": { "type": "int" } }
+  },
 
   "@_product": {
     "description": "T3 — Produit. UNAPPROVED COPY: the web's product form labels are hardcoded English in src/app/dashboard/stock/products/page.tsx with no i18n.ts keys behind them, so there was nothing to source. The French is the Figma frame's own; English and Arabic are new. The error messages mirror what backend/src/controllers/user-stock.controller.ts actually enforces on createProduct."
@@ -302,6 +545,11 @@
     "description": "Shown on a row's meta line when the product has a low-stock threshold set. The number is the threshold, not the stock.",
     "placeholders": { "count": { "type": "int" } }
   },
+  "productsVariantCount": "{count, plural, =1{1 VARIANT} other{{count} VARIANTS}}",
+  "@productsVariantCount": {
+    "description": "Shown on a row's meta line when the product has variants, like the web's 'N variants' badge next to the product name.",
+    "placeholders": { "count": { "type": "int" } }
+  },
   "productsEmptyTitle": "No products yet",
   "productsEmptyBody": "Add your first product and your agent will be able to sell it.",
   "productsNoMatchTitle": "Nothing matches",
@@ -320,6 +568,126 @@
   "productHasVariants": "This product has variants",
   "productHasVariantsHint": "Sizes or colours — the quantity is set per variant",
   "productAddSubmit": "Create product",
+  "productEditTitle": "Edit product",
+  "@productEditTitle": {
+    "description": "Title of the edit form (Figma `Edit product`), and the accessible name of the pencil that opens it from 17a."
+  },
+  "productEditSubmit": "Update product",
+  "productEditVariantsHint": "To change variant quantities, use “Adjust stock”.",
+  "@productEditVariantsHint": {
+    "description": "Under the variants checkbox on the edit form. Replaces the create form's hint, because on edit a saved variant's quantity is locked — PUT cannot carry one."
+  },
+  "productEditLeaveBody": "Your changes will be lost.",
+  "productEditDeleteVariantsTitle": "Delete variants?",
+  "productEditDeleteVariantsBody": "{count, plural, =1{1 variant will be permanently deleted.} other{{count} variants will be permanently deleted.}}",
+  "@productEditDeleteVariantsBody": {
+    "description": "Confirmation before a save that deletes variants holding no stock.",
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "productEditDeleteVariantsStock": "{count, plural, =1{1 variant will be permanently deleted, and its {stock} units written off your stock.} other{{count} variants will be permanently deleted, and their {stock} units written off your stock.}}",
+  "@productEditDeleteVariantsStock": {
+    "description": "Same confirmation when the variants still hold stock. The backend writes a negative adjustment movement for each, which is why the units are named.",
+    "placeholders": { "count": { "type": "int" }, "stock": { "type": "int" } }
+  },
+  "productEditDeleteVariantsConfirm": "Delete and save",
+  "productUnitAdd": "Add a custom unit",
+  "@productUnitAdd": {
+    "description": "The + beside the unit picker on the edit form, and the title of the sheet it opens — the web's Add Custom Unit."
+  },
+  "productUnitName": "Unit name",
+  "productUnitNamePlaceholder": "e.g. Dozen",
+  "productUnitAbbreviation": "Abbreviation",
+  "productUnitAbbreviationPlaceholder": "e.g. dz",
+  "productUnitCreate": "Add unit",
+
+  "stockAdjustTitle": "Adjust stock",
+  "@stockAdjustTitle": {
+    "description": "Title of the Adjust stock sheet (Figma `Adjust stock`), and the action row that opens it on 17a."
+  },
+  "stockAdjustSubtitle": "{product}  ·  Current stock: {stock}",
+  "@stockAdjustSubtitle": {
+    "description": "Under the sheet's title. `stock` is already formatted with its unit abbreviation, e.g. `15 pcs`.",
+    "placeholders": { "product": { "type": "String" }, "stock": { "type": "String" } }
+  },
+  "stockAdjustIn": "Stock in (+)",
+  "stockAdjustOut": "Stock out (−)",
+  "stockAdjustSet": "Set",
+  "@stockAdjustSet": {
+    "description": "The third adjustment type: set the exact quantity. Short, because three chips share one row."
+  },
+  "stockAdjustReason": "Reason",
+  "stockAdjustCurrent": "QTY: {count}",
+  "@stockAdjustCurrent": {
+    "description": "On a variant card's header — the stock it holds before the adjustment.",
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "stockAdjustResult": "New quantity: {count}",
+  "@stockAdjustResult": {
+    "description": "Preview under a filled adjustment line.",
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "stockAdjustInsufficient": "Only {count} in stock",
+  "@stockAdjustInsufficient": {
+    "description": "An outgoing movement larger than the stock on hand. The backend answers 400 `Insufficient stock`; this says so first.",
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "stockAdjustNothing": "Enter a quantity on at least one line.",
+  "stockAdjustSubmit": "Adjust stock",
+  "stockAdjustDone": "Stock adjusted",
+
+  "expensesTitle": "Product expenses",
+  "expensesEyebrow": "PRODUCT EXPENSES",
+  "expensesMarginSummary": "Margin summary",
+  "expensesTotal": "Total expenses",
+  "expensesPerUnit": "Expense / unit",
+  "expensesTrueCost": "True cost",
+  "expensesNetMargin": "Net margin",
+  "expensesSection": "Expenses ({count})",
+  "@expensesSection": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "expensesEmpty": "No expenses yet. Add one below and the margin above will take it into account.",
+  "expensesAddSection": "Add an expense",
+  "expenseCategory": "Category",
+  "expenseCategoryMarketing": "Marketing",
+  "expenseCategoryShipping": "Shipping",
+  "expenseCategoryPackaging": "Packaging",
+  "expenseCategoryCustoms": "Customs",
+  "expenseCategoryStorage": "Storage",
+  "expenseCategoryOther": "Other",
+  "expenseAmount": "Amount (DA)",
+  "expenseAmountPlaceholder": "Amount",
+  "expenseDescriptionPlaceholder": "Description (optional)",
+  "expenseFixed": "Fixed",
+  "@expenseFixed": {
+    "description": "The amount is a fixed total, spread over the quantity in stock. The web's `fixed` toggle, and the default."
+  },
+  "expensePerUnit": "Per unit",
+  "expensePerUnitTag": "/ unit",
+  "@expensePerUnitTag": {
+    "description": "Tag on an expense row whose amount applies to each unit sold."
+  },
+  "expenseAdd": "Add expense",
+  "expenseAdded": "Expense added",
+  "expenseDeleteTitle": "Delete this expense?",
+  "expenseDeleteBody": "{category} — {amount} will be removed, and the margin recalculated.",
+  "@expenseDeleteBody": {
+    "description": "Confirmation before deleting an expense. The backend's delete is hard.",
+    "placeholders": { "category": { "type": "String" }, "amount": { "type": "String" } }
+  },
+  "expenseDeleted": "Expense deleted",
+
+  "productDeleteTitle": "Delete product",
+  "productDeleteBody": "Do you really want to delete {name}? This action cannot be undone.",
+  "@productDeleteBody": {
+    "description": "The web's own delete copy. The row is a soft delete, but the product's image FILES are removed from disk, so it is not reversible in practice.",
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "productDeleteDone": "Product deleted",
+  "productDetailActions": "Actions",
+  "productDetailAdjustMeta": "Stock in, stock out, or set the exact quantity",
+  "productDetailExpensesMeta": "True cost and net margin",
+  "productDetailDeleteMeta": "Removes it from your catalogue",
   "productsCount": "{count, plural, =0{No products} =1{1 product} other{{count} products}}",
   "@productsCount": {
     "description": "The meta line under a category in the picker — how many products it holds.",
@@ -330,6 +698,10 @@
   "productPhotosWrongType": "Only JPEG, PNG, WEBP or GIF photos can be added.",
   "productPhotosTooMany": "Up to 10 photos per product.",
   "productPhotosUploadFailed": "Product created, but its photos could not be uploaded.",
+  "productPhotosUploadFailedEdit": "Product updated, but the new photos could not be uploaded.",
+  "@productPhotosUploadFailedEdit": {
+    "description": "Toast on the edit form when everything saved but the photo upload, which runs last, failed. The edit stands either way."
+  },
   "@productPhotosUploadFailed": {
     "description": "Toast on 18 when the product was created but the separate photo upload failed. The product exists either way."
   },
@@ -521,5 +893,445 @@
   "commonNotBuilt": "not built yet",
   "@commonNotBuilt": {
     "description": "Shown when a control leads to a screen that does not exist yet. Says so rather than doing nothing, which reads as a broken tap."
-  }
+  },
+  "agentsTitle": "AI Agents",
+  "agentsSubtitle": "Create and manage AI agents that sell your products on connected pages",
+  "agentsActive": "AI active",
+  "agentsInactive": "AI paused",
+  "agentsStatPages": "Pages",
+  "agentsStatProducts": "Products",
+  "agentsStatModel": "Model",
+  "agentsAllProducts": "All",
+  "agentsNoPages": "Not answering on any page yet",
+  "agentsPause": "Pause the agent",
+  "agentsResume": "Resume the agent",
+  "agentsPausedToast": "Agent paused — it no longer replies",
+  "agentsResumedToast": "Agent active — it replies again",
+  "agentsEmptyTitle": "No agent yet",
+  "agentsEmptyBody": "Create an AI agent to automatically respond to messages on your connected pages and sell your products.",
+  "agentsEmptyCta": "Create your agent",
+  "@agentsEmptyCta": {
+    "description": "14 — Agents IA, the button on the no-agent state. Leads to 15 — Agents · démarrer (F15), not built yet."
+  },
+  "agentsActionInsights": "Issues to review",
+  "agentsActionTest": "Test the agent",
+  "agentsActionDetails": "Details and stats",
+  "agentsActionDelete": "Delete the agent",
+  "agentsDeleteTitle": "Delete the agent?",
+  "agentsDeleteBody": "{name} will be deleted and will stop replying on your pages. You can create a new agent afterwards.",
+  "@agentsDeleteBody": {"placeholders":{"name":{"type":"String"}}},
+  "agentsDeleteConfirm": "Delete",
+  "agentsDeletedToast": "Agent deleted",
+  "agentsInsightsTitle": "Pending issues",
+  "agentsInsightsEmpty": "No pending issues — your agent is handling everything.",
+  "agentsInsightsNone": "Nothing here.",
+  "agentsInsightUnclear": "Unclear",
+  "agentsInsightUnknown": "Unknown topic",
+  "agentsInsightHandoff": "Handed to you",
+  "agentsInsightCustomer": "Customer",
+  "agentsInsightAgent": "AI response",
+  "agentsInsightResolve": "Resolve",
+  "agentsInsightDismiss": "Dismiss",
+  "agentsInsightAddAndResolve": "Add and resolve",
+  "agentsInsightInstructionHint": "Add an instruction so the agent handles this better next time…",
+  "agentsInsightResolved": "Resolved",
+  "agentsInsightDismissed": "Dismissed",
+  "agentsInsightPending": "Pending",
+  "agentsInsightFailed": "The issue could not be updated.",
+  "agentsTestTitle": "Test — {name}",
+  "@agentsTestTitle": {"placeholders":{"name":{"type":"String"}}},
+  "agentsTestEmpty": "Send a message to test",
+  "agentsTestNote": "A dry run: no credits used, no orders created.",
+  "agentsTestPlaceholder": "Type a message…",
+  "agentsTestSend": "Send",
+  "agentsTestFailed": "No reply — try again.",
+  "agentsDetailsConversations": "Conversations",
+  "agentsDetailsConversationsFoot": "{received} received · {sent} sent",
+  "@agentsDetailsConversationsFoot": {"placeholders":{"received":{"type":"int"},"sent":{"type":"int"}}},
+  "agentsDetailsMessages": "Messages",
+  "agentsDetailsLastActive": "Last: {date}",
+  "@agentsDetailsLastActive": {"placeholders":{"date":{"type":"String"}}},
+  "agentsDetailsNoActivity": "No activity yet",
+  "agentsDetailsOrders": "Orders created",
+  "agentsDetailsResolvedFoot": "{count} resolved",
+  "@agentsDetailsResolvedFoot": {"placeholders":{"count":{"type":"int"}}},
+  "agentsDetailsInsights": "Agent insights",
+  "agentsDetailsAll": "All",
+  "agentsDetailsInstructions": "Custom instructions",
+  "agentsDetailsNoInstructions": "No instructions yet.",
+  "agentsDetailsEdit": "Edit",
+  "agentsDetailsSave": "Save",
+  "agentsDetailsSaved": "Instructions saved",
+  "agentsDetailsSavedMerged": "Instructions saved — lines added on the web were kept",
+  "@agentsDetailsSavedMerged": {
+    "description": "Saving on the phone after the web appended instructions (an insight resolve) while the editor was open. Ours, unapproved."
+  },
+  "agentsDetailsConflictTitle": "Changed on the web",
+  "agentsDetailsConflictBody": "These instructions were changed while you were editing. The current version:",
+  "agentsDetailsUseLatest": "Use this version",
+  "agentsDetailsKeepMine": "Replace with mine",
+  "agentsNotFound": "Agent not found.",
+  "agentsTestEmptyFor": "Send a message to test {name}",
+  "@agentsTestEmptyFor": {"placeholders":{"name":{"type":"String"}}},
+  "agentsTestProduct": "Product",
+  "agentsTestProductId": "ID: {id}…",
+  "@agentsTestProductId": {"placeholders":{"id":{"type":"String"}}},
+  "agentsPresetsTitle": "Start with a ready-made agent",
+  "agentsPresetsBody": "Each one is fully configured for Algerian selling — Darija, Arabic and French, delivery quoting, and order handling. Pick one to launch in seconds, then fine-tune anything.",
+  "agentsPresetVisionVoice": "VISION + VOICE",
+  "agentsPresetVoice": "VOICE",
+  "agentsPresetCloserTagline": "Turns conversations into confirmed orders",
+  "agentsPresetCloser1": "Guides the customer from question to confirmed order",
+  "agentsPresetCloser2": "Quotes delivery per wilaya and closes with the full total",
+  "agentsPresetCloser3": "Understands photos and voice notes",
+  "agentsPresetSupportTagline": "Answers fast, escalates problems to you",
+  "agentsPresetSupport1": "Handles product and order questions politely",
+  "agentsPresetSupport2": "Escalates complaints and refunds to a human",
+  "agentsPresetSupport3": "Calm, accurate, and to the point",
+  "agentsPresetAdvisorTagline": "Helps customers pick the right product",
+  "agentsPresetAdvisor1": "Compares options and explains differences",
+  "agentsPresetAdvisor2": "Matches a customer photo to your catalog",
+  "agentsPresetAdvisor3": "Great for catalogs with variants and specs",
+  "agentsPresetExpressTagline": "Ultra-fast replies for high message volume",
+  "agentsPresetExpress1": "Short, quick answers for busy pages",
+  "agentsPresetExpress2": "Lowest credit use — text and voice only",
+  "agentsPresetExpress3": "Still places and cancels orders",
+  "agentsPresetUse": "Use this agent  →",
+  "agentsPresetOwn": "Prefer to build your own?",
+  "agentsPresetScratch": "Start from scratch",
+  "agentsCreatedToast": "Agent created",
+  "agentFormSubtitle": "Set up an agent to answer your conversations. Only the name is required — everything else has a default.",
+  "@agentFormSubtitle": {
+    "description": "15b — Partir de zéro, the full agent form. The web's AgentForm.tsx is hardcoded English and has no i18n keys; section names follow it, the rest is ours and unapproved."
+  },
+  "agentFormBasics": "Basic information",
+  "agentFormDescription": "Description",
+  "agentFormDescriptionPlaceholder": "Briefly describe what this agent does…",
+  "agentFormInstructions": "Custom instructions",
+  "agentFormInstructionsPlaceholder": "How to respond, what to avoid, how to handle certain cases…",
+  "agentFormInstructionsHint": "These instructions guide the agent’s behavior in conversations.",
+  "agentFormAdvanced": "Advanced settings",
+  "agentFormAdvancedHint": "Optional — sensible defaults apply.",
+  "agentFormBehavior": "Behavior",
+  "agentFormBehaviorSummary": "Closing · Human handoff",
+  "agentFormClosing": "Conversation closing",
+  "agentFormClosingPlaceholder": "Examples:\n• After an order: “Thank you! Your order is on its way.”\n• Customer says bye: “Thanks for chatting, come back anytime!”\n• Angry customer: “Sorry — let me get a human to help you.”",
+  "agentFormClosingHint": "When and how the AI closes conversations. If empty, it uses sensible defaults (thanks after an order, answers goodbyes).",
+  "agentFormHandoff": "Human intervention rules",
+  "agentFormHandoffPlaceholder": "Examples:\n• Refund or return → stop the AI, notify me\n• Discount request → let me handle it\n• Complaint → transfer the conversation to me",
+  "agentFormHandoffHint": "When the AI should stop and let a human take over. Normal greetings (slm, cava, hi) are always handled by the AI.",
+  "agentFormDisplay": "Product display",
+  "agentFormDisplayDefault": "Default style",
+  "agentFormDisplayCustom": "Custom",
+  "agentFormDisplayHint": "How the AI presents products. Tap a tag to insert it — the AI fills in real product data.",
+  "agentFormTemplate": "Template",
+  "agentFormTemplatePlaceholder": "Tap the tags above or type here…",
+  "agentFormTagCard": "Product card",
+  "agentFormTagName": "Name",
+  "agentFormTagPrice": "Price (DA)",
+  "agentFormTagDescription": "Description",
+  "agentFormTagStock": "Stock qty",
+  "agentFormTagNewLine": "↵ New line",
+  "agentFormPreview": "Preview",
+  "agentFormPreviewLive": "Live preview",
+  "agentFormPreviewCustomer": "Show me your products",
+  "agentFormPreviewDefault": "Here’s what we have!\n[PRODUCT_CARD]\nWould you like to order?",
+  "agentFormPreviewSampleName": "Sample product",
+  "agentFormPreviewSampleDescription": "A great product",
+  "agentFormModel": "AI model",
+  "agentFormModelSummary": "{model} · {temperature} · {tokens} tokens",
+  "@agentFormModelSummary": {
+    "placeholders": {
+      "model": {"type": "String"},
+      "temperature": {"type": "String"},
+      "tokens": {"type": "int"}
+    }
+  },
+  "agentFormModelPicker": "Model",
+  "agentFormModelCost": "≈ {usd} / 1000 msgs",
+  "@agentFormModelCost": {
+    "description": "The web's costPer1000Label. usd arrives with its dollar sign.",
+    "placeholders": {
+      "usd": {"type": "String"}
+    }
+  },
+  "agentFormModelsLoading": "Loading available models…",
+  "agentFormModelsUnavailable": "AI models are temporarily unavailable. Please try again later.",
+  "agentFormTraitBestQuality": "Best quality",
+  "agentFormTraitFastAffordable": "Fast & affordable",
+  "agentFormTraitLongContext128k": "128k context",
+  "agentFormTraitLegacyFast": "Legacy, fast",
+  "agentFormTraitBestBalanced": "Best balanced",
+  "agentFormTraitFastCheap": "Fast & cheap",
+  "agentFormTraitMostCapable": "Most capable",
+  "agentFormTraitLatestFast": "Latest, fast",
+  "agentFormTraitLongContext1m": "1M context",
+  "agentFormTraitBestOpenSource": "Best open-source",
+  "agentFormTraitUltraFast": "Ultra fast",
+  "agentFormTraitMixtureOfExperts": "MoE, 32k context",
+  "agentFormTraitReasoning": "Reasoning model",
+  "agentFormTemperature": "Temperature",
+  "agentFormPrecise": "Precise",
+  "agentFormCreative": "Creative",
+  "agentFormMaxTokens": "Max tokens",
+  "agentFormMaxTokensHint": "Maximum response length · 100 – 4096",
+  "agentFormImages": "Image recognition",
+  "agentFormImagesHint": "The AI sees customer photos and compares them with your products. 5 credits per image (vs 1 for text).",
+  "agentFormVoice": "Voice notes",
+  "agentFormVoiceHint": "The AI transcribes voice notes (AR, FR, EN, Darja). 3 credits per note. When off, the agent asks for a text instead.",
+  "agentFormDelay": "Response delay",
+  "agentFormDelayValue": "{seconds} s",
+  "@agentFormDelayValue": {
+    "placeholders": {
+      "seconds": {"type": "int"}
+    }
+  },
+  "agentFormDelayMax": "10 s",
+  "agentFormDelayHint": "Waits for more messages before replying — customers often send several short ones, and this combines them.",
+  "agentFormPages": "Connected pages",
+  "agentFormPagesHint": "The pages this agent answers on. Each page can only have one agent.",
+  "agentFormPagesSummary": "{selected} of {total} selected",
+  "@agentFormPagesSummary": {
+    "placeholders": {
+      "selected": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "agentFormPagesCount": "{selected} of {total}",
+  "@agentFormPagesCount": {
+    "placeholders": {
+      "selected": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "agentFormPagesNone": "No pages connected",
+  "agentFormPagesEmpty": "No pages connected yet. Connect a Facebook or Instagram page first, then link it to this agent.",
+  "agentFormPageTaken": "Already on {agent}",
+  "@agentFormPageTaken": {
+    "placeholders": {
+      "agent": {"type": "String"}
+    }
+  },
+  "agentFormPageActive": "Active",
+  "agentFormPageInactive": "Inactive",
+  "agentFormSelectAll": "Select all",
+  "agentFormClear": "Clear",
+  "agentFormProducts": "Products",
+  "agentFormSellAll": "Sell all products",
+  "agentFormSellAllHint": "The agent knows your entire catalog. Turn off to choose.",
+  "agentFormProductsAll": "All products",
+  "agentFormProductsChosen": "{count, plural, =0{No product chosen} =1{1 product chosen} other{{count} products chosen}}",
+  "@agentFormProductsChosen": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "agentFormProductSearch": "Search",
+  "agentFormProductSearchPlaceholder": "Search products…",
+  "agentFormProductsNone": "No products available",
+  "agentFormProductsNoMatch": "No products match your search",
+  "agentFormEditTitle": "Edit agent",
+  "@agentFormEditTitle": {
+    "description": "15c — the agent form in edit mode. The web says Edit Agent / Update your AI agent configuration; the rest is ours, unapproved."
+  },
+  "agentFormEditSubtitle": "Update your AI agent configuration. Changes apply to the next messages.",
+  "agentFormEditAdvancedHint": "Tap a section to change it.",
+  "agentFormActive": "Active",
+  "agentFormActiveHint": "The agent responds to messages on its pages while active.",
+  "agentFormSave": "Save changes",
+  "agentFormSavedToast": "Agent updated",
+  "agentFormSavedMergedToast": "Agent updated — instructions added on the web were kept",
+  "agentFormLeaveTitle": "Leave without saving?",
+  "agentFormLeaveBody": "Your changes to {name} will be lost.",
+  "@agentFormLeaveBody": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "productFormLeaveBody": "The product you started will be lost.",
+  "@productFormLeaveBody": {
+    "description": "Leave sheet body when backing out of a dirty Add product form. Ours, unapproved."
+  },
+  "conversationLeaveBody": "Your unsent reply will be lost.",
+  "@conversationLeaveBody": {
+    "description": "Leave sheet body when backing out of a conversation with text in the composer. Ours, unapproved."
+  },
+  "agentDetailsLeaveBody": "Your changes to the instructions will be lost.",
+  "@agentDetailsLeaveBody": {
+    "description": "Leave sheet body when backing out of agent details with unsaved instructions or a typed resolve instruction. Ours, unapproved."
+  },
+  "agentGenerateLeaveBody": "The generated agent will be discarded.",
+  "@agentGenerateLeaveBody": {
+    "description": "Leave sheet body when closing the generate-agent sheet on its preview. Ours, unapproved."
+  },
+  "tutorialAgentLeaveBody": "The agent you started will be lost.",
+  "@tutorialAgentLeaveBody": {
+    "description": "Leave sheet body when backing out of the app from tutorial step T4 with typed values. Ours, unapproved."
+  },
+  "checkoutLeaveTitle": "Leave the payment page?",
+  "@checkoutLeaveTitle": {
+    "description": "Leave sheet title before abandoning the Chargily checkout web view. Ours, unapproved."
+  },
+  "checkoutLeaveBody": "Your payment is not finished.",
+  "@checkoutLeaveBody": {
+    "description": "Leave sheet body before abandoning the Chargily checkout web view. Ours, unapproved."
+  },
+  "agentFormKeepEditing": "Keep editing",
+  "agentFormLeave": "Leave without saving",
+  "agentsDetailsEditAgent": "Edit agent",
+  "pagesEyebrow": "Connected channels",
+  "@pagesEyebrow": {
+    "description": "12 / 13 — the pages screen. pages.* and pageCard.* are the web's i18n verbatim; empty states, relative times and the disconnect sheet are ours (the web hardcodes English there), unapproved."
+  },
+  "pagesTitle": "Pages & inboxes",
+  "pagesSubtitle": "Each connected page has its own inbox, stock and tailored AI agent.",
+  "pagesStatTotal": "Total pages",
+  "pagesStatPlanLimit": "Plan limit",
+  "pagesFilterAll": "All Platforms",
+  "pagesEmptyTitle": "No pages connected",
+  "pagesEmptyBody": "Connect your pages to start managing them with AI.",
+  "pagesEmptyPlatformTitle": "No {platform} pages",
+  "@pagesEmptyPlatformTitle": {
+    "placeholders": {
+      "platform": {"type": "String"}
+    }
+  },
+  "pagesEmptyPlatformBody": "Connect your {platform} pages to get started.",
+  "@pagesEmptyPlatformBody": {
+    "placeholders": {
+      "platform": {"type": "String"}
+    }
+  },
+  "pagesDisconnectTitle": "Disconnect page?",
+  "pagesDisconnectBody": "You won’t receive messages from {name} anymore and the AI agent will stop replying there.",
+  "@pagesDisconnectBody": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "pagesDisconnectConfirm": "Disconnect",
+  "pagesDisconnectedToast": "Page disconnected",
+  "pageCardAiOn": "AI on",
+  "pageCardAiOff": "AI off",
+  "pageCardStatConvos": "Convos",
+  "pageCardStatMsgs7d": "Msgs 7d",
+  "pageCardStatUnread": "Unread",
+  "pageCardStatStock": "Stock",
+  "pageCardStatActive": "{n} active",
+  "@pageCardStatActive": {
+    "placeholders": {
+      "n": {"type": "int"}
+    }
+  },
+  "pageCardStatIn": "{n} in",
+  "@pageCardStatIn": {
+    "placeholders": {
+      "n": {"type": "int"}
+    }
+  },
+  "pageCardStatNeedsReply": "needs reply",
+  "pageCardStatProducts": "products",
+  "pageCardAgentReady": "AI agent ready",
+  "pageCardAgentTailored": "Tailored to this page’s inbox.",
+  "pageCardAgentNotReady": "No tailored agent yet",
+  "pageCardAgentNotReadyHint": "Generate one from this page’s recent conversations.",
+  "pageCardAgentGenerate": "Generate",
+  "pageCardAgentRegenerate": "Regenerate",
+  "pageCardActionInbox": "Inbox",
+  "pageCardActionStock": "Stock",
+  "pageCardActionConfigure": "Configure",
+  "pageCardActionDisconnect": "Disconnect",
+  "pageCardNoActivity": "No activity yet",
+  "pageCardNow": "just now",
+  "pageCardMinutesAgo": "{n} min ago",
+  "@pageCardMinutesAgo": {
+    "placeholders": {
+      "n": {"type": "int"}
+    }
+  },
+  "pageCardHoursAgo": "{n} h ago",
+  "@pageCardHoursAgo": {
+    "placeholders": {
+      "n": {"type": "int"}
+    }
+  },
+  "pageCardDaysAgo": "{n} d ago",
+  "@pageCardDaysAgo": {
+    "placeholders": {
+      "n": {"type": "int"}
+    }
+  },
+  "agentGenTitle": "Generate AI agent from inbox",
+  "@agentGenTitle": {
+    "description": "The web's agentGen.* verbatim — its GenerateAgentModal, as a sheet."
+  },
+  "agentGenSubtitle": "We’ll read the recent conversations on {pageName} and draft a tailored agent.",
+  "@agentGenSubtitle": {
+    "placeholders": {
+      "pageName": {"type": "String"}
+    }
+  },
+  "agentGenWhatTitle": "What this does",
+  "agentGenWhat1": "Reads up to 25 recent conversations on this page (we don’t store any new copy)",
+  "agentGenWhat2": "Detects what you sell, the languages your customers use, and the most common questions",
+  "agentGenWhat3": "Drafts a personality, tone, response length, and custom instructions tailored to your business",
+  "agentGenWhat4": "You preview, edit, and apply — nothing is changed until you tap Apply",
+  "agentGenStart": "Read inbox & generate",
+  "agentGenPhaseReading": "Reading recent conversations…",
+  "agentGenPhaseAnalyzing": "Understanding context — products, language, tone…",
+  "agentGenPhaseDrafting": "Drafting your tailored AI agent…",
+  "agentGenPhaseSubhint": "This usually takes 10–30 seconds.",
+  "agentGenStepRead": "Read",
+  "agentGenStepAnalyze": "Analyze",
+  "agentGenStepDraft": "Draft",
+  "agentGenSummary": "Business summary",
+  "agentGenSampled": "{conversations} conversations · {messages} messages",
+  "@agentGenSampled": {
+    "placeholders": {
+      "conversations": {"type": "int"},
+      "messages": {"type": "int"}
+    }
+  },
+  "agentGenLanguages": "Languages",
+  "agentGenTopQuestions": "Top questions",
+  "agentGenPersonality": "Personality",
+  "agentGenTone": "Tone",
+  "agentGenLength": "Length",
+  "agentGenInstructions": "Custom instructions",
+  "agentGenEditHint": "Edit anything before applying. These instructions are saved on this page’s AI settings.",
+  "agentGenChars": "{n} chars",
+  "@agentGenChars": {
+    "placeholders": {
+      "n": {"type": "int"}
+    }
+  },
+  "agentGenDiscard": "Discard",
+  "agentGenApply": "Apply to {pageName}",
+  "@agentGenApply": {
+    "placeholders": {
+      "pageName": {"type": "String"}
+    }
+  },
+  "agentGenApplying": "Applying settings…",
+  "agentGenCreated": "AI agent created and linked to {pageName}",
+  "@agentGenCreated": {
+    "placeholders": {
+      "pageName": {"type": "String"}
+    }
+  },
+  "agentGenUpdated": "AI agent updated for {pageName}",
+  "@agentGenUpdated": {
+    "placeholders": {
+      "pageName": {"type": "String"}
+    }
+  },
+  "agentGenApplyFail": "Could not apply settings",
+  "agentGenToneBalanced": "Balanced",
+  "agentGenToneFormal": "Formal",
+  "agentGenToneCasual": "Casual",
+  "agentGenToneEnthusiastic": "Enthusiastic",
+  "agentGenLengthShort": "Short",
+  "agentGenLengthMedium": "Medium",
+  "agentGenLengthDetailed": "Detailed",
+  "agentsNewTitle":"New agent"
 }

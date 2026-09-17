@@ -16,6 +16,12 @@ class Routes {
   static const forgotPassword = '/forgot-password';
   static const passwordSent = '/password-sent';
 
+  /// `08b — Nouveau mot de passe`. **The same path as the e-mail's link**
+  /// (`https://djaber.vercel.app/reset-password?token=…`, or the web page's
+  /// `djaber://app/reset-password?token=…`), so Android hands it straight
+  /// here. Reached from nothing inside the app.
+  static const resetPassword = '/reset-password';
+
   // ---- The first-run tutorial (brief §21.5) ----
   //
   // Reached only after account creation, and only until it is finished or
@@ -61,6 +67,10 @@ class Routes {
   static const home = '/home';
   static const queue = '/queue';
   static const inbox = '/inbox';
+
+  /// The inbox on one page — a page card's *Boîte*. The shell still matches
+  /// [inbox], so the Boîte tab stays lit.
+  static String inboxFor(String pageId) => '$inbox?pageId=${Uri.encodeQueryComponent(pageId)}';
   static const stock = '/stock';
   static const orders = '/orders';
 
@@ -69,9 +79,40 @@ class Routes {
   static String conversationOf(String id) => '/conversation/$id';
 
   /// `17 — Produits` — the catalogue. Pushed over the shell rather than
-  /// living in it: the bottom nav's Stock tab is `16 — Aperçu du stock`, which
-  /// is still unbuilt, and this is reached from the drawer and from home.
+  /// living in it: the bottom nav's Stock tab is `16 — Aperçu du stock`, and
+  /// this is reached from the drawer and from home.
   static const products = '/products';
+
+  /// `14 — Agents IA` — the merchant's agent. Reached from home's action
+  /// card and the drawer, like [products].
+  static const agents = '/agents';
+
+  /// `15 — Agents · démarrer` — ready-made agents, or start from scratch.
+  /// **Declared before [agent] in the router**, which would otherwise read
+  /// `new` as an agent id.
+  static const agentNew = '/agents/new';
+
+  /// "Partir de zéro": name, personality, instructions.
+  static const agentNewScratch = '/agents/new/scratch';
+
+  /// An agent's details, KPIs and instructions — the web's
+  /// `/dashboard/agents/{id}`. Pushed over [agents].
+  static const agent = '/agents/:id';
+  static String agentOf(String id) => '/agents/$id';
+
+  /// Its sandbox test chat. Pushed over [agents].
+  static const agentTest = '/agents/:id/test';
+  static String agentTestOf(String id) => '/agents/$id/test';
+
+  /// `15c — Modifier l'agent`: the full agent form, filled. Pushed over
+  /// [agent], whose *Modifier l'agent* button opens it, as the web's details
+  /// page does.
+  static const agentEdit = '/agents/:id/edit';
+  static String agentEditOf(String id) => '/agents/$id/edit';
+
+  /// `12 — Pages connectées` (`13 — Connecter une page` when there are none).
+  /// Reached from home and from the drawer's *Réseaux sociaux*.
+  static const pages = '/pages';
 
   /// `18 — Ajouter un produit`.
   ///
@@ -82,6 +123,16 @@ class Routes {
 
   static const product = '/products/:id';
   static String productOf(String id) => '/products/$id';
+
+  /// `Edit product` — the web's Add/Edit modal in its edit mode, reached from
+  /// the product's own screen. Three segments, so it cannot collide with
+  /// [product]; declared beside it all the same.
+  static const productEdit = '/products/:id/edit';
+  static String productEditOf(String id) => '/products/$id/edit';
+
+  /// `Product expenses panel` — the web's side panel, a screen of its own here.
+  static const productExpenses = '/products/:id/expenses';
+  static String productExpensesOf(String id) => '/products/$id/expenses';
 
   static const order = '/orders/:id';
   static String orderOf(String id) => '/orders/$id';
@@ -97,5 +148,6 @@ class Routes {
     signup,
     forgotPassword,
     passwordSent,
+    resetPassword,
   };
 }

@@ -15,6 +15,7 @@ import '../../viewmodels/tutorial_agent_view_model.dart';
 import '../../viewmodels/tutorial_view_model.dart';
 import '../../widgets/app_text_field.dart';
 import '../../widgets/app_toast.dart';
+import '../../widgets/leave_sheet.dart';
 import '../../widgets/option_card.dart';
 import 'tutorial_messages.dart';
 import 'tutorial_step_scaffold.dart';
@@ -68,8 +69,30 @@ class _TutorialAgentScreenState extends State<TutorialAgentScreen> {
     super.dispose();
   }
 
+  /// Set once the agent exists, and never cleared. Back is ignored from then
+  /// on, so nothing can interrupt the move to `T5`.
+  bool _advancing = false;
+
+  /// The typed name or instructions: what leaving the app from this root
+  /// would lose. The draft lives in memory only and dies with the process.
+  bool get _hasTyped =>
+      _model.name.value.trim().isNotEmpty ||
+      _model.instructions.value.trim().isNotEmpty;
+
+  /// `T4` is a root (the product below it is spent), so back leaves the app.
+  /// With something typed, the leave sheet is the confirmation, replacing
+  /// "tap again", and says what is lost. Busy or advancing is handled by the
+  /// scaffold, which ignores the press.
+  Future<bool> _onBack() => showLeaveSheet(
+        context,
+        body: L10n.of(context).tutorialAgentLeaveBody,
+      );
+
   Future<void> _create() async {
     final agent = await _model.submitAndCreate();
+    if ((agent != null || _model.alreadyExists) && mounted) {
+      setState(() => _advancing = true);
+    }
     // The wall this whole change exists to remove: one agent per user is
     // enforced, so a merchant who force-quit after this step came back to a
     // 403 they could never get past. `alreadyExists` treats that 403 as what
@@ -120,6 +143,9 @@ class _TutorialAgentScreenState extends State<TutorialAgentScreen> {
 
           return TutorialStepScaffold(
             step: 3,
+            busy: model.isBusy || _advancing,
+            dirty: _hasTyped,
+            onLeave: _onBack,
             title: l10n.tutorialAgentTitle,
             subtitle: l10n.tutorialAgentSubtitle,
             footer: Column(

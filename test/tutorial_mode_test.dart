@@ -136,6 +136,23 @@ void main() {
       expect(find.text(l10n.commonActive), findsOneWidget);
     });
 
+    testWidgets('Simple is preselected even on a phone that remembers Avancé',
+        (tester) async {
+      // Someone chose Avancé on this handset before, then signed out; the
+      // preference survives. The new account's tutorial must still start on
+      // Simple.
+      await prefs.setStockMode(StockMode.advanced);
+      stockMode = StockModeViewModel(prefs: prefs);
+      expect(stockMode.mode, StockMode.advanced);
+
+      await pump(tester);
+      final l10n = await L10n.delegate.load(const Locale('fr'));
+
+      expect(cardFor(tester, l10n.stockModeSimple).selected, isTrue);
+      expect(cardFor(tester, l10n.stockModeAdvanced).selected, isFalse);
+      expect(find.text(l10n.commonActive), findsOneWidget);
+    });
+
     testWidgets('tapping Avancé moves the selection', (tester) async {
       await pump(tester);
       final l10n = await L10n.delegate.load(const Locale('fr'));

@@ -15,6 +15,18 @@ class Api {
   static const login = '/api/auth/login';
   static const register = '/api/auth/register';
   static const profile = '/api/auth/profile';
+
+  /// Password recovery. The e-mailed link is
+  /// `https://djaber.vercel.app/reset-password?token=<64 hex>`: the web app's
+  /// page, or `08b` when Android hands the link to the app.
+  static const forgotPassword = '/api/auth/forgot-password';
+  static const resetPassword = '/api/auth/reset-password';
+  static String resetPasswordToken(String token) => '/api/auth/reset-password/$token';
+
+  // ---- Plans & payments ----
+  static const plans = '/api/plans';
+  static const paymentsCheckout = '/api/payments/checkout';
+  static String paymentVerify(String checkoutId) => '/api/payments/verify/$checkoutId';
   // NOTE: the web ships a /forgot-password page but it calls nothing — there is
   // no reset endpoint on the backend yet. The mobile screen will need one built
   // before it can work.
@@ -42,6 +54,8 @@ class Api {
   static String pageInsights(String pageId) => '/api/pages/$pageId/insights';
   static String pageAiSettings(String pageId) => '/api/pages/$pageId/ai-settings';
   static String pageSync(String pageId) => '/api/pages/$pageId/sync';
+  static String pageGenerateAgent(String pageId) => '/api/pages/$pageId/generate-agent';
+  static String pageApplyAgent(String pageId) => '/api/pages/$pageId/apply-agent';
 
   // ---- Conversations (page-config.routes.ts) ----
   static String pageConversations(String pageId) =>
@@ -69,6 +83,12 @@ class Api {
       '/api/user-stock/products/$id/images/$imageId/primary';
   static String productImagesReorder(String id) =>
       '/api/user-stock/products/$id/images/reorder';
+  static String productExpenses(String id) =>
+      '/api/user-stock/products/$id/expenses';
+  static String productExpense(String id, String expenseId) =>
+      '/api/user-stock/products/$id/expenses/$expenseId';
+  static String productMargins(String id) =>
+      '/api/user-stock/products/$id/margins';
   static String productVariants(String id) =>
       '/api/user-stock/products/$id/variants';
   static String productVariant(String id, String variantId) =>
@@ -113,11 +133,20 @@ class Api {
 
   // ---- Agents ----
   static const agents = '/api/user-stock/agents';
+
+  /// The LLM providers switched on, with their model ids — the agent form's
+  /// model picker.
+  static const aiProvidersActive = '/api/user-stock/ai-providers/active';
   static String agent(String id) => '/api/user-stock/agents/$id';
   static String agentTest(String id) => '/api/user-stock/agents/$id/test';
   static String agentMetrics(String id) => '/api/user-stock/agents/$id/metrics';
   static String agentInsights(String id) =>
       '/api/user-stock/agents/$id/insights';
+
+  /// Resolve or dismiss one insight. One segment deeper than [agent], so the
+  /// backend never confuses the two.
+  static String agentInsight(String insightId) =>
+      '/api/user-stock/agents/insights/$insightId';
 
   // ---- Notifications (brief Q7 — the API exists, mobile has never used it) ----
   static const notifications = '/api/user-stock/notifications';

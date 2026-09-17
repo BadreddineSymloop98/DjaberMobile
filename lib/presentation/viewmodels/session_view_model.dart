@@ -142,13 +142,19 @@ class SessionViewModel extends BaseViewModel {
       tag: 'signIn',
     );
     if (user == null) return false;
+    await startSession(user);
+    return true;
+  }
+
+  /// Adopts a session whose token [AuthRepository] has already stored — after
+  /// login, and after a password reset, which answers like login.
+  Future<void> startSession(User user) async {
     _user = user;
     _setStatus(AuthStatus.signedIn);
     await _syncPushToken();
     // Login returns no credits; only /profile does. Fetched without awaiting
     // so the merchant reaches home immediately and the credit state fills in.
     unawaited(refreshProfile());
-    return true;
   }
 
   Future<bool> signUp({

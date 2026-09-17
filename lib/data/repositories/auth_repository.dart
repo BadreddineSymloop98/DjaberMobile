@@ -55,6 +55,41 @@ class AuthRepository {
     return _persist(result);
   }
 
+  /// `POST /api/auth/forgot-password` — e-mails a one-time reset link.
+  ///
+  /// **Always 200**, whether or not an account exists for [email], so the
+  /// screen after it must stay neutral. The e-mail is written in the request's
+  /// `Accept-Language`. Within 60 seconds of the last request the server sends
+  /// nothing new; `503 MAIL_NOT_CONFIGURED` when outgoing mail is not set up.
+  Future<Result<bool>> requestPasswordReset(String email) => _api.post<bool>(
+        Api.forgotPassword,
+        body: {'email': email.trim()},
+        parse: (_) => true,
+      );
+
+  /// `GET /api/auth/reset-password/{token}` — whether a link can still be
+  /// used. Does not consume it. A dead link is a `400`
+  /// (`AUTH_RESET_TOKEN_INVALID` / `AUTH_RESET_TOKEN_EXPIRED`).
+  Future<Result<bool>> verifyResetToken(String token) => _api.get<bool>(
+        Api.resetPasswordToken(token),
+        parse: (json) => Json.boolOf(Json.map(json)['valid']),
+      );
+
+  /// `POST /api/auth/reset-password` — sets the new password and burns the
+  /// link. Answers like login, so the token is stored and the merchant is
+  /// signed in.
+  Future<Result<User>> resetPassword({
+    required String token,
+    required String password,
+  }) async {
+    final result = await _api.post<_AuthPayload>(
+      Api.resetPassword,
+      body: {'token': token, 'password': password},
+      parse: _AuthPayload.parse,
+    );
+    return _persist(result);
+  }
+
   /// Re-reads the merchant on launch when a token is already on the device.
   /// Also the credits check — `GET /api/auth/profile` is where the app learns
   /// the agent has been paused for lack of credits.
@@ -90,7 +125,7 @@ class AuthRepository {
   }
 }
 
-/// `{ token, user }` — the shape both auth endpoints return.
+/// `{ token, user }` — the shape login, register and reset-password return.
 class _AuthPayload {
   const _AuthPayload(this.token, this.user);
 
