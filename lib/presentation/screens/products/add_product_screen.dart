@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/extensions/responsive_extension.dart';
-import '../../../core/utils/logger.dart';
 import '../../../data/repositories/catalogue_repository.dart';
 import '../../../data/repositories/product_repository.dart';
 import '../../../l10n/gen/app_localizations.dart';
@@ -16,31 +14,40 @@ import '../../theme/app_typography.dart';
 import '../../viewmodels/add_product_view_model.dart';
 import '../../viewmodels/form_draft_store.dart';
 import '../../viewmodels/form_field_model.dart';
-import '../../viewmodels/session_view_model.dart';
 import '../../widgets/api_error_message.dart';
 import '../../widgets/app_checkbox.dart';
 import '../../widgets/app_icon.dart';
 import '../../widgets/app_select_field.dart';
 import '../../widgets/app_text_field.dart';
 import '../../widgets/app_toast.dart';
+import '../../widgets/back_scope.dart';
 import '../../widgets/icon_square_button.dart';
+import '../../widgets/leave_sheet.dart';
 import '../tutorial/tutorial_messages.dart';
+import 'product_photo_picker.dart';
 
 /// `18 — Ajouter un produit`.
 ///
 /// The nine editable fields the web's Add Product modal has, in its order, plus
-/// the variants checkbox. Three things differ from the web, and one from the
+/// the variants section. Three things differ from the web, and one from the
 /// frames:
 ///
 /// - **The title says only "Add Product".** The web's modal heading doubles as
-///   a mode switch (`Add Product` / `Edit Product`); there is no edit screen on
-///   mobile yet, so there is nothing to distinguish it from.
+///   a mode switch (`Add Product` / `Edit Product`); on mobile the two are
+///   separate screens, so each says one thing. See `EditProductScreen`, which
+///   is this form minus the quantity and plus the unit's **+**.
 /// - **Category and Unit are pickers, not dropdowns** — see [AppSelectField],
 ///   which also explains why the design system had no component for this.
 /// - **Cost, price and margin are not previewed.** The web computes a live
 ///   margin under the two price fields; margin work stays on the web
 ///   (brief §14.3).
 /// - **The photo row does not upload yet.** See [_Photos].
+///
+/// **Variants are the web's.** Ticking *This product has variants* hides the
+/// product's initial quantity and opens the web's `VariantEditor` under the
+/// box: "Variants" with the total quantity, *Add Variant*, and one card per
+/// variant — name, SKU, cost, price, quantity, min quantity, and a delete
+/// button. The web's four number columns are two rows of two here.
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key});
 
@@ -76,98 +83,49 @@ class _AddProductScreenState extends State<AddProductScreen> {
   /// One photo from the camera, or several from the gallery.
   Future<void> _pickPhotos() async {
     if (_picking) return;
-    final source = await _chooseSource();
-    if (source == null || !mounted) return;
-
     _picking = true;
-    // The camera and the gallery send the app to the background, and a splash
-    // replay on the way back would rebuild this screen and lose the pick.
-    final session = context.read<SessionViewModel?>();
-    session?.holdSplashReplay();
-    var files = const <XFile>[];
     try {
-      final picker = ImagePicker();
-      // Re-encoded at a sensible size: a phone camera's own photo can pass
-      // the backend's 5 MB limit by itself.
-      if (source == ImageSource.camera) {
-        final shot = await picker.pickImage(
-          source: ImageSource.camera,
-          maxWidth: 2000,
-          maxHeight: 2000,
-          imageQuality: 85,
-        );
-        files = [?shot];
-      } else {
-        files = await picker.pickMultiImage(
-          maxWidth: 2000,
-          maxHeight: 2000,
-          imageQuality: 85,
-          limit: AddProductViewModel.maxPhotos,
-        );
+      final picked = await pickProductPhotos(
+        context,
+        limit: AddProductViewModel.maxPhotos - _model.photos.length,
+      );
+      if (picked.isEmpty || !mounted) return;
+
+      final rejected = _model.addPhotos(picked);
+      final l10n = L10n.of(context);
+      if (rejected.contains(PhotoRejection.tooMany)) {
+        AppToast.info(context, l10n.productPhotosTooMany);
+      } else if (rejected.contains(PhotoRejection.tooLarge)) {
+        AppToast.info(context, l10n.productPhotosTooLarge);
+      } else if (rejected.contains(PhotoRejection.wrongType)) {
+        AppToast.info(context, l10n.productPhotosWrongType);
       }
-    } on Exception catch (error) {
-      Log.w('photo picker failed: $error', tag: 'products');
     } finally {
-      session?.releaseSplashReplay();
       _picking = false;
     }
-    if (files.isEmpty || !mounted) return;
-
-    final picked = <ProductPhoto>[];
-    for (final file in files) {
-      try {
-        picked.add(
-          ProductPhoto(name: file.name, bytes: await file.readAsBytes()),
-        );
-      } on Exception catch (error) {
-        Log.w('could not read ${file.name}: $error', tag: 'products');
-      }
-    }
-    if (!mounted) return;
-
-    final rejected = _model.addPhotos(picked);
-    final l10n = L10n.of(context);
-    if (rejected.contains(PhotoRejection.tooMany)) {
-      AppToast.info(context, l10n.productPhotosTooMany);
-    } else if (rejected.contains(PhotoRejection.tooLarge)) {
-      AppToast.info(context, l10n.productPhotosTooLarge);
-    } else if (rejected.contains(PhotoRejection.wrongType)) {
-      AppToast.info(context, l10n.productPhotosWrongType);
-    }
   }
 
-  /// Camera or gallery, asked in a sheet.
-  Future<ImageSource?> _chooseSource() {
-    final l10n = L10n.of(context);
-    return showModalBottomSheet<ImageSource>(
-      context: context,
-      backgroundColor: AppColors.surface,
-      barrierColor: AppColors.scrim,
-      builder: (sheet) => SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            for (final (source, label) in [
-              (ImageSource.camera, l10n.productPhotoCamera),
-              (ImageSource.gallery, l10n.productPhotoGallery),
-            ])
-              ListTile(
-                title: Text(
-                  label,
-                  style: AppText.bodyS.copyWith(color: AppColors.textPrimary),
-                ),
-                onTap: () => Navigator.of(sheet).pop(source),
-              ),
-          ],
-        ),
-      ),
-    );
+  /// Back on this form, through the route's [BackScope].
+  ///
+  /// Busy: ignored, so a create in flight is never orphaned. Created (the
+  /// photos failed and the screen stayed): closes as a success, so the list
+  /// reloads. Dirty: the leave sheet first. Clean: the intercept is inactive
+  /// and the navigator pops by itself.
+  Future<bool> _onBack() async {
+    if (_model.isBusy) return false;
+    if (_model.created != null) {
+      _closeCreated();
+      return false;
+    }
+    return showLeaveSheet(context, body: L10n.of(context).productFormLeaveBody);
   }
 
-  void _back() {
+  /// `true` is what tells `17` to refetch its rows and its two figures. An
+  /// explicit pop, so it bypasses the back intercept.
+  void _closeCreated() {
     final router = GoRouter.of(context);
     if (router.canPop()) {
-      router.pop(false);
+      router.pop(true);
     } else {
       router.go(Routes.products);
     }
@@ -187,13 +145,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       AppToast.success(context, L10n.of(context).toastProductCreated);
     }
 
-    final router = GoRouter.of(context);
-    // `true` is what tells `17` to refetch its rows and its two figures.
-    if (router.canPop()) {
-      router.pop(true);
-    } else {
-      router.go(Routes.products);
-    }
+    _closeCreated();
   }
 
   @override
@@ -218,7 +170,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
             return model.serverFieldErrors[apiName];
           }
 
-          return Scaffold(
+          // Clean and idle: inactive, so back pops natively (or goes to the
+          // list, the route's parent). See [_onBack] for the rest.
+          return BackIntercept(
+            active: model.hasChanges || model.isBusy || model.created != null,
+            onBack: _onBack,
+            child: Scaffold(
             backgroundColor: AppColors.ink,
             resizeToAvoidBottomInset: true,
             body: SafeArea(
@@ -232,10 +189,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     ),
                     child: Align(
                       alignment: AlignmentDirectional.centerStart,
-                      child: AppBackButton(
-                        onBack: _back,
-                        semanticLabel: l10n.commonBack,
-                      ),
+                      child: AppBackButton(semanticLabel: l10n.commonBack),
                     ),
                   ),
                   Expanded(
@@ -268,6 +222,17 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         // this carries the rules the server states without
                         // blaming a field — a duplicate SKU among them.
                         ApiErrorLine(error: model.submitError),
+                        // The product exists and a variant did not make it: the
+                        // next tap sends only the variants still missing.
+                        if (model.created != null && model.submitError != null)
+                          Padding(
+                            padding: EdgeInsets.only(bottom: AppSpacing.sm),
+                            child: Text(
+                              l10n.productVariantsRetryHint,
+                              textAlign: TextAlign.center,
+                              style: AppText.actionS.copyWith(color: AppColors.textMuted),
+                            ),
+                          ),
                         FilledButton(
                           // Disabled while in flight. This matters more than a
                           // spinner: a double tap would otherwise send two
@@ -289,6 +254,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   ),
                 ],
               ),
+            ),
             ),
           );
         },
@@ -382,27 +348,31 @@ class _Fields extends StatelessWidget {
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
           textInputAction: TextInputAction.next,
           inputFormatters: [_amountFormatter],
-          onSubmitted: (_) => model.quantity.focusNode.requestFocus(),
+          // The quantity is not on the form while variants are on.
+          onSubmitted: (_) =>
+              (model.hasVariants ? model.minQuantity : model.quantity).focusNode.requestFocus(),
         ),
         _gap,
-        AppTextField(
-          label: l10n.productQuantity,
-          // Stops being required the moment the variants box is ticked, which
-          // is the server's own rule — the variants carry the stock.
-          isRequired: !model.hasVariants,
-          controller: model.quantity.controller,
-          focusNode: model.quantity.focusNode,
-          errorText: errorFor(model.quantity, 'quantity'),
-          placeholder: '0',
-          keyboardType: TextInputType.number,
-          textInputAction: TextInputAction.next,
-          inputFormatters: [
-            FilteringTextInputFormatter.digitsOnly,
-            LengthLimitingTextInputFormatter(9),
-          ],
-          onSubmitted: (_) => model.minQuantity.focusNode.requestFocus(),
-        ),
-        _gap,
+        // The web hides the product-level quantity when variants are on: the
+        // variants carry the stock, and the backend sums it.
+        if (!model.hasVariants) ...[
+          AppTextField(
+            label: l10n.productQuantity,
+            isRequired: true,
+            controller: model.quantity.controller,
+            focusNode: model.quantity.focusNode,
+            errorText: errorFor(model.quantity, 'quantity'),
+            placeholder: '0',
+            keyboardType: TextInputType.number,
+            textInputAction: TextInputAction.next,
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+              LengthLimitingTextInputFormatter(9),
+            ],
+            onSubmitted: (_) => model.minQuantity.focusNode.requestFocus(),
+          ),
+          _gap,
+        ],
         AppTextField(
           label: l10n.productAlertThreshold,
           controller: model.minQuantity.controller,
@@ -473,6 +443,10 @@ class _Fields extends StatelessWidget {
           value: model.hasVariants,
           onChanged: model.toggleHasVariants,
         ),
+        if (model.hasVariants) ...[
+          SizedBox(height: AppSpacing.lg),
+          _VariantEditor(model: model),
+        ],
       ],
     );
   }
@@ -480,6 +454,252 @@ class _Fields extends StatelessWidget {
   /// 14 between fields, from the frame — tighter than the 16 the auth screens
   /// use, because this form is nine controls deep rather than four.
   Widget get _gap => SizedBox(height: 3.59.w); // 14
+}
+
+/// The web's `VariantEditor`: the title with the total quantity, *Add
+/// Variant*, then a card per variant — or the web's empty line.
+class _VariantEditor extends StatelessWidget {
+  const _VariantEditor({required this.model});
+
+  final AddProductViewModel model;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = L10n.of(context);
+    final rows = model.variants;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(text: l10n.productVariantsTitle, style: AppText.title),
+                    if (rows.isNotEmpty)
+                      TextSpan(
+                        text: '  ${l10n.productVariantsTotal(model.variantTotalQuantity)}',
+                        style: AppText.bodyS.copyWith(color: AppColors.textMuted),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+            Semantics(
+              button: true,
+              child: GestureDetector(
+                onTap: model.isBusy
+                    ? null
+                    : () {
+                        final row = model.addVariant();
+                        // Straight into the new row's name, once it is built.
+                        WidgetsBinding.instance.addPostFrameCallback((_) => row.name.focusNode.requestFocus());
+                      },
+                behavior: HitTestBehavior.opaque,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: AppSpacing.xs),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      AppIcon(AppIcons.plus, size: 3.59.w, color: AppColors.accentMoney), // 14
+                      SizedBox(width: AppSpacing.xs),
+                      Text(
+                        l10n.productVariantAdd,
+                        style: AppText.actionS.copyWith(color: AppColors.accentMoney),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: AppSpacing.md),
+        if (rows.isEmpty)
+          Text(
+            l10n.productVariantsEmpty,
+            style: AppText.bodyS.copyWith(
+              color: AppColors.textMuted,
+              fontStyle: FontStyle.italic,
+              height: 1.32,
+            ),
+          )
+        else
+          for (var i = 0; i < rows.length; i++) ...[
+            if (i > 0) SizedBox(height: AppSpacing.sm),
+            _VariantCard(model: model, row: rows[i]),
+          ],
+        if (model.showMissingVariants) ...[
+          SizedBox(height: AppSpacing.sm),
+          Text(
+            l10n.productVariantsRequired,
+            style: AppText.actionS.copyWith(color: AppColors.accentAlert),
+          ),
+        ],
+      ],
+    );
+  }
+}
+
+/// One variant: name and SKU with the delete button, then cost and price, then
+/// quantity and min quantity.
+class _VariantCard extends StatelessWidget {
+  const _VariantCard({required this.model, required this.row});
+
+  final AddProductViewModel model;
+  final VariantRowModel row;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = L10n.of(context);
+
+    String? errorFor(FormFieldModel field) {
+      final error = model.variantFieldError(field);
+      return error == null ? null : tutorialFieldMessage(error, l10n);
+    }
+
+    final nameError = errorFor(row.name) ?? (model.showDuplicate(row) ? l10n.productVariantDuplicate : null);
+    const numberKeyboard = TextInputType.number;
+    const amountKeyboard = TextInputType.numberWithOptions(decimal: true);
+    final digits = [FilteringTextInputFormatter.digitsOnly, LengthLimitingTextInputFormatter(9)];
+
+    return Container(
+      padding: EdgeInsets.all(AppSpacing.md), // 12
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        border: Border.all(color: AppColors.rule, width: AppStroke.hairline),
+        borderRadius: BorderRadius.circular(AppRadius.card),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: AppTextField(
+                  label: l10n.productVariantName,
+                  isRequired: true,
+                  controller: row.name.controller,
+                  focusNode: row.name.focusNode,
+                  errorText: nameError,
+                  placeholder: l10n.productVariantNamePlaceholder,
+                  textCapitalization: TextCapitalization.sentences,
+                  textInputAction: TextInputAction.next,
+                  inputFormatters: [LengthLimitingTextInputFormatter(255)],
+                  onSubmitted: (_) => row.sku.focusNode.requestFocus(),
+                ),
+              ),
+              SizedBox(width: AppSpacing.sm),
+              Expanded(
+                child: AppTextField(
+                  label: l10n.productVariantSku,
+                  controller: row.sku.controller,
+                  focusNode: row.sku.focusNode,
+                  placeholder: l10n.productVariantSkuPlaceholder,
+                  textCapitalization: TextCapitalization.characters,
+                  textInputAction: TextInputAction.next,
+                  inputFormatters: [LengthLimitingTextInputFormatter(255)],
+                  onSubmitted: (_) => row.costPrice.focusNode.requestFocus(),
+                ),
+              ),
+              // Not on a variant the backend already created: it exists.
+              if (row.createdId == null) ...[
+                SizedBox(width: AppSpacing.xs),
+                Padding(
+                  // Level with the inputs, under their labels.
+                  padding: EdgeInsets.only(top: 4.62.w), // 18
+                  child: Semantics(
+                    button: true,
+                    label: l10n.productVariantRemove,
+                    child: GestureDetector(
+                      onTap: model.isBusy ? null : () => model.removeVariant(row),
+                      behavior: HitTestBehavior.opaque,
+                      child: SizedBox(
+                        width: 9.23.w, // 36
+                        height: AppSize.control,
+                        child: Center(
+                          child: AppIcon(AppIcons.trash, size: 4.1.w, color: AppColors.textMuted),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ],
+          ),
+          SizedBox(height: AppSpacing.sm),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: AppTextField(
+                  label: l10n.productVariantCost,
+                  controller: row.costPrice.controller,
+                  focusNode: row.costPrice.focusNode,
+                  errorText: errorFor(row.costPrice),
+                  placeholder: '0',
+                  keyboardType: amountKeyboard,
+                  textInputAction: TextInputAction.next,
+                  inputFormatters: [_amountFormatter],
+                  onSubmitted: (_) => row.sellingPrice.focusNode.requestFocus(),
+                ),
+              ),
+              SizedBox(width: AppSpacing.sm),
+              Expanded(
+                child: AppTextField(
+                  label: l10n.productVariantPrice,
+                  controller: row.sellingPrice.controller,
+                  focusNode: row.sellingPrice.focusNode,
+                  errorText: errorFor(row.sellingPrice),
+                  placeholder: '0',
+                  keyboardType: amountKeyboard,
+                  textInputAction: TextInputAction.next,
+                  inputFormatters: [_amountFormatter],
+                  onSubmitted: (_) => row.quantity.focusNode.requestFocus(),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: AppSpacing.sm),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: AppTextField(
+                  label: l10n.productVariantQuantity,
+                  controller: row.quantity.controller,
+                  focusNode: row.quantity.focusNode,
+                  errorText: errorFor(row.quantity),
+                  placeholder: '0',
+                  keyboardType: numberKeyboard,
+                  textInputAction: TextInputAction.next,
+                  inputFormatters: digits,
+                  onSubmitted: (_) => row.minQuantity.focusNode.requestFocus(),
+                ),
+              ),
+              SizedBox(width: AppSpacing.sm),
+              Expanded(
+                child: AppTextField(
+                  label: l10n.productVariantMinQuantity,
+                  controller: row.minQuantity.controller,
+                  focusNode: row.minQuantity.focusNode,
+                  errorText: errorFor(row.minQuantity),
+                  placeholder: '0',
+                  keyboardType: numberKeyboard,
+                  textInputAction: TextInputAction.done,
+                  inputFormatters: digits,
+                  onSubmitted: (_) => row.minQuantity.focusNode.unfocus(),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 /// The photo row: tap to add from the camera or the gallery, then a thumbnail

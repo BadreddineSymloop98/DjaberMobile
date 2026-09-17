@@ -48,6 +48,36 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+            <!--
+              The password-reset e-mail's link (brief §25.19). go_router maps
+              /reset-password?token=… onto the reset screen.
+
+              Opens the app by itself only once Android has verified the domain,
+              which needs https://djaber.vercel.app/.well-known/assetlinks.json
+              listing this package and its signing certificate. Until then,
+              Android 11 and older ask which app to use; Android 12+ opens the
+              browser.
+            -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https" android:host="djaber.vercel.app" android:pathPrefix="/reset-password"/>
+            </intent-filter>
+            <!--
+              The hand-off from a page already open in a phone browser: the web
+              app's /reset-password page links to
+              intent://app/reset-password?token=…#Intent;scheme=djaber;package=ai.djaber.djaber_mobile;end
+              A custom scheme needs no domain verification, so this always
+              reaches the app when it is installed.
+            -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="djaber" android:host="app" android:pathPrefix="/reset-password"/>
+            </intent-filter>
+            <meta-data android:name="flutter_deeplinking_enabled" android:value="true"/>
         </activity>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->

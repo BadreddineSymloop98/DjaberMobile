@@ -40,13 +40,13 @@ class TutorialModeScreen extends StatefulWidget {
 }
 
 class _TutorialModeScreenState extends State<TutorialModeScreen> {
-  /// The pending choice. Null until the merchant touches a card, so the screen
-  /// shows whatever the app-wide model already holds — Simple on a fresh
-  /// install, the web's default and what the frame shows preselected.
-  StockMode? _mode;
-
-  StockMode get _selected =>
-      _mode ?? context.read<StockModeViewModel>().mode;
+  /// The pending choice, **always starting on Simple** — the web's default and
+  /// what the frame shows preselected.
+  ///
+  /// Not read from the app-wide model: the mode is a device preference that
+  /// survives sign-out, so a phone where someone once chose Avancé would
+  /// otherwise preselect it for the new account this tutorial is setting up.
+  StockMode _mode = StockMode.simple;
 
   Future<void> _continue() async {
     final stockMode = context.read<StockModeViewModel>();
@@ -54,7 +54,7 @@ class _TutorialModeScreenState extends State<TutorialModeScreen> {
     final router = GoRouter.of(context);
     // Committed on Continuer rather than on tap, so backing out of the step
     // does not leave the app-wide mode changed behind them.
-    await stockMode.setMode(_selected);
+    await stockMode.setMode(_mode);
     // Recorded before navigating, so a process death between the two resumes
     // forward rather than back at the intro.
     await session.rememberTutorialStep(Routes.tutorialProduct);
@@ -64,7 +64,7 @@ class _TutorialModeScreenState extends State<TutorialModeScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
-    final selected = _selected;
+    final selected = _mode;
 
     return TutorialStepScaffold(
       step: 1,
