@@ -1,0 +1,418 @@
+import 'package:flutter/widgets.dart';
+
+import '../../core/error/app_exception.dart';
+import '../../core/utils/validators.dart';
+import '../../data/models/agent.dart';
+import '../../data/models/agent_draft.dart';
+import '../../data/models/agent_preset.dart';
+import '../../data/models/ai_provider.dart';
+import '../../data/models/connected_page.dart';
+import '../../data/models/product.dart';
+import '../../data/repositories/agent_repository.dart';
+import '../../data/repositories/page_repository.dart';
+import '../../data/repositories/product_repository.dart';
+import 'base_view_model.dart';
+import 'form_field_model.dart';
+
+/// What creating an agent came to.
+enum AgentCreateOutcome { created, limitReached, failed }
+
+/// The part every way of creating an agent shares.
+///
+/// **No up-front limit.** How many agents a merchant may hold is their plan's
+/// call and the backend enforces it, so a refusal comes back as
+/// [AgentCreateOutcome.limitReached] with the backend's own, translated
+/// sentence in `error` — the screen shows that rather than guessing a cap.
+///
+/// **The pages still free.** A page answers through one agent only: a create
+/// whose `pageIds` include a page another agent holds is refused whole
+/// (`400 One or more pages are already assigned to another agent`). So the
+/// new agent takes every connected page no agent has yet — all of them for a
+/// first agent, what is left (possibly none) for the next.
+Future<({AgentCreateOutcome outcome, Agent? agent, AppException? error})> createAgentOnFreePages({
+  required AgentRepository agents,
+  required PageRepository pages,
+  required String name,
+  required AgentPersonality personality,
+  String? customInstructions,
+  AgentPreset? preset,
+}) async {
+  // Without the current agents there is no knowing which pages are free, and
+  // guessing wrong fails the whole create.
+  final existing = await agents.list();
+  final current = existing.valueOrNull;
+  if (current == null) {
+    return (outcome: AgentCreateOutcome.failed, agent: null, error: existing.errorOrNull);
+  }
+  final taken = {
+    for (final agent in current) ...[...agent.pageIds, ...agent.pages.map((p) => p.id)],
+  };
+  final pageIds = (await pages.list()).valueOrNull?.map((p) => p.id).where((id) => !taken.contains(id)).toList() ??
+      const <String>[];
+
+  final result = await agents.create(
+    name: name,
+    personality: personality,
+    customInstructions: customInstructions,
+    pageIds: pageIds,
+    preset: preset,
+  );
+  final agent = result.valueOrNull;
+  if (agent != null) return (outcome: AgentCreateOutcome.created, agent: agent, error: null);
+  final error = result.errorOrNull;
+  final limit = error?.code == 'PLAN_LIMIT_REACHED' || error?.code == 'AGENT_LIMIT_REACHED';
+  return (outcome: limit ? AgentCreateOutcome.limitReached : AgentCreateOutcome.failed, agent: null, error: error);
+}
+
+/// `15 — Agents · démarrer`: creating from a ready-made agent in one tap.
+class AgentPresetsViewModel extends BaseViewModel {
+  AgentPresetsViewModel({required AgentRepository agents, required PageRepository pages})
+      : _agents = agents,
+        _pages = pages;
+
+  final AgentRepository _agents;
+  final PageRepository _pages;
+
+  String? _creatingKey;
+
+  /// The preset being created, so only its card shows a spinner.
+  String? get creatingKey => _creatingKey;
+
+  AppException? _createError;
+  AppException? get createError => _createError;
+
+  Future<AgentCreateOutcome> createFrom(AgentPreset preset) async {
+    if (_creatingKey != null) return AgentCreateOutcome.failed;
+    _creatingKey = preset.key;
+    _createError = null;
+    safeNotify();
+
+    final result = await createAgentOnFreePages(
+      agents: _agents,
+      pages: _pages,
+      name: preset.name,
+      personality: preset.personality,
+      customInstructions: preset.customInstructions,
+      preset: preset,
+    );
+    if (isDisposed) return result.outcome;
+
+    _creatingKey = null;
+    _createError = result.error;
+    safeNotify();
+    return result.outcome;
+  }
+}
+
+/// The parts of "Partir de zéro" that fold away — every section of the web
+/// form past name, description, personality and instructions.
+enum AgentFormSection { behavior, display, model, pages, products }
+
+/// "Partir de zéro" (`15b`): the web's full agent form (`AgentForm.tsx`),
+/// arranged for a phone — the essentials open, the rest folded, each fold
+/// carrying its current value so nothing is hidden by being closed.
+///
+/// **Pages are chosen, not assumed.** The web makes the merchant pick; so does
+/// this, but it starts with every page no other agent holds already ticked —
+/// a first agent answers everywhere without a trip into the fold — and shows
+/// a held page as held, since a create naming it is refused whole
+/// (`One or more pages are already assigned to another agent`).
+class NewAgentViewModel extends FormViewModel {
+  NewAgentViewModel({
+    required AgentRepository agents,
+    required PageRepository pages,
+    required ProductRepository products,
+  })  : _agents = agents,
+        _pages = pages,
+        _products = products {
+    attachFields();
+    // The template feeds the live preview and two folds read their summary
+    // from a field, so those redraw as the merchant types.
+    template.controller.addListener(safeNotify);
+    maxTokens.controller.addListener(safeNotify);
+    productQuery.addListener(safeNotify);
+  }
+
+  static const _defaults = AgentDraft(name: '');
+
+  final AgentRepository _agents;
+  final PageRepository _pages;
+  final ProductRepository _products;
+
+  final name = FormFieldModel(validator: Validators.name);
+  final description = FormFieldModel(validator: Validators.optional);
+  final instructions = FormFieldModel(validator: Validators.optional);
+  final closing = FormFieldModel(validator: Validators.optional);
+  final handoff = FormFieldModel(validator: Validators.optional);
+  final template = FormFieldModel(validator: Validators.optional);
+  final maxTokens = FormFieldModel(
+    validator: Validators.optional,
+    initialValue: '${_defaults.maxTokens}',
+  );
+
+  /// The product list's search box — a filter on what is loaded, as on web,
+  /// not something the form sends.
+  final productQuery = TextEditingController();
+  final productQueryFocus = FocusNode();
+
+  @override
+  List<FormFieldModel> get fields => [name, description, instructions, closing, handoff, template, maxTokens];
+
+  // ---- Choices ----
+
+  AgentPersonality _personality = AgentPersonality.fallback;
+  AgentPersonality get personality => _personality;
+
+  void selectPersonality(AgentPersonality value) {
+    if (_personality == value) return;
+    _personality = value;
+    safeNotify();
+  }
+
+  String _aiModel = _defaults.aiModel;
+  String get aiModel => _aiModel;
+
+  void selectModel(String model) {
+    _aiModel = model;
+    safeNotify();
+  }
+
+  double _temperature = _defaults.temperature;
+  double get temperature => _temperature;
+
+  /// The web's slider steps by 0.1.
+  void setTemperature(double value) {
+    _temperature = (value * 10).round() / 10;
+    safeNotify();
+  }
+
+  /// What is sent: the typed number, or the default when the field is blank.
+  /// The draft clamps it to 100–4096, as the web's input does.
+  int get tokens => int.tryParse(maxTokens.value.trim()) ?? _defaults.maxTokens;
+
+  bool _imageRecognition = _defaults.imageRecognition;
+  bool get imageRecognition => _imageRecognition;
+
+  void setImageRecognition(bool value) {
+    _imageRecognition = value;
+    safeNotify();
+  }
+
+  bool _voiceTranscription = _defaults.voiceTranscription;
+  bool get voiceTranscription => _voiceTranscription;
+
+  void setVoiceTranscription(bool value) {
+    _voiceTranscription = value;
+    safeNotify();
+  }
+
+  int _responseDelay = _defaults.responseDelay;
+  int get responseDelay => _responseDelay;
+
+  /// **Starts at 1, not the web's 0.** Per the live docs the backend reads a
+  /// `0` delay as "unset" and stores 3, so a slider that offered *Instant*
+  /// would save something else.
+  static const minDelay = 1;
+
+  void setResponseDelay(int seconds) {
+    _responseDelay = seconds.clamp(minDelay, AgentDraft.maxDelay);
+    safeNotify();
+  }
+
+  /// Inserts a template tag where the cursor is, replacing any selection —
+  /// the web's tag chips. At the end when the field has never had focus.
+  void insertTag(String tag) {
+    final controller = template.controller;
+    final text = controller.text;
+    final selection = controller.selection;
+    final start = selection.isValid ? selection.start : text.length;
+    final end = selection.isValid ? selection.end : text.length;
+    controller.value = TextEditingValue(
+      text: text.replaceRange(start, end, tag),
+      selection: TextSelection.collapsed(offset: start + tag.length),
+    );
+  }
+
+  // ---- Folds ----
+
+  final _expanded = <AgentFormSection>{};
+
+  bool isExpanded(AgentFormSection section) => _expanded.contains(section);
+
+  void toggleSection(AgentFormSection section) {
+    if (!_expanded.remove(section)) _expanded.add(section);
+    safeNotify();
+  }
+
+  // ---- What the form chooses from ----
+
+  Future<void>? _loading;
+  bool _loaded = false;
+
+  /// True once pages, agents, products and models have answered — each may
+  /// have failed on its own, in which case its list is simply empty.
+  bool get isLoaded => _loaded;
+
+  List<AiProvider> _providers = const [];
+  List<AiProvider> get providers => _providers;
+
+  List<ConnectedPage> _pageRows = const [];
+  List<ConnectedPage> get pages => _pageRows;
+
+  /// Page id → the name of the agent already answering on it.
+  Map<String, String> _takenBy = const {};
+  String? takenBy(String pageId) => _takenBy[pageId];
+
+  final _selectedPageIds = <String>{};
+  bool isPageSelected(String pageId) => _selectedPageIds.contains(pageId);
+  int get selectedPageCount => _selectedPageIds.length;
+
+  List<Product> _productRows = const [];
+
+  bool _sellAll = _defaults.sellAllProducts;
+  bool get sellAllProducts => _sellAll;
+
+  final _selectedProductIds = <String>{};
+  bool isProductSelected(String productId) => _selectedProductIds.contains(productId);
+  int get selectedProductCount => _selectedProductIds.length;
+
+  /// Safe to call more than once; later calls wait on the first.
+  Future<void> load() => _loading ??= _load();
+
+  Future<void> _load() async {
+    final (agentList, pageList, productPage, providerList) = await (
+      _agents.list(),
+      _pages.list(),
+      // The web loads the first 200 and filters them in the browser.
+      _products.list(limit: 200),
+      _agents.activeProviders(),
+    ).wait;
+    if (isDisposed) return;
+
+    final current = agentList.valueOrNull;
+    _takenBy = {
+      for (final agent in current ?? const <Agent>[])
+        for (final id in {...agent.pageIds, ...agent.pages.map((p) => p.id)}) id: agent.name,
+    };
+    _pageRows = pageList.valueOrNull ?? const [];
+    // Without the current agents there is no knowing which pages are free, and
+    // naming a held one fails the whole create — so nothing is pre-ticked then.
+    if (current != null) {
+      _selectedPageIds.addAll([for (final page in _pageRows) if (!_takenBy.containsKey(page.id)) page.id]);
+    }
+    _productRows = productPage.valueOrNull?.products ?? const [];
+    _providers = providerList.valueOrNull ?? const [];
+    // Keep the model one the administrator actually offers.
+    final offered = [for (final provider in _providers) ...provider.models];
+    if (offered.isNotEmpty && !offered.contains(_aiModel)) _aiModel = offered.first;
+
+    _loaded = true;
+    safeNotify();
+  }
+
+  void togglePage(String pageId) {
+    if (_takenBy.containsKey(pageId)) return;
+    if (!_selectedPageIds.remove(pageId)) _selectedPageIds.add(pageId);
+    safeNotify();
+  }
+
+  void selectAllPages() {
+    _selectedPageIds.addAll([for (final page in _pageRows) if (!_takenBy.containsKey(page.id)) page.id]);
+    safeNotify();
+  }
+
+  void clearPages() {
+    _selectedPageIds.clear();
+    safeNotify();
+  }
+
+  void setSellAll(bool value) {
+    _sellAll = value;
+    safeNotify();
+  }
+
+  List<Product> get visibleProducts {
+    final query = productQuery.text.trim().toLowerCase();
+    if (query.isEmpty) return _productRows;
+    return [
+      for (final product in _productRows)
+        if (product.name.toLowerCase().contains(query) || product.sku.toLowerCase().contains(query)) product,
+    ];
+  }
+
+  void toggleProduct(String productId) {
+    if (!_selectedProductIds.remove(productId)) _selectedProductIds.add(productId);
+    safeNotify();
+  }
+
+  void clearProducts() {
+    _selectedProductIds.clear();
+    safeNotify();
+  }
+
+  /// The product the preview fills its tags from — the web's rule: the first
+  /// one the agent will sell.
+  Product? get sampleProduct {
+    for (final product in _productRows) {
+      if (_sellAll || _selectedProductIds.contains(product.id)) return product;
+    }
+    return null;
+  }
+
+  // ---- Creating ----
+
+  bool _creating = false;
+  bool get isCreating => _creating;
+
+  AppException? _createError;
+  AppException? get createError => _createError;
+
+  AgentDraft get draft => AgentDraft(
+        name: name.value,
+        description: description.value,
+        personality: _personality,
+        customInstructions: instructions.value,
+        closingInstructions: closing.value,
+        humanHandoffRules: handoff.value,
+        productTemplate: template.value,
+        aiModel: _aiModel,
+        temperature: _temperature,
+        maxTokens: tokens,
+        imageRecognition: _imageRecognition,
+        voiceTranscription: _voiceTranscription,
+        responseDelay: _responseDelay,
+        sellAllProducts: _sellAll,
+        pageIds: [for (final page in _pageRows) if (_selectedPageIds.contains(page.id)) page.id],
+        productIds: [for (final product in _productRows) if (_selectedProductIds.contains(product.id)) product.id],
+      );
+
+  /// Null when the form is not valid yet — its errors are now showing.
+  Future<AgentCreateOutcome?> submitAndCreate() async {
+    if (_creating || !submit()) return null;
+    _creating = true;
+    _createError = null;
+    safeNotify();
+
+    // Submitted before the lists answered: wait, so the pages go with it.
+    await load();
+    if (isDisposed) return null;
+
+    final result = await _agents.createFromDraft(draft);
+    if (isDisposed) return result.valueOrNull == null ? AgentCreateOutcome.failed : AgentCreateOutcome.created;
+
+    _creating = false;
+    final error = result.errorOrNull;
+    _createError = error;
+    safeNotify();
+    if (result.valueOrNull != null) return AgentCreateOutcome.created;
+    final limit = error?.code == 'PLAN_LIMIT_REACHED' || error?.code == 'AGENT_LIMIT_REACHED';
+    return limit ? AgentCreateOutcome.limitReached : AgentCreateOutcome.failed;
+  }
+
+  @override
+  void dispose() {
+    productQuery.dispose();
+    productQueryFocus.dispose();
+    super.dispose();
+  }
+}

@@ -986,4 +986,623 @@ class L10nFr extends L10n {
 
   @override
   String get commonNotBuilt => 'pas encore disponible';
+
+  @override
+  String get agentsTitle => 'Agents IA';
+
+  @override
+  String get agentsSubtitle =>
+      'Créez et gérez des agents IA qui vendent vos produits sur les pages connectées';
+
+  @override
+  String get agentsActive => 'IA active';
+
+  @override
+  String get agentsInactive => 'IA en pause';
+
+  @override
+  String get agentsStatPages => 'Pages';
+
+  @override
+  String get agentsStatProducts => 'Produits';
+
+  @override
+  String get agentsStatModel => 'Modèle';
+
+  @override
+  String get agentsAllProducts => 'Tous';
+
+  @override
+  String get agentsNoPages => 'Ne répond encore sur aucune page';
+
+  @override
+  String get agentsPause => 'Mettre l’agent en pause';
+
+  @override
+  String get agentsResume => 'Réactiver l’agent';
+
+  @override
+  String get agentsPausedToast => 'Agent en pause — il ne répond plus';
+
+  @override
+  String get agentsResumedToast => 'Agent actif — il répond de nouveau';
+
+  @override
+  String get agentsEmptyTitle => 'Aucun agent';
+
+  @override
+  String get agentsEmptyBody =>
+      'Créez un agent IA pour répondre automatiquement aux messages sur vos pages et vendre vos produits.';
+
+  @override
+  String get agentsEmptyCta => 'Créer votre agent';
+
+  @override
+  String get agentsActionInsights => 'Problèmes à traiter';
+
+  @override
+  String get agentsActionTest => 'Tester l’agent';
+
+  @override
+  String get agentsActionDetails => 'Détails et statistiques';
+
+  @override
+  String get agentsActionDelete => 'Supprimer l’agent';
+
+  @override
+  String get agentsDeleteTitle => 'Supprimer l’agent ?';
+
+  @override
+  String agentsDeleteBody(String name) {
+    return '$name sera supprimé et ne répondra plus sur vos pages. Vous pourrez créer un nouvel agent ensuite.';
+  }
+
+  @override
+  String get agentsDeleteConfirm => 'Supprimer';
+
+  @override
+  String get agentsDeletedToast => 'Agent supprimé';
+
+  @override
+  String get agentsInsightsTitle => 'Problèmes en attente';
+
+  @override
+  String get agentsInsightsEmpty =>
+      'Aucun problème en attente — votre agent gère tout.';
+
+  @override
+  String get agentsInsightsNone => 'Rien ici.';
+
+  @override
+  String get agentsInsightUnclear => 'Pas clair';
+
+  @override
+  String get agentsInsightUnknown => 'Sujet inconnu';
+
+  @override
+  String get agentsInsightHandoff => 'Transmis à vous';
+
+  @override
+  String get agentsInsightCustomer => 'Client';
+
+  @override
+  String get agentsInsightAgent => 'Réponse de l’IA';
+
+  @override
+  String get agentsInsightResolve => 'Résoudre';
+
+  @override
+  String get agentsInsightDismiss => 'Ignorer';
+
+  @override
+  String get agentsInsightAddAndResolve => 'Ajouter et résoudre';
+
+  @override
+  String get agentsInsightInstructionHint =>
+      'Ajoutez une consigne pour que l’agent gère mieux ce cas la prochaine fois…';
+
+  @override
+  String get agentsInsightResolved => 'Résolu';
+
+  @override
+  String get agentsInsightDismissed => 'Ignoré';
+
+  @override
+  String get agentsInsightPending => 'En attente';
+
+  @override
+  String get agentsInsightFailed => 'Le problème n’a pas pu être mis à jour.';
+
+  @override
+  String agentsTestTitle(String name) {
+    return 'Tester — $name';
+  }
+
+  @override
+  String get agentsTestEmpty => 'Envoyez un message pour tester';
+
+  @override
+  String get agentsTestNote =>
+      'Un essai : aucun crédit consommé, aucune commande créée.';
+
+  @override
+  String get agentsTestPlaceholder => 'Écrivez un message…';
+
+  @override
+  String get agentsTestSend => 'Envoyer';
+
+  @override
+  String get agentsTestFailed => 'Pas de réponse — réessayez.';
+
+  @override
+  String get agentsDetailsConversations => 'Conversations';
+
+  @override
+  String agentsDetailsConversationsFoot(int received, int sent) {
+    return '$received reçus · $sent envoyés';
+  }
+
+  @override
+  String get agentsDetailsMessages => 'Messages';
+
+  @override
+  String agentsDetailsLastActive(String date) {
+    return 'Dernier : $date';
+  }
+
+  @override
+  String get agentsDetailsNoActivity => 'Aucune activité';
+
+  @override
+  String get agentsDetailsOrders => 'Commandes créées';
+
+  @override
+  String agentsDetailsResolvedFoot(int count) {
+    return '$count résolus';
+  }
+
+  @override
+  String get agentsDetailsInsights => 'Signalements de l’agent';
+
+  @override
+  String get agentsDetailsAll => 'Tous';
+
+  @override
+  String get agentsDetailsInstructions => 'Consignes personnalisées';
+
+  @override
+  String get agentsDetailsNoInstructions => 'Aucune consigne pour l’instant.';
+
+  @override
+  String get agentsDetailsEdit => 'Modifier';
+
+  @override
+  String get agentsDetailsSave => 'Enregistrer';
+
+  @override
+  String get agentsDetailsSaved => 'Consignes enregistrées';
+
+  @override
+  String get agentsDetailsSavedMerged =>
+      'Consignes enregistrées — les lignes ajoutées sur le web sont conservées';
+
+  @override
+  String get agentsDetailsConflictTitle => 'Modifiées sur le web';
+
+  @override
+  String get agentsDetailsConflictBody =>
+      'Ces consignes ont été modifiées pendant que vous écriviez. Version actuelle :';
+
+  @override
+  String get agentsDetailsUseLatest => 'Reprendre cette version';
+
+  @override
+  String get agentsDetailsKeepMine => 'Remplacer par la mienne';
+
+  @override
+  String get agentsNotFound => 'Agent introuvable.';
+
+  @override
+  String agentsTestEmptyFor(String name) {
+    return 'Envoyez un message pour tester $name';
+  }
+
+  @override
+  String get agentsTestProduct => 'Produit';
+
+  @override
+  String agentsTestProductId(String id) {
+    return 'ID : $id…';
+  }
+
+  @override
+  String get agentsPresetsTitle => 'Commencez avec un agent prêt à l’emploi';
+
+  @override
+  String get agentsPresetsBody =>
+      'Chacun est configuré pour la vente en Algérie — darija, arabe et français, devis de livraison et gestion des commandes. Choisissez-en un, puis ajustez tout.';
+
+  @override
+  String get agentsPresetVisionVoice => 'VISION + VOIX';
+
+  @override
+  String get agentsPresetVoice => 'VOIX';
+
+  @override
+  String get agentsPresetCloserTagline =>
+      'Transforme les conversations en commandes confirmées';
+
+  @override
+  String get agentsPresetCloser1 =>
+      'Guide le client de la question à la commande confirmée';
+
+  @override
+  String get agentsPresetCloser2 =>
+      'Chiffre la livraison par wilaya et clôture au total';
+
+  @override
+  String get agentsPresetCloser3 => 'Comprend les photos et les notes vocales';
+
+  @override
+  String get agentsPresetSupportTagline =>
+      'Répond vite, vous transmet les problèmes';
+
+  @override
+  String get agentsPresetSupport1 =>
+      'Répond poliment aux questions produits et commandes';
+
+  @override
+  String get agentsPresetSupport2 =>
+      'Transmet réclamations et remboursements à un humain';
+
+  @override
+  String get agentsPresetSupport3 => 'Calme, exact, et va droit au but';
+
+  @override
+  String get agentsPresetAdvisorTagline =>
+      'Aide le client à choisir le bon produit';
+
+  @override
+  String get agentsPresetAdvisor1 =>
+      'Compare les options et explique les différences';
+
+  @override
+  String get agentsPresetAdvisor2 =>
+      'Retrouve un produit à partir d’une photo du client';
+
+  @override
+  String get agentsPresetAdvisor3 =>
+      'Idéal pour les catalogues à variantes et fiches techniques';
+
+  @override
+  String get agentsPresetExpressTagline =>
+      'Réponses ultra-rapides pour gros volumes';
+
+  @override
+  String get agentsPresetExpress1 =>
+      'Réponses courtes et rapides pour pages chargées';
+
+  @override
+  String get agentsPresetExpress2 =>
+      'Consommation minimale — texte et voix uniquement';
+
+  @override
+  String get agentsPresetExpress3 => 'Crée et annule quand même les commandes';
+
+  @override
+  String get agentsPresetUse => 'Utiliser cet agent  →';
+
+  @override
+  String get agentsPresetOwn => 'Vous préférez créer le vôtre ?';
+
+  @override
+  String get agentsPresetScratch => 'Partir de zéro';
+
+  @override
+  String get agentsCreatedToast => 'Agent créé';
+
+  @override
+  String get agentFormSubtitle =>
+      'Configurez un agent pour répondre à vos conversations. Seul le nom est obligatoire — tout le reste a une valeur par défaut.';
+
+  @override
+  String get agentFormBasics => 'Informations';
+
+  @override
+  String get agentFormDescription => 'Description';
+
+  @override
+  String get agentFormDescriptionPlaceholder =>
+      'Décrivez brièvement ce que fait cet agent…';
+
+  @override
+  String get agentFormInstructions => 'Consignes personnalisées';
+
+  @override
+  String get agentFormInstructionsPlaceholder =>
+      'Comment répondre, quoi éviter, comment gérer certains cas…';
+
+  @override
+  String get agentFormInstructionsHint =>
+      'Ces consignes guident le comportement de l’agent dans les conversations.';
+
+  @override
+  String get agentFormAdvanced => 'Réglages avancés';
+
+  @override
+  String get agentFormAdvancedHint =>
+      'Facultatif — des valeurs par défaut sont appliquées.';
+
+  @override
+  String get agentFormBehavior => 'Comportement';
+
+  @override
+  String get agentFormBehaviorSummary => 'Clôture · Transfert humain';
+
+  @override
+  String get agentFormClosing => 'Clôture de la conversation';
+
+  @override
+  String get agentFormClosingPlaceholder =>
+      'Exemples :\n• Après une commande : « Merci ! Votre commande est en route. »\n• Le client dit au revoir : « Merci, à bientôt ! »\n• Client mécontent : « Désolé, je vous passe l’équipe. »';
+
+  @override
+  String get agentFormClosingHint =>
+      'Quand et comment l’agent termine une conversation. Vide : il remercie après une commande et répond aux au revoir.';
+
+  @override
+  String get agentFormHandoff => 'Règles d’intervention humaine';
+
+  @override
+  String get agentFormHandoffPlaceholder =>
+      'Exemples :\n• Remboursement ou retour → arrêter l’IA, me prévenir\n• Demande de remise → me laisser gérer\n• Réclamation → me transférer la conversation';
+
+  @override
+  String get agentFormHandoffHint =>
+      'Quand l’agent s’arrête et vous passe la main. Les salutations (slm, cava, hi) restent toujours gérées par l’IA.';
+
+  @override
+  String get agentFormDisplay => 'Présentation des produits';
+
+  @override
+  String get agentFormDisplayDefault => 'Style par défaut';
+
+  @override
+  String get agentFormDisplayCustom => 'Personnalisé';
+
+  @override
+  String get agentFormDisplayHint =>
+      'Comment l’agent présente un produit. Touchez une balise pour l’insérer — l’agent remplit les vraies données.';
+
+  @override
+  String get agentFormTemplate => 'Modèle';
+
+  @override
+  String get agentFormTemplatePlaceholder =>
+      'Touchez les balises ci-dessus ou écrivez ici…';
+
+  @override
+  String get agentFormTagCard => 'Carte produit';
+
+  @override
+  String get agentFormTagName => 'Nom';
+
+  @override
+  String get agentFormTagPrice => 'Prix (DA)';
+
+  @override
+  String get agentFormTagDescription => 'Description';
+
+  @override
+  String get agentFormTagStock => 'Stock';
+
+  @override
+  String get agentFormTagNewLine => '↵ Nouvelle ligne';
+
+  @override
+  String get agentFormPreview => 'Aperçu';
+
+  @override
+  String get agentFormPreviewLive => 'Aperçu en direct';
+
+  @override
+  String get agentFormPreviewCustomer => 'Montrez-moi vos produits';
+
+  @override
+  String get agentFormPreviewDefault =>
+      'Voici ce que nous avons !\n[PRODUCT_CARD]\nVous voulez commander ?';
+
+  @override
+  String get agentFormPreviewSampleName => 'Produit exemple';
+
+  @override
+  String get agentFormPreviewSampleDescription => 'Un excellent produit';
+
+  @override
+  String get agentFormModel => 'Modèle IA';
+
+  @override
+  String agentFormModelSummary(String model, String temperature, int tokens) {
+    return '$model · $temperature · $tokens jetons';
+  }
+
+  @override
+  String get agentFormModelPicker => 'Modèle';
+
+  @override
+  String agentFormModelCost(String usd) {
+    return '≈ $usd / 1000 msgs';
+  }
+
+  @override
+  String get agentFormModelsLoading => 'Chargement des modèles disponibles…';
+
+  @override
+  String get agentFormModelsUnavailable =>
+      'Les modèles IA sont momentanément indisponibles. Réessayez plus tard.';
+
+  @override
+  String get agentFormTraitBestQuality => 'Meilleure qualité';
+
+  @override
+  String get agentFormTraitFastAffordable => 'Rapide et abordable';
+
+  @override
+  String get agentFormTraitLongContext128k => 'Contexte 128k';
+
+  @override
+  String get agentFormTraitLegacyFast => 'Ancien, rapide';
+
+  @override
+  String get agentFormTraitBestBalanced => 'Le plus équilibré';
+
+  @override
+  String get agentFormTraitFastCheap => 'Rapide et économique';
+
+  @override
+  String get agentFormTraitMostCapable => 'Le plus performant';
+
+  @override
+  String get agentFormTraitLatestFast => 'Récent, rapide';
+
+  @override
+  String get agentFormTraitLongContext1m => 'Contexte 1M';
+
+  @override
+  String get agentFormTraitBestOpenSource => 'Meilleur open source';
+
+  @override
+  String get agentFormTraitUltraFast => 'Ultra rapide';
+
+  @override
+  String get agentFormTraitMixtureOfExperts => 'MoE, contexte 32k';
+
+  @override
+  String get agentFormTraitReasoning => 'Modèle de raisonnement';
+
+  @override
+  String get agentFormTemperature => 'Température';
+
+  @override
+  String get agentFormPrecise => 'Précis';
+
+  @override
+  String get agentFormCreative => 'Créatif';
+
+  @override
+  String get agentFormMaxTokens => 'Jetons max';
+
+  @override
+  String get agentFormMaxTokensHint => 'Longueur max de réponse · 100 – 4096';
+
+  @override
+  String get agentFormImages => 'Reconnaissance d’images';
+
+  @override
+  String get agentFormImagesHint =>
+      'L’IA voit les photos des clients et les compare à vos produits. 5 crédits par image (1 pour un texte).';
+
+  @override
+  String get agentFormVoice => 'Notes vocales';
+
+  @override
+  String get agentFormVoiceHint =>
+      'L’IA écoute et transcrit les notes vocales (AR, FR, EN, darija). 3 crédits par note. Désactivé : l’agent demande un message écrit.';
+
+  @override
+  String get agentFormDelay => 'Délai de réponse';
+
+  @override
+  String agentFormDelayValue(int seconds) {
+    return '$seconds s';
+  }
+
+  @override
+  String get agentFormDelayMax => '10 s';
+
+  @override
+  String get agentFormDelayHint =>
+      'Attend d’autres messages avant de répondre — les clients envoient souvent plusieurs messages courts, l’agent les regroupe.';
+
+  @override
+  String get agentFormPages => 'Pages connectées';
+
+  @override
+  String get agentFormPagesHint =>
+      'Les pages où cet agent répond. Une page n’a qu’un seul agent.';
+
+  @override
+  String agentFormPagesSummary(int selected, int total) {
+    return '$selected sur $total sélectionnées';
+  }
+
+  @override
+  String agentFormPagesCount(int selected, int total) {
+    return '$selected sur $total';
+  }
+
+  @override
+  String get agentFormPagesNone => 'Aucune page connectée';
+
+  @override
+  String get agentFormPagesEmpty =>
+      'Aucune page connectée pour l’instant. Connectez d’abord une page Facebook ou Instagram, puis liez-la à cet agent.';
+
+  @override
+  String agentFormPageTaken(String agent) {
+    return 'Déjà liée à $agent';
+  }
+
+  @override
+  String get agentFormPageActive => 'Active';
+
+  @override
+  String get agentFormPageInactive => 'Inactive';
+
+  @override
+  String get agentFormSelectAll => 'Tout sélectionner';
+
+  @override
+  String get agentFormClear => 'Effacer';
+
+  @override
+  String get agentFormProducts => 'Produits';
+
+  @override
+  String get agentFormSellAll => 'Vendre tout le catalogue';
+
+  @override
+  String get agentFormSellAllHint =>
+      'L’agent connaît tous vos produits. Désactivez pour choisir.';
+
+  @override
+  String get agentFormProductsAll => 'Tout le catalogue';
+
+  @override
+  String agentFormProductsChosen(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count produits choisis',
+      one: '1 produit choisi',
+      zero: 'Aucun produit choisi',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get agentFormProductSearch => 'Recherche';
+
+  @override
+  String get agentFormProductSearchPlaceholder => 'Rechercher des produits…';
+
+  @override
+  String get agentFormProductsNone => 'Aucun produit disponible';
+
+  @override
+  String get agentFormProductsNoMatch =>
+      'Aucun produit ne correspond à votre recherche';
+
+  @override
+  String get agentsNewTitle => 'Nouvel agent';
 }
