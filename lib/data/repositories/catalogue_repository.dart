@@ -47,4 +47,30 @@ class CatalogueRepository {
       ),
     );
   }
+
+  /// `POST /api/user-stock/units` → `{ unit }` — the web's *Add Custom Unit*,
+  /// behind the **+** beside the unit picker on the edit form.
+  ///
+  /// Both fields are required and trimmed server-side; `name` is capped at 255
+  /// and `abbreviation` at 20, and `name` must be unique **per user** (a
+  /// duplicate is a 400, not a 409). The platform's own defaults live under
+  /// `userId: null`, so a merchant may create a unit named like one of them —
+  /// which is why this does not check the list it already has.
+  Future<Result<ProductUnit>> createUnit({
+    required String name,
+    required String abbreviation,
+  }) {
+    return _api.post<ProductUnit>(
+      Api.units,
+      body: {
+        'name': name.trim(),
+        'abbreviation': abbreviation.trim(),
+      },
+      parse: (json) {
+        final map = json as Map<String, dynamic>;
+        final unit = map['unit'];
+        return ProductUnit.fromJson(unit is Map<String, dynamic> ? unit : map);
+      },
+    );
+  }
 }

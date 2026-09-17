@@ -32,7 +32,7 @@ class Product {
     this.categoryName,
     this.unitName,
     this.unitAbbreviation,
-    this.imageUrls = const [],
+    this.images = const [],
     this.variants = const [],
     this.variantCount,
   });
@@ -80,10 +80,18 @@ class Product {
   final String? unitName;
   final String? unitAbbreviation;
 
-  /// Every image URL the response carried, primary first as the backend
-  /// orders them. Absolute — a relative upload path is resolved against the
-  /// API host, as the web does.
-  final List<String> imageUrls;
+  /// Every image the response carried, in the backend's own `sortOrder`.
+  ///
+  /// Carries the row id as well as the URL because the edit form removes one
+  /// by id (`DELETE …/images/{imageId}`). A product whose only picture is the
+  /// legacy `imageUrl` column gets a single entry with an empty [
+  /// ProductImage.id], which is exactly the case that cannot be deleted —
+  /// there is no row to delete.
+  final List<ProductImage> images;
+
+  /// Every image URL, primary first. What a screen that only displays them
+  /// reads.
+  List<String> get imageUrls => [for (final image in images) image.url];
 
   /// The variants the response carried. See the class note for which ones.
   final List<ProductVariant> variants;
@@ -118,13 +126,17 @@ class Product {
     final images = json['images'];
     final legacyImage = Json.strOrNull(json['imageUrl']);
 
-    final urls = <String>[
+    final gallery = <ProductImage>[
       if (images is List)
         for (final image in images.whereType<Map<String, dynamic>>())
-          if (Json.strOrNull(image['url']) case final url?) _absolute(url),
+          if (Json.strOrNull(image['url']) case final url?)
+            ProductImage(id: Json.str(image['id']), url: _absolute(url)),
     ];
-    // The web falls back to the legacy column when there is no gallery.
-    if (urls.isEmpty && legacyImage != null) urls.add(_absolute(legacyImage));
+    // The web falls back to the legacy column when there is no gallery. It has
+    // no row id, hence no way to delete it on its own.
+    if (gallery.isEmpty && legacyImage != null) {
+      gallery.add(ProductImage(id: '', url: _absolute(legacyImage)));
+    }
 
     return Product(
       id: Json.str(json['id']),
@@ -145,7 +157,7 @@ class Product {
       categoryName: category == null ? null : Json.strOrNull(category['name']),
       unitName: unitRef == null ? null : Json.strOrNull(unitRef['name']),
       unitAbbreviation: unitRef == null ? null : Json.strOrNull(unitRef['abbreviation']),
-      imageUrls: urls,
+      images: gallery,
       variants: Json.list(json['variants'], ProductVariant.fromJson),
       variantCount: count == null ? null : Json.intOrNull(count['variants']),
     );
@@ -153,6 +165,25 @@ class Product {
 
   static String _absolute(String url) =>
       url.startsWith('http') ? url : '${AppConfig.apiBaseUrl}$url';
+}
+
+/// One photo of a product — a `ProductImage` row.
+///
+/// Only the two fields a screen uses: the id, which is what
+/// `DELETE …/images/{imageId}` takes, and the resolved URL. `sortOrder` and
+/// `isPrimary` are not read — the backend already returns the rows in order,
+/// primary first.
+class ProductImage {
+  const ProductImage({required this.id, required this.url});
+
+  /// Empty for the legacy `imageUrl` column, which is not a row and cannot be
+  /// deleted by itself.
+  final String id;
+
+  /// Absolute — a relative upload path is resolved against the API host.
+  final String url;
+
+  bool get isDeletable => id.isNotEmpty;
 }
 
 /// One variant of a product — `Rouge - L`.

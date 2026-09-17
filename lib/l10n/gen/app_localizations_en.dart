@@ -123,6 +123,9 @@ class L10nEn extends L10n {
   String get toastProductCreated => 'Product created';
 
   @override
+  String get toastProductUpdated => 'Product updated';
+
+  @override
   String get toastAgentCreated => 'AI agent created';
 
   @override
@@ -1220,6 +1223,224 @@ class L10nEn extends L10n {
   String get productAddSubmit => 'Create product';
 
   @override
+  String get productEditTitle => 'Edit product';
+
+  @override
+  String get productEditSubmit => 'Update product';
+
+  @override
+  String get productEditVariantsHint =>
+      'To change variant quantities, use “Adjust stock”.';
+
+  @override
+  String get productEditLeaveBody => 'Your changes will be lost.';
+
+  @override
+  String get productEditDeleteVariantsTitle => 'Delete variants?';
+
+  @override
+  String productEditDeleteVariantsBody(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count variants will be permanently deleted.',
+      one: '1 variant will be permanently deleted.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String productEditDeleteVariantsStock(int count, int stock) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          '$count variants will be permanently deleted, and their $stock units written off your stock.',
+      one:
+          '1 variant will be permanently deleted, and its $stock units written off your stock.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get productEditDeleteVariantsConfirm => 'Delete and save';
+
+  @override
+  String get productUnitAdd => 'Add a custom unit';
+
+  @override
+  String get productUnitName => 'Unit name';
+
+  @override
+  String get productUnitNamePlaceholder => 'e.g. Dozen';
+
+  @override
+  String get productUnitAbbreviation => 'Abbreviation';
+
+  @override
+  String get productUnitAbbreviationPlaceholder => 'e.g. dz';
+
+  @override
+  String get productUnitCreate => 'Add unit';
+
+  @override
+  String get stockAdjustTitle => 'Adjust stock';
+
+  @override
+  String stockAdjustSubtitle(String product, String stock) {
+    return '$product  ·  Current stock: $stock';
+  }
+
+  @override
+  String get stockAdjustIn => 'Stock in (+)';
+
+  @override
+  String get stockAdjustOut => 'Stock out (−)';
+
+  @override
+  String get stockAdjustSet => 'Set';
+
+  @override
+  String get stockAdjustReason => 'Reason';
+
+  @override
+  String stockAdjustCurrent(int count) {
+    return 'QTY: $count';
+  }
+
+  @override
+  String stockAdjustResult(int count) {
+    return 'New quantity: $count';
+  }
+
+  @override
+  String stockAdjustInsufficient(int count) {
+    return 'Only $count in stock';
+  }
+
+  @override
+  String get stockAdjustNothing => 'Enter a quantity on at least one line.';
+
+  @override
+  String get stockAdjustSubmit => 'Adjust stock';
+
+  @override
+  String get stockAdjustDone => 'Stock adjusted';
+
+  @override
+  String get expensesTitle => 'Product expenses';
+
+  @override
+  String get expensesEyebrow => 'PRODUCT EXPENSES';
+
+  @override
+  String get expensesMarginSummary => 'Margin summary';
+
+  @override
+  String get expensesTotal => 'Total expenses';
+
+  @override
+  String get expensesPerUnit => 'Expense / unit';
+
+  @override
+  String get expensesTrueCost => 'True cost';
+
+  @override
+  String get expensesNetMargin => 'Net margin';
+
+  @override
+  String expensesSection(int count) {
+    return 'Expenses ($count)';
+  }
+
+  @override
+  String get expensesEmpty =>
+      'No expenses yet. Add one below and the margin above will take it into account.';
+
+  @override
+  String get expensesAddSection => 'Add an expense';
+
+  @override
+  String get expenseCategory => 'Category';
+
+  @override
+  String get expenseCategoryMarketing => 'Marketing';
+
+  @override
+  String get expenseCategoryShipping => 'Shipping';
+
+  @override
+  String get expenseCategoryPackaging => 'Packaging';
+
+  @override
+  String get expenseCategoryCustoms => 'Customs';
+
+  @override
+  String get expenseCategoryStorage => 'Storage';
+
+  @override
+  String get expenseCategoryOther => 'Other';
+
+  @override
+  String get expenseAmount => 'Amount (DA)';
+
+  @override
+  String get expenseAmountPlaceholder => 'Amount';
+
+  @override
+  String get expenseDescriptionPlaceholder => 'Description (optional)';
+
+  @override
+  String get expenseFixed => 'Fixed';
+
+  @override
+  String get expensePerUnit => 'Per unit';
+
+  @override
+  String get expensePerUnitTag => '/ unit';
+
+  @override
+  String get expenseAdd => 'Add expense';
+
+  @override
+  String get expenseAdded => 'Expense added';
+
+  @override
+  String get expenseDeleteTitle => 'Delete this expense?';
+
+  @override
+  String expenseDeleteBody(String category, String amount) {
+    return '$category — $amount will be removed, and the margin recalculated.';
+  }
+
+  @override
+  String get expenseDeleted => 'Expense deleted';
+
+  @override
+  String get productDeleteTitle => 'Delete product';
+
+  @override
+  String productDeleteBody(String name) {
+    return 'Do you really want to delete $name? This action cannot be undone.';
+  }
+
+  @override
+  String get productDeleteDone => 'Product deleted';
+
+  @override
+  String get productDetailActions => 'Actions';
+
+  @override
+  String get productDetailAdjustMeta =>
+      'Stock in, stock out, or set the exact quantity';
+
+  @override
+  String get productDetailExpensesMeta => 'True cost and net margin';
+
+  @override
+  String get productDetailDeleteMeta => 'Removes it from your catalogue';
+
+  @override
   String productsCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -1247,6 +1468,10 @@ class L10nEn extends L10n {
   @override
   String get productPhotosUploadFailed =>
       'Product created, but its photos could not be uploaded.';
+
+  @override
+  String get productPhotosUploadFailedEdit =>
+      'Product updated, but the new photos could not be uploaded.';
 
   @override
   String get productPhotoRemove => 'Remove photo';

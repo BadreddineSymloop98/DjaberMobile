@@ -40,6 +40,7 @@ class AppTextField extends StatelessWidget {
     this.textCapitalization = TextCapitalization.none,
     this.autofillHints,
     this.onSubmitted,
+    this.enabled = true,
     this.minLines = 1,
   });
 
@@ -82,6 +83,15 @@ class AppTextField extends StatelessWidget {
   final Iterable<String>? autofillHints;
   final ValueChanged<String>? onSubmitted;
 
+  /// False for a field the merchant may read but not change — the quantity of
+  /// a saved variant on the edit form, which has no route that would carry it.
+  ///
+  /// Drawn as the design draws it: the whole control, label included, at 40%
+  /// and not focusable. Not `readOnly` alone, which still looks live and lets
+  /// the caret in; not hidden either, because the value is what the merchant
+  /// came to check before going to *Ajuster le stock*.
+  final bool enabled;
+
   /// Above 1 the input becomes a text area: it opens this many lines tall and
   /// grows with its content. The web's `<textarea rows>`, for the agent form.
   final int minLines;
@@ -90,6 +100,18 @@ class AppTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (!enabled) {
+      return Opacity(
+        opacity: 0.4,
+        // Swallows taps rather than letting them fall through to whatever is
+        // behind the field.
+        child: IgnorePointer(child: _build(context)),
+      );
+    }
+    return _build(context);
+  }
+
+  Widget _build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -113,6 +135,7 @@ class AppTextField extends StatelessWidget {
           textCapitalization: textCapitalization,
           autofillHints: autofillHints,
           onSubmitted: onSubmitted,
+          enabled: enabled,
           minLines: minLines,
         ),
         if (_hasError || hint != null) ...[
@@ -187,6 +210,7 @@ class _Input extends StatelessWidget {
     required this.textCapitalization,
     required this.autofillHints,
     required this.onSubmitted,
+    required this.enabled,
     required this.minLines,
   });
 
@@ -201,6 +225,7 @@ class _Input extends StatelessWidget {
   final TextCapitalization textCapitalization;
   final Iterable<String>? autofillHints;
   final ValueChanged<String>? onSubmitted;
+  final bool enabled;
   final int minLines;
 
   @override
@@ -245,6 +270,10 @@ class _Input extends StatelessWidget {
             textCapitalization: textCapitalization,
             autofillHints: autofillHints,
             onSubmitted: onSubmitted,
+            // Read-only and out of the focus order: keyboard traversal must
+            // not stop on a field that cannot be changed.
+            readOnly: !enabled,
+            canRequestFocus: enabled,
             minLines: multiline ? minLines : null,
             maxLines: multiline ? null : 1,
             style: AppText.bodyS.copyWith(color: AppColors.textPrimary),

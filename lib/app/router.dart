@@ -24,7 +24,9 @@ import '../presentation/screens/inbox/inbox_screen.dart';
 import '../presentation/screens/onboarding/onboarding_screen.dart';
 import '../presentation/screens/pages/pages_screen.dart';
 import '../presentation/screens/products/add_product_screen.dart';
+import '../presentation/screens/products/edit_product_screen.dart';
 import '../presentation/screens/products/product_detail_screen.dart';
+import '../presentation/screens/products/product_expenses_screen.dart';
 import '../presentation/screens/products/products_screen.dart';
 import '../presentation/screens/settings/settings_screen.dart';
 import '../presentation/screens/splash/splash_screen.dart';
@@ -365,6 +367,28 @@ class AppRouter {
         builder: (_, _) => const BackScope(
           fallback: Routes.products,
           child: AddProductScreen(),
+        ),
+      ),
+      // Before `/products/:id` for the same reason `/products/new` is: a
+      // two-segment pattern declared first would not match this, but keeping
+      // the more specific path above the looser one is the rule this file
+      // follows throughout.
+      GoRoute(
+        path: Routes.productEdit,
+        parentNavigatorKey: _rootKey,
+        builder: (_, state) => BackScope(
+          // The product's own screen, which is where edit is opened from and
+          // what a saved edit should return to.
+          fallback: Routes.productOf(state.pathParameters['id']!),
+          child: EditProductScreen(productId: state.pathParameters['id']!),
+        ),
+      ),
+      GoRoute(
+        path: Routes.productExpenses,
+        parentNavigatorKey: _rootKey,
+        builder: (_, state) => BackScope(
+          fallback: Routes.productOf(state.pathParameters['id']!),
+          child: ProductExpensesScreen(productId: state.pathParameters['id']!),
         ),
       ),
       GoRoute(

@@ -54,4 +54,26 @@ class Money {
   /// itself, and the rows have the width for it.
   static String price(double amount, String localeTag) =>
       '${grouped(amount.round(), localeTag)} DA';
+
+  /// A figure that must not be rounded — `1 800 DA`, `933,33 DA`,
+  /// `−333,33 DA`.
+  ///
+  /// The margin summary is the one place decimals carry meaning: the backend
+  /// divides a fixed expense by the quantity on hand, so `12 600 / 15` really
+  /// is `840`, and rounding a per-unit cost to the dinar hides what the
+  /// merchant is checking. Whole figures still print whole, as the frame does.
+  static String exact(double amount, String localeTag) {
+    final rounded = double.parse(amount.toStringAsFixed(2));
+    final pattern = rounded == rounded.roundToDouble() ? '#,##0' : '#,##0.00';
+    return '${intl.NumberFormat(pattern, localeTag).format(rounded)} DA';
+  }
+
+  /// A signed percentage as the margin line prints it — `−13,9 %`, `25,0 %`.
+  ///
+  /// Uses the real minus sign, not a hyphen, for the same reason the rest of
+  /// the app does: at 13px a hyphen reads as a dash in a list of figures.
+  static String percent(double value, String localeTag) {
+    final text = intl.NumberFormat('#,##0.0', localeTag).format(value.abs());
+    return '${value < 0 ? '−' : ''}$text %';
+  }
 }

@@ -124,6 +124,16 @@ class Routes {
   static const product = '/products/:id';
   static String productOf(String id) => '/products/$id';
 
+  /// `Edit product` — the web's Add/Edit modal in its edit mode, reached from
+  /// the product's own screen. Three segments, so it cannot collide with
+  /// [product]; declared beside it all the same.
+  static const productEdit = '/products/:id/edit';
+  static String productEditOf(String id) => '/products/$id/edit';
+
+  /// `Product expenses panel` — the web's side panel, a screen of its own here.
+  static const productExpenses = '/products/:id/expenses';
+  static String productExpensesOf(String id) => '/products/$id/expenses';
+
   static const order = '/orders/:id';
   static String orderOf(String id) => '/orders/$id';
 

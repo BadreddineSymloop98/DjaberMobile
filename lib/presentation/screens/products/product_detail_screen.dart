@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../../../app/routes.dart';
 import '../../../core/extensions/responsive_extension.dart';
 import '../../../core/utils/money.dart';
 import '../../../data/models/product.dart';
@@ -13,8 +15,12 @@ import '../../theme/app_typography.dart';
 import '../../viewmodels/product_detail_view_model.dart';
 import '../../widgets/api_error_message.dart';
 import '../../widgets/app_icon.dart';
+import '../../widgets/app_toast.dart';
+import '../../widgets/back_scope.dart';
 import '../../widgets/home_widgets.dart';
 import '../../widgets/icon_square_button.dart';
+import '../../widgets/leave_sheet.dart';
+import 'adjust_stock_sheet.dart';
 
 /// A product's details — the web's *Product Details* modal on
 /// `/dashboard/stock/products`, in its order: the images, name and SKU, the
@@ -28,9 +34,10 @@ import '../../widgets/icon_square_button.dart';
 /// Like the web, the section shows only when the product has variants, and it
 /// lists inactive ones too (the detail endpoint returns them all).
 ///
-/// The web's *Edit* and *Close* buttons are not here: there is no edit screen
-/// on mobile, and back closes. Back — the arrow and Android's — goes through
-/// the route's `BackScope` in `router.dart`, whose parent is the product list.
+/// The web's *Close* button is not here — back closes, through the route's
+/// `BackScope` in `router.dart`, whose parent is the product list. Its *Edit*
+/// is: the boxed pencil beside the back arrow opens `Edit product`, and a save
+/// reloads this screen. `17a` predates that screen and does not draw it.
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({super.key, required this.productId});
 
@@ -47,6 +54,98 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   );
 
   int _shownImage = 0;
+
+  /// Opens the edit form and reloads when it reports a save, so the figures,
+  /// the images and the variants below are the ones that were just written.
+  Future<void> _openEdit() async {
+    final saved = await GoRouter.of(context).push<bool>(
+      Routes.productEditOf(widget.productId),
+    );
+    if (saved ?? false) {
+      // The carousel index may point past the end now that an image could
+      // have been removed.
+      setState(() {
+        _shownImage = 0;
+        _edited = true;
+      });
+      await _model.load();
+    }
+  }
+
+  /// True once an edit saved, so leaving this screen tells the product list to
+  /// reload the row underneath — its name, price and stock all moved.
+  bool _edited = false;
+
+  /// `Adjust stock` — a sheet over this screen, as the frame draws it.
+  ///
+  /// Which form it shows is the backend's call, not a setting: a product with
+  /// variants is refused by the product-level route, so the sheet gives it one
+  /// card per variant.
+  Future<void> _adjust(Product product) async {
+    final applied = await showAdjustStockSheet(
+      context,
+      products: context.read<ProductRepository>(),
+      product: product,
+    );
+    if (!applied || !mounted) return;
+    setState(() => _edited = true);
+    AppToast.success(context, L10n.of(context).stockAdjustDone);
+    await _model.load();
+  }
+
+  /// Opens the expenses panel. Nothing is reloaded on the way back: an expense
+  /// moves the true cost and the net margin, which live on that panel, and no
+  /// figure on this screen.
+  void _openExpenses() =>
+      GoRouter.of(context).push(Routes.productExpensesOf(widget.productId));
+
+  /// `Delete product` — the web's confirm, then a soft delete.
+  ///
+  /// On success this screen has nothing left to show, so it closes and the list
+  /// behind it reloads without the row.
+  Future<void> _delete(Product product) async {
+    final l10n = L10n.of(context);
+    final confirmed = await showDestructiveSheet(
+      context,
+      title: l10n.productDeleteTitle,
+      body: l10n.productDeleteBody(product.name),
+      confirmLabel: l10n.commonDelete,
+    );
+    if (!confirmed || !mounted) return;
+
+    setState(() => _deleting = true);
+    final result = await context.read<ProductRepository>().delete(product.id);
+    if (!mounted) return;
+    setState(() => _deleting = false);
+
+    if (result.errorOrNull case final error?) {
+      // A toast rather than a line: the sheet that asked is gone, and there is
+      // no form on this screen to put a message under.
+      AppToast.info(context, apiErrorMessage(error, l10n));
+      return;
+    }
+    AppToast.success(context, l10n.productDeleteDone);
+    final router = GoRouter.of(context);
+    if (router.canPop()) {
+      router.pop(true);
+    } else {
+      router.go(Routes.products);
+    }
+  }
+
+  /// Covers the screen while the delete is in flight, so nothing else on it can
+  /// be tapped in the meantime.
+  bool _deleting = false;
+
+  /// Reports the edit on the way out, then lets the normal back path run.
+  Future<bool> _onBack() async {
+    final router = GoRouter.of(context);
+    if (router.canPop()) {
+      router.pop(true);
+      return false;
+    }
+    return true;
+  }
 
   @override
   void initState() {
@@ -66,7 +165,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
     return ListenableBuilder(
       listenable: _model,
-      builder: (context, _) => Scaffold(
+      // Inactive until an edit saves, so back is the route's own path in the
+      // ordinary case.
+      builder: (context, _) => BackIntercept(
+        active: _edited,
+        onBack: _onBack,
+        // Nothing on the screen responds while a delete is in flight.
+        child: IgnorePointer(
+          ignoring: _deleting,
+          child: Scaffold(
         backgroundColor: AppColors.ink,
         body: SafeArea(
           child: Column(
@@ -74,9 +181,23 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             children: [
               Padding(
                 padding: EdgeInsets.fromLTRB(AppSpacing.gutter, 0.47.h, AppSpacing.gutter, AppSpacing.lg),
-                child: Align(
-                  alignment: AlignmentDirectional.centerStart,
-                  child: AppBackButton(semanticLabel: l10n.commonBack),
+                child: Row(
+                  children: [
+                    AppBackButton(semanticLabel: l10n.commonBack),
+                    const Spacer(),
+                    // The web's *Edit* button on this modal. `17a` was drawn
+                    // before an edit screen existed and has neither Edit nor
+                    // Close; back is still what closes, and this is the only
+                    // way into the form — the product rows on `17` carry no
+                    // actions (approved rule, brief §25.29: a row tap is the
+                    // details, actions live on the details screen).
+                    if (_model.product != null)
+                      IconSquareButton(
+                        icon: AppIcons.edit,
+                        semanticLabel: l10n.productEditTitle,
+                        onTap: _openEdit,
+                      ),
+                  ],
                 ),
               ),
               Expanded(
@@ -93,6 +214,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               ),
             ],
           ),
+        ),
+        ),
         ),
       ),
     );
@@ -204,6 +327,33 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           ],
         ),
       ],
+      // The web keeps these on the product's row in the table; `17`'s rows
+      // carry no actions here (approved rule, brief §25.29), so the details
+      // screen is where they live. Not in the `17a` frame, which predates all
+      // three screens.
+      SizedBox(height: AppSpacing.xxl),
+      Text(l10n.productDetailActions.toUpperCase(), style: AppText.labelSection),
+      SizedBox(height: AppSpacing.md),
+      ListBox(
+        children: [
+          AppListRow(
+            title: l10n.stockAdjustTitle,
+            meta: l10n.productDetailAdjustMeta,
+            onTap: () => _adjust(product),
+          ),
+          AppListRow(
+            title: l10n.expensesTitle,
+            meta: l10n.productDetailExpensesMeta,
+            onTap: _openExpenses,
+          ),
+          AppListRow(
+            title: l10n.productDeleteTitle,
+            meta: l10n.productDetailDeleteMeta,
+            titleColor: AppColors.accentAlert,
+            onTap: () => _delete(product),
+          ),
+        ],
+      ),
     ];
   }
 }

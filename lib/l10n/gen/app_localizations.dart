@@ -315,6 +315,12 @@ abstract class L10n {
   /// **'Product created'**
   String get toastProductCreated;
 
+  /// No description provided for @toastProductUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Product updated'**
+  String get toastProductUpdated;
+
   /// No description provided for @toastAgentCreated.
   ///
   /// In en, this message translates to:
@@ -2319,6 +2325,372 @@ abstract class L10n {
   /// **'Create product'**
   String get productAddSubmit;
 
+  /// Title of the edit form (Figma `Edit product`), and the accessible name of the pencil that opens it from 17a.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit product'**
+  String get productEditTitle;
+
+  /// No description provided for @productEditSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Update product'**
+  String get productEditSubmit;
+
+  /// Under the variants checkbox on the edit form. Replaces the create form's hint, because on edit a saved variant's quantity is locked — PUT cannot carry one.
+  ///
+  /// In en, this message translates to:
+  /// **'To change variant quantities, use “Adjust stock”.'**
+  String get productEditVariantsHint;
+
+  /// No description provided for @productEditLeaveBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your changes will be lost.'**
+  String get productEditLeaveBody;
+
+  /// No description provided for @productEditDeleteVariantsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete variants?'**
+  String get productEditDeleteVariantsTitle;
+
+  /// Confirmation before a save that deletes variants holding no stock.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 variant will be permanently deleted.} other{{count} variants will be permanently deleted.}}'**
+  String productEditDeleteVariantsBody(int count);
+
+  /// Same confirmation when the variants still hold stock. The backend writes a negative adjustment movement for each, which is why the units are named.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 variant will be permanently deleted, and its {stock} units written off your stock.} other{{count} variants will be permanently deleted, and their {stock} units written off your stock.}}'**
+  String productEditDeleteVariantsStock(int count, int stock);
+
+  /// No description provided for @productEditDeleteVariantsConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete and save'**
+  String get productEditDeleteVariantsConfirm;
+
+  /// The + beside the unit picker on the edit form, and the title of the sheet it opens — the web's Add Custom Unit.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a custom unit'**
+  String get productUnitAdd;
+
+  /// No description provided for @productUnitName.
+  ///
+  /// In en, this message translates to:
+  /// **'Unit name'**
+  String get productUnitName;
+
+  /// No description provided for @productUnitNamePlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. Dozen'**
+  String get productUnitNamePlaceholder;
+
+  /// No description provided for @productUnitAbbreviation.
+  ///
+  /// In en, this message translates to:
+  /// **'Abbreviation'**
+  String get productUnitAbbreviation;
+
+  /// No description provided for @productUnitAbbreviationPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. dz'**
+  String get productUnitAbbreviationPlaceholder;
+
+  /// No description provided for @productUnitCreate.
+  ///
+  /// In en, this message translates to:
+  /// **'Add unit'**
+  String get productUnitCreate;
+
+  /// Title of the Adjust stock sheet (Figma `Adjust stock`), and the action row that opens it on 17a.
+  ///
+  /// In en, this message translates to:
+  /// **'Adjust stock'**
+  String get stockAdjustTitle;
+
+  /// Under the sheet's title. `stock` is already formatted with its unit abbreviation, e.g. `15 pcs`.
+  ///
+  /// In en, this message translates to:
+  /// **'{product}  ·  Current stock: {stock}'**
+  String stockAdjustSubtitle(String product, String stock);
+
+  /// No description provided for @stockAdjustIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock in (+)'**
+  String get stockAdjustIn;
+
+  /// No description provided for @stockAdjustOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock out (−)'**
+  String get stockAdjustOut;
+
+  /// The third adjustment type: set the exact quantity. Short, because three chips share one row.
+  ///
+  /// In en, this message translates to:
+  /// **'Set'**
+  String get stockAdjustSet;
+
+  /// No description provided for @stockAdjustReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get stockAdjustReason;
+
+  /// On a variant card's header — the stock it holds before the adjustment.
+  ///
+  /// In en, this message translates to:
+  /// **'QTY: {count}'**
+  String stockAdjustCurrent(int count);
+
+  /// Preview under a filled adjustment line.
+  ///
+  /// In en, this message translates to:
+  /// **'New quantity: {count}'**
+  String stockAdjustResult(int count);
+
+  /// An outgoing movement larger than the stock on hand. The backend answers 400 `Insufficient stock`; this says so first.
+  ///
+  /// In en, this message translates to:
+  /// **'Only {count} in stock'**
+  String stockAdjustInsufficient(int count);
+
+  /// No description provided for @stockAdjustNothing.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a quantity on at least one line.'**
+  String get stockAdjustNothing;
+
+  /// No description provided for @stockAdjustSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Adjust stock'**
+  String get stockAdjustSubmit;
+
+  /// No description provided for @stockAdjustDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock adjusted'**
+  String get stockAdjustDone;
+
+  /// No description provided for @expensesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Product expenses'**
+  String get expensesTitle;
+
+  /// No description provided for @expensesEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'PRODUCT EXPENSES'**
+  String get expensesEyebrow;
+
+  /// No description provided for @expensesMarginSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Margin summary'**
+  String get expensesMarginSummary;
+
+  /// No description provided for @expensesTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total expenses'**
+  String get expensesTotal;
+
+  /// No description provided for @expensesPerUnit.
+  ///
+  /// In en, this message translates to:
+  /// **'Expense / unit'**
+  String get expensesPerUnit;
+
+  /// No description provided for @expensesTrueCost.
+  ///
+  /// In en, this message translates to:
+  /// **'True cost'**
+  String get expensesTrueCost;
+
+  /// No description provided for @expensesNetMargin.
+  ///
+  /// In en, this message translates to:
+  /// **'Net margin'**
+  String get expensesNetMargin;
+
+  /// No description provided for @expensesSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Expenses ({count})'**
+  String expensesSection(int count);
+
+  /// No description provided for @expensesEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No expenses yet. Add one below and the margin above will take it into account.'**
+  String get expensesEmpty;
+
+  /// No description provided for @expensesAddSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Add an expense'**
+  String get expensesAddSection;
+
+  /// No description provided for @expenseCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get expenseCategory;
+
+  /// No description provided for @expenseCategoryMarketing.
+  ///
+  /// In en, this message translates to:
+  /// **'Marketing'**
+  String get expenseCategoryMarketing;
+
+  /// No description provided for @expenseCategoryShipping.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipping'**
+  String get expenseCategoryShipping;
+
+  /// No description provided for @expenseCategoryPackaging.
+  ///
+  /// In en, this message translates to:
+  /// **'Packaging'**
+  String get expenseCategoryPackaging;
+
+  /// No description provided for @expenseCategoryCustoms.
+  ///
+  /// In en, this message translates to:
+  /// **'Customs'**
+  String get expenseCategoryCustoms;
+
+  /// No description provided for @expenseCategoryStorage.
+  ///
+  /// In en, this message translates to:
+  /// **'Storage'**
+  String get expenseCategoryStorage;
+
+  /// No description provided for @expenseCategoryOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get expenseCategoryOther;
+
+  /// No description provided for @expenseAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount (DA)'**
+  String get expenseAmount;
+
+  /// No description provided for @expenseAmountPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get expenseAmountPlaceholder;
+
+  /// No description provided for @expenseDescriptionPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Description (optional)'**
+  String get expenseDescriptionPlaceholder;
+
+  /// The amount is a fixed total, spread over the quantity in stock. The web's `fixed` toggle, and the default.
+  ///
+  /// In en, this message translates to:
+  /// **'Fixed'**
+  String get expenseFixed;
+
+  /// No description provided for @expensePerUnit.
+  ///
+  /// In en, this message translates to:
+  /// **'Per unit'**
+  String get expensePerUnit;
+
+  /// Tag on an expense row whose amount applies to each unit sold.
+  ///
+  /// In en, this message translates to:
+  /// **'/ unit'**
+  String get expensePerUnitTag;
+
+  /// No description provided for @expenseAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Add expense'**
+  String get expenseAdd;
+
+  /// No description provided for @expenseAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'Expense added'**
+  String get expenseAdded;
+
+  /// No description provided for @expenseDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this expense?'**
+  String get expenseDeleteTitle;
+
+  /// Confirmation before deleting an expense. The backend's delete is hard.
+  ///
+  /// In en, this message translates to:
+  /// **'{category} — {amount} will be removed, and the margin recalculated.'**
+  String expenseDeleteBody(String category, String amount);
+
+  /// No description provided for @expenseDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Expense deleted'**
+  String get expenseDeleted;
+
+  /// No description provided for @productDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete product'**
+  String get productDeleteTitle;
+
+  /// The web's own delete copy. The row is a soft delete, but the product's image FILES are removed from disk, so it is not reversible in practice.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you really want to delete {name}? This action cannot be undone.'**
+  String productDeleteBody(String name);
+
+  /// No description provided for @productDeleteDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Product deleted'**
+  String get productDeleteDone;
+
+  /// No description provided for @productDetailActions.
+  ///
+  /// In en, this message translates to:
+  /// **'Actions'**
+  String get productDetailActions;
+
+  /// No description provided for @productDetailAdjustMeta.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock in, stock out, or set the exact quantity'**
+  String get productDetailAdjustMeta;
+
+  /// No description provided for @productDetailExpensesMeta.
+  ///
+  /// In en, this message translates to:
+  /// **'True cost and net margin'**
+  String get productDetailExpensesMeta;
+
+  /// No description provided for @productDetailDeleteMeta.
+  ///
+  /// In en, this message translates to:
+  /// **'Removes it from your catalogue'**
+  String get productDetailDeleteMeta;
+
   /// The meta line under a category in the picker — how many products it holds.
   ///
   /// In en, this message translates to:
@@ -2354,6 +2726,12 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Product created, but its photos could not be uploaded.'**
   String get productPhotosUploadFailed;
+
+  /// Toast on the edit form when everything saved but the photo upload, which runs last, failed. The edit stands either way.
+  ///
+  /// In en, this message translates to:
+  /// **'Product updated, but the new photos could not be uploaded.'**
+  String get productPhotosUploadFailedEdit;
 
   /// No description provided for @productPhotoRemove.
   ///

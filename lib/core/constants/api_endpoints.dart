@@ -83,6 +83,12 @@ class Api {
       '/api/user-stock/products/$id/images/$imageId/primary';
   static String productImagesReorder(String id) =>
       '/api/user-stock/products/$id/images/reorder';
+  static String productExpenses(String id) =>
+      '/api/user-stock/products/$id/expenses';
+  static String productExpense(String id, String expenseId) =>
+      '/api/user-stock/products/$id/expenses/$expenseId';
+  static String productMargins(String id) =>
+      '/api/user-stock/products/$id/margins';
   static String productVariants(String id) =>
       '/api/user-stock/products/$id/variants';
   static String productVariant(String id, String variantId) =>

@@ -122,6 +122,9 @@ class L10nAr extends L10n {
   String get toastProductCreated => 'تم إنشاء المنتج';
 
   @override
+  String get toastProductUpdated => 'تم تحديث المنتج';
+
+  @override
   String get toastAgentCreated => 'تم إنشاء وكيل الذكاء الاصطناعي';
 
   @override
@@ -1218,6 +1221,225 @@ class L10nAr extends L10n {
   String get productAddSubmit => 'إضافة المنتج';
 
   @override
+  String get productEditTitle => 'تعديل المنتج';
+
+  @override
+  String get productEditSubmit => 'تحديث المنتج';
+
+  @override
+  String get productEditVariantsHint =>
+      'لتغيير كميات المتغيرات، استخدم «تعديل المخزون».';
+
+  @override
+  String get productEditLeaveBody => 'ستُفقد التعديلات.';
+
+  @override
+  String get productEditDeleteVariantsTitle => 'حذف المتغيرات؟';
+
+  @override
+  String productEditDeleteVariantsBody(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'سيُحذف $count متغير نهائيًا.',
+      few: 'ستُحذف $count متغيرات نهائيًا.',
+      two: 'سيُحذف متغيران نهائيًا.',
+      one: 'سيُحذف متغير واحد نهائيًا.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String productEditDeleteVariantsStock(int count, int stock) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'سيُحذف $count متغير نهائيًا، وستُخصم $stock وحدة من مخزونك.',
+      few: 'ستُحذف $count متغيرات نهائيًا، وستُخصم $stock وحدة من مخزونك.',
+      two: 'سيُحذف متغيران نهائيًا، وستُخصم $stock وحدة من مخزونك.',
+      one: 'سيُحذف متغير واحد نهائيًا، وستُخصم $stock وحدة من مخزونك.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get productEditDeleteVariantsConfirm => 'حذف وحفظ';
+
+  @override
+  String get productUnitAdd => 'إضافة وحدة';
+
+  @override
+  String get productUnitName => 'اسم الوحدة';
+
+  @override
+  String get productUnitNamePlaceholder => 'مثال: دزينة';
+
+  @override
+  String get productUnitAbbreviation => 'الاختصار';
+
+  @override
+  String get productUnitAbbreviationPlaceholder => 'مثال: دز';
+
+  @override
+  String get productUnitCreate => 'إضافة الوحدة';
+
+  @override
+  String get stockAdjustTitle => 'تعديل المخزون';
+
+  @override
+  String stockAdjustSubtitle(String product, String stock) {
+    return '$product  ·  المخزون الحالي: $stock';
+  }
+
+  @override
+  String get stockAdjustIn => 'إدخال (+)';
+
+  @override
+  String get stockAdjustOut => 'إخراج (−)';
+
+  @override
+  String get stockAdjustSet => 'تحديد';
+
+  @override
+  String get stockAdjustReason => 'السبب';
+
+  @override
+  String stockAdjustCurrent(int count) {
+    return 'الكمية: $count';
+  }
+
+  @override
+  String stockAdjustResult(int count) {
+    return 'الكمية الجديدة: $count';
+  }
+
+  @override
+  String stockAdjustInsufficient(int count) {
+    return 'المتوفّر $count فقط';
+  }
+
+  @override
+  String get stockAdjustNothing => 'أدخل كمية في سطر واحد على الأقل.';
+
+  @override
+  String get stockAdjustSubmit => 'تعديل المخزون';
+
+  @override
+  String get stockAdjustDone => 'تم تعديل المخزون';
+
+  @override
+  String get expensesTitle => 'مصاريف المنتج';
+
+  @override
+  String get expensesEyebrow => 'مصاريف المنتج';
+
+  @override
+  String get expensesMarginSummary => 'ملخّص الهامش';
+
+  @override
+  String get expensesTotal => 'إجمالي المصاريف';
+
+  @override
+  String get expensesPerUnit => 'المصروف / الوحدة';
+
+  @override
+  String get expensesTrueCost => 'التكلفة الحقيقية';
+
+  @override
+  String get expensesNetMargin => 'الهامش الصافي';
+
+  @override
+  String expensesSection(int count) {
+    return 'المصاريف ($count)';
+  }
+
+  @override
+  String get expensesEmpty =>
+      'لا توجد مصاريف بعد. أضف واحدة أدناه وسيأخذها الهامش في الحسبان.';
+
+  @override
+  String get expensesAddSection => 'إضافة مصروف';
+
+  @override
+  String get expenseCategory => 'الفئة';
+
+  @override
+  String get expenseCategoryMarketing => 'تسويق';
+
+  @override
+  String get expenseCategoryShipping => 'توصيل';
+
+  @override
+  String get expenseCategoryPackaging => 'تغليف';
+
+  @override
+  String get expenseCategoryCustoms => 'جمارك';
+
+  @override
+  String get expenseCategoryStorage => 'تخزين';
+
+  @override
+  String get expenseCategoryOther => 'أخرى';
+
+  @override
+  String get expenseAmount => 'المبلغ (دج)';
+
+  @override
+  String get expenseAmountPlaceholder => 'المبلغ';
+
+  @override
+  String get expenseDescriptionPlaceholder => 'الوصف (اختياري)';
+
+  @override
+  String get expenseFixed => 'ثابت';
+
+  @override
+  String get expensePerUnit => 'لكل وحدة';
+
+  @override
+  String get expensePerUnitTag => '/ وحدة';
+
+  @override
+  String get expenseAdd => 'إضافة المصروف';
+
+  @override
+  String get expenseAdded => 'تمت إضافة المصروف';
+
+  @override
+  String get expenseDeleteTitle => 'حذف هذا المصروف؟';
+
+  @override
+  String expenseDeleteBody(String category, String amount) {
+    return '$category — سيُحذف $amount، وسيُعاد حساب الهامش.';
+  }
+
+  @override
+  String get expenseDeleted => 'تم حذف المصروف';
+
+  @override
+  String get productDeleteTitle => 'حذف المنتج';
+
+  @override
+  String productDeleteBody(String name) {
+    return 'هل تريد فعلاً حذف $name؟ لا يمكن التراجع عن هذا الإجراء.';
+  }
+
+  @override
+  String get productDeleteDone => 'تم حذف المنتج';
+
+  @override
+  String get productDetailActions => 'إجراءات';
+
+  @override
+  String get productDetailAdjustMeta => 'إدخال أو إخراج أو كمية محدّدة';
+
+  @override
+  String get productDetailExpensesMeta => 'التكلفة الحقيقية والهامش الصافي';
+
+  @override
+  String get productDetailDeleteMeta => 'يزيله من كتالوجك';
+
+  @override
   String productsCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -1249,6 +1471,10 @@ class L10nAr extends L10n {
   @override
   String get productPhotosUploadFailed =>
       'تم إنشاء المنتج، لكن تعذّر رفع صوره.';
+
+  @override
+  String get productPhotosUploadFailedEdit =>
+      'تم تحديث المنتج، لكن تعذّر رفع الصور الجديدة.';
 
   @override
   String get productPhotoRemove => 'إزالة الصورة';

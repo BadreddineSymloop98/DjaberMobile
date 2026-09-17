@@ -52,6 +52,7 @@
   "errorUnauthorized": "Your session expired. Sign in again.",
   "errorServer": "Something went wrong on our side.",
   "toastProductCreated": "Product created",
+  "toastProductUpdated": "Product updated",
   "@toastProductCreated": {
     "description": "Success toast after POST /api/user-stock/products. Raised on the step that did the write and read on the next one — the root ScaffoldMessenger carries it across the navigation."
   },
@@ -567,6 +568,126 @@
   "productHasVariants": "This product has variants",
   "productHasVariantsHint": "Sizes or colours — the quantity is set per variant",
   "productAddSubmit": "Create product",
+  "productEditTitle": "Edit product",
+  "@productEditTitle": {
+    "description": "Title of the edit form (Figma `Edit product`), and the accessible name of the pencil that opens it from 17a."
+  },
+  "productEditSubmit": "Update product",
+  "productEditVariantsHint": "To change variant quantities, use “Adjust stock”.",
+  "@productEditVariantsHint": {
+    "description": "Under the variants checkbox on the edit form. Replaces the create form's hint, because on edit a saved variant's quantity is locked — PUT cannot carry one."
+  },
+  "productEditLeaveBody": "Your changes will be lost.",
+  "productEditDeleteVariantsTitle": "Delete variants?",
+  "productEditDeleteVariantsBody": "{count, plural, =1{1 variant will be permanently deleted.} other{{count} variants will be permanently deleted.}}",
+  "@productEditDeleteVariantsBody": {
+    "description": "Confirmation before a save that deletes variants holding no stock.",
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "productEditDeleteVariantsStock": "{count, plural, =1{1 variant will be permanently deleted, and its {stock} units written off your stock.} other{{count} variants will be permanently deleted, and their {stock} units written off your stock.}}",
+  "@productEditDeleteVariantsStock": {
+    "description": "Same confirmation when the variants still hold stock. The backend writes a negative adjustment movement for each, which is why the units are named.",
+    "placeholders": { "count": { "type": "int" }, "stock": { "type": "int" } }
+  },
+  "productEditDeleteVariantsConfirm": "Delete and save",
+  "productUnitAdd": "Add a custom unit",
+  "@productUnitAdd": {
+    "description": "The + beside the unit picker on the edit form, and the title of the sheet it opens — the web's Add Custom Unit."
+  },
+  "productUnitName": "Unit name",
+  "productUnitNamePlaceholder": "e.g. Dozen",
+  "productUnitAbbreviation": "Abbreviation",
+  "productUnitAbbreviationPlaceholder": "e.g. dz",
+  "productUnitCreate": "Add unit",
+
+  "stockAdjustTitle": "Adjust stock",
+  "@stockAdjustTitle": {
+    "description": "Title of the Adjust stock sheet (Figma `Adjust stock`), and the action row that opens it on 17a."
+  },
+  "stockAdjustSubtitle": "{product}  ·  Current stock: {stock}",
+  "@stockAdjustSubtitle": {
+    "description": "Under the sheet's title. `stock` is already formatted with its unit abbreviation, e.g. `15 pcs`.",
+    "placeholders": { "product": { "type": "String" }, "stock": { "type": "String" } }
+  },
+  "stockAdjustIn": "Stock in (+)",
+  "stockAdjustOut": "Stock out (−)",
+  "stockAdjustSet": "Set",
+  "@stockAdjustSet": {
+    "description": "The third adjustment type: set the exact quantity. Short, because three chips share one row."
+  },
+  "stockAdjustReason": "Reason",
+  "stockAdjustCurrent": "QTY: {count}",
+  "@stockAdjustCurrent": {
+    "description": "On a variant card's header — the stock it holds before the adjustment.",
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "stockAdjustResult": "New quantity: {count}",
+  "@stockAdjustResult": {
+    "description": "Preview under a filled adjustment line.",
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "stockAdjustInsufficient": "Only {count} in stock",
+  "@stockAdjustInsufficient": {
+    "description": "An outgoing movement larger than the stock on hand. The backend answers 400 `Insufficient stock`; this says so first.",
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "stockAdjustNothing": "Enter a quantity on at least one line.",
+  "stockAdjustSubmit": "Adjust stock",
+  "stockAdjustDone": "Stock adjusted",
+
+  "expensesTitle": "Product expenses",
+  "expensesEyebrow": "PRODUCT EXPENSES",
+  "expensesMarginSummary": "Margin summary",
+  "expensesTotal": "Total expenses",
+  "expensesPerUnit": "Expense / unit",
+  "expensesTrueCost": "True cost",
+  "expensesNetMargin": "Net margin",
+  "expensesSection": "Expenses ({count})",
+  "@expensesSection": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "expensesEmpty": "No expenses yet. Add one below and the margin above will take it into account.",
+  "expensesAddSection": "Add an expense",
+  "expenseCategory": "Category",
+  "expenseCategoryMarketing": "Marketing",
+  "expenseCategoryShipping": "Shipping",
+  "expenseCategoryPackaging": "Packaging",
+  "expenseCategoryCustoms": "Customs",
+  "expenseCategoryStorage": "Storage",
+  "expenseCategoryOther": "Other",
+  "expenseAmount": "Amount (DA)",
+  "expenseAmountPlaceholder": "Amount",
+  "expenseDescriptionPlaceholder": "Description (optional)",
+  "expenseFixed": "Fixed",
+  "@expenseFixed": {
+    "description": "The amount is a fixed total, spread over the quantity in stock. The web's `fixed` toggle, and the default."
+  },
+  "expensePerUnit": "Per unit",
+  "expensePerUnitTag": "/ unit",
+  "@expensePerUnitTag": {
+    "description": "Tag on an expense row whose amount applies to each unit sold."
+  },
+  "expenseAdd": "Add expense",
+  "expenseAdded": "Expense added",
+  "expenseDeleteTitle": "Delete this expense?",
+  "expenseDeleteBody": "{category} — {amount} will be removed, and the margin recalculated.",
+  "@expenseDeleteBody": {
+    "description": "Confirmation before deleting an expense. The backend's delete is hard.",
+    "placeholders": { "category": { "type": "String" }, "amount": { "type": "String" } }
+  },
+  "expenseDeleted": "Expense deleted",
+
+  "productDeleteTitle": "Delete product",
+  "productDeleteBody": "Do you really want to delete {name}? This action cannot be undone.",
+  "@productDeleteBody": {
+    "description": "The web's own delete copy. The row is a soft delete, but the product's image FILES are removed from disk, so it is not reversible in practice.",
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "productDeleteDone": "Product deleted",
+  "productDetailActions": "Actions",
+  "productDetailAdjustMeta": "Stock in, stock out, or set the exact quantity",
+  "productDetailExpensesMeta": "True cost and net margin",
+  "productDetailDeleteMeta": "Removes it from your catalogue",
   "productsCount": "{count, plural, =0{No products} =1{1 product} other{{count} products}}",
   "@productsCount": {
     "description": "The meta line under a category in the picker — how many products it holds.",
@@ -577,6 +698,10 @@
   "productPhotosWrongType": "Only JPEG, PNG, WEBP or GIF photos can be added.",
   "productPhotosTooMany": "Up to 10 photos per product.",
   "productPhotosUploadFailed": "Product created, but its photos could not be uploaded.",
+  "productPhotosUploadFailedEdit": "Product updated, but the new photos could not be uploaded.",
+  "@productPhotosUploadFailedEdit": {
+    "description": "Toast on the edit form when everything saved but the photo upload, which runs last, failed. The edit stands either way."
+  },
   "@productPhotosUploadFailed": {
     "description": "Toast on 18 when the product was created but the separate photo upload failed. The product exists either way."
   },

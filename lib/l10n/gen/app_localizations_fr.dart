@@ -124,6 +124,9 @@ class L10nFr extends L10n {
   String get toastProductCreated => 'Produit créé';
 
   @override
+  String get toastProductUpdated => 'Produit mis à jour';
+
+  @override
   String get toastAgentCreated => 'Agent IA créé';
 
   @override
@@ -1228,6 +1231,224 @@ class L10nFr extends L10n {
   String get productAddSubmit => 'Ajouter le produit';
 
   @override
+  String get productEditTitle => 'Modifier le produit';
+
+  @override
+  String get productEditSubmit => 'Mettre à jour le produit';
+
+  @override
+  String get productEditVariantsHint =>
+      'Pour ajuster les quantités des variantes, utilisez « Ajuster le stock ».';
+
+  @override
+  String get productEditLeaveBody => 'Les modifications seront perdues.';
+
+  @override
+  String get productEditDeleteVariantsTitle => 'Supprimer des variantes ?';
+
+  @override
+  String productEditDeleteVariantsBody(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count variantes seront supprimées définitivement.',
+      one: '1 variante sera supprimée définitivement.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String productEditDeleteVariantsStock(int count, int stock) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          '$count variantes seront supprimées définitivement, et leurs $stock unités retirées de votre stock.',
+      one:
+          '1 variante sera supprimée définitivement, et ses $stock unités retirées de votre stock.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get productEditDeleteVariantsConfirm => 'Supprimer et enregistrer';
+
+  @override
+  String get productUnitAdd => 'Ajouter une unité';
+
+  @override
+  String get productUnitName => 'Nom de l’unité';
+
+  @override
+  String get productUnitNamePlaceholder => 'ex. Douzaine';
+
+  @override
+  String get productUnitAbbreviation => 'Abréviation';
+
+  @override
+  String get productUnitAbbreviationPlaceholder => 'ex. dz';
+
+  @override
+  String get productUnitCreate => 'Ajouter l’unité';
+
+  @override
+  String get stockAdjustTitle => 'Ajuster le stock';
+
+  @override
+  String stockAdjustSubtitle(String product, String stock) {
+    return '$product  ·  Stock actuel : $stock';
+  }
+
+  @override
+  String get stockAdjustIn => 'Entrée (+)';
+
+  @override
+  String get stockAdjustOut => 'Sortie (−)';
+
+  @override
+  String get stockAdjustSet => 'Fixer';
+
+  @override
+  String get stockAdjustReason => 'Motif';
+
+  @override
+  String stockAdjustCurrent(int count) {
+    return 'QTÉ : $count';
+  }
+
+  @override
+  String stockAdjustResult(int count) {
+    return 'Nouvelle quantité : $count';
+  }
+
+  @override
+  String stockAdjustInsufficient(int count) {
+    return '$count seulement en stock';
+  }
+
+  @override
+  String get stockAdjustNothing =>
+      'Saisissez une quantité sur au moins une ligne.';
+
+  @override
+  String get stockAdjustSubmit => 'Ajuster le stock';
+
+  @override
+  String get stockAdjustDone => 'Stock ajusté';
+
+  @override
+  String get expensesTitle => 'Dépenses du produit';
+
+  @override
+  String get expensesEyebrow => 'DÉPENSES DU PRODUIT';
+
+  @override
+  String get expensesMarginSummary => 'Résumé de la marge';
+
+  @override
+  String get expensesTotal => 'Total des dépenses';
+
+  @override
+  String get expensesPerUnit => 'Dépense / unité';
+
+  @override
+  String get expensesTrueCost => 'Coût réel';
+
+  @override
+  String get expensesNetMargin => 'Marge nette';
+
+  @override
+  String expensesSection(int count) {
+    return 'Dépenses ($count)';
+  }
+
+  @override
+  String get expensesEmpty =>
+      'Aucune dépense pour l’instant. Ajoutez-en une ci-dessous et la marge en tiendra compte.';
+
+  @override
+  String get expensesAddSection => 'Ajouter une dépense';
+
+  @override
+  String get expenseCategory => 'Catégorie';
+
+  @override
+  String get expenseCategoryMarketing => 'Marketing';
+
+  @override
+  String get expenseCategoryShipping => 'Livraison';
+
+  @override
+  String get expenseCategoryPackaging => 'Emballage';
+
+  @override
+  String get expenseCategoryCustoms => 'Douane';
+
+  @override
+  String get expenseCategoryStorage => 'Stockage';
+
+  @override
+  String get expenseCategoryOther => 'Autre';
+
+  @override
+  String get expenseAmount => 'Montant (DA)';
+
+  @override
+  String get expenseAmountPlaceholder => 'Montant';
+
+  @override
+  String get expenseDescriptionPlaceholder => 'Description (facultatif)';
+
+  @override
+  String get expenseFixed => 'Fixe';
+
+  @override
+  String get expensePerUnit => 'Par unité';
+
+  @override
+  String get expensePerUnitTag => '/ unité';
+
+  @override
+  String get expenseAdd => 'Ajouter la dépense';
+
+  @override
+  String get expenseAdded => 'Dépense ajoutée';
+
+  @override
+  String get expenseDeleteTitle => 'Supprimer cette dépense ?';
+
+  @override
+  String expenseDeleteBody(String category, String amount) {
+    return '$category — $amount sera retirée, et la marge recalculée.';
+  }
+
+  @override
+  String get expenseDeleted => 'Dépense supprimée';
+
+  @override
+  String get productDeleteTitle => 'Supprimer le produit';
+
+  @override
+  String productDeleteBody(String name) {
+    return 'Voulez-vous vraiment supprimer $name ? Cette action est irréversible.';
+  }
+
+  @override
+  String get productDeleteDone => 'Produit supprimé';
+
+  @override
+  String get productDetailActions => 'Actions';
+
+  @override
+  String get productDetailAdjustMeta => 'Entrée, sortie ou quantité exacte';
+
+  @override
+  String get productDetailExpensesMeta => 'Coût réel et marge nette';
+
+  @override
+  String get productDetailDeleteMeta => 'Le retire de votre catalogue';
+
+  @override
   String productsCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -1257,6 +1478,10 @@ class L10nFr extends L10n {
   @override
   String get productPhotosUploadFailed =>
       'Produit créé, mais ses photos n’ont pas pu être envoyées.';
+
+  @override
+  String get productPhotosUploadFailedEdit =>
+      'Produit mis à jour, mais les nouvelles photos n’ont pas pu être envoyées.';
 
   @override
   String get productPhotoRemove => 'Retirer la photo';

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/extensions/responsive_extension.dart';
-import '../../../core/utils/logger.dart';
 import '../../../data/repositories/catalogue_repository.dart';
 import '../../../data/repositories/product_repository.dart';
 import '../../../l10n/gen/app_localizations.dart';
@@ -16,7 +14,6 @@ import '../../theme/app_typography.dart';
 import '../../viewmodels/add_product_view_model.dart';
 import '../../viewmodels/form_draft_store.dart';
 import '../../viewmodels/form_field_model.dart';
-import '../../viewmodels/session_view_model.dart';
 import '../../widgets/api_error_message.dart';
 import '../../widgets/app_checkbox.dart';
 import '../../widgets/app_icon.dart';
@@ -27,6 +24,7 @@ import '../../widgets/back_scope.dart';
 import '../../widgets/icon_square_button.dart';
 import '../../widgets/leave_sheet.dart';
 import '../tutorial/tutorial_messages.dart';
+import 'product_photo_picker.dart';
 
 /// `18 — Ajouter un produit`.
 ///
@@ -35,8 +33,9 @@ import '../tutorial/tutorial_messages.dart';
 /// frames:
 ///
 /// - **The title says only "Add Product".** The web's modal heading doubles as
-///   a mode switch (`Add Product` / `Edit Product`); there is no edit screen on
-///   mobile yet, so there is nothing to distinguish it from.
+///   a mode switch (`Add Product` / `Edit Product`); on mobile the two are
+///   separate screens, so each says one thing. See `EditProductScreen`, which
+///   is this form minus the quantity and plus the unit's **+**.
 /// - **Category and Unit are pickers, not dropdowns** — see [AppSelectField],
 ///   which also explains why the design system had no component for this.
 /// - **Cost, price and margin are not previewed.** The web computes a live
@@ -84,92 +83,26 @@ class _AddProductScreenState extends State<AddProductScreen> {
   /// One photo from the camera, or several from the gallery.
   Future<void> _pickPhotos() async {
     if (_picking) return;
-    final source = await _chooseSource();
-    if (source == null || !mounted) return;
-
     _picking = true;
-    // The camera and the gallery send the app to the background, and a splash
-    // replay on the way back would rebuild this screen and lose the pick.
-    final session = context.read<SessionViewModel?>();
-    session?.holdSplashReplay();
-    var files = const <XFile>[];
     try {
-      final picker = ImagePicker();
-      // Re-encoded at a sensible size: a phone camera's own photo can pass
-      // the backend's 5 MB limit by itself.
-      if (source == ImageSource.camera) {
-        final shot = await picker.pickImage(
-          source: ImageSource.camera,
-          maxWidth: 2000,
-          maxHeight: 2000,
-          imageQuality: 85,
-        );
-        files = [?shot];
-      } else {
-        files = await picker.pickMultiImage(
-          maxWidth: 2000,
-          maxHeight: 2000,
-          imageQuality: 85,
-          limit: AddProductViewModel.maxPhotos,
-        );
+      final picked = await pickProductPhotos(
+        context,
+        limit: AddProductViewModel.maxPhotos - _model.photos.length,
+      );
+      if (picked.isEmpty || !mounted) return;
+
+      final rejected = _model.addPhotos(picked);
+      final l10n = L10n.of(context);
+      if (rejected.contains(PhotoRejection.tooMany)) {
+        AppToast.info(context, l10n.productPhotosTooMany);
+      } else if (rejected.contains(PhotoRejection.tooLarge)) {
+        AppToast.info(context, l10n.productPhotosTooLarge);
+      } else if (rejected.contains(PhotoRejection.wrongType)) {
+        AppToast.info(context, l10n.productPhotosWrongType);
       }
-    } on Exception catch (error) {
-      Log.w('photo picker failed: $error', tag: 'products');
     } finally {
-      session?.releaseSplashReplay();
       _picking = false;
     }
-    if (files.isEmpty || !mounted) return;
-
-    final picked = <ProductPhoto>[];
-    for (final file in files) {
-      try {
-        picked.add(
-          ProductPhoto(name: file.name, bytes: await file.readAsBytes()),
-        );
-      } on Exception catch (error) {
-        Log.w('could not read ${file.name}: $error', tag: 'products');
-      }
-    }
-    if (!mounted) return;
-
-    final rejected = _model.addPhotos(picked);
-    final l10n = L10n.of(context);
-    if (rejected.contains(PhotoRejection.tooMany)) {
-      AppToast.info(context, l10n.productPhotosTooMany);
-    } else if (rejected.contains(PhotoRejection.tooLarge)) {
-      AppToast.info(context, l10n.productPhotosTooLarge);
-    } else if (rejected.contains(PhotoRejection.wrongType)) {
-      AppToast.info(context, l10n.productPhotosWrongType);
-    }
-  }
-
-  /// Camera or gallery, asked in a sheet.
-  Future<ImageSource?> _chooseSource() {
-    final l10n = L10n.of(context);
-    return showModalBottomSheet<ImageSource>(
-      context: context,
-      backgroundColor: AppColors.surface,
-      barrierColor: AppColors.scrim,
-      builder: (sheet) => SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            for (final (source, label) in [
-              (ImageSource.camera, l10n.productPhotoCamera),
-              (ImageSource.gallery, l10n.productPhotoGallery),
-            ])
-              ListTile(
-                title: Text(
-                  label,
-                  style: AppText.bodyS.copyWith(color: AppColors.textPrimary),
-                ),
-                onTap: () => Navigator.of(sheet).pop(source),
-              ),
-          ],
-        ),
-      ),
-    );
   }
 
   /// Back on this form, through the route's [BackScope].

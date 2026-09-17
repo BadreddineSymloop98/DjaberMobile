@@ -100,6 +100,14 @@ class _ProductsScreenState extends State<ProductsScreen> {
     await _model.reloadAfterCreate();
   }
 
+  /// Opens a product, and reloads when it reports an edit — the same refresh a
+  /// create gets, because an edit moves the same two figures.
+  Future<void> _open(String productId) async {
+    final edited = await GoRouter.of(context).push<bool>(Routes.productOf(productId));
+    if (edited != true || !mounted) return;
+    await _model.reloadAfterCreate();
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
@@ -129,7 +137,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                       ),
                     ),
                   ),
-                  Expanded(child: _Body(model: model, controller: _search,
+                  Expanded(child: _Body(model: model, controller: _search, onOpen: _open,
                       focusNode: _searchFocus)),
                   Padding(
                     padding: EdgeInsets.fromLTRB(
@@ -158,11 +166,15 @@ class _Body extends StatelessWidget {
     required this.model,
     required this.controller,
     required this.focusNode,
+    required this.onOpen,
   });
 
   final ProductsViewModel model;
   final TextEditingController controller;
   final FocusNode focusNode;
+
+  /// Opens a product, and reloads the list when it comes back edited.
+  final ValueChanged<String> onOpen;
 
   @override
   Widget build(BuildContext context) {
@@ -218,7 +230,7 @@ class _Body extends StatelessWidget {
                 },
           trailing: Money.grouped(model.total, tag),
         ),
-        Padding(padding: gutter, child: _Rows(model: model)),
+        Padding(padding: gutter, child: _Rows(model: model, onOpen: onOpen)),
       ],
     );
   }
@@ -257,9 +269,12 @@ class _Chips extends StatelessWidget {
 }
 
 class _Rows extends StatelessWidget {
-  const _Rows({required this.model});
+  const _Rows({required this.model, required this.onOpen});
 
   final ProductsViewModel model;
+
+  /// Opens a product and reloads this list if it comes back edited.
+  final ValueChanged<String> onOpen;
 
   @override
   Widget build(BuildContext context) {
@@ -312,13 +327,32 @@ class _Rows extends StatelessWidget {
             meta: _meta(product, l10n, tag),
             value: Money.grouped(product.quantity, tag),
             unit: _stockLabel(product, l10n),
-            unitColor: product.isOutOfStock ? AppColors.accentAlert : null,
+            // **Both the figure and its label**, on a product at or under its
+            // own alert threshold as well as one that has run out. The
+            // `Low-stock products` frame shows every row that way — quantity
+            // and `EN STOCK` alike in `accent/alert` — and the rule is the
+            // product's state, not which chip is active, so the same product
+            // reads the same on `Tous`.
+            valueColor: _alert(product),
+            unitColor: _alert(product),
             // Pushed, so back returns to this list with its filter and search.
-            onTap: () => GoRouter.of(context).push(Routes.productOf(product.id)),
+            // It answers true when the merchant edited the product while they
+            // were in there, which leaves this row's name, price and stock
+            // figures stale.
+            onTap: () => onOpen(product.id),
           ),
       ],
     );
   }
+
+  /// The alert colour for a product that has run out or fallen to its
+  /// threshold, null otherwise.
+  ///
+  /// `Product.isLowStock` is already the merchant's own rule — `minQuantity >
+  /// 0 && quantity <= minQuantity` — so a product with no threshold set is
+  /// never low, only ever out.
+  static Color? _alert(Product product) =>
+      product.isOutOfStock || product.isLowStock ? AppColors.accentAlert : null;
 
   /// `PRD-001 · 2 400 DA`, plus the variant count and the threshold when set.
   ///

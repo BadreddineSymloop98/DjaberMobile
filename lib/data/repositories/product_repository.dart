@@ -7,6 +7,24 @@ import '../../core/error/result.dart';
 import '../../core/network/api_client.dart';
 import '../../core/utils/json.dart';
 import '../models/product.dart';
+import '../models/product_expense.dart';
+
+/// How a stock adjustment moves the quantity — the backend's `type` enum, and
+/// the web's three choices in its order.
+enum StockAdjustType {
+  /// Adds to what is there.
+  stockIn('in'),
+
+  /// Takes away, and fails with `Insufficient stock` when there is not enough.
+  stockOut('out'),
+
+  /// Sets the exact quantity; the movement records the signed difference.
+  set('adjustment');
+
+  const StockAdjustType(this.wire);
+
+  final String wire;
+}
 
 /// One page of products, plus how many match the filter in total.
 ///
@@ -227,6 +245,304 @@ class ProductRepository {
         final variant = map['variant'];
         return ProductVariant.fromJson(variant is Map<String, dynamic> ? variant : map);
       },
+    );
+  }
+
+  /// `PUT /api/user-stock/products/{id}` → `{ product }` — the web's
+  /// `updateProduct`, behind *Modifier le produit*.
+  ///
+  /// **A partial update, and two fields are not part of it.** The live docs are
+  /// explicit: `quantity` and `hasVariants` "CANNOT be changed here — stock
+  /// moves only through `POST /products/{id}/adjust` (or the variant
+  /// endpoints)". That is the whole reason the edit form has no quantity field
+  /// and locks a saved variant's: there is no route that would carry it.
+  ///
+  /// **The rules are looser than on create**, also from the docs: `costPrice`,
+  /// `sellingPrice` and `minQuantity` need only be non-negative — neither
+  /// `> 0` nor `sellingPrice >= costPrice` is enforced on update. The form
+  /// keeps the cost/selling comparison anyway, because the web's own validator
+  /// does and a product priced below cost is a mistake either way; it drops the
+  /// must-be-positive rule, which the server no longer applies.
+  ///
+  /// **`description`, `categoryId` and `unitId` are sent even when empty.**
+  /// They are applied *when the key is present*, and `""` clears the column —
+  /// which is the only way to take a category back off a product. Contrast
+  /// [create], which omits an empty description. `sku` and `name` are the
+  /// opposite: applied only when non-empty, so they are never sent blank.
+  ///
+  /// **A duplicate SKU is a 500 here**, not the 409 [create] gets: the docs say
+  /// so outright ("A duplicate `sku` is NOT mapped to 400: it surfaces as a
+  /// 500"). Nothing in this client can tell that 500 from any other, so the
+  /// screen shows the server's message as it comes.
+  Future<Result<Product>> update(
+    String productId, {
+    required String sku,
+    required String name,
+    String? description,
+    double? costPrice,
+    double? sellingPrice,
+    int? minQuantity,
+    String? categoryId,
+    String? unitId,
+  }) {
+    return _api.put<Product>(
+      Api.product(productId),
+      body: {
+        'sku': sku.trim(),
+        'name': name.trim(),
+        // Present-but-empty clears the column. See the note above.
+        'description': description?.trim() ?? '',
+        'categoryId': categoryId ?? '',
+        'unitId': unitId ?? '',
+        'costPrice': ?costPrice,
+        'sellingPrice': ?sellingPrice,
+        'minQuantity': ?minQuantity,
+      },
+      parse: (json) {
+        final map = json as Map<String, dynamic>;
+        final product = map['product'];
+        return Product.fromJson(product is Map<String, dynamic> ? product : map);
+      },
+    );
+  }
+
+  /// `PUT /api/user-stock/products/{id}/variants/{variantId}` → `{ variant }`.
+  ///
+  /// Partial, and — like [update] — **`quantity` is not in it**: a saved
+  /// variant's stock moves through `…/variants/{variantId}/adjust`, which is
+  /// the *Ajuster le stock* screen, not this form. `sku` is sent even when
+  /// empty, because `""` is what clears it; `name` only when non-empty.
+  ///
+  /// A name another variant of the same product already holds is a **400**,
+  /// which is why the form refuses duplicates before sending: on the web that
+  /// 400 lands halfway through a multi-variant save, with the earlier rows
+  /// already written.
+  Future<Result<ProductVariant>> updateVariant({
+    required String productId,
+    required String variantId,
+    required String name,
+    String? sku,
+    double costPrice = 0,
+    double sellingPrice = 0,
+    int minQuantity = 0,
+  }) {
+    return _api.put<ProductVariant>(
+      Api.productVariant(productId, variantId),
+      body: {
+        'name': name.trim(),
+        'sku': sku?.trim() ?? '',
+        'costPrice': costPrice,
+        'sellingPrice': sellingPrice,
+        'minQuantity': minQuantity,
+      },
+      parse: (json) {
+        final map = json as Map<String, dynamic>;
+        final variant = map['variant'];
+        return ProductVariant.fromJson(variant is Map<String, dynamic> ? variant : map);
+      },
+    );
+  }
+
+  /// `DELETE /api/user-stock/products/{id}/variants/{variantId}`.
+  ///
+  /// **A hard delete, and it moves stock.** Per the live docs, in one
+  /// transaction the backend writes a parent-level `adjustment` movement of
+  /// `-variant.quantity` reasoned "Variant deleted", removes the row, sets the
+  /// product's `hasVariants` back to false if it was the last one, and
+  /// recomputes the parent quantity from what remains.
+  ///
+  /// So removing a variant that holds stock *destroys that stock*. The edit
+  /// form asks before it sends these, which the web does not.
+  Future<Result<void>> deleteVariant({
+    required String productId,
+    required String variantId,
+  }) {
+    return _api.delete<void>(
+      Api.productVariant(productId, variantId),
+      parse: (_) {},
+    );
+  }
+
+  /// `POST /api/user-stock/products/{id}/adjust` → `{ product, movement }`.
+  ///
+  /// The only way a variant-less product's stock moves. In one transaction,
+  /// with row-level locking so concurrent calls cannot oversell, it changes the
+  /// quantity and writes the matching `StockMovement`.
+  ///
+  /// [type] is the web's three choices:
+  /// - `in` adds [quantity];
+  /// - `out` removes it, and is **refused with a 400 `Insufficient stock`**
+  ///   when the product holds less;
+  /// - `adjustment` sets the quantity to exactly [quantity], the movement
+  ///   recording the signed delta.
+  ///
+  /// **[quantity] must be greater than zero on this endpoint** — `0` fails the
+  /// required-field check, so "adjust to zero" is impossible here (it is
+  /// allowed on the variant route). A non-integer ends in a 500, which is why
+  /// the form only lets digits through.
+  ///
+  /// A product with variants is refused (400): its quantity is derived from
+  /// them, so [adjustVariantStock] is the route.
+  Future<Result<Product>> adjustStock({
+    required String productId,
+    required StockAdjustType type,
+    required int quantity,
+    String? reason,
+  }) {
+    return _api.post<Product>(
+      Api.productAdjust(productId),
+      body: {
+        'type': type.wire,
+        'quantity': quantity,
+        // Sent only when typed, as the web's `reason || undefined` does: the
+        // column is stored verbatim on the movement and "" would read as a
+        // reason that was given and left blank.
+        if (reason != null && reason.trim().isNotEmpty) 'reason': reason.trim(),
+      },
+      parse: (json) {
+        final map = json as Map<String, dynamic>;
+        final product = map['product'];
+        return Product.fromJson(product is Map<String, dynamic> ? product : map);
+      },
+    );
+  }
+
+  /// `POST /api/user-stock/products/{id}/variants/{variantId}/adjust` →
+  /// `{ variant, movement }`.
+  ///
+  /// The variant-level counterpart. Same three types; in one transaction it
+  /// updates the variant, writes a movement carrying `variantId`, and
+  /// **recomputes the parent's quantity** from the active variants.
+  ///
+  /// Two differences from [adjustStock], both from the live docs: `quantity: 0`
+  /// **is** accepted here, so setting a variant to zero works; and the
+  /// adjustment applies even to an inactive variant, whose stock the parent
+  /// total then ignores.
+  Future<Result<ProductVariant>> adjustVariantStock({
+    required String productId,
+    required String variantId,
+    required StockAdjustType type,
+    required int quantity,
+    String? reason,
+  }) {
+    return _api.post<ProductVariant>(
+      Api.productVariantAdjust(productId, variantId),
+      body: {
+        'type': type.wire,
+        'quantity': quantity,
+        if (reason != null && reason.trim().isNotEmpty) 'reason': reason.trim(),
+      },
+      parse: (json) {
+        final map = json as Map<String, dynamic>;
+        final variant = map['variant'];
+        return ProductVariant.fromJson(variant is Map<String, dynamic> ? variant : map);
+      },
+    );
+  }
+
+  /// `DELETE /api/user-stock/products/{id}` — the web's Delete Product.
+  ///
+  /// **A soft delete.** It sets `isActive = false`: the product leaves the
+  /// default list and the dashboard KPIs but stays readable at
+  /// `GET /products/{id}`, and `PUT … { "isActive": true }` brings it back.
+  /// Variants, expenses and stock movements are untouched, and no stock
+  /// movement is written.
+  ///
+  /// One side effect is **not** reversible, and the docs are explicit: the
+  /// image files under `uploads/products/` are deleted from disk while the
+  /// `ProductImage` rows are kept, so a restored product comes back with dead
+  /// image URLs. The confirmation says the action cannot be undone, which is
+  /// the honest reading of that.
+  Future<Result<void>> delete(String productId) {
+    return _api.delete<void>(Api.product(productId), parse: (_) {});
+  }
+
+  /// `GET /api/user-stock/products/{id}/expenses` → `{ expenses }`, newest
+  /// first. The web's expense panel.
+  Future<Result<List<ProductExpense>>> expenses(String productId) {
+    return _api.get<List<ProductExpense>>(
+      Api.productExpenses(productId),
+      parse: (json) => Json.listAt(
+        json as Map<String, dynamic>,
+        'expenses',
+        ProductExpense.fromJson,
+      ),
+    );
+  }
+
+  /// `POST /api/user-stock/products/{id}/expenses` → **201** `{ expense }`.
+  ///
+  /// [amount] must be greater than zero (a 400 otherwise) and [category] one of
+  /// the six the backend names — both are enforced by the form, which offers a
+  /// picker rather than a text field for the category. `date` is left out so
+  /// the server stamps now, as the web does: an invalid date is a 500 there.
+  /// No stock movement is written.
+  Future<Result<ProductExpense>> addExpense({
+    required String productId,
+    required ExpenseCategory category,
+    required double amount,
+    bool isPerUnit = false,
+    String? description,
+  }) {
+    return _api.post<ProductExpense>(
+      Api.productExpenses(productId),
+      body: {
+        'category': category.wire,
+        'amount': amount,
+        'isPerUnit': isPerUnit,
+        if (description != null && description.trim().isNotEmpty)
+          'description': description.trim(),
+      },
+      parse: (json) {
+        final map = json as Map<String, dynamic>;
+        final expense = map['expense'];
+        return ProductExpense.fromJson(
+          expense is Map<String, dynamic> ? expense : map,
+        );
+      },
+    );
+  }
+
+  /// `DELETE /api/user-stock/products/{id}/expenses/{expenseId}` — a **hard**
+  /// delete, unlike the product's own.
+  Future<Result<void>> deleteExpense({
+    required String productId,
+    required String expenseId,
+  }) {
+    return _api.delete<void>(
+      Api.productExpense(productId, expenseId),
+      parse: (_) {},
+    );
+  }
+
+  /// `GET /api/user-stock/products/{id}/margins` → `{ margins }`.
+  ///
+  /// The true cost and net margin once the expenses are counted, computed
+  /// server-side. See [ProductMargins] for the formula and its one surprise on
+  /// variant products.
+  Future<Result<ProductMargins>> margins(String productId) {
+    return _api.get<ProductMargins>(
+      Api.productMargins(productId),
+      parse: (json) {
+        final map = json as Map<String, dynamic>;
+        final margins = map['margins'];
+        return ProductMargins.fromJson(
+          margins is Map<String, dynamic> ? margins : map,
+        );
+      },
+    );
+  }
+
+  /// `DELETE /api/user-stock/products/{id}/images/{imageId}` — the web's
+  /// per-thumbnail ✕ in the edit modal, which removes the image immediately
+  /// rather than on save.
+  Future<Result<void>> deleteImage({
+    required String productId,
+    required String imageId,
+  }) {
+    return _api.delete<void>(
+      Api.productImage(productId, imageId),
+      parse: (_) {},
     );
   }
 
