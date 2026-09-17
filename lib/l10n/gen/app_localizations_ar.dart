@@ -2892,4 +2892,234 @@ class L10nAr extends L10n {
 
   @override
   String get categoryDeleteNoticeBody => 'ستصبح بلا فئة.';
+
+  @override
+  String get menuClients => 'العملاء';
+
+  @override
+  String get clientsEyebrow => 'المبيعات';
+
+  @override
+  String get clientsTitle => 'العملاء';
+
+  @override
+  String get clientsSubtitle =>
+      'العملاء المحفوظون من محادثات الذكاء الاصطناعي والطلبات المؤكدة';
+
+  @override
+  String get clientsStatTotal => 'إجمالي العملاء';
+
+  @override
+  String get clientsStatActive => 'النشطون';
+
+  @override
+  String get clientsStatWithOrders => 'لديهم طلبات';
+
+  @override
+  String get clientsStatTotalSpent => 'إجمالي الإنفاق';
+
+  @override
+  String get clientsSearchName => 'ابحث بالاسم أو البريد الإلكتروني...';
+
+  @override
+  String get clientsSearchPhone => 'ابحث بالهاتف...';
+
+  @override
+  String get clientsSection => 'كل العملاء';
+
+  @override
+  String get clientsSourceAi => 'دردشة الذكاء';
+
+  @override
+  String get clientsSourceManual => 'يدوي';
+
+  @override
+  String clientsOrderCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count طلب',
+      few: '$count طلبات',
+      two: 'طلبان',
+      one: 'طلب واحد',
+      zero: '0 طلب',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String clientsConversationCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count محادثة',
+      few: '$count محادثات',
+      two: 'محادثتان',
+      one: 'محادثة واحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get clientsEmptyTitle => 'لا يوجد عملاء';
+
+  @override
+  String get clientsEmptyBody =>
+      'يظهر العملاء هنا تلقائيًا عندما يؤكد روبوت الذكاء الاصطناعي طلبًا، أو أضفهم يدويًا.';
+
+  @override
+  String get clientsNoMatchBody => 'لا يوجد عميل يطابق البحث أو عوامل التصفية.';
+
+  @override
+  String get clientsFilterStatus => 'الحالة';
+
+  @override
+  String get clientsFilterActive => 'النشطون';
+
+  @override
+  String get clientsFilterInactive => 'غير النشطين';
+
+  @override
+  String get clientsFilterSource => 'المصدر';
+
+  @override
+  String get clientsFilterOrdersMin => 'الطلبات · الحد الأدنى';
+
+  @override
+  String get clientsFilterOrdersMax => 'الطلبات · الحد الأقصى';
+
+  @override
+  String get clientsFilterSpentMin => 'الإنفاق (دج) · الحد الأدنى';
+
+  @override
+  String get clientsFilterSpentMax => 'الإنفاق (دج) · الحد الأقصى';
+
+  @override
+  String get dateFrom => 'من تاريخ';
+
+  @override
+  String get dateTo => 'إلى تاريخ';
+
+  @override
+  String get dateClear => 'مسح التاريخ';
+
+  @override
+  String get datePickerToday => 'اليوم';
+
+  @override
+  String get clientAddTitle => 'إضافة عميل';
+
+  @override
+  String get clientEditTitle => 'تعديل العميل';
+
+  @override
+  String get clientCreate => 'إضافة العميل';
+
+  @override
+  String get clientUpdate => 'تحديث العميل';
+
+  @override
+  String get clientNamePlaceholder => 'اسم العميل';
+
+  @override
+  String get clientPhone => 'الهاتف';
+
+  @override
+  String get clientAddress => 'العنوان';
+
+  @override
+  String get clientAddressPlaceholder => 'عنوان العميل';
+
+  @override
+  String get clientNotes => 'ملاحظات';
+
+  @override
+  String get clientNotesPlaceholder => 'ملاحظات اختيارية';
+
+  @override
+  String get clientErrNoLetters => 'يجب أن يحتوي على حرف أو رقم واحد على الأقل';
+
+  @override
+  String get clientErrPhone =>
+      'يجب أن يتكون الهاتف من 8 إلى 15 رقمًا (مثال 0555 12 34 56)';
+
+  @override
+  String clientErrPhoneTaken(String name) {
+    return 'يوجد عميل بهذا الهاتف مسبقًا ($name)';
+  }
+
+  @override
+  String get clientAdded => 'تمت إضافة العميل';
+
+  @override
+  String get clientUpdated => 'تم تحديث العميل';
+
+  @override
+  String get clientDeleted => 'تم حذف العميل';
+
+  @override
+  String get clientDeleteTitle => 'حذف العميل';
+
+  @override
+  String clientDeleteBody(String name) {
+    return 'هل تريد فعلاً حذف $name؟';
+  }
+
+  @override
+  String clientDeleteNotice(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'لهذا العميل $count طلبًا مرتبطًا.',
+      few: 'لهذا العميل $count طلبات مرتبطة.',
+      two: 'لهذا العميل طلبان مرتبطان.',
+      one: 'لهذا العميل طلب واحد مرتبط.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get clientDetailEyebrow => 'تفاصيل العميل';
+
+  @override
+  String get clientDetailTotalOrders => 'إجمالي الطلبات';
+
+  @override
+  String get clientDetailLastOrder => 'آخر طلب';
+
+  @override
+  String get clientDetailMetrics => 'مقاييس محادثات الذكاء الاصطناعي';
+
+  @override
+  String get clientDetailConversations => 'المحادثات';
+
+  @override
+  String get clientDetailMessages => 'الرسائل';
+
+  @override
+  String get clientDetailAiResponses => 'ردود الذكاء الاصطناعي';
+
+  @override
+  String get clientDetailClientMessages => 'رسائل العميل';
+
+  @override
+  String get clientDetailLastMessage => 'آخر رسالة';
+
+  @override
+  String get clientDetailHistory => 'سجل المحادثات';
+
+  @override
+  String get clientDetailMsgs => 'رسائل';
+
+  @override
+  String get clientDetailFromAi => 'الذكاء:';
+
+  @override
+  String get clientDetailFromClient => 'العميل:';
+
+  @override
+  String get clientViewOrders => 'عرض الطلبات';
+
+  @override
+  String get clientOrdersSoon => 'الطلبات غير متاحة على الهاتف بعد';
 }

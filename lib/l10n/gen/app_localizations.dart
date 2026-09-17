@@ -5192,6 +5192,390 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'They will become uncategorized.'**
   String get categoryDeleteNoticeBody;
+
+  /// No description provided for @menuClients.
+  ///
+  /// In en, this message translates to:
+  /// **'Clients'**
+  String get menuClients;
+
+  /// No description provided for @clientsEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'SALES'**
+  String get clientsEyebrow;
+
+  /// No description provided for @clientsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Clients'**
+  String get clientsTitle;
+
+  /// No description provided for @clientsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Customers saved from AI conversations and confirmed orders'**
+  String get clientsSubtitle;
+
+  /// No description provided for @clientsStatTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Clients'**
+  String get clientsStatTotal;
+
+  /// No description provided for @clientsStatActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get clientsStatActive;
+
+  /// No description provided for @clientsStatWithOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'With Orders'**
+  String get clientsStatWithOrders;
+
+  /// No description provided for @clientsStatTotalSpent.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Spent'**
+  String get clientsStatTotalSpent;
+
+  /// No description provided for @clientsSearchName.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by name or email...'**
+  String get clientsSearchName;
+
+  /// No description provided for @clientsSearchPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by phone...'**
+  String get clientsSearchPhone;
+
+  /// No description provided for @clientsSection.
+  ///
+  /// In en, this message translates to:
+  /// **'All clients'**
+  String get clientsSection;
+
+  /// No description provided for @clientsSourceAi.
+  ///
+  /// In en, this message translates to:
+  /// **'AI Chat'**
+  String get clientsSourceAi;
+
+  /// No description provided for @clientsSourceManual.
+  ///
+  /// In en, this message translates to:
+  /// **'Manual'**
+  String get clientsSourceManual;
+
+  /// No description provided for @clientsOrderCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{0 orders} =1{1 order} other{{count} orders}}'**
+  String clientsOrderCount(int count);
+
+  /// No description provided for @clientsConversationCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 conversation} other{{count} conversations}}'**
+  String clientsConversationCount(int count);
+
+  /// No description provided for @clientsEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No clients'**
+  String get clientsEmptyTitle;
+
+  /// No description provided for @clientsEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Clients appear here automatically when the AI chatbot confirms an order, or add them manually.'**
+  String get clientsEmptyBody;
+
+  /// No description provided for @clientsNoMatchBody.
+  ///
+  /// In en, this message translates to:
+  /// **'No clients match your search or filters.'**
+  String get clientsNoMatchBody;
+
+  /// No description provided for @clientsFilterStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get clientsFilterStatus;
+
+  /// No description provided for @clientsFilterActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get clientsFilterActive;
+
+  /// No description provided for @clientsFilterInactive.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get clientsFilterInactive;
+
+  /// No description provided for @clientsFilterSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Source'**
+  String get clientsFilterSource;
+
+  /// No description provided for @clientsFilterOrdersMin.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders · min'**
+  String get clientsFilterOrdersMin;
+
+  /// No description provided for @clientsFilterOrdersMax.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders · max'**
+  String get clientsFilterOrdersMax;
+
+  /// No description provided for @clientsFilterSpentMin.
+  ///
+  /// In en, this message translates to:
+  /// **'Spent (DA) · min'**
+  String get clientsFilterSpentMin;
+
+  /// No description provided for @clientsFilterSpentMax.
+  ///
+  /// In en, this message translates to:
+  /// **'Spent (DA) · max'**
+  String get clientsFilterSpentMax;
+
+  /// No description provided for @dateFrom.
+  ///
+  /// In en, this message translates to:
+  /// **'From date'**
+  String get dateFrom;
+
+  /// No description provided for @dateTo.
+  ///
+  /// In en, this message translates to:
+  /// **'To date'**
+  String get dateTo;
+
+  /// No description provided for @dateClear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear date'**
+  String get dateClear;
+
+  /// No description provided for @datePickerToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get datePickerToday;
+
+  /// No description provided for @clientAddTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Client'**
+  String get clientAddTitle;
+
+  /// No description provided for @clientEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Client'**
+  String get clientEditTitle;
+
+  /// No description provided for @clientCreate.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Client'**
+  String get clientCreate;
+
+  /// No description provided for @clientUpdate.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Client'**
+  String get clientUpdate;
+
+  /// No description provided for @clientNamePlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Client name'**
+  String get clientNamePlaceholder;
+
+  /// No description provided for @clientPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get clientPhone;
+
+  /// No description provided for @clientAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get clientAddress;
+
+  /// No description provided for @clientAddressPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Client address'**
+  String get clientAddressPlaceholder;
+
+  /// No description provided for @clientNotes.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get clientNotes;
+
+  /// No description provided for @clientNotesPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional notes'**
+  String get clientNotesPlaceholder;
+
+  /// No description provided for @clientErrNoLetters.
+  ///
+  /// In en, this message translates to:
+  /// **'Must contain at least one letter or number'**
+  String get clientErrNoLetters;
+
+  /// No description provided for @clientErrPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone must be 8-15 digits (e.g. 0555 12 34 56)'**
+  String get clientErrPhone;
+
+  /// No description provided for @clientErrPhoneTaken.
+  ///
+  /// In en, this message translates to:
+  /// **'A client already exists with this phone ({name})'**
+  String clientErrPhoneTaken(String name);
+
+  /// No description provided for @clientAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'Client added'**
+  String get clientAdded;
+
+  /// No description provided for @clientUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Client updated'**
+  String get clientUpdated;
+
+  /// No description provided for @clientDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Client deleted'**
+  String get clientDeleted;
+
+  /// No description provided for @clientDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Client'**
+  String get clientDeleteTitle;
+
+  /// No description provided for @clientDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete {name}?'**
+  String clientDeleteBody(String name);
+
+  /// No description provided for @clientDeleteNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{This client has 1 order linked.} other{This client has {count} orders linked.}}'**
+  String clientDeleteNotice(int count);
+
+  /// No description provided for @clientDetailEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'CLIENT DETAILS'**
+  String get clientDetailEyebrow;
+
+  /// No description provided for @clientDetailTotalOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Orders'**
+  String get clientDetailTotalOrders;
+
+  /// No description provided for @clientDetailLastOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Order'**
+  String get clientDetailLastOrder;
+
+  /// No description provided for @clientDetailMetrics.
+  ///
+  /// In en, this message translates to:
+  /// **'AI conversation metrics'**
+  String get clientDetailMetrics;
+
+  /// No description provided for @clientDetailConversations.
+  ///
+  /// In en, this message translates to:
+  /// **'Conversations'**
+  String get clientDetailConversations;
+
+  /// No description provided for @clientDetailMessages.
+  ///
+  /// In en, this message translates to:
+  /// **'Messages'**
+  String get clientDetailMessages;
+
+  /// No description provided for @clientDetailAiResponses.
+  ///
+  /// In en, this message translates to:
+  /// **'AI responses'**
+  String get clientDetailAiResponses;
+
+  /// No description provided for @clientDetailClientMessages.
+  ///
+  /// In en, this message translates to:
+  /// **'Client messages'**
+  String get clientDetailClientMessages;
+
+  /// No description provided for @clientDetailLastMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Last message'**
+  String get clientDetailLastMessage;
+
+  /// No description provided for @clientDetailHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Conversation history'**
+  String get clientDetailHistory;
+
+  /// No description provided for @clientDetailMsgs.
+  ///
+  /// In en, this message translates to:
+  /// **'MSGS'**
+  String get clientDetailMsgs;
+
+  /// No description provided for @clientDetailFromAi.
+  ///
+  /// In en, this message translates to:
+  /// **'AI:'**
+  String get clientDetailFromAi;
+
+  /// No description provided for @clientDetailFromClient.
+  ///
+  /// In en, this message translates to:
+  /// **'Client:'**
+  String get clientDetailFromClient;
+
+  /// No description provided for @clientViewOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'View Orders'**
+  String get clientViewOrders;
+
+  /// No description provided for @clientOrdersSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders are not available on mobile yet'**
+  String get clientOrdersSoon;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

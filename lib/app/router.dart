@@ -18,6 +18,8 @@ import '../presentation/screens/auth/password_sent_screen.dart';
 import '../presentation/screens/auth/reset_password_screen.dart';
 import '../presentation/screens/auth/signup_screen.dart';
 import '../presentation/screens/categories/categories_screen.dart';
+import '../presentation/screens/clients/client_detail_screen.dart';
+import '../presentation/screens/clients/clients_screen.dart';
 import '../presentation/screens/home/home_screen.dart';
 import '../presentation/screens/home/home_shell.dart';
 import '../presentation/screens/inbox/conversation_screen.dart';
@@ -307,6 +309,20 @@ class AppRouter {
         parentNavigatorKey: _rootKey,
         builder: (_, _) =>
             const BackScope(fallback: Routes.home, child: CategoriesScreen()),
+      ),
+      GoRoute(
+        path: Routes.clients,
+        parentNavigatorKey: _rootKey,
+        builder: (_, _) =>
+            const BackScope(fallback: Routes.home, child: ClientsScreen()),
+      ),
+      GoRoute(
+        path: Routes.client,
+        parentNavigatorKey: _rootKey,
+        builder: (_, state) => BackScope(
+          fallback: Routes.clients,
+          child: ClientDetailScreen(clientId: state.pathParameters['id']!),
+        ),
       ),
       GoRoute(
         path: Routes.agents,

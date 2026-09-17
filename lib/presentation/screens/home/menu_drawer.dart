@@ -305,6 +305,13 @@ class _MenuDrawerState extends State<MenuDrawer> {
                 onTap: () => _open(Routes.categories),
               ),
               MenuSubrow(
+                icon: AppIcons.users,
+                label: l10n.menuClients,
+                // `accent/clients` — §21.3's violet for people.
+                iconColor: AppColors.accentClients,
+                onTap: () => _open(Routes.clients),
+              ),
+              MenuSubrow(
                 icon: AppIcons.bot,
                 label: l10n.menuAgents,
                 // The AI is `signal/live`.

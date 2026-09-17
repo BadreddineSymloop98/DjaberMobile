@@ -2912,4 +2912,231 @@ class L10nFr extends L10n {
 
   @override
   String get categoryDeleteNoticeBody => 'Ils n’auront plus de catégorie.';
+
+  @override
+  String get menuClients => 'Clients';
+
+  @override
+  String get clientsEyebrow => 'VENTES';
+
+  @override
+  String get clientsTitle => 'Clients';
+
+  @override
+  String get clientsSubtitle =>
+      'Clients enregistrés depuis les conversations IA et les commandes confirmées';
+
+  @override
+  String get clientsStatTotal => 'Total clients';
+
+  @override
+  String get clientsStatActive => 'Actifs';
+
+  @override
+  String get clientsStatWithOrders => 'Avec commandes';
+
+  @override
+  String get clientsStatTotalSpent => 'Total dépensé';
+
+  @override
+  String get clientsSearchName => 'Rechercher par nom ou e-mail...';
+
+  @override
+  String get clientsSearchPhone => 'Rechercher par téléphone...';
+
+  @override
+  String get clientsSection => 'Tous les clients';
+
+  @override
+  String get clientsSourceAi => 'Chat IA';
+
+  @override
+  String get clientsSourceManual => 'Manuel';
+
+  @override
+  String clientsOrderCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count commandes',
+      one: '1 commande',
+      zero: '0 commande',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String clientsConversationCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count conversations',
+      one: '1 conversation',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get clientsEmptyTitle => 'Aucun client';
+
+  @override
+  String get clientsEmptyBody =>
+      'Les clients apparaissent ici automatiquement quand le chatbot IA confirme une commande, ou ajoutez-les manuellement.';
+
+  @override
+  String get clientsNoMatchBody =>
+      'Aucun client ne correspond à la recherche ou aux filtres.';
+
+  @override
+  String get clientsFilterStatus => 'Statut';
+
+  @override
+  String get clientsFilterActive => 'Actifs';
+
+  @override
+  String get clientsFilterInactive => 'Inactifs';
+
+  @override
+  String get clientsFilterSource => 'Source';
+
+  @override
+  String get clientsFilterOrdersMin => 'Commandes · min';
+
+  @override
+  String get clientsFilterOrdersMax => 'Commandes · max';
+
+  @override
+  String get clientsFilterSpentMin => 'Dépensé (DA) · min';
+
+  @override
+  String get clientsFilterSpentMax => 'Dépensé (DA) · max';
+
+  @override
+  String get dateFrom => 'Date de début';
+
+  @override
+  String get dateTo => 'Date de fin';
+
+  @override
+  String get dateClear => 'Effacer la date';
+
+  @override
+  String get datePickerToday => 'Aujourd’hui';
+
+  @override
+  String get clientAddTitle => 'Ajouter un client';
+
+  @override
+  String get clientEditTitle => 'Modifier le client';
+
+  @override
+  String get clientCreate => 'Ajouter le client';
+
+  @override
+  String get clientUpdate => 'Mettre à jour le client';
+
+  @override
+  String get clientNamePlaceholder => 'Nom du client';
+
+  @override
+  String get clientPhone => 'Téléphone';
+
+  @override
+  String get clientAddress => 'Adresse';
+
+  @override
+  String get clientAddressPlaceholder => 'Adresse du client';
+
+  @override
+  String get clientNotes => 'Notes';
+
+  @override
+  String get clientNotesPlaceholder => 'Notes facultatives';
+
+  @override
+  String get clientErrNoLetters =>
+      'Doit contenir au moins une lettre ou un chiffre';
+
+  @override
+  String get clientErrPhone =>
+      'Le téléphone doit comporter 8 à 15 chiffres (ex. 0555 12 34 56)';
+
+  @override
+  String clientErrPhoneTaken(String name) {
+    return 'Un client existe déjà avec ce téléphone ($name)';
+  }
+
+  @override
+  String get clientAdded => 'Client ajouté';
+
+  @override
+  String get clientUpdated => 'Client mis à jour';
+
+  @override
+  String get clientDeleted => 'Client supprimé';
+
+  @override
+  String get clientDeleteTitle => 'Supprimer le client';
+
+  @override
+  String clientDeleteBody(String name) {
+    return 'Voulez-vous vraiment supprimer $name ?';
+  }
+
+  @override
+  String clientDeleteNotice(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Ce client a $count commandes liées.',
+      one: 'Ce client a 1 commande liée.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get clientDetailEyebrow => 'DÉTAILS DU CLIENT';
+
+  @override
+  String get clientDetailTotalOrders => 'Total commandes';
+
+  @override
+  String get clientDetailLastOrder => 'Dernière commande';
+
+  @override
+  String get clientDetailMetrics => 'Métriques des conversations IA';
+
+  @override
+  String get clientDetailConversations => 'Conversations';
+
+  @override
+  String get clientDetailMessages => 'Messages';
+
+  @override
+  String get clientDetailAiResponses => 'Réponses IA';
+
+  @override
+  String get clientDetailClientMessages => 'Messages du client';
+
+  @override
+  String get clientDetailLastMessage => 'Dernier message';
+
+  @override
+  String get clientDetailHistory => 'Historique des conversations';
+
+  @override
+  String get clientDetailMsgs => 'MSGS';
+
+  @override
+  String get clientDetailFromAi => 'IA :';
+
+  @override
+  String get clientDetailFromClient => 'Client :';
+
+  @override
+  String get clientViewOrders => 'Voir les commandes';
+
+  @override
+  String get clientOrdersSoon =>
+      'Les commandes ne sont pas encore disponibles sur mobile';
 }

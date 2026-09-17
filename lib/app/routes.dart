@@ -87,6 +87,12 @@ class Routes {
   /// Produits, the web sidebar's order). Pushed over the shell like [products].
   static const categories = '/categories';
 
+  /// `Clients` — from the drawer, after Catégories. [client] is one client's
+  /// details, pushed over the list.
+  static const clients = '/clients';
+  static const client = '/clients/:id';
+  static String clientOf(String id) => '/clients/$id';
+
   /// `14 — Agents IA` — the merchant's agent. Reached from home's action
   /// card and the drawer, like [products].
   static const agents = '/agents';

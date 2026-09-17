@@ -2883,4 +2883,227 @@ class L10nEn extends L10n {
 
   @override
   String get categoryDeleteNoticeBody => 'They will become uncategorized.';
+
+  @override
+  String get menuClients => 'Clients';
+
+  @override
+  String get clientsEyebrow => 'SALES';
+
+  @override
+  String get clientsTitle => 'Clients';
+
+  @override
+  String get clientsSubtitle =>
+      'Customers saved from AI conversations and confirmed orders';
+
+  @override
+  String get clientsStatTotal => 'Total Clients';
+
+  @override
+  String get clientsStatActive => 'Active';
+
+  @override
+  String get clientsStatWithOrders => 'With Orders';
+
+  @override
+  String get clientsStatTotalSpent => 'Total Spent';
+
+  @override
+  String get clientsSearchName => 'Search by name or email...';
+
+  @override
+  String get clientsSearchPhone => 'Search by phone...';
+
+  @override
+  String get clientsSection => 'All clients';
+
+  @override
+  String get clientsSourceAi => 'AI Chat';
+
+  @override
+  String get clientsSourceManual => 'Manual';
+
+  @override
+  String clientsOrderCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count orders',
+      one: '1 order',
+      zero: '0 orders',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String clientsConversationCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count conversations',
+      one: '1 conversation',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get clientsEmptyTitle => 'No clients';
+
+  @override
+  String get clientsEmptyBody =>
+      'Clients appear here automatically when the AI chatbot confirms an order, or add them manually.';
+
+  @override
+  String get clientsNoMatchBody => 'No clients match your search or filters.';
+
+  @override
+  String get clientsFilterStatus => 'Status';
+
+  @override
+  String get clientsFilterActive => 'Active';
+
+  @override
+  String get clientsFilterInactive => 'Inactive';
+
+  @override
+  String get clientsFilterSource => 'Source';
+
+  @override
+  String get clientsFilterOrdersMin => 'Orders · min';
+
+  @override
+  String get clientsFilterOrdersMax => 'Orders · max';
+
+  @override
+  String get clientsFilterSpentMin => 'Spent (DA) · min';
+
+  @override
+  String get clientsFilterSpentMax => 'Spent (DA) · max';
+
+  @override
+  String get dateFrom => 'From date';
+
+  @override
+  String get dateTo => 'To date';
+
+  @override
+  String get dateClear => 'Clear date';
+
+  @override
+  String get datePickerToday => 'Today';
+
+  @override
+  String get clientAddTitle => 'Add Client';
+
+  @override
+  String get clientEditTitle => 'Edit Client';
+
+  @override
+  String get clientCreate => 'Add Client';
+
+  @override
+  String get clientUpdate => 'Update Client';
+
+  @override
+  String get clientNamePlaceholder => 'Client name';
+
+  @override
+  String get clientPhone => 'Phone';
+
+  @override
+  String get clientAddress => 'Address';
+
+  @override
+  String get clientAddressPlaceholder => 'Client address';
+
+  @override
+  String get clientNotes => 'Notes';
+
+  @override
+  String get clientNotesPlaceholder => 'Optional notes';
+
+  @override
+  String get clientErrNoLetters => 'Must contain at least one letter or number';
+
+  @override
+  String get clientErrPhone => 'Phone must be 8-15 digits (e.g. 0555 12 34 56)';
+
+  @override
+  String clientErrPhoneTaken(String name) {
+    return 'A client already exists with this phone ($name)';
+  }
+
+  @override
+  String get clientAdded => 'Client added';
+
+  @override
+  String get clientUpdated => 'Client updated';
+
+  @override
+  String get clientDeleted => 'Client deleted';
+
+  @override
+  String get clientDeleteTitle => 'Delete Client';
+
+  @override
+  String clientDeleteBody(String name) {
+    return 'Are you sure you want to delete $name?';
+  }
+
+  @override
+  String clientDeleteNotice(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'This client has $count orders linked.',
+      one: 'This client has 1 order linked.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get clientDetailEyebrow => 'CLIENT DETAILS';
+
+  @override
+  String get clientDetailTotalOrders => 'Total Orders';
+
+  @override
+  String get clientDetailLastOrder => 'Last Order';
+
+  @override
+  String get clientDetailMetrics => 'AI conversation metrics';
+
+  @override
+  String get clientDetailConversations => 'Conversations';
+
+  @override
+  String get clientDetailMessages => 'Messages';
+
+  @override
+  String get clientDetailAiResponses => 'AI responses';
+
+  @override
+  String get clientDetailClientMessages => 'Client messages';
+
+  @override
+  String get clientDetailLastMessage => 'Last message';
+
+  @override
+  String get clientDetailHistory => 'Conversation history';
+
+  @override
+  String get clientDetailMsgs => 'MSGS';
+
+  @override
+  String get clientDetailFromAi => 'AI:';
+
+  @override
+  String get clientDetailFromClient => 'Client:';
+
+  @override
+  String get clientViewOrders => 'View Orders';
+
+  @override
+  String get clientOrdersSoon => 'Orders are not available on mobile yet';
 }
