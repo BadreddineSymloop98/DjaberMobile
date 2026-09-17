@@ -83,6 +83,10 @@ class Routes {
   /// this is reached from the drawer and from home.
   static const products = '/products';
 
+  /// `Catégories` — the catalogue's categories, from the drawer (under
+  /// Produits, the web sidebar's order). Pushed over the shell like [products].
+  static const categories = '/categories';
+
   /// `14 — Agents IA` — the merchant's agent. Reached from home's action
   /// card and the drawer, like [products].
   static const agents = '/agents';

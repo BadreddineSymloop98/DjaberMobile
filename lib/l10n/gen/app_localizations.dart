@@ -4946,6 +4946,252 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'New agent'**
   String get agentsNewTitle;
+
+  /// No description provided for @commonYes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get commonYes;
+
+  /// No description provided for @commonNo.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get commonNo;
+
+  /// No description provided for @menuCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'Categories'**
+  String get menuCategories;
+
+  /// No description provided for @categoriesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Categories'**
+  String get categoriesTitle;
+
+  /// No description provided for @categoriesCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 category} other{{count} categories}}'**
+  String categoriesCount(int count);
+
+  /// No description provided for @categoriesSearchPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Search categories...'**
+  String get categoriesSearchPlaceholder;
+
+  /// No description provided for @categoriesFilters.
+  ///
+  /// In en, this message translates to:
+  /// **'Filters'**
+  String get categoriesFilters;
+
+  /// The Filters chip once filters are applied.
+  ///
+  /// In en, this message translates to:
+  /// **'Filters · {count}'**
+  String categoriesFiltersActive(int count);
+
+  /// No description provided for @categoriesSection.
+  ///
+  /// In en, this message translates to:
+  /// **'All categories'**
+  String get categoriesSection;
+
+  /// No description provided for @categoriesProductCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{0 products} =1{1 product} other{{count} products}}'**
+  String categoriesProductCount(int count);
+
+  /// No description provided for @categoriesEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No Categories'**
+  String get categoriesEmptyTitle;
+
+  /// No description provided for @categoriesEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Create categories to organize your products'**
+  String get categoriesEmptyBody;
+
+  /// No description provided for @categoriesNoMatchBody.
+  ///
+  /// In en, this message translates to:
+  /// **'No categories match your search or filters.'**
+  String get categoriesNoMatchBody;
+
+  /// No description provided for @categoriesFilterMin.
+  ///
+  /// In en, this message translates to:
+  /// **'Products · min'**
+  String get categoriesFilterMin;
+
+  /// No description provided for @categoriesFilterMax.
+  ///
+  /// In en, this message translates to:
+  /// **'Products · max'**
+  String get categoriesFilterMax;
+
+  /// No description provided for @categoriesFilterRangeInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Must be at least the minimum'**
+  String get categoriesFilterRangeInvalid;
+
+  /// No description provided for @categoriesFilterHasDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Has description'**
+  String get categoriesFilterHasDescription;
+
+  /// No description provided for @categoriesFilterColorsSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} selected'**
+  String categoriesFilterColorsSelected(int count);
+
+  /// No description provided for @categoriesFilterApply.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply filters'**
+  String get categoriesFilterApply;
+
+  /// No description provided for @categoriesFilterClear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear all'**
+  String get categoriesFilterClear;
+
+  /// No description provided for @categoryAddTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Category'**
+  String get categoryAddTitle;
+
+  /// No description provided for @categoryEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Category'**
+  String get categoryEditTitle;
+
+  /// No description provided for @categoryName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get categoryName;
+
+  /// No description provided for @categoryNamePlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., Electronics'**
+  String get categoryNamePlaceholder;
+
+  /// No description provided for @categoryDescriptionPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional description'**
+  String get categoryDescriptionPlaceholder;
+
+  /// No description provided for @categoryColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Color'**
+  String get categoryColor;
+
+  /// No description provided for @categoryColorCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom colour'**
+  String get categoryColorCustom;
+
+  /// No description provided for @categoryColorHex.
+  ///
+  /// In en, this message translates to:
+  /// **'Hex code'**
+  String get categoryColorHex;
+
+  /// No description provided for @categoryColorInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Six hex digits, e.g. EC4899'**
+  String get categoryColorInvalid;
+
+  /// No description provided for @categoryColorApply.
+  ///
+  /// In en, this message translates to:
+  /// **'Use this colour'**
+  String get categoryColorApply;
+
+  /// No description provided for @categoryCreate.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Category'**
+  String get categoryCreate;
+
+  /// No description provided for @categoryUpdate.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Category'**
+  String get categoryUpdate;
+
+  /// No description provided for @categoryNameTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'At least 2 characters'**
+  String get categoryNameTooShort;
+
+  /// No description provided for @categoryNameTaken.
+  ///
+  /// In en, this message translates to:
+  /// **'You already have a category with this name'**
+  String get categoryNameTaken;
+
+  /// No description provided for @categoryAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'Category added'**
+  String get categoryAdded;
+
+  /// No description provided for @categoryUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Category updated'**
+  String get categoryUpdated;
+
+  /// No description provided for @categoryDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Category deleted'**
+  String get categoryDeleted;
+
+  /// No description provided for @categoryDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Category'**
+  String get categoryDeleteTitle;
+
+  /// No description provided for @categoryDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete {name}?'**
+  String categoryDeleteBody(String name);
+
+  /// No description provided for @categoryDeleteNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{This category has 1 product.} other{This category has {count} products.}}'**
+  String categoryDeleteNotice(int count);
+
+  /// No description provided for @categoryDeleteNoticeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'They will become uncategorized.'**
+  String get categoryDeleteNoticeBody;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

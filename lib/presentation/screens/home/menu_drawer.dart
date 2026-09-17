@@ -298,6 +298,13 @@ class _MenuDrawerState extends State<MenuDrawer> {
                 onTap: () => _open(Routes.products),
               ),
               MenuSubrow(
+                icon: AppIcons.tag,
+                label: l10n.menuCategories,
+                // Catalogue, like Produits just above it (§21.3).
+                iconColor: AppColors.accentStarred,
+                onTap: () => _open(Routes.categories),
+              ),
+              MenuSubrow(
                 icon: AppIcons.bot,
                 label: l10n.menuAgents,
                 // The AI is `signal/live`.

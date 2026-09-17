@@ -268,7 +268,14 @@ class FakeCatalogueRepository extends CatalogueRepository {
   final bool fails;
 
   @override
-  Future<Result<List<ProductCategory>>> categories() async => fails
+  Future<Result<List<ProductCategory>>> categories({
+    String? search,
+    bool? hasDescription,
+    List<String> colors = const [],
+    int? minProducts,
+    int? maxProducts,
+  }) async =>
+      fails
       ? const Result.failure(ServerException('unreachable'))
       : Result.success(categoryList);
 

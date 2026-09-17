@@ -43,11 +43,17 @@ Future<bool> showLeaveSheet(
 /// red, which is the whole reason this shape exists rather than the other.
 ///
 /// Resolves true only on an explicit confirm.
+///
+/// [noticeTitle] / [noticeBody] add the boxed consequence the category delete
+/// frame draws under the question — *"Cette catégorie contient 12 produits.
+/// Ils n'auront plus de catégorie."* Shown only when a title is given.
 Future<bool> showDestructiveSheet(
   BuildContext context, {
   required String title,
   required String body,
   required String confirmLabel,
+  String? noticeTitle,
+  String? noticeBody,
 }) async {
   final confirmed = await showModalBottomSheet<bool>(
     context: context,
@@ -76,6 +82,31 @@ Future<bool> showDestructiveSheet(
                   height: 1.32,
                 ),
               ),
+              if (noticeTitle != null) ...[
+                SizedBox(height: AppSpacing.xl),
+                Container(
+                  padding: EdgeInsets.all(AppSpacing.md),
+                  decoration: BoxDecoration(
+                    color: AppColors.ink,
+                    border: Border.all(color: AppColors.rule, width: AppStroke.hairline),
+                    borderRadius: BorderRadius.circular(AppRadius.card),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(noticeTitle, style: AppText.title),
+                      if (noticeBody != null) ...[
+                        SizedBox(height: AppSpacing.xxs),
+                        Text(
+                          noticeBody,
+                          style: AppText.bodyS.copyWith(color: AppColors.textMuted),
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+              ],
               SizedBox(height: AppSpacing.xl),
               FilledButton(
                 style: FilledButton.styleFrom(

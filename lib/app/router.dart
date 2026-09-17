@@ -17,6 +17,7 @@ import '../presentation/screens/auth/login_screen.dart';
 import '../presentation/screens/auth/password_sent_screen.dart';
 import '../presentation/screens/auth/reset_password_screen.dart';
 import '../presentation/screens/auth/signup_screen.dart';
+import '../presentation/screens/categories/categories_screen.dart';
 import '../presentation/screens/home/home_screen.dart';
 import '../presentation/screens/home/home_shell.dart';
 import '../presentation/screens/inbox/conversation_screen.dart';
@@ -300,6 +301,12 @@ class AppRouter {
         parentNavigatorKey: _rootKey,
         builder: (_, _) =>
             const BackScope(fallback: Routes.home, child: ProductsScreen()),
+      ),
+      GoRoute(
+        path: Routes.categories,
+        parentNavigatorKey: _rootKey,
+        builder: (_, _) =>
+            const BackScope(fallback: Routes.home, child: CategoriesScreen()),
       ),
       GoRoute(
         path: Routes.agents,

@@ -2727,4 +2727,160 @@ class L10nEn extends L10n {
 
   @override
   String get agentsNewTitle => 'New agent';
+
+  @override
+  String get commonYes => 'Yes';
+
+  @override
+  String get commonNo => 'No';
+
+  @override
+  String get menuCategories => 'Categories';
+
+  @override
+  String get categoriesTitle => 'Categories';
+
+  @override
+  String categoriesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count categories',
+      one: '1 category',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get categoriesSearchPlaceholder => 'Search categories...';
+
+  @override
+  String get categoriesFilters => 'Filters';
+
+  @override
+  String categoriesFiltersActive(int count) {
+    return 'Filters · $count';
+  }
+
+  @override
+  String get categoriesSection => 'All categories';
+
+  @override
+  String categoriesProductCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count products',
+      one: '1 product',
+      zero: '0 products',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get categoriesEmptyTitle => 'No Categories';
+
+  @override
+  String get categoriesEmptyBody =>
+      'Create categories to organize your products';
+
+  @override
+  String get categoriesNoMatchBody =>
+      'No categories match your search or filters.';
+
+  @override
+  String get categoriesFilterMin => 'Products · min';
+
+  @override
+  String get categoriesFilterMax => 'Products · max';
+
+  @override
+  String get categoriesFilterRangeInvalid => 'Must be at least the minimum';
+
+  @override
+  String get categoriesFilterHasDescription => 'Has description';
+
+  @override
+  String categoriesFilterColorsSelected(int count) {
+    return '$count selected';
+  }
+
+  @override
+  String get categoriesFilterApply => 'Apply filters';
+
+  @override
+  String get categoriesFilterClear => 'Clear all';
+
+  @override
+  String get categoryAddTitle => 'Add Category';
+
+  @override
+  String get categoryEditTitle => 'Edit Category';
+
+  @override
+  String get categoryName => 'Name';
+
+  @override
+  String get categoryNamePlaceholder => 'e.g., Electronics';
+
+  @override
+  String get categoryDescriptionPlaceholder => 'Optional description';
+
+  @override
+  String get categoryColor => 'Color';
+
+  @override
+  String get categoryColorCustom => 'Custom colour';
+
+  @override
+  String get categoryColorHex => 'Hex code';
+
+  @override
+  String get categoryColorInvalid => 'Six hex digits, e.g. EC4899';
+
+  @override
+  String get categoryColorApply => 'Use this colour';
+
+  @override
+  String get categoryCreate => 'Add Category';
+
+  @override
+  String get categoryUpdate => 'Update Category';
+
+  @override
+  String get categoryNameTooShort => 'At least 2 characters';
+
+  @override
+  String get categoryNameTaken => 'You already have a category with this name';
+
+  @override
+  String get categoryAdded => 'Category added';
+
+  @override
+  String get categoryUpdated => 'Category updated';
+
+  @override
+  String get categoryDeleted => 'Category deleted';
+
+  @override
+  String get categoryDeleteTitle => 'Delete Category';
+
+  @override
+  String categoryDeleteBody(String name) {
+    return 'Are you sure you want to delete $name?';
+  }
+
+  @override
+  String categoryDeleteNotice(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'This category has $count products.',
+      one: 'This category has 1 product.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get categoryDeleteNoticeBody => 'They will become uncategorized.';
 }

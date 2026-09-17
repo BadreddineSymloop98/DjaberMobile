@@ -2724,4 +2724,172 @@ class L10nAr extends L10n {
 
   @override
   String get agentsNewTitle => 'وكيل جديد';
+
+  @override
+  String get commonYes => 'نعم';
+
+  @override
+  String get commonNo => 'لا';
+
+  @override
+  String get menuCategories => 'الفئات';
+
+  @override
+  String get categoriesTitle => 'الفئات';
+
+  @override
+  String categoriesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count فئة',
+      few: '$count فئات',
+      two: 'فئتان',
+      one: 'فئة واحدة',
+      zero: 'لا توجد فئات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get categoriesSearchPlaceholder => 'ابحث في الفئات...';
+
+  @override
+  String get categoriesFilters => 'عوامل التصفية';
+
+  @override
+  String categoriesFiltersActive(int count) {
+    return 'عوامل التصفية · $count';
+  }
+
+  @override
+  String get categoriesSection => 'كل الفئات';
+
+  @override
+  String categoriesProductCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count منتج',
+      few: '$count منتجات',
+      two: 'منتجان',
+      one: 'منتج واحد',
+      zero: '0 منتج',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get categoriesEmptyTitle => 'لا توجد فئات';
+
+  @override
+  String get categoriesEmptyBody => 'أنشئ فئات لتنظيم منتجاتك';
+
+  @override
+  String get categoriesNoMatchBody =>
+      'لا توجد فئة تطابق البحث أو عوامل التصفية.';
+
+  @override
+  String get categoriesFilterMin => 'المنتجات · الحد الأدنى';
+
+  @override
+  String get categoriesFilterMax => 'المنتجات · الحد الأقصى';
+
+  @override
+  String get categoriesFilterRangeInvalid => 'يجب ألا يقل عن الحد الأدنى';
+
+  @override
+  String get categoriesFilterHasDescription => 'لها وصف';
+
+  @override
+  String categoriesFilterColorsSelected(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ألوان محددة',
+      one: 'لون واحد محدد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get categoriesFilterApply => 'تطبيق عوامل التصفية';
+
+  @override
+  String get categoriesFilterClear => 'مسح الكل';
+
+  @override
+  String get categoryAddTitle => 'إضافة فئة';
+
+  @override
+  String get categoryEditTitle => 'تعديل الفئة';
+
+  @override
+  String get categoryName => 'الاسم';
+
+  @override
+  String get categoryNamePlaceholder => 'مثال: إلكترونيات';
+
+  @override
+  String get categoryDescriptionPlaceholder => 'وصف اختياري';
+
+  @override
+  String get categoryColor => 'اللون';
+
+  @override
+  String get categoryColorCustom => 'لون مخصص';
+
+  @override
+  String get categoryColorHex => 'الرمز السداسي';
+
+  @override
+  String get categoryColorInvalid => 'ستة رموز سداسية، مثال EC4899';
+
+  @override
+  String get categoryColorApply => 'استخدام هذا اللون';
+
+  @override
+  String get categoryCreate => 'إضافة الفئة';
+
+  @override
+  String get categoryUpdate => 'تحديث الفئة';
+
+  @override
+  String get categoryNameTooShort => 'حرفان على الأقل';
+
+  @override
+  String get categoryNameTaken => 'لديك فئة بهذا الاسم مسبقًا';
+
+  @override
+  String get categoryAdded => 'تمت إضافة الفئة';
+
+  @override
+  String get categoryUpdated => 'تم تحديث الفئة';
+
+  @override
+  String get categoryDeleted => 'تم حذف الفئة';
+
+  @override
+  String get categoryDeleteTitle => 'حذف الفئة';
+
+  @override
+  String categoryDeleteBody(String name) {
+    return 'هل تريد فعلاً حذف $name؟';
+  }
+
+  @override
+  String categoryDeleteNotice(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'تحتوي هذه الفئة على $count منتج.',
+      few: 'تحتوي هذه الفئة على $count منتجات.',
+      two: 'تحتوي هذه الفئة على منتجين.',
+      one: 'تحتوي هذه الفئة على منتج واحد.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get categoryDeleteNoticeBody => 'ستصبح بلا فئة.';
 }
