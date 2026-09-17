@@ -10,8 +10,11 @@ import '../core/storage/prefs_storage.dart';
 import '../core/storage/secure_storage.dart';
 import '../data/repositories/agent_repository.dart';
 import '../data/repositories/auth_repository.dart';
+import '../data/repositories/billing_repository.dart';
 import '../data/repositories/catalogue_repository.dart';
+import '../data/repositories/client_repository.dart';
 import '../data/repositories/dashboard_repository.dart';
+import '../data/repositories/inbox_repository.dart';
 import '../data/repositories/notification_repository.dart';
 import '../data/repositories/page_repository.dart';
 import '../data/repositories/product_repository.dart';
@@ -73,6 +76,9 @@ class AppProviders {
         create: (context) =>
             CatalogueRepository(api: context.read<ApiClient>()),
       ),
+      Provider<ClientRepository>(
+        create: (context) => ClientRepository(api: context.read<ApiClient>()),
+      ),
       Provider<AgentRepository>(
         create: (context) => AgentRepository(api: context.read<ApiClient>()),
       ),
@@ -83,9 +89,17 @@ class AppProviders {
         create: (context) =>
             DashboardRepository(api: context.read<ApiClient>()),
       ),
+      // Conversations, replies, status and sync — `10` and `10b`.
+      Provider<InboxRepository>(
+        create: (context) => InboxRepository(api: context.read<ApiClient>()),
+      ),
       Provider<NotificationRepository>(
         create: (context) =>
             NotificationRepository(api: context.read<ApiClient>()),
+      ),
+      // Plans and checkout — `11 — Paramètres`.
+      Provider<BillingRepository>(
+        create: (context) => BillingRepository(api: context.read<ApiClient>()),
       ),
       Provider<AuthRepository>(
         create: (context) => AuthRepository(

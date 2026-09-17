@@ -3,24 +3,28 @@ import '../../core/utils/json.dart';
 /// A product category — the merchant's own grouping.
 ///
 /// `GET /api/user-stock/categories` → `{ categories }`. Every field the list
-/// returns is here except `description` and the timestamps, which no mobile
-/// screen shows.
+/// returns is here except the timestamps.
 ///
-/// `color` is a hex string the web uses for a dot next to the name. It is kept
-/// but **not rendered**: brief §21.3 says colour marks the module, and a
-/// merchant-chosen colour on a filter chip would compete with the six accents
-/// that already mean something. It is here so a future screen that wants it
-/// does not need a model change.
+/// `color` is a hex string the merchant picks. It is drawn **only on the
+/// categories screen**, as the small square before the name that the Figma
+/// frame draws. It stays off the filter chips on `17`: brief §21.3 says colour
+/// marks the module, and a merchant-chosen colour there would compete with the
+/// accents that already mean something.
 class ProductCategory {
   const ProductCategory({
     required this.id,
     required this.name,
+    this.description,
     this.color,
     this.productCount,
   });
 
   final String id;
   final String name;
+
+  /// Optional; the categories screen shows it under the name when set.
+  final String? description;
+
   final String? color;
 
   /// From `_count.products`, when the endpoint includes it.
@@ -31,6 +35,7 @@ class ProductCategory {
     return ProductCategory(
       id: Json.str(json['id']),
       name: Json.str(json['name']),
+      description: Json.strOrNull(json['description']),
       color: Json.strOrNull(json['color']),
       productCount: count == null ? null : Json.intOrNull(count['products']),
     );

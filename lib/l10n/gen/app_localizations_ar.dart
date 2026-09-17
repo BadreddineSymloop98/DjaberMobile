@@ -122,6 +122,9 @@ class L10nAr extends L10n {
   String get toastProductCreated => 'تم إنشاء المنتج';
 
   @override
+  String get toastProductUpdated => 'تم تحديث المنتج';
+
+  @override
   String get toastAgentCreated => 'تم إنشاء وكيل الذكاء الاصطناعي';
 
   @override
@@ -358,13 +361,60 @@ class L10nAr extends L10n {
   String get authSentTitle => 'تحقق من بريدك';
 
   @override
-  String get authSentMessage => 'أرسلنا رابط إعادة التعيين إلى';
+  String get authSentMessage =>
+      'إذا كان هناك حساب بهذا العنوان، فقد أُرسل إليه رابط إعادة التعيين للتو';
 
   @override
   String get authSentNoReceive => 'لم تستلم البريد؟';
 
   @override
   String get authSentTryAnother => 'جرّب عنوان بريد آخر';
+
+  @override
+  String get authSentResend => 'إعادة إرسال الرابط';
+
+  @override
+  String authSentResendIn(int seconds) {
+    return 'إعادة إرسال الرابط بعد $seconds ث';
+  }
+
+  @override
+  String get authSentResent => 'تم إرسال رابط جديد';
+
+  @override
+  String get authSentNextStep =>
+      'افتح الرابط الوارد في البريد لاختيار كلمة مرور جديدة.';
+
+  @override
+  String get authResetTitle => 'كلمة مرور جديدة';
+
+  @override
+  String get authResetSubtitle => 'اختر كلمة مرور جديدة لحسابك';
+
+  @override
+  String get authResetDeadSubtitle =>
+      'اطلب رابطًا جديدًا لإعادة تعيين كلمة المرور';
+
+  @override
+  String get authResetChecking => 'جارٍ التحقق من الرابط…';
+
+  @override
+  String get authResetPasswordLabel => 'كلمة المرور الجديدة';
+
+  @override
+  String get authResetConfirmLabel => 'تأكيد كلمة المرور';
+
+  @override
+  String get authErrPasswordMismatch => 'كلمتا المرور غير متطابقتين';
+
+  @override
+  String get authResetSubmit => 'حفظ كلمة المرور';
+
+  @override
+  String get authResetDone => 'تم تحديث كلمة المرور';
+
+  @override
+  String get authResetRequestNew => 'طلب رابط جديد';
 
   @override
   String get menuOverview => 'نظرة عامة';
@@ -489,6 +539,522 @@ class L10nAr extends L10n {
       'مجموعة كاملة — الموردون والعملاء والمبيعات والمشتريات والصندوق والحركات والتوصيل والمزيد.';
 
   @override
+  String get stockOverviewTitle => 'نظرة عامة على المخزون';
+
+  @override
+  String get stockOverviewSubtitle => 'ملخص المخزون والمبيعات والمشتريات';
+
+  @override
+  String get stockOverviewHintSimple =>
+      'الوضع البسيط يعرض المنتجات والطلبات والعملاء. انتقل إلى المتقدم للمبيعات والمشتريات والموردين والصندوق والحركات.';
+
+  @override
+  String get stockOverviewHintAdvanced =>
+      'الوضع المتقدم: نظام متكامل — المبيعات والمشتريات والموردون والصندوق وحركات المخزون مفعّلة.';
+
+  @override
+  String get stockTotalProducts => 'إجمالي المنتجات';
+
+  @override
+  String get stockLowStock => 'مخزون منخفض';
+
+  @override
+  String get stockValue => 'قيمة المخزون';
+
+  @override
+  String get stockRetailValue => 'قيمة البيع';
+
+  @override
+  String get stockCategories => 'الفئات';
+
+  @override
+  String get stockSuppliers => 'الموردون';
+
+  @override
+  String get stockTotalItems => 'إجمالي العناصر في المخزون';
+
+  @override
+  String get stockSalesMonth => 'مبيعات هذا الشهر';
+
+  @override
+  String get stockTotalSales => 'إجمالي المبيعات';
+
+  @override
+  String get stockRevenue => 'الإيرادات';
+
+  @override
+  String get stockPaid => 'مدفوع';
+
+  @override
+  String get stockPending => 'قيد الانتظار';
+
+  @override
+  String get stockPurchasesMonth => 'مشتريات هذا الشهر';
+
+  @override
+  String get stockTotalPurchases => 'إجمالي المشتريات';
+
+  @override
+  String get stockTotalSpent => 'إجمالي الإنفاق';
+
+  @override
+  String get stockReceived => 'مستلم';
+
+  @override
+  String get stockRecentMovements => 'الحركات الأخيرة';
+
+  @override
+  String get stockMovementsEmpty =>
+      'لا توجد حركات مسجلة. ستظهر حركات المخزون هنا عند إضافة المنتجات أو بيعها أو تعديلها.';
+
+  @override
+  String get stockMoveIn => 'دخول';
+
+  @override
+  String get stockMoveOut => 'خروج';
+
+  @override
+  String get stockMoveAdjustment => 'تعديل';
+
+  @override
+  String get stockMoveReturn => 'إرجاع';
+
+  @override
+  String get settingsTitle => 'الإعدادات';
+
+  @override
+  String get settingsSubtitle => 'أدر حسابك وإعدادات التطبيق';
+
+  @override
+  String get settingsStockMode => 'إدارة المخزون';
+
+  @override
+  String get settingsLanguage => 'اللغة';
+
+  @override
+  String get settingsLanguageFrench => 'الفرنسية';
+
+  @override
+  String get settingsLanguageEnglish => 'الإنجليزية';
+
+  @override
+  String get settingsLanguageArabic => 'العربية';
+
+  @override
+  String get settingsLanguageHelp =>
+      'يبقى التطبيق باللغة التي تختارها، حتى لو تغيّرت لغة الهاتف.';
+
+  @override
+  String get planNameIndividual => 'فردي';
+
+  @override
+  String get planNamePro => 'احترافي';
+
+  @override
+  String get planNameTeams => 'فِرق';
+
+  @override
+  String get planDescIndividual =>
+      'للبدء: اربط صفحتك ودع الذكاء الاصطناعي يرد على عملائك.';
+
+  @override
+  String get planDescPro =>
+      'للبائعين النشطين: التعرّف على الصور، الرسائل الصوتية وحجم أكبر.';
+
+  @override
+  String get planDescTeams => 'للمتاجر الراسخة: أقصى حجم ودعم ذو أولوية.';
+
+  @override
+  String planFeaturePages(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count صفحة على فيسبوك / إنستغرام',
+      few: '$count صفحات على فيسبوك / إنستغرام',
+      two: 'صفحتان على فيسبوك / إنستغرام',
+      one: 'صفحة واحدة على فيسبوك أو إنستغرام',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String planFeatureCredits(String amount) {
+    return '$amount رصيد ذكاء اصطناعي / شهريًا';
+  }
+
+  @override
+  String planFeatureProducts(String amount) {
+    return '$amount منتج';
+  }
+
+  @override
+  String planFeatureDelivery(int count, String carriers) {
+    return 'التوصيل إلى $count ولاية ($carriers)';
+  }
+
+  @override
+  String get planFeatureAgentText => 'وكيل ذكاء اصطناعي 24/7 (نص)';
+
+  @override
+  String get planFeatureAgentFull => 'وكيل ذكاء اصطناعي 24/7 (نص + صور + صوت)';
+
+  @override
+  String get planFeatureStock => 'إدارة المخزون والطلبات';
+
+  @override
+  String get planFeatureCallConfirmation => 'تأكيد الطلبات بالاتصال الهاتفي';
+
+  @override
+  String get planFeatureVision => 'التعرّف على الصور (الرؤية)';
+
+  @override
+  String get planFeatureVoiceNotes => 'الرسائل الصوتية (تفريغ نصي)';
+
+  @override
+  String get planFeatureCrossSell =>
+      'البيع المتقاطع والبيع الإضافي بالذكاء الاصطناعي';
+
+  @override
+  String get planFeatureUnlimitedProducts => 'منتجات غير محدودة';
+
+  @override
+  String get planFeatureUnlimitedConversations => 'محادثات غير محدودة';
+
+  @override
+  String get planFeatureEverythingPro => 'جميع ميزات الخطة الاحترافية';
+
+  @override
+  String get planFeaturePrioritySupport => 'دعم ذو أولوية';
+
+  @override
+  String get settingsAccount => 'معلومات الحساب';
+
+  @override
+  String get settingsBilling => 'الخطة والفوترة';
+
+  @override
+  String get settingsCurrentPlan => 'الخطة الحالية';
+
+  @override
+  String get settingsMonthly => 'شهري';
+
+  @override
+  String get settingsYearly => 'سنوي';
+
+  @override
+  String get settingsFree => 'مجاني';
+
+  @override
+  String settingsPerMonth(String currency) {
+    return '$currency / شهر';
+  }
+
+  @override
+  String settingsPerYear(String currency) {
+    return '$currency / سنة';
+  }
+
+  @override
+  String get settingsBadgeCurrent => 'الحالية';
+
+  @override
+  String get settingsBadgePopular => 'الأكثر شيوعا';
+
+  @override
+  String get settingsYourPlan => 'خطتك الحالية';
+
+  @override
+  String get settingsFreeNoPayment => 'مجاني — لا حاجة للدفع';
+
+  @override
+  String settingsSubscribe(String price) {
+    return 'اشترك — $price';
+  }
+
+  @override
+  String get settingsRedirecting => 'جارٍ التحويل…';
+
+  @override
+  String get settingsVerifying => 'جارٍ التحقق من الدفع…';
+
+  @override
+  String get settingsNoPlans => 'لا توجد خطط متاحة حاليًا.';
+
+  @override
+  String settingsCheckoutPaid(String plan) {
+    return 'تم تأكيد الدفع — خطتك $plan مفعّلة.';
+  }
+
+  @override
+  String get settingsCheckoutPending =>
+      'لم يتم تأكيد الدفع بعد. إذا تمّ، ستُفعَّل خطتك قريبًا.';
+
+  @override
+  String get settingsCheckoutFailed => 'لم تتم عملية الدفع.';
+
+  @override
+  String get settingsFbTitle => 'صلاحيات واجهة فيسبوك';
+
+  @override
+  String get settingsFbActive => 'الصلاحيات المفعّلة حاليًا';
+
+  @override
+  String get settingsFbAvailable => 'الصلاحيات المتقدمة المتاحة';
+
+  @override
+  String get settingsFbReviewHint =>
+      'تحتاج هذه الصلاحيات إلى موافقة مراجعة تطبيق فيسبوك.';
+
+  @override
+  String get settingsDangerTitle => 'منطقة الخطر';
+
+  @override
+  String get settingsDeleteAccount => 'حذف الحساب';
+
+  @override
+  String get settingsDeleteHelp =>
+      'احذف حسابك وجميع البيانات المرتبطة به نهائيًا.';
+
+  @override
+  String get inboxTitle => 'البريد الوارد';
+
+  @override
+  String get inboxSubtitle => 'اقرأ ورد على رسائل عملائك.';
+
+  @override
+  String get inboxNoPagesTitle => 'لا توجد صفحات متصلة';
+
+  @override
+  String get inboxNoPagesBody =>
+      'اربط صفحة فيسبوك أو إنستغرام لتبدأ في استقبال الرسائل هنا.';
+
+  @override
+  String get inboxConnectPage => 'ربط صفحة';
+
+  @override
+  String get inboxPlatformMessenger => 'ماسنجر';
+
+  @override
+  String get inboxPlatformInstagram => 'رسائل إنستغرام';
+
+  @override
+  String inboxSynced(String time) {
+    return 'تمت المزامنة $time';
+  }
+
+  @override
+  String get inboxSwitchPage => 'تبديل الصفحة';
+
+  @override
+  String get inboxConnectAnother => 'ربط صفحة أخرى';
+
+  @override
+  String get inboxSync => 'مزامنة';
+
+  @override
+  String get inboxSyncing => 'جاري المزامنة…';
+
+  @override
+  String get inboxTabAll => 'الكل';
+
+  @override
+  String get inboxTabActive => 'نشطة';
+
+  @override
+  String get inboxTabResolved => 'منتهية';
+
+  @override
+  String get inboxTabArchived => 'مؤرشفة';
+
+  @override
+  String get inboxSearchHint => 'ابحث بالاسم أو الرسالة…';
+
+  @override
+  String get inboxNoMatches => 'لا توجد نتائج';
+
+  @override
+  String get inboxNoConversations => 'لا توجد محادثات بعد';
+
+  @override
+  String get inboxNothingHere => 'لا شيء في هذا العرض';
+
+  @override
+  String get inboxPullFromFacebook => 'سحب من فيسبوك';
+
+  @override
+  String get inboxUpToDate => 'محدّث';
+
+  @override
+  String inboxSyncedCount(int n) {
+    return 'تمت المزامنة — $n رسالة جديدة';
+  }
+
+  @override
+  String get inboxAttachment => 'مرفق';
+
+  @override
+  String get inboxEmptyMessage => 'رسالة فارغة';
+
+  @override
+  String get inboxAiPaused => 'الذكاء الاصطناعي متوقف';
+
+  @override
+  String get inboxStatusActive => 'نشطة';
+
+  @override
+  String get inboxStatusResolved => 'منتهية';
+
+  @override
+  String get inboxStatusArchived => 'مؤرشفة';
+
+  @override
+  String get inboxTimeNow => 'الآن';
+
+  @override
+  String inboxTimeMinutes(int n) {
+    return '$n د';
+  }
+
+  @override
+  String inboxTimeHours(int n) {
+    return '$n س';
+  }
+
+  @override
+  String get conversationMarkResolved => 'وضع علامة منتهي';
+
+  @override
+  String get conversationArchive => 'أرشفة المحادثة';
+
+  @override
+  String get conversationReopen => 'إعادة فتح';
+
+  @override
+  String get conversationResumeAi => 'إعادة تشغيل الذكاء الاصطناعي';
+
+  @override
+  String get conversationPausedNotice =>
+      'لم يعد الوكيل يرد على هذا العميل. رد عليه هنا.';
+
+  @override
+  String get conversationReplyHint => 'اكتب ردك…';
+
+  @override
+  String get conversationSend => 'إرسال';
+
+  @override
+  String get conversationSending => 'جاري الإرسال…';
+
+  @override
+  String get conversationReopenHint => 'أعد فتح هذه المحادثة للرد.';
+
+  @override
+  String get conversationEmpty => 'لا توجد رسائل بعد';
+
+  @override
+  String get conversationResolvedToast => 'تم وضع علامة منتهي';
+
+  @override
+  String get conversationArchivedToast => 'تمت الأرشفة';
+
+  @override
+  String get conversationReopenedToast => 'تمت إعادة فتح المحادثة';
+
+  @override
+  String get conversationAiResumedToast => 'عاد الذكاء الاصطناعي للرد';
+
+  @override
+  String get conversationAuthorAi => 'الوكيل';
+
+  @override
+  String get conversationAuthorYou => 'أنت';
+
+  @override
+  String get productVariantsTitle => 'المتغيرات';
+
+  @override
+  String productVariantsTotal(int count) {
+    return 'إجمالي الكمية: $count';
+  }
+
+  @override
+  String get productVariantAdd => 'إضافة متغير';
+
+  @override
+  String get productVariantsEmpty =>
+      'لا توجد متغيرات. اضغط «إضافة متغير» لإنشاء واحد.';
+
+  @override
+  String get productVariantName => 'الاسم';
+
+  @override
+  String get productVariantNamePlaceholder => 'مثال: أحمر - L';
+
+  @override
+  String get productVariantSku => 'SKU';
+
+  @override
+  String get productVariantSkuPlaceholder => 'اختياري';
+
+  @override
+  String get productVariantCost => 'التكلفة';
+
+  @override
+  String get productVariantPrice => 'السعر';
+
+  @override
+  String get productVariantQuantity => 'الكمية';
+
+  @override
+  String get productVariantMinQuantity => 'الحد الأدنى';
+
+  @override
+  String get productVariantRemove => 'حذف المتغير';
+
+  @override
+  String get productVariantDuplicate => 'لا يمكن أن يكون لمتغيرين نفس الاسم';
+
+  @override
+  String get productVariantsRequired =>
+      'أضف متغيرًا واحدًا على الأقل، أو ألغِ تحديد الخانة.';
+
+  @override
+  String get productVariantsRetryHint =>
+      'تم إنشاء المنتج — سيتم إرسال المتغيرات المفقودة فقط.';
+
+  @override
+  String get productDetailEyebrow => 'تفاصيل المنتج';
+
+  @override
+  String get productDetailNoImages => 'لا توجد صور';
+
+  @override
+  String get productDetailCost => 'سعر التكلفة';
+
+  @override
+  String get productDetailSelling => 'سعر البيع';
+
+  @override
+  String get productDetailProfit => 'الربح / الهامش';
+
+  @override
+  String get productDetailInStock => 'في المخزون';
+
+  @override
+  String get productDetailStatus => 'الحالة';
+
+  @override
+  String get productDetailActive => 'نشط';
+
+  @override
+  String get productDetailInactive => 'غير نشط';
+
+  @override
+  String productDetailVariants(int count) {
+    return 'المتغيرات ($count)';
+  }
+
+  @override
   String get tutorialProductTitle => 'منتجك الأول';
 
   @override
@@ -589,6 +1155,19 @@ class L10nAr extends L10n {
   }
 
   @override
+  String productsVariantCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count متغير',
+      few: '$count متغيرات',
+      two: 'متغيران',
+      one: 'متغير واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get productsEmptyTitle => 'لا توجد منتجات';
 
   @override
@@ -642,6 +1221,225 @@ class L10nAr extends L10n {
   String get productAddSubmit => 'إضافة المنتج';
 
   @override
+  String get productEditTitle => 'تعديل المنتج';
+
+  @override
+  String get productEditSubmit => 'تحديث المنتج';
+
+  @override
+  String get productEditVariantsHint =>
+      'لتغيير كميات المتغيرات، استخدم «تعديل المخزون».';
+
+  @override
+  String get productEditLeaveBody => 'ستُفقد التعديلات.';
+
+  @override
+  String get productEditDeleteVariantsTitle => 'حذف المتغيرات؟';
+
+  @override
+  String productEditDeleteVariantsBody(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'سيُحذف $count متغير نهائيًا.',
+      few: 'ستُحذف $count متغيرات نهائيًا.',
+      two: 'سيُحذف متغيران نهائيًا.',
+      one: 'سيُحذف متغير واحد نهائيًا.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String productEditDeleteVariantsStock(int count, int stock) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'سيُحذف $count متغير نهائيًا، وستُخصم $stock وحدة من مخزونك.',
+      few: 'ستُحذف $count متغيرات نهائيًا، وستُخصم $stock وحدة من مخزونك.',
+      two: 'سيُحذف متغيران نهائيًا، وستُخصم $stock وحدة من مخزونك.',
+      one: 'سيُحذف متغير واحد نهائيًا، وستُخصم $stock وحدة من مخزونك.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get productEditDeleteVariantsConfirm => 'حذف وحفظ';
+
+  @override
+  String get productUnitAdd => 'إضافة وحدة';
+
+  @override
+  String get productUnitName => 'اسم الوحدة';
+
+  @override
+  String get productUnitNamePlaceholder => 'مثال: دزينة';
+
+  @override
+  String get productUnitAbbreviation => 'الاختصار';
+
+  @override
+  String get productUnitAbbreviationPlaceholder => 'مثال: دز';
+
+  @override
+  String get productUnitCreate => 'إضافة الوحدة';
+
+  @override
+  String get stockAdjustTitle => 'تعديل المخزون';
+
+  @override
+  String stockAdjustSubtitle(String product, String stock) {
+    return '$product  ·  المخزون الحالي: $stock';
+  }
+
+  @override
+  String get stockAdjustIn => 'إدخال (+)';
+
+  @override
+  String get stockAdjustOut => 'إخراج (−)';
+
+  @override
+  String get stockAdjustSet => 'تحديد';
+
+  @override
+  String get stockAdjustReason => 'السبب';
+
+  @override
+  String stockAdjustCurrent(int count) {
+    return 'الكمية: $count';
+  }
+
+  @override
+  String stockAdjustResult(int count) {
+    return 'الكمية الجديدة: $count';
+  }
+
+  @override
+  String stockAdjustInsufficient(int count) {
+    return 'المتوفّر $count فقط';
+  }
+
+  @override
+  String get stockAdjustNothing => 'أدخل كمية في سطر واحد على الأقل.';
+
+  @override
+  String get stockAdjustSubmit => 'تعديل المخزون';
+
+  @override
+  String get stockAdjustDone => 'تم تعديل المخزون';
+
+  @override
+  String get expensesTitle => 'مصاريف المنتج';
+
+  @override
+  String get expensesEyebrow => 'مصاريف المنتج';
+
+  @override
+  String get expensesMarginSummary => 'ملخّص الهامش';
+
+  @override
+  String get expensesTotal => 'إجمالي المصاريف';
+
+  @override
+  String get expensesPerUnit => 'المصروف / الوحدة';
+
+  @override
+  String get expensesTrueCost => 'التكلفة الحقيقية';
+
+  @override
+  String get expensesNetMargin => 'الهامش الصافي';
+
+  @override
+  String expensesSection(int count) {
+    return 'المصاريف ($count)';
+  }
+
+  @override
+  String get expensesEmpty =>
+      'لا توجد مصاريف بعد. أضف واحدة أدناه وسيأخذها الهامش في الحسبان.';
+
+  @override
+  String get expensesAddSection => 'إضافة مصروف';
+
+  @override
+  String get expenseCategory => 'الفئة';
+
+  @override
+  String get expenseCategoryMarketing => 'تسويق';
+
+  @override
+  String get expenseCategoryShipping => 'توصيل';
+
+  @override
+  String get expenseCategoryPackaging => 'تغليف';
+
+  @override
+  String get expenseCategoryCustoms => 'جمارك';
+
+  @override
+  String get expenseCategoryStorage => 'تخزين';
+
+  @override
+  String get expenseCategoryOther => 'أخرى';
+
+  @override
+  String get expenseAmount => 'المبلغ (دج)';
+
+  @override
+  String get expenseAmountPlaceholder => 'المبلغ';
+
+  @override
+  String get expenseDescriptionPlaceholder => 'الوصف (اختياري)';
+
+  @override
+  String get expenseFixed => 'ثابت';
+
+  @override
+  String get expensePerUnit => 'لكل وحدة';
+
+  @override
+  String get expensePerUnitTag => '/ وحدة';
+
+  @override
+  String get expenseAdd => 'إضافة المصروف';
+
+  @override
+  String get expenseAdded => 'تمت إضافة المصروف';
+
+  @override
+  String get expenseDeleteTitle => 'حذف هذا المصروف؟';
+
+  @override
+  String expenseDeleteBody(String category, String amount) {
+    return '$category — سيُحذف $amount، وسيُعاد حساب الهامش.';
+  }
+
+  @override
+  String get expenseDeleted => 'تم حذف المصروف';
+
+  @override
+  String get productDeleteTitle => 'حذف المنتج';
+
+  @override
+  String productDeleteBody(String name) {
+    return 'هل تريد فعلاً حذف $name؟ لا يمكن التراجع عن هذا الإجراء.';
+  }
+
+  @override
+  String get productDeleteDone => 'تم حذف المنتج';
+
+  @override
+  String get productDetailActions => 'إجراءات';
+
+  @override
+  String get productDetailAdjustMeta => 'إدخال أو إخراج أو كمية محدّدة';
+
+  @override
+  String get productDetailExpensesMeta => 'التكلفة الحقيقية والهامش الصافي';
+
+  @override
+  String get productDetailDeleteMeta => 'يزيله من كتالوجك';
+
+  @override
   String productsCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -673,6 +1471,10 @@ class L10nAr extends L10n {
   @override
   String get productPhotosUploadFailed =>
       'تم إنشاء المنتج، لكن تعذّر رفع صوره.';
+
+  @override
+  String get productPhotosUploadFailedEdit =>
+      'تم تحديث المنتج، لكن تعذّر رفع الصور الجديدة.';
 
   @override
   String get productPhotoRemove => 'إزالة الصورة';
@@ -985,4 +1787,1339 @@ class L10nAr extends L10n {
 
   @override
   String get commonNotBuilt => 'غير متاح بعد';
+
+  @override
+  String get agentsTitle => 'وكلاء الذكاء الاصطناعي';
+
+  @override
+  String get agentsSubtitle =>
+      'أنشئ وأدر وكلاء ذكيين يبيعون منتجاتك على الصفحات المرتبطة';
+
+  @override
+  String get agentsActive => 'الذكاء الاصطناعي نشط';
+
+  @override
+  String get agentsInactive => 'الذكاء الاصطناعي متوقف';
+
+  @override
+  String get agentsStatPages => 'الصفحات';
+
+  @override
+  String get agentsStatProducts => 'المنتجات';
+
+  @override
+  String get agentsStatModel => 'النموذج';
+
+  @override
+  String get agentsAllProducts => 'الكل';
+
+  @override
+  String get agentsNoPages => 'لا يرد على أي صفحة بعد';
+
+  @override
+  String get agentsPause => 'إيقاف الوكيل مؤقتًا';
+
+  @override
+  String get agentsResume => 'إعادة تشغيل الوكيل';
+
+  @override
+  String get agentsPausedToast => 'تم إيقاف الوكيل — لم يعد يرد';
+
+  @override
+  String get agentsResumedToast => 'الوكيل نشط — يرد من جديد';
+
+  @override
+  String get agentsEmptyTitle => 'لا يوجد وكيل';
+
+  @override
+  String get agentsEmptyBody =>
+      'أنشئ وكيلا ذكيا للرد تلقائيا على الرسائل في صفحاتك وبيع منتجاتك.';
+
+  @override
+  String get agentsEmptyCta => 'أنشئ وكيلك';
+
+  @override
+  String get agentsActionInsights => 'مشاكل للمراجعة';
+
+  @override
+  String get agentsActionTest => 'اختبار الوكيل';
+
+  @override
+  String get agentsActionDetails => 'التفاصيل والإحصائيات';
+
+  @override
+  String get agentsActionDelete => 'حذف الوكيل';
+
+  @override
+  String get agentsDeleteTitle => 'حذف الوكيل؟';
+
+  @override
+  String agentsDeleteBody(String name) {
+    return 'سيتم حذف $name ولن يرد بعد الآن على صفحاتك. يمكنك إنشاء وكيل جديد بعد ذلك.';
+  }
+
+  @override
+  String get agentsDeleteConfirm => 'حذف';
+
+  @override
+  String get agentsDeletedToast => 'تم حذف الوكيل';
+
+  @override
+  String get agentsInsightsTitle => 'مشاكل معلّقة';
+
+  @override
+  String get agentsInsightsEmpty =>
+      'لا توجد مشاكل معلّقة — وكيلك يتولى كل شيء.';
+
+  @override
+  String get agentsInsightsNone => 'لا يوجد شيء هنا.';
+
+  @override
+  String get agentsInsightUnclear => 'غير واضح';
+
+  @override
+  String get agentsInsightUnknown => 'موضوع غير معروف';
+
+  @override
+  String get agentsInsightHandoff => 'مُحوّل إليك';
+
+  @override
+  String get agentsInsightCustomer => 'العميل';
+
+  @override
+  String get agentsInsightAgent => 'رد الذكاء الاصطناعي';
+
+  @override
+  String get agentsInsightResolve => 'حل';
+
+  @override
+  String get agentsInsightDismiss => 'تجاهل';
+
+  @override
+  String get agentsInsightAddAndResolve => 'إضافة وحل';
+
+  @override
+  String get agentsInsightInstructionHint =>
+      'أضف تعليمة ليتعامل الوكيل مع هذه الحالة بشكل أفضل في المرة القادمة…';
+
+  @override
+  String get agentsInsightResolved => 'تم الحل';
+
+  @override
+  String get agentsInsightDismissed => 'تم التجاهل';
+
+  @override
+  String get agentsInsightPending => 'معلّقة';
+
+  @override
+  String get agentsInsightFailed => 'تعذّر تحديث المشكلة.';
+
+  @override
+  String agentsTestTitle(String name) {
+    return 'اختبار — $name';
+  }
+
+  @override
+  String get agentsTestEmpty => 'أرسل رسالة للاختبار';
+
+  @override
+  String get agentsTestNote =>
+      'تجربة فقط: لا يُستهلك أي رصيد ولا تُنشأ أي طلبات.';
+
+  @override
+  String get agentsTestPlaceholder => 'اكتب رسالة…';
+
+  @override
+  String get agentsTestSend => 'إرسال';
+
+  @override
+  String get agentsTestFailed => 'لا يوجد رد — أعد المحاولة.';
+
+  @override
+  String get agentsDetailsConversations => 'المحادثات';
+
+  @override
+  String agentsDetailsConversationsFoot(int received, int sent) {
+    return '$received مستلمة · $sent مرسلة';
+  }
+
+  @override
+  String get agentsDetailsMessages => 'الرسائل';
+
+  @override
+  String agentsDetailsLastActive(String date) {
+    return 'آخر نشاط: $date';
+  }
+
+  @override
+  String get agentsDetailsNoActivity => 'لا يوجد نشاط بعد';
+
+  @override
+  String get agentsDetailsOrders => 'الطلبات المُنشأة';
+
+  @override
+  String agentsDetailsResolvedFoot(int count) {
+    return '$count تم حلها';
+  }
+
+  @override
+  String get agentsDetailsInsights => 'ملاحظات الوكيل';
+
+  @override
+  String get agentsDetailsAll => 'الكل';
+
+  @override
+  String get agentsDetailsInstructions => 'تعليمات مخصصة';
+
+  @override
+  String get agentsDetailsNoInstructions => 'لا توجد تعليمات بعد.';
+
+  @override
+  String get agentsDetailsEdit => 'تعديل';
+
+  @override
+  String get agentsDetailsSave => 'حفظ';
+
+  @override
+  String get agentsDetailsSaved => 'تم حفظ التعليمات';
+
+  @override
+  String get agentsDetailsSavedMerged =>
+      'تم حفظ التعليمات — مع الإبقاء على الأسطر المضافة من الويب';
+
+  @override
+  String get agentsDetailsConflictTitle => 'عُدّلت على الويب';
+
+  @override
+  String get agentsDetailsConflictBody =>
+      'عُدّلت هذه التعليمات أثناء كتابتك. النسخة الحالية:';
+
+  @override
+  String get agentsDetailsUseLatest => 'اعتماد هذه النسخة';
+
+  @override
+  String get agentsDetailsKeepMine => 'استبدالها بنسختي';
+
+  @override
+  String get agentsNotFound => 'الوكيل غير موجود.';
+
+  @override
+  String agentsTestEmptyFor(String name) {
+    return 'أرسل رسالة لاختبار $name';
+  }
+
+  @override
+  String get agentsTestProduct => 'منتج';
+
+  @override
+  String agentsTestProductId(String id) {
+    return 'المعرّف: $id…';
+  }
+
+  @override
+  String get agentsPresetsTitle => 'ابدأ بوكيل جاهز';
+
+  @override
+  String get agentsPresetsBody =>
+      'كل واحد مهيّأ للبيع في الجزائر — الدارجة والعربية والفرنسية، تسعير التوصيل وإدارة الطلبات. اختر واحدًا ثم عدّل ما تشاء.';
+
+  @override
+  String get agentsPresetVisionVoice => 'رؤية + صوت';
+
+  @override
+  String get agentsPresetVoice => 'صوت';
+
+  @override
+  String get agentsPresetCloserTagline => 'يحوّل المحادثات إلى طلبات مؤكدة';
+
+  @override
+  String get agentsPresetCloser1 => 'يرافق العميل من السؤال إلى الطلب المؤكد';
+
+  @override
+  String get agentsPresetCloser2 =>
+      'يسعّر التوصيل حسب الولاية ويُغلق بالمبلغ الإجمالي';
+
+  @override
+  String get agentsPresetCloser3 => 'يفهم الصور والرسائل الصوتية';
+
+  @override
+  String get agentsPresetSupportTagline => 'يردّ بسرعة ويحوّل المشاكل إليك';
+
+  @override
+  String get agentsPresetSupport1 => 'يجيب بلطف عن أسئلة المنتجات والطلبات';
+
+  @override
+  String get agentsPresetSupport2 => 'يحوّل الشكاوى والاسترجاعات إلى إنسان';
+
+  @override
+  String get agentsPresetSupport3 => 'هادئ ودقيق ومباشر';
+
+  @override
+  String get agentsPresetAdvisorTagline =>
+      'يساعد العميل على اختيار المنتج المناسب';
+
+  @override
+  String get agentsPresetAdvisor1 => 'يقارن الخيارات ويشرح الفروق';
+
+  @override
+  String get agentsPresetAdvisor2 => 'يجد المنتج انطلاقًا من صورة العميل';
+
+  @override
+  String get agentsPresetAdvisor3 =>
+      'مثالي للكتالوجات ذات المتغيرات والمواصفات';
+
+  @override
+  String get agentsPresetExpressTagline => 'ردود فائقة السرعة للحجم الكبير';
+
+  @override
+  String get agentsPresetExpress1 => 'ردود قصيرة وسريعة للصفحات المزدحمة';
+
+  @override
+  String get agentsPresetExpress2 => 'أقل استهلاك للأرصدة — نص وصوت فقط';
+
+  @override
+  String get agentsPresetExpress3 => 'ينشئ الطلبات ويلغيها أيضًا';
+
+  @override
+  String get agentsPresetUse => 'استخدم هذا الوكيل  ←';
+
+  @override
+  String get agentsPresetOwn => 'تفضّل إنشاء وكيلك؟';
+
+  @override
+  String get agentsPresetScratch => 'ابدأ من الصفر';
+
+  @override
+  String get agentsCreatedToast => 'تم إنشاء الوكيل';
+
+  @override
+  String get agentFormSubtitle =>
+      'اضبط وكيلًا يردّ على محادثاتك. الاسم وحده إلزامي — ولكل ما تبقّى قيمة افتراضية.';
+
+  @override
+  String get agentFormBasics => 'المعلومات الأساسية';
+
+  @override
+  String get agentFormDescription => 'الوصف';
+
+  @override
+  String get agentFormDescriptionPlaceholder =>
+      'صف باختصار ما يقوم به هذا الوكيل…';
+
+  @override
+  String get agentFormInstructions => 'تعليمات مخصصة';
+
+  @override
+  String get agentFormInstructionsPlaceholder =>
+      'كيف يردّ، ما الذي يتجنّبه، وكيف يتعامل مع حالات معيّنة…';
+
+  @override
+  String get agentFormInstructionsHint =>
+      'توجّه هذه التعليمات سلوك الوكيل في المحادثات.';
+
+  @override
+  String get agentFormAdvanced => 'إعدادات متقدمة';
+
+  @override
+  String get agentFormAdvancedHint => 'اختياري — تُطبَّق قيم افتراضية.';
+
+  @override
+  String get agentFormBehavior => 'السلوك';
+
+  @override
+  String get agentFormBehaviorSummary => 'الختام · التحويل إلى إنسان';
+
+  @override
+  String get agentFormClosing => 'ختام المحادثة';
+
+  @override
+  String get agentFormClosingPlaceholder =>
+      'أمثلة:\n• بعد الطلب: «شكرًا! طلبك في الطريق.»\n• الزبون يودّع: «شكرًا، نراك قريبًا!»\n• زبون غاضب: «عذرًا، سأحوّلك إلى الفريق.»';
+
+  @override
+  String get agentFormClosingHint =>
+      'متى وكيف ينهي الوكيل المحادثة. إن تُرك فارغًا: يشكر بعد الطلب ويردّ على التوديع.';
+
+  @override
+  String get agentFormHandoff => 'قواعد التدخّل البشري';
+
+  @override
+  String get agentFormHandoffPlaceholder =>
+      'أمثلة:\n• استرداد أو إرجاع ← أوقف الذكاء الاصطناعي ونبّهني\n• طلب تخفيض ← اتركه لي\n• شكوى ← حوّل المحادثة إليّ';
+
+  @override
+  String get agentFormHandoffHint =>
+      'متى يتوقف الوكيل ويسلّمك المحادثة. التحيات (slm، cava، hi) يتولاها الذكاء الاصطناعي دائمًا.';
+
+  @override
+  String get agentFormDisplay => 'عرض المنتجات';
+
+  @override
+  String get agentFormDisplayDefault => 'النمط الافتراضي';
+
+  @override
+  String get agentFormDisplayCustom => 'مخصّص';
+
+  @override
+  String get agentFormDisplayHint =>
+      'كيف يعرض الوكيل المنتج. المس وسمًا لإدراجه — ويملأ الوكيل البيانات الحقيقية.';
+
+  @override
+  String get agentFormTemplate => 'القالب';
+
+  @override
+  String get agentFormTemplatePlaceholder => 'المس الوسوم أعلاه أو اكتب هنا…';
+
+  @override
+  String get agentFormTagCard => 'بطاقة المنتج';
+
+  @override
+  String get agentFormTagName => 'الاسم';
+
+  @override
+  String get agentFormTagPrice => 'السعر (دج)';
+
+  @override
+  String get agentFormTagDescription => 'الوصف';
+
+  @override
+  String get agentFormTagStock => 'المخزون';
+
+  @override
+  String get agentFormTagNewLine => '↵ سطر جديد';
+
+  @override
+  String get agentFormPreview => 'معاينة';
+
+  @override
+  String get agentFormPreviewLive => 'معاينة مباشرة';
+
+  @override
+  String get agentFormPreviewCustomer => 'أرني منتجاتك';
+
+  @override
+  String get agentFormPreviewDefault =>
+      'إليك ما لدينا!\n[PRODUCT_CARD]\nهل تريد الطلب؟';
+
+  @override
+  String get agentFormPreviewSampleName => 'منتج تجريبي';
+
+  @override
+  String get agentFormPreviewSampleDescription => 'منتج رائع';
+
+  @override
+  String get agentFormModel => 'نموذج الذكاء الاصطناعي';
+
+  @override
+  String agentFormModelSummary(String model, String temperature, int tokens) {
+    return '$model · $temperature · $tokens رمزًا';
+  }
+
+  @override
+  String get agentFormModelPicker => 'النموذج';
+
+  @override
+  String agentFormModelCost(String usd) {
+    return '≈ $usd / 1000 رسالة';
+  }
+
+  @override
+  String get agentFormModelsLoading => 'جارٍ تحميل النماذج المتاحة…';
+
+  @override
+  String get agentFormModelsUnavailable =>
+      'نماذج الذكاء الاصطناعي غير متاحة مؤقتًا. أعد المحاولة لاحقًا.';
+
+  @override
+  String get agentFormTraitBestQuality => 'أفضل جودة';
+
+  @override
+  String get agentFormTraitFastAffordable => 'سريع وبسعر مناسب';
+
+  @override
+  String get agentFormTraitLongContext128k => 'سياق 128k';
+
+  @override
+  String get agentFormTraitLegacyFast => 'قديم، سريع';
+
+  @override
+  String get agentFormTraitBestBalanced => 'الأكثر توازنًا';
+
+  @override
+  String get agentFormTraitFastCheap => 'سريع واقتصادي';
+
+  @override
+  String get agentFormTraitMostCapable => 'الأقوى';
+
+  @override
+  String get agentFormTraitLatestFast => 'الأحدث، سريع';
+
+  @override
+  String get agentFormTraitLongContext1m => 'سياق 1M';
+
+  @override
+  String get agentFormTraitBestOpenSource => 'أفضل نموذج مفتوح المصدر';
+
+  @override
+  String get agentFormTraitUltraFast => 'فائق السرعة';
+
+  @override
+  String get agentFormTraitMixtureOfExperts => 'MoE، سياق 32k';
+
+  @override
+  String get agentFormTraitReasoning => 'نموذج استدلال';
+
+  @override
+  String get agentFormTemperature => 'درجة الإبداع';
+
+  @override
+  String get agentFormPrecise => 'دقيق';
+
+  @override
+  String get agentFormCreative => 'مبدع';
+
+  @override
+  String get agentFormMaxTokens => 'الحد الأقصى للرموز';
+
+  @override
+  String get agentFormMaxTokensHint => 'أقصى طول للرد · 100 – 4096';
+
+  @override
+  String get agentFormImages => 'التعرّف على الصور';
+
+  @override
+  String get agentFormImagesHint =>
+      'يرى الذكاء الاصطناعي صور الزبائن ويقارنها بمنتجاتك. 5 أرصدة لكل صورة (1 للنص).';
+
+  @override
+  String get agentFormVoice => 'الرسائل الصوتية';
+
+  @override
+  String get agentFormVoiceHint =>
+      'يستمع الذكاء الاصطناعي إلى الرسائل الصوتية ويكتبها (عربية، فرنسية، إنجليزية، دارجة). 3 أرصدة لكل رسالة. عند الإيقاف: يطلب الوكيل رسالة مكتوبة.';
+
+  @override
+  String get agentFormDelay => 'مهلة الرد';
+
+  @override
+  String agentFormDelayValue(int seconds) {
+    return '$seconds ث';
+  }
+
+  @override
+  String get agentFormDelayMax => '10 ث';
+
+  @override
+  String get agentFormDelayHint =>
+      'ينتظر رسائل أخرى قبل الرد — كثيرًا ما يرسل الزبائن عدة رسائل قصيرة، فيجمعها الوكيل.';
+
+  @override
+  String get agentFormPages => 'الصفحات المتصلة';
+
+  @override
+  String get agentFormPagesHint =>
+      'الصفحات التي يردّ عليها هذا الوكيل. لكل صفحة وكيل واحد فقط.';
+
+  @override
+  String agentFormPagesSummary(int selected, int total) {
+    return '$selected من $total محددة';
+  }
+
+  @override
+  String agentFormPagesCount(int selected, int total) {
+    return '$selected من $total';
+  }
+
+  @override
+  String get agentFormPagesNone => 'لا توجد صفحات متصلة';
+
+  @override
+  String get agentFormPagesEmpty =>
+      'لا توجد صفحات متصلة بعد. اربط صفحة فيسبوك أو إنستغرام أولًا، ثم اربطها بهذا الوكيل.';
+
+  @override
+  String agentFormPageTaken(String agent) {
+    return 'مرتبطة بـ $agent';
+  }
+
+  @override
+  String get agentFormPageActive => 'نشطة';
+
+  @override
+  String get agentFormPageInactive => 'غير نشطة';
+
+  @override
+  String get agentFormSelectAll => 'تحديد الكل';
+
+  @override
+  String get agentFormClear => 'مسح';
+
+  @override
+  String get agentFormProducts => 'المنتجات';
+
+  @override
+  String get agentFormSellAll => 'بيع كل الكتالوج';
+
+  @override
+  String get agentFormSellAllHint =>
+      'يعرف الوكيل كل منتجاتك. أوقف الخيار لتختار.';
+
+  @override
+  String get agentFormProductsAll => 'كل الكتالوج';
+
+  @override
+  String agentFormProductsChosen(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count منتجات مختارة',
+      two: 'منتجان مختاران',
+      one: 'منتج واحد مختار',
+      zero: 'لم يُختر أي منتج',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get agentFormProductSearch => 'بحث';
+
+  @override
+  String get agentFormProductSearchPlaceholder => 'ابحث عن منتجات…';
+
+  @override
+  String get agentFormProductsNone => 'لا توجد منتجات متاحة';
+
+  @override
+  String get agentFormProductsNoMatch => 'لا توجد منتجات تطابق بحثك';
+
+  @override
+  String get agentFormEditTitle => 'تعديل الوكيل';
+
+  @override
+  String get agentFormEditSubtitle =>
+      'حدّث إعدادات وكيل الذكاء الاصطناعي. تُطبَّق التغييرات على الرسائل القادمة.';
+
+  @override
+  String get agentFormEditAdvancedHint => 'المس قسمًا لتعديله.';
+
+  @override
+  String get agentFormActive => 'الوكيل نشط';
+
+  @override
+  String get agentFormActiveHint => 'يردّ على رسائل صفحاته ما دام نشطًا.';
+
+  @override
+  String get agentFormSave => 'حفظ التغييرات';
+
+  @override
+  String get agentFormSavedToast => 'تم تحديث الوكيل';
+
+  @override
+  String get agentFormSavedMergedToast =>
+      'تم تحديث الوكيل — مع الإبقاء على التعليمات المضافة من الويب';
+
+  @override
+  String get agentFormLeaveTitle => 'المغادرة دون حفظ؟';
+
+  @override
+  String agentFormLeaveBody(String name) {
+    return 'ستفقد تعديلاتك على $name.';
+  }
+
+  @override
+  String get productFormLeaveBody => 'سيُفقد المنتج الذي بدأته.';
+
+  @override
+  String get conversationLeaveBody => 'سيُفقد ردك غير المرسل.';
+
+  @override
+  String get agentDetailsLeaveBody => 'ستُفقد تعديلاتك على التعليمات.';
+
+  @override
+  String get agentGenerateLeaveBody => 'سيتم تجاهل الوكيل المُنشأ.';
+
+  @override
+  String get tutorialAgentLeaveBody => 'سيُفقد الوكيل الذي بدأته.';
+
+  @override
+  String get checkoutLeaveTitle => 'مغادرة صفحة الدفع؟';
+
+  @override
+  String get checkoutLeaveBody => 'لم يكتمل الدفع بعد.';
+
+  @override
+  String get agentFormKeepEditing => 'مواصلة التعديل';
+
+  @override
+  String get agentFormLeave => 'المغادرة دون حفظ';
+
+  @override
+  String get agentsDetailsEditAgent => 'تعديل الوكيل';
+
+  @override
+  String get pagesEyebrow => 'القنوات المتصلة';
+
+  @override
+  String get pagesTitle => 'الصفحات والبريد الوارد';
+
+  @override
+  String get pagesSubtitle =>
+      'لكل صفحة متصلة بريد وارد ومخزون ووكيل ذكاء اصطناعي خاص بها.';
+
+  @override
+  String get pagesStatTotal => 'إجمالي الصفحات';
+
+  @override
+  String get pagesStatPlanLimit => 'حد الخطة';
+
+  @override
+  String get pagesFilterAll => 'جميع المنصات';
+
+  @override
+  String get pagesEmptyTitle => 'لا توجد صفحة مربوطة';
+
+  @override
+  String get pagesEmptyBody => 'اربط صفحاتك لتبدأ إدارتها بالذكاء الاصطناعي.';
+
+  @override
+  String pagesEmptyPlatformTitle(String platform) {
+    return 'لا توجد صفحات $platform';
+  }
+
+  @override
+  String pagesEmptyPlatformBody(String platform) {
+    return 'اربط صفحات $platform لتبدأ.';
+  }
+
+  @override
+  String get pagesDisconnectTitle => 'فصل الصفحة؟';
+
+  @override
+  String pagesDisconnectBody(String name) {
+    return 'لن تصلك رسائل $name بعد الآن وسيتوقف وكيل الذكاء الاصطناعي عن الرد فيها.';
+  }
+
+  @override
+  String get pagesDisconnectConfirm => 'فصل';
+
+  @override
+  String get pagesDisconnectedToast => 'تم فصل الصفحة';
+
+  @override
+  String get pageCardAiOn => 'الذكاء الاصطناعي مفعّل';
+
+  @override
+  String get pageCardAiOff => 'الذكاء الاصطناعي معطّل';
+
+  @override
+  String get pageCardStatConvos => 'محادثات';
+
+  @override
+  String get pageCardStatMsgs7d => 'رسائل 7 أيام';
+
+  @override
+  String get pageCardStatUnread => 'غير مقروءة';
+
+  @override
+  String get pageCardStatStock => 'المخزون';
+
+  @override
+  String pageCardStatActive(int n) {
+    return '$n نشطة';
+  }
+
+  @override
+  String pageCardStatIn(int n) {
+    return '$n واردة';
+  }
+
+  @override
+  String get pageCardStatNeedsReply => 'بانتظار الرد';
+
+  @override
+  String get pageCardStatProducts => 'منتجات';
+
+  @override
+  String get pageCardAgentReady => 'وكيل الذكاء الاصطناعي جاهز';
+
+  @override
+  String get pageCardAgentTailored => 'مخصص لبريد هذه الصفحة.';
+
+  @override
+  String get pageCardAgentNotReady => 'لا يوجد وكيل مخصص بعد';
+
+  @override
+  String get pageCardAgentNotReadyHint =>
+      'ولّد واحدًا من المحادثات الأخيرة لهذه الصفحة.';
+
+  @override
+  String get pageCardAgentGenerate => 'توليد';
+
+  @override
+  String get pageCardAgentRegenerate => 'إعادة توليد';
+
+  @override
+  String get pageCardActionInbox => 'البريد';
+
+  @override
+  String get pageCardActionStock => 'المخزون';
+
+  @override
+  String get pageCardActionConfigure => 'إعداد';
+
+  @override
+  String get pageCardActionDisconnect => 'فصل';
+
+  @override
+  String get pageCardNoActivity => 'لا نشاط بعد';
+
+  @override
+  String get pageCardNow => 'الآن';
+
+  @override
+  String pageCardMinutesAgo(int n) {
+    return 'منذ $n د';
+  }
+
+  @override
+  String pageCardHoursAgo(int n) {
+    return 'منذ $n س';
+  }
+
+  @override
+  String pageCardDaysAgo(int n) {
+    return 'منذ $n ي';
+  }
+
+  @override
+  String get agentGenTitle => 'توليد وكيل ذكاء اصطناعي من البريد الوارد';
+
+  @override
+  String agentGenSubtitle(String pageName) {
+    return 'سنقرأ المحادثات الأخيرة على $pageName ونصمم وكيلًا مخصصًا.';
+  }
+
+  @override
+  String get agentGenWhatTitle => 'ماذا يفعل هذا';
+
+  @override
+  String get agentGenWhat1 =>
+      'يقرأ ما يصل إلى 25 محادثة حديثة (لا نخزن أي نسخ جديدة)';
+
+  @override
+  String get agentGenWhat2 =>
+      'يكتشف ما تبيعه واللغات المستخدمة وأكثر الأسئلة شيوعًا';
+
+  @override
+  String get agentGenWhat3 =>
+      'يصيغ شخصية ونبرة وطول الردود وتعليمات مخصصة لنشاطك';
+
+  @override
+  String get agentGenWhat4 =>
+      'تعاين وتعدّل وتطبق — لا شيء يتغير حتى تضغط تطبيق';
+
+  @override
+  String get agentGenStart => 'قراءة البريد وتوليد';
+
+  @override
+  String get agentGenPhaseReading => 'قراءة المحادثات الأخيرة…';
+
+  @override
+  String get agentGenPhaseAnalyzing => 'فهم السياق — المنتجات واللغة والنبرة…';
+
+  @override
+  String get agentGenPhaseDrafting => 'صياغة وكيل الذكاء الاصطناعي المخصص لك…';
+
+  @override
+  String get agentGenPhaseSubhint => 'تستغرق هذه العملية عادة 10 إلى 30 ثانية.';
+
+  @override
+  String get agentGenStepRead => 'قراءة';
+
+  @override
+  String get agentGenStepAnalyze => 'تحليل';
+
+  @override
+  String get agentGenStepDraft => 'صياغة';
+
+  @override
+  String get agentGenSummary => 'ملخص النشاط';
+
+  @override
+  String agentGenSampled(int conversations, int messages) {
+    return '$conversations محادثة · $messages رسالة';
+  }
+
+  @override
+  String get agentGenLanguages => 'اللغات';
+
+  @override
+  String get agentGenTopQuestions => 'أهم الأسئلة';
+
+  @override
+  String get agentGenPersonality => 'الشخصية';
+
+  @override
+  String get agentGenTone => 'النبرة';
+
+  @override
+  String get agentGenLength => 'الطول';
+
+  @override
+  String get agentGenInstructions => 'التعليمات المخصصة';
+
+  @override
+  String get agentGenEditHint =>
+      'عدّل قبل التطبيق. تُحفظ هذه التعليمات في إعدادات الذكاء الاصطناعي لهذه الصفحة.';
+
+  @override
+  String agentGenChars(int n) {
+    return '$n حرفًا';
+  }
+
+  @override
+  String get agentGenDiscard => 'تجاهل';
+
+  @override
+  String agentGenApply(String pageName) {
+    return 'تطبيق على $pageName';
+  }
+
+  @override
+  String get agentGenApplying => 'جاري تطبيق الإعدادات…';
+
+  @override
+  String agentGenCreated(String pageName) {
+    return 'تم إنشاء وكيل الذكاء الاصطناعي وربطه بـ $pageName';
+  }
+
+  @override
+  String agentGenUpdated(String pageName) {
+    return 'تم تحديث وكيل الذكاء الاصطناعي لـ $pageName';
+  }
+
+  @override
+  String get agentGenApplyFail => 'تعذر تطبيق الإعدادات';
+
+  @override
+  String get agentGenToneBalanced => 'متوازنة';
+
+  @override
+  String get agentGenToneFormal => 'رسمية';
+
+  @override
+  String get agentGenToneCasual => 'عفوية';
+
+  @override
+  String get agentGenToneEnthusiastic => 'متحمسة';
+
+  @override
+  String get agentGenLengthShort => 'قصيرة';
+
+  @override
+  String get agentGenLengthMedium => 'متوسطة';
+
+  @override
+  String get agentGenLengthDetailed => 'مفصّلة';
+
+  @override
+  String get agentsNewTitle => 'وكيل جديد';
+
+  @override
+  String get commonYes => 'نعم';
+
+  @override
+  String get commonNo => 'لا';
+
+  @override
+  String get menuCategories => 'الفئات';
+
+  @override
+  String get categoriesTitle => 'الفئات';
+
+  @override
+  String categoriesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count فئة',
+      few: '$count فئات',
+      two: 'فئتان',
+      one: 'فئة واحدة',
+      zero: 'لا توجد فئات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get categoriesSearchPlaceholder => 'ابحث في الفئات...';
+
+  @override
+  String get categoriesFilters => 'عوامل التصفية';
+
+  @override
+  String categoriesFiltersActive(int count) {
+    return 'عوامل التصفية · $count';
+  }
+
+  @override
+  String get categoriesSection => 'كل الفئات';
+
+  @override
+  String categoriesProductCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count منتج',
+      few: '$count منتجات',
+      two: 'منتجان',
+      one: 'منتج واحد',
+      zero: '0 منتج',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get categoriesEmptyTitle => 'لا توجد فئات';
+
+  @override
+  String get categoriesEmptyBody => 'أنشئ فئات لتنظيم منتجاتك';
+
+  @override
+  String get categoriesNoMatchBody =>
+      'لا توجد فئة تطابق البحث أو عوامل التصفية.';
+
+  @override
+  String get categoriesFilterMin => 'المنتجات · الحد الأدنى';
+
+  @override
+  String get categoriesFilterMax => 'المنتجات · الحد الأقصى';
+
+  @override
+  String get categoriesFilterRangeInvalid => 'يجب ألا يقل عن الحد الأدنى';
+
+  @override
+  String get categoriesFilterHasDescription => 'لها وصف';
+
+  @override
+  String categoriesFilterColorsSelected(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ألوان محددة',
+      one: 'لون واحد محدد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get categoriesFilterApply => 'تطبيق عوامل التصفية';
+
+  @override
+  String get categoriesFilterClear => 'مسح الكل';
+
+  @override
+  String get categoryAddTitle => 'إضافة فئة';
+
+  @override
+  String get categoryEditTitle => 'تعديل الفئة';
+
+  @override
+  String get categoryName => 'الاسم';
+
+  @override
+  String get categoryNamePlaceholder => 'مثال: إلكترونيات';
+
+  @override
+  String get categoryDescriptionPlaceholder => 'وصف اختياري';
+
+  @override
+  String get categoryColor => 'اللون';
+
+  @override
+  String get categoryColorCustom => 'لون مخصص';
+
+  @override
+  String get categoryColorHex => 'الرمز السداسي';
+
+  @override
+  String get categoryColorInvalid => 'ستة رموز سداسية، مثال EC4899';
+
+  @override
+  String get categoryColorApply => 'استخدام هذا اللون';
+
+  @override
+  String get categoryCreate => 'إضافة الفئة';
+
+  @override
+  String get categoryUpdate => 'تحديث الفئة';
+
+  @override
+  String get categoryNameTooShort => 'حرفان على الأقل';
+
+  @override
+  String get categoryNameTaken => 'لديك فئة بهذا الاسم مسبقًا';
+
+  @override
+  String get categoryAdded => 'تمت إضافة الفئة';
+
+  @override
+  String get categoryUpdated => 'تم تحديث الفئة';
+
+  @override
+  String get categoryDeleted => 'تم حذف الفئة';
+
+  @override
+  String get categoryDeleteTitle => 'حذف الفئة';
+
+  @override
+  String categoryDeleteBody(String name) {
+    return 'هل تريد فعلاً حذف $name؟';
+  }
+
+  @override
+  String categoryDeleteNotice(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'تحتوي هذه الفئة على $count منتج.',
+      few: 'تحتوي هذه الفئة على $count منتجات.',
+      two: 'تحتوي هذه الفئة على منتجين.',
+      one: 'تحتوي هذه الفئة على منتج واحد.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get categoryDeleteNoticeBody => 'ستصبح بلا فئة.';
+
+  @override
+  String get menuClients => 'العملاء';
+
+  @override
+  String get clientsEyebrow => 'المبيعات';
+
+  @override
+  String get clientsTitle => 'العملاء';
+
+  @override
+  String get clientsSubtitle =>
+      'العملاء المحفوظون من محادثات الذكاء الاصطناعي والطلبات المؤكدة';
+
+  @override
+  String get clientsStatTotal => 'إجمالي العملاء';
+
+  @override
+  String get clientsStatActive => 'النشطون';
+
+  @override
+  String get clientsStatWithOrders => 'لديهم طلبات';
+
+  @override
+  String get clientsStatTotalSpent => 'إجمالي الإنفاق';
+
+  @override
+  String get clientsSearchName => 'ابحث بالاسم أو البريد الإلكتروني...';
+
+  @override
+  String get clientsSearchPhone => 'ابحث بالهاتف...';
+
+  @override
+  String get clientsSection => 'كل العملاء';
+
+  @override
+  String get clientsSourceAi => 'دردشة الذكاء';
+
+  @override
+  String get clientsSourceManual => 'يدوي';
+
+  @override
+  String clientsOrderCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count طلب',
+      few: '$count طلبات',
+      two: 'طلبان',
+      one: 'طلب واحد',
+      zero: '0 طلب',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String clientsConversationCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count محادثة',
+      few: '$count محادثات',
+      two: 'محادثتان',
+      one: 'محادثة واحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get clientsEmptyTitle => 'لا يوجد عملاء';
+
+  @override
+  String get clientsEmptyBody =>
+      'يظهر العملاء هنا تلقائيًا عندما يؤكد روبوت الذكاء الاصطناعي طلبًا، أو أضفهم يدويًا.';
+
+  @override
+  String get clientsNoMatchBody => 'لا يوجد عميل يطابق البحث أو عوامل التصفية.';
+
+  @override
+  String get clientsFilterStatus => 'الحالة';
+
+  @override
+  String get clientsFilterActive => 'النشطون';
+
+  @override
+  String get clientsFilterInactive => 'غير النشطين';
+
+  @override
+  String get clientsFilterSource => 'المصدر';
+
+  @override
+  String get clientsFilterOrdersMin => 'الطلبات · الحد الأدنى';
+
+  @override
+  String get clientsFilterOrdersMax => 'الطلبات · الحد الأقصى';
+
+  @override
+  String get clientsFilterSpentMin => 'الإنفاق (دج) · الحد الأدنى';
+
+  @override
+  String get clientsFilterSpentMax => 'الإنفاق (دج) · الحد الأقصى';
+
+  @override
+  String get dateFrom => 'من تاريخ';
+
+  @override
+  String get dateTo => 'إلى تاريخ';
+
+  @override
+  String get dateClear => 'مسح التاريخ';
+
+  @override
+  String get datePickerToday => 'اليوم';
+
+  @override
+  String get clientAddTitle => 'إضافة عميل';
+
+  @override
+  String get clientEditTitle => 'تعديل العميل';
+
+  @override
+  String get clientCreate => 'إضافة العميل';
+
+  @override
+  String get clientUpdate => 'تحديث العميل';
+
+  @override
+  String get clientNamePlaceholder => 'اسم العميل';
+
+  @override
+  String get clientPhone => 'الهاتف';
+
+  @override
+  String get clientAddress => 'العنوان';
+
+  @override
+  String get clientAddressPlaceholder => 'عنوان العميل';
+
+  @override
+  String get clientNotes => 'ملاحظات';
+
+  @override
+  String get clientNotesPlaceholder => 'ملاحظات اختيارية';
+
+  @override
+  String get clientErrNoLetters => 'يجب أن يحتوي على حرف أو رقم واحد على الأقل';
+
+  @override
+  String get clientErrPhone =>
+      'يجب أن يتكون الهاتف من 8 إلى 15 رقمًا (مثال 0555 12 34 56)';
+
+  @override
+  String clientErrPhoneTaken(String name) {
+    return 'يوجد عميل بهذا الهاتف مسبقًا ($name)';
+  }
+
+  @override
+  String get clientAdded => 'تمت إضافة العميل';
+
+  @override
+  String get clientUpdated => 'تم تحديث العميل';
+
+  @override
+  String get clientDeleted => 'تم حذف العميل';
+
+  @override
+  String get clientDeleteTitle => 'حذف العميل';
+
+  @override
+  String clientDeleteBody(String name) {
+    return 'هل تريد فعلاً حذف $name؟';
+  }
+
+  @override
+  String clientDeleteNotice(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'لهذا العميل $count طلبًا مرتبطًا.',
+      few: 'لهذا العميل $count طلبات مرتبطة.',
+      two: 'لهذا العميل طلبان مرتبطان.',
+      one: 'لهذا العميل طلب واحد مرتبط.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get clientDetailEyebrow => 'تفاصيل العميل';
+
+  @override
+  String get clientDetailTotalOrders => 'إجمالي الطلبات';
+
+  @override
+  String get clientDetailLastOrder => 'آخر طلب';
+
+  @override
+  String get clientDetailMetrics => 'مقاييس محادثات الذكاء الاصطناعي';
+
+  @override
+  String get clientDetailConversations => 'المحادثات';
+
+  @override
+  String get clientDetailMessages => 'الرسائل';
+
+  @override
+  String get clientDetailAiResponses => 'ردود الذكاء الاصطناعي';
+
+  @override
+  String get clientDetailClientMessages => 'رسائل العميل';
+
+  @override
+  String get clientDetailLastMessage => 'آخر رسالة';
+
+  @override
+  String get clientDetailHistory => 'سجل المحادثات';
+
+  @override
+  String get clientDetailMsgs => 'رسائل';
+
+  @override
+  String get clientDetailFromAi => 'الذكاء:';
+
+  @override
+  String get clientDetailFromClient => 'العميل:';
+
+  @override
+  String get clientViewOrders => 'عرض الطلبات';
+
+  @override
+  String get clientOrdersSoon => 'الطلبات غير متاحة على الهاتف بعد';
 }

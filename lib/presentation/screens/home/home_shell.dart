@@ -63,7 +63,8 @@ class HomeShell extends StatelessWidget {
         destinations: destinations,
         currentIndex: current < 0 ? 0 : current,
         // `go`, not `push`: these are peers, and a tab must not stack on the
-        // tab before it — that is what made back exit the app (brief §21.7).
+        // tab before it. Back from a tab other than Accueil goes home through
+        // the shell's BackScope in `router.dart`; only home asks to leave.
         onSelect: (index) => context.go(destinations[index].route),
       ),
     );

@@ -178,6 +178,26 @@ class AppIcons {
         '012 2v8a2 2 0 01-2 2h-5l-5 5v-5z',
   ];
 
+  /// `AlertIcon` — an agent's pending issues.
+  static const alert = <String>[
+    'M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z',
+  ];
+
+  /// `EditIcon` — details and editing.
+  static const edit = <String>[
+    'M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z',
+  ];
+
+  /// `PlusIcon` — create.
+  static const plus = <String>[
+    'M12 4v16m8-8H4',
+  ];
+
+  /// `TrashIcon` — delete.
+  static const trash = <String>[
+    'M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16',
+  ];
+
   /// `GridIcon` — the Services group.
   static const grid = <String>[
     'M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 '
@@ -219,6 +239,34 @@ class AppIcons {
     'M19 9l-7 7-7-7',
   ];
 
+  /// `UsersIcon` — suppliers, on `16 — Aperçu du stock`.
+  static const users = <String>[
+    'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z',
+  ];
+
+  /// `TagIcon` — the agent form's product display section.
+  static const tag = <String>[
+    'M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z',
+  ];
+
+  /// `CalendarIcon` — the date chips and the calendar sheet (Figma
+  /// `Icon/Calendar`, `642:9625`).
+  static const calendar = <String>[
+    'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
+  ];
+
+  /// `ClockIcon` — *Dernière commande* on a client's details (Figma
+  /// `Icon/Clock`, `651:12258`).
+  static const clock = <String>[
+    'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z',
+  ];
+
+  /// `FilterIcon` — the *Filtres* chip on the categories screen (Figma
+  /// `Icon/Filter`, `629:6708`).
+  static const filter = <String>[
+    'M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z',
+  ];
+
   /// `BotIcon` — the AI agents subrow. Heroicons v2 in the source, unlike the
   /// rest of the set, which is why it carries far more path than its
   /// neighbours.
@@ -244,6 +292,22 @@ class AppIcons {
         '011.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 '
         '23.91 0 001.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 '
         '1.317-.811 1.73m0-3.46a24.347 24.347 0 010 3.46',
+  ];
+
+  /// `SearchIcon` — the inbox's search field.
+  static const search = <String>[
+    'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z',
+  ];
+
+  /// `RefreshIcon` — the inbox's Sync.
+  static const refresh = <String>[
+    'M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 '
+        '0a8.003 8.003 0 01-15.357-2m15.357 2H15',
+  ];
+
+  /// `CheckCircleIcon` — *Marquer terminé* on a conversation.
+  static const checkCircle = <String>[
+    'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
   ];
 }
 
