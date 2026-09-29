@@ -122,12 +122,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
     return showLeaveSheet(context, body: L10n.of(context).productEditLeaveBody);
   }
 
-  /// `true` tells the detail screen and `17` to refetch. An explicit pop, so it
-  /// bypasses the back intercept.
+  /// A non-null pop value tells the detail screen and `17` to refetch; the
+  /// list it carries is the images this save uploaded, which the detail screen
+  /// shows even if its reload answers before the backend lists them. An
+  /// explicit pop, so it bypasses the back intercept.
   void _close() {
     final router = GoRouter.of(context);
     if (router.canPop()) {
-      router.pop(true);
+      router.pop(_model.uploadedImages);
     } else {
       router.go(Routes.productOf(widget.productId));
     }

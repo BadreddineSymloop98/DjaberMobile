@@ -87,6 +87,12 @@ class Routes {
   /// Produits, the web sidebar's order). Pushed over the shell like [products].
   static const categories = '/categories';
 
+  /// `Fournisseurs` — from the drawer, between Catégories and Clients (the web
+  /// sidebar's order). [supplier] is one supplier's details.
+  static const suppliers = '/suppliers';
+  static const supplier = '/suppliers/:id';
+  static String supplierOf(String id) => '/suppliers/$id';
+
   /// `Clients` — from the drawer, after Catégories. [client] is one client's
   /// details, pushed over the list.
   static const clients = '/clients';
@@ -144,6 +150,12 @@ class Routes {
   static const productExpenses = '/products/:id/expenses';
   static String productExpensesOf(String id) => '/products/$id/expenses';
 
+  /// `Nouvelle commande`. Declared **before** [order] in `router.dart` for the
+  /// same reason `/products/new` is: a two-segment pattern would swallow it.
+  static const orderNew = '/orders/new';
+
+  /// `Détail de la commande` and the confirm wizard on top of it — one screen,
+  /// three steps.
   static const order = '/orders/:id';
   static String orderOf(String id) => '/orders/$id';
 

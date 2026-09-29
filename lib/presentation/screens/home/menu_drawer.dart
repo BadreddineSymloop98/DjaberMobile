@@ -91,6 +91,12 @@ class _MenuDrawerState extends State<MenuDrawer> {
   /// is not worth persisting.
   bool _servicesOpen = true;
 
+  /// Closed, unlike Services. Produits is a destination in its own right —
+  /// the row opens the stock overview — and a group that opens itself pushes
+  /// Agents and Commercial down the drawer for a merchant who only wanted the
+  /// stock. The chevron is right there when the catalogue is what they want.
+  bool _productsOpen = false;
+
   /// Unread notifications, for the badge on that row.
   ///
   /// Fetched here rather than handed in, unlike [MenuDrawer.connectedPages]:
@@ -239,9 +245,11 @@ class _MenuDrawerState extends State<MenuDrawer> {
     );
   }
 
-  /// The eight rows and three subrows, in the web sidebar's own order.
+  /// The eight rows and, under Services, its subrows — in the web sidebar's
+  /// own order, nesting included.
   ///
-  /// The Services group is one child of [ListBox] rather than four, because
+  /// The Services group is one child of [ListBox] rather than one per row,
+  /// because
   /// its subrows carry no dividers — the group is a single band in the frame,
   /// and `ListBox` rules between its children.
   List<Widget> _navigation(L10n l10n) => [
@@ -290,27 +298,70 @@ class _MenuDrawerState extends State<MenuDrawer> {
               onTap: () => setState(() => _servicesOpen = !_servicesOpen),
             ),
             if (_servicesOpen) ...[
+              // Produits is a destination **and** a group, exactly as on the
+              // web: the row opens the stock hub (`/dashboard/stock`, the
+              // Stock tab here) and that hub's own sidebar lists Produits,
+              // Catégories, Fournisseurs and Clients under it
+              // (`stockNavItemsBase`, which opens with Overview then
+              // Products). So the group title is the overview and the
+              // catalogue itself is a row inside the group — same name, two
+              // destinations, as the web has them.
               MenuSubrow(
                 icon: AppIcons.box,
                 label: l10n.menuProducts,
                 // Catalogue is amber (§21.3).
                 iconColor: AppColors.accentStarred,
-                onTap: () => _open(Routes.products),
+                onTap: () => _goToTab(Routes.stock),
+                expanded: _productsOpen,
+                onToggle: () => setState(() => _productsOpen = !_productsOpen),
               ),
-              MenuSubrow(
-                icon: AppIcons.tag,
-                label: l10n.menuCategories,
-                // Catalogue, like Produits just above it (§21.3).
-                iconColor: AppColors.accentStarred,
-                onTap: () => _open(Routes.categories),
-              ),
-              MenuSubrow(
-                icon: AppIcons.users,
-                label: l10n.menuClients,
-                // `accent/clients` — §21.3's violet for people.
-                iconColor: AppColors.accentClients,
-                onTap: () => _open(Routes.clients),
-              ),
+              if (_productsOpen) ...[
+                MenuSubrow(
+                  depth: 2,
+                  icon: AppIcons.box,
+                  label: l10n.menuProducts,
+                  // Catalogue amber, like the group it opens (§21.3).
+                  iconColor: AppColors.accentStarred,
+                  onTap: () => _open(Routes.products),
+                ),
+                MenuSubrow(
+                  depth: 2,
+                  icon: AppIcons.tag,
+                  label: l10n.menuCategories,
+                  // Catalogue, like Produits above it (§21.3).
+                  iconColor: AppColors.accentStarred,
+                  onTap: () => _open(Routes.categories),
+                ),
+                MenuSubrow(
+                  depth: 2,
+                  icon: AppIcons.truck,
+                  label: l10n.menuSuppliers,
+                  // Catalogue side, like Produits and Catégories (§21.3).
+                  iconColor: AppColors.accentStarred,
+                  onTap: () => _open(Routes.suppliers),
+                ),
+                MenuSubrow(
+                  depth: 2,
+                  icon: AppIcons.users,
+                  label: l10n.menuClients,
+                  // `accent/clients` — §21.3's violet for people.
+                  iconColor: AppColors.accentClients,
+                  onTap: () => _open(Routes.clients),
+                ),
+                // Commandes is also the CMD tab, so this is a second way in
+                // rather than the only one — the web lists it in the same
+                // stock group (`stockNavItemsBase`), and a merchant reading
+                // the group should see everything the group holds. `go`, not
+                // `push`: it is a tab, and pushing it would hide the nav bar
+                // it belongs to.
+                MenuSubrow(
+                  depth: 2,
+                  icon: AppIcons.clipboard,
+                  label: l10n.ordersTitle,
+                  iconColor: AppColors.accentOrders,
+                  onTap: () => _goToTab(Routes.orders),
+                ),
+              ],
               MenuSubrow(
                 icon: AppIcons.bot,
                 label: l10n.menuAgents,

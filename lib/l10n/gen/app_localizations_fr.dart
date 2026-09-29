@@ -3139,4 +3139,857 @@ class L10nFr extends L10n {
   @override
   String get clientOrdersSoon =>
       'Les commandes ne sont pas encore disponibles sur mobile';
+
+  @override
+  String get menuSuppliers => 'Fournisseurs';
+
+  @override
+  String get suppliersEyebrow => 'ACHATS';
+
+  @override
+  String get suppliersTitle => 'Fournisseurs';
+
+  @override
+  String suppliersCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count fournisseurs',
+      one: '1 fournisseur',
+      zero: '0 fournisseur',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get suppliersStatTotal => 'Total fournisseurs';
+
+  @override
+  String get suppliersStatWithPurchases => 'Avec achats';
+
+  @override
+  String get suppliersSearch => 'Rechercher des fournisseurs...';
+
+  @override
+  String get suppliersSection => 'Tous les fournisseurs';
+
+  @override
+  String suppliersPurchaseCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count achats',
+      one: '1 achat',
+      zero: '0 achat',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get suppliersEmptyTitle => 'Aucun fournisseur';
+
+  @override
+  String get suppliersEmptyBody =>
+      'Ajoutez des fournisseurs pour gérer vos achats';
+
+  @override
+  String get suppliersNoMatchBody =>
+      'Aucun fournisseur ne correspond à la recherche ou aux filtres.';
+
+  @override
+  String get suppliersFilterPurchasesMin => 'Achats · min';
+
+  @override
+  String get suppliersFilterPurchasesMax => 'Achats · max';
+
+  @override
+  String get supplierActive => 'Actif';
+
+  @override
+  String get supplierInactive => 'Inactif';
+
+  @override
+  String get supplierAddTitle => 'Ajouter un fournisseur';
+
+  @override
+  String get supplierEditTitle => 'Modifier le fournisseur';
+
+  @override
+  String get supplierCreate => 'Ajouter le fournisseur';
+
+  @override
+  String get supplierUpdate => 'Mettre à jour le fournisseur';
+
+  @override
+  String get supplierNamePlaceholder => 'Nom du fournisseur';
+
+  @override
+  String get supplierAddressPlaceholder => 'Adresse du fournisseur';
+
+  @override
+  String get supplierErrNameTaken =>
+      'Vous avez déjà un fournisseur avec ce nom';
+
+  @override
+  String get supplierAdded => 'Fournisseur ajouté';
+
+  @override
+  String get supplierUpdated => 'Fournisseur mis à jour';
+
+  @override
+  String get supplierDeleted => 'Fournisseur supprimé';
+
+  @override
+  String get supplierDeleteTitle => 'Supprimer le fournisseur';
+
+  @override
+  String supplierDeleteBody(String name) {
+    return 'Voulez-vous vraiment supprimer $name ?';
+  }
+
+  @override
+  String supplierDeleteNotice(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Ce fournisseur a $count achats liés.',
+      one: 'Ce fournisseur a 1 achat lié.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get supplierDetailEyebrow => 'DÉTAILS DU FOURNISSEUR';
+
+  @override
+  String get supplierDetailPurchases => 'Achats';
+
+  @override
+  String get supplierDetailMemberSince => 'Membre depuis';
+
+  @override
+  String get supplierViewPurchases => 'Voir les achats';
+
+  @override
+  String get supplierPurchasesSoon =>
+      'Les achats ne sont pas encore disponibles sur mobile';
+
+  @override
+  String get supplierNotFound => 'Ce fournisseur n’existe plus.';
+
+  @override
+  String get ordersEyebrow => 'VENTES';
+
+  @override
+  String get ordersTitle => 'Commandes';
+
+  @override
+  String ordersCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count commandes',
+      one: '1 commande',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ordersStatTotal => 'Total commandes';
+
+  @override
+  String get ordersStatPending => 'En attente';
+
+  @override
+  String get ordersStatDelivered => 'Livrées';
+
+  @override
+  String get ordersStatValue => 'Valeur totale';
+
+  @override
+  String get ordersSearch =>
+      'Rechercher par # commande, client, téléphone, produit...';
+
+  @override
+  String get ordersSection => 'Toutes les commandes';
+
+  @override
+  String get ordersSelectAll => 'Tout sélectionner';
+
+  @override
+  String get ordersNew => 'Nouvelle commande';
+
+  @override
+  String get ordersEmptyTitle => 'Aucune commande';
+
+  @override
+  String get ordersEmptyBody =>
+      'Les commandes arrivent des confirmations du chatbot IA, ou créez-en une à la main.';
+
+  @override
+  String get ordersNoMatchBody =>
+      'Aucune commande ne correspond à votre recherche ou à vos filtres.';
+
+  @override
+  String get orderStatusAll => 'Tous';
+
+  @override
+  String get orderStatusPending => 'Nouveau';
+
+  @override
+  String get orderStatusConfirmed => 'Confirmée';
+
+  @override
+  String get orderStatusPreparing => 'En préparation';
+
+  @override
+  String get orderStatusShipped => 'Expédiée';
+
+  @override
+  String get orderStatusDelivered => 'Livrée';
+
+  @override
+  String get orderStatusCancelled => 'Annulée';
+
+  @override
+  String get orderStatusReturned => 'Retournée';
+
+  @override
+  String get orderConfirmNotCalled => 'Non appelé';
+
+  @override
+  String get orderConfirmNoAnswer => 'Sans réponse';
+
+  @override
+  String get orderConfirmConfirmed => 'Confirmé';
+
+  @override
+  String get orderConfirmRejected => 'Rejeté';
+
+  @override
+  String orderConfirmWithCount(String label, int count) {
+    return '$label ($count)';
+  }
+
+  @override
+  String get orderSourceAi => 'IA';
+
+  @override
+  String get orderSourceAiLong => 'Chatbot IA';
+
+  @override
+  String get orderSourceManual => 'Manuel';
+
+  @override
+  String get paymentStatusPaid => 'Payé';
+
+  @override
+  String get paymentStatusPending => 'En attente';
+
+  @override
+  String get paymentStatusPartial => 'Partiel';
+
+  @override
+  String ordersRowItems(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count articles',
+      one: '1 article',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ordersRowMeta(String items, String paid, String remaining) {
+    return '$items  ·  PAYÉ $paid  ·  RESTANT $remaining';
+  }
+
+  @override
+  String get ordersRowNoRemaining => '–';
+
+  @override
+  String get orderActionCallConfirm => 'Appeler et confirmer';
+
+  @override
+  String get orderActionRetry => 'Réessayer';
+
+  @override
+  String get orderActionPrepare => 'Préparer';
+
+  @override
+  String get orderActionMarkShipped => 'Marquer expédiée';
+
+  @override
+  String get orderActionMarkDelivered => 'Marquer livrée';
+
+  @override
+  String get orderActionOpen => 'Ouvrir';
+
+  @override
+  String get orderActionMarkReturned => 'Marquer comme retournée';
+
+  @override
+  String get orderActionDelete => 'Supprimer la commande';
+
+  @override
+  String ordersSelectedCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count commandes sélectionnées',
+      one: '1 commande sélectionnée',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ordersClearSelection => 'Effacer';
+
+  @override
+  String get ordersBulkConfirm => 'Tout confirmer';
+
+  @override
+  String get ordersBulkPrepare => 'Tout préparer';
+
+  @override
+  String get ordersBulkShip => 'Tout expédier';
+
+  @override
+  String get ordersBulkDeliver => 'Tout marquer livrées';
+
+  @override
+  String get ordersBulkReturn => 'Tout marquer retournées';
+
+  @override
+  String get ordersBulkCancel => 'Tout annuler';
+
+  @override
+  String get ordersBulkNone => 'Aucune action groupée pour cette sélection';
+
+  @override
+  String ordersBulkFailed(int failed, int total) {
+    return '$failed commande(s) sur $total n’ont pas pu être mises à jour';
+  }
+
+  @override
+  String get ordersFilters => 'Filtres';
+
+  @override
+  String ordersFiltersActive(int count) {
+    return 'Filtres · $count';
+  }
+
+  @override
+  String get ordersFilterStatus => 'Statut de la commande';
+
+  @override
+  String get ordersFilterStatusAll => 'Tous les statuts';
+
+  @override
+  String get ordersFilterConfirmation => 'Confirmation';
+
+  @override
+  String get ordersFilterPayment => 'Statut du paiement';
+
+  @override
+  String get ordersFilterAny => 'Tous';
+
+  @override
+  String get ordersFilterHasRemaining => 'Solde restant à payer';
+
+  @override
+  String get ordersFilterPaymentDisabled =>
+      'Désactivé — « Solde restant » est actif';
+
+  @override
+  String get ordersFilterTotalMin => 'Montant total (DA) · min';
+
+  @override
+  String get ordersFilterTotalMax => 'Montant total (DA) · max';
+
+  @override
+  String get ordersFilterApply => 'Appliquer les filtres';
+
+  @override
+  String get ordersFilterClear => 'Tout effacer';
+
+  @override
+  String get orderEyebrow => 'Commande';
+
+  @override
+  String get orderStepReview => 'Vérification';
+
+  @override
+  String get orderStepCall => 'Appel';
+
+  @override
+  String get orderStepResult => 'Résultat';
+
+  @override
+  String orderCallsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count appels',
+      one: '1 appel',
+      zero: 'aucun appel',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get orderClientSection => 'Client';
+
+  @override
+  String get orderEditContact => 'Modifier';
+
+  @override
+  String get orderEditContactDone => 'Terminé';
+
+  @override
+  String get orderFieldName => 'Nom';
+
+  @override
+  String get orderFieldPhone => 'Téléphone';
+
+  @override
+  String get orderFieldAddress => 'Adresse';
+
+  @override
+  String get orderFieldRegion => 'Région';
+
+  @override
+  String get orderNoPhone => 'sans téléphone';
+
+  @override
+  String get orderNoAddress => 'sans adresse';
+
+  @override
+  String get orderPhoneHint => '0555 12 34 56';
+
+  @override
+  String get orderAddressHint => 'Wilaya, commune, rue, bâtiment...';
+
+  @override
+  String get orderContactSavedWithCall =>
+      'Les modifications sont enregistrées avec le résultat de l’appel.';
+
+  @override
+  String get orderStopdeskChip => 'Stopdesk (retrait en agence)';
+
+  @override
+  String get orderItemsSection => 'Articles';
+
+  @override
+  String orderUnitLine(int qty, String price) {
+    return '×$qty · $price / unité';
+  }
+
+  @override
+  String get orderTotalLabel => 'Total';
+
+  @override
+  String get orderPaidLabel => 'Payé';
+
+  @override
+  String get orderRemainingLabel => 'Restant';
+
+  @override
+  String get orderNotesSection => 'Notes';
+
+  @override
+  String get orderAttemptsSection => 'Tentatives précédentes';
+
+  @override
+  String get orderCallHistorySection => 'Historique des appels';
+
+  @override
+  String get orderLogCall => 'Enregistrer le résultat de l’appel';
+
+  @override
+  String get orderAlreadyConfirmed => 'Déjà confirmée';
+
+  @override
+  String get orderClose => 'Fermer';
+
+  @override
+  String orderReadOnlyNotice(String status) {
+    return 'Cette commande est $status — l’enregistrement des appels est désactivé.';
+  }
+
+  @override
+  String get orderReadOnlyResell =>
+      'Créez une nouvelle commande pour revendre.';
+
+  @override
+  String get orderCallQuestion => 'Comment s’est passé l’appel ?';
+
+  @override
+  String get orderCallSubtitle =>
+      'Nous enregistrons la tentative et mettons la commande à jour en conséquence.';
+
+  @override
+  String get orderOutcomeConfirmed => 'Confirmée';
+
+  @override
+  String get orderOutcomeConfirmedHint =>
+      'Le client veut la commande — elle passe prête à expédier.';
+
+  @override
+  String get orderOutcomeNoAnswer => 'Sans réponse';
+
+  @override
+  String get orderOutcomeNoAnswerHint =>
+      'Tentative enregistrée — reste dans la file en attente.';
+
+  @override
+  String get orderOutcomeBusy => 'Occupé';
+
+  @override
+  String get orderOutcomeBusyHint =>
+      'Réessayez plus tard — reste dans la file en attente.';
+
+  @override
+  String get orderOutcomeVoicemail => 'Messagerie';
+
+  @override
+  String get orderOutcomeVoicemailHint =>
+      'Tentative enregistrée — reste dans la file en attente.';
+
+  @override
+  String get orderOutcomeRejected => 'Rejetée';
+
+  @override
+  String get orderOutcomeRejectedHint =>
+      'Le client n’en veut pas — la commande sera annulée.';
+
+  @override
+  String get orderCallNotesLabel => 'Notes (facultatif, pour vos dossiers)';
+
+  @override
+  String get orderCallNotesHintConfirmed =>
+      'Heure de livraison confirmée, instructions, paiement…';
+
+  @override
+  String get orderCallNotesHintRejected => 'Pourquoi le client a-t-il refusé ?';
+
+  @override
+  String get orderCallNotesHintOther => 'Que s’est-il passé ?';
+
+  @override
+  String get orderSaveOutcome => 'Enregistrer le résultat';
+
+  @override
+  String get orderBackToReview => 'Retour';
+
+  @override
+  String get orderNoAddressWarning =>
+      'Cette commande n’a pas encore d’adresse de livraison.';
+
+  @override
+  String get orderNoAddressBody =>
+      'Revenez à « Vérification » et modifiez la fiche client avant de confirmer.';
+
+  @override
+  String get orderResultConfirmedTitle => 'Commande confirmée';
+
+  @override
+  String get orderResultConfirmedBody =>
+      'Prête à être envoyée à votre transporteur.';
+
+  @override
+  String get orderResultCancelledTitle => 'Commande annulée';
+
+  @override
+  String get orderResultCancelledBody =>
+      'Le stock est restauré. Le paiement enregistré est annulé — un remboursement éventuel reste à faire à la main.';
+
+  @override
+  String get orderResultAttemptTitle => 'Tentative enregistrée';
+
+  @override
+  String orderResultAttemptBody(int count) {
+    return 'Tentative n° $count enregistrée. Reste dans votre file en attente.';
+  }
+
+  @override
+  String get orderNextSection => 'Suite : préparer et expédier';
+
+  @override
+  String get orderNextBody =>
+      'Envoyez cette commande à votre transporteur, ou marquez-la en préparation pendant que vous l’emballez.';
+
+  @override
+  String get orderSendToDelivery => 'Envoyer en livraison';
+
+  @override
+  String get orderSendToDeliverySoon => 'Yalidine / ZR — bientôt';
+
+  @override
+  String get orderMarkPreparing => 'Marquer en préparation';
+
+  @override
+  String get orderDone => 'Terminé';
+
+  @override
+  String get orderReturnTitle => 'Marquer comme retournée';
+
+  @override
+  String orderReturnBody(String number) {
+    return 'Voulez-vous vraiment marquer la commande $number comme retournée ? Le stock sera restauré et le paiement annulé.';
+  }
+
+  @override
+  String get orderReturnNoticeTitle => 'Le remboursement n’est pas automatique';
+
+  @override
+  String get orderReturnNoticeBody =>
+      'L’argent déjà encaissé doit être rendu au client et saisi en dépense dans la caisse.';
+
+  @override
+  String get orderDeleteTitle => 'Supprimer la commande';
+
+  @override
+  String orderDeleteBody(String number) {
+    return 'Voulez-vous vraiment supprimer la commande $number ? Le stock sera restauré.';
+  }
+
+  @override
+  String get orderDeleteNoticeBody =>
+      'La commande, ses lignes et son historique d’appels sont effacés pour de bon.';
+
+  @override
+  String get newOrderTitle => 'Nouvelle commande';
+
+  @override
+  String get newOrderClientSection => 'Client';
+
+  @override
+  String get newOrderSearchClient => 'Rechercher un client';
+
+  @override
+  String get newOrderSearchClientHint =>
+      'Rechercher un client par nom ou téléphone...';
+
+  @override
+  String get newOrderNoClients => 'Aucun client trouvé';
+
+  @override
+  String get newOrderOrType => 'Ou bien saisir';
+
+  @override
+  String get newOrderClientName => 'Nom du client';
+
+  @override
+  String get newOrderClientPhone => 'Téléphone';
+
+  @override
+  String get newOrderDeliveryAddress => 'Adresse de livraison';
+
+  @override
+  String get newOrderWilaya => 'Wilaya';
+
+  @override
+  String get newOrderWilayaHint => 'Choisir une wilaya…';
+
+  @override
+  String get newOrderCommune => 'Commune';
+
+  @override
+  String get newOrderCommuneHint => 'Commune (facultatif)';
+
+  @override
+  String get newOrderStopdesk => 'Stopdesk (retrait en agence — moins cher)';
+
+  @override
+  String get newOrderProductsSection => 'Produits';
+
+  @override
+  String get newOrderAddProducts => 'Ajouter des produits';
+
+  @override
+  String get newOrderProductHint => 'Rechercher un produit par nom ou SKU…';
+
+  @override
+  String get newOrderNoProducts => 'Aucun produit trouvé';
+
+  @override
+  String newOrderVariantCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count variantes',
+      one: '1 variante',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String newOrderInStock(int count) {
+    return '$count en stock';
+  }
+
+  @override
+  String get newOrderOutOfStock => 'Rupture';
+
+  @override
+  String get newOrderQty => 'Qté';
+
+  @override
+  String get newOrderUnitPrice => 'Prix (DA)';
+
+  @override
+  String get newOrderLineTotal => 'Total';
+
+  @override
+  String get newOrderNoLines =>
+      'Recherchez et sélectionnez des produits ci-dessus pour les ajouter';
+
+  @override
+  String get newOrderNotesSection => 'Remarque / Notes';
+
+  @override
+  String get newOrderNotes => 'Notes';
+
+  @override
+  String get newOrderNotesHint => 'Ajouter une note pour cette commande…';
+
+  @override
+  String get newOrderSummary => 'Récapitulatif';
+
+  @override
+  String get newOrderSubtotal => 'Sous-total';
+
+  @override
+  String get newOrderDelivery => 'Livraison';
+
+  @override
+  String get newOrderTotal => 'Total';
+
+  @override
+  String get newOrderPayInFull => 'Payé en totalité';
+
+  @override
+  String get newOrderAmountPaid => 'Montant payé (DA)';
+
+  @override
+  String get newOrderCodHint =>
+      'Laissez 0 pour le paiement à la livraison — il est enregistré automatiquement à la livraison.';
+
+  @override
+  String get newOrderRemainingDebt => 'Restant (dette)';
+
+  @override
+  String get newOrderFullyPaid => 'Payé en totalité';
+
+  @override
+  String get newOrderPayment => 'Paiement';
+
+  @override
+  String get newOrderStatus => 'Statut de la commande';
+
+  @override
+  String get newOrderPaymentMethod => 'Mode de paiement';
+
+  @override
+  String get paymentMethodCash => 'Espèces';
+
+  @override
+  String get paymentMethodCard => 'Carte';
+
+  @override
+  String get paymentMethodTransfer => 'Virement';
+
+  @override
+  String get paymentMethodCcp => 'CCP';
+
+  @override
+  String get newOrderSubmit => 'Créer la commande';
+
+  @override
+  String get newOrderStockReserved =>
+      'Le stock est réservé dès la création, même pour une commande en attente.';
+
+  @override
+  String get newOrderErrNoItems => 'Ajoutez au moins un produit';
+
+  @override
+  String get newOrderErrName => 'Le nom du client est obligatoire';
+
+  @override
+  String get newOrderErrPhone =>
+      'Un numéro de téléphone est obligatoire pour contacter le client';
+
+  @override
+  String get newOrderErrWilaya => 'La wilaya de livraison est obligatoire';
+
+  @override
+  String get newOrderErrAddress =>
+      'L’adresse est obligatoire pour une livraison à domicile (ou cochez Stopdesk)';
+
+  @override
+  String newOrderErrStock(String name, int count) {
+    return '$name — il ne reste que $count en stock';
+  }
+
+  @override
+  String get orderCreatedToast => 'Commande créée';
+
+  @override
+  String get orderCallLoggedToast => 'Résultat de l’appel enregistré';
+
+  @override
+  String get orderStatusChangedToast => 'Commande mise à jour';
+
+  @override
+  String get orderReturnedToast => 'Commande marquée comme retournée';
+
+  @override
+  String get orderDeletedToast => 'Commande supprimée';
+
+  @override
+  String newOrderDraftLinesDropped(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          '$count lignes de votre brouillon n’ont pas pu être rétablies : les produits n’existent plus ou sont en rupture.',
+      one: '1 ligne de votre brouillon n’a pas pu être rétablie : le produit n’existe plus ou est en rupture.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get productsFilterPriceMin => 'Prix de vente (DA) · min';
+
+  @override
+  String get productsFilterPriceMax => 'Prix de vente (DA) · max';
+
+  @override
+  String get productsFilterCostMin => 'Prix de revient (DA) · min';
+
+  @override
+  String get productsFilterCostMax => 'Prix de revient (DA) · max';
+
+  @override
+  String get productsFilterQtyMin => 'Quantité · min';
+
+  @override
+  String get productsFilterQtyMax => 'Quantité · max';
+
+  @override
+  String get productsFilterProfitMin => 'Bénéfice net (DA) · min';
+
+  @override
+  String get productsFilterProfitMax => 'Bénéfice net (DA) · max';
+
+  @override
+  String get productsFilterMarginMin => 'Marge (%) · min';
+
+  @override
+  String get productsFilterMarginMax => 'Marge (%) · max';
+
+  @override
+  String get productsSectionInactive => 'PRODUITS INACTIFS';
 }

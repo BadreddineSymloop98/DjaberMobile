@@ -6,6 +6,8 @@ import 'package:go_router/go_router.dart';
 import '../core/services/push_service.dart';
 import '../core/utils/logger.dart';
 import '../data/models/agent.dart';
+import '../data/models/order.dart';
+import '../data/models/supplier.dart';
 import '../l10n/gen/app_localizations.dart';
 import '../presentation/screens/agents/agent_details_screen.dart';
 import '../presentation/screens/agents/agent_new_screen.dart';
@@ -25,6 +27,9 @@ import '../presentation/screens/home/home_shell.dart';
 import '../presentation/screens/inbox/conversation_screen.dart';
 import '../presentation/screens/inbox/inbox_screen.dart';
 import '../presentation/screens/onboarding/onboarding_screen.dart';
+import '../presentation/screens/orders/new_order_screen.dart';
+import '../presentation/screens/orders/order_detail_screen.dart';
+import '../presentation/screens/orders/orders_screen.dart';
 import '../presentation/screens/pages/pages_screen.dart';
 import '../presentation/screens/products/add_product_screen.dart';
 import '../presentation/screens/products/edit_product_screen.dart';
@@ -34,6 +39,8 @@ import '../presentation/screens/products/products_screen.dart';
 import '../presentation/screens/settings/settings_screen.dart';
 import '../presentation/screens/splash/splash_screen.dart';
 import '../presentation/screens/stock/stock_overview_screen.dart';
+import '../presentation/screens/suppliers/supplier_detail_screen.dart';
+import '../presentation/screens/suppliers/suppliers_screen.dart';
 import '../presentation/screens/tutorial/tutorial_agent_screen.dart';
 import '../presentation/screens/tutorial/tutorial_connect_screen.dart';
 import '../presentation/screens/tutorial/tutorial_intro_screen.dart';
@@ -43,6 +50,7 @@ import '../presentation/screens/tutorial/tutorial_ready_screen.dart';
 import '../presentation/viewmodels/session_view_model.dart';
 import '../presentation/widgets/back_scope.dart';
 import '../presentation/widgets/placeholder_screen.dart';
+import 'route_observer.dart';
 import 'routes.dart';
 
 /// The navigation graph and the redirect policy.
@@ -122,6 +130,7 @@ class AppRouter {
 
   late final GoRouter router = GoRouter(
     navigatorKey: _rootKey,
+    observers: [appRouteObserver],
     initialLocation: Routes.splash,
     debugLogDiagnostics: false,
     refreshListenable: _session,
@@ -272,8 +281,7 @@ class AppRouter {
           ),
           GoRoute(
             path: Routes.orders,
-            builder: (context, _) =>
-                PlaceholderScreen(title: L10n.of(context).navOrders),
+            builder: (_, _) => const OrdersScreen(),
           ),
         ],
       ),
@@ -309,6 +317,25 @@ class AppRouter {
         parentNavigatorKey: _rootKey,
         builder: (_, _) =>
             const BackScope(fallback: Routes.home, child: CategoriesScreen()),
+      ),
+      GoRoute(
+        path: Routes.suppliers,
+        parentNavigatorKey: _rootKey,
+        builder: (_, _) =>
+            const BackScope(fallback: Routes.home, child: SuppliersScreen()),
+      ),
+      GoRoute(
+        path: Routes.supplier,
+        parentNavigatorKey: _rootKey,
+        builder: (_, state) => BackScope(
+          fallback: Routes.suppliers,
+          child: SupplierDetailScreen(
+            supplierId: state.pathParameters['id']!,
+            // The list hands its row over; a deep link or a splash replay
+            // arrives without one and the screen reads the list.
+            initial: state.extra is Supplier ? state.extra! as Supplier : null,
+          ),
+        ),
       ),
       GoRoute(
         path: Routes.clients,
@@ -422,14 +449,26 @@ class AppRouter {
           child: ProductDetailScreen(productId: state.pathParameters['id']!),
         ),
       ),
+      // Before `/orders/:id`, which would otherwise match it — the same rule
+      // `/products/new` follows.
+      GoRoute(
+        path: Routes.orderNew,
+        parentNavigatorKey: _rootKey,
+        builder: (_, _) => const BackScope(
+          fallback: Routes.orders,
+          child: NewOrderScreen(),
+        ),
+      ),
       GoRoute(
         path: Routes.order,
         parentNavigatorKey: _rootKey,
-        builder: (context, state) => BackScope(
+        builder: (_, state) => BackScope(
           fallback: Routes.orders,
-          child: PlaceholderScreen(
-            title: L10n.of(context).navOrders,
-            detail: state.pathParameters['id'],
+          child: OrderDetailScreen(
+            orderId: state.pathParameters['id']!,
+            // The list hands its row over so the screen draws at once; a deep
+            // link or a splash replay arrives without one and fetches.
+            initial: state.extra is Order ? state.extra as Order : null,
           ),
         ),
       ),

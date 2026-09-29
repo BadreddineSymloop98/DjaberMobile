@@ -93,6 +93,52 @@ class Product {
   /// reads.
   List<String> get imageUrls => [for (final image in images) image.url];
 
+  /// This product with [extra] appended to its gallery, skipping any row it
+  /// already carries.
+  ///
+  /// For the one case where the client knows more than the response it just
+  /// read: `POST …/images` returns the rows it created, and a `GET` issued in
+  /// the same breath can still come back without them. Showing what the upload
+  /// confirmed is more honest than showing a gallery the merchant can see is
+  /// missing the photo they just added.
+  Product withImages(List<ProductImage> extra) {
+    final known = {for (final image in images) image.id};
+    final added = [
+      for (final image in extra)
+        if (image.id.isEmpty || !known.contains(image.id)) image,
+    ];
+    if (added.isEmpty) return this;
+    // A gallery that is only the legacy `imageUrl` fallback is not a row list:
+    // once real rows exist the backend stops falling back, so keeping it would
+    // show the same photo twice until the next load.
+    final kept = images.length == 1 && images.single.id.isEmpty
+        ? const <ProductImage>[]
+        : images;
+    return Product(
+      id: id,
+      sku: sku,
+      name: name,
+      description: description,
+      costPrice: costPrice,
+      sellingPrice: sellingPrice,
+      quantity: quantity,
+      minQuantity: minQuantity,
+      unit: unit,
+      hasVariants: hasVariants,
+      isActive: isActive,
+      categoryId: categoryId,
+      unitId: unitId,
+      imageUrl: imageUrl,
+      createdAt: createdAt,
+      categoryName: categoryName,
+      unitName: unitName,
+      unitAbbreviation: unitAbbreviation,
+      images: [...kept, ...added],
+      variants: variants,
+      variantCount: variantCount,
+    );
+  }
+
   /// The variants the response carried. See the class note for which ones.
   final List<ProductVariant> variants;
 
@@ -129,13 +175,12 @@ class Product {
     final gallery = <ProductImage>[
       if (images is List)
         for (final image in images.whereType<Map<String, dynamic>>())
-          if (Json.strOrNull(image['url']) case final url?)
-            ProductImage(id: Json.str(image['id']), url: _absolute(url)),
+          ?ProductImage.fromJson(image),
     ];
     // The web falls back to the legacy column when there is no gallery. It has
     // no row id, hence no way to delete it on its own.
     if (gallery.isEmpty && legacyImage != null) {
-      gallery.add(ProductImage(id: '', url: _absolute(legacyImage)));
+      gallery.add(ProductImage(id: '', url: absoluteUrl(legacyImage)));
     }
 
     return Product(
@@ -163,7 +208,10 @@ class Product {
     );
   }
 
-  static String _absolute(String url) =>
+  /// A relative upload path resolved against the API host. Public because
+  /// [ProductImage.fromJson] also resolves rows that arrive outside a product
+  /// — the 201 of `POST …/images`.
+  static String absoluteUrl(String url) =>
       url.startsWith('http') ? url : '${AppConfig.apiBaseUrl}$url';
 }
 
@@ -175,6 +223,16 @@ class Product {
 /// primary first.
 class ProductImage {
   const ProductImage({required this.id, required this.url});
+
+  /// One `ProductImage` row, as every endpoint that returns images shapes it —
+  /// the product detail's `images`, and the upload's own 201. Null when the
+  /// row carries no `url`, which is the only field a screen cannot do without.
+  static ProductImage? fromJson(Map<String, dynamic> json) {
+    final url = Json.strOrNull(json['url']);
+    return url == null
+        ? null
+        : ProductImage(id: Json.str(json['id']), url: Product.absoluteUrl(url));
+  }
 
   /// Empty for the legacy `imageUrl` column, which is not a row and cannot be
   /// deleted by itself.

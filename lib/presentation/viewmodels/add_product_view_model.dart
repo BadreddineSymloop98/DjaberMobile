@@ -29,7 +29,7 @@ class VariantRowModel {
   })  : name = FormFieldModel(validator: Validators.name, initialValue: name),
         sku = FormFieldModel(validator: Validators.optional, initialValue: sku),
         costPrice = FormFieldModel(validator: Validators.optionalAmount, initialValue: costPrice),
-        sellingPrice = FormFieldModel(validator: Validators.optionalAmount, initialValue: sellingPrice),
+        _sellingPriceInitial = sellingPrice,
         quantity = FormFieldModel(validator: Validators.threshold, initialValue: quantity),
         minQuantity = FormFieldModel(validator: Validators.threshold, initialValue: minQuantity);
 
@@ -47,7 +47,14 @@ class VariantRowModel {
   final FormFieldModel name;
   final FormFieldModel sku;
   final FormFieldModel costPrice;
-  final FormFieldModel sellingPrice;
+
+  /// Cross-field, like the product's own: not below this row's cost. Late
+  /// because its rule reads [costPrice], which an initializer list cannot.
+  late final FormFieldModel sellingPrice = FormFieldModel(
+    validator: Validators.optionalSellingPrice(() => costPrice.value),
+    initialValue: _sellingPriceInitial,
+  );
+  final String _sellingPriceInitial;
   final FormFieldModel quantity;
   final FormFieldModel minQuantity;
 
@@ -451,6 +458,8 @@ class AddProductViewModel extends FormViewModel {
           // Photos attach to a product id, so they can only follow the create.
           // A failed upload does not undo it: the product exists either way.
           if (_photos.isNotEmpty) {
+            // The rows come back on the 201, but the create flow leaves for
+            // the product list, which refetches — nothing here needs them.
             final upload = await _products.uploadImages(productId: product.id, photos: _photos);
             _photosFailed = upload.isFailure;
           }

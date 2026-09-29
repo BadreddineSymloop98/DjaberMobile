@@ -18,8 +18,18 @@ import '../../widgets/rise_fade.dart';
 /// A wordmark and nothing else, per the design. Still open on this flow: no
 /// loading state, no version, and no offline case — a restore that fails on a
 /// dead network keeps the session and moves on, but says nothing about it.
+///
+/// Also played again on every return to the app, as an overlay
+/// ([SplashScreen.replay]): the session is already restored by then, and the
+/// app's resume handler re-reads the profile, so the replay only has to hold
+/// for [minimumDisplay] and hand back.
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  const SplashScreen({super.key}) : replay = false;
+
+  const SplashScreen.replay({super.key}) : replay = true;
+
+  /// Played over the app on a return, rather than as the launch route.
+  final bool replay;
 
   /// The splash stays up at least this long.
   ///
@@ -46,6 +56,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _boot() async {
     final session = context.read<SessionViewModel>();
+    if (widget.replay) {
+      await Future<void>.delayed(SplashScreen.minimumDisplay);
+      if (mounted) session.endSplashReplay();
+      return;
+    }
     await Future.wait([
       session.restore(),
       Future<void>.delayed(SplashScreen.minimumDisplay),

@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../../../app/route_observer.dart';
 import '../../../app/routes.dart';
 import '../../../core/extensions/responsive_extension.dart';
 import '../../../core/utils/money.dart';
 import '../../../data/models/product.dart';
+import '../../../data/models/product_filters.dart';
 import '../../../data/repositories/catalogue_repository.dart';
 import '../../../data/repositories/dashboard_repository.dart';
 import '../../../data/repositories/product_repository.dart';
@@ -18,9 +20,12 @@ import '../../theme/app_typography.dart';
 import '../../viewmodels/products_view_model.dart';
 import '../../widgets/api_error_message.dart';
 import '../../widgets/app_filter_chip.dart';
+import '../../widgets/app_icon.dart';
 import '../../widgets/app_text_field.dart';
 import '../../widgets/home_widgets.dart';
 import '../../widgets/icon_square_button.dart';
+import '../../widgets/list_widgets.dart';
+import 'product_filters_sheet.dart';
 
 /// `17 — Produits` — the catalogue.
 ///
@@ -37,6 +42,10 @@ import '../../widgets/icon_square_button.dart';
 /// category the merchant has actually created — so they are as long as their
 /// catalogue and the row scrolls.
 ///
+/// **The web's filter panel is a sheet** behind *Filtres*, as on Clients:
+/// status and the five ranges (price, cost, quantity, net profit, margin). See
+/// `product_filters_sheet.dart` for what it leaves to the chips.
+///
 /// > The frames drew a third fixed chip, `Sans catégorie`. It is **not** here:
 /// > the endpoint has no filter for "category is null" — `categoryId` matches
 /// > one id and `categoryIds` a list — so the chip could only have been
@@ -50,7 +59,7 @@ class ProductsScreen extends StatefulWidget {
   State<ProductsScreen> createState() => _ProductsScreenState();
 }
 
-class _ProductsScreenState extends State<ProductsScreen> {
+class _ProductsScreenState extends State<ProductsScreen> with RouteAware {
   late final ProductsViewModel _model = ProductsViewModel(
     products: context.read<ProductRepository>(),
     catalogue: context.read<CatalogueRepository>(),
@@ -70,7 +79,15 @@ class _ProductsScreenState extends State<ProductsScreen> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = ModalRoute.of(context);
+    if (route is PageRoute) appRouteObserver.subscribe(this, route);
+  }
+
+  @override
   void dispose() {
+    appRouteObserver.unsubscribe(this);
     _debounce?.cancel();
     _search.dispose();
     _searchFocus.dispose();
@@ -91,21 +108,38 @@ class _ProductsScreenState extends State<ProductsScreen> {
     );
   }
 
-  Future<void> _add() async {
-    // `push`, not `go`: the merchant comes back to the list they were reading,
-    // with the filter and the search they had set still on it.
-    final created = await GoRouter.of(context).push<bool>(Routes.productNew);
-    if (created != true || !mounted) return;
+  /// **Refreshes whenever the screen above this one closes** — Add product,
+  /// a product's details, anything else pushed from here.
+  ///
+  /// Not on the value that screen pops. That is one exit among several: those
+  /// forms also leave through the router's own fallback, which completes no
+  /// future at all, and the system back button and the iOS swipe carry
+  /// nothing. A product created with a photo was the case that showed it — the
+  /// picker sends the app to the background, and the merchant came back to a
+  /// list without the product they had just added until they pulled to
+  /// refresh. `didPopNext` fires for every one of those.
+  @override
+  void didPopNext() {
+    if (!mounted) return;
     // The rows and the two figures in the subtitle are both stale now.
-    await _model.reloadAfterCreate();
+    unawaited(_model.reloadAfterCreate());
   }
 
-  /// Opens a product, and reloads when it reports an edit — the same refresh a
-  /// create gets, because an edit moves the same two figures.
-  Future<void> _open(String productId) async {
-    final edited = await GoRouter.of(context).push<bool>(Routes.productOf(productId));
-    if (edited != true || !mounted) return;
-    await _model.reloadAfterCreate();
+  void _add() {
+    // `push`, not `go`: the merchant comes back to the list they were reading,
+    // with the filter and the search they had set still on it.
+    unawaited(GoRouter.of(context).push<bool>(Routes.productNew));
+  }
+
+  Future<void> _openFilters() async {
+    final applied = await showProductFiltersSheet(context, current: _model.filters);
+    if (applied == null || !mounted) return;
+    await _model.applyFilters(applied);
+  }
+
+  /// Opens a product. The refresh on the way back is [didPopNext]'s.
+  void _open(String productId) {
+    unawaited(GoRouter.of(context).push<bool>(Routes.productOf(productId)));
   }
 
   @override
@@ -137,8 +171,15 @@ class _ProductsScreenState extends State<ProductsScreen> {
                       ),
                     ),
                   ),
-                  Expanded(child: _Body(model: model, controller: _search, onOpen: _open,
-                      focusNode: _searchFocus)),
+                  Expanded(
+                    child: _Body(
+                      model: model,
+                      controller: _search,
+                      onOpen: _open,
+                      onFilters: _openFilters,
+                      focusNode: _searchFocus,
+                    ),
+                  ),
                   Padding(
                     padding: EdgeInsets.fromLTRB(
                       AppSpacing.gutter,
@@ -167,6 +208,7 @@ class _Body extends StatelessWidget {
     required this.controller,
     required this.focusNode,
     required this.onOpen,
+    required this.onFilters,
   });
 
   final ProductsViewModel model;
@@ -176,11 +218,15 @@ class _Body extends StatelessWidget {
   /// Opens a product, and reloads the list when it comes back edited.
   final ValueChanged<String> onOpen;
 
+  /// Opens the filter sheet.
+  final VoidCallback onFilters;
+
   @override
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
     final tag = Localizations.localeOf(context).toLanguageTag();
     final gutter = EdgeInsets.symmetric(horizontal: AppSpacing.gutter);
+    final applied = model.filters.activeCount;
 
     return ListView(
       // The chip row is full-bleed, so the padding is per-section rather than
@@ -216,6 +262,13 @@ class _Body extends StatelessWidget {
                 onSubmitted: (_) => focusNode.unfocus(),
               ),
               SizedBox(height: AppSpacing.lg), // 16
+              ToolChip(
+                icon: AppIcons.filter,
+                label: applied > 0 ? l10n.categoriesFiltersActive(applied) : l10n.categoriesFilters,
+                active: applied > 0,
+                onTap: onFilters,
+              ),
+              SizedBox(height: AppSpacing.md),
             ],
           ),
         ),
@@ -226,6 +279,9 @@ class _Body extends StatelessWidget {
               ? l10n.productsSectionLowStock
               : switch (model.filter) {
                   InCategory(:final category) => category.name,
+                  // Deleted products are a different list, and say so.
+                  _ when model.filters.status == ProductStatusFilter.inactive =>
+                    l10n.productsSectionInactive,
                   _ => l10n.productsSectionAll,
                 },
           trailing: Money.grouped(model.total, tag),

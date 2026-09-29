@@ -7,6 +7,7 @@ import 'package:djaber_mobile/data/models/conversation.dart';
 import 'package:djaber_mobile/data/models/dashboard_stats.dart';
 import 'package:djaber_mobile/data/models/page_summary.dart';
 import 'package:djaber_mobile/data/models/product.dart';
+import 'package:djaber_mobile/data/models/product_filters.dart';
 import 'package:djaber_mobile/data/models/stock_overview.dart';
 import 'package:djaber_mobile/data/repositories/agent_repository.dart';
 import 'package:djaber_mobile/data/repositories/catalogue_repository.dart';
@@ -192,6 +193,7 @@ class FakeProductRepository extends ProductRepository {
     String? search,
     String? categoryId,
     bool lowStock = false,
+    ProductFilters filters = const ProductFilters(),
     int limit = 50,
     int offset = 0,
   }) async {

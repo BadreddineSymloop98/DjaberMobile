@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../../../app/route_observer.dart';
 import '../../../app/routes.dart';
 import '../../../core/extensions/responsive_extension.dart';
 import '../../../core/utils/money.dart';
@@ -47,7 +50,8 @@ class ProductDetailScreen extends StatefulWidget {
   State<ProductDetailScreen> createState() => _ProductDetailScreenState();
 }
 
-class _ProductDetailScreenState extends State<ProductDetailScreen> {
+class _ProductDetailScreenState extends State<ProductDetailScreen>
+    with RouteAware {
   late final ProductDetailViewModel _model = ProductDetailViewModel(
     products: context.read<ProductRepository>(),
     productId: widget.productId,
@@ -55,20 +59,61 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
   int _shownImage = 0;
 
-  /// Opens the edit form and reloads when it reports a save, so the figures,
-  /// the images and the variants below are the ones that were just written.
+  /// Rows the edit form's upload confirmed, held until the reload that follows
+  /// can merge them (see [Product.withImages]).
+  List<ProductImage> _justUploaded = const [];
+
+  /// Guards against the two reload triggers below firing at once.
+  bool _reloading = false;
+
+  /// **Refreshes whenever the screen above this one closes.**
+  ///
+  /// Not on the value that screen pops. That is one path among several: the
+  /// edit form can also leave through the router's own fallback, which
+  /// completes no future at all, and the system back button and the iOS swipe
+  /// carry nothing either. When it did not fire, the merchant came back to the
+  /// product as it stood before the edit — the figures stale and the photo
+  /// they had just added missing until they pulled to refresh. `didPopNext`
+  /// fires for every one of those.
+  @override
+  void didPopNext() => unawaited(_reload());
+
+  /// Opens the edit form. The reload is [didPopNext]'s job; this only records
+  /// what the save reported, for that reload to use.
   Future<void> _openEdit() async {
-    final saved = await GoRouter.of(context).push<bool>(
+    final uploaded = await GoRouter.of(context).push<List<ProductImage>>(
       Routes.productEditOf(widget.productId),
     );
-    if (saved ?? false) {
-      // The carousel index may point past the end now that an image could
-      // have been removed.
+    // Null is a back out; a list — empty or not — is a save.
+    if (uploaded != null) {
+      _justUploaded = uploaded;
+      _edited = true;
+      await _reload();
+    }
+  }
+
+  /// Refetches the product and shows it, newest photo first.
+  Future<void> _reload() async {
+    if (_reloading) return;
+    _reloading = true;
+    final uploaded = _justUploaded;
+    try {
+      final before = _model.product?.imageUrls ?? const <String>[];
+      await _model.load(withImages: uploaded);
+      if (!mounted) return;
+      final after = _model.product?.imageUrls ?? const <String>[];
       setState(() {
-        _shownImage = 0;
-        _edited = true;
+        // Show the photo that was just added. Appending it and leaving the
+        // carousel on 0 puts the merchant's new picture in a thumbnail behind
+        // the one that was already there — which reads exactly like the upload
+        // having failed. Falls back to 0, which is also what a removal needs:
+        // the old index can point past the end now.
+        final added = after.indexWhere((url) => !before.contains(url));
+        _shownImage = added < 0 ? 0 : added;
       });
-      await _model.load();
+    } finally {
+      _reloading = false;
+      _justUploaded = const [];
     }
   }
 
@@ -154,7 +199,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = ModalRoute.of(context);
+    if (route is PageRoute) appRouteObserver.subscribe(this, route);
+  }
+
+  @override
   void dispose() {
+    appRouteObserver.unsubscribe(this);
     _model.dispose();
     super.dispose();
   }
@@ -390,7 +443,12 @@ class _Images extends StatelessWidget {
       );
     }
 
+    // Keyed by URL so a gallery that has just gained a photo mounts a fresh
+    // element for it rather than re-using the one that was showing another
+    // image — the element keeps its resolved stream, and a swap without a key
+    // can leave the new URL unrequested.
     Widget image(String url, BoxFit fit) => CachedNetworkImage(
+          key: ValueKey(url),
           imageUrl: url,
           fit: fit,
           placeholder: (_, _) => const ColoredBox(color: AppColors.surface),

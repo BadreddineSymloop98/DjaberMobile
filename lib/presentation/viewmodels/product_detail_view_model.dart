@@ -20,10 +20,15 @@ class ProductDetailViewModel extends BaseViewModel {
   bool get isFirstLoad => !_loadedOnce;
 
   /// Silent after the first load, so a pull to refresh keeps what is shown.
-  Future<void> load() async {
+  ///
+  /// [withImages] are rows an upload has just confirmed — see
+  /// [Product.withImages]. They are merged into whatever this reads, because a
+  /// reload fired the instant a save pops can answer before the backend lists
+  /// the images it has only just created.
+  Future<void> load({List<ProductImage> withImages = const []}) async {
     await run(
       () => _products.get(productId),
-      onSuccess: (value) => _product = value,
+      onSuccess: (value) => _product = value.withImages(withImages),
       silent: _loadedOnce,
       tag: 'productDetail',
     );

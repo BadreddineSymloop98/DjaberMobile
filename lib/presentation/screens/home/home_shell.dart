@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../app/route_observer.dart';
 import '../../../app/routes.dart';
 import '../../../l10n/gen/app_localizations.dart';
 import '../../theme/app_colors.dart';
@@ -13,10 +14,36 @@ import '../../widgets/app_icon.dart';
 /// It lives in a `ShellRoute` so the bar is built once and does not rebuild or
 /// animate when the tab changes — switching tabs swaps the body under a bar
 /// that never moves.
-class HomeShell extends StatelessWidget {
+class HomeShell extends StatefulWidget {
   const HomeShell({super.key, required this.child});
 
   final Widget child;
+
+  @override
+  State<HomeShell> createState() => _HomeShellState();
+}
+
+class _HomeShellState extends State<HomeShell> with RouteAware {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // This context sits **above** the shell's own navigator, so the route it
+    // finds is the shell's page on the root navigator — the one that is
+    // underneath everything pushed from a tab.
+    final route = ModalRoute.of(context);
+    if (route is PageRoute) appRouteObserver.subscribe(this, route);
+  }
+
+  @override
+  void dispose() {
+    appRouteObserver.unsubscribe(this);
+    super.dispose();
+  }
+
+  /// A screen pushed from a tab has closed. The tab underneath cannot hear
+  /// this itself (see [shellReturns]), so the shell passes it on.
+  @override
+  void didPopNext() => shellReturns.bump();
 
   /// In the frame's order: Accueil, File, Boîte, Stock, Commandes.
   static List<NavDestination> _destinations(L10n l10n) => [
@@ -58,7 +85,7 @@ class HomeShell extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.ink,
-      body: child,
+      body: widget.child,
       bottomNavigationBar: AppBottomNav(
         destinations: destinations,
         currentIndex: current < 0 ? 0 : current,

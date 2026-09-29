@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import '../../../app/routes.dart';
 import '../../../core/extensions/responsive_extension.dart';
 import '../../../core/utils/money.dart';
+import '../../../core/utils/phone.dart';
 import '../../../data/models/client.dart';
 import '../../../data/repositories/client_repository.dart';
 import '../../../l10n/gen/app_localizations.dart';
@@ -24,6 +25,7 @@ import '../../widgets/date_picker_sheet.dart';
 import '../../widgets/home_widgets.dart';
 import '../../widgets/icon_square_button.dart';
 import '../../widgets/leave_sheet.dart';
+import '../../widgets/list_widgets.dart';
 import 'client_form_sheet.dart';
 
 /// `Clients list` (Figma `639:8359`) — the web's `stock/clients` page.
@@ -198,7 +200,7 @@ class _ClientsScreenState extends State<ClientsScreen> {
         padding: EdgeInsets.symmetric(horizontal: AppSpacing.gutter),
         child: Column(
           children: [
-            _Pair(
+            KpiPair(
               KpiTile(
                 label: l10n.clientsStatTotal,
                 value: Money.grouped(_model.totalCount, tag),
@@ -213,7 +215,7 @@ class _ClientsScreenState extends State<ClientsScreen> {
               ),
             ),
             SizedBox(height: AppSpacing.sm),
-            _Pair(
+            KpiPair(
               KpiTile(
                 label: l10n.clientsStatWithOrders,
                 value: Money.grouped(_model.withOrdersCount, tag),
@@ -255,7 +257,7 @@ class _ClientsScreenState extends State<ClientsScreen> {
               placeholder: l10n.clientsSearchPhone,
               keyboardType: TextInputType.phone,
               textInputAction: TextInputAction.search,
-              inputFormatters: [LengthLimitingTextInputFormatter(20)],
+              inputFormatters: const [AlgerianPhoneFormatter()],
               onSubmitted: (_) => _phoneFocus.unfocus(),
             ),
           ],
@@ -382,27 +384,6 @@ Future<bool> confirmClientDelete(BuildContext context, Client client) {
   );
 }
 
-class _Pair extends StatelessWidget {
-  const _Pair(this.first, this.second);
-
-  final Widget first;
-  final Widget second;
-
-  @override
-  Widget build(BuildContext context) {
-    return IntrinsicHeight(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(child: first),
-          SizedBox(width: AppSpacing.sm),
-          Expanded(child: second),
-        ],
-      ),
-    );
-  }
-}
-
 /// One client row, as the frame draws it.
 class _ClientRow extends StatelessWidget {
   const _ClientRow({
@@ -487,29 +468,6 @@ class _ClientRow extends StatelessWidget {
   }
 }
 
-/// The 36px initials square — `ink/3` with a hairline, square as the file's
-/// frozen style has it (the web's are round).
-class InitialsAvatar extends StatelessWidget {
-  const InitialsAvatar({super.key, required this.initials});
-
-  final String initials;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 9.23.w, // 36
-      height: 9.23.w,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: const Color(0xFF141414),
-        border: Border.all(color: AppColors.rule, width: AppStroke.hairline),
-        borderRadius: BorderRadius.circular(AppRadius.card),
-      ),
-      child: Text(initials, style: AppText.title.copyWith(color: AppColors.textSecondary)),
-    );
-  }
-}
-
 /// *CHAT IA* / *MANUEL* — the web's source badge.
 class SourceBadge extends StatelessWidget {
   const SourceBadge({super.key, required this.source});
@@ -529,140 +487,6 @@ class SourceBadge extends StatelessWidget {
       child: Text(
         (source == ClientSource.ai ? l10n.clientsSourceAi : l10n.clientsSourceManual).toUpperCase(),
         style: AppText.labelMicro.copyWith(color: AppColors.textSecondary),
-      ),
-    );
-  }
-}
-
-/// A 16px glyph with a comfortable hit target.
-class RowAction extends StatelessWidget {
-  const RowAction({super.key, required this.icon, required this.label, required this.onTap});
-
-  final List<String> icon;
-  final String label;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Semantics(
-      button: true,
-      label: label,
-      child: GestureDetector(
-        onTap: onTap,
-        behavior: HitTestBehavior.opaque,
-        child: Padding(
-          padding: EdgeInsets.all(1.54.w),
-          child: AppIcon(icon, size: 4.1.w, color: AppColors.textMuted),
-        ),
-      ),
-    );
-  }
-}
-
-/// The file's `Tab` with a leading icon — *Filtres* and the date chips. Filled
-/// white once it holds a value; a date chip then carries a × that clears it,
-/// as the web's DatePicker does.
-class ToolChip extends StatelessWidget {
-  const ToolChip({
-    super.key,
-    required this.icon,
-    required this.label,
-    required this.active,
-    required this.onTap,
-    this.onClear,
-    this.clearLabel,
-  });
-
-  final List<String> icon;
-  final String label;
-  final bool active;
-  final VoidCallback onTap;
-  final VoidCallback? onClear;
-  final String? clearLabel;
-
-  @override
-  Widget build(BuildContext context) {
-    final fg = active ? AppColors.ink : AppColors.textSecondary;
-    return Container(
-      decoration: BoxDecoration(
-        color: active ? AppColors.textPrimary : Colors.transparent,
-        border: Border.all(color: active ? AppColors.textPrimary : AppColors.rule, width: AppStroke.hairline),
-        borderRadius: BorderRadius.circular(AppRadius.card),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Semantics(
-            button: true,
-            child: GestureDetector(
-              onTap: onTap,
-              behavior: HitTestBehavior.opaque,
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(
-                  AppSpacing.md,
-                  AppSpacing.sm,
-                  onClear == null ? AppSpacing.md : AppSpacing.xs,
-                  AppSpacing.sm,
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    AppIcon(icon, size: 3.59.w, color: fg),
-                    SizedBox(width: 1.54.w),
-                    Text(label, style: AppText.bodyS.copyWith(color: fg)),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          if (onClear != null)
-            Semantics(
-              button: true,
-              label: clearLabel,
-              child: GestureDetector(
-                onTap: onClear,
-                behavior: HitTestBehavior.opaque,
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(AppSpacing.xs, AppSpacing.sm, AppSpacing.md, AppSpacing.sm),
-                  child: AppIcon(AppIcons.close, size: 3.08.w, color: fg),
-                ),
-              ),
-            ),
-        ],
-      ),
-    );
-  }
-}
-
-/// The empty box — an icon, a title, a sentence.
-class EmptyBox extends StatelessWidget {
-  const EmptyBox({super.key, required this.icon, required this.title, required this.body});
-
-  final List<String> icon;
-  final String title;
-  final String body;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: AppSpacing.xl, vertical: 12.31.w),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        border: Border.all(color: AppColors.rule, width: AppStroke.hairline),
-        borderRadius: BorderRadius.circular(AppRadius.card),
-      ),
-      child: Column(
-        children: [
-          AppIcon(icon, size: 8.21.w, color: AppColors.textMuted),
-          SizedBox(height: AppSpacing.md),
-          Text(title, style: AppText.title, textAlign: TextAlign.center),
-          SizedBox(height: AppSpacing.xs),
-          Text(
-            body,
-            style: AppText.bodyS.copyWith(color: AppColors.textMuted, height: 1.32),
-            textAlign: TextAlign.center,
-          ),
-        ],
       ),
     );
   }

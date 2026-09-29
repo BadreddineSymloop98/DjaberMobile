@@ -170,6 +170,22 @@ class Validators {
     return null;
   }
 
+  /// A variant's selling price: [optionalAmount], and not below the cost.
+  ///
+  /// The variant endpoint does not enforce this (live docs), but a price
+  /// under cost is a typo on a variant as much as on the product, whose own
+  /// [sellingPrice] refuses it. Equal is allowed — a new row is `0` and `0`.
+  /// Quiet while the cost is empty or unreadable, as [sellingPrice] is.
+  static FieldValidator optionalSellingPrice(String Function() costPriceText) =>
+      (String value) {
+        final own = optionalAmount(value);
+        if (own != null) return own;
+        final cost = parseAmount(costPriceText());
+        final asked = parseAmount(value);
+        if (cost == null || asked == null) return null;
+        return asked < cost ? FieldError.belowCostPrice : null;
+      };
+
   /// The low-stock alert threshold: optional, and legitimately zero.
   ///
   /// Deliberately not [quantity]. The server defaults `minQuantity` to 0 and

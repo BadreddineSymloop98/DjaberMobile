@@ -158,6 +158,10 @@ class Api {
 
   // ---- Delivery ----
   static const deliveryWilayas = '/api/user-stock/delivery/wilayas';
+
+  /// What a delivery to one wilaya costs — the figure the new order form puts
+  /// on the *Livraison* line of its summary.
+  static const deliveryFeeQuote = '/api/user-stock/delivery/fees/quote';
   static const deliveryFees = '/api/user-stock/delivery/fees';
   static const deliveryFeesQuote = '/api/user-stock/delivery/fees/quote';
   static String deliveryTrack(String orderId) =>

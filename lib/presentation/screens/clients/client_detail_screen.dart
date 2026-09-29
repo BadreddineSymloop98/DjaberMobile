@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../../core/extensions/responsive_extension.dart';
 import '../../../core/utils/money.dart';
+import '../../../core/utils/phone.dart';
 import '../../../data/models/client.dart';
 import '../../../data/repositories/client_repository.dart';
 import '../../../l10n/gen/app_localizations.dart';
@@ -190,7 +191,10 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
       // ---- Contact ----
       ListBox(
         children: [
-          _Fact(label: l10n.clientPhone, value: client.phone ?? '—'),
+          _Fact(
+            label: l10n.clientPhone,
+            value: (client.phone ?? '').isEmpty ? '—' : Phone.format(client.phone!),
+          ),
           _Fact(label: l10n.authEmail, value: client.email ?? '—'),
           _Fact(label: l10n.clientAddress, value: client.address ?? '—'),
         ],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../core/extensions/responsive_extension.dart';
+import '../../../core/utils/phone.dart';
 import '../../../data/models/client.dart';
 import '../../../data/repositories/client_repository.dart';
 import '../../../l10n/gen/app_localizations.dart';
@@ -123,11 +124,10 @@ class _ClientFormSheetState extends State<_ClientFormSheet> {
                   placeholder: '0555 12 34 56',
                   errorText: _message(_model.visible(_model.phone, _model.phoneError), l10n),
                   keyboardType: TextInputType.phone,
+                  // The formatter owns both jobs now: it admits digits only
+                  // and caps at the length the shape allows.
+                  inputFormatters: const [AlgerianPhoneFormatter()],
                   textInputAction: TextInputAction.next,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp(r'[0-9+\s\-().]')),
-                    LengthLimitingTextInputFormatter(20),
-                  ],
                   onSubmitted: (_) => _model.address.focusNode.requestFocus(),
                 ),
                 gap,

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:provider/provider.dart';
 
+import '../../../app/route_observer.dart';
 import '../../../app/routes.dart';
 import '../../../core/extensions/responsive_extension.dart';
 import '../../../data/models/connected_page.dart';
@@ -52,11 +53,19 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    // A tab: it hears that it is back on screen — a pushed screen closed, or
+    // the splash replay ended — through the shell (see [shellReturns]).
+    shellReturns.addListener(_onReturn);
     _model.load();
+  }
+
+  void _onReturn() {
+    if (mounted) _model.load();
   }
 
   @override
   void dispose() {
+    shellReturns.removeListener(_onReturn);
     _model.dispose();
     super.dispose();
   }

@@ -2,11 +2,17 @@ import 'session_view_model.dart';
 
 /// Unsent form values that must outlive the screen showing them.
 ///
-/// Leaving the app replays the splash on return (`SessionViewModel.resetBoot`
-/// runs on pause), and the router then builds whatever screen was open from
-/// scratch — so a form that kept its values in its screen came back empty.
-/// A form registered here (see `FormViewModel.keepDraft`) writes its values on
-/// every keystroke and reads them back when it is built again.
+/// Leaving the app used to replay the splash as a route, and the router then
+/// built whatever screen was open from scratch — so a form that kept its
+/// values in its screen came back empty. A form registered here (see
+/// `FormViewModel.keepDraft`) writes its values on every keystroke and reads
+/// them back when it is built again.
+///
+/// **Since 2026-09-29 the replay is an overlay** (`SplashReplayOverlay`) and no
+/// screen is torn down by it, so every form keeps its input without this —
+/// including the many that never registered, and bottom sheets. What remains
+/// here is a second line for a screen rebuilt while the splash plays. It is
+/// in memory only, so it does not survive Android killing the process.
 ///
 /// **Passwords are never kept.** Each form names the fields it keeps, and none
 /// names a password: retyping one is a smaller cost than a password sitting in
@@ -41,11 +47,11 @@ class FormDraftStore {
 
   /// Called as a form goes away.
   ///
-  /// The draft is kept only when the splash took the screen: the boot gate is
-  /// down from the moment the app is left until the splash hands back. Any
-  /// other departure is the merchant moving on, and the draft goes with it.
+  /// The draft is kept only when the splash is playing — at launch, or again
+  /// over the app after it was left. Any other departure is the merchant
+  /// moving on, and the draft goes with it.
   void release(String form) {
-    if (_session.isBootComplete) _drafts.remove(form);
+    if (_session.isBootComplete && !_session.isReplayingSplash) _drafts.remove(form);
   }
 
   void _onSessionChanged() {

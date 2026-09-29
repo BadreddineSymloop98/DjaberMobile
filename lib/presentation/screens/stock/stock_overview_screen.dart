@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart' show DateFormat;
 import 'package:provider/provider.dart';
 
+import '../../../app/route_observer.dart';
 import '../../../app/routes.dart';
 import '../../../core/error/app_exception.dart';
 import '../../../core/extensions/responsive_extension.dart';
@@ -56,22 +57,28 @@ class _StockOverviewScreenState extends State<StockOverviewScreen> {
   @override
   void initState() {
     super.initState();
+    // A tab: it hears that it is back on screen — a pushed screen closed, or
+    // the splash replay ended — through the shell (see [shellReturns]).
+    shellReturns.addListener(_onReturn);
     WidgetsBinding.instance.addPostFrameCallback((_) => _model.load());
+  }
+
+  void _onReturn() {
+    if (mounted) _model.load();
   }
 
   @override
   void dispose() {
+    shellReturns.removeListener(_onReturn);
     _model.dispose();
     super.dispose();
   }
 
   /// The frame's *Ajouter un produit*. Pushed, as from `17`, so back returns
-  /// here; a created product makes every figure and the movements stale.
-  Future<void> _addProduct() async {
-    final created = await GoRouter.of(context).push<bool>(Routes.productNew);
-    if (created != true || !mounted) return;
-    await _model.load();
-  }
+  /// here; a created product makes every figure and the movements stale, and
+  /// [_onReturn] reloads them however the form was left — a saved product's
+  /// pop, back, or the system gesture (brief §27.4).
+  void _addProduct() => GoRouter.of(context).push<void>(Routes.productNew);
 
   void _setMode(StockModeViewModel? modes, StockMode mode) {
     if (modes != null) {

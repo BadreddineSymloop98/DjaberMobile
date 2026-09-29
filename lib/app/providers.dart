@@ -14,10 +14,13 @@ import '../data/repositories/billing_repository.dart';
 import '../data/repositories/catalogue_repository.dart';
 import '../data/repositories/client_repository.dart';
 import '../data/repositories/dashboard_repository.dart';
+import '../data/repositories/delivery_repository.dart';
 import '../data/repositories/inbox_repository.dart';
 import '../data/repositories/notification_repository.dart';
+import '../data/repositories/order_repository.dart';
 import '../data/repositories/page_repository.dart';
 import '../data/repositories/product_repository.dart';
+import '../data/repositories/supplier_repository.dart';
 import '../presentation/viewmodels/form_draft_store.dart';
 import '../presentation/viewmodels/locale_view_model.dart';
 import '../presentation/viewmodels/session_view_model.dart';
@@ -78,6 +81,15 @@ class AppProviders {
       ),
       Provider<ClientRepository>(
         create: (context) => ClientRepository(api: context.read<ApiClient>()),
+      ),
+      Provider<DeliveryRepository>(
+        create: (context) => DeliveryRepository(api: context.read<ApiClient>()),
+      ),
+      Provider<OrderRepository>(
+        create: (context) => OrderRepository(api: context.read<ApiClient>()),
+      ),
+      Provider<SupplierRepository>(
+        create: (context) => SupplierRepository(api: context.read<ApiClient>()),
       ),
       Provider<AgentRepository>(
         create: (context) => AgentRepository(api: context.read<ApiClient>()),

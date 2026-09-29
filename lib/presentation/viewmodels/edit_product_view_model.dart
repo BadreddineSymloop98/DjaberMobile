@@ -39,10 +39,7 @@ class EditVariantRow {
           validator: Validators.optionalAmount,
           initialValue: costPrice,
         ),
-        sellingPrice = FormFieldModel(
-          validator: Validators.optionalAmount,
-          initialValue: sellingPrice,
-        ),
+        _sellingPriceInitial = sellingPrice,
         quantity = FormFieldModel(
           validator: Validators.threshold,
           initialValue: quantity,
@@ -71,7 +68,15 @@ class EditVariantRow {
   final FormFieldModel name;
   final FormFieldModel sku;
   final FormFieldModel costPrice;
-  final FormFieldModel sellingPrice;
+
+  /// Not below this row's cost — the rule of the create form's rows and of the
+  /// product itself; `PUT …/variants/{id}` does not enforce it (live docs).
+  /// Late because it reads [costPrice], which an initializer list cannot.
+  late final FormFieldModel sellingPrice = FormFieldModel(
+    validator: Validators.optionalSellingPrice(() => costPrice.value),
+    initialValue: _sellingPriceInitial,
+  );
+  final String _sellingPriceInitial;
   final FormFieldModel quantity;
   final FormFieldModel minQuantity;
 
@@ -503,6 +508,16 @@ class EditProductViewModel extends FormViewModel {
   /// True when everything else saved but the new photos could not be sent.
   bool get photosFailed => _photosFailed;
 
+  final List<ProductImage> _uploadedImages = [];
+
+  /// The image rows this save created, as the upload's own 201 returned them.
+  ///
+  /// The detail screen behind this one reloads the product when the save pops,
+  /// and that reload can answer before the new rows are visible to it — which
+  /// left the merchant looking at a gallery without the photo they had just
+  /// added until they pulled to refresh. These are what it shows instead.
+  List<ProductImage> get uploadedImages => List.unmodifiable(_uploadedImages);
+
   // ---- Change tracking ----
 
   String _snapshot = '';
@@ -671,6 +686,9 @@ class EditProductViewModel extends FormViewModel {
           );
           _photosUploaded = upload.isSuccess;
           _photosFailed = upload.isFailure;
+          if (upload.valueOrNull case final rows?) {
+            _uploadedImages.addAll(rows);
+          }
         }
 
         _saved = true;

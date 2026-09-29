@@ -1,4 +1,5 @@
 import '../../core/error/app_exception.dart';
+import '../../core/utils/phone.dart';
 import '../../core/utils/validators.dart';
 import '../../data/models/client.dart';
 import '../../data/repositories/client_repository.dart';
@@ -36,7 +37,10 @@ class ClientFormViewModel extends FormViewModel {
         _knownPhones = knownPhones {
     name.controller.text = editing?.name ?? '';
     email.controller.text = editing?.email ?? '';
-    phone.controller.text = editing?.phone ?? '';
+    // Grouped on the way in, so an existing number reads the same as one
+    // being typed. The formatter only runs on keystrokes, not on a
+    // programmatic set.
+    phone.controller.text = Phone.format(editing?.phone ?? '');
     address.controller.text = editing?.address ?? '';
     notes.controller.text = editing?.notes ?? '';
     attachFields();
@@ -127,7 +131,10 @@ class ClientFormViewModel extends FormViewModel {
       () => current == null
           ? _clients.create(
               name: name.value,
-              phone: phone.value,
+              // Digits only. A client's phone is unique per merchant
+              // server-side, and `0555 12 34 56` and `0555123456` are two
+              // different clients to a column that compares strings.
+              phone: Phone.digits(phone.value),
               email: email.value,
               address: address.value,
               notes: notes.value,
@@ -135,7 +142,10 @@ class ClientFormViewModel extends FormViewModel {
           : _clients.update(
               current.id,
               name: name.value,
-              phone: phone.value,
+              // Digits only. A client's phone is unique per merchant
+              // server-side, and `0555 12 34 56` and `0555123456` are two
+              // different clients to a column that compares strings.
+              phone: Phone.digits(phone.value),
               email: email.value,
               address: address.value,
               notes: notes.value,

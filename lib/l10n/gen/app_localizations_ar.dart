@@ -3122,4 +3122,860 @@ class L10nAr extends L10n {
 
   @override
   String get clientOrdersSoon => 'الطلبات غير متاحة على الهاتف بعد';
+
+  @override
+  String get menuSuppliers => 'الموردون';
+
+  @override
+  String get suppliersEyebrow => 'المشتريات';
+
+  @override
+  String get suppliersTitle => 'الموردون';
+
+  @override
+  String suppliersCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count موردًا',
+      few: '$count موردين',
+      two: 'موردان',
+      one: 'مورد واحد',
+      zero: 'لا يوجد موردون',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get suppliersStatTotal => 'إجمالي الموردين';
+
+  @override
+  String get suppliersStatWithPurchases => 'لديهم مشتريات';
+
+  @override
+  String get suppliersSearch => 'ابحث في الموردين...';
+
+  @override
+  String get suppliersSection => 'كل الموردين';
+
+  @override
+  String suppliersPurchaseCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count عملية شراء',
+      few: '$count عمليات شراء',
+      two: 'عمليتا شراء',
+      one: 'عملية شراء واحدة',
+      zero: '0 مشتريات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get suppliersEmptyTitle => 'لا يوجد موردون';
+
+  @override
+  String get suppliersEmptyBody => 'أضف موردين لإدارة مشترياتك';
+
+  @override
+  String get suppliersNoMatchBody =>
+      'لا يوجد مورد يطابق البحث أو عوامل التصفية.';
+
+  @override
+  String get suppliersFilterPurchasesMin => 'المشتريات · الحد الأدنى';
+
+  @override
+  String get suppliersFilterPurchasesMax => 'المشتريات · الحد الأقصى';
+
+  @override
+  String get supplierActive => 'نشط';
+
+  @override
+  String get supplierInactive => 'غير نشط';
+
+  @override
+  String get supplierAddTitle => 'إضافة مورد';
+
+  @override
+  String get supplierEditTitle => 'تعديل المورد';
+
+  @override
+  String get supplierCreate => 'إضافة المورد';
+
+  @override
+  String get supplierUpdate => 'تحديث المورد';
+
+  @override
+  String get supplierNamePlaceholder => 'اسم المورد';
+
+  @override
+  String get supplierAddressPlaceholder => 'عنوان المورد';
+
+  @override
+  String get supplierErrNameTaken => 'لديك مورد بهذا الاسم مسبقًا';
+
+  @override
+  String get supplierAdded => 'تمت إضافة المورد';
+
+  @override
+  String get supplierUpdated => 'تم تحديث المورد';
+
+  @override
+  String get supplierDeleted => 'تم حذف المورد';
+
+  @override
+  String get supplierDeleteTitle => 'حذف المورد';
+
+  @override
+  String supplierDeleteBody(String name) {
+    return 'هل تريد فعلاً حذف $name؟';
+  }
+
+  @override
+  String supplierDeleteNotice(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'لهذا المورد $count عملية شراء مرتبطة.',
+      few: 'لهذا المورد $count عمليات شراء مرتبطة.',
+      two: 'لهذا المورد عمليتا شراء مرتبطتان.',
+      one: 'لهذا المورد عملية شراء واحدة مرتبطة.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get supplierDetailEyebrow => 'تفاصيل المورد';
+
+  @override
+  String get supplierDetailPurchases => 'المشتريات';
+
+  @override
+  String get supplierDetailMemberSince => 'عضو منذ';
+
+  @override
+  String get supplierViewPurchases => 'عرض المشتريات';
+
+  @override
+  String get supplierPurchasesSoon => 'المشتريات غير متاحة على الهاتف بعد';
+
+  @override
+  String get supplierNotFound => 'هذا المورد لم يعد موجودًا.';
+
+  @override
+  String get ordersEyebrow => 'المبيعات';
+
+  @override
+  String get ordersTitle => 'الطلبات';
+
+  @override
+  String ordersCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count طلب',
+      few: '$count طلبات',
+      two: 'طلبان',
+      one: 'طلب واحد',
+      zero: 'لا توجد طلبات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ordersStatTotal => 'إجمالي الطلبات';
+
+  @override
+  String get ordersStatPending => 'قيد الانتظار';
+
+  @override
+  String get ordersStatDelivered => 'تم التسليم';
+
+  @override
+  String get ordersStatValue => 'القيمة الإجمالية';
+
+  @override
+  String get ordersSearch => 'ابحث برقم الطلب، العميل، الهاتف، المنتج...';
+
+  @override
+  String get ordersSection => 'كل الطلبات';
+
+  @override
+  String get ordersSelectAll => 'تحديد الكل';
+
+  @override
+  String get ordersNew => 'طلب جديد';
+
+  @override
+  String get ordersEmptyTitle => 'لا توجد طلبات بعد';
+
+  @override
+  String get ordersEmptyBody =>
+      'تصل الطلبات من تأكيدات روبوت الدردشة الذكي، أو أنشئها يدويًا.';
+
+  @override
+  String get ordersNoMatchBody => 'لا توجد طلبات تطابق بحثك أو عوامل التصفية.';
+
+  @override
+  String get orderStatusAll => 'الكل';
+
+  @override
+  String get orderStatusPending => 'جديد';
+
+  @override
+  String get orderStatusConfirmed => 'مؤكدة';
+
+  @override
+  String get orderStatusPreparing => 'قيد التحضير';
+
+  @override
+  String get orderStatusShipped => 'مُرسلة';
+
+  @override
+  String get orderStatusDelivered => 'تم التسليم';
+
+  @override
+  String get orderStatusCancelled => 'ملغاة';
+
+  @override
+  String get orderStatusReturned => 'مرتجعة';
+
+  @override
+  String get orderConfirmNotCalled => 'لم يتم الاتصال';
+
+  @override
+  String get orderConfirmNoAnswer => 'لا يوجد رد';
+
+  @override
+  String get orderConfirmConfirmed => 'مؤكد';
+
+  @override
+  String get orderConfirmRejected => 'مرفوض';
+
+  @override
+  String orderConfirmWithCount(String label, int count) {
+    return '$label ($count)';
+  }
+
+  @override
+  String get orderSourceAi => 'ذكاء';
+
+  @override
+  String get orderSourceAiLong => 'روبوت الدردشة الذكي';
+
+  @override
+  String get orderSourceManual => 'يدوي';
+
+  @override
+  String get paymentStatusPaid => 'مدفوع';
+
+  @override
+  String get paymentStatusPending => 'قيد الانتظار';
+
+  @override
+  String get paymentStatusPartial => 'جزئي';
+
+  @override
+  String ordersRowItems(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count عنصر',
+      few: '$count عناصر',
+      two: 'عنصران',
+      one: 'عنصر واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ordersRowMeta(String items, String paid, String remaining) {
+    return '$items  ·  المدفوع $paid  ·  المتبقي $remaining';
+  }
+
+  @override
+  String get ordersRowNoRemaining => '–';
+
+  @override
+  String get orderActionCallConfirm => 'اتصل وأكّد';
+
+  @override
+  String get orderActionRetry => 'أعد المحاولة';
+
+  @override
+  String get orderActionPrepare => 'ابدأ التحضير';
+
+  @override
+  String get orderActionMarkShipped => 'تحديد كمُرسلة';
+
+  @override
+  String get orderActionMarkDelivered => 'تحديد كمسلَّمة';
+
+  @override
+  String get orderActionOpen => 'فتح';
+
+  @override
+  String get orderActionMarkReturned => 'تحديد كمرتجع';
+
+  @override
+  String get orderActionDelete => 'حذف الطلب';
+
+  @override
+  String ordersSelectedCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count طلبًا محددًا',
+      few: '$count طلبات محددة',
+      two: 'طلبان محددان',
+      one: 'طلب واحد محدد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ordersClearSelection => 'مسح';
+
+  @override
+  String get ordersBulkConfirm => 'تأكيد الكل';
+
+  @override
+  String get ordersBulkPrepare => 'تحضير الكل';
+
+  @override
+  String get ordersBulkShip => 'إرسال الكل';
+
+  @override
+  String get ordersBulkDeliver => 'تحديد الكل كمسلَّمة';
+
+  @override
+  String get ordersBulkReturn => 'تحديد الكل كمرتجع';
+
+  @override
+  String get ordersBulkCancel => 'إلغاء الكل';
+
+  @override
+  String get ordersBulkNone => 'لا يوجد إجراء جماعي متاح لهذا التحديد';
+
+  @override
+  String ordersBulkFailed(int failed, int total) {
+    return 'تعذّر تحديث $failed من أصل $total طلبات';
+  }
+
+  @override
+  String get ordersFilters => 'الفلاتر';
+
+  @override
+  String ordersFiltersActive(int count) {
+    return 'الفلاتر · $count';
+  }
+
+  @override
+  String get ordersFilterStatus => 'حالة الطلب';
+
+  @override
+  String get ordersFilterStatusAll => 'كل الحالات';
+
+  @override
+  String get ordersFilterConfirmation => 'التأكيد';
+
+  @override
+  String get ordersFilterPayment => 'حالة الدفع';
+
+  @override
+  String get ordersFilterAny => 'الكل';
+
+  @override
+  String get ordersFilterHasRemaining => 'يوجد رصيد متبقٍ';
+
+  @override
+  String get ordersFilterPaymentDisabled => 'معطّل — «الرصيد المتبقي» مفعّل';
+
+  @override
+  String get ordersFilterTotalMin => 'المبلغ الإجمالي (دج) · الأدنى';
+
+  @override
+  String get ordersFilterTotalMax => 'المبلغ الإجمالي (دج) · الأقصى';
+
+  @override
+  String get ordersFilterApply => 'تطبيق الفلاتر';
+
+  @override
+  String get ordersFilterClear => 'مسح الكل';
+
+  @override
+  String get orderEyebrow => 'الطلب';
+
+  @override
+  String get orderStepReview => 'المراجعة';
+
+  @override
+  String get orderStepCall => 'نتيجة الاتصال';
+
+  @override
+  String get orderStepResult => 'النتيجة';
+
+  @override
+  String orderCallsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count اتصالًا',
+      few: '$count اتصالات',
+      two: 'اتصالان',
+      one: 'اتصال واحد',
+      zero: 'لا اتصالات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get orderClientSection => 'العميل';
+
+  @override
+  String get orderEditContact => 'تعديل';
+
+  @override
+  String get orderEditContactDone => 'تم';
+
+  @override
+  String get orderFieldName => 'الاسم';
+
+  @override
+  String get orderFieldPhone => 'الهاتف';
+
+  @override
+  String get orderFieldAddress => 'العنوان';
+
+  @override
+  String get orderFieldRegion => 'المنطقة';
+
+  @override
+  String get orderNoPhone => 'بدون هاتف';
+
+  @override
+  String get orderNoAddress => 'بدون عنوان';
+
+  @override
+  String get orderPhoneHint => '0555 12 34 56';
+
+  @override
+  String get orderAddressHint => 'الولاية، البلدية، الشارع، المبنى...';
+
+  @override
+  String get orderContactSavedWithCall =>
+      'تُحفظ التعديلات عند تسجيل نتيجة الاتصال.';
+
+  @override
+  String get orderStopdeskChip => 'ستوب ديسك (استلام من الوكالة)';
+
+  @override
+  String get orderItemsSection => 'العناصر';
+
+  @override
+  String orderUnitLine(int qty, String price) {
+    return '×$qty · $price / وحدة';
+  }
+
+  @override
+  String get orderTotalLabel => 'الإجمالي';
+
+  @override
+  String get orderPaidLabel => 'المدفوع';
+
+  @override
+  String get orderRemainingLabel => 'المتبقي';
+
+  @override
+  String get orderNotesSection => 'ملاحظات';
+
+  @override
+  String get orderAttemptsSection => 'المحاولات السابقة';
+
+  @override
+  String get orderCallHistorySection => 'سجل الاتصالات';
+
+  @override
+  String get orderLogCall => 'تسجيل نتيجة الاتصال';
+
+  @override
+  String get orderAlreadyConfirmed => 'مؤكدة بالفعل';
+
+  @override
+  String get orderClose => 'إغلاق';
+
+  @override
+  String orderReadOnlyNotice(String status) {
+    return 'هذا الطلب $status — تسجيل الاتصالات معطّل.';
+  }
+
+  @override
+  String get orderReadOnlyResell => 'أنشئ طلبًا جديدًا لإعادة البيع.';
+
+  @override
+  String get orderCallQuestion => 'كيف جرى الاتصال؟';
+
+  @override
+  String get orderCallSubtitle => 'سنسجّل المحاولة ونحدّث الطلب وفقًا لذلك.';
+
+  @override
+  String get orderOutcomeConfirmed => 'مؤكدة';
+
+  @override
+  String get orderOutcomeConfirmedHint =>
+      'العميل يريد الطلب — سنجعله جاهزًا للإرسال.';
+
+  @override
+  String get orderOutcomeNoAnswer => 'لا يوجد رد';
+
+  @override
+  String get orderOutcomeNoAnswerHint =>
+      'سُجّلت كمحاولة — يبقى في قائمة الانتظار.';
+
+  @override
+  String get orderOutcomeBusy => 'مشغول';
+
+  @override
+  String get orderOutcomeBusyHint =>
+      'أعد المحاولة لاحقًا — يبقى في قائمة الانتظار.';
+
+  @override
+  String get orderOutcomeVoicemail => 'البريد الصوتي';
+
+  @override
+  String get orderOutcomeVoicemailHint =>
+      'سُجّلت كمحاولة — يبقى في قائمة الانتظار.';
+
+  @override
+  String get orderOutcomeRejected => 'مرفوضة';
+
+  @override
+  String get orderOutcomeRejectedHint => 'العميل لا يريده — سيتم إلغاء الطلب.';
+
+  @override
+  String get orderCallNotesLabel => 'ملاحظات (اختياري، لسجلاتك)';
+
+  @override
+  String get orderCallNotesHintConfirmed =>
+      'وقت التسليم المؤكد، التعليمات، الدفع…';
+
+  @override
+  String get orderCallNotesHintRejected => 'لماذا رفض العميل؟';
+
+  @override
+  String get orderCallNotesHintOther => 'ماذا حدث؟';
+
+  @override
+  String get orderSaveOutcome => 'حفظ النتيجة';
+
+  @override
+  String get orderBackToReview => 'رجوع';
+
+  @override
+  String get orderNoAddressWarning => 'لا يوجد عنوان تسليم لهذا الطلب بعد.';
+
+  @override
+  String get orderNoAddressBody =>
+      'ارجع إلى «المراجعة» وعدّل بطاقة العميل قبل التأكيد.';
+
+  @override
+  String get orderResultConfirmedTitle => 'تم تأكيد الطلب';
+
+  @override
+  String get orderResultConfirmedBody => 'جاهز للإرسال إلى شركة التوصيل.';
+
+  @override
+  String get orderResultCancelledTitle => 'تم إلغاء الطلب';
+
+  @override
+  String get orderResultCancelledBody =>
+      'تمت استعادة المخزون. وأُلغي الدفع المسجّل — أما الاسترداد الفعلي فيبقى عليك.';
+
+  @override
+  String get orderResultAttemptTitle => 'تم تسجيل المحاولة';
+
+  @override
+  String orderResultAttemptBody(int count) {
+    return 'تم تسجيل المحاولة رقم $count. يبقى في قائمة الانتظار.';
+  }
+
+  @override
+  String get orderNextSection => 'التالي: التحضير والإرسال';
+
+  @override
+  String get orderNextBody =>
+      'أرسل هذا الطلب إلى شركة التوصيل، أو ضعه قيد التحضير بينما تجهّزه.';
+
+  @override
+  String get orderSendToDelivery => 'إرسال للتوصيل';
+
+  @override
+  String get orderSendToDeliverySoon => 'ياليدين / ZR — قريبًا';
+
+  @override
+  String get orderMarkPreparing => 'تحديد قيد التحضير';
+
+  @override
+  String get orderDone => 'تم';
+
+  @override
+  String get orderReturnTitle => 'تحديد كمرتجع';
+
+  @override
+  String orderReturnBody(String number) {
+    return 'هل تريد فعلًا تحديد الطلب $number كمرتجع؟ ستتم استعادة المخزون وإلغاء الدفع.';
+  }
+
+  @override
+  String get orderReturnNoticeTitle => 'الاسترداد ليس تلقائيًا';
+
+  @override
+  String get orderReturnNoticeBody =>
+      'يجب إعادة المبلغ المحصّل إلى العميل وتسجيله كمصروف في الصندوق.';
+
+  @override
+  String get orderDeleteTitle => 'حذف الطلب';
+
+  @override
+  String orderDeleteBody(String number) {
+    return 'هل تريد فعلًا حذف الطلب $number؟ ستتم استعادة المخزون.';
+  }
+
+  @override
+  String get orderDeleteNoticeBody =>
+      'يُحذف الطلب وسطوره وسجل اتصالاته نهائيًا.';
+
+  @override
+  String get newOrderTitle => 'طلب جديد';
+
+  @override
+  String get newOrderClientSection => 'العميل';
+
+  @override
+  String get newOrderSearchClient => 'ابحث عن عميل';
+
+  @override
+  String get newOrderSearchClientHint => 'ابحث عن عميل بالاسم أو الهاتف...';
+
+  @override
+  String get newOrderNoClients => 'لم يُعثر على عملاء';
+
+  @override
+  String get newOrderOrType => 'أو أدخل';
+
+  @override
+  String get newOrderClientName => 'اسم العميل';
+
+  @override
+  String get newOrderClientPhone => 'الهاتف';
+
+  @override
+  String get newOrderDeliveryAddress => 'عنوان التسليم';
+
+  @override
+  String get newOrderWilaya => 'الولاية';
+
+  @override
+  String get newOrderWilayaHint => 'اختر ولاية…';
+
+  @override
+  String get newOrderCommune => 'البلدية';
+
+  @override
+  String get newOrderCommuneHint => 'البلدية (اختياري)';
+
+  @override
+  String get newOrderStopdesk => 'ستوب ديسك (استلام من الوكالة — أرخص)';
+
+  @override
+  String get newOrderProductsSection => 'المنتجات';
+
+  @override
+  String get newOrderAddProducts => 'إضافة منتجات';
+
+  @override
+  String get newOrderProductHint => 'ابحث عن منتج بالاسم أو رمز SKU…';
+
+  @override
+  String get newOrderNoProducts => 'لم يُعثر على منتجات';
+
+  @override
+  String newOrderVariantCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count نوعًا',
+      few: '$count أنواع',
+      two: 'نوعان',
+      one: 'نوع واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String newOrderInStock(int count) {
+    return '$count في المخزون';
+  }
+
+  @override
+  String get newOrderOutOfStock => 'نفد المخزون';
+
+  @override
+  String get newOrderQty => 'الكمية';
+
+  @override
+  String get newOrderUnitPrice => 'السعر (دج)';
+
+  @override
+  String get newOrderLineTotal => 'الإجمالي';
+
+  @override
+  String get newOrderNoLines => 'ابحث واختر المنتجات أعلاه لإضافتها';
+
+  @override
+  String get newOrderNotesSection => 'ملاحظة / ملاحظات';
+
+  @override
+  String get newOrderNotes => 'ملاحظات';
+
+  @override
+  String get newOrderNotesHint => 'أضف ملاحظة لهذا الطلب…';
+
+  @override
+  String get newOrderSummary => 'ملخص الطلب';
+
+  @override
+  String get newOrderSubtotal => 'المجموع الفرعي';
+
+  @override
+  String get newOrderDelivery => 'التوصيل';
+
+  @override
+  String get newOrderTotal => 'الإجمالي';
+
+  @override
+  String get newOrderPayInFull => 'مدفوع بالكامل';
+
+  @override
+  String get newOrderAmountPaid => 'المبلغ المدفوع (دج)';
+
+  @override
+  String get newOrderCodHint =>
+      'اترك 0 للدفع عند الاستلام — يُسجَّل تلقائيًا عند التسليم.';
+
+  @override
+  String get newOrderRemainingDebt => 'المتبقي (دين)';
+
+  @override
+  String get newOrderFullyPaid => 'مدفوع بالكامل';
+
+  @override
+  String get newOrderPayment => 'الدفع';
+
+  @override
+  String get newOrderStatus => 'حالة الطلب';
+
+  @override
+  String get newOrderPaymentMethod => 'طريقة الدفع';
+
+  @override
+  String get paymentMethodCash => 'نقدًا';
+
+  @override
+  String get paymentMethodCard => 'بطاقة';
+
+  @override
+  String get paymentMethodTransfer => 'تحويل بنكي';
+
+  @override
+  String get paymentMethodCcp => 'CCP';
+
+  @override
+  String get newOrderSubmit => 'إنشاء الطلب';
+
+  @override
+  String get newOrderStockReserved =>
+      'يُحجز المخزون فور إنشاء الطلب، حتى لو كان قيد الانتظار.';
+
+  @override
+  String get newOrderErrNoItems => 'أضف منتجًا واحدًا على الأقل';
+
+  @override
+  String get newOrderErrName => 'اسم العميل مطلوب';
+
+  @override
+  String get newOrderErrPhone => 'رقم الهاتف مطلوب للتواصل مع العميل';
+
+  @override
+  String get newOrderErrWilaya => 'ولاية التسليم مطلوبة';
+
+  @override
+  String get newOrderErrAddress =>
+      'العنوان مطلوب للتوصيل إلى المنزل (أو اختر ستوب ديسك)';
+
+  @override
+  String newOrderErrStock(String name, int count) {
+    return '$name — لم يتبقَّ سوى $count في المخزون';
+  }
+
+  @override
+  String get orderCreatedToast => 'تم إنشاء الطلب';
+
+  @override
+  String get orderCallLoggedToast => 'تم حفظ نتيجة الاتصال';
+
+  @override
+  String get orderStatusChangedToast => 'تم تحديث الطلب';
+
+  @override
+  String get orderReturnedToast => 'تم تحديد الطلب كمرتجع';
+
+  @override
+  String get orderDeletedToast => 'تم حذف الطلب';
+
+  @override
+  String newOrderDraftLinesDropped(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          'تعذّر استرجاع $count أسطر من مسودتك: المنتجات لم تعد موجودة أو نفدت من المخزون.',
+      one: 'تعذّر استرجاع سطر واحد من مسودتك: المنتج لم يعد موجودًا أو نفد من المخزون.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get productsFilterPriceMin => 'سعر البيع (دج) · الحد الأدنى';
+
+  @override
+  String get productsFilterPriceMax => 'سعر البيع (دج) · الحد الأقصى';
+
+  @override
+  String get productsFilterCostMin => 'سعر التكلفة (دج) · الحد الأدنى';
+
+  @override
+  String get productsFilterCostMax => 'سعر التكلفة (دج) · الحد الأقصى';
+
+  @override
+  String get productsFilterQtyMin => 'الكمية · الحد الأدنى';
+
+  @override
+  String get productsFilterQtyMax => 'الكمية · الحد الأقصى';
+
+  @override
+  String get productsFilterProfitMin => 'الربح الصافي (دج) · الحد الأدنى';
+
+  @override
+  String get productsFilterProfitMax => 'الربح الصافي (دج) · الحد الأقصى';
+
+  @override
+  String get productsFilterMarginMin => 'الهامش (٪) · الحد الأدنى';
+
+  @override
+  String get productsFilterMarginMax => 'الهامش (٪) · الحد الأقصى';
+
+  @override
+  String get productsSectionInactive => 'المنتجات غير النشطة';
 }

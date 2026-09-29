@@ -31,15 +31,35 @@ enum CheckoutReturn {
 /// per the live docs — an external browser would end the merchant on a desktop
 /// page with no way back. Here that redirect is stopped and read instead, and
 /// the settings screen then asks the backend how the checkout really ended.
+///
+/// **Chargily's result page is where it ends, not the dashboard.** After
+/// paying, Chargily first sends the page to its own
+/// `http://pay.chargily.dz[/test]/payments/<result>/<id>` — plain HTTP, which
+/// Android refuses to load — and only that page, once loaded, links on to the
+/// dashboard, behind a button. Waiting for the dashboard left the merchant on
+/// an error page. The result URL already says how it went, so it is read as the
+/// navigation starts, before anything loads (seen 2026-09-29, test mode).
+/// `<result>` is `success`, or `failure`, `cancellation` (Chargily's own
+/// *Annuler*) or `expiration`; the last three all mean nothing was paid.
 class CheckoutWebViewScreen extends StatefulWidget {
   const CheckoutWebViewScreen({super.key, required this.checkoutUrl});
 
   final String checkoutUrl;
 
+  static final _chargilyResult = RegExp(r'/payments/(success|failure|cancellation|expiration)/');
+
   /// The return a [url] means, or null while the checkout is still going.
   static CheckoutReturn? readReturn(String url) {
     final uri = Uri.tryParse(url);
-    if (uri == null || !uri.path.contains('/dashboard')) return null;
+    if (uri == null) return null;
+    if (uri.host.contains('chargily')) {
+      return switch (_chargilyResult.firstMatch(uri.path)?.group(1)) {
+        'success' => CheckoutReturn.success,
+        null => null,
+        _ => CheckoutReturn.failed,
+      };
+    }
+    if (!uri.path.contains('/dashboard')) return null;
     return switch (uri.queryParameters['payment']) {
       'success' => CheckoutReturn.success,
       'failed' => CheckoutReturn.failed,
@@ -112,13 +132,31 @@ class _CheckoutWebViewScreenState extends State<CheckoutWebViewScreen> {
     super.dispose();
   }
 
-  /// Back and the × share this: abandoning a payment asks first. Chargily's
-  /// own success and failure redirects call [_finish] directly and never ask.
+  /// The system back button: back **within the page** first, as a browser does.
+  ///
+  /// Chargily's page links out — its terms of use open
+  /// `chargily.com/business/pay/tos/consumer`, a 404 on their side (seen
+  /// 2026-09-29) — and a bank's page can do the same. Back used to offer to
+  /// abandon the payment from there, so the only way off that page was out of
+  /// the payment altogether. Now it returns to the page before; only with
+  /// nothing to go back to does it ask about leaving.
+  Future<bool> _onSystemBack() async {
+    if (_finished) return false;
+    if (await _controller.canGoBack()) {
+      await _controller.goBack();
+      return false;
+    }
+    if (!mounted) return false;
+    return _onClose();
+  }
+
+  /// The ×, and back from the first page: abandoning a payment asks first.
+  /// Chargily's own result redirects call [_finish] directly and never ask.
   ///
   /// Always consumes the press ([_finish] pops with its result). [_finished]
   /// is checked again after the sheet: a success redirect can land while it
   /// is open, and must not be turned into `closed`.
-  Future<bool> _onBack() async {
+  Future<bool> _onClose() async {
     if (_finished) return false;
     final l10n = L10n.of(context);
     final leave = await showLeaveSheet(
@@ -136,7 +174,7 @@ class _CheckoutWebViewScreenState extends State<CheckoutWebViewScreen> {
     // Standalone: this is a pageless route over Settings, with no BackScope.
     return BackIntercept(
       active: !_finished,
-      onBack: _onBack,
+      onBack: _onSystemBack,
       child: Scaffold(
         backgroundColor: AppColors.ink,
         body: SafeArea(
@@ -151,7 +189,7 @@ class _CheckoutWebViewScreenState extends State<CheckoutWebViewScreen> {
                       button: true,
                       label: l10n.commonDismiss,
                       child: GestureDetector(
-                        onTap: _onBack,
+                        onTap: _onClose,
                         behavior: HitTestBehavior.opaque,
                         child: SizedBox.square(
                           dimension: 6.15.w, // 24

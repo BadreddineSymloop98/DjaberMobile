@@ -8,6 +8,7 @@ import '../../core/network/api_client.dart';
 import '../../core/utils/json.dart';
 import '../models/product.dart';
 import '../models/product_expense.dart';
+import '../models/product_filters.dart';
 
 /// How a stock adjustment moves the quantity — the backend's `type` enum, and
 /// the web's three choices in its order.
@@ -80,6 +81,7 @@ class ProductRepository {
     String? search,
     String? categoryId,
     bool lowStock = false,
+    ProductFilters filters = const ProductFilters(),
     int limit = 50,
     int offset = 0,
   }) {
@@ -94,6 +96,8 @@ class ProductRepository {
         // 'false' would read as truthy on any future rewrite that checks
         // presence instead of value.
         if (lowStock) 'lowStock': 'true',
+        // The filter sheet's status and ranges — see [ProductFilters.toQuery].
+        ...filters.toQuery(),
         'limit': limit,
         'offset': offset,
       },
@@ -552,8 +556,13 @@ class ProductRepository {
   /// docs the backend accepts a file by the extension of its filename, 1 to 10
   /// at a time and 5 MB each — and answers a breach of any of those with a
   /// generic 500 rather than a 4xx, so the form checks all three before
-  /// calling this. Returns how many images were saved.
-  Future<Result<int>> uploadImages({
+  /// calling this.
+  ///
+  /// Returns the **rows the 201 carries** — only the ones this upload created,
+  /// with their ids and resolved URLs. The caller needs them, not a count: a
+  /// `GET /products/{id}` issued straight after this can still answer without
+  /// the new images, so the screen shows what the upload confirmed.
+  Future<Result<List<ProductImage>>> uploadImages({
     required String productId,
     required List<ProductPhoto> photos,
   }) {
@@ -566,12 +575,16 @@ class ProductRepository {
         ),
       );
     }
-    return _api.postForm<int>(
+    return _api.postForm<List<ProductImage>>(
       Api.productImages(productId),
       form: form,
       parse: (json) {
         final rows = (json as Map<String, dynamic>)['images'];
-        return rows is List ? rows.length : 0;
+        if (rows is! List) return const [];
+        return [
+          for (final row in rows.whereType<Map<String, dynamic>>())
+            ?ProductImage.fromJson(row),
+        ];
       },
     );
   }
