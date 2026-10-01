@@ -7022,6 +7022,684 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'INACTIVE PRODUCTS'**
   String get productsSectionInactive;
+
+  /// No description provided for @menuDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery'**
+  String get menuDelivery;
+
+  /// No description provided for @deliveryEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'SALES'**
+  String get deliveryEyebrow;
+
+  /// No description provided for @deliveryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery'**
+  String get deliveryTitle;
+
+  /// No description provided for @deliverySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Send orders to delivery companies and track shipments'**
+  String get deliverySubtitle;
+
+  /// No description provided for @deliveryFeesAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Fees'**
+  String get deliveryFeesAction;
+
+  /// No description provided for @deliveryProvidersAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Providers'**
+  String get deliveryProvidersAction;
+
+  /// No description provided for @deliveryRefresh.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh'**
+  String get deliveryRefresh;
+
+  /// No description provided for @deliveryStatReady.
+  ///
+  /// In en, this message translates to:
+  /// **'READY TO SHIP'**
+  String get deliveryStatReady;
+
+  /// No description provided for @deliveryStatShipped.
+  ///
+  /// In en, this message translates to:
+  /// **'SHIPPED'**
+  String get deliveryStatShipped;
+
+  /// No description provided for @deliveryStatInTransit.
+  ///
+  /// In en, this message translates to:
+  /// **'IN TRANSIT'**
+  String get deliveryStatInTransit;
+
+  /// No description provided for @deliveryStatDelivered.
+  ///
+  /// In en, this message translates to:
+  /// **'DELIVERED'**
+  String get deliveryStatDelivered;
+
+  /// No description provided for @deliverySearchLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'SEARCH'**
+  String get deliverySearchLabel;
+
+  /// No description provided for @deliverySearchPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Search orders...'**
+  String get deliverySearchPlaceholder;
+
+  /// No description provided for @deliveryTabAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get deliveryTabAll;
+
+  /// No description provided for @deliveryTabReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready'**
+  String get deliveryTabReady;
+
+  /// No description provided for @deliveryTabSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Sent'**
+  String get deliveryTabSent;
+
+  /// No description provided for @deliveryTabInTransit.
+  ///
+  /// In en, this message translates to:
+  /// **'In Transit'**
+  String get deliveryTabInTransit;
+
+  /// No description provided for @deliveryTabDelivered.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered'**
+  String get deliveryTabDelivered;
+
+  /// No description provided for @deliveryOrdersSection.
+  ///
+  /// In en, this message translates to:
+  /// **'ORDERS'**
+  String get deliveryOrdersSection;
+
+  /// No description provided for @deliveryPillNotSent.
+  ///
+  /// In en, this message translates to:
+  /// **'NOT SENT'**
+  String get deliveryPillNotSent;
+
+  /// No description provided for @deliveryPillSent.
+  ///
+  /// In en, this message translates to:
+  /// **'SENT'**
+  String get deliveryPillSent;
+
+  /// No description provided for @deliveryPillInTransit.
+  ///
+  /// In en, this message translates to:
+  /// **'IN TRANSIT'**
+  String get deliveryPillInTransit;
+
+  /// No description provided for @deliveryPillDelivered.
+  ///
+  /// In en, this message translates to:
+  /// **'DELIVERED'**
+  String get deliveryPillDelivered;
+
+  /// No description provided for @deliveryMetaLine.
+  ///
+  /// In en, this message translates to:
+  /// **'PROVIDER {provider}  ·  TRACKING {tracking}'**
+  String deliveryMetaLine(String provider, String tracking);
+
+  /// No description provided for @deliverySend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get deliverySend;
+
+  /// No description provided for @deliveryTrack.
+  ///
+  /// In en, this message translates to:
+  /// **'Track'**
+  String get deliveryTrack;
+
+  /// No description provided for @deliveryLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Label'**
+  String get deliveryLabel;
+
+  /// No description provided for @deliveryEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No orders'**
+  String get deliveryEmptyTitle;
+
+  /// No description provided for @deliveryEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders show up here, ready to be sent to a delivery company.'**
+  String get deliveryEmptyBody;
+
+  /// No description provided for @deliveryNoMatchTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No matches'**
+  String get deliveryNoMatchTitle;
+
+  /// No description provided for @deliveryNoMatchBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Try another word or another tab.'**
+  String get deliveryNoMatchBody;
+
+  /// No description provided for @deliverySendTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Send {order} to Delivery'**
+  String deliverySendTitle(String order);
+
+  /// No description provided for @deliveryClient.
+  ///
+  /// In en, this message translates to:
+  /// **'Client'**
+  String get deliveryClient;
+
+  /// No description provided for @deliveryPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get deliveryPhone;
+
+  /// No description provided for @deliveryAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get deliveryAddress;
+
+  /// No description provided for @deliveryTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get deliveryTotal;
+
+  /// No description provided for @deliveryProviderLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'DELIVERY PROVIDER'**
+  String get deliveryProviderLabel;
+
+  /// No description provided for @deliveryProviderDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} (Default)'**
+  String deliveryProviderDefault(String name);
+
+  /// No description provided for @deliveryDestination.
+  ///
+  /// In en, this message translates to:
+  /// **'DESTINATION WILAYA'**
+  String get deliveryDestination;
+
+  /// No description provided for @deliveryChooseWilaya.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a wilaya'**
+  String get deliveryChooseWilaya;
+
+  /// No description provided for @deliveryStopdesk.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop desk delivery'**
+  String get deliveryStopdesk;
+
+  /// No description provided for @deliveryNote.
+  ///
+  /// In en, this message translates to:
+  /// **'NOTE'**
+  String get deliveryNote;
+
+  /// No description provided for @deliveryNotePlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional note for the delivery company...'**
+  String get deliveryNotePlaceholder;
+
+  /// No description provided for @deliveryRates.
+  ///
+  /// In en, this message translates to:
+  /// **'ESTIMATED RATES'**
+  String get deliveryRates;
+
+  /// No description provided for @deliveryRateHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home Delivery'**
+  String get deliveryRateHome;
+
+  /// No description provided for @deliveryRateStopdesk.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop Desk'**
+  String get deliveryRateStopdesk;
+
+  /// No description provided for @deliveryConfirmSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm & Send'**
+  String get deliveryConfirmSend;
+
+  /// No description provided for @deliveryNoProviders.
+  ///
+  /// In en, this message translates to:
+  /// **'No delivery providers configured'**
+  String get deliveryNoProviders;
+
+  /// No description provided for @deliveryAddProvider.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Provider'**
+  String get deliveryAddProvider;
+
+  /// No description provided for @deliverySentToast.
+  ///
+  /// In en, this message translates to:
+  /// **'{order} sent to {provider}'**
+  String deliverySentToast(String order, String provider);
+
+  /// No description provided for @deliveryTrackTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tracking — {order}'**
+  String deliveryTrackTitle(String order);
+
+  /// No description provided for @deliveryCourierResponse.
+  ///
+  /// In en, this message translates to:
+  /// **'COURIER RESPONSE · {provider}'**
+  String deliveryCourierResponse(String provider);
+
+  /// No description provided for @deliveryTrackEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'The courier returned no information.'**
+  String get deliveryTrackEmpty;
+
+  /// No description provided for @deliveryLabelNotReady.
+  ///
+  /// In en, this message translates to:
+  /// **'The courier has not produced a label yet.'**
+  String get deliveryLabelNotReady;
+
+  /// No description provided for @deliveryLabelOpenFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'The label could not be opened on this phone.'**
+  String get deliveryLabelOpenFailed;
+
+  /// No description provided for @deliveryFeesEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'DELIVERY'**
+  String get deliveryFeesEyebrow;
+
+  /// No description provided for @deliveryFeesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery Fees'**
+  String get deliveryFeesTitle;
+
+  /// No description provided for @deliveryFeesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Set your shipping price per wilaya. Used automatically when creating orders and by the AI agent for Messenger quotes.'**
+  String get deliveryFeesSubtitle;
+
+  /// No description provided for @deliveryFeesFillMissing.
+  ///
+  /// In en, this message translates to:
+  /// **'Fill missing'**
+  String get deliveryFeesFillMissing;
+
+  /// No description provided for @deliveryFeesResetAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all to defaults'**
+  String get deliveryFeesResetAll;
+
+  /// No description provided for @deliveryFeesSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search wilaya…'**
+  String get deliveryFeesSearch;
+
+  /// No description provided for @deliveryFeesSection.
+  ///
+  /// In en, this message translates to:
+  /// **'WILAYAS'**
+  String get deliveryFeesSection;
+
+  /// No description provided for @deliveryFeesDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'DEFAULT'**
+  String get deliveryFeesDefault;
+
+  /// No description provided for @deliveryFeesCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'CUSTOM'**
+  String get deliveryFeesCustom;
+
+  /// No description provided for @deliveryFeesHome.
+  ///
+  /// In en, this message translates to:
+  /// **'HOME (DA)'**
+  String get deliveryFeesHome;
+
+  /// No description provided for @deliveryFeesStopdesk.
+  ///
+  /// In en, this message translates to:
+  /// **'STOPDESK (DA)'**
+  String get deliveryFeesStopdesk;
+
+  /// No description provided for @deliveryFeesReturn.
+  ///
+  /// In en, this message translates to:
+  /// **'RETURN (DA)'**
+  String get deliveryFeesReturn;
+
+  /// No description provided for @deliveryFeesReset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get deliveryFeesReset;
+
+  /// No description provided for @deliveryFeesResetAllTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all to defaults'**
+  String get deliveryFeesResetAllTitle;
+
+  /// No description provided for @deliveryFeesResetAllBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Overwrite all your custom prices with system defaults?'**
+  String get deliveryFeesResetAllBody;
+
+  /// No description provided for @deliveryFeesSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'{wilaya} fees saved'**
+  String deliveryFeesSaved(String wilaya);
+
+  /// No description provided for @deliveryFeesResetDone.
+  ///
+  /// In en, this message translates to:
+  /// **'{wilaya} is back to the default fees'**
+  String deliveryFeesResetDone(String wilaya);
+
+  /// No description provided for @deliveryFeesFilled.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{Nothing to fill: every wilaya already has its fees} =1{1 wilaya filled} other{{count} wilayas filled}}'**
+  String deliveryFeesFilled(int count);
+
+  /// No description provided for @deliveryFeesResetAllDone.
+  ///
+  /// In en, this message translates to:
+  /// **'All fees are back to the defaults'**
+  String get deliveryFeesResetAllDone;
+
+  /// No description provided for @deliveryProvidersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery Providers'**
+  String get deliveryProvidersTitle;
+
+  /// No description provided for @deliveryProvidersSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Configure delivery companies for shipping orders'**
+  String get deliveryProvidersSubtitle;
+
+  /// No description provided for @deliveryProvidersSection.
+  ///
+  /// In en, this message translates to:
+  /// **'PROVIDERS'**
+  String get deliveryProvidersSection;
+
+  /// No description provided for @deliveryDefaultBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'DEFAULT'**
+  String get deliveryDefaultBadge;
+
+  /// No description provided for @deliveryCardProvider.
+  ///
+  /// In en, this message translates to:
+  /// **'Provider:'**
+  String get deliveryCardProvider;
+
+  /// No description provided for @deliveryCardSender.
+  ///
+  /// In en, this message translates to:
+  /// **'Sender:'**
+  String get deliveryCardSender;
+
+  /// No description provided for @deliveryCardPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone:'**
+  String get deliveryCardPhone;
+
+  /// No description provided for @deliveryCardWilaya.
+  ///
+  /// In en, this message translates to:
+  /// **'Wilaya:'**
+  String get deliveryCardWilaya;
+
+  /// No description provided for @deliveryEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get deliveryEdit;
+
+  /// No description provided for @deliveryProvidersEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No providers configured'**
+  String get deliveryProvidersEmptyTitle;
+
+  /// No description provided for @deliveryProvidersEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a delivery provider to start shipping orders'**
+  String get deliveryProvidersEmptyBody;
+
+  /// No description provided for @deliveryDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Provider'**
+  String get deliveryDeleteTitle;
+
+  /// No description provided for @deliveryDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to remove this delivery provider? This cannot be undone.'**
+  String get deliveryDeleteBody;
+
+  /// No description provided for @deliveryProviderDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} deleted'**
+  String deliveryProviderDeleted(String name);
+
+  /// No description provided for @deliveryFormAddTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Provider'**
+  String get deliveryFormAddTitle;
+
+  /// No description provided for @deliveryFormEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Delivery Provider'**
+  String get deliveryFormEditTitle;
+
+  /// No description provided for @deliveryFormCourier.
+  ///
+  /// In en, this message translates to:
+  /// **'DELIVERY PROVIDER'**
+  String get deliveryFormCourier;
+
+  /// No description provided for @deliveryFormChooseCourier.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a provider'**
+  String get deliveryFormChooseCourier;
+
+  /// No description provided for @deliveryFormDisplayName.
+  ///
+  /// In en, this message translates to:
+  /// **'DISPLAY NAME'**
+  String get deliveryFormDisplayName;
+
+  /// No description provided for @deliveryFormCredentials.
+  ///
+  /// In en, this message translates to:
+  /// **'API CREDENTIALS'**
+  String get deliveryFormCredentials;
+
+  /// No description provided for @deliveryFormUnchanged.
+  ///
+  /// In en, this message translates to:
+  /// **'(unchanged — enter to update)'**
+  String get deliveryFormUnchanged;
+
+  /// No description provided for @deliveryFormTest.
+  ///
+  /// In en, this message translates to:
+  /// **'Test Credentials'**
+  String get deliveryFormTest;
+
+  /// No description provided for @deliveryFormTestOk.
+  ///
+  /// In en, this message translates to:
+  /// **'Credentials are valid — connected to {name}.'**
+  String deliveryFormTestOk(String name);
+
+  /// No description provided for @deliveryFormTestFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} refused the connection: {reason}'**
+  String deliveryFormTestFailed(String name, String reason);
+
+  /// No description provided for @deliveryFormSender.
+  ///
+  /// In en, this message translates to:
+  /// **'SENDER INFORMATION'**
+  String get deliveryFormSender;
+
+  /// No description provided for @deliveryFormSenderName.
+  ///
+  /// In en, this message translates to:
+  /// **'SENDER NAME'**
+  String get deliveryFormSenderName;
+
+  /// No description provided for @deliveryFormSenderPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'SENDER PHONE'**
+  String get deliveryFormSenderPhone;
+
+  /// No description provided for @deliveryFormSenderAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'SENDER ADDRESS'**
+  String get deliveryFormSenderAddress;
+
+  /// No description provided for @deliveryFormSenderWilaya.
+  ///
+  /// In en, this message translates to:
+  /// **'SENDER WILAYA'**
+  String get deliveryFormSenderWilaya;
+
+  /// No description provided for @deliveryFormSetDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'Set as default provider'**
+  String get deliveryFormSetDefault;
+
+  /// No description provided for @deliveryFormAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Provider'**
+  String get deliveryFormAdd;
+
+  /// No description provided for @deliveryFormUpdate.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get deliveryFormUpdate;
+
+  /// No description provided for @deliveryProviderAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} added'**
+  String deliveryProviderAdded(String name);
+
+  /// No description provided for @deliveryProviderUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} updated'**
+  String deliveryProviderUpdated(String name);
+
+  /// No description provided for @deliveryFormAllTaken.
+  ///
+  /// In en, this message translates to:
+  /// **'Every supported provider is already configured.'**
+  String get deliveryFormAllTaken;
+
+  /// No description provided for @deliveryDeleteNoticeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders already sent'**
+  String get deliveryDeleteNoticeTitle;
+
+  /// No description provided for @deliveryDeleteNoticeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Those sent with {name} keep their tracking number, but can no longer be tracked or have their label printed.'**
+  String deliveryDeleteNoticeBody(String name);
+
+  /// No description provided for @deliveryDeleteNoticeDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'This is your default provider: choose another one afterwards.'**
+  String get deliveryDeleteNoticeDefault;
+
+  /// No description provided for @deliveryProviderAlreadyGone.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} had already been deleted'**
+  String deliveryProviderAlreadyGone(String name);
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

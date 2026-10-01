@@ -159,6 +159,17 @@ class Routes {
   static const order = '/orders/:id';
   static String orderOf(String id) => '/orders/$id';
 
+  /// `Livraison` — from the drawer, after Commandes (the web sidebar's order).
+  /// Its two header buttons open [deliveryFees] and [deliveryProviders]; the
+  /// provider form is pushed from the list. [deliveryProviderNew] is declared
+  /// before [deliveryProviderEdit] in `router.dart`.
+  static const delivery = '/delivery';
+  static const deliveryFees = '/delivery/fees';
+  static const deliveryProviders = '/delivery/providers';
+  static const deliveryProviderNew = '/delivery/providers/new';
+  static const deliveryProviderEdit = '/delivery/providers/:id/edit';
+  static String deliveryProviderEditOf(String id) => '/delivery/providers/$id/edit';
+
   static const notifications = '/notifications';
   static const settings = '/settings';
 

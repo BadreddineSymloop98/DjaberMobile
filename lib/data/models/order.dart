@@ -279,6 +279,8 @@ class Order {
     this.wilayaId,
     this.communeName,
     this.isStopdesk = false,
+    this.trackingNumber,
+    this.deliveryProvider,
     this.items = const [],
     this.calls = const [],
   });
@@ -321,6 +323,14 @@ class Order {
   final String? communeName;
   final bool isStopdesk;
 
+  /// The courier's tracking number, set when the order was sent — may stay
+  /// null when the courier answered without one.
+  final String? trackingNumber;
+
+  /// The **id** of the merchant's courier account the parcel went to (a
+  /// `DeliveryProvider` row), not the courier's name.
+  final String? deliveryProvider;
+
   final List<OrderItem> items;
 
   /// Newest first. Five at most on a list row; all of them on the detail.
@@ -348,6 +358,15 @@ class Order {
       isStopdesk || (clientAddress != null && clientAddress!.trim().isNotEmpty);
 
   List<OrderStatus> get allowedNext => orderTransitions[status] ?? const [];
+
+  /// `POST /delivery/send/{id}` accepts it: never sent, not cancelled (live
+  /// docs) — and, as the web's *Envoyer* button, not returned either.
+  bool get canSendToDelivery =>
+      deliveryStatus == DeliveryStatus.notSent && !status.isTerminal;
+
+  /// Sent, with something to look up at the courier: *Suivre* and *Étiquette*.
+  bool get canTrack =>
+      deliveryStatus != DeliveryStatus.notSent && (trackingNumber ?? '').isNotEmpty;
 
   /// The web's rule, kept: a delivered order is the only one that can be
   /// returned, and only a non-delivered, non-cancelled one can be deleted.
@@ -388,6 +407,8 @@ class Order {
       wilayaId: Json.intOrNull(json['wilayaId']),
       communeName: _blank(Json.strOrNull(json['communeName'])),
       isStopdesk: Json.boolOf(json['isStopdesk']),
+      trackingNumber: _blank(Json.strOrNull(json['trackingNumber'])),
+      deliveryProvider: _blank(Json.strOrNull(json['deliveryProvider'])),
       items: items is List
           ? [
               for (final item in items.whereType<Map<String, dynamic>>())
@@ -425,6 +446,10 @@ class OrderStats {
     this.delivered = 0,
     this.cancelled = 0,
     this.returned = 0,
+    this.notSent = 0,
+    this.sent = 0,
+    this.inTransit = 0,
+    this.deliveredDelivery = 0,
   });
 
   final int totalOrders;
@@ -436,6 +461,14 @@ class OrderStats {
   final int delivered;
   final int cancelled;
   final int returned;
+
+  /// Counts per **delivery** status — the four figures on *Livraison*.
+  /// `deliveredDelivery` is the courier's "delivered", distinct from the
+  /// order status of the same name.
+  final int notSent;
+  final int sent;
+  final int inTransit;
+  final int deliveredDelivery;
 
   /// The count for one tab, so the active tab can show its own figure.
   int? countFor(OrderStatus? status) => switch (status) {
@@ -461,6 +494,10 @@ class OrderStats {
       delivered: Json.intOf(stats['delivered']),
       cancelled: Json.intOf(stats['cancelled']),
       returned: Json.intOf(stats['returned']),
+      notSent: Json.intOf(stats['notSent']),
+      sent: Json.intOf(stats['sent']),
+      inTransit: Json.intOf(stats['inTransit']),
+      deliveredDelivery: Json.intOf(stats['deliveredDelivery']),
     );
   }
 }

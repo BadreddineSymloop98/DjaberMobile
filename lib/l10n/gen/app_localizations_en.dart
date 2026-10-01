@@ -3951,4 +3951,394 @@ class L10nEn extends L10n {
 
   @override
   String get productsSectionInactive => 'INACTIVE PRODUCTS';
+
+  @override
+  String get menuDelivery => 'Delivery';
+
+  @override
+  String get deliveryEyebrow => 'SALES';
+
+  @override
+  String get deliveryTitle => 'Delivery';
+
+  @override
+  String get deliverySubtitle =>
+      'Send orders to delivery companies and track shipments';
+
+  @override
+  String get deliveryFeesAction => 'Fees';
+
+  @override
+  String get deliveryProvidersAction => 'Providers';
+
+  @override
+  String get deliveryRefresh => 'Refresh';
+
+  @override
+  String get deliveryStatReady => 'READY TO SHIP';
+
+  @override
+  String get deliveryStatShipped => 'SHIPPED';
+
+  @override
+  String get deliveryStatInTransit => 'IN TRANSIT';
+
+  @override
+  String get deliveryStatDelivered => 'DELIVERED';
+
+  @override
+  String get deliverySearchLabel => 'SEARCH';
+
+  @override
+  String get deliverySearchPlaceholder => 'Search orders...';
+
+  @override
+  String get deliveryTabAll => 'All';
+
+  @override
+  String get deliveryTabReady => 'Ready';
+
+  @override
+  String get deliveryTabSent => 'Sent';
+
+  @override
+  String get deliveryTabInTransit => 'In Transit';
+
+  @override
+  String get deliveryTabDelivered => 'Delivered';
+
+  @override
+  String get deliveryOrdersSection => 'ORDERS';
+
+  @override
+  String get deliveryPillNotSent => 'NOT SENT';
+
+  @override
+  String get deliveryPillSent => 'SENT';
+
+  @override
+  String get deliveryPillInTransit => 'IN TRANSIT';
+
+  @override
+  String get deliveryPillDelivered => 'DELIVERED';
+
+  @override
+  String deliveryMetaLine(String provider, String tracking) {
+    return 'PROVIDER $provider  ·  TRACKING $tracking';
+  }
+
+  @override
+  String get deliverySend => 'Send';
+
+  @override
+  String get deliveryTrack => 'Track';
+
+  @override
+  String get deliveryLabel => 'Label';
+
+  @override
+  String get deliveryEmptyTitle => 'No orders';
+
+  @override
+  String get deliveryEmptyBody =>
+      'Orders show up here, ready to be sent to a delivery company.';
+
+  @override
+  String get deliveryNoMatchTitle => 'No matches';
+
+  @override
+  String get deliveryNoMatchBody => 'Try another word or another tab.';
+
+  @override
+  String deliverySendTitle(String order) {
+    return 'Send $order to Delivery';
+  }
+
+  @override
+  String get deliveryClient => 'Client';
+
+  @override
+  String get deliveryPhone => 'Phone';
+
+  @override
+  String get deliveryAddress => 'Address';
+
+  @override
+  String get deliveryTotal => 'Total';
+
+  @override
+  String get deliveryProviderLabel => 'DELIVERY PROVIDER';
+
+  @override
+  String deliveryProviderDefault(String name) {
+    return '$name (Default)';
+  }
+
+  @override
+  String get deliveryDestination => 'DESTINATION WILAYA';
+
+  @override
+  String get deliveryChooseWilaya => 'Choose a wilaya';
+
+  @override
+  String get deliveryStopdesk => 'Stop desk delivery';
+
+  @override
+  String get deliveryNote => 'NOTE';
+
+  @override
+  String get deliveryNotePlaceholder =>
+      'Optional note for the delivery company...';
+
+  @override
+  String get deliveryRates => 'ESTIMATED RATES';
+
+  @override
+  String get deliveryRateHome => 'Home Delivery';
+
+  @override
+  String get deliveryRateStopdesk => 'Stop Desk';
+
+  @override
+  String get deliveryConfirmSend => 'Confirm & Send';
+
+  @override
+  String get deliveryNoProviders => 'No delivery providers configured';
+
+  @override
+  String get deliveryAddProvider => 'Add Provider';
+
+  @override
+  String deliverySentToast(String order, String provider) {
+    return '$order sent to $provider';
+  }
+
+  @override
+  String deliveryTrackTitle(String order) {
+    return 'Tracking — $order';
+  }
+
+  @override
+  String deliveryCourierResponse(String provider) {
+    return 'COURIER RESPONSE · $provider';
+  }
+
+  @override
+  String get deliveryTrackEmpty => 'The courier returned no information.';
+
+  @override
+  String get deliveryLabelNotReady =>
+      'The courier has not produced a label yet.';
+
+  @override
+  String get deliveryLabelOpenFailed =>
+      'The label could not be opened on this phone.';
+
+  @override
+  String get deliveryFeesEyebrow => 'DELIVERY';
+
+  @override
+  String get deliveryFeesTitle => 'Delivery Fees';
+
+  @override
+  String get deliveryFeesSubtitle =>
+      'Set your shipping price per wilaya. Used automatically when creating orders and by the AI agent for Messenger quotes.';
+
+  @override
+  String get deliveryFeesFillMissing => 'Fill missing';
+
+  @override
+  String get deliveryFeesResetAll => 'Reset all to defaults';
+
+  @override
+  String get deliveryFeesSearch => 'Search wilaya…';
+
+  @override
+  String get deliveryFeesSection => 'WILAYAS';
+
+  @override
+  String get deliveryFeesDefault => 'DEFAULT';
+
+  @override
+  String get deliveryFeesCustom => 'CUSTOM';
+
+  @override
+  String get deliveryFeesHome => 'HOME (DA)';
+
+  @override
+  String get deliveryFeesStopdesk => 'STOPDESK (DA)';
+
+  @override
+  String get deliveryFeesReturn => 'RETURN (DA)';
+
+  @override
+  String get deliveryFeesReset => 'Reset';
+
+  @override
+  String get deliveryFeesResetAllTitle => 'Reset all to defaults';
+
+  @override
+  String get deliveryFeesResetAllBody =>
+      'Overwrite all your custom prices with system defaults?';
+
+  @override
+  String deliveryFeesSaved(String wilaya) {
+    return '$wilaya fees saved';
+  }
+
+  @override
+  String deliveryFeesResetDone(String wilaya) {
+    return '$wilaya is back to the default fees';
+  }
+
+  @override
+  String deliveryFeesFilled(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count wilayas filled',
+      one: '1 wilaya filled',
+      zero: 'Nothing to fill: every wilaya already has its fees',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get deliveryFeesResetAllDone => 'All fees are back to the defaults';
+
+  @override
+  String get deliveryProvidersTitle => 'Delivery Providers';
+
+  @override
+  String get deliveryProvidersSubtitle =>
+      'Configure delivery companies for shipping orders';
+
+  @override
+  String get deliveryProvidersSection => 'PROVIDERS';
+
+  @override
+  String get deliveryDefaultBadge => 'DEFAULT';
+
+  @override
+  String get deliveryCardProvider => 'Provider:';
+
+  @override
+  String get deliveryCardSender => 'Sender:';
+
+  @override
+  String get deliveryCardPhone => 'Phone:';
+
+  @override
+  String get deliveryCardWilaya => 'Wilaya:';
+
+  @override
+  String get deliveryEdit => 'Edit';
+
+  @override
+  String get deliveryProvidersEmptyTitle => 'No providers configured';
+
+  @override
+  String get deliveryProvidersEmptyBody =>
+      'Add a delivery provider to start shipping orders';
+
+  @override
+  String get deliveryDeleteTitle => 'Delete Provider';
+
+  @override
+  String get deliveryDeleteBody =>
+      'Are you sure you want to remove this delivery provider? This cannot be undone.';
+
+  @override
+  String deliveryProviderDeleted(String name) {
+    return '$name deleted';
+  }
+
+  @override
+  String get deliveryFormAddTitle => 'Add Provider';
+
+  @override
+  String get deliveryFormEditTitle => 'Edit Delivery Provider';
+
+  @override
+  String get deliveryFormCourier => 'DELIVERY PROVIDER';
+
+  @override
+  String get deliveryFormChooseCourier => 'Choose a provider';
+
+  @override
+  String get deliveryFormDisplayName => 'DISPLAY NAME';
+
+  @override
+  String get deliveryFormCredentials => 'API CREDENTIALS';
+
+  @override
+  String get deliveryFormUnchanged => '(unchanged — enter to update)';
+
+  @override
+  String get deliveryFormTest => 'Test Credentials';
+
+  @override
+  String deliveryFormTestOk(String name) {
+    return 'Credentials are valid — connected to $name.';
+  }
+
+  @override
+  String deliveryFormTestFailed(String name, String reason) {
+    return '$name refused the connection: $reason';
+  }
+
+  @override
+  String get deliveryFormSender => 'SENDER INFORMATION';
+
+  @override
+  String get deliveryFormSenderName => 'SENDER NAME';
+
+  @override
+  String get deliveryFormSenderPhone => 'SENDER PHONE';
+
+  @override
+  String get deliveryFormSenderAddress => 'SENDER ADDRESS';
+
+  @override
+  String get deliveryFormSenderWilaya => 'SENDER WILAYA';
+
+  @override
+  String get deliveryFormSetDefault => 'Set as default provider';
+
+  @override
+  String get deliveryFormAdd => 'Add Provider';
+
+  @override
+  String get deliveryFormUpdate => 'Update';
+
+  @override
+  String deliveryProviderAdded(String name) {
+    return '$name added';
+  }
+
+  @override
+  String deliveryProviderUpdated(String name) {
+    return '$name updated';
+  }
+
+  @override
+  String get deliveryFormAllTaken =>
+      'Every supported provider is already configured.';
+
+  @override
+  String get deliveryDeleteNoticeTitle => 'Orders already sent';
+
+  @override
+  String deliveryDeleteNoticeBody(String name) {
+    return 'Those sent with $name keep their tracking number, but can no longer be tracked or have their label printed.';
+  }
+
+  @override
+  String get deliveryDeleteNoticeDefault =>
+      'This is your default provider: choose another one afterwards.';
+
+  @override
+  String deliveryProviderAlreadyGone(String name) {
+    return '$name had already been deleted';
+  }
 }

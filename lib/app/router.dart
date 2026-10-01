@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../core/services/push_service.dart';
 import '../core/utils/logger.dart';
 import '../data/models/agent.dart';
+import '../data/models/delivery.dart';
 import '../data/models/order.dart';
 import '../data/models/supplier.dart';
 import '../l10n/gen/app_localizations.dart';
@@ -22,6 +23,10 @@ import '../presentation/screens/auth/signup_screen.dart';
 import '../presentation/screens/categories/categories_screen.dart';
 import '../presentation/screens/clients/client_detail_screen.dart';
 import '../presentation/screens/clients/clients_screen.dart';
+import '../presentation/screens/delivery/delivery_fees_screen.dart';
+import '../presentation/screens/delivery/delivery_provider_form_screen.dart';
+import '../presentation/screens/delivery/delivery_providers_screen.dart';
+import '../presentation/screens/delivery/delivery_screen.dart';
 import '../presentation/screens/home/home_screen.dart';
 import '../presentation/screens/home/home_shell.dart';
 import '../presentation/screens/inbox/conversation_screen.dart';
@@ -469,6 +474,44 @@ class AppRouter {
             // The list hands its row over so the screen draws at once; a deep
             // link or a splash replay arrives without one and fetches.
             initial: state.extra is Order ? state.extra as Order : null,
+          ),
+        ),
+      ),
+      // `Livraison` and its three screens, all on the root navigator. The
+      // provider form's `new` is declared before its `:id/edit`.
+      GoRoute(
+        path: Routes.delivery,
+        parentNavigatorKey: _rootKey,
+        builder: (_, _) => const BackScope(fallback: Routes.home, child: DeliveryScreen()),
+      ),
+      GoRoute(
+        path: Routes.deliveryFees,
+        parentNavigatorKey: _rootKey,
+        builder: (_, _) => const BackScope(fallback: Routes.delivery, child: DeliveryFeesScreen()),
+      ),
+      GoRoute(
+        path: Routes.deliveryProviders,
+        parentNavigatorKey: _rootKey,
+        builder: (_, _) => const BackScope(fallback: Routes.delivery, child: DeliveryProvidersScreen()),
+      ),
+      GoRoute(
+        path: Routes.deliveryProviderNew,
+        parentNavigatorKey: _rootKey,
+        builder: (_, _) => const BackScope(
+          fallback: Routes.deliveryProviders,
+          child: DeliveryProviderFormScreen(),
+        ),
+      ),
+      GoRoute(
+        path: Routes.deliveryProviderEdit,
+        parentNavigatorKey: _rootKey,
+        builder: (_, state) => BackScope(
+          fallback: Routes.deliveryProviders,
+          child: DeliveryProviderFormScreen(
+            // The list hands its row over; without it (a deep link) the form
+            // looks the account up by id.
+            editing: state.extra is DeliveryProvider ? state.extra! as DeliveryProvider : null,
+            editingId: state.pathParameters['id'],
           ),
         ),
       ),

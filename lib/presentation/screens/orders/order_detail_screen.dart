@@ -23,6 +23,7 @@ import '../../widgets/date_picker_sheet.dart';
 import '../../widgets/home_widgets.dart';
 import '../../widgets/icon_square_button.dart';
 import '../../widgets/list_widgets.dart';
+import '../delivery/delivery_sheets.dart';
 import 'order_status_pill.dart';
 
 /// `Order detail` (Figma `651:11839`) and the confirm wizard on top of it
@@ -138,6 +139,18 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
     }
     AppToast.success(context, l10n.orderStatusChangedToast);
     _close();
+  }
+
+  /// *Envoyer en livraison* — the Send sheet from *Livraison*, for this order.
+  /// From step 3 the work is then done and the screen closes, as *Marquer en
+  /// préparation* does; from the review it stays, now showing the order sent.
+  Future<void> _sendToDelivery({bool closeAfter = false}) async {
+    final order = _model.order;
+    if (order == null) return;
+    final sent = await showSendToCarrierSheet(context, order: order);
+    if (sent == null || !mounted) return;
+    _model.adopt(sent);
+    if (closeAfter) _close();
   }
 
   void _close() {
@@ -573,28 +586,13 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                 style: AppText.bodyS.copyWith(color: AppColors.textSecondary, height: 1.4),
               ),
               SizedBox(height: AppSpacing.md),
-              // Drawn disabled in the frame and disabled here: no courier is
-              // wired up yet, and a button that fails is worse than one that
-              // says it is not ready.
-              Opacity(
-                opacity: 0.4,
-                child: Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.all(AppSpacing.md),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: AppColors.rule, width: AppStroke.hairline),
-                    borderRadius: BorderRadius.circular(AppRadius.card),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(l10n.orderSendToDelivery, style: AppText.bodyS),
-                      SizedBox(height: 0.77.w),
-                      Text(l10n.orderSendToDeliverySoon.toUpperCase(), style: AppText.labelMicro),
-                    ],
-                  ),
+              // Was drawn disabled (*bientôt*) until Livraison existed; it now
+              // opens the Send sheet (wired 2026-10-01).
+              if (order.canSendToDelivery)
+                OutlinedButton(
+                  onPressed: () => _sendToDelivery(closeAfter: true),
+                  child: Text(l10n.orderSendToDelivery),
                 ),
-              ),
               SizedBox(height: AppSpacing.sm),
               FilledButton(
                 onPressed: _markPreparing,
@@ -665,6 +663,14 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                   ),
                 ),
               if (order.canLogCall) SizedBox(height: AppSpacing.sm),
+              // A confirmed order waiting for its courier. Not offered before
+              // confirmation: a cash-on-delivery order is confirmed by phone
+              // first. *Livraison* still lists every unsent order.
+              if (order.canSendToDelivery &&
+                  (order.status == OrderStatus.confirmed || order.status == OrderStatus.preparing)) ...[
+                FilledButton(onPressed: _sendToDelivery, child: Text(l10n.orderSendToDelivery)),
+                SizedBox(height: AppSpacing.sm),
+              ],
               OutlinedButton(onPressed: _close, child: Text(l10n.orderClose)),
             ],
           OrderStep.call => [

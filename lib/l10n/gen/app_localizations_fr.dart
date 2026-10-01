@@ -3992,4 +3992,396 @@ class L10nFr extends L10n {
 
   @override
   String get productsSectionInactive => 'PRODUITS INACTIFS';
+
+  @override
+  String get menuDelivery => 'Livraison';
+
+  @override
+  String get deliveryEyebrow => 'VENTES';
+
+  @override
+  String get deliveryTitle => 'Livraison';
+
+  @override
+  String get deliverySubtitle =>
+      'Envoyez les commandes aux transporteurs et suivez les expéditions';
+
+  @override
+  String get deliveryFeesAction => 'Tarifs';
+
+  @override
+  String get deliveryProvidersAction => 'Transporteurs';
+
+  @override
+  String get deliveryRefresh => 'Actualiser';
+
+  @override
+  String get deliveryStatReady => 'PRÊT À EXPÉDIER';
+
+  @override
+  String get deliveryStatShipped => 'EXPÉDIÉES';
+
+  @override
+  String get deliveryStatInTransit => 'EN TRANSIT';
+
+  @override
+  String get deliveryStatDelivered => 'LIVRÉES';
+
+  @override
+  String get deliverySearchLabel => 'RECHERCHE';
+
+  @override
+  String get deliverySearchPlaceholder => 'Rechercher des commandes...';
+
+  @override
+  String get deliveryTabAll => 'Tous';
+
+  @override
+  String get deliveryTabReady => 'Prêt';
+
+  @override
+  String get deliveryTabSent => 'Envoyée';
+
+  @override
+  String get deliveryTabInTransit => 'En transit';
+
+  @override
+  String get deliveryTabDelivered => 'Livrée';
+
+  @override
+  String get deliveryOrdersSection => 'COMMANDES';
+
+  @override
+  String get deliveryPillNotSent => 'NON ENVOYÉE';
+
+  @override
+  String get deliveryPillSent => 'ENVOYÉE';
+
+  @override
+  String get deliveryPillInTransit => 'EN TRANSIT';
+
+  @override
+  String get deliveryPillDelivered => 'LIVRÉE';
+
+  @override
+  String deliveryMetaLine(String provider, String tracking) {
+    return 'TRANSPORTEUR $provider  ·  SUIVI $tracking';
+  }
+
+  @override
+  String get deliverySend => 'Envoyer';
+
+  @override
+  String get deliveryTrack => 'Suivre';
+
+  @override
+  String get deliveryLabel => 'Étiquette';
+
+  @override
+  String get deliveryEmptyTitle => 'Aucune commande';
+
+  @override
+  String get deliveryEmptyBody =>
+      'Les commandes apparaissent ici, prêtes à être envoyées à un transporteur.';
+
+  @override
+  String get deliveryNoMatchTitle => 'Aucun résultat';
+
+  @override
+  String get deliveryNoMatchBody => 'Essayez un autre mot ou un autre onglet.';
+
+  @override
+  String deliverySendTitle(String order) {
+    return 'Envoyer $order en livraison';
+  }
+
+  @override
+  String get deliveryClient => 'Client';
+
+  @override
+  String get deliveryPhone => 'Téléphone';
+
+  @override
+  String get deliveryAddress => 'Adresse';
+
+  @override
+  String get deliveryTotal => 'Total';
+
+  @override
+  String get deliveryProviderLabel => 'TRANSPORTEUR';
+
+  @override
+  String deliveryProviderDefault(String name) {
+    return '$name (par défaut)';
+  }
+
+  @override
+  String get deliveryDestination => 'WILAYA DE DESTINATION';
+
+  @override
+  String get deliveryChooseWilaya => 'Choisir une wilaya';
+
+  @override
+  String get deliveryStopdesk => 'Livraison en stop desk';
+
+  @override
+  String get deliveryNote => 'NOTE';
+
+  @override
+  String get deliveryNotePlaceholder =>
+      'Note facultative pour la société de livraison...';
+
+  @override
+  String get deliveryRates => 'TARIFS ESTIMÉS';
+
+  @override
+  String get deliveryRateHome => 'Livraison à domicile';
+
+  @override
+  String get deliveryRateStopdesk => 'Stop desk';
+
+  @override
+  String get deliveryConfirmSend => 'Confirmer et envoyer';
+
+  @override
+  String get deliveryNoProviders => 'Aucun transporteur de livraison configuré';
+
+  @override
+  String get deliveryAddProvider => 'Ajouter un transporteur';
+
+  @override
+  String deliverySentToast(String order, String provider) {
+    return '$order envoyée à $provider';
+  }
+
+  @override
+  String deliveryTrackTitle(String order) {
+    return 'Suivi — $order';
+  }
+
+  @override
+  String deliveryCourierResponse(String provider) {
+    return 'RÉPONSE DU TRANSPORTEUR · $provider';
+  }
+
+  @override
+  String get deliveryTrackEmpty =>
+      'Le transporteur n’a renvoyé aucune information.';
+
+  @override
+  String get deliveryLabelNotReady =>
+      'Le transporteur n’a pas encore produit d’étiquette.';
+
+  @override
+  String get deliveryLabelOpenFailed =>
+      'Impossible d’ouvrir l’étiquette sur ce téléphone.';
+
+  @override
+  String get deliveryFeesEyebrow => 'LIVRAISON';
+
+  @override
+  String get deliveryFeesTitle => 'Tarifs de livraison';
+
+  @override
+  String get deliveryFeesSubtitle =>
+      'Fixez votre prix de livraison par wilaya. Utilisé automatiquement à la création des commandes et par l’agent IA pour les devis Messenger.';
+
+  @override
+  String get deliveryFeesFillMissing => 'Compléter les manquants';
+
+  @override
+  String get deliveryFeesResetAll => 'Tout réinitialiser';
+
+  @override
+  String get deliveryFeesSearch => 'Rechercher une wilaya…';
+
+  @override
+  String get deliveryFeesSection => 'WILAYAS';
+
+  @override
+  String get deliveryFeesDefault => 'PAR DÉFAUT';
+
+  @override
+  String get deliveryFeesCustom => 'PERSONNALISÉ';
+
+  @override
+  String get deliveryFeesHome => 'DOMICILE (DA)';
+
+  @override
+  String get deliveryFeesStopdesk => 'STOPDESK (DA)';
+
+  @override
+  String get deliveryFeesReturn => 'RETOUR (DA)';
+
+  @override
+  String get deliveryFeesReset => 'Réinitialiser';
+
+  @override
+  String get deliveryFeesResetAllTitle => 'Tout réinitialiser par défaut';
+
+  @override
+  String get deliveryFeesResetAllBody =>
+      'Remplacer tous vos prix personnalisés par les valeurs par défaut du système ?';
+
+  @override
+  String deliveryFeesSaved(String wilaya) {
+    return 'Tarifs de $wilaya enregistrés';
+  }
+
+  @override
+  String deliveryFeesResetDone(String wilaya) {
+    return '$wilaya revient aux tarifs par défaut';
+  }
+
+  @override
+  String deliveryFeesFilled(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count wilayas complétées',
+      one: '1 wilaya complétée',
+      zero: 'Rien à compléter : chaque wilaya a déjà ses tarifs',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get deliveryFeesResetAllDone =>
+      'Tous les tarifs sont revenus aux valeurs par défaut';
+
+  @override
+  String get deliveryProvidersTitle => 'Transporteurs de livraison';
+
+  @override
+  String get deliveryProvidersSubtitle =>
+      'Configurez les sociétés de livraison pour expédier les commandes';
+
+  @override
+  String get deliveryProvidersSection => 'TRANSPORTEURS';
+
+  @override
+  String get deliveryDefaultBadge => 'PAR DÉFAUT';
+
+  @override
+  String get deliveryCardProvider => 'Transporteur :';
+
+  @override
+  String get deliveryCardSender => 'Expéditeur :';
+
+  @override
+  String get deliveryCardPhone => 'Téléphone :';
+
+  @override
+  String get deliveryCardWilaya => 'Wilaya :';
+
+  @override
+  String get deliveryEdit => 'Modifier';
+
+  @override
+  String get deliveryProvidersEmptyTitle => 'Aucun transporteur configuré';
+
+  @override
+  String get deliveryProvidersEmptyBody =>
+      'Ajoutez un transporteur pour commencer à expédier des commandes';
+
+  @override
+  String get deliveryDeleteTitle => 'Supprimer le transporteur';
+
+  @override
+  String get deliveryDeleteBody =>
+      'Voulez-vous vraiment retirer ce transporteur de livraison ? Cette action est irréversible.';
+
+  @override
+  String deliveryProviderDeleted(String name) {
+    return '$name supprimé';
+  }
+
+  @override
+  String get deliveryFormAddTitle => 'Ajouter un transporteur';
+
+  @override
+  String get deliveryFormEditTitle => 'Modifier le transporteur';
+
+  @override
+  String get deliveryFormCourier => 'TRANSPORTEUR';
+
+  @override
+  String get deliveryFormChooseCourier => 'Choisir un transporteur';
+
+  @override
+  String get deliveryFormDisplayName => 'NOM D’AFFICHAGE';
+
+  @override
+  String get deliveryFormCredentials => 'IDENTIFIANTS API';
+
+  @override
+  String get deliveryFormUnchanged => '(inchangé — saisir pour modifier)';
+
+  @override
+  String get deliveryFormTest => 'Tester les identifiants';
+
+  @override
+  String deliveryFormTestOk(String name) {
+    return 'Identifiants valides — connexion à $name réussie.';
+  }
+
+  @override
+  String deliveryFormTestFailed(String name, String reason) {
+    return 'Connexion à $name refusée : $reason';
+  }
+
+  @override
+  String get deliveryFormSender => 'INFORMATIONS DE L’EXPÉDITEUR';
+
+  @override
+  String get deliveryFormSenderName => 'NOM DE L’EXPÉDITEUR';
+
+  @override
+  String get deliveryFormSenderPhone => 'TÉLÉPHONE';
+
+  @override
+  String get deliveryFormSenderAddress => 'ADRESSE DE L’EXPÉDITEUR';
+
+  @override
+  String get deliveryFormSenderWilaya => 'WILAYA DE L’EXPÉDITEUR';
+
+  @override
+  String get deliveryFormSetDefault => 'Définir comme transporteur par défaut';
+
+  @override
+  String get deliveryFormAdd => 'Ajouter le transporteur';
+
+  @override
+  String get deliveryFormUpdate => 'Mettre à jour';
+
+  @override
+  String deliveryProviderAdded(String name) {
+    return '$name ajouté';
+  }
+
+  @override
+  String deliveryProviderUpdated(String name) {
+    return '$name mis à jour';
+  }
+
+  @override
+  String get deliveryFormAllTaken =>
+      'Chaque transporteur pris en charge est déjà configuré.';
+
+  @override
+  String get deliveryDeleteNoticeTitle => 'Commandes déjà envoyées';
+
+  @override
+  String deliveryDeleteNoticeBody(String name) {
+    return 'Celles envoyées avec $name garderont leur numéro de suivi, mais ne pourront plus être suivies ni leur étiquette imprimée.';
+  }
+
+  @override
+  String get deliveryDeleteNoticeDefault =>
+      'C’est votre transporteur par défaut : choisissez-en un autre ensuite.';
+
+  @override
+  String deliveryProviderAlreadyGone(String name) {
+    return '$name avait déjà été supprimé';
+  }
 }

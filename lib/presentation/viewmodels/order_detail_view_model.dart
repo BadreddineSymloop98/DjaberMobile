@@ -188,6 +188,12 @@ class OrderDetailViewModel extends BaseViewModel {
     return true;
   }
 
+  /// The order as the Send sheet returned it — sent, with its tracking.
+  void adopt(Order updated) {
+    _order = updated;
+    safeNotify();
+  }
+
   /// Step 3's *Marquer en préparation*.
   Future<Result<Order>> advanceTo(OrderStatus status) async {
     final result = await _orders.update(orderId, status: status);

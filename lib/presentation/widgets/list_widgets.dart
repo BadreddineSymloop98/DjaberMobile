@@ -113,25 +113,36 @@ class ToolChip extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Semantics(
-            button: true,
-            child: GestureDetector(
-              onTap: onTap,
-              behavior: HitTestBehavior.opaque,
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(
-                  AppSpacing.md,
-                  AppSpacing.sm,
-                  onClear == null ? AppSpacing.md : AppSpacing.xs,
-                  AppSpacing.sm,
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    AppIcon(icon, size: 3.59.w, color: fg),
-                    SizedBox(width: 1.54.w),
-                    Text(label, style: AppText.bodyS.copyWith(color: fg)),
-                  ],
+          // Flexible, with an ellipsis below: a long label (*Compléter les
+          // manquants*) on a 320-wide handset shortens instead of overflowing.
+          Flexible(
+            child: Semantics(
+              button: true,
+              child: GestureDetector(
+                onTap: onTap,
+                behavior: HitTestBehavior.opaque,
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(
+                    AppSpacing.md,
+                    AppSpacing.sm,
+                    onClear == null ? AppSpacing.md : AppSpacing.xs,
+                    AppSpacing.sm,
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      AppIcon(icon, size: 3.59.w, color: fg),
+                      SizedBox(width: 1.54.w),
+                      Flexible(
+                        child: Text(
+                          label,
+                          style: AppText.bodyS.copyWith(color: fg),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

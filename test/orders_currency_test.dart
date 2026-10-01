@@ -126,6 +126,7 @@ class _Orders extends OrderRepository {
     String? search,
     OrderStatus? status,
     ConfirmationStatus? confirmationStatus,
+    DeliveryStatus? deliveryStatus,
     PaymentStatus? paymentStatus,
     bool hasRemaining = false,
     DateTime? startDate,

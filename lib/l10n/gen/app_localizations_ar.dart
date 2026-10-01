@@ -3978,4 +3978,388 @@ class L10nAr extends L10n {
 
   @override
   String get productsSectionInactive => 'المنتجات غير النشطة';
+
+  @override
+  String get menuDelivery => 'التوصيل';
+
+  @override
+  String get deliveryEyebrow => 'المبيعات';
+
+  @override
+  String get deliveryTitle => 'التوصيل';
+
+  @override
+  String get deliverySubtitle =>
+      'أرسل الطلبات إلى شركات التوصيل وتتبّع الشحنات';
+
+  @override
+  String get deliveryFeesAction => 'الأسعار';
+
+  @override
+  String get deliveryProvidersAction => 'شركات التوصيل';
+
+  @override
+  String get deliveryRefresh => 'تحديث';
+
+  @override
+  String get deliveryStatReady => 'جاهزة للشحن';
+
+  @override
+  String get deliveryStatShipped => 'مُرسلة';
+
+  @override
+  String get deliveryStatInTransit => 'قيد النقل';
+
+  @override
+  String get deliveryStatDelivered => 'تم التسليم';
+
+  @override
+  String get deliverySearchLabel => 'البحث';
+
+  @override
+  String get deliverySearchPlaceholder => 'ابحث في الطلبات...';
+
+  @override
+  String get deliveryTabAll => 'الكل';
+
+  @override
+  String get deliveryTabReady => 'جاهز';
+
+  @override
+  String get deliveryTabSent => 'مُرسلة';
+
+  @override
+  String get deliveryTabInTransit => 'قيد النقل';
+
+  @override
+  String get deliveryTabDelivered => 'تم التسليم';
+
+  @override
+  String get deliveryOrdersSection => 'الطلبات';
+
+  @override
+  String get deliveryPillNotSent => 'لم تُرسل';
+
+  @override
+  String get deliveryPillSent => 'مُرسلة';
+
+  @override
+  String get deliveryPillInTransit => 'قيد النقل';
+
+  @override
+  String get deliveryPillDelivered => 'تم التسليم';
+
+  @override
+  String deliveryMetaLine(String provider, String tracking) {
+    return 'شركة التوصيل $provider  ·  التتبع $tracking';
+  }
+
+  @override
+  String get deliverySend => 'إرسال';
+
+  @override
+  String get deliveryTrack => 'تتبّع';
+
+  @override
+  String get deliveryLabel => 'الملصق';
+
+  @override
+  String get deliveryEmptyTitle => 'لا توجد طلبات';
+
+  @override
+  String get deliveryEmptyBody =>
+      'تظهر الطلبات هنا، جاهزة للإرسال إلى شركة توصيل.';
+
+  @override
+  String get deliveryNoMatchTitle => 'لا نتائج';
+
+  @override
+  String get deliveryNoMatchBody => 'جرّب كلمة أخرى أو تبويبًا آخر.';
+
+  @override
+  String deliverySendTitle(String order) {
+    return 'إرسال $order للتوصيل';
+  }
+
+  @override
+  String get deliveryClient => 'العميل';
+
+  @override
+  String get deliveryPhone => 'الهاتف';
+
+  @override
+  String get deliveryAddress => 'العنوان';
+
+  @override
+  String get deliveryTotal => 'الإجمالي';
+
+  @override
+  String get deliveryProviderLabel => 'شركة التوصيل';
+
+  @override
+  String deliveryProviderDefault(String name) {
+    return '$name (افتراضي)';
+  }
+
+  @override
+  String get deliveryDestination => 'ولاية الوجهة';
+
+  @override
+  String get deliveryChooseWilaya => 'اختر ولاية';
+
+  @override
+  String get deliveryStopdesk => 'التوصيل إلى المكتب (ستوب ديسك)';
+
+  @override
+  String get deliveryNote => 'ملاحظة';
+
+  @override
+  String get deliveryNotePlaceholder => 'ملاحظة اختيارية لشركة التوصيل...';
+
+  @override
+  String get deliveryRates => 'الأسعار التقديرية';
+
+  @override
+  String get deliveryRateHome => 'التوصيل إلى المنزل';
+
+  @override
+  String get deliveryRateStopdesk => 'ستوب ديسك';
+
+  @override
+  String get deliveryConfirmSend => 'تأكيد وإرسال';
+
+  @override
+  String get deliveryNoProviders => 'لم تُضبط أي شركة توصيل';
+
+  @override
+  String get deliveryAddProvider => 'إضافة شركة توصيل';
+
+  @override
+  String deliverySentToast(String order, String provider) {
+    return 'تم إرسال $order إلى $provider';
+  }
+
+  @override
+  String deliveryTrackTitle(String order) {
+    return 'التتبع — $order';
+  }
+
+  @override
+  String deliveryCourierResponse(String provider) {
+    return 'رد شركة التوصيل · $provider';
+  }
+
+  @override
+  String get deliveryTrackEmpty => 'لم تُرجع شركة التوصيل أي معلومات.';
+
+  @override
+  String get deliveryLabelNotReady => 'لم تُصدر شركة التوصيل الملصق بعد.';
+
+  @override
+  String get deliveryLabelOpenFailed => 'تعذّر فتح الملصق على هذا الهاتف.';
+
+  @override
+  String get deliveryFeesEyebrow => 'التوصيل';
+
+  @override
+  String get deliveryFeesTitle => 'أسعار التوصيل';
+
+  @override
+  String get deliveryFeesSubtitle =>
+      'حدّد سعر التوصيل لكل ولاية. يُستعمل تلقائيًا عند إنشاء الطلبات ومن طرف وكيل الذكاء الاصطناعي لعروض الأسعار على ماسنجر.';
+
+  @override
+  String get deliveryFeesFillMissing => 'إكمال الناقص';
+
+  @override
+  String get deliveryFeesResetAll => 'إعادة الكل للافتراضي';
+
+  @override
+  String get deliveryFeesSearch => 'ابحث عن ولاية…';
+
+  @override
+  String get deliveryFeesSection => 'الولايات';
+
+  @override
+  String get deliveryFeesDefault => 'افتراضي';
+
+  @override
+  String get deliveryFeesCustom => 'مخصص';
+
+  @override
+  String get deliveryFeesHome => 'المنزل (دج)';
+
+  @override
+  String get deliveryFeesStopdesk => 'المكتب (دج)';
+
+  @override
+  String get deliveryFeesReturn => 'الإرجاع (دج)';
+
+  @override
+  String get deliveryFeesReset => 'إعادة تعيين';
+
+  @override
+  String get deliveryFeesResetAllTitle => 'إعادة الكل إلى الافتراضي';
+
+  @override
+  String get deliveryFeesResetAllBody =>
+      'استبدال كل أسعارك المخصصة بالقيم الافتراضية للنظام؟';
+
+  @override
+  String deliveryFeesSaved(String wilaya) {
+    return 'تم حفظ أسعار $wilaya';
+  }
+
+  @override
+  String deliveryFeesResetDone(String wilaya) {
+    return 'عادت $wilaya إلى الأسعار الافتراضية';
+  }
+
+  @override
+  String deliveryFeesFilled(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'تم إكمال $count ولاية',
+      one: 'تم إكمال ولاية واحدة',
+      zero: 'لا شيء لإكماله: لكل ولاية أسعارها',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get deliveryFeesResetAllDone => 'عادت كل الأسعار إلى القيم الافتراضية';
+
+  @override
+  String get deliveryProvidersTitle => 'شركات التوصيل';
+
+  @override
+  String get deliveryProvidersSubtitle => 'اضبط شركات التوصيل لشحن الطلبات';
+
+  @override
+  String get deliveryProvidersSection => 'شركات التوصيل';
+
+  @override
+  String get deliveryDefaultBadge => 'افتراضي';
+
+  @override
+  String get deliveryCardProvider => 'الشركة:';
+
+  @override
+  String get deliveryCardSender => 'المرسِل:';
+
+  @override
+  String get deliveryCardPhone => 'الهاتف:';
+
+  @override
+  String get deliveryCardWilaya => 'الولاية:';
+
+  @override
+  String get deliveryEdit => 'تعديل';
+
+  @override
+  String get deliveryProvidersEmptyTitle => 'لم تُضبط أي شركة توصيل';
+
+  @override
+  String get deliveryProvidersEmptyBody => 'أضف شركة توصيل لبدء شحن الطلبات';
+
+  @override
+  String get deliveryDeleteTitle => 'حذف شركة التوصيل';
+
+  @override
+  String get deliveryDeleteBody =>
+      'هل تريد فعلًا إزالة شركة التوصيل هذه؟ لا يمكن التراجع عن ذلك.';
+
+  @override
+  String deliveryProviderDeleted(String name) {
+    return 'تم حذف $name';
+  }
+
+  @override
+  String get deliveryFormAddTitle => 'إضافة شركة توصيل';
+
+  @override
+  String get deliveryFormEditTitle => 'تعديل شركة التوصيل';
+
+  @override
+  String get deliveryFormCourier => 'شركة التوصيل';
+
+  @override
+  String get deliveryFormChooseCourier => 'اختر شركة توصيل';
+
+  @override
+  String get deliveryFormDisplayName => 'الاسم المعروض';
+
+  @override
+  String get deliveryFormCredentials => 'بيانات اعتماد API';
+
+  @override
+  String get deliveryFormUnchanged => '(دون تغيير — أدخل للتحديث)';
+
+  @override
+  String get deliveryFormTest => 'اختبار بيانات الاعتماد';
+
+  @override
+  String deliveryFormTestOk(String name) {
+    return 'بيانات الاعتماد صحيحة — تم الاتصال بـ $name.';
+  }
+
+  @override
+  String deliveryFormTestFailed(String name, String reason) {
+    return 'رفضت $name الاتصال: $reason';
+  }
+
+  @override
+  String get deliveryFormSender => 'معلومات المرسِل';
+
+  @override
+  String get deliveryFormSenderName => 'اسم المرسِل';
+
+  @override
+  String get deliveryFormSenderPhone => 'هاتف المرسِل';
+
+  @override
+  String get deliveryFormSenderAddress => 'عنوان المرسِل';
+
+  @override
+  String get deliveryFormSenderWilaya => 'ولاية المرسِل';
+
+  @override
+  String get deliveryFormSetDefault => 'تعيين كشركة التوصيل الافتراضية';
+
+  @override
+  String get deliveryFormAdd => 'إضافة الشركة';
+
+  @override
+  String get deliveryFormUpdate => 'تحديث';
+
+  @override
+  String deliveryProviderAdded(String name) {
+    return 'تمت إضافة $name';
+  }
+
+  @override
+  String deliveryProviderUpdated(String name) {
+    return 'تم تحديث $name';
+  }
+
+  @override
+  String get deliveryFormAllTaken => 'كل شركات التوصيل المدعومة مضبوطة مسبقًا.';
+
+  @override
+  String get deliveryDeleteNoticeTitle => 'الطلبات المُرسلة مسبقًا';
+
+  @override
+  String deliveryDeleteNoticeBody(String name) {
+    return 'ستحتفظ الطلبات المُرسلة عبر $name برقم التتبع، لكن لن يمكن تتبعها أو طباعة ملصقها بعد الآن.';
+  }
+
+  @override
+  String get deliveryDeleteNoticeDefault =>
+      'هذه شركة التوصيل الافتراضية لديك: اختر شركة أخرى بعد ذلك.';
+
+  @override
+  String deliveryProviderAlreadyGone(String name) {
+    return 'كانت $name محذوفة مسبقًا';
+  }
 }

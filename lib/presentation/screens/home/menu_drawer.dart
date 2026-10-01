@@ -361,6 +361,16 @@ class _MenuDrawerState extends State<MenuDrawer> {
                   iconColor: AppColors.accentOrders,
                   onTap: () => _goToTab(Routes.orders),
                 ),
+                // Right after Commandes, as in the web's stock group. Shown
+                // in both stock modes like every row here (the web keeps it
+                // to Advanced) — decided 2026-10-01.
+                MenuSubrow(
+                  depth: 2,
+                  icon: AppIcons.truck,
+                  label: l10n.menuDelivery,
+                  iconColor: AppColors.accentOrders,
+                  onTap: () => _open(Routes.delivery),
+                ),
               ],
               MenuSubrow(
                 icon: AppIcons.bot,

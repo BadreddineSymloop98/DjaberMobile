@@ -166,4 +166,18 @@ class Api {
   static const deliveryFeesQuote = '/api/user-stock/delivery/fees/quote';
   static String deliveryTrack(String orderId) =>
       '/api/user-stock/delivery/track/$orderId';
+  static String deliveryLabel(String orderId) =>
+      '/api/user-stock/delivery/label/$orderId';
+  static String deliverySend(String orderId) =>
+      '/api/user-stock/delivery/send/$orderId';
+  static const deliveryRates = '/api/user-stock/delivery/rates';
+  static String deliveryFee(int wilayaId) =>
+      '/api/user-stock/delivery/fees/$wilayaId';
+  static const deliveryFeesSeed = '/api/user-stock/delivery/fees/seed';
+  static const deliveryProviders = '/api/user-stock/delivery/providers';
+  static String deliveryProvider(String id) =>
+      '/api/user-stock/delivery/providers/$id';
+  static const deliveryProvidersAvailable =
+      '/api/user-stock/delivery/providers/available';
+  static const deliveryProvidersTest = '/api/user-stock/delivery/providers/test';
 }

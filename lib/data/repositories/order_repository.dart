@@ -59,6 +59,7 @@ class OrderRepository {
     String? search,
     OrderStatus? status,
     ConfirmationStatus? confirmationStatus,
+    DeliveryStatus? deliveryStatus,
     PaymentStatus? paymentStatus,
     bool hasRemaining = false,
     DateTime? startDate,
@@ -75,6 +76,8 @@ class OrderRepository {
         if (search != null && search.trim().isNotEmpty) 'search': search.trim(),
         if (status != null) 'status': status.wire,
         if (confirmationStatus != null) 'confirmationStatus': confirmationStatus.wire,
+        // The courier pipeline — *Livraison*'s tabs filter on it server-side.
+        if (deliveryStatus != null) 'deliveryStatus': deliveryStatus.wire,
         // Never both: the server ignores `paymentStatus` when `hasRemaining`
         // is set, and sending a filter that is silently dropped would make the
         // sheet lie about what is applied.
