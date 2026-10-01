@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../core/utils/screen.dart';
 import '../l10n/gen/app_localizations.dart';
+import '../presentation/screens/splash/splash_replay_overlay.dart';
 import '../presentation/theme/app_theme.dart';
 import '../presentation/viewmodels/locale_view_model.dart';
 import '../presentation/viewmodels/session_view_model.dart';
@@ -42,12 +43,12 @@ class _DjaberAppState extends State<DjaberApp> with WidgetsBindingObserver {
 
     switch (state) {
       case AppLifecycleState.paused:
-        // Put the app back behind the splash, so it plays on every return and
-        // not only on a cold start. Done on the way out rather than on the way
-        // in: by the time the merchant is looking at the screen again the
-        // router has already settled on the splash, so there is no flash of
-        // the previous screen.
-        session.resetBoot();
+        // Cover the app with the splash, so it plays on every return and not
+        // only on a cold start. Done on the way out rather than on the way in:
+        // by the time the merchant is looking at the screen again the splash
+        // is already over it, so there is no flash of the previous screen.
+        // Over it, not instead of it — see [SessionViewModel.replaySplash].
+        session.replaySplash();
       case AppLifecycleState.resumed:
         // Coming back to the foreground is the moment the merchant's view is
         // most likely stale — a push may have been missed, credits may have
@@ -104,8 +105,9 @@ class _DjaberAppState extends State<DjaberApp> with WidgetsBindingObserver {
       // Runs above every route: keeps `Screen` current so the `.h` / `.w`
       // extension is populated before any screen builds, and clamps the OS
       // text scale so a 2.0 system font size cannot destroy dense layouts.
+      // The splash's replay covers the router from here.
       builder: (context, child) => ScreenInitializer(
-        child: child ?? const SizedBox.shrink(),
+        child: SplashReplayOverlay(child: child ?? const SizedBox.shrink()),
       ),
     );
   }

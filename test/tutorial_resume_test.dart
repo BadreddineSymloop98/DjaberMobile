@@ -2,6 +2,7 @@ import 'package:djaber_mobile/app/routes.dart';
 import 'package:djaber_mobile/core/error/app_exception.dart';
 import 'package:djaber_mobile/core/error/result.dart';
 import 'package:djaber_mobile/data/models/agent.dart';
+import 'package:djaber_mobile/data/models/agent_preset.dart';
 import 'package:djaber_mobile/data/models/product.dart';
 import 'package:djaber_mobile/data/repositories/agent_repository.dart';
 import 'package:djaber_mobile/data/repositories/product_repository.dart';
@@ -209,6 +210,7 @@ class _AtLimitAgents extends AgentRepository {
     required AgentPersonality personality,
     String? customInstructions,
     List<String> pageIds = const [],
+    AgentPreset? preset,
   }) async =>
       const Result.failure(ForbiddenException(
         'La limite de votre plan est atteinte (1 agent).',
@@ -226,6 +228,7 @@ class _FailingAgents extends AgentRepository {
     required AgentPersonality personality,
     String? customInstructions,
     List<String> pageIds = const [],
+    AgentPreset? preset,
   }) async =>
       const Result.failure(ServerException('boom', statusCode: 500));
 }

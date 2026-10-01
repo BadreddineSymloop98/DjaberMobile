@@ -71,8 +71,16 @@ class _TutorialProductScreenState extends State<TutorialProductScreen> {
     super.dispose();
   }
 
+  /// Set once the product exists, and never cleared: from then on the step is
+  /// spent, and back must not send the merchant to `T2` in the gap before the
+  /// `go` to `T4` (the step is remembered first, which awaits).
+  bool _advancing = false;
+
   Future<void> _create() async {
     final product = await _model.submitAndCreate();
+    if ((product != null || _model.alreadyExists) && mounted) {
+      setState(() => _advancing = true);
+    }
     // The router is looked up only on the success path, not before the
     // attempt. Capturing it up front would make a screen that merely *fails
     // validation* depend on a GoRouter being in the tree — which is exactly
@@ -120,6 +128,9 @@ class _TutorialProductScreenState extends State<TutorialProductScreen> {
 
           return TutorialStepScaffold(
             step: 2,
+            // Back goes to T2 (the route's parent) only while nothing has
+            // been created; the draft is kept by dispose.
+            busy: model.isBusy || _advancing,
             title: l10n.tutorialProductTitle,
             subtitle: l10n.tutorialProductSubtitle,
             footer: Column(

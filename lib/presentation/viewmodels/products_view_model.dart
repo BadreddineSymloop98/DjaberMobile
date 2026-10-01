@@ -2,6 +2,7 @@ import '../../core/error/result.dart';
 import '../../data/models/catalogue.dart';
 import '../../data/models/dashboard_stats.dart';
 import '../../data/models/product.dart';
+import '../../data/models/product_filters.dart';
 import '../../data/repositories/catalogue_repository.dart';
 import '../../data/repositories/dashboard_repository.dart';
 import '../../data/repositories/product_repository.dart';
@@ -78,6 +79,7 @@ class ProductsViewModel extends BaseViewModel {
   DashboardStats _stats = const DashboardStats();
   int _total = 0;
   ProductFilter _filter = ProductFilter.all;
+  ProductFilters _filters = const ProductFilters();
   String _search = '';
 
   List<Product> get rows => _rows;
@@ -89,13 +91,16 @@ class ProductsViewModel extends BaseViewModel {
   int get total => _total;
 
   ProductFilter get filter => _filter;
+
+  /// The filter sheet's status and ranges, on top of the chip above.
+  ProductFilters get filters => _filters;
   String get search => _search;
 
   /// True when the catalogue is genuinely empty, as opposed to filtered down
   /// to nothing. The two need different copy: one invites adding a first
   /// product, the other says the filter found nothing.
   bool get isCatalogueEmpty =>
-      _rows.isEmpty && _search.isEmpty && _filter is AllProducts;
+      _rows.isEmpty && _search.isEmpty && _filter is AllProducts && _filters.isEmpty;
 
   /// True while the first load is still running and there is nothing to show.
   /// A refresh does not set it — see [BaseViewModel.run]'s `silent`.
@@ -151,17 +156,20 @@ class ProductsViewModel extends BaseViewModel {
   /// the screen strobe.
   Future<void> _reload({bool silent = false}) async {
     final active = _filter;
+    final sheet = _filters;
     await run(
       () => _products.list(
         search: _search,
         categoryId: active is InCategory ? active.category.id : null,
         lowStock: active is LowStockOnly,
+        filters: sheet,
       ),
       onSuccess: (page) {
         // Dropped if the merchant changed the filter while this was in
         // flight: a slow answer for `Stock faible` must not overwrite the
-        // rows for the category they have since tapped.
-        if (_filter != active) return;
+        // rows for the category they have since tapped — nor an answer for
+        // the sheet's old ranges the rows for its new ones.
+        if (_filter != active || _filters != sheet) return;
         _rows = page.products;
         _total = page.total;
       },
@@ -176,6 +184,15 @@ class ProductsViewModel extends BaseViewModel {
   Future<void> selectFilter(ProductFilter value) async {
     if (value == _filter) return;
     _filter = value;
+    safeNotify();
+    await _reload(silent: true);
+  }
+
+  /// From the filter sheet's *Appliquer*. Combines with the chip and the
+  /// search, as the web's panel combines with its toolbar.
+  Future<void> applyFilters(ProductFilters value) async {
+    if (value == _filters) return;
+    _filters = value;
     safeNotify();
     await _reload(silent: true);
   }
