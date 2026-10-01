@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:provider/provider.dart';
 
+import '../../../app/route_observer.dart';
 import '../../../app/routes.dart';
 import '../../../core/extensions/responsive_extension.dart';
 import '../../../data/models/connected_page.dart';
@@ -52,11 +53,19 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    // A tab: it hears that it is back on screen — a pushed screen closed, or
+    // the splash replay ended — through the shell (see [shellReturns]).
+    shellReturns.addListener(_onReturn);
     _model.load();
+  }
+
+  void _onReturn() {
+    if (mounted) _model.load();
   }
 
   @override
   void dispose() {
+    shellReturns.removeListener(_onReturn);
     _model.dispose();
     super.dispose();
   }
@@ -103,8 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         // Not `T5`: see `_QuickActions`. The step it names is
                         // outstanding, but the place to do it is the
                         // standalone connect screen, not the wizard.
-                        onConnect: () =>
-                            _notBuilt(context, l10n.homeNoPageTitle),
+                        onConnect: () => _openPages(context),
                       ),
 
                     SectionLabel(
@@ -123,14 +131,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     SectionLabel(label: l10n.homeQuickActions),
                     _QuickActions(
                       l10n: l10n,
-                      onUnbuilt: (what) => _notBuilt(context, what),
+                      onConnect: () => _openPages(context),
                     ),
 
                     _gap,
                     SectionLabel(
                       label: l10n.homeYourPages,
                       trailing: model.hasPages ? l10n.homeManageAll : null,
-                      onTrailingTap: () => _notBuilt(context, 'Pages'),
+                      onTrailingTap: () => _openPages(context),
                     ),
                     _Pages(model: model, l10n: l10n),
 
@@ -149,17 +157,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget get _gap => SizedBox(height: AppSpacing.xxl); // 24
 
-
-  /// Destinations that do not exist yet. Says so rather than doing nothing,
-  /// which reads as a broken tap.
-  void _notBuilt(BuildContext context, String what) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('$what — ${L10n.of(context).commonNotBuilt}'),
-        backgroundColor: AppColors.surfaceHigh,
-        behavior: SnackBarBehavior.floating,
-      ),
-    );
+  /// `12 — Pages connectées` (`13` when there are none). Home reloads on the
+  /// way back: a page may have been connected or disconnected there.
+  Future<void> _openPages(BuildContext context) async {
+    await GoRouter.of(context).push(Routes.pages);
+    if (mounted) await _model.load(silent: true);
   }
 }
 
@@ -391,7 +393,13 @@ class _Queue extends StatelessWidget {
               time: _age(conversation, l10n),
               who: conversation.displayName,
               message: conversation.lastMessage ?? '',
-              onTap: () => context.go(Routes.conversationOf(conversation.id)),
+              // Pushed, so back returns to home; re-read on the way back,
+              // since a reply or a status change may have cleared the card.
+              onTap: () async {
+                await GoRouter.of(context)
+                    .push(Routes.conversationOf(conversation.id));
+                if (context.mounted) await model.load(silent: true);
+              },
             ),
             SizedBox(height: AppSpacing.sm), // 8
           ],
@@ -574,12 +582,12 @@ class _TileRow extends StatelessWidget {
 /// The standalone creation screens are not built yet, so each card says so
 /// until it has a real destination.
 class _QuickActions extends StatelessWidget {
-  const _QuickActions({required this.l10n, required this.onUnbuilt});
+  const _QuickActions({required this.l10n, required this.onConnect});
 
   final L10n l10n;
 
-  /// Called with the destination's name until that screen exists.
-  final void Function(String what) onUnbuilt;
+  /// `13 — Connecter une page`, the standalone twin of `T5`.
+  final VoidCallback onConnect;
 
   @override
   Widget build(BuildContext context) {
@@ -593,9 +601,7 @@ class _QuickActions extends StatelessWidget {
             iconColor: AppColors.live,
             title: l10n.homeActionConnectTitle,
             subtitle: l10n.homeActionConnectBody,
-            // TODO(pages): `13 — Connecter une page`, the standalone twin of
-            // `T5`. Same two brand buttons, no wizard around them.
-            onTap: () => onUnbuilt(l10n.homeActionConnectTitle),
+            onTap: onConnect,
           ),
           SizedBox(height: AppSpacing.sm),
           ActionCard(
@@ -603,9 +609,8 @@ class _QuickActions extends StatelessWidget {
             iconColor: AppColors.accentStarred,
             title: l10n.homeActionProductsTitle,
             subtitle: l10n.homeActionProductsBody,
-            // TODO(stock): the product form outside the tutorial. Not the
-            // Stock tab either — that is a list, and this card is a create.
-            onTap: () => context.go(Routes.products),
+            // Pushed, so back returns to home instead of asking to leave.
+            onTap: () => GoRouter.of(context).push(Routes.products),
           ),
           SizedBox(height: AppSpacing.sm),
           ActionCard(
@@ -613,9 +618,7 @@ class _QuickActions extends StatelessWidget {
             iconColor: AppColors.live,
             title: l10n.homeActionAgentsTitle,
             subtitle: l10n.homeActionAgentsBody,
-            // TODO(agents): the agents list, which is where a second agent is
-            // created — not `T4`, which creates the first one.
-            onTap: () => onUnbuilt(l10n.homeActionAgentsTitle),
+            onTap: () => context.go(Routes.agents),
           ),
         ],
       ),

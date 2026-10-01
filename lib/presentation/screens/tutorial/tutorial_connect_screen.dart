@@ -48,6 +48,10 @@ class _TutorialConnectScreenState extends State<TutorialConnectScreen> {
     agents: context.read<AgentRepository>(),
   );
 
+  /// Set once a page is connected, and never cleared: back is ignored until
+  /// the `go` to `T6`.
+  bool _advancing = false;
+
   @override
   void dispose() {
     _model.dispose();
@@ -94,6 +98,8 @@ class _TutorialConnectScreenState extends State<TutorialConnectScreen> {
     );
     if (page == null || !mounted) return;
 
+    // The page exists: from here the step is spent and back is ignored.
+    setState(() => _advancing = true);
     context.read<TutorialViewModel>().pageConnected(page);
     final l10n = L10n.of(context);
     // The page is connected either way, so the step moves on — but a page the
@@ -147,6 +153,9 @@ class _TutorialConnectScreenState extends State<TutorialConnectScreen> {
         builder: (context, model, _) {
           return TutorialStepScaffold(
             step: 4,
+            // A root: back leaves the app, asking first. Ignored while
+            // connecting (startConnect, finishConnect) and after success.
+            busy: model.isBusy || _advancing,
             title: l10n.tutorialConnectTitle,
             subtitle: l10n.tutorialConnectSubtitle,
             footer: Column(

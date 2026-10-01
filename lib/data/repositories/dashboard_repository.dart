@@ -3,8 +3,9 @@ import '../../core/error/result.dart';
 import '../../core/network/api_client.dart';
 import '../models/conversation.dart';
 import '../models/dashboard_stats.dart';
+import '../models/stock_overview.dart';
 
-/// The figures and the queue behind `09 — Accueil`.
+/// The figures and the queue behind `09 — Accueil`, and `16 — Aperçu du stock`.
 class DashboardRepository {
   DashboardRepository({required ApiClient api}) : _api = api;
 
@@ -25,6 +26,21 @@ class DashboardRepository {
         Api.salesStats,
         query: const {'period': 'month'},
         parse: (json) => SalesStats.fromJson(json as Map<String, dynamic>),
+      );
+
+  /// `GET /api/user-stock/dashboard`, whole: the figures and the 10 latest
+  /// stock movements — `16 — Aperçu du stock`.
+  Future<Result<StockOverview>> overview() => _api.get<StockOverview>(
+        Api.dashboard,
+        parse: (json) => StockOverview.fromJson(json as Map<String, dynamic>),
+      );
+
+  /// `GET /api/user-stock/purchases/stats?period=month` — `16`'s Advanced
+  /// "Achats ce mois", with the web's own period.
+  Future<Result<PurchaseStats>> purchaseStats() => _api.get<PurchaseStats>(
+        Api.purchasesStats,
+        query: const {'period': 'month'},
+        parse: (json) => PurchaseStats.fromJson(json as Map<String, dynamic>),
       );
 
   /// `GET /api/pages/:pageId/conversations` for one Page.

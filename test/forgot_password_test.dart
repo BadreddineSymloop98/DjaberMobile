@@ -1,5 +1,8 @@
+import 'package:djaber_mobile/core/error/app_exception.dart';
+import 'package:djaber_mobile/core/error/result.dart';
 import 'package:djaber_mobile/core/utils/screen.dart';
 import 'package:djaber_mobile/core/utils/validators.dart';
+import 'package:djaber_mobile/data/repositories/auth_repository.dart';
 import 'package:djaber_mobile/l10n/gen/app_localizations.dart';
 import 'package:djaber_mobile/presentation/screens/auth/forgot_password_screen.dart';
 import 'package:djaber_mobile/presentation/screens/auth/password_sent_screen.dart';
@@ -62,6 +65,42 @@ void main() {
       addTearDown(model.dispose);
       model.email.controller.text = 'amina@shop.dz';
       expect(model.submittedEmail, 'amina@shop.dz');
+    });
+
+    test('sends the trimmed address and reports the server accepted it', () async {
+      final auth = _FakeAuth(const Result.success(true));
+      final model = ForgotPasswordViewModel(auth: auth);
+      addTearDown(model.dispose);
+      model.email.controller.text = 'amina@shop.dz';
+
+      expect(await model.send(), isTrue);
+      expect(auth.requested, ['amina@shop.dz']);
+      expect(model.error, isNull);
+    });
+
+    test('an invalid address never reaches the server', () async {
+      final auth = _FakeAuth(const Result.success(true));
+      final model = ForgotPasswordViewModel(auth: auth);
+      addTearDown(model.dispose);
+      model.email.controller.text = 'amina@';
+
+      expect(await model.send(), isFalse);
+      expect(auth.requested, isEmpty);
+    });
+
+    test('a refused request stays on the form with the server message', () async {
+      const unavailable = ServerException(
+        'Password recovery by e-mail is not available yet.',
+        statusCode: 503,
+        code: 'MAIL_NOT_CONFIGURED',
+      );
+      final model = ForgotPasswordViewModel(auth: _FakeAuth(const Result.failure(unavailable)));
+      addTearDown(model.dispose);
+      model.email.controller.text = 'amina@shop.dz';
+
+      expect(await model.send(), isFalse);
+      expect(model.error?.code, 'MAIL_NOT_CONFIGURED');
+      expect(model.isBusy, isFalse);
     });
   });
 
@@ -148,6 +187,14 @@ void main() {
       expect(find.text('Vérifiez votre e-mail'), findsOneWidget);
       expect(find.text('amina@shop.dz'), findsOneWidget);
       expect(find.text('Essayez une autre adresse e-mail'), findsOneWidget);
+      // The server's 60-second guard: resend waits it out.
+      expect(find.text('Renvoyer le lien dans 60 s'), findsOneWidget);
+      // The next step is the e-mail's link; nothing here opens a reset form.
+      expect(find.text('Ouvrez le lien reçu par e-mail pour choisir un nouveau mot de passe.'), findsOneWidget);
+      expect(find.text('Définir un nouveau mot de passe'), findsNothing);
+
+      await tester.pump(const Duration(seconds: 61));
+      expect(find.text('Renvoyer le lien'), findsOneWidget);
     });
 
     testWidgets('omits the address block when it has none', (tester) async {
@@ -160,6 +207,8 @@ void main() {
       expect(tester.takeException(), isNull);
       expect(find.text('Vérifiez votre e-mail'), findsOneWidget);
       expect(find.text('Essayez une autre adresse e-mail'), findsOneWidget);
+      // Nothing to resend to without the address.
+      expect(find.textContaining('Renvoyer'), findsNothing);
     });
 
     testWidgets('a long address is truncated rather than overflowing',
@@ -177,4 +226,21 @@ void main() {
       expect(tester.takeException(), isNull);
     });
   });
+}
+
+/// Only the reset request is exercised here.
+class _FakeAuth implements AuthRepository {
+  _FakeAuth(this.answer);
+
+  final Result<bool> answer;
+  final requested = <String>[];
+
+  @override
+  Future<Result<bool>> requestPasswordReset(String email) async {
+    requested.add(email);
+    return answer;
+  }
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
