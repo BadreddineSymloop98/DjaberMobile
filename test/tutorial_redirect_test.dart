@@ -153,7 +153,8 @@ void main() {
     expect(location(), Routes.home);
   });
 
-  testWidgets('back does not close the app from a step', (tester) async {
+  testWidgets('back from a step goes to the step before it, not out of the app',
+      (tester) async {
     await boot(tutorialPending: true);
     session.debugSetUser(user);
     await pumpApp(tester);
@@ -162,14 +163,14 @@ void main() {
     await tester.pumpAndSettle();
 
     // Steps are reached with `go`, which replaces rather than pushes, so
-    // there is nothing to pop and the pop would reach Android and close the
-    // app — losing whatever the merchant had typed. On `T3` that is six
-    // fields. Swallowed instead.
+    // there is nothing to pop, and the pop would reach Android and close the
+    // app. The route's `BackScope` consumes it and goes to the step's declared
+    // parent instead: `T2` has created nothing, so back is the intro.
     final popped = await tester.binding.handlePopRoute();
     await tester.pumpAndSettle();
 
     expect(popped, isTrue, reason: 'the route must consume the pop');
-    expect(location(), Routes.tutorialMode);
+    expect(location(), Routes.tutorial);
   });
 
   testWidgets('back walks the intro pages instead of closing the app',
@@ -334,8 +335,8 @@ void main() {
     expect(session.tutorialPending, isFalse);
   });
 
-  testWidgets('completeTutorial releases the hold but does not navigate',
-      (tester) async {
+  testWidgets('completeTutorial releases the hold, and a finished tutorial is '
+      'never shown again', (tester) async {
     await boot(tutorialPending: true);
     session.debugSetUser(user);
     await pumpApp(tester);
@@ -344,16 +345,17 @@ void main() {
     await session.completeTutorial();
     await tester.pumpAndSettle();
 
-    // Still on the tutorial: `/tutorial` is not a public path, so once the
-    // flag clears the redirect has no reason to move anyone. Clearing the
-    // flag *releases* the merchant, it does not transport them — the call
-    // site navigates, the way every sign-out call site pushes its own route.
-    // `T6 — Prêt` will need its own `go` for the same reason.
-    expect(location(), Routes.tutorial);
+    // Off the tutorial: the router sends a merchant who has finished it home
+    // from any tutorial path, so a back fallback racing `T6`'s completion, a
+    // deep link or a splash replay can never drop them into a spent step.
+    expect(location(), Routes.home);
     expect(session.tutorialPending, isFalse);
 
-    // And the hold really is gone: a destination that was bounced back to the
-    // tutorial a moment ago now sticks.
+    // And the hold really is gone: a tutorial path no longer holds anyone,
+    // and home sticks.
+    router.router.go(Routes.tutorialProduct);
+    await tester.pumpAndSettle();
+    expect(location(), Routes.home);
     router.router.go(Routes.home);
     await tester.pumpAndSettle();
     expect(location(), Routes.home);

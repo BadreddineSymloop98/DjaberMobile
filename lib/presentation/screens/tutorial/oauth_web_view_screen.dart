@@ -230,10 +230,14 @@ class _OAuthWebViewScreenState extends State<OAuthWebViewScreen> {
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
 
+    // No confirmation: the Meta login can simply be redone. But back and the
+    // × are ignored while [_reading] the callback page, because the backend
+    // has already saved the page by then, and reporting "dismissed" would
+    // tell the connect step nothing happened.
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, _) {
-        if (!didPop) _finish(OAuthOutcome.dismissed);
+        if (!didPop && !_reading) _finish(OAuthOutcome.dismissed);
       },
       child: Scaffold(
         backgroundColor: AppColors.ink,
@@ -242,7 +246,9 @@ class _OAuthWebViewScreenState extends State<OAuthWebViewScreen> {
             children: [
               _Bar(
                 host: _host,
-                onClose: () => _finish(OAuthOutcome.dismissed),
+                onClose: () {
+                  if (!_reading) _finish(OAuthOutcome.dismissed);
+                },
               ),
               if (_loading) const _LoadingRule(),
               Expanded(

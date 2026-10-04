@@ -68,32 +68,49 @@ class SessionViewModel extends BaseViewModel {
     safeNotify();
   }
 
-  /// Puts the app back behind the splash.
+  bool _replayingSplash = false;
+
+  /// True while the splash is being played again over the app — see
+  /// [replaySplash]. `SplashReplayOverlay` draws it; nothing navigates.
+  bool get isReplayingSplash => _replayingSplash;
+
+  /// Plays the splash again, **over** whatever is on screen.
   ///
   /// Called when the app is backgrounded, so the splash plays on every return
   /// and not only on a cold start — Android keeps the process alive, so
   /// without this a merchant who task-switches away and back never sees it.
   ///
+  /// **Why an overlay and not the router.** This used to drop the boot gate,
+  /// so the router went to `/splash` and then rebuilt the screen the merchant
+  /// had been on. Everything that lives only in a screen went with it: what
+  /// they had typed, any bottom sheet or dialog that was open, and the stack
+  /// under the screen, so back no longer led where it had. Covering the app
+  /// instead leaves every screen, sheet and field exactly as it was.
+  ///
   /// The cost is real and worth knowing: it also sits in front of a tapped
   /// notification, which is the one path in this app measured in seconds. If
   /// that becomes a problem, gate this on how long the app was away rather
   /// than removing it.
-  void resetBoot() {
-    if (!_bootComplete || _splashHolds > 0) return;
-    _bootComplete = false;
+  void replaySplash() {
+    if (!_bootComplete || _splashHolds > 0 || _replayingSplash) return;
+    _replayingSplash = true;
+    safeNotify();
+  }
+
+  /// Called by the replaying splash when it has had its time on screen.
+  void endSplashReplay() {
+    if (!_replayingSplash) return;
+    _replayingSplash = false;
     safeNotify();
   }
 
   int _splashHolds = 0;
 
-  /// Stops the splash from replaying while something on screen cannot be
-  /// rebuilt after it.
-  ///
-  /// The replay makes the router rebuild its screens, and a window pushed on
-  /// top of them — Facebook's login, the system file picker's caller — is
-  /// dropped. Leaving the app is exactly what those flows make a merchant do:
-  /// fetch a Facebook security code, browse to a photo. Pair every call with
-  /// [releaseSplashReplay].
+  /// Stops the splash from replaying while the merchant is in a flow that
+  /// makes them leave the app — fetching a Facebook security code, paying in
+  /// their bank's app, browsing to a photo. Nothing would be lost any more
+  /// (see [replaySplash]), but a logo in the middle of a payment is noise.
+  /// Pair every call with [releaseSplashReplay].
   void holdSplashReplay() => _splashHolds++;
 
   void releaseSplashReplay() {
@@ -142,13 +159,19 @@ class SessionViewModel extends BaseViewModel {
       tag: 'signIn',
     );
     if (user == null) return false;
+    await startSession(user);
+    return true;
+  }
+
+  /// Adopts a session whose token [AuthRepository] has already stored — after
+  /// login, and after a password reset, which answers like login.
+  Future<void> startSession(User user) async {
     _user = user;
     _setStatus(AuthStatus.signedIn);
     await _syncPushToken();
     // Login returns no credits; only /profile does. Fetched without awaiting
     // so the merchant reaches home immediately and the credit state fills in.
     unawaited(refreshProfile());
-    return true;
   }
 
   Future<bool> signUp({
