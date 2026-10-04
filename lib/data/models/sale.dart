@@ -122,11 +122,15 @@ class Sale {
   /// Lines, not units — the frames' *3 articles* for a sale of 2 + 1 + 1.
   int get itemCount => items.length;
 
-  /// The server refuses (400) any sale with money against it, and a zero-total
-  /// sale is derived *paid* — so only a sale with nothing received may go.
-  /// Decided 2026-10-01: the trash shows on exactly those, rather than on
-  /// every unpaid one as the web does (where a partial sale then fails).
-  bool get canDelete => paymentStatus != PaymentStatus.paid && amountPaid <= 0;
+  /// Every sale not fully paid, as on the web (decided 2026-10-04, replacing
+  /// the 0-DA-only rule of 2026-10-01). The server refuses (400) a sale with
+  /// money against it, so a partial one has its payment reset to 0 first —
+  /// see [needsPaymentReset] — which the sheet says before it happens. A
+  /// zero-total sale is derived *paid* and never shows the trash.
+  bool get canDelete => paymentStatus != PaymentStatus.paid;
+
+  /// Money is recorded on it: deleting takes it out of the caisse first.
+  bool get needsPaymentReset => amountPaid > 0;
 
   bool get isPaid => paymentStatus == PaymentStatus.paid;
 

@@ -122,7 +122,14 @@ class _SalesScreenState extends State<SalesScreen> with RouteAware {
       title: l10n.saleDeleteTitle,
       body: l10n.saleDeleteBody(sale.saleNumber),
       confirmLabel: l10n.commonDelete,
-      noticeBody: l10n.saleDeleteNotice,
+      // A partial sale's money leaves the caisse with it — said first.
+      noticeBody: [
+        if (sale.needsPaymentReset)
+          l10n.saleDeleteMoney(
+            Money.exact(sale.amountPaid, Localizations.localeOf(context).toLanguageTag()),
+          ),
+        l10n.saleDeleteNotice,
+      ].join('\n\n'),
     );
     if (!confirmed || !mounted) return;
     final result = await _model.delete(sale);
@@ -133,7 +140,7 @@ class _SalesScreenState extends State<SalesScreen> with RouteAware {
       case NotFoundException():
         AppToast.info(context, l10n.saleAlreadyGone(sale.saleNumber));
       case final error:
-        // A 400: money was recorded on it since the list loaded.
+        // A 400: it was fully paid since the list loaded.
         AppToast.info(context, apiErrorMessage(error, l10n));
         unawaited(_model.load());
     }

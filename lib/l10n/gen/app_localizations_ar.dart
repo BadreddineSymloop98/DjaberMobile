@@ -4960,4 +4960,183 @@ class L10nAr extends L10n {
 
   @override
   String get movementReasonVariantDeleted => 'حذف متغير';
+
+  @override
+  String saleDeleteMoney(String amount) {
+    return 'سيُحذف المبلغ المستلم $amount من الصندوق.';
+  }
+
+  @override
+  String get menuCaisse => 'الصندوق';
+
+  @override
+  String get caisseEyebrow => 'المالية';
+
+  @override
+  String get caisseTitle => 'الصندوق';
+
+  @override
+  String get caisseSubtitle => 'صندوق النقد وإدارة الخزينة';
+
+  @override
+  String get caissePeriodToday => 'اليوم';
+
+  @override
+  String get caissePeriodWeek => 'هذا الأسبوع';
+
+  @override
+  String get caissePeriodMonth => 'هذا الشهر';
+
+  @override
+  String get caissePeriodYear => 'هذه السنة';
+
+  @override
+  String get caisseStatBalance => 'الرصيد';
+
+  @override
+  String get caisseStatIncome => 'إجمالي الإيرادات';
+
+  @override
+  String get caisseStatExpense => 'إجمالي المصاريف';
+
+  @override
+  String get caisseStatCount => 'المعاملات';
+
+  @override
+  String get caisseSearch => 'ابحث بالمرجع أو الوصف…';
+
+  @override
+  String get caisseSection => 'المعاملات';
+
+  @override
+  String get caisseEmptyTitle => 'لم يتم العثور على معاملات';
+
+  @override
+  String get caisseEmptyBody =>
+      'تظهر المبيعات والطلبات والمشتريات المدفوعة هنا تلقائيًا. أضف باقي مداخيلك ومصاريفك.';
+
+  @override
+  String get caisseNoMatchBody => 'لا توجد معاملة تطابق هذه المعايير.';
+
+  @override
+  String get caisseTypeIncome => 'إيراد';
+
+  @override
+  String get caisseTypeExpense => 'مصروف';
+
+  @override
+  String get caisseCatSale => 'بيع';
+
+  @override
+  String get caisseCatOrder => 'طلب';
+
+  @override
+  String get caisseCatPurchase => 'شراء';
+
+  @override
+  String get caisseCatRent => 'إيجار';
+
+  @override
+  String get caisseCatSalary => 'راتب';
+
+  @override
+  String get caisseCatUtilities => 'فواتير';
+
+  @override
+  String get caisseCatMarketing => 'تسويق';
+
+  @override
+  String get caisseCatShipping => 'شحن';
+
+  @override
+  String get caisseCatOther => 'أخرى';
+
+  @override
+  String caisseRef(String reference) {
+    return 'المرجع $reference';
+  }
+
+  @override
+  String get caisseAuto => 'تلقائي';
+
+  @override
+  String get caisseManual => 'يدوي';
+
+  @override
+  String caisseAutoSale(String number) {
+    return 'بيع $number';
+  }
+
+  @override
+  String caisseAutoOrder(String number) {
+    return 'طلب $number';
+  }
+
+  @override
+  String caisseAutoPurchase(String number) {
+    return 'شراء $number';
+  }
+
+  @override
+  String get caisseFilterType => 'النوع';
+
+  @override
+  String get caisseFilterCategory => 'الفئة';
+
+  @override
+  String get caisseFilterCategoryAny => 'كل الفئات';
+
+  @override
+  String get caisseAddTitle => 'إضافة معاملة';
+
+  @override
+  String get caisseEditTitle => 'تعديل المعاملة';
+
+  @override
+  String get caisseFieldAmount => 'المبلغ (دج)';
+
+  @override
+  String get caisseFieldReference => 'المرجع';
+
+  @override
+  String get caisseReferenceHint => 'مثال: فاتورة رقم 123';
+
+  @override
+  String get caisseFieldDescription => 'الوصف';
+
+  @override
+  String get caisseDescriptionHint => 'تفاصيل هذه المعاملة';
+
+  @override
+  String get caisseFieldDate => 'التاريخ';
+
+  @override
+  String get caisseAdd => 'إضافة';
+
+  @override
+  String get caisseUpdate => 'تحديث';
+
+  @override
+  String get caisseErrAmount => 'أدخل مبلغًا';
+
+  @override
+  String get caisseErrAmountPositive => 'يجب أن يكون المبلغ أكبر من 0';
+
+  @override
+  String get caisseAddedToast => 'تمت إضافة المعاملة';
+
+  @override
+  String get caisseUpdatedToast => 'تم تحديث المعاملة';
+
+  @override
+  String get caisseDeletedToast => 'تم حذف المعاملة';
+
+  @override
+  String get caisseAlreadyGone => 'كانت هذه المعاملة محذوفة مسبقًا';
+
+  @override
+  String get caisseDeleteTitle => 'حذف المعاملة';
+
+  @override
+  String get caisseDeleteBody => 'هل تريد فعلًا حذف هذه المعاملة؟';
 }

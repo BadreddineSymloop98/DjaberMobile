@@ -8720,6 +8720,342 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Variant deleted'**
   String get movementReasonVariantDeleted;
+
+  /// No description provided for @saleDeleteMoney.
+  ///
+  /// In en, this message translates to:
+  /// **'The {amount} already received will be removed from the cash register.'**
+  String saleDeleteMoney(String amount);
+
+  /// No description provided for @menuCaisse.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash register'**
+  String get menuCaisse;
+
+  /// No description provided for @caisseEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'FINANCES'**
+  String get caisseEyebrow;
+
+  /// No description provided for @caisseTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash register'**
+  String get caisseTitle;
+
+  /// No description provided for @caisseSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash register & treasury management'**
+  String get caisseSubtitle;
+
+  /// No description provided for @caissePeriodToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get caissePeriodToday;
+
+  /// No description provided for @caissePeriodWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'This week'**
+  String get caissePeriodWeek;
+
+  /// No description provided for @caissePeriodMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'This month'**
+  String get caissePeriodMonth;
+
+  /// No description provided for @caissePeriodYear.
+  ///
+  /// In en, this message translates to:
+  /// **'This year'**
+  String get caissePeriodYear;
+
+  /// No description provided for @caisseStatBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Balance'**
+  String get caisseStatBalance;
+
+  /// No description provided for @caisseStatIncome.
+  ///
+  /// In en, this message translates to:
+  /// **'Total income'**
+  String get caisseStatIncome;
+
+  /// No description provided for @caisseStatExpense.
+  ///
+  /// In en, this message translates to:
+  /// **'Total expenses'**
+  String get caisseStatExpense;
+
+  /// No description provided for @caisseStatCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Transactions'**
+  String get caisseStatCount;
+
+  /// No description provided for @caisseSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search reference or description…'**
+  String get caisseSearch;
+
+  /// No description provided for @caisseSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Transactions'**
+  String get caisseSection;
+
+  /// No description provided for @caisseEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No transactions found'**
+  String get caisseEmptyTitle;
+
+  /// No description provided for @caisseEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid sales, orders and purchases appear here automatically. Add your other money in and out.'**
+  String get caisseEmptyBody;
+
+  /// No description provided for @caisseNoMatchBody.
+  ///
+  /// In en, this message translates to:
+  /// **'No transaction matches these filters.'**
+  String get caisseNoMatchBody;
+
+  /// No description provided for @caisseTypeIncome.
+  ///
+  /// In en, this message translates to:
+  /// **'Income'**
+  String get caisseTypeIncome;
+
+  /// No description provided for @caisseTypeExpense.
+  ///
+  /// In en, this message translates to:
+  /// **'Expense'**
+  String get caisseTypeExpense;
+
+  /// No description provided for @caisseCatSale.
+  ///
+  /// In en, this message translates to:
+  /// **'Sale'**
+  String get caisseCatSale;
+
+  /// No description provided for @caisseCatOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Order'**
+  String get caisseCatOrder;
+
+  /// No description provided for @caisseCatPurchase.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase'**
+  String get caisseCatPurchase;
+
+  /// No description provided for @caisseCatRent.
+  ///
+  /// In en, this message translates to:
+  /// **'Rent'**
+  String get caisseCatRent;
+
+  /// No description provided for @caisseCatSalary.
+  ///
+  /// In en, this message translates to:
+  /// **'Salary'**
+  String get caisseCatSalary;
+
+  /// No description provided for @caisseCatUtilities.
+  ///
+  /// In en, this message translates to:
+  /// **'Utilities'**
+  String get caisseCatUtilities;
+
+  /// No description provided for @caisseCatMarketing.
+  ///
+  /// In en, this message translates to:
+  /// **'Marketing'**
+  String get caisseCatMarketing;
+
+  /// No description provided for @caisseCatShipping.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipping'**
+  String get caisseCatShipping;
+
+  /// No description provided for @caisseCatOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get caisseCatOther;
+
+  /// No description provided for @caisseRef.
+  ///
+  /// In en, this message translates to:
+  /// **'Ref. {reference}'**
+  String caisseRef(String reference);
+
+  /// No description provided for @caisseAuto.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto'**
+  String get caisseAuto;
+
+  /// No description provided for @caisseManual.
+  ///
+  /// In en, this message translates to:
+  /// **'Manual'**
+  String get caisseManual;
+
+  /// No description provided for @caisseAutoSale.
+  ///
+  /// In en, this message translates to:
+  /// **'Sale {number}'**
+  String caisseAutoSale(String number);
+
+  /// No description provided for @caisseAutoOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Order {number}'**
+  String caisseAutoOrder(String number);
+
+  /// No description provided for @caisseAutoPurchase.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase {number}'**
+  String caisseAutoPurchase(String number);
+
+  /// No description provided for @caisseFilterType.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get caisseFilterType;
+
+  /// No description provided for @caisseFilterCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get caisseFilterCategory;
+
+  /// No description provided for @caisseFilterCategoryAny.
+  ///
+  /// In en, this message translates to:
+  /// **'All categories'**
+  String get caisseFilterCategoryAny;
+
+  /// No description provided for @caisseAddTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add transaction'**
+  String get caisseAddTitle;
+
+  /// No description provided for @caisseEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit transaction'**
+  String get caisseEditTitle;
+
+  /// No description provided for @caisseFieldAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount (DA)'**
+  String get caisseFieldAmount;
+
+  /// No description provided for @caisseFieldReference.
+  ///
+  /// In en, this message translates to:
+  /// **'Reference'**
+  String get caisseFieldReference;
+
+  /// No description provided for @caisseReferenceHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. Invoice #123'**
+  String get caisseReferenceHint;
+
+  /// No description provided for @caisseFieldDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get caisseFieldDescription;
+
+  /// No description provided for @caisseDescriptionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Details about this transaction'**
+  String get caisseDescriptionHint;
+
+  /// No description provided for @caisseFieldDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get caisseFieldDate;
+
+  /// No description provided for @caisseAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get caisseAdd;
+
+  /// No description provided for @caisseUpdate.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get caisseUpdate;
+
+  /// No description provided for @caisseErrAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter an amount'**
+  String get caisseErrAmount;
+
+  /// No description provided for @caisseErrAmountPositive.
+  ///
+  /// In en, this message translates to:
+  /// **'The amount must be above 0'**
+  String get caisseErrAmountPositive;
+
+  /// No description provided for @caisseAddedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Transaction added'**
+  String get caisseAddedToast;
+
+  /// No description provided for @caisseUpdatedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Transaction updated'**
+  String get caisseUpdatedToast;
+
+  /// No description provided for @caisseDeletedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Transaction deleted'**
+  String get caisseDeletedToast;
+
+  /// No description provided for @caisseAlreadyGone.
+  ///
+  /// In en, this message translates to:
+  /// **'This transaction had already been deleted'**
+  String get caisseAlreadyGone;
+
+  /// No description provided for @caisseDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete transaction'**
+  String get caisseDeleteTitle;
+
+  /// No description provided for @caisseDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this transaction?'**
+  String get caisseDeleteBody;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

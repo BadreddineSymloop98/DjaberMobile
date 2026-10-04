@@ -348,6 +348,15 @@ class _MenuDrawerState extends State<MenuDrawer> {
                   iconColor: AppColors.accentClients,
                   onTap: () => _open(Routes.clients),
                 ),
+                // The cash register — before Commandes, as in the web's stock
+                // group, and in both stock modes like every row here.
+                MenuSubrow(
+                  depth: 2,
+                  icon: AppIcons.dollar,
+                  label: l10n.menuCaisse,
+                  iconColor: AppColors.accentMoney,
+                  onTap: () => _open(Routes.caisse),
+                ),
                 // Commandes is also the CMD tab, so this is a second way in
                 // rather than the only one — the web lists it in the same
                 // stock group (`stockNavItemsBase`), and a merchant reading

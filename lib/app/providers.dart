@@ -11,6 +11,7 @@ import '../core/storage/secure_storage.dart';
 import '../data/repositories/agent_repository.dart';
 import '../data/repositories/auth_repository.dart';
 import '../data/repositories/billing_repository.dart';
+import '../data/repositories/caisse_repository.dart';
 import '../data/repositories/catalogue_repository.dart';
 import '../data/repositories/client_repository.dart';
 import '../data/repositories/dashboard_repository.dart';
@@ -80,6 +81,9 @@ class AppProviders {
       Provider<CatalogueRepository>(
         create: (context) =>
             CatalogueRepository(api: context.read<ApiClient>()),
+      ),
+      Provider<CaisseRepository>(
+        create: (context) => CaisseRepository(api: context.read<ApiClient>()),
       ),
       Provider<ClientRepository>(
         create: (context) => ClientRepository(api: context.read<ApiClient>()),

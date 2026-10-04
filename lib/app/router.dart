@@ -22,6 +22,7 @@ import '../presentation/screens/auth/login_screen.dart';
 import '../presentation/screens/auth/password_sent_screen.dart';
 import '../presentation/screens/auth/reset_password_screen.dart';
 import '../presentation/screens/auth/signup_screen.dart';
+import '../presentation/screens/caisse/caisse_screen.dart';
 import '../presentation/screens/categories/categories_screen.dart';
 import '../presentation/screens/clients/client_detail_screen.dart';
 import '../presentation/screens/clients/clients_screen.dart';
@@ -586,6 +587,11 @@ class AppRouter {
         path: Routes.movements,
         parentNavigatorKey: _rootKey,
         builder: (_, _) => const BackScope(fallback: Routes.home, child: MovementsScreen()),
+      ),
+      GoRoute(
+        path: Routes.caisse,
+        parentNavigatorKey: _rootKey,
+        builder: (_, _) => const BackScope(fallback: Routes.home, child: CaisseScreen()),
       ),
       GoRoute(
         path: Routes.notifications,

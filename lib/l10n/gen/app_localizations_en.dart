@@ -4945,4 +4945,184 @@ class L10nEn extends L10n {
 
   @override
   String get movementReasonVariantDeleted => 'Variant deleted';
+
+  @override
+  String saleDeleteMoney(String amount) {
+    return 'The $amount already received will be removed from the cash register.';
+  }
+
+  @override
+  String get menuCaisse => 'Cash register';
+
+  @override
+  String get caisseEyebrow => 'FINANCES';
+
+  @override
+  String get caisseTitle => 'Cash register';
+
+  @override
+  String get caisseSubtitle => 'Cash register & treasury management';
+
+  @override
+  String get caissePeriodToday => 'Today';
+
+  @override
+  String get caissePeriodWeek => 'This week';
+
+  @override
+  String get caissePeriodMonth => 'This month';
+
+  @override
+  String get caissePeriodYear => 'This year';
+
+  @override
+  String get caisseStatBalance => 'Balance';
+
+  @override
+  String get caisseStatIncome => 'Total income';
+
+  @override
+  String get caisseStatExpense => 'Total expenses';
+
+  @override
+  String get caisseStatCount => 'Transactions';
+
+  @override
+  String get caisseSearch => 'Search reference or description…';
+
+  @override
+  String get caisseSection => 'Transactions';
+
+  @override
+  String get caisseEmptyTitle => 'No transactions found';
+
+  @override
+  String get caisseEmptyBody =>
+      'Paid sales, orders and purchases appear here automatically. Add your other money in and out.';
+
+  @override
+  String get caisseNoMatchBody => 'No transaction matches these filters.';
+
+  @override
+  String get caisseTypeIncome => 'Income';
+
+  @override
+  String get caisseTypeExpense => 'Expense';
+
+  @override
+  String get caisseCatSale => 'Sale';
+
+  @override
+  String get caisseCatOrder => 'Order';
+
+  @override
+  String get caisseCatPurchase => 'Purchase';
+
+  @override
+  String get caisseCatRent => 'Rent';
+
+  @override
+  String get caisseCatSalary => 'Salary';
+
+  @override
+  String get caisseCatUtilities => 'Utilities';
+
+  @override
+  String get caisseCatMarketing => 'Marketing';
+
+  @override
+  String get caisseCatShipping => 'Shipping';
+
+  @override
+  String get caisseCatOther => 'Other';
+
+  @override
+  String caisseRef(String reference) {
+    return 'Ref. $reference';
+  }
+
+  @override
+  String get caisseAuto => 'Auto';
+
+  @override
+  String get caisseManual => 'Manual';
+
+  @override
+  String caisseAutoSale(String number) {
+    return 'Sale $number';
+  }
+
+  @override
+  String caisseAutoOrder(String number) {
+    return 'Order $number';
+  }
+
+  @override
+  String caisseAutoPurchase(String number) {
+    return 'Purchase $number';
+  }
+
+  @override
+  String get caisseFilterType => 'Type';
+
+  @override
+  String get caisseFilterCategory => 'Category';
+
+  @override
+  String get caisseFilterCategoryAny => 'All categories';
+
+  @override
+  String get caisseAddTitle => 'Add transaction';
+
+  @override
+  String get caisseEditTitle => 'Edit transaction';
+
+  @override
+  String get caisseFieldAmount => 'Amount (DA)';
+
+  @override
+  String get caisseFieldReference => 'Reference';
+
+  @override
+  String get caisseReferenceHint => 'e.g. Invoice #123';
+
+  @override
+  String get caisseFieldDescription => 'Description';
+
+  @override
+  String get caisseDescriptionHint => 'Details about this transaction';
+
+  @override
+  String get caisseFieldDate => 'Date';
+
+  @override
+  String get caisseAdd => 'Add';
+
+  @override
+  String get caisseUpdate => 'Update';
+
+  @override
+  String get caisseErrAmount => 'Enter an amount';
+
+  @override
+  String get caisseErrAmountPositive => 'The amount must be above 0';
+
+  @override
+  String get caisseAddedToast => 'Transaction added';
+
+  @override
+  String get caisseUpdatedToast => 'Transaction updated';
+
+  @override
+  String get caisseDeletedToast => 'Transaction deleted';
+
+  @override
+  String get caisseAlreadyGone => 'This transaction had already been deleted';
+
+  @override
+  String get caisseDeleteTitle => 'Delete transaction';
+
+  @override
+  String get caisseDeleteBody =>
+      'Are you sure you want to delete this transaction?';
 }

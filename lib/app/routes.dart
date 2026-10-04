@@ -191,6 +191,10 @@ class Routes {
   /// overview's recent movements.
   static const movements = '/movements';
 
+  /// `Caisse` — from the drawer, before Commandes (the web stock group's
+  /// order). Adding and editing are sheets, not routes.
+  static const caisse = '/caisse';
+
   static const notifications = '/notifications';
   static const settings = '/settings';
 

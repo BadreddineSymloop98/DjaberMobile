@@ -4994,4 +4994,185 @@ class L10nFr extends L10n {
 
   @override
   String get movementReasonVariantDeleted => 'Variante supprimée';
+
+  @override
+  String saleDeleteMoney(String amount) {
+    return 'Les $amount déjà encaissés seront retirés de la caisse.';
+  }
+
+  @override
+  String get menuCaisse => 'Caisse';
+
+  @override
+  String get caisseEyebrow => 'FINANCES';
+
+  @override
+  String get caisseTitle => 'Caisse';
+
+  @override
+  String get caisseSubtitle => 'Caisse et gestion de trésorerie';
+
+  @override
+  String get caissePeriodToday => 'Aujourd’hui';
+
+  @override
+  String get caissePeriodWeek => 'Cette semaine';
+
+  @override
+  String get caissePeriodMonth => 'Ce mois-ci';
+
+  @override
+  String get caissePeriodYear => 'Cette année';
+
+  @override
+  String get caisseStatBalance => 'Solde';
+
+  @override
+  String get caisseStatIncome => 'Total revenus';
+
+  @override
+  String get caisseStatExpense => 'Total dépenses';
+
+  @override
+  String get caisseStatCount => 'Transactions';
+
+  @override
+  String get caisseSearch => 'Rechercher une référence ou description…';
+
+  @override
+  String get caisseSection => 'Transactions';
+
+  @override
+  String get caisseEmptyTitle => 'Aucune transaction trouvée';
+
+  @override
+  String get caisseEmptyBody =>
+      'Les ventes, commandes et achats payés s’inscrivent ici automatiquement. Ajoutez vos autres entrées et sorties d’argent.';
+
+  @override
+  String get caisseNoMatchBody =>
+      'Aucune transaction ne correspond à ces critères.';
+
+  @override
+  String get caisseTypeIncome => 'Revenu';
+
+  @override
+  String get caisseTypeExpense => 'Dépense';
+
+  @override
+  String get caisseCatSale => 'Vente';
+
+  @override
+  String get caisseCatOrder => 'Commande';
+
+  @override
+  String get caisseCatPurchase => 'Achat';
+
+  @override
+  String get caisseCatRent => 'Loyer';
+
+  @override
+  String get caisseCatSalary => 'Salaire';
+
+  @override
+  String get caisseCatUtilities => 'Services';
+
+  @override
+  String get caisseCatMarketing => 'Marketing';
+
+  @override
+  String get caisseCatShipping => 'Livraison';
+
+  @override
+  String get caisseCatOther => 'Autre';
+
+  @override
+  String caisseRef(String reference) {
+    return 'Réf. $reference';
+  }
+
+  @override
+  String get caisseAuto => 'Auto';
+
+  @override
+  String get caisseManual => 'Manuel';
+
+  @override
+  String caisseAutoSale(String number) {
+    return 'Vente $number';
+  }
+
+  @override
+  String caisseAutoOrder(String number) {
+    return 'Commande $number';
+  }
+
+  @override
+  String caisseAutoPurchase(String number) {
+    return 'Achat $number';
+  }
+
+  @override
+  String get caisseFilterType => 'Type';
+
+  @override
+  String get caisseFilterCategory => 'Catégorie';
+
+  @override
+  String get caisseFilterCategoryAny => 'Toutes les catégories';
+
+  @override
+  String get caisseAddTitle => 'Ajouter une transaction';
+
+  @override
+  String get caisseEditTitle => 'Modifier la transaction';
+
+  @override
+  String get caisseFieldAmount => 'Montant (DA)';
+
+  @override
+  String get caisseFieldReference => 'Référence';
+
+  @override
+  String get caisseReferenceHint => 'ex. Facture n°123';
+
+  @override
+  String get caisseFieldDescription => 'Description';
+
+  @override
+  String get caisseDescriptionHint => 'Détails de cette transaction';
+
+  @override
+  String get caisseFieldDate => 'Date';
+
+  @override
+  String get caisseAdd => 'Ajouter';
+
+  @override
+  String get caisseUpdate => 'Mettre à jour';
+
+  @override
+  String get caisseErrAmount => 'Saisissez un montant';
+
+  @override
+  String get caisseErrAmountPositive => 'Le montant doit être supérieur à 0';
+
+  @override
+  String get caisseAddedToast => 'Transaction ajoutée';
+
+  @override
+  String get caisseUpdatedToast => 'Transaction mise à jour';
+
+  @override
+  String get caisseDeletedToast => 'Transaction supprimée';
+
+  @override
+  String get caisseAlreadyGone => 'Cette transaction avait déjà été supprimée';
+
+  @override
+  String get caisseDeleteTitle => 'Supprimer la transaction';
+
+  @override
+  String get caisseDeleteBody =>
+      'Voulez-vous vraiment supprimer cette transaction ?';
 }

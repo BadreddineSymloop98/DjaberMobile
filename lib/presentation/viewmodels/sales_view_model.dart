@@ -228,9 +228,24 @@ class SalesViewModel extends BaseViewModel {
 
   /// `DELETE /sales/{id}`. A 404 means it already went (another device): the
   /// row goes too, and the caller says so instead of showing an error.
+  ///
+  /// A partial sale is first brought back to 0 received (`PUT amountPaid: 0`,
+  /// which removes its caisse income), since the server refuses to delete a
+  /// sale with money on it. If that step fails nothing has changed; if the
+  /// delete then fails the sale is left at 0 received, and the list reloads so
+  /// the row says so.
   Future<Result<void>> delete(Sale sale) async {
     if (!_deleting.add(sale.id)) return const Result.success(null);
     safeNotify();
+    if (sale.needsPaymentReset) {
+      final reset = await _sales.update(sale.id, amountPaid: 0);
+      if (isDisposed) return const Result.success(null);
+      if (reset.errorOrNull case final error? when error is! NotFoundException) {
+        _deleting.remove(sale.id);
+        safeNotify();
+        return Result.failure(error);
+      }
+    }
     final result = await _sales.delete(sale.id);
     if (isDisposed) return result;
     _deleting.remove(sale.id);
@@ -245,6 +260,7 @@ class SalesViewModel extends BaseViewModel {
       await loadStats();
     } else {
       safeNotify();
+      if (sale.needsPaymentReset) await reload();
     }
     return result;
   }

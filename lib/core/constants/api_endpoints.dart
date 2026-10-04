@@ -5,9 +5,10 @@
 /// is where the 134 stock endpoints live. Paths are kept here rather than
 /// inline in repositories so a backend rename is one file to change.
 ///
-/// Deliberately omitted: `/api/user-stock/reports/*`, `/analytics/*` and
-/// `/caisse/*` — desk work that stays on the web (brief §14.3), and
-/// `/api/admin/*`, which merchants never call.
+/// Deliberately omitted: `/api/user-stock/reports/*` and `/analytics/*` —
+/// desk work that stays on the web (brief §14.3) — and `/api/admin/*`, which
+/// merchants never call. (`/caisse/*` was in that list until the Caisse
+/// screens were built, 2026-10-04.)
 class Api {
   const Api._();
 
@@ -122,6 +123,11 @@ class Api {
   static String purchase(String id) => '/api/user-stock/purchases/$id';
   static String purchaseReceive(String id) =>
       '/api/user-stock/purchases/$id/receive';
+
+  // ---- Caisse (cash register) ----
+  static const caisse = '/api/user-stock/caisse';
+  static const caisseStats = '/api/user-stock/caisse/stats';
+  static String caisseTransaction(String id) => '/api/user-stock/caisse/$id';
 
   // ---- Clients & suppliers ----
   static const clients = '/api/user-stock/clients';

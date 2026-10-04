@@ -51,9 +51,11 @@ void main() {
       expect(sale.itemCount, 3, reason: 'lines, not units');
     });
 
-    test('only a sale with nothing received can be deleted', () {
+    test('every sale not fully paid can be deleted, as on the web', () {
       expect(Sale.fromJson(_pending).canDelete, isTrue);
-      expect(Sale.fromJson(_partial).canDelete, isFalse, reason: 'the API refuses money recorded');
+      expect(Sale.fromJson(_pending).needsPaymentReset, isFalse);
+      expect(Sale.fromJson(_partial).canDelete, isTrue);
+      expect(Sale.fromJson(_partial).needsPaymentReset, isTrue, reason: 'the API refuses money recorded');
       expect(Sale.fromJson(_paid).canDelete, isFalse);
       expect(
         Sale.fromJson({..._pending, 'total': '0.00', 'paymentStatus': 'paid'}).canDelete,
@@ -142,7 +144,30 @@ void main() {
       expect(model.sales.map((s) => s.id), ['s-1', 's-2']);
     });
 
-    testWidgets('the trash is only on the unpaid sale, and asks first', (tester) async {
+    test('a partial sale is brought back to 0 received, then deleted', () async {
+      final model = SalesViewModel(sales: sales);
+      addTearDown(model.dispose);
+      await model.load();
+      final partial = model.sales.firstWhere((s) => s.id == 's-2');
+      expect((await model.delete(partial)).isSuccess, isTrue);
+      final calls = backend.requests.where((r) => r.path == '/api/user-stock/sales/s-2').toList();
+      expect(calls.map((r) => r.method), ['PUT', 'DELETE'], reason: 'reset first, then delete');
+      expect(backend.lastBody('PUT', '/api/user-stock/sales/s-2'), {'amountPaid': 0});
+      expect(model.sales.map((s) => s.id), ['s-1', 's-3']);
+    });
+
+    test('if the reset fails, nothing is deleted', () async {
+      backend.putStatus = 500;
+      final model = SalesViewModel(sales: sales);
+      addTearDown(model.dispose);
+      await model.load();
+      final partial = model.sales.firstWhere((s) => s.id == 's-2');
+      expect((await model.delete(partial)).isFailure, isTrue);
+      expect(backend.requests.where((r) => r.method == 'DELETE'), isEmpty);
+      expect(model.sales, hasLength(3));
+    });
+
+    testWidgets('the trash is on every unpaid sale, and asks first', (tester) async {
       final session = await sessionForTest();
       session.markBootComplete();
       addTearDown(session.dispose);
@@ -156,11 +181,20 @@ void main() {
       ));
       await tester.pumpAndSettle();
 
-      expect(find.bySemanticsLabel('Supprimer'), findsOneWidget);
-      await tester.tap(find.bySemanticsLabel('Supprimer'));
+      // The partial sale and the pending one; not the paid one.
+      expect(find.bySemanticsLabel('Supprimer'), findsNWidgets(2));
+      // The partial sale says its money leaves the caisse.
+      await tester.tap(find.bySemanticsLabel('Supprimer').first);
+      await tester.pumpAndSettle();
+      expect(find.textContaining('déjà encaissés seront retirés de la caisse'), findsOneWidget);
+      await tester.tap(find.widgetWithText(OutlinedButton, 'Annuler'));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.bySemanticsLabel('Supprimer').last);
       await tester.pumpAndSettle();
       expect(find.text('Supprimer la vente'), findsOneWidget);
       expect(find.textContaining('Les quantités en stock seront restaurées'), findsOneWidget);
+      expect(find.textContaining('retirés de la caisse'), findsNothing, reason: 'nothing was received');
       await tester.tap(find.widgetWithText(FilledButton, 'Supprimer'));
       await tester.pumpAndSettle();
       expect(backend.requests.where((r) => r.method == 'DELETE').single.path, '/api/user-stock/sales/s-3');
@@ -424,6 +458,9 @@ class _Backend implements HttpClientAdapter {
   /// What `DELETE /sales/{id}` answers — 200, 400, 404.
   int deleteStatus = 200;
 
+  /// What `PUT /sales/{id}` answers when not 200.
+  int putStatus = 200;
+
   Map<String, dynamic> lastBody(String method, String path) {
     final r = requests.lastWhere((r) => r.method == method && r.path == path);
     return Map<String, dynamic>.from(r.data is String ? jsonDecode(r.data as String) : r.data as Map);
@@ -454,6 +491,7 @@ class _Backend implements HttpClientAdapter {
       return sale == null ? (404, {'error': 'Sale not found'}) : {'sale': sale};
     }
     if (p.startsWith('/sales/') && m == 'PUT') {
+      if (putStatus != 200) return (putStatus, {'error': 'Failed to update sale'});
       final id = p.substring('/sales/'.length);
       final base = sales.firstWhere((s) => s['id'] == id);
       final body = Map<String, dynamic>.from(o.data is String ? jsonDecode(o.data as String) : o.data as Map);
