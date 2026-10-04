@@ -18,9 +18,9 @@ import '../../data/models/product.dart';
 /// from the server, which is a larger question than this holds.
 ///
 /// **Unsent drafts.** A step's form lives in its screen, and the screen does
-/// not survive the merchant leaving the app: on return the splash replays
-/// (`SessionViewModel.resetBoot` runs on pause), the router swaps the step out
-/// for it, and the step comes back as a new, empty screen. Changing the phone's
+/// always survive: the splash replay used to swap the step out for itself
+/// (it is an overlay since 2026-09-29, `SessionViewModel.replaySplash`), and
+/// anything that rebuilds the step brings it back as a new, empty screen. Changing the phone's
 /// language in Settings is the everyday way to hit that. So `T3` and `T4` hand
 /// their unsent values here as they close and take them back as they open.
 /// Held in memory like everything else here — a process death still loses them.

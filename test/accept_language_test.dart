@@ -179,6 +179,26 @@ void main() {
     expect(sent.single.method, 'POST');
   });
 
+  test('choosing the language already inherited from the handset pins it — '
+      'the Settings cards must not leave it following the phone', () async {
+    await boot();
+    final model = LocaleViewModel(
+      prefs: prefs,
+      api: api,
+      deviceLocales: const [Locale('fr')],
+    );
+    expect(model.hasExplicitChoice, isFalse);
+
+    await model.setLanguage(AppLanguage.french);
+    expect(model.hasExplicitChoice, isTrue);
+
+    // The phone switches to Arabic; the app stays in French.
+    model.didChangeLocales(const [Locale('ar')]);
+    await api.get<dynamic>('/api/pages');
+    expect(headerOf(sent.single), 'fr');
+    expect(model.locale.languageCode, 'fr');
+  });
+
   test('the choice survives a restart, because it is read back from prefs',
       () async {
     await boot();

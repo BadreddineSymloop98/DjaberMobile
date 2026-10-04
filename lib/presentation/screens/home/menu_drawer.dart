@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -89,6 +91,12 @@ class _MenuDrawerState extends State<MenuDrawer> {
   /// is not worth persisting.
   bool _servicesOpen = true;
 
+  /// Closed, unlike Services. Produits is a destination in its own right —
+  /// the row opens the stock overview — and a group that opens itself pushes
+  /// Agents and Commercial down the drawer for a merchant who only wanted the
+  /// stock. The chevron is right there when the catalogue is what they want.
+  bool _productsOpen = false;
+
   /// Unread notifications, for the badge on that row.
   ///
   /// Fetched here rather than handed in, unlike [MenuDrawer.connectedPages]:
@@ -122,24 +130,28 @@ class _MenuDrawerState extends State<MenuDrawer> {
 
   void _close() => Navigator.of(context).pop();
 
-  /// Closes the drawer, then goes.
+  /// Closes the drawer, then switches tab with `go`: tabs are peers and never
+  /// stack.
   ///
   /// In this order because the drawer is a route: leaving it on the stack
   /// while `go` replaces what is underneath would strand it over the new
   /// screen.
-  void _goTo(String route) {
+  void _goToTab(String route) {
     final router = GoRouter.of(context);
     _close();
     router.go(route);
   }
 
-  /// For a destination whose screen does not exist yet.
+  /// Closes the drawer, then **pushes** [route] over home.
   ///
-  /// The drawer stays open on purpose — closing it to show a toast would tell
-  /// the merchant "that did nothing" twice over. The same choice home makes
-  /// for its four unbuilt actions (§23.6).
-  void _notBuilt(String what) {
-    AppToast.info(context, '$what — ${L10n.of(context).commonNotBuilt}');
+  /// The drawer opens only from home, so home is the previous screen, and back
+  /// from Settings or Products must return there instead of asking to leave the
+  /// app. The pop removes the drawer from the history at once (only its exit
+  /// animation remains), so the push lands directly on home.
+  void _open(String route) {
+    final router = GoRouter.of(context);
+    _close();
+    unawaited(router.push(route));
   }
 
   /// For Analyses and Rapports, which are **not** unbuilt — they are
@@ -233,9 +245,11 @@ class _MenuDrawerState extends State<MenuDrawer> {
     );
   }
 
-  /// The eight rows and three subrows, in the web sidebar's own order.
+  /// The eight rows and, under Services, its subrows — in the web sidebar's
+  /// own order, nesting included.
   ///
-  /// The Services group is one child of [ListBox] rather than four, because
+  /// The Services group is one child of [ListBox] rather than one per row,
+  /// because
   /// its subrows carry no dividers — the group is a single band in the frame,
   /// and `ListBox` rules between its children.
   List<Widget> _navigation(L10n l10n) => [
@@ -255,7 +269,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
           // colour — which said "the agent is here" on the one row that is
           // about the customer rather than the agent.
           iconColor: AppColors.accentInbound,
-          onTap: () => _goTo(Routes.inbox),
+          onTap: () => _goToTab(Routes.inbox),
         ),
         MenuRow(
           icon: AppIcons.chat,
@@ -270,7 +284,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
           // row that would let them fix it; contrast the notifications badge
           // below, which the web hides at zero.
           count: widget.connectedPages?.toString(),
-          onTap: () => _notBuilt(l10n.menuSocial),
+          onTap: () => _open(Routes.pages),
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -284,19 +298,130 @@ class _MenuDrawerState extends State<MenuDrawer> {
               onTap: () => setState(() => _servicesOpen = !_servicesOpen),
             ),
             if (_servicesOpen) ...[
+              // Produits is a destination **and** a group, exactly as on the
+              // web: the row opens the stock hub (`/dashboard/stock`, the
+              // Stock tab here) and that hub's own sidebar lists Produits,
+              // Catégories, Fournisseurs and Clients under it
+              // (`stockNavItemsBase`, which opens with Overview then
+              // Products). So the group title is the overview and the
+              // catalogue itself is a row inside the group — same name, two
+              // destinations, as the web has them.
               MenuSubrow(
                 icon: AppIcons.box,
                 label: l10n.menuProducts,
                 // Catalogue is amber (§21.3).
                 iconColor: AppColors.accentStarred,
-                onTap: () => _goTo(Routes.products),
+                onTap: () => _goToTab(Routes.stock),
+                expanded: _productsOpen,
+                onToggle: () => setState(() => _productsOpen = !_productsOpen),
               ),
+              if (_productsOpen) ...[
+                MenuSubrow(
+                  depth: 2,
+                  icon: AppIcons.box,
+                  label: l10n.menuProducts,
+                  // Catalogue amber, like the group it opens (§21.3).
+                  iconColor: AppColors.accentStarred,
+                  onTap: () => _open(Routes.products),
+                ),
+                MenuSubrow(
+                  depth: 2,
+                  icon: AppIcons.tag,
+                  label: l10n.menuCategories,
+                  // Catalogue, like Produits above it (§21.3).
+                  iconColor: AppColors.accentStarred,
+                  onTap: () => _open(Routes.categories),
+                ),
+                MenuSubrow(
+                  depth: 2,
+                  icon: AppIcons.truck,
+                  label: l10n.menuSuppliers,
+                  // Catalogue side, like Produits and Catégories (§21.3).
+                  iconColor: AppColors.accentStarred,
+                  onTap: () => _open(Routes.suppliers),
+                ),
+                MenuSubrow(
+                  depth: 2,
+                  icon: AppIcons.users,
+                  label: l10n.menuClients,
+                  // `accent/clients` — §21.3's violet for people.
+                  iconColor: AppColors.accentClients,
+                  onTap: () => _open(Routes.clients),
+                ),
+                // Cross-sell / up-sell — right after Clients, as in the web's
+                // stock group.
+                MenuSubrow(
+                  depth: 2,
+                  icon: AppIcons.bolt,
+                  label: l10n.menuCrossSell,
+                  iconColor: AppColors.live,
+                  onTap: () => _open(Routes.recommendations),
+                ),
+                // The cash register — before Commandes, as in the web's stock
+                // group, and in both stock modes like every row here.
+                MenuSubrow(
+                  depth: 2,
+                  icon: AppIcons.dollar,
+                  label: l10n.menuCaisse,
+                  iconColor: AppColors.accentMoney,
+                  onTap: () => _open(Routes.caisse),
+                ),
+                // Commandes is also the CMD tab, so this is a second way in
+                // rather than the only one — the web lists it in the same
+                // stock group (`stockNavItemsBase`), and a merchant reading
+                // the group should see everything the group holds. `go`, not
+                // `push`: it is a tab, and pushing it would hide the nav bar
+                // it belongs to.
+                MenuSubrow(
+                  depth: 2,
+                  icon: AppIcons.clipboard,
+                  label: l10n.ordersTitle,
+                  iconColor: AppColors.accentOrders,
+                  onTap: () => _goToTab(Routes.orders),
+                ),
+                // Right after Commandes, as in the web's stock group. Shown
+                // in both stock modes like every row here (the web keeps it
+                // to Advanced) — decided 2026-10-01.
+                MenuSubrow(
+                  depth: 2,
+                  icon: AppIcons.truck,
+                  label: l10n.menuDelivery,
+                  iconColor: AppColors.accentOrders,
+                  onTap: () => _open(Routes.delivery),
+                ),
+                // After Livraison, as in the web's stock group, and in both
+                // stock modes like the rows above it.
+                MenuSubrow(
+                  depth: 2,
+                  icon: AppIcons.shoppingCart,
+                  label: l10n.menuSales,
+                  // Money in — `accent/money`.
+                  iconColor: AppColors.accentMoney,
+                  onTap: () => _open(Routes.sales),
+                ),
+                // Then Achats and Mouvements — the web stock group's order.
+                MenuSubrow(
+                  depth: 2,
+                  icon: AppIcons.truck,
+                  label: l10n.menuPurchases,
+                  // Money out, on the catalogue side — amber like Fournisseurs.
+                  iconColor: AppColors.accentStarred,
+                  onTap: () => _open(Routes.purchases),
+                ),
+                MenuSubrow(
+                  depth: 2,
+                  icon: AppIcons.history,
+                  label: l10n.menuMovements,
+                  iconColor: AppColors.accentStarred,
+                  onTap: () => _open(Routes.movements),
+                ),
+              ],
               MenuSubrow(
                 icon: AppIcons.bot,
                 label: l10n.menuAgents,
                 // The AI is `signal/live`.
                 iconColor: AppColors.live,
-                onTap: () => _notBuilt(l10n.menuAgents),
+                onTap: () => _open(Routes.agents),
               ),
               MenuSubrow(
                 icon: AppIcons.megaphone,
@@ -318,7 +443,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
           // (`item.id === 'notifications' && unreadCount > 0`). A standing
           // `0` next to a bell would read as a broken badge.
           count: (_unread ?? 0) > 0 ? _unread.toString() : null,
-          onTap: () => _goTo(Routes.notifications),
+          onTap: () => _open(Routes.notifications),
         ),
         MenuRow(
           icon: AppIcons.chart,
@@ -334,7 +459,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
           icon: AppIcons.settings,
           label: l10n.menuSettings,
           iconColor: AppColors.textPrimary,
-          onTap: () => _goTo(Routes.settings),
+          onTap: () => _open(Routes.settings),
         ),
         // NOT IN THE FRAME. Added because the frame has no way out of a
         // session and this drawer replaces the stand-in sheet that held the
