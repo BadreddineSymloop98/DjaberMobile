@@ -4341,4 +4341,245 @@ class L10nEn extends L10n {
   String deliveryProviderAlreadyGone(String name) {
     return '$name had already been deleted';
   }
+
+  @override
+  String get menuSales => 'Sales';
+
+  @override
+  String get salesEyebrow => 'SALES';
+
+  @override
+  String get salesTitle => 'Sales';
+
+  @override
+  String salesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count sales',
+      one: '1 sale',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get salesPeriodToday => 'Today';
+
+  @override
+  String get salesPeriodWeek => 'Week';
+
+  @override
+  String get salesPeriodMonth => 'Month';
+
+  @override
+  String get salesPeriodYear => 'Year';
+
+  @override
+  String get salesStatTotal => 'Total sales';
+
+  @override
+  String get salesStatRevenue => 'Revenue';
+
+  @override
+  String get salesStatAverage => 'Avg order value';
+
+  @override
+  String get salesStatPending => 'Pending';
+
+  @override
+  String get salesSearch => 'Search sales…';
+
+  @override
+  String get salesQuickAll => 'All';
+
+  @override
+  String get salesQuickPaid => 'Paid';
+
+  @override
+  String get salesQuickRemaining => 'Remaining';
+
+  @override
+  String get salesSection => 'All sales';
+
+  @override
+  String get salesView => 'View';
+
+  @override
+  String get salesNew => 'New sale';
+
+  @override
+  String get salesEmptyTitle => 'No sales';
+
+  @override
+  String get salesEmptyBody => 'Record your first sale to track revenue';
+
+  @override
+  String get salesNoMatchBody => 'No sale matches these filters.';
+
+  @override
+  String get salesFilterMethodAny => 'All methods';
+
+  @override
+  String get saleStatusPaid => 'Paid';
+
+  @override
+  String get saleStatusPending => 'Pending';
+
+  @override
+  String get saleStatusPartial => 'Partial';
+
+  @override
+  String get saleDeleteTitle => 'Delete sale';
+
+  @override
+  String saleDeleteBody(String number) {
+    return 'Are you sure you want to delete sale $number?';
+  }
+
+  @override
+  String get saleDeleteNotice =>
+      'This action cannot be undone. Stock quantities will be restored.';
+
+  @override
+  String saleDeletedToast(String number) {
+    return 'Sale $number deleted';
+  }
+
+  @override
+  String saleAlreadyGone(String number) {
+    return 'Sale $number had already been deleted';
+  }
+
+  @override
+  String get saleEyebrow => 'SALE';
+
+  @override
+  String get saleFieldCustomer => 'Customer';
+
+  @override
+  String get saleFieldPhone => 'Phone';
+
+  @override
+  String get saleFieldDate => 'Date';
+
+  @override
+  String get saleFieldMethod => 'Payment method';
+
+  @override
+  String get saleFieldItems => 'Items';
+
+  @override
+  String get saleWalkIn => 'Walk-in customer';
+
+  @override
+  String get saleItemsSection => 'Items';
+
+  @override
+  String saleLineMeta(int qty, String price) {
+    return '×$qty  ·  $price';
+  }
+
+  @override
+  String saleLineDiscount(String amount) {
+    return 'Discount $amount';
+  }
+
+  @override
+  String get saleSubtotal => 'Subtotal';
+
+  @override
+  String get saleDiscount => 'Discount';
+
+  @override
+  String get saleTax => 'Tax';
+
+  @override
+  String get saleTotal => 'Total';
+
+  @override
+  String get salePaymentStatus => 'Payment status';
+
+  @override
+  String get saleMarkPaid => 'Mark as paid';
+
+  @override
+  String get saleEdit => 'Edit';
+
+  @override
+  String get saleMarkedPaidToast => 'Sale marked as paid';
+
+  @override
+  String saleEditTitle(String number) {
+    return 'Edit sale $number';
+  }
+
+  @override
+  String get saleEditSubtitle =>
+      'Update payment and notes. Items and prices cannot be changed once a sale is recorded.';
+
+  @override
+  String get saleMethodHint => 'Choose a method';
+
+  @override
+  String get saleEditPartialMissing => 'Enter the amount received';
+
+  @override
+  String saleEditPartialTooHigh(String total) {
+    return 'Must be below the total ($total) — otherwise choose “Paid”';
+  }
+
+  @override
+  String saleEditCaisse(String from, String to) {
+    return 'The cash register will go from $from to $to.';
+  }
+
+  @override
+  String get saleEditSave => 'Save changes';
+
+  @override
+  String get saleUpdatedToast => 'Sale updated';
+
+  @override
+  String get saleEditLeaveBody => 'Your changes will be lost.';
+
+  @override
+  String get newSaleNotesHint => 'Add a note for this sale…';
+
+  @override
+  String get newSaleSummary => 'Payment summary';
+
+  @override
+  String get newSaleFullyPaid => 'Fully paid';
+
+  @override
+  String get newSaleStatus => 'Status';
+
+  @override
+  String get newSalePayInFull => 'Paid in full';
+
+  @override
+  String newSaleChangeDue(String amount) {
+    return 'Change due: $amount';
+  }
+
+  @override
+  String get newSaleSubmit => 'Complete sale';
+
+  @override
+  String get newSaleStockNote =>
+      'Stock is deducted as soon as the sale is recorded.';
+
+  @override
+  String get newSaleErrPhone => 'Incomplete phone number';
+
+  @override
+  String newSaleCreatedToast(String number) {
+    return 'Sale $number recorded';
+  }
+
+  @override
+  String get newSaleDateTitle => 'Sale date';
+
+  @override
+  String get newSaleLeaveBody => 'The sale you started will be lost.';
 }

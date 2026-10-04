@@ -371,6 +371,16 @@ class _MenuDrawerState extends State<MenuDrawer> {
                   iconColor: AppColors.accentOrders,
                   onTap: () => _open(Routes.delivery),
                 ),
+                // After Livraison, as in the web's stock group, and in both
+                // stock modes like the rows above it.
+                MenuSubrow(
+                  depth: 2,
+                  icon: AppIcons.shoppingCart,
+                  label: l10n.menuSales,
+                  // Money in — `accent/money`.
+                  iconColor: AppColors.accentMoney,
+                  onTap: () => _open(Routes.sales),
+                ),
               ],
               MenuSubrow(
                 icon: AppIcons.bot,

@@ -93,8 +93,11 @@ class _ClientsScreenState extends State<ClientsScreen> {
   }
 
   Future<void> _openDetails(Client client) async {
-    final changed = await GoRouter.of(context).push<bool>(Routes.clientOf(client.id));
-    if (changed == true && mounted) await _model.load();
+    await GoRouter.of(context).push<bool>(Routes.clientOf(client.id));
+    // Always, not only when the details report an edit: a change made there
+    // by any path must be on the list the moment the merchant is back. The
+    // reload is silent, so it costs no spinner.
+    if (mounted) await _model.load();
   }
 
   /// The web's confirm, with its notice when orders are linked. The backend

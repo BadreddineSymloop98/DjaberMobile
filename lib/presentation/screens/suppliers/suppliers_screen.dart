@@ -84,13 +84,16 @@ class _SuppliersScreenState extends State<SuppliersScreen> {
   }
 
   Future<void> _openDetails(Supplier supplier) async {
-    final changed = await GoRouter.of(context).push<bool>(
+    await GoRouter.of(context).push<bool>(
       Routes.supplierOf(supplier.id),
       // The backend has no read-one route: hand the row over so the details
       // show at once. The details screen re-reads the list when it has none.
       extra: supplier,
     );
-    if (changed == true && mounted) await _model.load();
+    // Always, not only when the details report an edit: a change made there
+    // by any path must be on the list the moment the merchant is back. The
+    // reload is silent, so it costs no spinner.
+    if (mounted) await _model.load();
   }
 
   Future<void> _delete(Supplier supplier) async {

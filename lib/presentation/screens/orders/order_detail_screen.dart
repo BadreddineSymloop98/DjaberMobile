@@ -259,6 +259,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
         SizedBox(height: AppSpacing.xl),
       ],
       SectionLabel(
+        nested: true,
         label: l10n.orderClientSection,
         trailing: order.canLogCall ? (editing ? l10n.orderEditContactDone : l10n.orderEditContact) : null,
         onTrailingTap: order.canLogCall ? (editing ? _stopEditing : _startEditing) : null,
@@ -267,7 +268,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
         child: editing ? _contactForm(l10n) : _contactFacts(l10n, order),
       ),
       SizedBox(height: AppSpacing.xl),
-      SectionLabel(label: l10n.orderItemsSection, trailing: '${order.itemCount}'),
+      SectionLabel(nested: true, label: l10n.orderItemsSection, trailing: '${order.itemCount}'),
       _Card(
         child: Column(
           children: [
@@ -336,12 +337,13 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
       ),
       if (order.notes case final notes?) ...[
         SizedBox(height: AppSpacing.xl),
-        SectionLabel(label: l10n.orderNotesSection),
+        SectionLabel(nested: true, label: l10n.orderNotesSection),
         _Card(child: Text(notes, style: AppText.bodyS.copyWith(height: 1.4))),
       ],
       if (order.calls.isNotEmpty) ...[
         SizedBox(height: AppSpacing.xl),
         SectionLabel(
+          nested: true,
           label: order.canLogCall ? l10n.orderAttemptsSection : l10n.orderCallHistorySection,
         ),
         _Card(
@@ -576,7 +578,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
       ),
       if (confirmed) ...[
         SizedBox(height: AppSpacing.xl),
-        SectionLabel(label: l10n.orderNextSection),
+        SectionLabel(nested: true, label: l10n.orderNextSection),
         _Card(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

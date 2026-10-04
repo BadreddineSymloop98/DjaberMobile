@@ -4384,4 +4384,247 @@ class L10nFr extends L10n {
   String deliveryProviderAlreadyGone(String name) {
     return '$name avait déjà été supprimé';
   }
+
+  @override
+  String get menuSales => 'Ventes';
+
+  @override
+  String get salesEyebrow => 'VENTES';
+
+  @override
+  String get salesTitle => 'Ventes';
+
+  @override
+  String salesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ventes',
+      one: '1 vente',
+      zero: '0 vente',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get salesPeriodToday => 'Aujourd’hui';
+
+  @override
+  String get salesPeriodWeek => 'Semaine';
+
+  @override
+  String get salesPeriodMonth => 'Mois';
+
+  @override
+  String get salesPeriodYear => 'Année';
+
+  @override
+  String get salesStatTotal => 'Total ventes';
+
+  @override
+  String get salesStatRevenue => 'Chiffre d’affaires';
+
+  @override
+  String get salesStatAverage => 'Valeur moyenne';
+
+  @override
+  String get salesStatPending => 'En attente';
+
+  @override
+  String get salesSearch => 'Rechercher des ventes…';
+
+  @override
+  String get salesQuickAll => 'Tous';
+
+  @override
+  String get salesQuickPaid => 'Payées';
+
+  @override
+  String get salesQuickRemaining => 'Restant à payer';
+
+  @override
+  String get salesSection => 'Toutes les ventes';
+
+  @override
+  String get salesView => 'Voir';
+
+  @override
+  String get salesNew => 'Nouvelle vente';
+
+  @override
+  String get salesEmptyTitle => 'Aucune vente';
+
+  @override
+  String get salesEmptyBody =>
+      'Enregistrez votre première vente pour suivre votre chiffre d’affaires';
+
+  @override
+  String get salesNoMatchBody => 'Aucune vente ne correspond à ces critères.';
+
+  @override
+  String get salesFilterMethodAny => 'Tous les modes';
+
+  @override
+  String get saleStatusPaid => 'Payée';
+
+  @override
+  String get saleStatusPending => 'En attente';
+
+  @override
+  String get saleStatusPartial => 'Partielle';
+
+  @override
+  String get saleDeleteTitle => 'Supprimer la vente';
+
+  @override
+  String saleDeleteBody(String number) {
+    return 'Voulez-vous vraiment supprimer la vente $number ?';
+  }
+
+  @override
+  String get saleDeleteNotice =>
+      'Cette action est irréversible. Les quantités en stock seront restaurées.';
+
+  @override
+  String saleDeletedToast(String number) {
+    return 'Vente $number supprimée';
+  }
+
+  @override
+  String saleAlreadyGone(String number) {
+    return 'La vente $number avait déjà été supprimée';
+  }
+
+  @override
+  String get saleEyebrow => 'VENTE';
+
+  @override
+  String get saleFieldCustomer => 'Client';
+
+  @override
+  String get saleFieldPhone => 'Téléphone';
+
+  @override
+  String get saleFieldDate => 'Date';
+
+  @override
+  String get saleFieldMethod => 'Mode de paiement';
+
+  @override
+  String get saleFieldItems => 'Articles';
+
+  @override
+  String get saleWalkIn => 'Client de passage';
+
+  @override
+  String get saleItemsSection => 'Articles';
+
+  @override
+  String saleLineMeta(int qty, String price) {
+    return '×$qty  ·  $price';
+  }
+
+  @override
+  String saleLineDiscount(String amount) {
+    return 'Remise $amount';
+  }
+
+  @override
+  String get saleSubtotal => 'Sous-total';
+
+  @override
+  String get saleDiscount => 'Remise';
+
+  @override
+  String get saleTax => 'Taxe';
+
+  @override
+  String get saleTotal => 'Total';
+
+  @override
+  String get salePaymentStatus => 'Statut du paiement';
+
+  @override
+  String get saleMarkPaid => 'Marquer comme payée';
+
+  @override
+  String get saleEdit => 'Modifier';
+
+  @override
+  String get saleMarkedPaidToast => 'Vente marquée comme payée';
+
+  @override
+  String saleEditTitle(String number) {
+    return 'Modifier la vente $number';
+  }
+
+  @override
+  String get saleEditSubtitle =>
+      'Modifiez le paiement et les notes. Les articles et les prix ne peuvent plus être changés une fois la vente enregistrée.';
+
+  @override
+  String get saleMethodHint => 'Choisir un mode';
+
+  @override
+  String get saleEditPartialMissing => 'Saisissez le montant reçu';
+
+  @override
+  String saleEditPartialTooHigh(String total) {
+    return 'Doit être inférieur au total ($total) — sinon choisissez « Payée »';
+  }
+
+  @override
+  String saleEditCaisse(String from, String to) {
+    return 'La caisse passera de $from à $to.';
+  }
+
+  @override
+  String get saleEditSave => 'Enregistrer les modifications';
+
+  @override
+  String get saleUpdatedToast => 'Vente mise à jour';
+
+  @override
+  String get saleEditLeaveBody => 'Vos modifications seront perdues.';
+
+  @override
+  String get newSaleNotesHint => 'Ajouter une note pour cette vente…';
+
+  @override
+  String get newSaleSummary => 'Résumé du paiement';
+
+  @override
+  String get newSaleFullyPaid => 'Entièrement payée';
+
+  @override
+  String get newSaleStatus => 'Statut';
+
+  @override
+  String get newSalePayInFull => 'Payée en totalité';
+
+  @override
+  String newSaleChangeDue(String amount) {
+    return 'Monnaie à rendre : $amount';
+  }
+
+  @override
+  String get newSaleSubmit => 'Finaliser la vente';
+
+  @override
+  String get newSaleStockNote =>
+      'Le stock est déduit dès l’enregistrement de la vente.';
+
+  @override
+  String get newSaleErrPhone => 'Numéro de téléphone incomplet';
+
+  @override
+  String newSaleCreatedToast(String number) {
+    return 'Vente $number enregistrée';
+  }
+
+  @override
+  String get newSaleDateTitle => 'Date de la vente';
+
+  @override
+  String get newSaleLeaveBody => 'La vente commencée sera perdue.';
 }

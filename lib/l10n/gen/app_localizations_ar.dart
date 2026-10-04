@@ -4362,4 +4362,243 @@ class L10nAr extends L10n {
   String deliveryProviderAlreadyGone(String name) {
     return 'كانت $name محذوفة مسبقًا';
   }
+
+  @override
+  String get menuSales => 'المبيعات';
+
+  @override
+  String get salesEyebrow => 'المبيعات';
+
+  @override
+  String get salesTitle => 'المبيعات';
+
+  @override
+  String salesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count مبيعة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get salesPeriodToday => 'اليوم';
+
+  @override
+  String get salesPeriodWeek => 'الأسبوع';
+
+  @override
+  String get salesPeriodMonth => 'الشهر';
+
+  @override
+  String get salesPeriodYear => 'السنة';
+
+  @override
+  String get salesStatTotal => 'إجمالي المبيعات';
+
+  @override
+  String get salesStatRevenue => 'الإيرادات';
+
+  @override
+  String get salesStatAverage => 'متوسط قيمة الطلب';
+
+  @override
+  String get salesStatPending => 'قيد الانتظار';
+
+  @override
+  String get salesSearch => 'ابحث في المبيعات…';
+
+  @override
+  String get salesQuickAll => 'الكل';
+
+  @override
+  String get salesQuickPaid => 'مدفوعة';
+
+  @override
+  String get salesQuickRemaining => 'متبقية';
+
+  @override
+  String get salesSection => 'كل المبيعات';
+
+  @override
+  String get salesView => 'عرض';
+
+  @override
+  String get salesNew => 'مبيعة جديدة';
+
+  @override
+  String get salesEmptyTitle => 'لا توجد مبيعات';
+
+  @override
+  String get salesEmptyBody => 'سجّل أول مبيعاتك لتتبع الإيرادات';
+
+  @override
+  String get salesNoMatchBody => 'لا توجد مبيعة تطابق هذه المعايير.';
+
+  @override
+  String get salesFilterMethodAny => 'كل الطرق';
+
+  @override
+  String get saleStatusPaid => 'مدفوعة';
+
+  @override
+  String get saleStatusPending => 'قيد الانتظار';
+
+  @override
+  String get saleStatusPartial => 'جزئية';
+
+  @override
+  String get saleDeleteTitle => 'حذف المبيعة';
+
+  @override
+  String saleDeleteBody(String number) {
+    return 'هل تريد فعلًا حذف المبيعة $number؟';
+  }
+
+  @override
+  String get saleDeleteNotice =>
+      'لا يمكن التراجع عن هذا الإجراء. ستُستعاد كميات المخزون.';
+
+  @override
+  String saleDeletedToast(String number) {
+    return 'تم حذف المبيعة $number';
+  }
+
+  @override
+  String saleAlreadyGone(String number) {
+    return 'كانت المبيعة $number محذوفة مسبقًا';
+  }
+
+  @override
+  String get saleEyebrow => 'مبيعة';
+
+  @override
+  String get saleFieldCustomer => 'العميل';
+
+  @override
+  String get saleFieldPhone => 'الهاتف';
+
+  @override
+  String get saleFieldDate => 'التاريخ';
+
+  @override
+  String get saleFieldMethod => 'طريقة الدفع';
+
+  @override
+  String get saleFieldItems => 'المنتجات';
+
+  @override
+  String get saleWalkIn => 'عميل عابر';
+
+  @override
+  String get saleItemsSection => 'المنتجات';
+
+  @override
+  String saleLineMeta(int qty, String price) {
+    return '×$qty  ·  $price';
+  }
+
+  @override
+  String saleLineDiscount(String amount) {
+    return 'خصم $amount';
+  }
+
+  @override
+  String get saleSubtotal => 'المجموع الفرعي';
+
+  @override
+  String get saleDiscount => 'خصم';
+
+  @override
+  String get saleTax => 'الضريبة';
+
+  @override
+  String get saleTotal => 'الإجمالي';
+
+  @override
+  String get salePaymentStatus => 'حالة الدفع';
+
+  @override
+  String get saleMarkPaid => 'تحديد كمدفوعة';
+
+  @override
+  String get saleEdit => 'تعديل';
+
+  @override
+  String get saleMarkedPaidToast => 'تم تحديد المبيعة كمدفوعة';
+
+  @override
+  String saleEditTitle(String number) {
+    return 'تعديل المبيعة $number';
+  }
+
+  @override
+  String get saleEditSubtitle =>
+      'عدّل الدفع والملاحظات. لا يمكن تغيير المنتجات والأسعار بعد تسجيل المبيعة.';
+
+  @override
+  String get saleMethodHint => 'اختر طريقة';
+
+  @override
+  String get saleEditPartialMissing => 'أدخل المبلغ المستلم';
+
+  @override
+  String saleEditPartialTooHigh(String total) {
+    return 'يجب أن يكون أقل من الإجمالي ($total) — وإلا اختر «مدفوعة»';
+  }
+
+  @override
+  String saleEditCaisse(String from, String to) {
+    return 'سيتغير مبلغ الصندوق من $from إلى $to.';
+  }
+
+  @override
+  String get saleEditSave => 'حفظ التعديلات';
+
+  @override
+  String get saleUpdatedToast => 'تم تحديث المبيعة';
+
+  @override
+  String get saleEditLeaveBody => 'ستفقد تعديلاتك.';
+
+  @override
+  String get newSaleNotesHint => 'أضف ملاحظة لهذه المبيعة…';
+
+  @override
+  String get newSaleSummary => 'ملخص الدفع';
+
+  @override
+  String get newSaleFullyPaid => 'مدفوعة بالكامل';
+
+  @override
+  String get newSaleStatus => 'الحالة';
+
+  @override
+  String get newSalePayInFull => 'دفع المبلغ كاملًا';
+
+  @override
+  String newSaleChangeDue(String amount) {
+    return 'الباقي للعميل: $amount';
+  }
+
+  @override
+  String get newSaleSubmit => 'إتمام البيع';
+
+  @override
+  String get newSaleStockNote => 'يُخصم المخزون فور تسجيل المبيعة.';
+
+  @override
+  String get newSaleErrPhone => 'رقم الهاتف غير مكتمل';
+
+  @override
+  String newSaleCreatedToast(String number) {
+    return 'تم تسجيل المبيعة $number';
+  }
+
+  @override
+  String get newSaleDateTitle => 'تاريخ المبيعة';
+
+  @override
+  String get newSaleLeaveBody => 'ستفقد المبيعة التي بدأتها.';
 }

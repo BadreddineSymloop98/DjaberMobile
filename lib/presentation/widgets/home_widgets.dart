@@ -20,20 +20,31 @@ import 'icon_square_button.dart';
 /// The optional trailing slot carries a count on `À traiter` and an action on
 /// `Vos pages`; the frame sets both in `Label/Section` at `text/primary`.
 class SectionLabel extends StatelessWidget {
-  const SectionLabel({super.key, required this.label, this.trailing, this.onTrailingTap});
+  const SectionLabel({
+    super.key,
+    required this.label,
+    this.trailing,
+    this.onTrailingTap,
+    this.nested = false,
+  });
 
   final String label;
   final String? trailing;
   final VoidCallback? onTrailingTap;
 
+  /// Inside content already padded to the 16 gutter: only the 4 that makes
+  /// up the label's 20 is added, instead of indenting it twice.
+  final bool nested;
+
   @override
   Widget build(BuildContext context) {
     final trailingText = trailing;
+    final side = nested ? AppSpacing.gutter - AppSpacing.gutterTight : AppSpacing.gutter;
     return Padding(
       padding: EdgeInsets.fromLTRB(
-        AppSpacing.gutter, // 20 — the label gutter, wider than the content's 16
+        side, // 20 — the label gutter, wider than the content's 16
         AppSpacing.xxs, // 2
-        AppSpacing.gutter,
+        side,
         AppSpacing.md, // 12
       ),
       child: Row(

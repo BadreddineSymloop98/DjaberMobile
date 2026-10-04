@@ -20,6 +20,7 @@ import '../data/repositories/notification_repository.dart';
 import '../data/repositories/order_repository.dart';
 import '../data/repositories/page_repository.dart';
 import '../data/repositories/product_repository.dart';
+import '../data/repositories/sale_repository.dart';
 import '../data/repositories/supplier_repository.dart';
 import '../presentation/viewmodels/form_draft_store.dart';
 import '../presentation/viewmodels/locale_view_model.dart';
@@ -87,6 +88,9 @@ class AppProviders {
       ),
       Provider<OrderRepository>(
         create: (context) => OrderRepository(api: context.read<ApiClient>()),
+      ),
+      Provider<SaleRepository>(
+        create: (context) => SaleRepository(api: context.read<ApiClient>()),
       ),
       Provider<SupplierRepository>(
         create: (context) => SupplierRepository(api: context.read<ApiClient>()),

@@ -170,6 +170,16 @@ class Routes {
   static const deliveryProviderEdit = '/delivery/providers/:id/edit';
   static String deliveryProviderEditOf(String id) => '/delivery/providers/$id/edit';
 
+  /// `Ventes` — from the drawer, after Livraison (the web sidebar's order).
+  /// [saleNew] is declared before [sale] in `router.dart`, so `new` is never
+  /// read as an id; [saleEdit] is pushed from the detail.
+  static const sales = '/sales';
+  static const saleNew = '/sales/new';
+  static const sale = '/sales/:id';
+  static String saleOf(String id) => '/sales/$id';
+  static const saleEdit = '/sales/:id/edit';
+  static String saleEditOf(String id) => '/sales/$id/edit';
+
   static const notifications = '/notifications';
   static const settings = '/settings';
 

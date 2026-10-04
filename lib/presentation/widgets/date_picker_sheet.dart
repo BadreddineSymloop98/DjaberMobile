@@ -24,13 +24,14 @@ Future<DateTime?> showDatePickerSheet(
   BuildContext context, {
   required String title,
   DateTime? initial,
+  DateTime? lastDay,
 }) {
   return showModalBottomSheet<DateTime>(
     context: context,
     backgroundColor: AppColors.surface,
     barrierColor: AppColors.scrim,
     isScrollControlled: true,
-    builder: (_) => _DatePickerSheet(title: title, initial: initial),
+    builder: (_) => _DatePickerSheet(title: title, initial: initial, lastDay: lastDay),
   );
 }
 
@@ -39,10 +40,13 @@ String formatPickedDay(DateTime day, String localeTag) =>
     DateFormat.yMMMd(localeTag).format(day);
 
 class _DatePickerSheet extends StatefulWidget {
-  const _DatePickerSheet({required this.title, required this.initial});
+  const _DatePickerSheet({required this.title, required this.initial, this.lastDay});
 
   final String title;
   final DateTime? initial;
+
+  /// The last day that can be picked; later ones are drawn dimmed and inert.
+  final DateTime? lastDay;
 
   @override
   State<_DatePickerSheet> createState() => _DatePickerSheetState();
@@ -61,6 +65,7 @@ class _DatePickerSheetState extends State<_DatePickerSheet> {
     final tag = Localizations.localeOf(context).toLanguageTag();
     final today = _dayOnly(DateTime.now());
     final selected = widget.initial == null ? null : _dayOnly(widget.initial!);
+    final last = widget.lastDay == null ? null : _dayOnly(widget.lastDay!);
 
     final daysInMonth = DateTime(_month.year, _month.month + 1, 0).day;
     // Monday = 1 … Sunday = 7, so the leading blanks are weekday - 1.
@@ -126,6 +131,7 @@ class _DatePickerSheetState extends State<_DatePickerSheet> {
                     day: d,
                     selected: selected == DateTime(_month.year, _month.month, d),
                     today: today == DateTime(_month.year, _month.month, d),
+                    disabled: last != null && DateTime(_month.year, _month.month, d).isAfter(last),
                     onTap: () => Navigator.of(context).pop(DateTime(_month.year, _month.month, d)),
                   ),
               ],
@@ -180,6 +186,7 @@ class _DayCell extends StatelessWidget {
     required this.selected,
     required this.today,
     required this.onTap,
+    this.disabled = false,
   });
 
   final double size;
@@ -187,11 +194,12 @@ class _DayCell extends StatelessWidget {
   final bool selected;
   final bool today;
   final VoidCallback onTap;
+  final bool disabled;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: disabled ? null : onTap,
       behavior: HitTestBehavior.opaque,
       child: SizedBox.square(
         dimension: size,
@@ -211,7 +219,11 @@ class _DayCell extends StatelessWidget {
             child: Text(
               '$day',
               style: AppText.bodyS.copyWith(
-                color: selected ? AppColors.ink : AppColors.textPrimary,
+                color: selected
+                    ? AppColors.ink
+                    : disabled
+                        ? AppColors.textMuted.withValues(alpha: 0.4)
+                        : AppColors.textPrimary,
               ),
             ),
           ),

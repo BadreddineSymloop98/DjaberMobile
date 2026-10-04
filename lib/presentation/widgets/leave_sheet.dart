@@ -82,7 +82,9 @@ Future<bool> showDestructiveSheet(
                   height: 1.32,
                 ),
               ),
-              if (noticeTitle != null) ...[
+              // A notice may be a body alone (the sale frame's box): it used to
+              // need a title, and an order's body-only notice never showed.
+              if (noticeTitle != null || noticeBody != null) ...[
                 SizedBox(height: AppSpacing.xl),
                 Container(
                   padding: EdgeInsets.all(AppSpacing.md),
@@ -95,12 +97,14 @@ Future<bool> showDestructiveSheet(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(noticeTitle, style: AppText.title),
+                      if (noticeTitle != null) Text(noticeTitle, style: AppText.title),
                       if (noticeBody != null) ...[
-                        SizedBox(height: AppSpacing.xxs),
+                        if (noticeTitle != null) SizedBox(height: AppSpacing.xxs),
                         Text(
                           noticeBody,
-                          style: AppText.bodyS.copyWith(color: AppColors.textMuted),
+                          style: noticeTitle == null
+                              ? AppText.bodyS.copyWith(height: 1.4)
+                              : AppText.bodyS.copyWith(color: AppColors.textMuted),
                         ),
                       ],
                     ],

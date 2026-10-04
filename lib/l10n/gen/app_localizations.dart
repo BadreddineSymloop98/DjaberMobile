@@ -7700,6 +7700,426 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'{name} had already been deleted'**
   String deliveryProviderAlreadyGone(String name);
+
+  /// No description provided for @menuSales.
+  ///
+  /// In en, this message translates to:
+  /// **'Sales'**
+  String get menuSales;
+
+  /// No description provided for @salesEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'SALES'**
+  String get salesEyebrow;
+
+  /// No description provided for @salesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sales'**
+  String get salesTitle;
+
+  /// No description provided for @salesCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 sale} other{{count} sales}}'**
+  String salesCount(int count);
+
+  /// No description provided for @salesPeriodToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get salesPeriodToday;
+
+  /// No description provided for @salesPeriodWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'Week'**
+  String get salesPeriodWeek;
+
+  /// No description provided for @salesPeriodMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Month'**
+  String get salesPeriodMonth;
+
+  /// No description provided for @salesPeriodYear.
+  ///
+  /// In en, this message translates to:
+  /// **'Year'**
+  String get salesPeriodYear;
+
+  /// No description provided for @salesStatTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total sales'**
+  String get salesStatTotal;
+
+  /// No description provided for @salesStatRevenue.
+  ///
+  /// In en, this message translates to:
+  /// **'Revenue'**
+  String get salesStatRevenue;
+
+  /// No description provided for @salesStatAverage.
+  ///
+  /// In en, this message translates to:
+  /// **'Avg order value'**
+  String get salesStatAverage;
+
+  /// No description provided for @salesStatPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get salesStatPending;
+
+  /// No description provided for @salesSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search sales…'**
+  String get salesSearch;
+
+  /// No description provided for @salesQuickAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get salesQuickAll;
+
+  /// No description provided for @salesQuickPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid'**
+  String get salesQuickPaid;
+
+  /// No description provided for @salesQuickRemaining.
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining'**
+  String get salesQuickRemaining;
+
+  /// No description provided for @salesSection.
+  ///
+  /// In en, this message translates to:
+  /// **'All sales'**
+  String get salesSection;
+
+  /// No description provided for @salesView.
+  ///
+  /// In en, this message translates to:
+  /// **'View'**
+  String get salesView;
+
+  /// No description provided for @salesNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New sale'**
+  String get salesNew;
+
+  /// No description provided for @salesEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No sales'**
+  String get salesEmptyTitle;
+
+  /// No description provided for @salesEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Record your first sale to track revenue'**
+  String get salesEmptyBody;
+
+  /// No description provided for @salesNoMatchBody.
+  ///
+  /// In en, this message translates to:
+  /// **'No sale matches these filters.'**
+  String get salesNoMatchBody;
+
+  /// No description provided for @salesFilterMethodAny.
+  ///
+  /// In en, this message translates to:
+  /// **'All methods'**
+  String get salesFilterMethodAny;
+
+  /// No description provided for @saleStatusPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid'**
+  String get saleStatusPaid;
+
+  /// No description provided for @saleStatusPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get saleStatusPending;
+
+  /// No description provided for @saleStatusPartial.
+  ///
+  /// In en, this message translates to:
+  /// **'Partial'**
+  String get saleStatusPartial;
+
+  /// No description provided for @saleDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete sale'**
+  String get saleDeleteTitle;
+
+  /// No description provided for @saleDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete sale {number}?'**
+  String saleDeleteBody(String number);
+
+  /// No description provided for @saleDeleteNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'This action cannot be undone. Stock quantities will be restored.'**
+  String get saleDeleteNotice;
+
+  /// No description provided for @saleDeletedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Sale {number} deleted'**
+  String saleDeletedToast(String number);
+
+  /// No description provided for @saleAlreadyGone.
+  ///
+  /// In en, this message translates to:
+  /// **'Sale {number} had already been deleted'**
+  String saleAlreadyGone(String number);
+
+  /// No description provided for @saleEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'SALE'**
+  String get saleEyebrow;
+
+  /// No description provided for @saleFieldCustomer.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer'**
+  String get saleFieldCustomer;
+
+  /// No description provided for @saleFieldPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get saleFieldPhone;
+
+  /// No description provided for @saleFieldDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get saleFieldDate;
+
+  /// No description provided for @saleFieldMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment method'**
+  String get saleFieldMethod;
+
+  /// No description provided for @saleFieldItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Items'**
+  String get saleFieldItems;
+
+  /// No description provided for @saleWalkIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Walk-in customer'**
+  String get saleWalkIn;
+
+  /// No description provided for @saleItemsSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Items'**
+  String get saleItemsSection;
+
+  /// No description provided for @saleLineMeta.
+  ///
+  /// In en, this message translates to:
+  /// **'×{qty}  ·  {price}'**
+  String saleLineMeta(int qty, String price);
+
+  /// No description provided for @saleLineDiscount.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount {amount}'**
+  String saleLineDiscount(String amount);
+
+  /// No description provided for @saleSubtotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Subtotal'**
+  String get saleSubtotal;
+
+  /// No description provided for @saleDiscount.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount'**
+  String get saleDiscount;
+
+  /// No description provided for @saleTax.
+  ///
+  /// In en, this message translates to:
+  /// **'Tax'**
+  String get saleTax;
+
+  /// No description provided for @saleTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get saleTotal;
+
+  /// No description provided for @salePaymentStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment status'**
+  String get salePaymentStatus;
+
+  /// No description provided for @saleMarkPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as paid'**
+  String get saleMarkPaid;
+
+  /// No description provided for @saleEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get saleEdit;
+
+  /// No description provided for @saleMarkedPaidToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Sale marked as paid'**
+  String get saleMarkedPaidToast;
+
+  /// No description provided for @saleEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit sale {number}'**
+  String saleEditTitle(String number);
+
+  /// No description provided for @saleEditSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Update payment and notes. Items and prices cannot be changed once a sale is recorded.'**
+  String get saleEditSubtitle;
+
+  /// No description provided for @saleMethodHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a method'**
+  String get saleMethodHint;
+
+  /// No description provided for @saleEditPartialMissing.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the amount received'**
+  String get saleEditPartialMissing;
+
+  /// No description provided for @saleEditPartialTooHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'Must be below the total ({total}) — otherwise choose “Paid”'**
+  String saleEditPartialTooHigh(String total);
+
+  /// No description provided for @saleEditCaisse.
+  ///
+  /// In en, this message translates to:
+  /// **'The cash register will go from {from} to {to}.'**
+  String saleEditCaisse(String from, String to);
+
+  /// No description provided for @saleEditSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get saleEditSave;
+
+  /// No description provided for @saleUpdatedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Sale updated'**
+  String get saleUpdatedToast;
+
+  /// No description provided for @saleEditLeaveBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your changes will be lost.'**
+  String get saleEditLeaveBody;
+
+  /// No description provided for @newSaleNotesHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a note for this sale…'**
+  String get newSaleNotesHint;
+
+  /// No description provided for @newSaleSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment summary'**
+  String get newSaleSummary;
+
+  /// No description provided for @newSaleFullyPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Fully paid'**
+  String get newSaleFullyPaid;
+
+  /// No description provided for @newSaleStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get newSaleStatus;
+
+  /// No description provided for @newSalePayInFull.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid in full'**
+  String get newSalePayInFull;
+
+  /// No description provided for @newSaleChangeDue.
+  ///
+  /// In en, this message translates to:
+  /// **'Change due: {amount}'**
+  String newSaleChangeDue(String amount);
+
+  /// No description provided for @newSaleSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete sale'**
+  String get newSaleSubmit;
+
+  /// No description provided for @newSaleStockNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock is deducted as soon as the sale is recorded.'**
+  String get newSaleStockNote;
+
+  /// No description provided for @newSaleErrPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Incomplete phone number'**
+  String get newSaleErrPhone;
+
+  /// No description provided for @newSaleCreatedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Sale {number} recorded'**
+  String newSaleCreatedToast(String number);
+
+  /// No description provided for @newSaleDateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sale date'**
+  String get newSaleDateTitle;
+
+  /// No description provided for @newSaleLeaveBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The sale you started will be lost.'**
+  String get newSaleLeaveBody;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

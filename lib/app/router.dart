@@ -8,6 +8,7 @@ import '../core/utils/logger.dart';
 import '../data/models/agent.dart';
 import '../data/models/delivery.dart';
 import '../data/models/order.dart';
+import '../data/models/sale.dart';
 import '../data/models/supplier.dart';
 import '../l10n/gen/app_localizations.dart';
 import '../presentation/screens/agents/agent_details_screen.dart';
@@ -41,6 +42,10 @@ import '../presentation/screens/products/edit_product_screen.dart';
 import '../presentation/screens/products/product_detail_screen.dart';
 import '../presentation/screens/products/product_expenses_screen.dart';
 import '../presentation/screens/products/products_screen.dart';
+import '../presentation/screens/sales/edit_sale_screen.dart';
+import '../presentation/screens/sales/new_sale_screen.dart';
+import '../presentation/screens/sales/sale_detail_screen.dart';
+import '../presentation/screens/sales/sales_screen.dart';
 import '../presentation/screens/settings/settings_screen.dart';
 import '../presentation/screens/splash/splash_screen.dart';
 import '../presentation/screens/stock/stock_overview_screen.dart';
@@ -512,6 +517,40 @@ class AppRouter {
             // looks the account up by id.
             editing: state.extra is DeliveryProvider ? state.extra! as DeliveryProvider : null,
             editingId: state.pathParameters['id'],
+          ),
+        ),
+      ),
+      // `Ventes` and its three screens. `new` before `:id`.
+      GoRoute(
+        path: Routes.sales,
+        parentNavigatorKey: _rootKey,
+        builder: (_, _) => const BackScope(fallback: Routes.home, child: SalesScreen()),
+      ),
+      GoRoute(
+        path: Routes.saleNew,
+        parentNavigatorKey: _rootKey,
+        builder: (_, _) => const BackScope(fallback: Routes.sales, child: NewSaleScreen()),
+      ),
+      GoRoute(
+        path: Routes.sale,
+        parentNavigatorKey: _rootKey,
+        builder: (_, state) => BackScope(
+          fallback: Routes.sales,
+          child: SaleDetailScreen(
+            saleId: state.pathParameters['id']!,
+            // The list hands its row over so the screen draws at once.
+            initial: state.extra is Sale ? state.extra! as Sale : null,
+          ),
+        ),
+      ),
+      GoRoute(
+        path: Routes.saleEdit,
+        parentNavigatorKey: _rootKey,
+        builder: (_, state) => BackScope(
+          fallback: Routes.sales,
+          child: EditSaleScreen(
+            saleId: state.pathParameters['id']!,
+            initial: state.extra is Sale ? state.extra! as Sale : null,
           ),
         ),
       ),

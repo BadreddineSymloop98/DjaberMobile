@@ -11,18 +11,16 @@ import '../../../data/models/client.dart';
 import '../../../data/models/order.dart';
 import '../../../data/models/product.dart';
 import '../../../data/repositories/client_repository.dart';
-import '../../../data/repositories/delivery_repository.dart';
-import '../../../data/repositories/order_repository.dart';
 import '../../../data/repositories/product_repository.dart';
+import '../../../data/repositories/sale_repository.dart';
 import '../../../l10n/gen/app_localizations.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/app_spacing.dart';
 import '../../theme/app_typography.dart';
 import '../../viewmodels/form_draft_store.dart';
-import '../../viewmodels/new_order_view_model.dart';
+import '../../viewmodels/new_sale_view_model.dart';
 import '../../widgets/api_error_message.dart';
 import '../../widgets/app_filter_chip.dart';
-import '../../widgets/app_select_field.dart';
 import '../../widgets/app_text_field.dart';
 import '../../widgets/app_toast.dart';
 import '../../widgets/back_scope.dart';
@@ -30,39 +28,32 @@ import '../../widgets/date_picker_sheet.dart';
 import '../../widgets/home_widgets.dart';
 import '../../widgets/icon_square_button.dart';
 import '../../widgets/leave_sheet.dart';
-import 'order_form_widgets.dart';
-import 'order_status_pill.dart';
+import '../orders/order_form_widgets.dart';
+import '../orders/order_status_pill.dart';
+import 'sale_widgets.dart';
 
-/// `New order` (Figma `652:12048`) — the web's `stock/orders/new`.
+/// `New sale` (Figma `670:15943`, `· paiement partiel` `670:16131`) — the
+/// web's `stock/sales/new`.
 ///
-/// Four blocks down the screen: the client and where it goes, the product
-/// lines, a note, then the summary that adds it all up and asks how much was
-/// paid.
-///
-/// **Creating an order takes the stock immediately**, whatever status it is
-/// given — so the form says so above the button, and it refuses to send a line
-/// that is over what is on hand rather than letting the server roll the whole
-/// order back.
-class NewOrderScreen extends StatefulWidget {
-  const NewOrderScreen({super.key});
+/// The customer and the date, the product lines, a note, then the payment
+/// summary: the total, what was received, what is left (or the change to
+/// hand back), the status that follows, and the method.
+class NewSaleScreen extends StatefulWidget {
+  const NewSaleScreen({super.key});
 
   @override
-  State<NewOrderScreen> createState() => _NewOrderScreenState();
+  State<NewSaleScreen> createState() => _NewSaleScreenState();
 }
 
-class _NewOrderScreenState extends State<NewOrderScreen> {
-  late final NewOrderViewModel _model = NewOrderViewModel(
-    orders: context.read<OrderRepository>(),
+class _NewSaleScreenState extends State<NewSaleScreen> {
+  late final NewSaleViewModel _model = NewSaleViewModel(
+    sales: context.read<SaleRepository>(),
     clients: context.read<ClientRepository>(),
     products: context.read<ProductRepository>(),
-    delivery: context.read<DeliveryRepository>(),
-    // What keeps the form alive across the splash that plays when the app is
-    // left and reopened.
     drafts: context.read<FormDraftStore?>(),
   );
 
-  // The two search boxes are the screen's own: they hold a query, not a value,
-  // and a query is not worth keeping across a restart.
+  // Queries, not values — not worth keeping across a restart.
   final _clientSearch = TextEditingController();
   final _productSearch = TextEditingController();
   final _clientFocus = FocusNode();
@@ -94,16 +85,15 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
       _model.client != null ||
       _model.name.value.trim().isNotEmpty ||
       _model.phone.value.trim().isNotEmpty ||
-      _model.address.value.trim().isNotEmpty;
+      _model.notes.value.trim().isNotEmpty;
 
   Future<bool> _onBack() async {
     if (_model.isBusy) return false;
     if (!_dirty) return true;
-    return showLeaveSheet(context, body: L10n.of(context).productFormLeaveBody);
+    return showLeaveSheet(context, body: L10n.of(context).newSaleLeaveBody);
   }
 
   void _pickClient(Client client) {
-    // The model fills the address from the client when there is none typed.
     _model.setClient(client);
     _clientSearch.clear();
     _clientFocus.unfocus();
@@ -117,30 +107,33 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
   }
 
   Future<void> _pickDate() async {
-    final l10n = L10n.of(context);
     final picked = await showDatePickerSheet(
       context,
-      title: l10n.dateFrom,
-      initial: _model.orderDate,
+      title: L10n.of(context).newSaleDateTitle,
+      initial: _model.saleDate,
+      // The API refuses a sale more than 24 h ahead.
+      lastDay: DateTime.now(),
     );
-    if (picked != null) _model.setOrderDate(picked);
+    if (picked != null) _model.setSaleDate(picked);
   }
 
   Future<void> _submit() async {
+    FocusScope.of(context).unfocus();
     final l10n = L10n.of(context);
-    final order = await _model.createOrder();
-    if (order == null || !mounted) {
+    final sale = await _model.createSale();
+    if (!mounted) return;
+    if (sale == null) {
       if (_model.submitError case final error?) {
-        if (mounted) AppToast.info(context, apiErrorMessage(error, l10n));
+        AppToast.info(context, apiErrorMessage(error, l10n));
       }
       return;
     }
-    AppToast.success(context, l10n.orderCreatedToast);
+    AppToast.success(context, l10n.newSaleCreatedToast(sale.saleNumber));
     final router = GoRouter.of(context);
     if (router.canPop()) {
       router.pop();
     } else {
-      router.go(Routes.orders);
+      router.go(Routes.sales);
     }
   }
 
@@ -195,8 +188,10 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
   List<Widget> _content(L10n l10n) {
     final tag = Localizations.localeOf(context).toLanguageTag();
 
-    if (_model.wilayas.isEmpty && _model.error != null) {
+    if (!_model.isLoaded && _model.error != null) {
       return [
+        Text(l10n.salesNew, style: AppText.displayM),
+        SizedBox(height: AppSpacing.xl),
         ApiErrorLine(error: _model.error),
         Align(
           alignment: AlignmentDirectional.centerStart,
@@ -206,7 +201,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
     }
 
     return [
-      Text(l10n.newOrderTitle, style: AppText.displayM),
+      Text(l10n.salesNew, style: AppText.displayM),
       SizedBox(height: AppSpacing.xl),
       ..._clientBlock(l10n, tag),
       SizedBox(height: AppSpacing.xl),
@@ -217,7 +212,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
         label: l10n.newOrderNotes,
         controller: _model.notes.controller,
         focusNode: _model.notes.focusNode,
-        placeholder: l10n.newOrderNotesHint,
+        placeholder: l10n.newSaleNotesHint,
         minLines: 2,
         inputFormatters: [LengthLimitingTextInputFormatter(1000)],
       ),
@@ -226,7 +221,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
     ];
   }
 
-  // ---- Client ----
+  // ---- Customer ----
 
   List<Widget> _clientBlock(L10n l10n, String tag) {
     final query = _clientSearch.text.trim().toLowerCase();
@@ -243,7 +238,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
       SectionLabel(
         nested: true,
         label: l10n.newOrderClientSection,
-        trailing: formatPickedDay(_model.orderDate, tag),
+        trailing: formatPickedDay(_model.saleDate, tag),
         onTrailingTap: _pickDate,
       ),
       if (_model.client case final chosen?)
@@ -264,7 +259,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
               for (final client in matches)
                 SuggestionRow(
                   title: client.name,
-                  meta: client.phone,
+                  meta: client.phone == null ? null : Phone.format(client.phone!),
                   onTap: () => _pickClient(client),
                 ),
             ],
@@ -281,7 +276,6 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                 label: l10n.newOrderClientName,
                 controller: _model.name.controller,
                 focusNode: _model.name.focusNode,
-                isRequired: true,
                 textCapitalization: TextCapitalization.words,
                 inputFormatters: [LengthLimitingTextInputFormatter(120)],
               ),
@@ -292,7 +286,9 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                 label: l10n.newOrderClientPhone,
                 controller: _model.phone.controller,
                 focusNode: _model.phone.focusNode,
-                isRequired: true,
+                errorText: _model.phoneIncomplete && !_model.phone.hasFocus
+                    ? l10n.newSaleErrPhone
+                    : null,
                 keyboardType: TextInputType.phone,
                 inputFormatters: const [AlgerianPhoneFormatter()],
               ),
@@ -300,69 +296,6 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
           ],
         ),
       ],
-      SizedBox(height: AppSpacing.md),
-      AppTextField(
-        label: l10n.newOrderDeliveryAddress,
-        controller: _model.address.controller,
-        focusNode: _model.address.focusNode,
-        placeholder: l10n.orderAddressHint,
-        minLines: 2,
-        inputFormatters: [LengthLimitingTextInputFormatter(1000)],
-      ),
-      SizedBox(height: AppSpacing.md),
-      // A select, not chips. 58 wilayas in a horizontal strip means scrolling
-      // sideways past dozens of them to find one, with no sense of how far in
-      // it is — and the app already has the answer the brief's own adaptation
-      // rules name for a web `<select>`: a field that opens a sheet. The
-      // sheet also keeps the merchant's place in a long form, which a strip
-      // that grows the layout does not.
-      AppSelectField<int>(
-        label: l10n.newOrderWilaya,
-        placeholder: l10n.newOrderWilayaHint,
-        isRequired: true,
-        sheetTitle: l10n.newOrderWilaya,
-        options: [
-          for (final wilaya in _model.wilayas)
-            SelectOption(
-              value: wilaya.id,
-              label: wilaya.label(Localizations.localeOf(context).languageCode),
-            ),
-        ],
-        value: _model.wilayaId,
-        // Still loading, or the list failed: the field stays readable and
-        // simply does not open an empty sheet.
-        enabled: _model.wilayas.isNotEmpty,
-        onChanged: _model.setWilaya,
-      ),
-      SizedBox(height: AppSpacing.md),
-      AppTextField(
-        label: l10n.newOrderCommune,
-        controller: _model.commune.controller,
-        focusNode: _model.commune.focusNode,
-        placeholder: l10n.newOrderCommuneHint,
-        inputFormatters: [LengthLimitingTextInputFormatter(80)],
-      ),
-      SizedBox(height: AppSpacing.md),
-      GestureDetector(
-        onTap: () => _model.setStopdesk(!_model.isStopdesk),
-        behavior: HitTestBehavior.opaque,
-        child: Row(
-          children: [
-            OrderTick(
-              checked: _model.isStopdesk,
-              onTap: () => _model.setStopdesk(!_model.isStopdesk),
-              label: l10n.newOrderStopdesk,
-            ),
-            SizedBox(width: 1.28.w),
-            Expanded(
-              child: Text(
-                l10n.newOrderStopdesk,
-                style: AppText.bodyS.copyWith(color: AppColors.textSecondary),
-              ),
-            ),
-          ],
-        ),
-      ),
     ];
   }
 
@@ -381,9 +314,6 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
 
     return [
       SectionLabel(nested: true, label: l10n.newOrderProductsSection),
-      // A draft came back with lines whose product has since been deleted or
-      // sold out. Said plainly, because it changes the total the merchant is
-      // about to commit to.
       if (_model.droppedDraftLines > 0) ...[
         DashedBox(
           child: Text(
@@ -405,25 +335,25 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
         SizedBox(height: AppSpacing.sm),
         PickerSuggestions(
           empty: l10n.newOrderNoProducts,
-          children: [
-            for (final product in matches) ..._productRows(l10n, tag, product),
-          ],
+          children: [for (final product in matches) ..._productRows(l10n, tag, product)],
         ),
       ],
       SizedBox(height: AppSpacing.md),
       if (_model.lines.isEmpty)
-        DashedBox(child: Text(
-          l10n.newOrderNoLines,
-          style: AppText.bodyS.copyWith(color: AppColors.textMuted, height: 1.4),
-          textAlign: TextAlign.center,
-        ))
+        DashedBox(
+          child: Text(
+            l10n.newOrderNoLines,
+            style: AppText.bodyS.copyWith(color: AppColors.textMuted, height: 1.4),
+            textAlign: TextAlign.center,
+          ),
+        )
       else
         for (final (index, line) in _model.lines.indexed)
           Padding(
             padding: EdgeInsets.only(bottom: AppSpacing.sm),
             child: DraftLineCard(
-              // Keyed by what the line is: unkeyed, removing a line handed its
-              // fields (and their listeners) to the line below it.
+              // Keyed by what the line is, so removing one line does not hand
+              // its typed quantity to the next.
               key: ValueKey('${line.product.id}/${line.variant?.id}'),
               index: index,
               line: line,
@@ -436,9 +366,6 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
     ];
   }
 
-  /// A plain product is one row; a variant product is a row that opens into
-  /// its variants. Out-of-stock variants are **shown and dimmed** rather than
-  /// hidden, so the merchant can see the size exists and is simply gone.
   List<Widget> _productRows(L10n l10n, String tag, Product product) {
     if (!product.hasVariants) {
       return [
@@ -452,7 +379,10 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
       ];
     }
 
-    final variants = [for (final v in product.variants) if (v.isActive) v];
+    final variants = [
+      for (final v in product.variants)
+        if (v.isActive) v,
+    ];
     final open = _expanded == product.id;
 
     return [
@@ -477,51 +407,31 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
     ];
   }
 
-  // ---- Summary ----
+  // ---- Payment summary ----
 
   List<Widget> _summaryBlock(L10n l10n, String tag) {
     String money(double v) => Money.exact(v, tag);
     final overstocked = _model.overstockedLines;
+    final change = _model.amountPaid - _model.total;
+    final status = _model.paymentStatus;
 
     return [
-      SectionLabel(nested: true, label: l10n.newOrderSummary),
-      Container(
-        padding: EdgeInsets.all(AppSpacing.md),
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          border: Border.all(color: AppColors.rule, width: AppStroke.hairline),
-          borderRadius: BorderRadius.circular(AppRadius.card),
-        ),
+      SectionLabel(nested: true, label: l10n.newSaleSummary),
+      SaleCard(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _SummaryRow(label: l10n.newOrderSubtotal, value: money(_model.subtotal)),
+            Text(l10n.newOrderTotal.toUpperCase(), style: AppText.labelMeta),
             SizedBox(height: AppSpacing.xs),
-            _SummaryRow(
-              label: l10n.newOrderDelivery,
-              value: _model.isQuotingFee ? '…' : money(_model.deliveryFee),
-            ),
-            SizedBox(height: AppSpacing.md),
-            const Divider(
-              height: AppStroke.hairline,
-              thickness: AppStroke.hairline,
-              color: AppColors.rule,
-            ),
-            SizedBox(height: AppSpacing.md),
             Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(l10n.newOrderTotal.toUpperCase(), style: AppText.labelMeta),
-                const Spacer(),
-                Text(money(_model.total), style: AppText.numeralL),
+                Expanded(child: Text(money(_model.total), style: AppText.numeralL)),
+                Text(
+                  l10n.ordersRowItems(_model.lines.length).toUpperCase(),
+                  style: AppText.labelMicro,
+                ),
               ],
-            ),
-            SizedBox(height: 0.77.w),
-            Align(
-              alignment: AlignmentDirectional.centerEnd,
-              child: Text(
-                l10n.ordersRowItems(_model.lines.length).toUpperCase(),
-                style: AppText.labelMicro,
-              ),
             ),
           ],
         ),
@@ -534,7 +444,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
           behavior: HitTestBehavior.opaque,
           child: Padding(
             padding: EdgeInsets.all(AppSpacing.xs),
-            child: Text(l10n.newOrderPayInFull, style: AppText.link),
+            child: Text(l10n.newSalePayInFull, style: AppText.link),
           ),
         ),
       ),
@@ -545,12 +455,16 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
         placeholder: '0',
         keyboardType: const TextInputType.numberWithOptions(decimal: true),
         inputFormatters: [
-          FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
+          FilteringTextInputFormatter.allow(RegExp(r'[0-9.,]')),
           LengthLimitingTextInputFormatter(12),
         ],
       ),
-      SizedBox(height: AppSpacing.sm),
-      Text(l10n.newOrderCodHint, style: AppText.labelMeta),
+      // More handed over than owed: the server keeps the total, the merchant
+      // hands back the difference.
+      if (change > 0 && _model.total > 0) ...[
+        SizedBox(height: AppSpacing.sm),
+        Text(l10n.newSaleChangeDue(money(change)), style: AppText.labelMeta),
+      ],
       SizedBox(height: AppSpacing.md),
       Container(
         width: double.infinity,
@@ -563,7 +477,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
         child: Column(
           children: [
             Text(
-              (_model.remaining > 0 ? l10n.newOrderRemainingDebt : l10n.newOrderFullyPaid)
+              (_model.remaining > 0 ? l10n.newOrderRemainingDebt : l10n.newSaleFullyPaid)
                   .toUpperCase(),
               style: AppText.labelMeta,
             ),
@@ -575,30 +489,10 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
       SizedBox(height: AppSpacing.md),
       Row(
         children: [
-          Text(l10n.newOrderPayment, style: AppText.bodyS),
+          Text(l10n.newSaleStatus, style: AppText.bodyS),
           const Spacer(),
-          OrderStatusPill(
-            label: paymentStatusLabel(_model.paymentStatus, l10n),
-            tone: _model.paymentStatus == PaymentStatus.paid ? PillTone.settled : PillTone.moving,
-          ),
-        ],
-      ),
-      SizedBox(height: AppSpacing.md),
-      Text(l10n.newOrderStatus.toUpperCase(), style: AppText.labelMeta),
-      SizedBox(height: AppSpacing.sm),
-      Wrap(
-        spacing: 1.54.w,
-        runSpacing: 1.54.w,
-        children: [
-          // Only the two the backend takes safely: it stores whatever it is
-          // sent here **without validating it**, so the form never offers a
-          // status that would persist as nonsense.
-          for (final status in [OrderStatus.pending, OrderStatus.confirmed])
-            AppFilterChip(
-              label: orderStatusLabel(status, l10n),
-              selected: _model.status == status,
-              onTap: () => _model.setStatus(status),
-            ),
+          // Nothing to pay yet reads as nothing, not as *Payée*.
+          if (_model.lines.isNotEmpty) salePaymentPill(status, l10n),
         ],
       ),
       SizedBox(height: AppSpacing.md),
@@ -631,15 +525,11 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
   }
 
   Widget _footer(L10n l10n) {
-    final problem = _model.problem;
-    final message = switch (problem) {
-      NewOrderProblem.noItems => l10n.newOrderErrNoItems,
-      NewOrderProblem.noClientName => l10n.newOrderErrName,
-      NewOrderProblem.noPhone => l10n.newOrderErrPhone,
-      NewOrderProblem.noWilaya => l10n.newOrderErrWilaya,
-      NewOrderProblem.noAddress => l10n.newOrderErrAddress,
-      null => null,
-    };
+    final message = _model.hasNoItems
+        ? l10n.newOrderErrNoItems
+        : _model.phoneIncomplete
+        ? l10n.newSaleErrPhone
+        : null;
 
     return Padding(
       padding: EdgeInsets.fromLTRB(
@@ -652,51 +542,27 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (message != null) ...[
-            Text(
-              message,
-              style: AppText.bodyS.copyWith(color: AppColors.textMuted),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: AppSpacing.sm),
-          ] else ...[
-            Text(l10n.newOrderStockReserved, style: AppText.labelMeta, textAlign: TextAlign.center),
-            SizedBox(height: AppSpacing.sm),
-          ],
+          Text(
+            message ?? l10n.newSaleStockNote,
+            style: message == null
+                ? AppText.labelMeta
+                : AppText.bodyS.copyWith(color: AppColors.textMuted),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: AppSpacing.sm),
           FilledButton(
             onPressed: _model.canSubmit ? _submit : null,
-            child: _model.isBusy
+            child: _model.isBusy && _model.isLoaded
                 ? SizedBox.square(
                     dimension: AppSpacing.gutterTight,
                     child: const CircularProgressIndicator(strokeWidth: 2, color: AppColors.ink),
                   )
-                : Text(l10n.newOrderSubmit),
+                : Text(l10n.newSaleSubmit),
           ),
           SizedBox(height: AppSpacing.sm),
-          OutlinedButton(
-            onPressed: () => BackScope.back(context),
-            child: Text(l10n.commonCancel),
-          ),
+          OutlinedButton(onPressed: () => BackScope.back(context), child: Text(l10n.commonCancel)),
         ],
       ),
-    );
-  }
-}
-
-class _SummaryRow extends StatelessWidget {
-  const _SummaryRow({required this.label, required this.value});
-
-  final String label;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(label, style: AppText.bodyS.copyWith(color: AppColors.textSecondary)),
-        const Spacer(),
-        Text(value, style: AppText.bodyS),
-      ],
     );
   }
 }
