@@ -5362,4 +5362,506 @@ class L10nFr extends L10n {
   String recoReasonRelated(String percent) {
     return 'Produits liés ($percent de description commune)';
   }
+
+  @override
+  String pageBreadcrumb(String name) {
+    return 'PAGES  ›  $name';
+  }
+
+  @override
+  String pageConnectedOn(String platform, String date) {
+    return '$platform  ·  Connectée le $date';
+  }
+
+  @override
+  String get pageActive => 'Active';
+
+  @override
+  String get pageOpenStock => 'Ouvrir le stock';
+
+  @override
+  String get pageTabOverview => 'Aperçu';
+
+  @override
+  String get pageTabMessages => 'Messages';
+
+  @override
+  String get pageTabAi => 'Paramètres IA';
+
+  @override
+  String get pageTabHistory => 'Historique';
+
+  @override
+  String get pageGoneTitle => 'Page introuvable';
+
+  @override
+  String get pageGoneBody => 'Cette page n’est plus connectée.';
+
+  @override
+  String get pageOverviewTitle => 'Aperçu de la page';
+
+  @override
+  String pageUpdatedAt(String time) {
+    return 'Dernière mise à jour : $time';
+  }
+
+  @override
+  String get pageRefresh => 'Actualiser';
+
+  @override
+  String get pageStatFollowers => 'Abonnés';
+
+  @override
+  String get pageStatImpressions => 'Impressions';
+
+  @override
+  String get pageStatEngaged => 'Utilisateurs engagés';
+
+  @override
+  String get pageStatPostEngagements => 'Engagements sur les publications';
+
+  @override
+  String get pageAnalyzeCardTitle => 'Analyser cette page avec l’IA';
+
+  @override
+  String get pageAnalyzeCardBody =>
+      'Analysez vos publications récentes, détectez automatiquement les produits et importez-les dans votre stock en un clic. Vous validez tout avant l’ajout.';
+
+  @override
+  String get pageAnalyzeCardCta => 'Lancer l’analyse →';
+
+  @override
+  String get pageStockTitle => 'Stock & inventaire';
+
+  @override
+  String get pageStockSubtitle =>
+      'Choisissez où cette page lit son catalogue de produits';
+
+  @override
+  String get pageStockMain => 'Stock principal';
+
+  @override
+  String get pageStockMainBody => 'Catalogue partagé entre toutes vos pages';
+
+  @override
+  String get pageStockProductsLabel => 'Produits';
+
+  @override
+  String get pageStockPage => 'Stock de la page';
+
+  @override
+  String get pageStockPageBody =>
+      'Les produits que l’agent IA vend sur cette page';
+
+  @override
+  String get pageStockPageCta => 'Ouvrir le stock dédié →';
+
+  @override
+  String get pageInsightsUnavailableTitle => 'Statistiques indisponibles';
+
+  @override
+  String get pageInsightsUnavailableBody =>
+      'Les statistiques de page Facebook nécessitent des autorisations supplémentaires en cours d’examen par Facebook. En attendant, vous pouvez utiliser les fonctions Messages et Paramètres IA.';
+
+  @override
+  String get pageMessagesSearch => 'Rechercher par nom ou message…';
+
+  @override
+  String get pageMessagesEmptyTitle => 'Aucune conversation';
+
+  @override
+  String get pageMessagesEmptyBody =>
+      'Les conversations de cette page apparaîtront ici. Tirez vers le bas pour synchroniser.';
+
+  @override
+  String get pageMessagesNoMatch =>
+      'Aucune conversation ne correspond à ces critères.';
+
+  @override
+  String get pageAiSubtitle => 'Configuration de l’agent IA pour cette page';
+
+  @override
+  String get pageAgentActive => 'Actif';
+
+  @override
+  String get pageAgentInactive => 'Inactif';
+
+  @override
+  String get pageAiModel => 'Modèle';
+
+  @override
+  String get pageAiTemperature => 'Température';
+
+  @override
+  String get pageAiMaxTokens => 'Tokens max';
+
+  @override
+  String get pageAiProducts => 'Produits';
+
+  @override
+  String get pageAiProductsAll => 'Tous';
+
+  @override
+  String pageAiProductsSome(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count sélectionnés',
+      one: '1 sélectionné',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pageAiInstructions => 'Instructions personnalisées';
+
+  @override
+  String pageAiLinkedPages(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pages liées',
+      one: '1 page liée',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pageAiConversations(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count conversations',
+      one: '1 conversation',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pageAiNote =>
+      'Pour modifier la façon dont l’IA répond, modifiez la personnalité, le modèle ou les instructions personnalisées. Les changements s’appliquent à toutes les pages liées.';
+
+  @override
+  String get pageAiNoAgentTitle => 'Aucun agent IA lié';
+
+  @override
+  String get pageAiNoAgentBody =>
+      'Cette page n’a pas d’agent IA assigné. Créez ou liez un agent pour qu’il réponde automatiquement aux messages entrants.';
+
+  @override
+  String get pageAiGoToAgents => 'Aller aux agents';
+
+  @override
+  String get pageHistoryTitle => 'Historique des messages';
+
+  @override
+  String get pageHistoryLog => 'Journal des conversations';
+
+  @override
+  String pageHistoryMessages(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count messages',
+      one: '1 message',
+      zero: '0 message',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pageHistoryDirection => 'Direction';
+
+  @override
+  String get pageHistoryIn => 'Entrants';
+
+  @override
+  String get pageHistoryOut => 'Sortants';
+
+  @override
+  String get pageHistoryInTag => '↓ Entr.';
+
+  @override
+  String get pageHistoryOutTag => '↑ Sort.';
+
+  @override
+  String get pageHistoryFrom => 'Depuis';
+
+  @override
+  String get pageHistoryTo => 'Jusqu’à';
+
+  @override
+  String get pageHistoryNoText => '(sans texte)';
+
+  @override
+  String get pageHistoryEmptyTitle => 'Aucun message';
+
+  @override
+  String get pageHistoryEmptyBody =>
+      'Quand cette page échangera des messages, ils apparaîtront ici.';
+
+  @override
+  String get pageHistoryNoMatch =>
+      'Aucun message ne correspond à ces critères.';
+
+  @override
+  String pageProductsCrumb(String name) {
+    return 'PAGES  ›  $name  ›  PRODUITS';
+  }
+
+  @override
+  String pageProductsTitle(String name) {
+    return 'Produits de $name';
+  }
+
+  @override
+  String get pageProductsSubtitle =>
+      'Choisissez quels produits de votre catalogue l’agent IA vend sur cette page';
+
+  @override
+  String get pageProductsManage => 'Gérer le catalogue';
+
+  @override
+  String get pageProductsSellAll => 'Vendre tous les produits';
+
+  @override
+  String pageProductsSellAllBody(int count) {
+    return 'L’agent a accès aux $count produits de votre catalogue';
+  }
+
+  @override
+  String pageProductsSelectedOf(int selected, int total) {
+    return '$selected produits sur $total sélectionnés';
+  }
+
+  @override
+  String pageProductsAllAvailable(int count) {
+    return 'Les $count produits seront disponibles sur cette page';
+  }
+
+  @override
+  String pageProductsSelectedCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count produits sélectionnés',
+      one: '1 produit sélectionné',
+      zero: 'Aucun produit sélectionné',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pageProductsSelectAll => 'Tout sélectionner';
+
+  @override
+  String get pageProductsDeselectAll => 'Tout désélectionner';
+
+  @override
+  String get pageProductsSave => 'Enregistrer la sélection';
+
+  @override
+  String get pageProductsSaved => 'Sélection enregistrée';
+
+  @override
+  String pageProductsShared(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          'Cet agent répond aussi sur $count autres pages — la sélection s’y appliquera.',
+      one: 'Cet agent répond aussi sur 1 autre page — la sélection s’y appliquera.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pageProductsNoneSelected =>
+      'Choisissez au moins un produit, ou vendez-les tous.';
+
+  @override
+  String get pageProductsManageAll => 'Gérer tout le catalogue';
+
+  @override
+  String get pageProductsManageAllBody =>
+      'Ajoutez, modifiez ou retirez des produits de votre stock principal';
+
+  @override
+  String get pageProductsConfigureAgent => 'Configurer l’agent IA';
+
+  @override
+  String get pageProductsConfigureAgentBody =>
+      'Changez la personnalité, le modèle et l’affichage';
+
+  @override
+  String get pageProductsNoAgentTitle => 'Aucun agent IA lié à cette page';
+
+  @override
+  String get pageProductsNoAgentBody =>
+      'Créez un agent et assignez-le d’abord à cette page.';
+
+  @override
+  String get pageProductsLeave => 'Votre sélection n’est pas enregistrée.';
+
+  @override
+  String get pageAnalysisBack => 'Retour à la page';
+
+  @override
+  String get pageAnalysisTitle => 'Analyse de la page par IA';
+
+  @override
+  String get pageAnalysisSubtitle =>
+      'Nous allons analyser vos publications récentes, détecter les produits et vous laisser confirmer ce qu’il faut importer dans votre stock.';
+
+  @override
+  String get pageAnalysisCardTitle => 'Analyser les publications récentes';
+
+  @override
+  String get pageAnalysisCardBody =>
+      'Récupère jusqu’à 30 de vos dernières publications, exécute une IA de vision pour détecter les produits et vous montre un aperçu avant tout ajout au stock.';
+
+  @override
+  String get pageAnalysisStart => 'Démarrer l’analyse';
+
+  @override
+  String get pageAnalysisRescan => 'Analyser à nouveau';
+
+  @override
+  String pageAnalysisReconnectTitle(String platform) {
+    return 'Autorisation $platform requise';
+  }
+
+  @override
+  String get pageAnalysisReconnectBody =>
+      'Votre page a été connectée avant que nous demandions l’autorisation « lire les publications ». Reconnectez la page pour la donner.';
+
+  @override
+  String get pageAnalysisReconnectCta => 'Aller aux pages → reconnecter';
+
+  @override
+  String get pageAnalysisScanning =>
+      'Analyse des publications et extraction des produits… Cela peut prendre quelques minutes.';
+
+  @override
+  String get pageAnalysisNothing =>
+      'Aucun produit détecté dans vos publications récentes.';
+
+  @override
+  String pageAnalysisScanned(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count publications analysées',
+      one: '1 publication analysée',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pageAnalysisFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count produits détectés',
+      one: '1 produit détecté',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pageAnalysisIncomplete(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          '$count produits sélectionnés manquent de champs obligatoires. Renseignez le prix (DA) et le stock initial avant l’import.',
+      one: '1 produit sélectionné manque de champs obligatoires. Renseignez le prix (DA) et le stock initial avant l’import.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pageAnalysisName => 'Nom du produit';
+
+  @override
+  String get pageAnalysisDescriptionHint => 'Description (facultatif)';
+
+  @override
+  String get pageAnalysisPrice => 'Prix (DA)';
+
+  @override
+  String get pageAnalysisStock => 'Stock';
+
+  @override
+  String get pageAnalysisFillName => 'Renseignez le nom pour importer';
+
+  @override
+  String get pageAnalysisFillPrice => 'Renseignez le prix pour importer';
+
+  @override
+  String get pageAnalysisFillStock => 'Renseignez le stock pour importer';
+
+  @override
+  String pageAnalysisImport(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Importer $count dans le stock',
+      zero: 'Importer dans le stock',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pageAnalysisImporting => 'Import en cours…';
+
+  @override
+  String pageAnalysisDoneTitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count produits importés',
+      one: '1 produit importé',
+      zero: 'Aucun produit importé',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pageAnalysisSkipped(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ignorés',
+      one: '1 ignoré',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pageAnalysisLeave => 'Les produits détectés seront perdus.';
+
+  @override
+  String get pageCategoryClothing => 'Vêtements';
+
+  @override
+  String get pageCategoryBeauty => 'Beauté';
+
+  @override
+  String get pageCategoryElectronics => 'Électronique';
+
+  @override
+  String get pageCategoryFood => 'Alimentation';
+
+  @override
+  String get pageCategoryAccessories => 'Accessoires';
+
+  @override
+  String get pageCategoryHome => 'Maison';
+
+  @override
+  String get pageCategoryKids => 'Enfants';
+
+  @override
+  String get pageCategoryOther => 'Autre';
 }

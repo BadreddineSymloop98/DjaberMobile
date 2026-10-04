@@ -130,6 +130,17 @@ class Routes {
   /// Reached from home and from the drawer's *Réseaux sociaux*.
   static const pages = '/pages';
 
+  /// One connected page — *Configurer* on its card. Overview, Messages, AI
+  /// settings and History are tabs of the one screen (`?tab=`); the page's
+  /// products and the AI analysis are screens of their own.
+  static const page = '/pages/:id';
+  static String pageOf(String id, {String? tab}) =>
+      tab == null ? '/pages/$id' : '/pages/$id?tab=$tab';
+  static const pageProducts = '/pages/:id/products';
+  static String pageProductsOf(String id) => '/pages/$id/products';
+  static const pageAnalyze = '/pages/:id/analyze';
+  static String pageAnalyzeOf(String id) => '/pages/$id/analyze';
+
   /// `18 — Ajouter un produit`.
   ///
   /// **Must be declared before [product] in the router.** go_router matches in

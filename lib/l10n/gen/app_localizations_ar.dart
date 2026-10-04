@@ -5311,4 +5311,488 @@ class L10nAr extends L10n {
   String recoReasonRelated(String percent) {
     return 'منتجات مرتبطة (تطابق الوصف $percent)';
   }
+
+  @override
+  String pageBreadcrumb(String name) {
+    return 'الصفحات  ‹  $name';
+  }
+
+  @override
+  String pageConnectedOn(String platform, String date) {
+    return '$platform  ·  تم الربط في $date';
+  }
+
+  @override
+  String get pageActive => 'نشطة';
+
+  @override
+  String get pageOpenStock => 'فتح المخزون';
+
+  @override
+  String get pageTabOverview => 'نظرة عامة';
+
+  @override
+  String get pageTabMessages => 'الرسائل';
+
+  @override
+  String get pageTabAi => 'إعدادات الذكاء الاصطناعي';
+
+  @override
+  String get pageTabHistory => 'السجل';
+
+  @override
+  String get pageGoneTitle => 'الصفحة غير موجودة';
+
+  @override
+  String get pageGoneBody => 'هذه الصفحة لم تعد مرتبطة.';
+
+  @override
+  String get pageOverviewTitle => 'نظرة عامة على الصفحة';
+
+  @override
+  String pageUpdatedAt(String time) {
+    return 'آخر تحديث: $time';
+  }
+
+  @override
+  String get pageRefresh => 'تحديث';
+
+  @override
+  String get pageStatFollowers => 'المتابعون';
+
+  @override
+  String get pageStatImpressions => 'مرات الظهور';
+
+  @override
+  String get pageStatEngaged => 'المستخدمون المتفاعلون';
+
+  @override
+  String get pageStatPostEngagements => 'التفاعل مع المنشورات';
+
+  @override
+  String get pageAnalyzeCardTitle => 'تحليل هذه الصفحة بالذكاء الاصطناعي';
+
+  @override
+  String get pageAnalyzeCardBody =>
+      'افحص منشوراتك الأخيرة، اكتشف المنتجات تلقائيًا، واستوردها إلى مخزونك بنقرة واحدة. تؤكد كل شيء قبل إضافته.';
+
+  @override
+  String get pageAnalyzeCardCta => 'بدء التحليل ←';
+
+  @override
+  String get pageStockTitle => 'المخزون والجرد';
+
+  @override
+  String get pageStockSubtitle => 'اختر مصدر كتالوج المنتجات لهذه الصفحة';
+
+  @override
+  String get pageStockMain => 'المخزون الرئيسي';
+
+  @override
+  String get pageStockMainBody => 'كتالوج مشترك بين كل صفحاتك';
+
+  @override
+  String get pageStockProductsLabel => 'منتجات';
+
+  @override
+  String get pageStockPage => 'مخزون الصفحة';
+
+  @override
+  String get pageStockPageBody =>
+      'المنتجات التي يبيعها وكيل الذكاء الاصطناعي على هذه الصفحة';
+
+  @override
+  String get pageStockPageCta => 'فتح المخزون المخصص ←';
+
+  @override
+  String get pageInsightsUnavailableTitle => 'الإحصائيات غير متاحة';
+
+  @override
+  String get pageInsightsUnavailableBody =>
+      'إحصائيات صفحات فيسبوك تتطلب أذونات إضافية قيد المراجعة من قبل فيسبوك. في هذه الأثناء يمكنك استخدام الرسائل وإعدادات الذكاء الاصطناعي.';
+
+  @override
+  String get pageMessagesSearch => 'ابحث بالاسم أو الرسالة…';
+
+  @override
+  String get pageMessagesEmptyTitle => 'لا توجد محادثات';
+
+  @override
+  String get pageMessagesEmptyBody =>
+      'ستظهر محادثات هذه الصفحة هنا. اسحب للأسفل للمزامنة.';
+
+  @override
+  String get pageMessagesNoMatch => 'لا توجد محادثة تطابق هذه المعايير.';
+
+  @override
+  String get pageAiSubtitle => 'إعدادات وكيل الذكاء الاصطناعي لهذه الصفحة';
+
+  @override
+  String get pageAgentActive => 'نشط';
+
+  @override
+  String get pageAgentInactive => 'متوقف';
+
+  @override
+  String get pageAiModel => 'النموذج';
+
+  @override
+  String get pageAiTemperature => 'درجة الحرارة';
+
+  @override
+  String get pageAiMaxTokens => 'الحد الأقصى للرموز';
+
+  @override
+  String get pageAiProducts => 'المنتجات';
+
+  @override
+  String get pageAiProductsAll => 'الكل';
+
+  @override
+  String pageAiProductsSome(int count) {
+    return '$count محددة';
+  }
+
+  @override
+  String get pageAiInstructions => 'تعليمات مخصصة';
+
+  @override
+  String pageAiLinkedPages(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count صفحات مرتبطة',
+      two: 'صفحتان مرتبطتان',
+      one: 'صفحة واحدة مرتبطة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pageAiConversations(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count محادثة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pageAiNote =>
+      'لتغيير طريقة رد الذكاء الاصطناعي، عدّل شخصية الوكيل أو نموذجه أو تعليماته المخصصة. التغييرات تنطبق على كل الصفحات المرتبطة.';
+
+  @override
+  String get pageAiNoAgentTitle => 'لا يوجد وكيل ذكاء اصطناعي مرتبط';
+
+  @override
+  String get pageAiNoAgentBody =>
+      'هذه الصفحة لا تحتوي على وكيل ذكاء اصطناعي معيّن. أنشئ أو اربط وكيلًا ليرد تلقائيًا على الرسائل الواردة.';
+
+  @override
+  String get pageAiGoToAgents => 'الذهاب إلى الوكلاء';
+
+  @override
+  String get pageHistoryTitle => 'سجل الرسائل';
+
+  @override
+  String get pageHistoryLog => 'سجل المحادثات';
+
+  @override
+  String pageHistoryMessages(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count رسالة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pageHistoryDirection => 'الاتجاه';
+
+  @override
+  String get pageHistoryIn => 'وارد';
+
+  @override
+  String get pageHistoryOut => 'صادر';
+
+  @override
+  String get pageHistoryInTag => '↓ وارد';
+
+  @override
+  String get pageHistoryOutTag => '↑ صادر';
+
+  @override
+  String get pageHistoryFrom => 'من';
+
+  @override
+  String get pageHistoryTo => 'إلى';
+
+  @override
+  String get pageHistoryNoText => '(بدون نص)';
+
+  @override
+  String get pageHistoryEmptyTitle => 'لا توجد رسائل';
+
+  @override
+  String get pageHistoryEmptyBody =>
+      'عندما تتبادل هذه الصفحة الرسائل ستظهر هنا.';
+
+  @override
+  String get pageHistoryNoMatch => 'لا توجد رسالة تطابق هذه المعايير.';
+
+  @override
+  String pageProductsCrumb(String name) {
+    return 'الصفحات  ‹  $name  ‹  المنتجات';
+  }
+
+  @override
+  String pageProductsTitle(String name) {
+    return 'منتجات $name';
+  }
+
+  @override
+  String get pageProductsSubtitle =>
+      'اختر المنتجات التي يبيعها وكيل الذكاء الاصطناعي من كتالوجك على هذه الصفحة';
+
+  @override
+  String get pageProductsManage => 'إدارة الكتالوج';
+
+  @override
+  String get pageProductsSellAll => 'بيع كل المنتجات';
+
+  @override
+  String pageProductsSellAllBody(int count) {
+    return 'للوكيل وصول إلى كل منتجات كتالوجك الـ$count';
+  }
+
+  @override
+  String pageProductsSelectedOf(int selected, int total) {
+    return 'تم اختيار $selected من $total منتجًا';
+  }
+
+  @override
+  String pageProductsAllAvailable(int count) {
+    return 'ستكون كل المنتجات الـ$count متاحة على هذه الصفحة';
+  }
+
+  @override
+  String pageProductsSelectedCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'تم اختيار $count منتجات',
+      one: 'تم اختيار منتج واحد',
+      zero: 'لم يتم اختيار أي منتج',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pageProductsSelectAll => 'تحديد الكل';
+
+  @override
+  String get pageProductsDeselectAll => 'إلغاء التحديد';
+
+  @override
+  String get pageProductsSave => 'حفظ الاختيار';
+
+  @override
+  String get pageProductsSaved => 'تم حفظ الاختيار';
+
+  @override
+  String pageProductsShared(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          'هذا الوكيل يرد أيضًا على $count صفحات أخرى — سيُطبَّق الاختيار عليها.',
+      one: 'هذا الوكيل يرد أيضًا على صفحة أخرى — سيُطبَّق الاختيار عليها.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pageProductsNoneSelected =>
+      'اختر منتجًا واحدًا على الأقل، أو بِع كل المنتجات.';
+
+  @override
+  String get pageProductsManageAll => 'إدارة الكتالوج كاملًا';
+
+  @override
+  String get pageProductsManageAllBody =>
+      'أضف أو عدّل أو احذف منتجات من مخزونك الرئيسي';
+
+  @override
+  String get pageProductsConfigureAgent => 'إعداد وكيل الذكاء الاصطناعي';
+
+  @override
+  String get pageProductsConfigureAgentBody => 'غيّر الشخصية والنموذج والعرض';
+
+  @override
+  String get pageProductsNoAgentTitle =>
+      'لا يوجد وكيل ذكاء اصطناعي مرتبط بهذه الصفحة';
+
+  @override
+  String get pageProductsNoAgentBody => 'أنشئ وكيلًا وعيّنه لهذه الصفحة أولًا.';
+
+  @override
+  String get pageProductsLeave => 'اختيارك غير محفوظ.';
+
+  @override
+  String get pageAnalysisBack => 'العودة إلى الصفحة';
+
+  @override
+  String get pageAnalysisTitle => 'تحليل الصفحة بالذكاء الاصطناعي';
+
+  @override
+  String get pageAnalysisSubtitle =>
+      'سنفحص منشوراتك الأخيرة ونكتشف المنتجات ونتركك تؤكد ما يتم استيراده إلى مخزونك.';
+
+  @override
+  String get pageAnalysisCardTitle => 'فحص المنشورات الأخيرة';
+
+  @override
+  String get pageAnalysisCardBody =>
+      'يجلب حتى 30 من أحدث منشوراتك، ويشغّل ذكاء اصطناعي للرؤية لاكتشاف المنتجات، ويعرض معاينة قبل أي إضافة إلى المخزون.';
+
+  @override
+  String get pageAnalysisStart => 'بدء الفحص';
+
+  @override
+  String get pageAnalysisRescan => 'إعادة الفحص';
+
+  @override
+  String pageAnalysisReconnectTitle(String platform) {
+    return 'مطلوب إذن من $platform';
+  }
+
+  @override
+  String get pageAnalysisReconnectBody =>
+      'تم ربط صفحتك قبل أن نطلب إذن \"قراءة المنشورات\". أعد ربط الصفحة لمنح هذا الإذن.';
+
+  @override
+  String get pageAnalysisReconnectCta => 'الذهاب إلى الصفحات ← إعادة الربط';
+
+  @override
+  String get pageAnalysisScanning =>
+      'فحص المنشورات واستخراج المنتجات… قد يستغرق ذلك بضع دقائق.';
+
+  @override
+  String get pageAnalysisNothing =>
+      'لم يتم العثور على منتجات في منشوراتك الأخيرة.';
+
+  @override
+  String pageAnalysisScanned(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'تم فحص $count منشورًا',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pageAnalysisFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'تم اكتشاف $count منتجات',
+      one: 'تم اكتشاف منتج واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pageAnalysisIncomplete(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          '$count منتجات محددة تنقصها حقول مطلوبة. حدد السعر (دج) والمخزون الأولي قبل الاستيراد.',
+      one: 'منتج واحد محدد ينقصه حقول مطلوبة. حدد السعر (دج) والمخزون الأولي قبل الاستيراد.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pageAnalysisName => 'اسم المنتج';
+
+  @override
+  String get pageAnalysisDescriptionHint => 'الوصف (اختياري)';
+
+  @override
+  String get pageAnalysisPrice => 'السعر (دج)';
+
+  @override
+  String get pageAnalysisStock => 'المخزون';
+
+  @override
+  String get pageAnalysisFillName => 'املأ الاسم للاستيراد';
+
+  @override
+  String get pageAnalysisFillPrice => 'املأ السعر للاستيراد';
+
+  @override
+  String get pageAnalysisFillStock => 'املأ المخزون للاستيراد';
+
+  @override
+  String pageAnalysisImport(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'استيراد $count إلى المخزون',
+      zero: 'استيراد إلى المخزون',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pageAnalysisImporting => 'جارٍ الاستيراد…';
+
+  @override
+  String pageAnalysisDoneTitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'تم استيراد $count منتجات',
+      two: 'تم استيراد منتجين',
+      one: 'تم استيراد منتج واحد',
+      zero: 'لم يتم استيراد أي منتج',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pageAnalysisSkipped(int count) {
+    return 'تم تخطي $count';
+  }
+
+  @override
+  String get pageAnalysisLeave => 'ستفقد المنتجات المكتشفة.';
+
+  @override
+  String get pageCategoryClothing => 'ملابس';
+
+  @override
+  String get pageCategoryBeauty => 'تجميل';
+
+  @override
+  String get pageCategoryElectronics => 'إلكترونيات';
+
+  @override
+  String get pageCategoryFood => 'طعام';
+
+  @override
+  String get pageCategoryAccessories => 'إكسسوارات';
+
+  @override
+  String get pageCategoryHome => 'منزل';
+
+  @override
+  String get pageCategoryKids => 'أطفال';
+
+  @override
+  String get pageCategoryOther => 'أخرى';
 }

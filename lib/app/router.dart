@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../core/services/push_service.dart';
 import '../core/utils/logger.dart';
 import '../data/models/agent.dart';
+import '../data/models/connected_page.dart';
 import '../data/models/delivery.dart';
 import '../data/models/order.dart';
 import '../data/models/purchase.dart';
@@ -38,6 +39,9 @@ import '../presentation/screens/onboarding/onboarding_screen.dart';
 import '../presentation/screens/orders/new_order_screen.dart';
 import '../presentation/screens/orders/order_detail_screen.dart';
 import '../presentation/screens/orders/orders_screen.dart';
+import '../presentation/screens/pages/page_analysis_screen.dart';
+import '../presentation/screens/pages/page_detail_screen.dart';
+import '../presentation/screens/pages/page_products_screen.dart';
 import '../presentation/screens/pages/pages_screen.dart';
 import '../presentation/screens/products/add_product_screen.dart';
 import '../presentation/screens/products/edit_product_screen.dart';
@@ -64,6 +68,7 @@ import '../presentation/screens/tutorial/tutorial_intro_screen.dart';
 import '../presentation/screens/tutorial/tutorial_mode_screen.dart';
 import '../presentation/screens/tutorial/tutorial_product_screen.dart';
 import '../presentation/screens/tutorial/tutorial_ready_screen.dart';
+import '../presentation/viewmodels/page_detail_view_model.dart';
 import '../presentation/viewmodels/session_view_model.dart';
 import '../presentation/widgets/back_scope.dart';
 import '../presentation/widgets/placeholder_screen.dart';
@@ -379,6 +384,45 @@ class AppRouter {
         parentNavigatorKey: _rootKey,
         builder: (_, _) =>
             const BackScope(fallback: Routes.home, child: PagesScreen()),
+      ),
+      // One page, then its products and its analysis. The card hands its page
+      // over so the header draws at once; a deep link looks it up.
+      GoRoute(
+        path: Routes.page,
+        parentNavigatorKey: _rootKey,
+        builder: (_, state) => BackScope(
+          fallback: Routes.pages,
+          child: PageDetailScreen(
+            pageId: state.pathParameters['id']!,
+            initial: state.extra is ConnectedPage ? state.extra! as ConnectedPage : null,
+            section: PageSection.values
+                    .where((s) => s.name == state.uri.queryParameters['tab'])
+                    .firstOrNull ??
+                PageSection.overview,
+          ),
+        ),
+      ),
+      GoRoute(
+        path: Routes.pageProducts,
+        parentNavigatorKey: _rootKey,
+        builder: (_, state) => BackScope(
+          fallback: Routes.pageOf(state.pathParameters['id']!),
+          child: PageProductsScreen(
+            pageId: state.pathParameters['id']!,
+            page: state.extra is ConnectedPage ? state.extra! as ConnectedPage : null,
+          ),
+        ),
+      ),
+      GoRoute(
+        path: Routes.pageAnalyze,
+        parentNavigatorKey: _rootKey,
+        builder: (_, state) => BackScope(
+          fallback: Routes.pageOf(state.pathParameters['id']!),
+          child: PageAnalysisScreen(
+            pageId: state.pathParameters['id']!,
+            page: state.extra is ConnectedPage ? state.extra! as ConnectedPage : null,
+          ),
+        ),
       ),
       // Before /agents/:id, which would otherwise match `new`.
       GoRoute(

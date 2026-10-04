@@ -173,8 +173,9 @@ class _PagesScreenState extends State<PagesScreen> {
     if (mounted) await _model.refreshSummaries();
   }
 
-  void _notBuilt(String what) {
-    AppToast.info(context, '$what — ${L10n.of(context).commonNotBuilt}');
+  Future<void> _configure(ConnectedPage page) async {
+    await GoRouter.of(context).push(Routes.pageOf(page.id), extra: page);
+    if (mounted) await _model.refreshSummaries();
   }
 
   @override
@@ -304,9 +305,10 @@ class _PagesScreenState extends State<PagesScreen> {
             // the inbox therefore goes home, the tabs' parent.
             onInbox: () => GoRouter.of(context).go(Routes.inboxFor(page.id)),
             onStock: () => GoRouter.of(context).push(Routes.products),
-            // The web's page configuration (`/dashboard/page/{id}`) is not
-            // built on mobile.
-            onConfigure: () => _notBuilt(l10n.pageCardActionConfigure),
+            // The web's page configuration (`/dashboard/page/{id}`): its four
+            // tabs, then products and analysis. The cards are read again on
+            // the way back — an agent or a product change shows on them.
+            onConfigure: () => _configure(page),
             onDisconnect: () => _disconnect(page),
             onGenerate: () => _generate(page),
             onEditAgent: _editAgent,

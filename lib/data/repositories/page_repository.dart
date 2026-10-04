@@ -4,7 +4,9 @@ import '../../core/config/app_config.dart';
 import '../../core/constants/api_endpoints.dart';
 import '../../core/error/result.dart';
 import '../../core/network/api_client.dart';
+import '../../core/utils/json.dart';
 import '../models/connected_page.dart';
+import '../models/page_detail.dart';
 import '../models/page_summary.dart';
 
 /// Connected Pages, against `/api/pages`.
@@ -88,6 +90,74 @@ class PageRepository {
           ? Api.connectInstagram
           : Api.connectFacebook,
       parse: (json) => (json as Map<String, dynamic>)['authUrl'] as String,
+    );
+  }
+
+  /// `GET /api/pages/{id}/insights` — Facebook Page Insights, proxied. Any
+  /// Graph error is a 503, which is what an Instagram page always gets and,
+  /// per the live docs, what Facebook pages get in practice for now.
+  Future<Result<PageInsights>> insights(String pageId) {
+    return _api.get<PageInsights>(
+      Api.pageInsights(pageId),
+      parse: (json) => PageInsights.fromJson(Json.map(json)),
+    );
+  }
+
+  /// `GET /api/pages/{id}/messages` — every message of the page, newest first.
+  /// [dateTo] is sent as the end of that day: the server compares raw
+  /// timestamps.
+  Future<Result<PageHistoryPage>> history(
+    String pageId, {
+    MessageDirection? direction,
+    DateTime? dateFrom,
+    DateTime? dateTo,
+    int limit = 50,
+    int offset = 0,
+  }) {
+    return _api.get<PageHistoryPage>(
+      Api.pageMessages(pageId),
+      query: {
+        if (direction != null) 'type': direction.wire,
+        if (dateFrom != null)
+          'dateFrom': DateTime(dateFrom.year, dateFrom.month, dateFrom.day).toUtc().toIso8601String(),
+        if (dateTo != null)
+          'dateTo': DateTime(dateTo.year, dateTo.month, dateTo.day, 23, 59, 59, 999)
+              .toUtc()
+              .toIso8601String(),
+        'limit': limit,
+        'offset': offset,
+      },
+      parse: (json) {
+        final map = Json.map(json);
+        final rows = Json.list(map['messages'], PageHistoryMessage.fromJson);
+        return (messages: rows, total: Json.intOf(map['total'], rows.length));
+      },
+    );
+  }
+
+  /// `POST /api/pages/{id}/analyze` — product candidates from the page's recent
+  /// posts. Synchronous and slow (a vision model over up to 30 posts), so it
+  /// gets five minutes. A Meta permission problem is a 403 whose body carries
+  /// `needsReconnect: true`.
+  Future<Result<PageAnalysis>> analyze(String pageId) {
+    return _api.post<PageAnalysis>(
+      Api.pageAnalyze(pageId),
+      receiveTimeout: const Duration(minutes: 5),
+      parse: (json) => PageAnalysis.fromJson(Json.map(json)),
+    );
+  }
+
+  /// `POST /api/pages/{id}/import-products` → `{ created, skipped }`. Creates
+  /// products in the merchant's main stock; an item with no name or no price
+  /// is skipped rather than refused.
+  Future<Result<ImportResult>> importProducts(String pageId, List<ImportProductItem> items) {
+    return _api.post<ImportResult>(
+      Api.pageImportProducts(pageId),
+      body: {'items': [for (final item in items) item.toJson()]},
+      parse: (json) {
+        final map = Json.map(json);
+        return (created: Json.intOf(map['created']), skipped: Json.intOf(map['skipped']));
+      },
     );
   }
 }

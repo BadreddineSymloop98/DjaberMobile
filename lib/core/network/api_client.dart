@@ -66,16 +66,22 @@ class ApiClient {
         parse,
       );
 
+  /// [receiveTimeout] overrides the app-wide 30 s for one call — the page
+  /// analysis runs a vision model over up to 30 posts and can take minutes.
   Future<Result<T>> post<T>(
     String path, {
     Object? body,
     Map<String, dynamic>? query,
     T Function(dynamic json)? parse,
     CancelToken? cancelToken,
+    Duration? receiveTimeout,
   }) =>
       _send(
         () => _dio.post<dynamic>(path,
-            data: body, queryParameters: query, cancelToken: cancelToken),
+            data: body,
+            queryParameters: query,
+            cancelToken: cancelToken,
+            options: receiveTimeout == null ? null : Options(receiveTimeout: receiveTimeout)),
         parse,
       );
 

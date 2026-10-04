@@ -57,6 +57,9 @@ class Api {
   static String pageSync(String pageId) => '/api/pages/$pageId/sync';
   static String pageGenerateAgent(String pageId) => '/api/pages/$pageId/generate-agent';
   static String pageApplyAgent(String pageId) => '/api/pages/$pageId/apply-agent';
+  static String pageMessages(String pageId) => '/api/pages/$pageId/messages';
+  static String pageAnalyze(String pageId) => '/api/pages/$pageId/analyze';
+  static String pageImportProducts(String pageId) => '/api/pages/$pageId/import-products';
 
   // ---- Conversations (page-config.routes.ts) ----
   static String pageConversations(String pageId) =>

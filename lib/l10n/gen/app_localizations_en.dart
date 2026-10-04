@@ -5301,4 +5301,490 @@ class L10nEn extends L10n {
   String recoReasonRelated(String percent) {
     return 'Related products ($percent description match)';
   }
+
+  @override
+  String pageBreadcrumb(String name) {
+    return 'PAGES  ›  $name';
+  }
+
+  @override
+  String pageConnectedOn(String platform, String date) {
+    return '$platform  ·  Connected $date';
+  }
+
+  @override
+  String get pageActive => 'Active';
+
+  @override
+  String get pageOpenStock => 'Open stock';
+
+  @override
+  String get pageTabOverview => 'Overview';
+
+  @override
+  String get pageTabMessages => 'Messages';
+
+  @override
+  String get pageTabAi => 'AI settings';
+
+  @override
+  String get pageTabHistory => 'History';
+
+  @override
+  String get pageGoneTitle => 'Page not found';
+
+  @override
+  String get pageGoneBody => 'This page is no longer connected.';
+
+  @override
+  String get pageOverviewTitle => 'Page overview';
+
+  @override
+  String pageUpdatedAt(String time) {
+    return 'Last updated: $time';
+  }
+
+  @override
+  String get pageRefresh => 'Refresh';
+
+  @override
+  String get pageStatFollowers => 'Followers';
+
+  @override
+  String get pageStatImpressions => 'Impressions';
+
+  @override
+  String get pageStatEngaged => 'Engaged users';
+
+  @override
+  String get pageStatPostEngagements => 'Post engagements';
+
+  @override
+  String get pageAnalyzeCardTitle => 'Analyze this page with AI';
+
+  @override
+  String get pageAnalyzeCardBody =>
+      'Scan your recent posts, auto-detect products, and import them into your stock with one click. You confirm everything before anything is added.';
+
+  @override
+  String get pageAnalyzeCardCta => 'Run analysis →';
+
+  @override
+  String get pageStockTitle => 'Stock & inventory';
+
+  @override
+  String get pageStockSubtitle =>
+      'Choose where this page reads its product catalog from';
+
+  @override
+  String get pageStockMain => 'Main stock';
+
+  @override
+  String get pageStockMainBody => 'Shared catalog across all your pages';
+
+  @override
+  String get pageStockProductsLabel => 'Products';
+
+  @override
+  String get pageStockPage => 'Page stock';
+
+  @override
+  String get pageStockPageBody =>
+      'The products the AI agent sells on this page';
+
+  @override
+  String get pageStockPageCta => 'Open dedicated stock →';
+
+  @override
+  String get pageInsightsUnavailableTitle => 'Insights not available';
+
+  @override
+  String get pageInsightsUnavailableBody =>
+      'Facebook Page Insights require additional permissions that are currently under review by Facebook. In the meantime, you can still use the Messages and AI settings features.';
+
+  @override
+  String get pageMessagesSearch => 'Search by name or message…';
+
+  @override
+  String get pageMessagesEmptyTitle => 'No conversations';
+
+  @override
+  String get pageMessagesEmptyBody =>
+      'This page’s conversations will appear here. Pull down to sync.';
+
+  @override
+  String get pageMessagesNoMatch => 'No conversation matches these filters.';
+
+  @override
+  String get pageAiSubtitle => 'AI agent configuration for this page';
+
+  @override
+  String get pageAgentActive => 'Active';
+
+  @override
+  String get pageAgentInactive => 'Inactive';
+
+  @override
+  String get pageAiModel => 'Model';
+
+  @override
+  String get pageAiTemperature => 'Temperature';
+
+  @override
+  String get pageAiMaxTokens => 'Max tokens';
+
+  @override
+  String get pageAiProducts => 'Products';
+
+  @override
+  String get pageAiProductsAll => 'All';
+
+  @override
+  String pageAiProductsSome(int count) {
+    return '$count selected';
+  }
+
+  @override
+  String get pageAiInstructions => 'Custom instructions';
+
+  @override
+  String pageAiLinkedPages(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pages linked',
+      one: '1 page linked',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pageAiConversations(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count conversations',
+      one: '1 conversation',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pageAiNote =>
+      'To change how the AI responds, edit the agent’s personality, model, or custom instructions. Changes apply to all pages linked to this agent.';
+
+  @override
+  String get pageAiNoAgentTitle => 'No AI agent linked';
+
+  @override
+  String get pageAiNoAgentBody =>
+      'This page doesn’t have an AI agent assigned. Create or link an agent so it can automatically respond to incoming messages.';
+
+  @override
+  String get pageAiGoToAgents => 'Go to agents';
+
+  @override
+  String get pageHistoryTitle => 'Message history';
+
+  @override
+  String get pageHistoryLog => 'Conversation log';
+
+  @override
+  String pageHistoryMessages(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count messages',
+      one: '1 message',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pageHistoryDirection => 'Direction';
+
+  @override
+  String get pageHistoryIn => 'In';
+
+  @override
+  String get pageHistoryOut => 'Out';
+
+  @override
+  String get pageHistoryInTag => '↓ In';
+
+  @override
+  String get pageHistoryOutTag => '↑ Out';
+
+  @override
+  String get pageHistoryFrom => 'From';
+
+  @override
+  String get pageHistoryTo => 'To';
+
+  @override
+  String get pageHistoryNoText => '(no text)';
+
+  @override
+  String get pageHistoryEmptyTitle => 'No messages';
+
+  @override
+  String get pageHistoryEmptyBody =>
+      'When this page exchanges messages, they will appear here.';
+
+  @override
+  String get pageHistoryNoMatch => 'No message matches these filters.';
+
+  @override
+  String pageProductsCrumb(String name) {
+    return 'PAGES  ›  $name  ›  PRODUCTS';
+  }
+
+  @override
+  String pageProductsTitle(String name) {
+    return 'Products for $name';
+  }
+
+  @override
+  String get pageProductsSubtitle =>
+      'Choose which products from your catalog the AI agent sells on this page';
+
+  @override
+  String get pageProductsManage => 'Manage catalog';
+
+  @override
+  String get pageProductsSellAll => 'Sell all products';
+
+  @override
+  String pageProductsSellAllBody(int count) {
+    return 'Agent has access to all $count products in your catalog';
+  }
+
+  @override
+  String pageProductsSelectedOf(int selected, int total) {
+    return '$selected of $total products selected';
+  }
+
+  @override
+  String pageProductsAllAvailable(int count) {
+    return 'All $count products will be available on this page';
+  }
+
+  @override
+  String pageProductsSelectedCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count products selected',
+      one: '1 product selected',
+      zero: 'No product selected',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pageProductsSelectAll => 'Select all';
+
+  @override
+  String get pageProductsDeselectAll => 'Deselect all';
+
+  @override
+  String get pageProductsSave => 'Save selection';
+
+  @override
+  String get pageProductsSaved => 'Selection saved';
+
+  @override
+  String pageProductsShared(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          'This agent also answers on $count other pages — the selection applies there too.',
+      one: 'This agent also answers on 1 other page — the selection applies there too.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pageProductsNoneSelected =>
+      'Pick at least one product, or sell them all.';
+
+  @override
+  String get pageProductsManageAll => 'Manage full catalog';
+
+  @override
+  String get pageProductsManageAllBody =>
+      'Add, edit, or remove products from your main stock';
+
+  @override
+  String get pageProductsConfigureAgent => 'Configure AI agent';
+
+  @override
+  String get pageProductsConfigureAgentBody =>
+      'Change personality, model, and display settings';
+
+  @override
+  String get pageProductsNoAgentTitle => 'No AI agent linked to this page';
+
+  @override
+  String get pageProductsNoAgentBody =>
+      'Create an agent and assign it to this page first.';
+
+  @override
+  String get pageProductsLeave => 'Your selection isn’t saved.';
+
+  @override
+  String get pageAnalysisBack => 'Back to page';
+
+  @override
+  String get pageAnalysisTitle => 'AI page analysis';
+
+  @override
+  String get pageAnalysisSubtitle =>
+      'We’ll scan your recent posts, detect products, and let you confirm what to import into your stock.';
+
+  @override
+  String get pageAnalysisCardTitle => 'Scan recent posts';
+
+  @override
+  String get pageAnalysisCardBody =>
+      'Pulls up to 30 of your latest posts, runs vision AI to detect products, and shows you a preview before anything is added to stock.';
+
+  @override
+  String get pageAnalysisStart => 'Start scan';
+
+  @override
+  String get pageAnalysisRescan => 'Scan again';
+
+  @override
+  String pageAnalysisReconnectTitle(String platform) {
+    return '$platform permission needed';
+  }
+
+  @override
+  String get pageAnalysisReconnectBody =>
+      'Your page was connected before we asked for the “read posts” permission. Reconnect the page to grant it.';
+
+  @override
+  String get pageAnalysisReconnectCta => 'Go to pages → reconnect';
+
+  @override
+  String get pageAnalysisScanning =>
+      'Scanning posts and extracting products… This can take a few minutes.';
+
+  @override
+  String get pageAnalysisNothing => 'No product found in your recent posts.';
+
+  @override
+  String pageAnalysisScanned(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'scanned $count posts',
+      one: 'scanned 1 post',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pageAnalysisFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count products detected',
+      one: '1 product detected',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pageAnalysisIncomplete(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          '$count selected products are missing required fields. Set price (DA) and initial stock on each before importing.',
+      one: '1 selected product is missing required fields. Set its price (DA) and initial stock before importing.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pageAnalysisName => 'Product name';
+
+  @override
+  String get pageAnalysisDescriptionHint => 'Description (optional)';
+
+  @override
+  String get pageAnalysisPrice => 'Price (DA)';
+
+  @override
+  String get pageAnalysisStock => 'Stock';
+
+  @override
+  String get pageAnalysisFillName => 'Fill the name to import';
+
+  @override
+  String get pageAnalysisFillPrice => 'Fill the price to import';
+
+  @override
+  String get pageAnalysisFillStock => 'Fill the stock to import';
+
+  @override
+  String pageAnalysisImport(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Import $count to stock',
+      zero: 'Import to stock',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pageAnalysisImporting => 'Importing…';
+
+  @override
+  String pageAnalysisDoneTitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Imported $count products',
+      one: 'Imported 1 product',
+      zero: 'No product imported',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pageAnalysisSkipped(int count) {
+    return '$count skipped';
+  }
+
+  @override
+  String get pageAnalysisLeave => 'The detected products will be lost.';
+
+  @override
+  String get pageCategoryClothing => 'Clothing';
+
+  @override
+  String get pageCategoryBeauty => 'Beauty';
+
+  @override
+  String get pageCategoryElectronics => 'Electronics';
+
+  @override
+  String get pageCategoryFood => 'Food';
+
+  @override
+  String get pageCategoryAccessories => 'Accessories';
+
+  @override
+  String get pageCategoryHome => 'Home';
+
+  @override
+  String get pageCategoryKids => 'Kids';
+
+  @override
+  String get pageCategoryOther => 'Other';
 }

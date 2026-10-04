@@ -9314,6 +9314,732 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Related products ({percent} description match)'**
   String recoReasonRelated(String percent);
+
+  /// No description provided for @pageBreadcrumb.
+  ///
+  /// In en, this message translates to:
+  /// **'PAGES  ›  {name}'**
+  String pageBreadcrumb(String name);
+
+  /// No description provided for @pageConnectedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'{platform}  ·  Connected {date}'**
+  String pageConnectedOn(String platform, String date);
+
+  /// No description provided for @pageActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get pageActive;
+
+  /// No description provided for @pageOpenStock.
+  ///
+  /// In en, this message translates to:
+  /// **'Open stock'**
+  String get pageOpenStock;
+
+  /// No description provided for @pageTabOverview.
+  ///
+  /// In en, this message translates to:
+  /// **'Overview'**
+  String get pageTabOverview;
+
+  /// No description provided for @pageTabMessages.
+  ///
+  /// In en, this message translates to:
+  /// **'Messages'**
+  String get pageTabMessages;
+
+  /// No description provided for @pageTabAi.
+  ///
+  /// In en, this message translates to:
+  /// **'AI settings'**
+  String get pageTabAi;
+
+  /// No description provided for @pageTabHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get pageTabHistory;
+
+  /// No description provided for @pageGoneTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Page not found'**
+  String get pageGoneTitle;
+
+  /// No description provided for @pageGoneBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This page is no longer connected.'**
+  String get pageGoneBody;
+
+  /// No description provided for @pageOverviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Page overview'**
+  String get pageOverviewTitle;
+
+  /// No description provided for @pageUpdatedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Last updated: {time}'**
+  String pageUpdatedAt(String time);
+
+  /// No description provided for @pageRefresh.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh'**
+  String get pageRefresh;
+
+  /// No description provided for @pageStatFollowers.
+  ///
+  /// In en, this message translates to:
+  /// **'Followers'**
+  String get pageStatFollowers;
+
+  /// No description provided for @pageStatImpressions.
+  ///
+  /// In en, this message translates to:
+  /// **'Impressions'**
+  String get pageStatImpressions;
+
+  /// No description provided for @pageStatEngaged.
+  ///
+  /// In en, this message translates to:
+  /// **'Engaged users'**
+  String get pageStatEngaged;
+
+  /// No description provided for @pageStatPostEngagements.
+  ///
+  /// In en, this message translates to:
+  /// **'Post engagements'**
+  String get pageStatPostEngagements;
+
+  /// No description provided for @pageAnalyzeCardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Analyze this page with AI'**
+  String get pageAnalyzeCardTitle;
+
+  /// No description provided for @pageAnalyzeCardBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan your recent posts, auto-detect products, and import them into your stock with one click. You confirm everything before anything is added.'**
+  String get pageAnalyzeCardBody;
+
+  /// No description provided for @pageAnalyzeCardCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Run analysis →'**
+  String get pageAnalyzeCardCta;
+
+  /// No description provided for @pageStockTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock & inventory'**
+  String get pageStockTitle;
+
+  /// No description provided for @pageStockSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose where this page reads its product catalog from'**
+  String get pageStockSubtitle;
+
+  /// No description provided for @pageStockMain.
+  ///
+  /// In en, this message translates to:
+  /// **'Main stock'**
+  String get pageStockMain;
+
+  /// No description provided for @pageStockMainBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Shared catalog across all your pages'**
+  String get pageStockMainBody;
+
+  /// No description provided for @pageStockProductsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Products'**
+  String get pageStockProductsLabel;
+
+  /// No description provided for @pageStockPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Page stock'**
+  String get pageStockPage;
+
+  /// No description provided for @pageStockPageBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The products the AI agent sells on this page'**
+  String get pageStockPageBody;
+
+  /// No description provided for @pageStockPageCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Open dedicated stock →'**
+  String get pageStockPageCta;
+
+  /// No description provided for @pageInsightsUnavailableTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Insights not available'**
+  String get pageInsightsUnavailableTitle;
+
+  /// No description provided for @pageInsightsUnavailableBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Facebook Page Insights require additional permissions that are currently under review by Facebook. In the meantime, you can still use the Messages and AI settings features.'**
+  String get pageInsightsUnavailableBody;
+
+  /// No description provided for @pageMessagesSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by name or message…'**
+  String get pageMessagesSearch;
+
+  /// No description provided for @pageMessagesEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No conversations'**
+  String get pageMessagesEmptyTitle;
+
+  /// No description provided for @pageMessagesEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This page’s conversations will appear here. Pull down to sync.'**
+  String get pageMessagesEmptyBody;
+
+  /// No description provided for @pageMessagesNoMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'No conversation matches these filters.'**
+  String get pageMessagesNoMatch;
+
+  /// No description provided for @pageAiSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'AI agent configuration for this page'**
+  String get pageAiSubtitle;
+
+  /// No description provided for @pageAgentActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get pageAgentActive;
+
+  /// No description provided for @pageAgentInactive.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get pageAgentInactive;
+
+  /// No description provided for @pageAiModel.
+  ///
+  /// In en, this message translates to:
+  /// **'Model'**
+  String get pageAiModel;
+
+  /// No description provided for @pageAiTemperature.
+  ///
+  /// In en, this message translates to:
+  /// **'Temperature'**
+  String get pageAiTemperature;
+
+  /// No description provided for @pageAiMaxTokens.
+  ///
+  /// In en, this message translates to:
+  /// **'Max tokens'**
+  String get pageAiMaxTokens;
+
+  /// No description provided for @pageAiProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Products'**
+  String get pageAiProducts;
+
+  /// No description provided for @pageAiProductsAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get pageAiProductsAll;
+
+  /// No description provided for @pageAiProductsSome.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} selected'**
+  String pageAiProductsSome(int count);
+
+  /// No description provided for @pageAiInstructions.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom instructions'**
+  String get pageAiInstructions;
+
+  /// No description provided for @pageAiLinkedPages.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 page linked} other{{count} pages linked}}'**
+  String pageAiLinkedPages(int count);
+
+  /// No description provided for @pageAiConversations.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 conversation} other{{count} conversations}}'**
+  String pageAiConversations(int count);
+
+  /// No description provided for @pageAiNote.
+  ///
+  /// In en, this message translates to:
+  /// **'To change how the AI responds, edit the agent’s personality, model, or custom instructions. Changes apply to all pages linked to this agent.'**
+  String get pageAiNote;
+
+  /// No description provided for @pageAiNoAgentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No AI agent linked'**
+  String get pageAiNoAgentTitle;
+
+  /// No description provided for @pageAiNoAgentBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This page doesn’t have an AI agent assigned. Create or link an agent so it can automatically respond to incoming messages.'**
+  String get pageAiNoAgentBody;
+
+  /// No description provided for @pageAiGoToAgents.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to agents'**
+  String get pageAiGoToAgents;
+
+  /// No description provided for @pageHistoryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Message history'**
+  String get pageHistoryTitle;
+
+  /// No description provided for @pageHistoryLog.
+  ///
+  /// In en, this message translates to:
+  /// **'Conversation log'**
+  String get pageHistoryLog;
+
+  /// No description provided for @pageHistoryMessages.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 message} other{{count} messages}}'**
+  String pageHistoryMessages(int count);
+
+  /// No description provided for @pageHistoryDirection.
+  ///
+  /// In en, this message translates to:
+  /// **'Direction'**
+  String get pageHistoryDirection;
+
+  /// No description provided for @pageHistoryIn.
+  ///
+  /// In en, this message translates to:
+  /// **'In'**
+  String get pageHistoryIn;
+
+  /// No description provided for @pageHistoryOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Out'**
+  String get pageHistoryOut;
+
+  /// No description provided for @pageHistoryInTag.
+  ///
+  /// In en, this message translates to:
+  /// **'↓ In'**
+  String get pageHistoryInTag;
+
+  /// No description provided for @pageHistoryOutTag.
+  ///
+  /// In en, this message translates to:
+  /// **'↑ Out'**
+  String get pageHistoryOutTag;
+
+  /// No description provided for @pageHistoryFrom.
+  ///
+  /// In en, this message translates to:
+  /// **'From'**
+  String get pageHistoryFrom;
+
+  /// No description provided for @pageHistoryTo.
+  ///
+  /// In en, this message translates to:
+  /// **'To'**
+  String get pageHistoryTo;
+
+  /// No description provided for @pageHistoryNoText.
+  ///
+  /// In en, this message translates to:
+  /// **'(no text)'**
+  String get pageHistoryNoText;
+
+  /// No description provided for @pageHistoryEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No messages'**
+  String get pageHistoryEmptyTitle;
+
+  /// No description provided for @pageHistoryEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'When this page exchanges messages, they will appear here.'**
+  String get pageHistoryEmptyBody;
+
+  /// No description provided for @pageHistoryNoMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'No message matches these filters.'**
+  String get pageHistoryNoMatch;
+
+  /// No description provided for @pageProductsCrumb.
+  ///
+  /// In en, this message translates to:
+  /// **'PAGES  ›  {name}  ›  PRODUCTS'**
+  String pageProductsCrumb(String name);
+
+  /// No description provided for @pageProductsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Products for {name}'**
+  String pageProductsTitle(String name);
+
+  /// No description provided for @pageProductsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose which products from your catalog the AI agent sells on this page'**
+  String get pageProductsSubtitle;
+
+  /// No description provided for @pageProductsManage.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage catalog'**
+  String get pageProductsManage;
+
+  /// No description provided for @pageProductsSellAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Sell all products'**
+  String get pageProductsSellAll;
+
+  /// No description provided for @pageProductsSellAllBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Agent has access to all {count} products in your catalog'**
+  String pageProductsSellAllBody(int count);
+
+  /// No description provided for @pageProductsSelectedOf.
+  ///
+  /// In en, this message translates to:
+  /// **'{selected} of {total} products selected'**
+  String pageProductsSelectedOf(int selected, int total);
+
+  /// No description provided for @pageProductsAllAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'All {count} products will be available on this page'**
+  String pageProductsAllAvailable(int count);
+
+  /// No description provided for @pageProductsSelectedCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No product selected} =1{1 product selected} other{{count} products selected}}'**
+  String pageProductsSelectedCount(int count);
+
+  /// No description provided for @pageProductsSelectAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Select all'**
+  String get pageProductsSelectAll;
+
+  /// No description provided for @pageProductsDeselectAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Deselect all'**
+  String get pageProductsDeselectAll;
+
+  /// No description provided for @pageProductsSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save selection'**
+  String get pageProductsSave;
+
+  /// No description provided for @pageProductsSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Selection saved'**
+  String get pageProductsSaved;
+
+  /// No description provided for @pageProductsShared.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{This agent also answers on 1 other page — the selection applies there too.} other{This agent also answers on {count} other pages — the selection applies there too.}}'**
+  String pageProductsShared(int count);
+
+  /// No description provided for @pageProductsNoneSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick at least one product, or sell them all.'**
+  String get pageProductsNoneSelected;
+
+  /// No description provided for @pageProductsManageAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage full catalog'**
+  String get pageProductsManageAll;
+
+  /// No description provided for @pageProductsManageAllBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Add, edit, or remove products from your main stock'**
+  String get pageProductsManageAllBody;
+
+  /// No description provided for @pageProductsConfigureAgent.
+  ///
+  /// In en, this message translates to:
+  /// **'Configure AI agent'**
+  String get pageProductsConfigureAgent;
+
+  /// No description provided for @pageProductsConfigureAgentBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Change personality, model, and display settings'**
+  String get pageProductsConfigureAgentBody;
+
+  /// No description provided for @pageProductsNoAgentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No AI agent linked to this page'**
+  String get pageProductsNoAgentTitle;
+
+  /// No description provided for @pageProductsNoAgentBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Create an agent and assign it to this page first.'**
+  String get pageProductsNoAgentBody;
+
+  /// No description provided for @pageProductsLeave.
+  ///
+  /// In en, this message translates to:
+  /// **'Your selection isn’t saved.'**
+  String get pageProductsLeave;
+
+  /// No description provided for @pageAnalysisBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to page'**
+  String get pageAnalysisBack;
+
+  /// No description provided for @pageAnalysisTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'AI page analysis'**
+  String get pageAnalysisTitle;
+
+  /// No description provided for @pageAnalysisSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'We’ll scan your recent posts, detect products, and let you confirm what to import into your stock.'**
+  String get pageAnalysisSubtitle;
+
+  /// No description provided for @pageAnalysisCardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan recent posts'**
+  String get pageAnalysisCardTitle;
+
+  /// No description provided for @pageAnalysisCardBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Pulls up to 30 of your latest posts, runs vision AI to detect products, and shows you a preview before anything is added to stock.'**
+  String get pageAnalysisCardBody;
+
+  /// No description provided for @pageAnalysisStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Start scan'**
+  String get pageAnalysisStart;
+
+  /// No description provided for @pageAnalysisRescan.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan again'**
+  String get pageAnalysisRescan;
+
+  /// No description provided for @pageAnalysisReconnectTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{platform} permission needed'**
+  String pageAnalysisReconnectTitle(String platform);
+
+  /// No description provided for @pageAnalysisReconnectBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your page was connected before we asked for the “read posts” permission. Reconnect the page to grant it.'**
+  String get pageAnalysisReconnectBody;
+
+  /// No description provided for @pageAnalysisReconnectCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to pages → reconnect'**
+  String get pageAnalysisReconnectCta;
+
+  /// No description provided for @pageAnalysisScanning.
+  ///
+  /// In en, this message translates to:
+  /// **'Scanning posts and extracting products… This can take a few minutes.'**
+  String get pageAnalysisScanning;
+
+  /// No description provided for @pageAnalysisNothing.
+  ///
+  /// In en, this message translates to:
+  /// **'No product found in your recent posts.'**
+  String get pageAnalysisNothing;
+
+  /// No description provided for @pageAnalysisScanned.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{scanned 1 post} other{scanned {count} posts}}'**
+  String pageAnalysisScanned(int count);
+
+  /// No description provided for @pageAnalysisFound.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 product detected} other{{count} products detected}}'**
+  String pageAnalysisFound(int count);
+
+  /// No description provided for @pageAnalysisIncomplete.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 selected product is missing required fields. Set its price (DA) and initial stock before importing.} other{{count} selected products are missing required fields. Set price (DA) and initial stock on each before importing.}}'**
+  String pageAnalysisIncomplete(int count);
+
+  /// No description provided for @pageAnalysisName.
+  ///
+  /// In en, this message translates to:
+  /// **'Product name'**
+  String get pageAnalysisName;
+
+  /// No description provided for @pageAnalysisDescriptionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Description (optional)'**
+  String get pageAnalysisDescriptionHint;
+
+  /// No description provided for @pageAnalysisPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Price (DA)'**
+  String get pageAnalysisPrice;
+
+  /// No description provided for @pageAnalysisStock.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock'**
+  String get pageAnalysisStock;
+
+  /// No description provided for @pageAnalysisFillName.
+  ///
+  /// In en, this message translates to:
+  /// **'Fill the name to import'**
+  String get pageAnalysisFillName;
+
+  /// No description provided for @pageAnalysisFillPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Fill the price to import'**
+  String get pageAnalysisFillPrice;
+
+  /// No description provided for @pageAnalysisFillStock.
+  ///
+  /// In en, this message translates to:
+  /// **'Fill the stock to import'**
+  String get pageAnalysisFillStock;
+
+  /// No description provided for @pageAnalysisImport.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{Import to stock} other{Import {count} to stock}}'**
+  String pageAnalysisImport(int count);
+
+  /// No description provided for @pageAnalysisImporting.
+  ///
+  /// In en, this message translates to:
+  /// **'Importing…'**
+  String get pageAnalysisImporting;
+
+  /// No description provided for @pageAnalysisDoneTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No product imported} =1{Imported 1 product} other{Imported {count} products}}'**
+  String pageAnalysisDoneTitle(int count);
+
+  /// No description provided for @pageAnalysisSkipped.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} skipped'**
+  String pageAnalysisSkipped(int count);
+
+  /// No description provided for @pageAnalysisLeave.
+  ///
+  /// In en, this message translates to:
+  /// **'The detected products will be lost.'**
+  String get pageAnalysisLeave;
+
+  /// No description provided for @pageCategoryClothing.
+  ///
+  /// In en, this message translates to:
+  /// **'Clothing'**
+  String get pageCategoryClothing;
+
+  /// No description provided for @pageCategoryBeauty.
+  ///
+  /// In en, this message translates to:
+  /// **'Beauty'**
+  String get pageCategoryBeauty;
+
+  /// No description provided for @pageCategoryElectronics.
+  ///
+  /// In en, this message translates to:
+  /// **'Electronics'**
+  String get pageCategoryElectronics;
+
+  /// No description provided for @pageCategoryFood.
+  ///
+  /// In en, this message translates to:
+  /// **'Food'**
+  String get pageCategoryFood;
+
+  /// No description provided for @pageCategoryAccessories.
+  ///
+  /// In en, this message translates to:
+  /// **'Accessories'**
+  String get pageCategoryAccessories;
+
+  /// No description provided for @pageCategoryHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get pageCategoryHome;
+
+  /// No description provided for @pageCategoryKids.
+  ///
+  /// In en, this message translates to:
+  /// **'Kids'**
+  String get pageCategoryKids;
+
+  /// No description provided for @pageCategoryOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get pageCategoryOther;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {
