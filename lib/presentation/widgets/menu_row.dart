@@ -23,7 +23,8 @@ class MenuRow extends StatelessWidget {
     this.count,
     this.onTap,
     this.expanded,
-  });
+    this.onToggle,
+  }) : assert(onToggle == null || expanded != null, 'a split disclosure needs its state');
 
   final List<String> icon;
   final String label;
@@ -46,9 +47,16 @@ class MenuRow extends StatelessWidget {
   /// right when closed. Null keeps the plain "goes somewhere" chevron.
   final bool? expanded;
 
+  /// Splits a group row, as [MenuSubrow] does for Produits: the label goes to
+  /// [onTap]'s destination and the chevron, a hit target of its own, toggles.
+  /// Null keeps the whole row as one tap. Services uses it (2026-10-04): the
+  /// label opens *16s — Services*, the chevron still shows its rows.
+  final VoidCallback? onToggle;
+
   @override
   Widget build(BuildContext context) {
     final isGroup = expanded != null;
+    final chevron = _MenuChevron(down: isGroup && expanded!);
 
     return GestureDetector(
       onTap: onTap,
@@ -56,7 +64,11 @@ class MenuRow extends StatelessWidget {
       child: SizedBox(
         height: 12.31.w, // 48
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppSpacing.md), // 12
+          padding: EdgeInsetsDirectional.only(
+            start: AppSpacing.md, // 12
+            // A split row gives its end padding to the chevron's target.
+            end: onToggle == null ? AppSpacing.md : 0,
+          ),
           child: Row(
             children: [
               AppIcon(
@@ -79,7 +91,18 @@ class MenuRow extends StatelessWidget {
                 SizedBox(width: AppSpacing.sm),
               ] else
                 SizedBox(width: AppSpacing.sm),
-              _MenuChevron(down: isGroup && expanded!),
+              if (onToggle == null)
+                chevron
+              else
+                GestureDetector(
+                  onTap: onToggle,
+                  behavior: HitTestBehavior.opaque,
+                  child: SizedBox(
+                    height: double.infinity,
+                    width: 12.31.w, // 48, the row's height — easy to hit
+                    child: Center(child: chevron),
+                  ),
+                ),
             ],
           ),
         ),
@@ -94,8 +117,13 @@ class MenuRow extends StatelessWidget {
 ///
 /// 40 high against the row's 48, a 16 icon against 24, and `Body` in
 /// `text/secondary` against `Title` in `text/primary`: three signals that it
-/// is subordinate, so the indent is not carrying the hierarchy alone. It has
-/// no chevron — the group above it owns the disclosure.
+/// is subordinate, so the indent is not carrying the hierarchy alone.
+///
+/// A subrow can itself be a group — Produits holds Catégories, Fournisseurs
+/// and Clients, as the web's stock sub-sidebar does. That one keeps [onTap]
+/// (it is still the product list, the drawer's busiest destination) and puts
+/// the disclosure in [onToggle], a hit target of its own at the end of the
+/// row, so opening the group and going to the list are different taps.
 class MenuSubrow extends StatelessWidget {
   const MenuSubrow({
     super.key,
@@ -104,7 +132,14 @@ class MenuSubrow extends StatelessWidget {
     this.iconColor,
     this.trailing,
     this.onTap,
-  });
+    this.depth = 1,
+    this.expanded,
+    this.onToggle,
+  }) : assert(depth >= 1 && depth <= 2, 'the drawer goes two levels deep'),
+       assert(
+         (expanded == null) == (onToggle == null),
+         'a disclosure needs both the state and the toggle',
+       );
 
   final List<String> icon;
   final String label;
@@ -115,6 +150,19 @@ class MenuSubrow extends StatelessWidget {
   final String? trailing;
 
   final VoidCallback? onTap;
+
+  /// 1 sits under a [MenuRow]; 2 sits under another subrow. Each step moves
+  /// the icon column 22 further in, which is the step the row-to-subrow indent
+  /// already uses — the icons stay in a regular ladder even though the labels
+  /// cannot, the 24 icon above having shrunk to 16.
+  final int depth;
+
+  /// Non-null adds a disclosure chevron: down when open, right when closed.
+  final bool? expanded;
+
+  /// Toggles that disclosure. Separate from [onTap] so tapping the label still
+  /// navigates.
+  final VoidCallback? onToggle;
 
   @override
   Widget build(BuildContext context) {
@@ -131,8 +179,13 @@ class MenuSubrow extends StatelessWidget {
             // than the parent's. The labels deliberately do **not** line up —
             // the indent is the hierarchy, and it is meant to be visible.
             // `AppSpacing` already carries this number for the tutorial.
-            start: AppSpacing.beforeAction,
-            end: AppSpacing.md, // 12
+            //
+            // A second level steps the icon column 22 further again, which is
+            // the same step the row-to-subrow indent makes.
+            start: AppSpacing.beforeAction + (depth - 1) * 5.64.w, // 34, 56
+            // A group gives its end padding back to the chevron's hit target,
+            // which carries its own.
+            end: expanded == null ? AppSpacing.md : 0, // 12
           ),
           child: Row(
             children: [
@@ -152,6 +205,19 @@ class MenuSubrow extends StatelessWidget {
               ),
               if (trailing != null)
                 Text(trailing!.toUpperCase(), style: AppText.labelMicro),
+              if (expanded != null)
+                // Its own gesture, so the label still goes to the list. Sized
+                // to the row's full height and wide enough to hit without
+                // aiming — the 16 glyph alone would be a 16 target.
+                GestureDetector(
+                  onTap: onToggle,
+                  behavior: HitTestBehavior.opaque,
+                  child: SizedBox(
+                    height: double.infinity,
+                    width: 10.26.w, // 40
+                    child: Center(child: _MenuChevron(down: expanded!)),
+                  ),
+                ),
             ],
           ),
         ),

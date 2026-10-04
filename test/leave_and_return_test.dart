@@ -33,7 +33,7 @@ void main() {
   const user = User(id: 'u-1', email: 'z@djaber.test', firstName: 'Zakaria');
 
   group('holding the splash replay', () {
-    test('a held replay leaves the boot gate up; releasing restores it',
+    test('a held replay does not play; releasing lets it play again',
         () async {
       final session = await sessionForTest();
       addTearDown(session.dispose);
@@ -41,12 +41,13 @@ void main() {
 
       // The Facebook window and the photo picker hold it while they are open.
       session.holdSplashReplay();
-      session.resetBoot();
-      expect(session.isBootComplete, isTrue, reason: 'replay was held');
+      session.replaySplash();
+      expect(session.isReplayingSplash, isFalse, reason: 'replay was held');
 
       session.releaseSplashReplay();
-      session.resetBoot();
-      expect(session.isBootComplete, isFalse);
+      session.replaySplash();
+      expect(session.isReplayingSplash, isTrue);
+      expect(session.isBootComplete, isTrue, reason: 'the router is never sent back to /splash');
     });
 
     test('holds nest, and an extra release does not go negative', () async {
@@ -58,15 +59,15 @@ void main() {
         ..holdSplashReplay()
         ..holdSplashReplay()
         ..releaseSplashReplay();
-      session.resetBoot();
-      expect(session.isBootComplete, isTrue, reason: 'one hold remains');
+      session.replaySplash();
+      expect(session.isReplayingSplash, isFalse, reason: 'one hold remains');
 
       session
         ..releaseSplashReplay()
         ..releaseSplashReplay();
       session.holdSplashReplay();
-      session.resetBoot();
-      expect(session.isBootComplete, isTrue);
+      session.replaySplash();
+      expect(session.isReplayingSplash, isFalse);
     });
   });
 
@@ -156,7 +157,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Leaving the app, then the splash on the way back.
-      session.resetBoot();
+      session.replaySplash();
       await tester.pump();
       await tester.pump(SplashScreen.minimumDisplay);
       await tester.pumpAndSettle();

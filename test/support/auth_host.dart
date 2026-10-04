@@ -13,6 +13,7 @@ import 'package:djaber_mobile/presentation/viewmodels/stock_mode_view_model.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -119,6 +120,49 @@ Widget authHost(
         builder: (context) {
           Screen.update(MediaQuery.of(context));
           return _host(screen, locale);
+        },
+      ),
+    ),
+  );
+}
+
+/// [authHost] for a screen that navigates.
+///
+/// Same providers, theme and localisations, but hosted on a real [GoRouter] so
+/// `push`, `pop` and the value a pop carries behave as they do in the app —
+/// none of which a `MaterialApp(home:)` can show.
+Widget routerHost(
+  GoRouter router,
+  SessionViewModel session, {
+  Locale locale = const Locale('fr'),
+  List<SingleChildWidget> extra = const [],
+}) {
+  return MultiProvider(
+    providers: [
+      ChangeNotifierProvider<SessionViewModel>.value(value: session),
+      ...extra,
+    ],
+    child: MediaQuery.fromView(
+      view: WidgetsBinding.instance.platformDispatcher.views.first,
+      child: Builder(
+        builder: (context) {
+          Screen.update(MediaQuery.of(context));
+          return MaterialApp.router(
+            locale: locale,
+            theme: AppTheme.build(locale),
+            supportedLocales: const [Locale('en'), Locale('fr'), Locale('ar')],
+            localizationsDelegates: const [
+              L10n.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            builder: (context, child) {
+              Screen.update(MediaQuery.of(context));
+              return child!;
+            },
+            routerConfig: router,
+          );
         },
       ),
     ),

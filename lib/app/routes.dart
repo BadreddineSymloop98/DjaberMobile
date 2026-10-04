@@ -16,6 +16,12 @@ class Routes {
   static const forgotPassword = '/forgot-password';
   static const passwordSent = '/password-sent';
 
+  /// `08b — Nouveau mot de passe`. **The same path as the e-mail's link**
+  /// (`https://djaber.vercel.app/reset-password?token=…`, or the web page's
+  /// `djaber://app/reset-password?token=…`), so Android hands it straight
+  /// here. Reached from nothing inside the app.
+  static const resetPassword = '/reset-password';
+
   // ---- The first-run tutorial (brief §21.5) ----
   //
   // Reached only after account creation, and only until it is finished or
@@ -61,7 +67,17 @@ class Routes {
   static const home = '/home';
   static const queue = '/queue';
   static const inbox = '/inbox';
+
+  /// The inbox on one page — a page card's *Boîte*. The shell still matches
+  /// [inbox], so the Boîte tab stays lit.
+  static String inboxFor(String pageId) => '$inbox?pageId=${Uri.encodeQueryComponent(pageId)}';
   static const stock = '/stock';
+
+  /// The same stock overview, **pushed** over the screen that opened it
+  /// rather than switched to as a tab — so back returns there. Services'
+  /// *Produits* card opens it. A tab route cannot be pushed from a root screen
+  /// (it would stack a second shell), hence its own path.
+  static const stockOverview = '/stock-overview';
   static const orders = '/orders';
 
   // ---- Pushed on top of the shell ----
@@ -69,9 +85,70 @@ class Routes {
   static String conversationOf(String id) => '/conversation/$id';
 
   /// `17 — Produits` — the catalogue. Pushed over the shell rather than
-  /// living in it: the bottom nav's Stock tab is `16 — Aperçu du stock`, which
-  /// is still unbuilt, and this is reached from the drawer and from home.
+  /// living in it: the bottom nav's Stock tab is `16 — Aperçu du stock`, and
+  /// this is reached from the drawer and from home.
   static const products = '/products';
+
+  /// `Catégories` — the catalogue's categories, from the drawer (under
+  /// Produits, the web sidebar's order). Pushed over the shell like [products].
+  static const categories = '/categories';
+
+  /// `Fournisseurs` — from the drawer, between Catégories and Clients (the web
+  /// sidebar's order). [supplier] is one supplier's details.
+  static const suppliers = '/suppliers';
+  static const supplier = '/suppliers/:id';
+  static String supplierOf(String id) => '/suppliers/$id';
+
+  /// `Clients` — from the drawer, after Catégories. [client] is one client's
+  /// details, pushed over the list.
+  static const clients = '/clients';
+  static const client = '/clients/:id';
+  static String clientOf(String id) => '/clients/$id';
+
+  /// `14 — Agents IA` — the merchant's agent. Reached from home's action
+  /// card and the drawer, like [products].
+  static const agents = '/agents';
+
+  /// `15 — Agents · démarrer` — ready-made agents, or start from scratch.
+  /// **Declared before [agent] in the router**, which would otherwise read
+  /// `new` as an agent id.
+  static const agentNew = '/agents/new';
+
+  /// "Partir de zéro": name, personality, instructions.
+  static const agentNewScratch = '/agents/new/scratch';
+
+  /// An agent's details, KPIs and instructions — the web's
+  /// `/dashboard/agents/{id}`. Pushed over [agents].
+  static const agent = '/agents/:id';
+  static String agentOf(String id) => '/agents/$id';
+
+  /// Its sandbox test chat. Pushed over [agents].
+  static const agentTest = '/agents/:id/test';
+  static String agentTestOf(String id) => '/agents/$id/test';
+
+  /// `15c — Modifier l'agent`: the full agent form, filled. Pushed over
+  /// [agent], whose *Modifier l'agent* button opens it, as the web's details
+  /// page does.
+  static const agentEdit = '/agents/:id/edit';
+  static String agentEditOf(String id) => '/agents/$id/edit';
+
+  /// `12 — Pages connectées` (`13 — Connecter une page` when there are none).
+  /// Reached from home and from the drawer's *Réseaux sociaux*.
+  /// `16s — Services` — the drawer's *Services* label.
+  static const services = '/services';
+
+  static const pages = '/pages';
+
+  /// One connected page — *Configurer* on its card. Overview, Messages, AI
+  /// settings and History are tabs of the one screen (`?tab=`); the page's
+  /// products and the AI analysis are screens of their own.
+  static const page = '/pages/:id';
+  static String pageOf(String id, {String? tab}) =>
+      tab == null ? '/pages/$id' : '/pages/$id?tab=$tab';
+  static const pageProducts = '/pages/:id/products';
+  static String pageProductsOf(String id) => '/pages/$id/products';
+  static const pageAnalyze = '/pages/:id/analyze';
+  static String pageAnalyzeOf(String id) => '/pages/$id/analyze';
 
   /// `18 — Ajouter un produit`.
   ///
@@ -83,8 +160,64 @@ class Routes {
   static const product = '/products/:id';
   static String productOf(String id) => '/products/$id';
 
+  /// `Edit product` — the web's Add/Edit modal in its edit mode, reached from
+  /// the product's own screen. Three segments, so it cannot collide with
+  /// [product]; declared beside it all the same.
+  static const productEdit = '/products/:id/edit';
+  static String productEditOf(String id) => '/products/$id/edit';
+
+  /// `Product expenses panel` — the web's side panel, a screen of its own here.
+  static const productExpenses = '/products/:id/expenses';
+  static String productExpensesOf(String id) => '/products/$id/expenses';
+
+  /// `Nouvelle commande`. Declared **before** [order] in `router.dart` for the
+  /// same reason `/products/new` is: a two-segment pattern would swallow it.
+  static const orderNew = '/orders/new';
+
+  /// `Détail de la commande` and the confirm wizard on top of it — one screen,
+  /// three steps.
   static const order = '/orders/:id';
   static String orderOf(String id) => '/orders/$id';
+
+  /// `Livraison` — from the drawer, after Commandes (the web sidebar's order).
+  /// Its two header buttons open [deliveryFees] and [deliveryProviders]; the
+  /// provider form is pushed from the list. [deliveryProviderNew] is declared
+  /// before [deliveryProviderEdit] in `router.dart`.
+  static const delivery = '/delivery';
+  static const deliveryFees = '/delivery/fees';
+  static const deliveryProviders = '/delivery/providers';
+  static const deliveryProviderNew = '/delivery/providers/new';
+  static const deliveryProviderEdit = '/delivery/providers/:id/edit';
+  static String deliveryProviderEditOf(String id) => '/delivery/providers/$id/edit';
+
+  /// `Ventes` — from the drawer, after Livraison (the web sidebar's order).
+  /// [saleNew] is declared before [sale] in `router.dart`, so `new` is never
+  /// read as an id; [saleEdit] is pushed from the detail.
+  static const sales = '/sales';
+  static const saleNew = '/sales/new';
+  static const sale = '/sales/:id';
+  static String saleOf(String id) => '/sales/$id';
+  static const saleEdit = '/sales/:id/edit';
+  static String saleEditOf(String id) => '/sales/$id/edit';
+
+  /// `Achats` — from the drawer, after Ventes. [purchaseNew] is declared
+  /// before [purchase] in `router.dart`. Receiving is a sheet, not a route.
+  static const purchases = '/purchases';
+  static const purchaseNew = '/purchases/new';
+  static const purchase = '/purchases/:id';
+  static String purchaseOf(String id) => '/purchases/$id';
+
+  /// `Mouvements de stock` — from the drawer, and *Tout voir* on the stock
+  /// overview's recent movements.
+  static const movements = '/movements';
+
+  /// `Caisse` — from the drawer, before Commandes (the web stock group's
+  /// order). Adding and editing are sheets, not routes.
+  static const caisse = '/caisse';
+
+  /// `Ventes croisées` — from the drawer, after Clients (the web stock group's
+  /// order). Delete is confirmed in the card, not a route.
+  static const recommendations = '/recommendations';
 
   static const notifications = '/notifications';
   static const settings = '/settings';
@@ -97,5 +230,6 @@ class Routes {
     signup,
     forgotPassword,
     passwordSent,
+    resetPassword,
   };
 }

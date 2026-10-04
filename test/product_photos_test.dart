@@ -7,6 +7,7 @@ import 'package:djaber_mobile/core/error/result.dart';
 import 'package:djaber_mobile/data/models/product.dart';
 import 'package:djaber_mobile/data/repositories/product_repository.dart';
 import 'package:djaber_mobile/presentation/viewmodels/add_product_view_model.dart';
+import 'package:djaber_mobile/presentation/viewmodels/product_detail_view_model.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -30,8 +31,8 @@ void main() {
           return ResponseBody.fromString(
             jsonEncode({
               'images': [
-                {'id': 'i-1'},
-                {'id': 'i-2'},
+                {'id': 'i-1', 'url': '/uploads/products/sac.jpg'},
+                {'id': 'i-2', 'url': 'https://cdn.test/dos.png'},
               ],
             }),
             201,
@@ -47,7 +48,12 @@ void main() {
         photos: [photo('sac.jpg'), photo('dos.PNG')],
       );
 
-      expect(result.valueOrNull, 2);
+      final images = result.valueOrNull!;
+      expect(images.map((i) => i.id), ['i-1', 'i-2']);
+      // A relative upload path is resolved against the API host; an absolute
+      // one is left alone.
+      expect(images.first.url, Product.absoluteUrl('/uploads/products/sac.jpg'));
+      expect(images.last.url, 'https://cdn.test/dos.png');
       final request = sent.single;
       expect(request.method, 'POST');
       expect(request.path, '/api/user-stock/products/p-1/images');
@@ -110,6 +116,74 @@ void main() {
       form.removePhoto(0);
 
       expect(form.photos.single.name, 'b.jpg');
+    });
+  });
+
+  group('a photo added on the edit form', () {
+    // The bug: the save uploads the photo, pops, and the detail screen reloads
+    // — but that reload can answer before the backend lists the row it has
+    // just created, leaving the merchant on a gallery without the picture they
+    // added until they pull to refresh.
+    test('shows on the detail screen even when the reload is behind', () async {
+      final stale = Product.fromJson({
+        'id': 'p-1',
+        'sku': 'SAC-01',
+        'name': 'Sac cuir',
+        'images': <Map<String, dynamic>>[],
+      });
+      final model = ProductDetailViewModel(
+        products: _OneProduct(stale),
+        productId: 'p-1',
+      );
+      addTearDown(model.dispose);
+
+      await model.load(
+        withImages: const [ProductImage(id: 'i-1', url: 'https://cdn/sac.jpg')],
+      );
+
+      expect(model.product?.imageUrls, ['https://cdn/sac.jpg']);
+    });
+
+    test('is not doubled when the reload does carry it', () async {
+      final fresh = Product.fromJson({
+        'id': 'p-1',
+        'sku': 'SAC-01',
+        'name': 'Sac cuir',
+        'images': [
+          {'id': 'i-1', 'url': 'https://cdn/sac.jpg'},
+        ],
+      });
+      final model = ProductDetailViewModel(
+        products: _OneProduct(fresh),
+        productId: 'p-1',
+      );
+      addTearDown(model.dispose);
+
+      await model.load(
+        withImages: const [ProductImage(id: 'i-1', url: 'https://cdn/sac.jpg')],
+      );
+
+      expect(model.product?.imageUrls, ['https://cdn/sac.jpg']);
+    });
+
+    test('replaces the legacy imageUrl rather than showing it twice', () async {
+      final legacy = Product.fromJson({
+        'id': 'p-1',
+        'sku': 'SAC-01',
+        'name': 'Sac cuir',
+        'imageUrl': 'https://cdn/old.jpg',
+      });
+      final model = ProductDetailViewModel(
+        products: _OneProduct(legacy),
+        productId: 'p-1',
+      );
+      addTearDown(model.dispose);
+
+      await model.load(
+        withImages: const [ProductImage(id: 'i-9', url: 'https://cdn/new.jpg')],
+      );
+
+      expect(model.product?.imageUrls, ['https://cdn/new.jpg']);
     });
   });
 
@@ -186,7 +260,7 @@ class _Products extends ProductRepository {
       Result.success(Product.fromJson({'id': 'p-9', 'sku': sku, 'name': name}));
 
   @override
-  Future<Result<int>> uploadImages({
+  Future<Result<List<ProductImage>>> uploadImages({
     required String productId,
     required List<ProductPhoto> photos,
   }) async {
@@ -196,7 +270,10 @@ class _Products extends ProductRepository {
     ));
     return uploadFails
         ? const Result.failure(ServerException('upload failed'))
-        : Result.success(photos.length);
+        : Result.success([
+            for (final photo in photos)
+              ProductImage(id: photo.name, url: 'https://x/${photo.name}'),
+          ]);
   }
 }
 
@@ -216,4 +293,15 @@ class _StubAdapter implements HttpClientAdapter {
 
   @override
   void close({bool force = false}) {}
+}
+
+/// A product repository whose `get` always answers with the one product it was
+/// built with — the detail screen's reload, with nothing else attached.
+class _OneProduct extends ProductRepository {
+  _OneProduct(this.product) : super(api: apiForTest());
+
+  final Product product;
+
+  @override
+  Future<Result<Product>> get(String productId) async => Result.success(product);
 }

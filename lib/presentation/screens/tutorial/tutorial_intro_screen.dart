@@ -9,6 +9,7 @@ import '../../theme/app_colors.dart';
 import '../../theme/app_spacing.dart';
 import '../../theme/app_typography.dart';
 import '../../viewmodels/session_view_model.dart';
+import '../../widgets/back_scope.dart';
 import '../../widgets/checklist_row.dart';
 
 /// `T1a — Bienvenue`, `T1b — Votre stock`, `T1c — Votre agent`.
@@ -117,22 +118,19 @@ class _TutorialIntroScreenState extends State<TutorialIntroScreen> {
 
     final isLast = _page == pages.length - 1;
 
-    // Back walks the pages instead of closing the app.
-    //
-    // The intro is reached with `context.go`, which replaces rather than
-    // pushes, so there is nothing to pop and the pop would reach Android and
-    // close the app — see `tutorial_step_scaffold.dart` for the same problem
-    // on the steps. Here it can do something useful: these pages already swipe
-    // both ways, so back should agree with the gesture and step backwards
-    // through them. On the first page it does nothing.
-    return PopScope(
-      canPop: false,
-      onPopInvokedWithResult: (didPop, _) {
-        if (didPop || _page == 0) return;
+    // Back walks the pages, agreeing with the swipe. On the first page the
+    // intercept is inactive and the route's root scope takes over: this is
+    // where the tutorial starts, nothing below it exists, and nothing has been
+    // created yet, so "tap again to leave" is honest. A relaunch comes back
+    // here (see `router.dart`).
+    return BackIntercept(
+      active: _page > 0,
+      onBack: () {
         _controller.previousPage(
           duration: AppDuration.slow,
           curve: Curves.easeOutCubic,
         );
+        return false;
       },
       child: Scaffold(
         backgroundColor: AppColors.ink,
