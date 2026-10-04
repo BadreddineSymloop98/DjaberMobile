@@ -183,6 +183,8 @@ void main() {
       final l10n = await pump(tester);
 
       expect(find.text(l10n.menuProducts), findsOneWidget);
+      // Services is the only group that opens itself; Produits, inside it,
+      // stays closed and points its chevron along.
       expect(
         find.byWidgetPredicate(
           (w) => w is AppIcon && w.paths == AppIcons.chevronDown,
@@ -196,6 +198,9 @@ void main() {
       expect(find.text(l10n.menuProducts), findsNothing);
       expect(find.text(l10n.menuAgents), findsNothing);
       expect(find.text(l10n.menuCommercial), findsNothing);
+      // Closing Services takes the whole subtree with it, Produits' own
+      // disclosure included.
+      expect(find.text(l10n.menuCategories), findsNothing);
       expect(
         find.byWidgetPredicate(
           (w) => w is AppIcon && w.paths == AppIcons.chevronDown,
@@ -206,6 +211,133 @@ void main() {
       await tester.tap(find.text(l10n.menuServices));
       await tester.pumpAndSettle();
       expect(find.text(l10n.menuProducts), findsOneWidget);
+    });
+  });
+
+  group('the Produits group — the web sidebar nests these', () {
+    /// Taps Produits' own disclosure, which is closed on arrival.
+    Future<void> openProducts(WidgetTester tester, L10n l10n) async {
+      await tester.tap(find.descendant(
+        of: find.ancestor(
+          of: find.text(l10n.menuProducts),
+          matching: find.byType(MenuSubrow),
+        ),
+        matching: find.byWidgetPredicate(
+          (w) => w is AppIcon && w.paths == AppIcons.chevronRight,
+        ),
+      ));
+      await tester.pumpAndSettle();
+    }
+
+    testWidgets('is closed on arrival — Produits is a destination first, and '
+        'an open group would push Agents down the drawer', (tester) async {
+      final l10n = await pump(tester);
+
+      expect(find.text(l10n.menuProducts), findsOneWidget);
+      expect(find.text(l10n.menuCategories), findsNothing);
+      expect(find.text(l10n.menuSuppliers), findsNothing);
+      expect(find.text(l10n.menuClients), findsNothing);
+
+      await openProducts(tester, l10n);
+
+      // Opened, Produits appears twice: the group title, which goes to the
+      // stock overview, and the catalogue row inside it — as the web has it.
+      expect(find.text(l10n.menuProducts), findsNWidgets(2));
+      expect(find.text(l10n.menuCategories), findsOneWidget);
+      // Commandes is in the group **and** the CMD tab — the web lists it in
+      // the same stock nav, and a second way in is not a duplicate.
+      expect(find.text(l10n.ordersTitle), findsOneWidget);
+    });
+
+    // The web puts Products under Services (`serviceSubItemsBase`) and lists
+    // Categories, Suppliers and Clients under Products, in the stock hub's own
+    // sidebar (`stockNavItemsBase`). The drawer used to flatten all five into
+    // Services.
+    testWidgets('Catégories, Fournisseurs and Clients sit under Produits, '
+        'not beside it', (tester) async {
+      final l10n = await pump(tester);
+      await openProducts(tester, l10n);
+
+      double labelStart(String label) =>
+          tester.getTopLeft(find.text(label).first).dx;
+
+      for (final label in [
+        l10n.menuCategories,
+        l10n.menuSuppliers,
+        l10n.menuClients,
+        l10n.ordersTitle,
+      ]) {
+        expect(find.text(label), findsOneWidget, reason: label);
+        expect(
+          labelStart(label),
+          greaterThan(labelStart(l10n.menuProducts)),
+          reason: '$label is indented past Produits',
+        );
+      }
+      // And they are inside the group: Agents, the next Services subrow, comes
+      // after all three.
+      expect(
+        tester.getTopLeft(find.text(l10n.menuAgents)).dy,
+        greaterThan(tester.getTopLeft(find.text(l10n.menuClients)).dy),
+      );
+      // Agents is a plain Services subrow, so it lines up with Produits.
+      expect(
+        labelStart(l10n.menuAgents),
+        moreOrLessEquals(labelStart(l10n.menuProducts), epsilon: 1),
+      );
+    });
+
+    testWidgets('the third level steps 22 further in, the same step the '
+        'second one makes at the icon', (tester) async {
+      final l10n = await pump(tester);
+
+      await openProducts(tester, l10n);
+
+      final subrow = tester.widget<MenuSubrow>(find.ancestor(
+        of: find.text(l10n.menuCategories),
+        matching: find.byType(MenuSubrow),
+      ));
+      expect(subrow.depth, 2);
+      expect(
+        tester.getTopLeft(find.text(l10n.menuCategories)).dx -
+            tester.getTopLeft(find.text(l10n.menuProducts).first).dx,
+        moreOrLessEquals(22, epsilon: 1),
+      );
+    });
+
+    testWidgets('the chevron closes the group while the label still opens the '
+        'product list', (tester) async {
+      final l10n = await pump(tester);
+
+      // The disclosure is its own hit target at the end of the row.
+      await openProducts(tester, l10n);
+      expect(find.text(l10n.menuCategories), findsOneWidget);
+
+      await tester.tap(find.descendant(
+        of: find.ancestor(
+          of: find.text(l10n.menuProducts).first,
+          matching: find.byType(MenuSubrow),
+        ),
+        matching: find.byWidgetPredicate(
+          (w) => w is AppIcon && w.paths == AppIcons.chevronDown,
+        ),
+      ));
+      await tester.pumpAndSettle();
+
+      // The three are gone; Produits itself stays, and so do its siblings.
+      expect(find.text(l10n.menuCategories), findsNothing);
+      expect(find.text(l10n.menuSuppliers), findsNothing);
+      expect(find.text(l10n.menuClients), findsNothing);
+      expect(find.text(l10n.menuProducts), findsOneWidget);
+      expect(find.text(l10n.menuAgents), findsOneWidget);
+
+      // And Produits kept its own destination — the disclosure did not take
+      // the tap, which goes to the stock overview.
+      final produits = tester.widget<MenuSubrow>(find.ancestor(
+        of: find.text(l10n.menuProducts),
+        matching: find.byType(MenuSubrow),
+      ));
+      expect(produits.onTap, isNotNull);
     });
   });
 
