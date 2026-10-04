@@ -33,7 +33,6 @@ class AppFilterChip extends StatelessWidget {
         behavior: HitTestBehavior.opaque,
         child: Container(
           height: 8.21.w, // 32
-          alignment: Alignment.center,
           padding: EdgeInsets.symmetric(horizontal: AppSpacing.md), // 12
           decoration: BoxDecoration(
             color: selected ? AppColors.textPrimary : Colors.transparent,
@@ -43,12 +42,18 @@ class AppFilterChip extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(AppRadius.input),
           ),
-          child: Text(
-            label,
-            style: AppText.bodyS.copyWith(
-              color: selected ? AppColors.ink : AppColors.textSecondary,
+          // Centred at the label's own width. A plain `alignment` made the chip
+          // take every pixel it was offered, so in a `Wrap` (the filter sheets,
+          // the payment-method row) each chip filled its own line.
+          child: Align(
+            widthFactor: 1,
+            child: Text(
+              label,
+              style: AppText.bodyS.copyWith(
+                color: selected ? AppColors.ink : AppColors.textSecondary,
+              ),
+              maxLines: 1,
             ),
-            maxLines: 1,
           ),
         ),
       ),

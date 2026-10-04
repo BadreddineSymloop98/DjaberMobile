@@ -58,7 +58,12 @@ class DashboardStats {
 /// Orders that are not delivered are excluded, because they can still be
 /// cancelled and counting them would inflate the figure.
 class SalesStats {
-  const SalesStats({this.totalSales = 0, this.totalRevenue = 0});
+  const SalesStats({
+    this.totalSales = 0,
+    this.totalRevenue = 0,
+    this.paidSales = 0,
+    this.pendingSales = 0,
+  });
 
   /// Sales plus delivered orders — the tile's "N vente" line.
   final int totalSales;
@@ -66,12 +71,18 @@ class SalesStats {
   /// Their combined total, in DA.
   final double totalRevenue;
 
+  /// Rows by `paymentStatus`, across both sources — `16`'s Advanced block.
+  final int paidSales;
+  final int pendingSales;
+
   factory SalesStats.fromJson(Map<String, dynamic> json) {
     final stats = json['stats'];
     final map = stats is Map<String, dynamic> ? stats : json;
     return SalesStats(
       totalSales: Json.intOf(map['totalSales']),
       totalRevenue: Json.dbl(map['totalRevenue']),
+      paidSales: Json.intOf(map['paidSales']),
+      pendingSales: Json.intOf(map['pendingSales']),
     );
   }
 }

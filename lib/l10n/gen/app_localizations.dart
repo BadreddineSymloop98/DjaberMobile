@@ -315,6 +315,12 @@ abstract class L10n {
   /// **'Product created'**
   String get toastProductCreated;
 
+  /// No description provided for @toastProductUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Product updated'**
+  String get toastProductUpdated;
+
   /// No description provided for @toastAgentCreated.
   ///
   /// In en, this message translates to:
@@ -783,10 +789,10 @@ abstract class L10n {
   /// **'Check Your Email'**
   String get authSentTitle;
 
-  /// No description provided for @authSentMessage.
+  /// Neutral on purpose: POST /api/auth/forgot-password answers the same whether or not the account exists. Diverges from the web's 'We’ve sent a password reset link to'.
   ///
   /// In en, this message translates to:
-  /// **'We’ve sent a password reset link to'**
+  /// **'If an account exists for this address, a reset link has just been sent to it'**
   String get authSentMessage;
 
   /// No description provided for @authSentNoReceive.
@@ -800,6 +806,90 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Try another email address'**
   String get authSentTryAnother;
+
+  /// No description provided for @authSentResend.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend link'**
+  String get authSentResend;
+
+  /// Countdown before resend is offered: the server sends nothing new within 60 seconds of the last request.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend link in {seconds}s'**
+  String authSentResendIn(int seconds);
+
+  /// No description provided for @authSentResent.
+  ///
+  /// In en, this message translates to:
+  /// **'A new link has been sent'**
+  String get authSentResent;
+
+  /// 08: the reset happens through the e-mail's link (the web page, or the app when Android hands the link over). Nothing on this screen leads to the reset.
+  ///
+  /// In en, this message translates to:
+  /// **'Open the link in the e-mail to choose a new password.'**
+  String get authSentNextStep;
+
+  /// 08b — the reset screen, opened only by the e-mail's link handed to the app (App Link or the web page's intent).
+  ///
+  /// In en, this message translates to:
+  /// **'New Password'**
+  String get authResetTitle;
+
+  /// No description provided for @authResetSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a new password for your account'**
+  String get authResetSubtitle;
+
+  /// No description provided for @authResetDeadSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Request a new link to reset your password'**
+  String get authResetDeadSubtitle;
+
+  /// No description provided for @authResetChecking.
+  ///
+  /// In en, this message translates to:
+  /// **'Checking the link…'**
+  String get authResetChecking;
+
+  /// No description provided for @authResetPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'New password'**
+  String get authResetPasswordLabel;
+
+  /// 08b: the new password is typed twice; the button stays disabled until both match.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm password'**
+  String get authResetConfirmLabel;
+
+  /// No description provided for @authErrPasswordMismatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords don’t match'**
+  String get authErrPasswordMismatch;
+
+  /// No description provided for @authResetSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Save password'**
+  String get authResetSubmit;
+
+  /// No description provided for @authResetDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Password updated'**
+  String get authResetDone;
+
+  /// No description provided for @authResetRequestNew.
+  ///
+  /// In en, this message translates to:
+  /// **'Request a new link'**
+  String get authResetRequestNew;
 
   /// 09a — Menu. Every nav label in this block is nav.* in src/lib/i18n.ts verbatim — the drawer is a port of the web sidebar, which is what the web itself collapses behind a hamburger below lg.
   ///
@@ -885,7 +975,7 @@ abstract class L10n {
   /// **'Already done — moving on'**
   String get tutorialStepAlreadyDone;
 
-  /// First press of the system back button on a screen that would otherwise close the app. Ours, unapproved.
+  /// First press of the system back button on a root screen (home, login, onboarding, tutorial roots), where back would otherwise close the app. Root screens only. Ours, unapproved.
   ///
   /// In en, this message translates to:
   /// **'Tap back again to leave'**
@@ -1028,6 +1118,936 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Full suite — Suppliers, Clients, Sales, Purchases, Caisse, Movements, Delivery & more.'**
   String get stockModeAdvancedDesc;
+
+  /// No description provided for @stockOverviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock overview'**
+  String get stockOverviewTitle;
+
+  /// No description provided for @stockOverviewSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Inventory, sales and purchase summary'**
+  String get stockOverviewSubtitle;
+
+  /// No description provided for @stockOverviewHintSimple.
+  ///
+  /// In en, this message translates to:
+  /// **'Simple mode shows products, orders and clients. Switch to Advanced for sales, purchases, suppliers, caisse and movements.'**
+  String get stockOverviewHintSimple;
+
+  /// No description provided for @stockOverviewHintAdvanced.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced mode: full ERP — sales, purchases, suppliers, caisse and stock movements are enabled.'**
+  String get stockOverviewHintAdvanced;
+
+  /// No description provided for @stockTotalProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Total products'**
+  String get stockTotalProducts;
+
+  /// No description provided for @stockLowStock.
+  ///
+  /// In en, this message translates to:
+  /// **'Low stock'**
+  String get stockLowStock;
+
+  /// No description provided for @stockValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock value'**
+  String get stockValue;
+
+  /// No description provided for @stockRetailValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Retail value'**
+  String get stockRetailValue;
+
+  /// No description provided for @stockCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'Categories'**
+  String get stockCategories;
+
+  /// No description provided for @stockSuppliers.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppliers'**
+  String get stockSuppliers;
+
+  /// No description provided for @stockTotalItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Total items in stock'**
+  String get stockTotalItems;
+
+  /// No description provided for @stockSalesMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Sales this month'**
+  String get stockSalesMonth;
+
+  /// No description provided for @stockTotalSales.
+  ///
+  /// In en, this message translates to:
+  /// **'Total sales'**
+  String get stockTotalSales;
+
+  /// No description provided for @stockRevenue.
+  ///
+  /// In en, this message translates to:
+  /// **'Revenue'**
+  String get stockRevenue;
+
+  /// No description provided for @stockPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid'**
+  String get stockPaid;
+
+  /// No description provided for @stockPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get stockPending;
+
+  /// No description provided for @stockPurchasesMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchases this month'**
+  String get stockPurchasesMonth;
+
+  /// No description provided for @stockTotalPurchases.
+  ///
+  /// In en, this message translates to:
+  /// **'Total purchases'**
+  String get stockTotalPurchases;
+
+  /// No description provided for @stockTotalSpent.
+  ///
+  /// In en, this message translates to:
+  /// **'Total spent'**
+  String get stockTotalSpent;
+
+  /// No description provided for @stockReceived.
+  ///
+  /// In en, this message translates to:
+  /// **'Received'**
+  String get stockReceived;
+
+  /// No description provided for @stockRecentMovements.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent movements'**
+  String get stockRecentMovements;
+
+  /// No description provided for @stockMovementsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No movements recorded yet. Stock movements will appear here when products are added, sold, or adjusted.'**
+  String get stockMovementsEmpty;
+
+  /// No description provided for @stockMoveIn.
+  ///
+  /// In en, this message translates to:
+  /// **'In'**
+  String get stockMoveIn;
+
+  /// No description provided for @stockMoveOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Out'**
+  String get stockMoveOut;
+
+  /// No description provided for @stockMoveAdjustment.
+  ///
+  /// In en, this message translates to:
+  /// **'Adjustment'**
+  String get stockMoveAdjustment;
+
+  /// No description provided for @stockMoveReturn.
+  ///
+  /// In en, this message translates to:
+  /// **'Return'**
+  String get stockMoveReturn;
+
+  /// No description provided for @settingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsTitle;
+
+  /// No description provided for @settingsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage your account and application settings'**
+  String get settingsSubtitle;
+
+  /// No description provided for @settingsStockMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock management'**
+  String get settingsStockMode;
+
+  /// Settings section title for the interface language. The three options show each language's own name, with this locale's name for it underneath.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get settingsLanguage;
+
+  /// No description provided for @settingsLanguageFrench.
+  ///
+  /// In en, this message translates to:
+  /// **'French'**
+  String get settingsLanguageFrench;
+
+  /// No description provided for @settingsLanguageEnglish.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get settingsLanguageEnglish;
+
+  /// No description provided for @settingsLanguageArabic.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic'**
+  String get settingsLanguageArabic;
+
+  /// Under the three language options: a chosen language is kept and the phone's system language is no longer followed.
+  ///
+  /// In en, this message translates to:
+  /// **'The app stays in the language you choose, even if your phone\'s language changes.'**
+  String get settingsLanguageHelp;
+
+  /// Plan names, descriptions and features: GET /api/plans sends French admin text and ignores Accept-Language, so the app translates the texts it recognises (plan_copy.dart). Unrecognised server text is shown as sent.
+  ///
+  /// In en, this message translates to:
+  /// **'Individual'**
+  String get planNameIndividual;
+
+  /// No description provided for @planNamePro.
+  ///
+  /// In en, this message translates to:
+  /// **'Pro'**
+  String get planNamePro;
+
+  /// No description provided for @planNameTeams.
+  ///
+  /// In en, this message translates to:
+  /// **'Teams'**
+  String get planNameTeams;
+
+  /// No description provided for @planDescIndividual.
+  ///
+  /// In en, this message translates to:
+  /// **'To get started: connect your page and let the AI answer your customers.'**
+  String get planDescIndividual;
+
+  /// No description provided for @planDescPro.
+  ///
+  /// In en, this message translates to:
+  /// **'For active sellers: vision, voice notes and more volume.'**
+  String get planDescPro;
+
+  /// No description provided for @planDescTeams.
+  ///
+  /// In en, this message translates to:
+  /// **'For established shops: maximum volume and priority support.'**
+  String get planDescTeams;
+
+  /// No description provided for @planFeaturePages.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 Facebook or Instagram page} other{{count} Facebook / Instagram pages}}'**
+  String planFeaturePages(int count);
+
+  /// amount is already grouped for the locale (5 000).
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} AI credits / month'**
+  String planFeatureCredits(String amount);
+
+  /// No description provided for @planFeatureProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} products'**
+  String planFeatureProducts(String amount);
+
+  /// carriers are brand names from the server (Yalidine, ZR Express, Maystro), not translated.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery to {count} wilayas ({carriers})'**
+  String planFeatureDelivery(int count, String carriers);
+
+  /// No description provided for @planFeatureAgentText.
+  ///
+  /// In en, this message translates to:
+  /// **'24/7 AI agent (text)'**
+  String get planFeatureAgentText;
+
+  /// No description provided for @planFeatureAgentFull.
+  ///
+  /// In en, this message translates to:
+  /// **'24/7 AI agent (text + images + voice)'**
+  String get planFeatureAgentFull;
+
+  /// No description provided for @planFeatureStock.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock & order management'**
+  String get planFeatureStock;
+
+  /// No description provided for @planFeatureCallConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Order confirmation by phone call'**
+  String get planFeatureCallConfirmation;
+
+  /// No description provided for @planFeatureVision.
+  ///
+  /// In en, this message translates to:
+  /// **'Image recognition (vision)'**
+  String get planFeatureVision;
+
+  /// No description provided for @planFeatureVoiceNotes.
+  ///
+  /// In en, this message translates to:
+  /// **'Voice notes (transcription)'**
+  String get planFeatureVoiceNotes;
+
+  /// No description provided for @planFeatureCrossSell.
+  ///
+  /// In en, this message translates to:
+  /// **'AI cross-sell / up-sell'**
+  String get planFeatureCrossSell;
+
+  /// No description provided for @planFeatureUnlimitedProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlimited products'**
+  String get planFeatureUnlimitedProducts;
+
+  /// No description provided for @planFeatureUnlimitedConversations.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlimited conversations'**
+  String get planFeatureUnlimitedConversations;
+
+  /// No description provided for @planFeatureEverythingPro.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything in Pro'**
+  String get planFeatureEverythingPro;
+
+  /// No description provided for @planFeaturePrioritySupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Priority support'**
+  String get planFeaturePrioritySupport;
+
+  /// No description provided for @settingsAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Account information'**
+  String get settingsAccount;
+
+  /// No description provided for @settingsBilling.
+  ///
+  /// In en, this message translates to:
+  /// **'Plan & billing'**
+  String get settingsBilling;
+
+  /// No description provided for @settingsCurrentPlan.
+  ///
+  /// In en, this message translates to:
+  /// **'Current plan'**
+  String get settingsCurrentPlan;
+
+  /// No description provided for @settingsMonthly.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly'**
+  String get settingsMonthly;
+
+  /// No description provided for @settingsYearly.
+  ///
+  /// In en, this message translates to:
+  /// **'Yearly'**
+  String get settingsYearly;
+
+  /// No description provided for @settingsFree.
+  ///
+  /// In en, this message translates to:
+  /// **'Free'**
+  String get settingsFree;
+
+  /// No description provided for @settingsPerMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'{currency} / mo'**
+  String settingsPerMonth(String currency);
+
+  /// No description provided for @settingsPerYear.
+  ///
+  /// In en, this message translates to:
+  /// **'{currency} / yr'**
+  String settingsPerYear(String currency);
+
+  /// No description provided for @settingsBadgeCurrent.
+  ///
+  /// In en, this message translates to:
+  /// **'Current'**
+  String get settingsBadgeCurrent;
+
+  /// No description provided for @settingsBadgePopular.
+  ///
+  /// In en, this message translates to:
+  /// **'Popular'**
+  String get settingsBadgePopular;
+
+  /// No description provided for @settingsYourPlan.
+  ///
+  /// In en, this message translates to:
+  /// **'Your current plan'**
+  String get settingsYourPlan;
+
+  /// No description provided for @settingsFreeNoPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Free — no payment needed'**
+  String get settingsFreeNoPayment;
+
+  /// The plan card's button. {price} is the grouped amount and the plan's currency label, e.g. 2,900 DA.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscribe — {price}'**
+  String settingsSubscribe(String price);
+
+  /// No description provided for @settingsRedirecting.
+  ///
+  /// In en, this message translates to:
+  /// **'Redirecting…'**
+  String get settingsRedirecting;
+
+  /// No description provided for @settingsVerifying.
+  ///
+  /// In en, this message translates to:
+  /// **'Verifying payment…'**
+  String get settingsVerifying;
+
+  /// No description provided for @settingsNoPlans.
+  ///
+  /// In en, this message translates to:
+  /// **'No plans available yet.'**
+  String get settingsNoPlans;
+
+  /// No description provided for @settingsCheckoutPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment confirmed — your {plan} plan is active.'**
+  String settingsCheckoutPaid(String plan);
+
+  /// No description provided for @settingsCheckoutPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment not confirmed yet. If it went through, your plan will be activated shortly.'**
+  String get settingsCheckoutPending;
+
+  /// No description provided for @settingsCheckoutFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'The payment did not go through.'**
+  String get settingsCheckoutFailed;
+
+  /// No description provided for @settingsFbTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Facebook API permissions'**
+  String get settingsFbTitle;
+
+  /// No description provided for @settingsFbActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Currently active permissions'**
+  String get settingsFbActive;
+
+  /// No description provided for @settingsFbAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Available advanced permissions'**
+  String get settingsFbAvailable;
+
+  /// No description provided for @settingsFbReviewHint.
+  ///
+  /// In en, this message translates to:
+  /// **'These permissions require Facebook App Review approval.'**
+  String get settingsFbReviewHint;
+
+  /// No description provided for @settingsDangerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Danger zone'**
+  String get settingsDangerTitle;
+
+  /// No description provided for @settingsDeleteAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account'**
+  String get settingsDeleteAccount;
+
+  /// No description provided for @settingsDeleteHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Permanently delete your account and all associated data.'**
+  String get settingsDeleteHelp;
+
+  /// No description provided for @inboxTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Inbox'**
+  String get inboxTitle;
+
+  /// No description provided for @inboxSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Read and reply to your customer messages.'**
+  String get inboxSubtitle;
+
+  /// No description provided for @inboxNoPagesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No pages connected'**
+  String get inboxNoPagesTitle;
+
+  /// No description provided for @inboxNoPagesBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect a Facebook or Instagram page to start receiving messages here.'**
+  String get inboxNoPagesBody;
+
+  /// No description provided for @inboxConnectPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect a page'**
+  String get inboxConnectPage;
+
+  /// No description provided for @inboxPlatformMessenger.
+  ///
+  /// In en, this message translates to:
+  /// **'Messenger'**
+  String get inboxPlatformMessenger;
+
+  /// No description provided for @inboxPlatformInstagram.
+  ///
+  /// In en, this message translates to:
+  /// **'Instagram DMs'**
+  String get inboxPlatformInstagram;
+
+  /// No description provided for @inboxSynced.
+  ///
+  /// In en, this message translates to:
+  /// **'synced {time}'**
+  String inboxSynced(String time);
+
+  /// No description provided for @inboxSwitchPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch page'**
+  String get inboxSwitchPage;
+
+  /// No description provided for @inboxConnectAnother.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect another page'**
+  String get inboxConnectAnother;
+
+  /// No description provided for @inboxSync.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync'**
+  String get inboxSync;
+
+  /// No description provided for @inboxSyncing.
+  ///
+  /// In en, this message translates to:
+  /// **'Syncing…'**
+  String get inboxSyncing;
+
+  /// No description provided for @inboxTabAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get inboxTabAll;
+
+  /// No description provided for @inboxTabActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get inboxTabActive;
+
+  /// No description provided for @inboxTabResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get inboxTabResolved;
+
+  /// No description provided for @inboxTabArchived.
+  ///
+  /// In en, this message translates to:
+  /// **'Archived'**
+  String get inboxTabArchived;
+
+  /// No description provided for @inboxSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by name or message…'**
+  String get inboxSearchHint;
+
+  /// No description provided for @inboxNoMatches.
+  ///
+  /// In en, this message translates to:
+  /// **'No matches'**
+  String get inboxNoMatches;
+
+  /// No description provided for @inboxNoConversations.
+  ///
+  /// In en, this message translates to:
+  /// **'No conversations yet'**
+  String get inboxNoConversations;
+
+  /// No description provided for @inboxNothingHere.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing in this view'**
+  String get inboxNothingHere;
+
+  /// No description provided for @inboxPullFromFacebook.
+  ///
+  /// In en, this message translates to:
+  /// **'Pull from Facebook'**
+  String get inboxPullFromFacebook;
+
+  /// No description provided for @inboxUpToDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Up to date'**
+  String get inboxUpToDate;
+
+  /// No description provided for @inboxSyncedCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{n, plural, =1{Synced — 1 new message} other{Synced — {n} new messages}}'**
+  String inboxSyncedCount(int n);
+
+  /// No description provided for @inboxAttachment.
+  ///
+  /// In en, this message translates to:
+  /// **'Attachment'**
+  String get inboxAttachment;
+
+  /// No description provided for @inboxEmptyMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Empty message'**
+  String get inboxEmptyMessage;
+
+  /// Mobile addition, not on the web inbox: the AI handed the conversation over (Conversation.aiPaused).
+  ///
+  /// In en, this message translates to:
+  /// **'AI paused'**
+  String get inboxAiPaused;
+
+  /// No description provided for @inboxStatusActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get inboxStatusActive;
+
+  /// No description provided for @inboxStatusResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Resolved'**
+  String get inboxStatusResolved;
+
+  /// No description provided for @inboxStatusArchived.
+  ///
+  /// In en, this message translates to:
+  /// **'Archived'**
+  String get inboxStatusArchived;
+
+  /// No description provided for @inboxTimeNow.
+  ///
+  /// In en, this message translates to:
+  /// **'now'**
+  String get inboxTimeNow;
+
+  /// No description provided for @inboxTimeMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'{n}m'**
+  String inboxTimeMinutes(int n);
+
+  /// No description provided for @inboxTimeHours.
+  ///
+  /// In en, this message translates to:
+  /// **'{n}h'**
+  String inboxTimeHours(int n);
+
+  /// No description provided for @conversationMarkResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark resolved'**
+  String get conversationMarkResolved;
+
+  /// No description provided for @conversationArchive.
+  ///
+  /// In en, this message translates to:
+  /// **'Archive conversation'**
+  String get conversationArchive;
+
+  /// No description provided for @conversationReopen.
+  ///
+  /// In en, this message translates to:
+  /// **'Reopen'**
+  String get conversationReopen;
+
+  /// No description provided for @conversationResumeAi.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume the AI'**
+  String get conversationResumeAi;
+
+  /// No description provided for @conversationPausedNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'The agent no longer replies to this customer. Reply here.'**
+  String get conversationPausedNotice;
+
+  /// No description provided for @conversationReplyHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Type your reply…'**
+  String get conversationReplyHint;
+
+  /// No description provided for @conversationSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get conversationSend;
+
+  /// No description provided for @conversationSending.
+  ///
+  /// In en, this message translates to:
+  /// **'Sending…'**
+  String get conversationSending;
+
+  /// No description provided for @conversationReopenHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Reopen this conversation to reply.'**
+  String get conversationReopenHint;
+
+  /// No description provided for @conversationEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No messages yet'**
+  String get conversationEmpty;
+
+  /// No description provided for @conversationResolvedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Marked as resolved'**
+  String get conversationResolvedToast;
+
+  /// No description provided for @conversationArchivedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Archived'**
+  String get conversationArchivedToast;
+
+  /// No description provided for @conversationReopenedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Conversation reopened'**
+  String get conversationReopenedToast;
+
+  /// No description provided for @conversationAiResumedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'The AI is replying again'**
+  String get conversationAiResumedToast;
+
+  /// No description provided for @conversationAuthorAi.
+  ///
+  /// In en, this message translates to:
+  /// **'AI'**
+  String get conversationAuthorAi;
+
+  /// No description provided for @conversationAuthorYou.
+  ///
+  /// In en, this message translates to:
+  /// **'You'**
+  String get conversationAuthorYou;
+
+  /// No description provided for @productVariantsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Variants'**
+  String get productVariantsTitle;
+
+  /// No description provided for @productVariantsTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total qty: {count}'**
+  String productVariantsTotal(int count);
+
+  /// No description provided for @productVariantAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Add variant'**
+  String get productVariantAdd;
+
+  /// No description provided for @productVariantsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No variants. Tap “Add variant” to create one.'**
+  String get productVariantsEmpty;
+
+  /// No description provided for @productVariantName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get productVariantName;
+
+  /// No description provided for @productVariantNamePlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., Red - Large'**
+  String get productVariantNamePlaceholder;
+
+  /// No description provided for @productVariantSku.
+  ///
+  /// In en, this message translates to:
+  /// **'SKU'**
+  String get productVariantSku;
+
+  /// No description provided for @productVariantSkuPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional SKU'**
+  String get productVariantSkuPlaceholder;
+
+  /// No description provided for @productVariantCost.
+  ///
+  /// In en, this message translates to:
+  /// **'Cost'**
+  String get productVariantCost;
+
+  /// No description provided for @productVariantPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Price'**
+  String get productVariantPrice;
+
+  /// No description provided for @productVariantQuantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Qty'**
+  String get productVariantQuantity;
+
+  /// No description provided for @productVariantMinQuantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Min qty'**
+  String get productVariantMinQuantity;
+
+  /// No description provided for @productVariantRemove.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove variant'**
+  String get productVariantRemove;
+
+  /// No description provided for @productVariantDuplicate.
+  ///
+  /// In en, this message translates to:
+  /// **'Two variants cannot have the same name'**
+  String get productVariantDuplicate;
+
+  /// No description provided for @productVariantsRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Add at least one variant, or untick the box.'**
+  String get productVariantsRequired;
+
+  /// No description provided for @productVariantsRetryHint.
+  ///
+  /// In en, this message translates to:
+  /// **'The product is created — only the missing variants will be sent again.'**
+  String get productVariantsRetryHint;
+
+  /// No description provided for @productDetailEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'PRODUCT DETAILS'**
+  String get productDetailEyebrow;
+
+  /// No description provided for @productDetailNoImages.
+  ///
+  /// In en, this message translates to:
+  /// **'No images'**
+  String get productDetailNoImages;
+
+  /// No description provided for @productDetailCost.
+  ///
+  /// In en, this message translates to:
+  /// **'Cost price'**
+  String get productDetailCost;
+
+  /// No description provided for @productDetailSelling.
+  ///
+  /// In en, this message translates to:
+  /// **'Selling price'**
+  String get productDetailSelling;
+
+  /// No description provided for @productDetailProfit.
+  ///
+  /// In en, this message translates to:
+  /// **'Profit / margin'**
+  String get productDetailProfit;
+
+  /// No description provided for @productDetailInStock.
+  ///
+  /// In en, this message translates to:
+  /// **'In stock'**
+  String get productDetailInStock;
+
+  /// No description provided for @productDetailStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get productDetailStatus;
+
+  /// No description provided for @productDetailActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get productDetailActive;
+
+  /// No description provided for @productDetailInactive.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get productDetailInactive;
+
+  /// No description provided for @productDetailVariants.
+  ///
+  /// In en, this message translates to:
+  /// **'Variants ({count})'**
+  String productDetailVariants(int count);
 
   /// No description provided for @tutorialProductTitle.
   ///
@@ -1197,6 +2217,12 @@ abstract class L10n {
   /// **'THRESHOLD {count}'**
   String productsThreshold(int count);
 
+  /// Shown on a row's meta line when the product has variants, like the web's 'N variants' badge next to the product name.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 VARIANT} other{{count} VARIANTS}}'**
+  String productsVariantCount(int count);
+
   /// No description provided for @productsEmptyTitle.
   ///
   /// In en, this message translates to:
@@ -1299,6 +2325,372 @@ abstract class L10n {
   /// **'Create product'**
   String get productAddSubmit;
 
+  /// Title of the edit form (Figma `Edit product`), and the accessible name of the pencil that opens it from 17a.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit product'**
+  String get productEditTitle;
+
+  /// No description provided for @productEditSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Update product'**
+  String get productEditSubmit;
+
+  /// Under the variants checkbox on the edit form. Replaces the create form's hint, because on edit a saved variant's quantity is locked — PUT cannot carry one.
+  ///
+  /// In en, this message translates to:
+  /// **'To change variant quantities, use “Adjust stock”.'**
+  String get productEditVariantsHint;
+
+  /// No description provided for @productEditLeaveBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your changes will be lost.'**
+  String get productEditLeaveBody;
+
+  /// No description provided for @productEditDeleteVariantsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete variants?'**
+  String get productEditDeleteVariantsTitle;
+
+  /// Confirmation before a save that deletes variants holding no stock.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 variant will be permanently deleted.} other{{count} variants will be permanently deleted.}}'**
+  String productEditDeleteVariantsBody(int count);
+
+  /// Same confirmation when the variants still hold stock. The backend writes a negative adjustment movement for each, which is why the units are named.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 variant will be permanently deleted, and its {stock} units written off your stock.} other{{count} variants will be permanently deleted, and their {stock} units written off your stock.}}'**
+  String productEditDeleteVariantsStock(int count, int stock);
+
+  /// No description provided for @productEditDeleteVariantsConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete and save'**
+  String get productEditDeleteVariantsConfirm;
+
+  /// The + beside the unit picker on the edit form, and the title of the sheet it opens — the web's Add Custom Unit.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a custom unit'**
+  String get productUnitAdd;
+
+  /// No description provided for @productUnitName.
+  ///
+  /// In en, this message translates to:
+  /// **'Unit name'**
+  String get productUnitName;
+
+  /// No description provided for @productUnitNamePlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. Dozen'**
+  String get productUnitNamePlaceholder;
+
+  /// No description provided for @productUnitAbbreviation.
+  ///
+  /// In en, this message translates to:
+  /// **'Abbreviation'**
+  String get productUnitAbbreviation;
+
+  /// No description provided for @productUnitAbbreviationPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. dz'**
+  String get productUnitAbbreviationPlaceholder;
+
+  /// No description provided for @productUnitCreate.
+  ///
+  /// In en, this message translates to:
+  /// **'Add unit'**
+  String get productUnitCreate;
+
+  /// Title of the Adjust stock sheet (Figma `Adjust stock`), and the action row that opens it on 17a.
+  ///
+  /// In en, this message translates to:
+  /// **'Adjust stock'**
+  String get stockAdjustTitle;
+
+  /// Under the sheet's title. `stock` is already formatted with its unit abbreviation, e.g. `15 pcs`.
+  ///
+  /// In en, this message translates to:
+  /// **'{product}  ·  Current stock: {stock}'**
+  String stockAdjustSubtitle(String product, String stock);
+
+  /// No description provided for @stockAdjustIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock in (+)'**
+  String get stockAdjustIn;
+
+  /// No description provided for @stockAdjustOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock out (−)'**
+  String get stockAdjustOut;
+
+  /// The third adjustment type: set the exact quantity. Short, because three chips share one row.
+  ///
+  /// In en, this message translates to:
+  /// **'Set'**
+  String get stockAdjustSet;
+
+  /// No description provided for @stockAdjustReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get stockAdjustReason;
+
+  /// On a variant card's header — the stock it holds before the adjustment.
+  ///
+  /// In en, this message translates to:
+  /// **'QTY: {count}'**
+  String stockAdjustCurrent(int count);
+
+  /// Preview under a filled adjustment line.
+  ///
+  /// In en, this message translates to:
+  /// **'New quantity: {count}'**
+  String stockAdjustResult(int count);
+
+  /// An outgoing movement larger than the stock on hand. The backend answers 400 `Insufficient stock`; this says so first.
+  ///
+  /// In en, this message translates to:
+  /// **'Only {count} in stock'**
+  String stockAdjustInsufficient(int count);
+
+  /// No description provided for @stockAdjustNothing.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a quantity on at least one line.'**
+  String get stockAdjustNothing;
+
+  /// No description provided for @stockAdjustSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Adjust stock'**
+  String get stockAdjustSubmit;
+
+  /// No description provided for @stockAdjustDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock adjusted'**
+  String get stockAdjustDone;
+
+  /// No description provided for @expensesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Product expenses'**
+  String get expensesTitle;
+
+  /// No description provided for @expensesEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'PRODUCT EXPENSES'**
+  String get expensesEyebrow;
+
+  /// No description provided for @expensesMarginSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Margin summary'**
+  String get expensesMarginSummary;
+
+  /// No description provided for @expensesTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total expenses'**
+  String get expensesTotal;
+
+  /// No description provided for @expensesPerUnit.
+  ///
+  /// In en, this message translates to:
+  /// **'Expense / unit'**
+  String get expensesPerUnit;
+
+  /// No description provided for @expensesTrueCost.
+  ///
+  /// In en, this message translates to:
+  /// **'True cost'**
+  String get expensesTrueCost;
+
+  /// No description provided for @expensesNetMargin.
+  ///
+  /// In en, this message translates to:
+  /// **'Net margin'**
+  String get expensesNetMargin;
+
+  /// No description provided for @expensesSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Expenses ({count})'**
+  String expensesSection(int count);
+
+  /// No description provided for @expensesEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No expenses yet. Add one below and the margin above will take it into account.'**
+  String get expensesEmpty;
+
+  /// No description provided for @expensesAddSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Add an expense'**
+  String get expensesAddSection;
+
+  /// No description provided for @expenseCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get expenseCategory;
+
+  /// No description provided for @expenseCategoryMarketing.
+  ///
+  /// In en, this message translates to:
+  /// **'Marketing'**
+  String get expenseCategoryMarketing;
+
+  /// No description provided for @expenseCategoryShipping.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipping'**
+  String get expenseCategoryShipping;
+
+  /// No description provided for @expenseCategoryPackaging.
+  ///
+  /// In en, this message translates to:
+  /// **'Packaging'**
+  String get expenseCategoryPackaging;
+
+  /// No description provided for @expenseCategoryCustoms.
+  ///
+  /// In en, this message translates to:
+  /// **'Customs'**
+  String get expenseCategoryCustoms;
+
+  /// No description provided for @expenseCategoryStorage.
+  ///
+  /// In en, this message translates to:
+  /// **'Storage'**
+  String get expenseCategoryStorage;
+
+  /// No description provided for @expenseCategoryOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get expenseCategoryOther;
+
+  /// No description provided for @expenseAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount (DA)'**
+  String get expenseAmount;
+
+  /// No description provided for @expenseAmountPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get expenseAmountPlaceholder;
+
+  /// No description provided for @expenseDescriptionPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Description (optional)'**
+  String get expenseDescriptionPlaceholder;
+
+  /// The amount is a fixed total, spread over the quantity in stock. The web's `fixed` toggle, and the default.
+  ///
+  /// In en, this message translates to:
+  /// **'Fixed'**
+  String get expenseFixed;
+
+  /// No description provided for @expensePerUnit.
+  ///
+  /// In en, this message translates to:
+  /// **'Per unit'**
+  String get expensePerUnit;
+
+  /// Tag on an expense row whose amount applies to each unit sold.
+  ///
+  /// In en, this message translates to:
+  /// **'/ unit'**
+  String get expensePerUnitTag;
+
+  /// No description provided for @expenseAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Add expense'**
+  String get expenseAdd;
+
+  /// No description provided for @expenseAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'Expense added'**
+  String get expenseAdded;
+
+  /// No description provided for @expenseDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this expense?'**
+  String get expenseDeleteTitle;
+
+  /// Confirmation before deleting an expense. The backend's delete is hard.
+  ///
+  /// In en, this message translates to:
+  /// **'{category} — {amount} will be removed, and the margin recalculated.'**
+  String expenseDeleteBody(String category, String amount);
+
+  /// No description provided for @expenseDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Expense deleted'**
+  String get expenseDeleted;
+
+  /// No description provided for @productDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete product'**
+  String get productDeleteTitle;
+
+  /// The web's own delete copy. The row is a soft delete, but the product's image FILES are removed from disk, so it is not reversible in practice.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you really want to delete {name}? This action cannot be undone.'**
+  String productDeleteBody(String name);
+
+  /// No description provided for @productDeleteDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Product deleted'**
+  String get productDeleteDone;
+
+  /// No description provided for @productDetailActions.
+  ///
+  /// In en, this message translates to:
+  /// **'Actions'**
+  String get productDetailActions;
+
+  /// No description provided for @productDetailAdjustMeta.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock in, stock out, or set the exact quantity'**
+  String get productDetailAdjustMeta;
+
+  /// No description provided for @productDetailExpensesMeta.
+  ///
+  /// In en, this message translates to:
+  /// **'True cost and net margin'**
+  String get productDetailExpensesMeta;
+
+  /// No description provided for @productDetailDeleteMeta.
+  ///
+  /// In en, this message translates to:
+  /// **'Removes it from your catalogue'**
+  String get productDetailDeleteMeta;
+
   /// The meta line under a category in the picker — how many products it holds.
   ///
   /// In en, this message translates to:
@@ -1334,6 +2726,12 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Product created, but its photos could not be uploaded.'**
   String get productPhotosUploadFailed;
+
+  /// Toast on the edit form when everything saved but the photo upload, which runs last, failed. The edit stands either way.
+  ///
+  /// In en, this message translates to:
+  /// **'Product updated, but the new photos could not be uploaded.'**
+  String get productPhotosUploadFailedEdit;
 
   /// No description provided for @productPhotoRemove.
   ///
@@ -1880,6 +3278,5784 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'not built yet'**
   String get commonNotBuilt;
+
+  /// No description provided for @agentsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'AI Agents'**
+  String get agentsTitle;
+
+  /// No description provided for @agentsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create and manage AI agents that sell your products on connected pages'**
+  String get agentsSubtitle;
+
+  /// No description provided for @agentsActive.
+  ///
+  /// In en, this message translates to:
+  /// **'AI active'**
+  String get agentsActive;
+
+  /// No description provided for @agentsInactive.
+  ///
+  /// In en, this message translates to:
+  /// **'AI paused'**
+  String get agentsInactive;
+
+  /// No description provided for @agentsStatPages.
+  ///
+  /// In en, this message translates to:
+  /// **'Pages'**
+  String get agentsStatPages;
+
+  /// No description provided for @agentsStatProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Products'**
+  String get agentsStatProducts;
+
+  /// No description provided for @agentsStatModel.
+  ///
+  /// In en, this message translates to:
+  /// **'Model'**
+  String get agentsStatModel;
+
+  /// No description provided for @agentsAllProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get agentsAllProducts;
+
+  /// No description provided for @agentsNoPages.
+  ///
+  /// In en, this message translates to:
+  /// **'Not answering on any page yet'**
+  String get agentsNoPages;
+
+  /// No description provided for @agentsPause.
+  ///
+  /// In en, this message translates to:
+  /// **'Pause the agent'**
+  String get agentsPause;
+
+  /// No description provided for @agentsResume.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume the agent'**
+  String get agentsResume;
+
+  /// No description provided for @agentsPausedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Agent paused — it no longer replies'**
+  String get agentsPausedToast;
+
+  /// No description provided for @agentsResumedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Agent active — it replies again'**
+  String get agentsResumedToast;
+
+  /// No description provided for @agentsEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No agent yet'**
+  String get agentsEmptyTitle;
+
+  /// No description provided for @agentsEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Create an AI agent to automatically respond to messages on your connected pages and sell your products.'**
+  String get agentsEmptyBody;
+
+  /// 14 — Agents IA, the button on the no-agent state. Leads to 15 — Agents · démarrer (F15), not built yet.
+  ///
+  /// In en, this message translates to:
+  /// **'Create your agent'**
+  String get agentsEmptyCta;
+
+  /// No description provided for @agentsActionInsights.
+  ///
+  /// In en, this message translates to:
+  /// **'Issues to review'**
+  String get agentsActionInsights;
+
+  /// No description provided for @agentsActionTest.
+  ///
+  /// In en, this message translates to:
+  /// **'Test the agent'**
+  String get agentsActionTest;
+
+  /// No description provided for @agentsActionDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Details and stats'**
+  String get agentsActionDetails;
+
+  /// No description provided for @agentsActionDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete the agent'**
+  String get agentsActionDelete;
+
+  /// No description provided for @agentsDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete the agent?'**
+  String get agentsDeleteTitle;
+
+  /// No description provided for @agentsDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} will be deleted and will stop replying on your pages. You can create a new agent afterwards.'**
+  String agentsDeleteBody(String name);
+
+  /// No description provided for @agentsDeleteConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get agentsDeleteConfirm;
+
+  /// No description provided for @agentsDeletedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Agent deleted'**
+  String get agentsDeletedToast;
+
+  /// No description provided for @agentsInsightsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending issues'**
+  String get agentsInsightsTitle;
+
+  /// No description provided for @agentsInsightsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No pending issues — your agent is handling everything.'**
+  String get agentsInsightsEmpty;
+
+  /// No description provided for @agentsInsightsNone.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing here.'**
+  String get agentsInsightsNone;
+
+  /// No description provided for @agentsInsightUnclear.
+  ///
+  /// In en, this message translates to:
+  /// **'Unclear'**
+  String get agentsInsightUnclear;
+
+  /// No description provided for @agentsInsightUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown topic'**
+  String get agentsInsightUnknown;
+
+  /// No description provided for @agentsInsightHandoff.
+  ///
+  /// In en, this message translates to:
+  /// **'Handed to you'**
+  String get agentsInsightHandoff;
+
+  /// No description provided for @agentsInsightCustomer.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer'**
+  String get agentsInsightCustomer;
+
+  /// No description provided for @agentsInsightAgent.
+  ///
+  /// In en, this message translates to:
+  /// **'AI response'**
+  String get agentsInsightAgent;
+
+  /// No description provided for @agentsInsightResolve.
+  ///
+  /// In en, this message translates to:
+  /// **'Resolve'**
+  String get agentsInsightResolve;
+
+  /// No description provided for @agentsInsightDismiss.
+  ///
+  /// In en, this message translates to:
+  /// **'Dismiss'**
+  String get agentsInsightDismiss;
+
+  /// No description provided for @agentsInsightAddAndResolve.
+  ///
+  /// In en, this message translates to:
+  /// **'Add and resolve'**
+  String get agentsInsightAddAndResolve;
+
+  /// No description provided for @agentsInsightInstructionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add an instruction so the agent handles this better next time…'**
+  String get agentsInsightInstructionHint;
+
+  /// No description provided for @agentsInsightResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Resolved'**
+  String get agentsInsightResolved;
+
+  /// No description provided for @agentsInsightDismissed.
+  ///
+  /// In en, this message translates to:
+  /// **'Dismissed'**
+  String get agentsInsightDismissed;
+
+  /// No description provided for @agentsInsightPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get agentsInsightPending;
+
+  /// No description provided for @agentsInsightFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'The issue could not be updated.'**
+  String get agentsInsightFailed;
+
+  /// No description provided for @agentsTestTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Test — {name}'**
+  String agentsTestTitle(String name);
+
+  /// No description provided for @agentsTestEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Send a message to test'**
+  String get agentsTestEmpty;
+
+  /// No description provided for @agentsTestNote.
+  ///
+  /// In en, this message translates to:
+  /// **'A dry run: no credits used, no orders created.'**
+  String get agentsTestNote;
+
+  /// No description provided for @agentsTestPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Type a message…'**
+  String get agentsTestPlaceholder;
+
+  /// No description provided for @agentsTestSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get agentsTestSend;
+
+  /// No description provided for @agentsTestFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'No reply — try again.'**
+  String get agentsTestFailed;
+
+  /// No description provided for @agentsDetailsConversations.
+  ///
+  /// In en, this message translates to:
+  /// **'Conversations'**
+  String get agentsDetailsConversations;
+
+  /// No description provided for @agentsDetailsConversationsFoot.
+  ///
+  /// In en, this message translates to:
+  /// **'{received} received · {sent} sent'**
+  String agentsDetailsConversationsFoot(int received, int sent);
+
+  /// No description provided for @agentsDetailsMessages.
+  ///
+  /// In en, this message translates to:
+  /// **'Messages'**
+  String get agentsDetailsMessages;
+
+  /// No description provided for @agentsDetailsLastActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Last: {date}'**
+  String agentsDetailsLastActive(String date);
+
+  /// No description provided for @agentsDetailsNoActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'No activity yet'**
+  String get agentsDetailsNoActivity;
+
+  /// No description provided for @agentsDetailsOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders created'**
+  String get agentsDetailsOrders;
+
+  /// No description provided for @agentsDetailsResolvedFoot.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} resolved'**
+  String agentsDetailsResolvedFoot(int count);
+
+  /// No description provided for @agentsDetailsInsights.
+  ///
+  /// In en, this message translates to:
+  /// **'Agent insights'**
+  String get agentsDetailsInsights;
+
+  /// No description provided for @agentsDetailsAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get agentsDetailsAll;
+
+  /// No description provided for @agentsDetailsInstructions.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom instructions'**
+  String get agentsDetailsInstructions;
+
+  /// No description provided for @agentsDetailsNoInstructions.
+  ///
+  /// In en, this message translates to:
+  /// **'No instructions yet.'**
+  String get agentsDetailsNoInstructions;
+
+  /// No description provided for @agentsDetailsEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get agentsDetailsEdit;
+
+  /// No description provided for @agentsDetailsSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get agentsDetailsSave;
+
+  /// No description provided for @agentsDetailsSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Instructions saved'**
+  String get agentsDetailsSaved;
+
+  /// Saving on the phone after the web appended instructions (an insight resolve) while the editor was open. Ours, unapproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Instructions saved — lines added on the web were kept'**
+  String get agentsDetailsSavedMerged;
+
+  /// No description provided for @agentsDetailsConflictTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Changed on the web'**
+  String get agentsDetailsConflictTitle;
+
+  /// No description provided for @agentsDetailsConflictBody.
+  ///
+  /// In en, this message translates to:
+  /// **'These instructions were changed while you were editing. The current version:'**
+  String get agentsDetailsConflictBody;
+
+  /// No description provided for @agentsDetailsUseLatest.
+  ///
+  /// In en, this message translates to:
+  /// **'Use this version'**
+  String get agentsDetailsUseLatest;
+
+  /// No description provided for @agentsDetailsKeepMine.
+  ///
+  /// In en, this message translates to:
+  /// **'Replace with mine'**
+  String get agentsDetailsKeepMine;
+
+  /// No description provided for @agentsNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Agent not found.'**
+  String get agentsNotFound;
+
+  /// No description provided for @agentsTestEmptyFor.
+  ///
+  /// In en, this message translates to:
+  /// **'Send a message to test {name}'**
+  String agentsTestEmptyFor(String name);
+
+  /// No description provided for @agentsTestProduct.
+  ///
+  /// In en, this message translates to:
+  /// **'Product'**
+  String get agentsTestProduct;
+
+  /// No description provided for @agentsTestProductId.
+  ///
+  /// In en, this message translates to:
+  /// **'ID: {id}…'**
+  String agentsTestProductId(String id);
+
+  /// No description provided for @agentsPresetsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Start with a ready-made agent'**
+  String get agentsPresetsTitle;
+
+  /// No description provided for @agentsPresetsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Each one is fully configured for Algerian selling — Darija, Arabic and French, delivery quoting, and order handling. Pick one to launch in seconds, then fine-tune anything.'**
+  String get agentsPresetsBody;
+
+  /// No description provided for @agentsPresetVisionVoice.
+  ///
+  /// In en, this message translates to:
+  /// **'VISION + VOICE'**
+  String get agentsPresetVisionVoice;
+
+  /// No description provided for @agentsPresetVoice.
+  ///
+  /// In en, this message translates to:
+  /// **'VOICE'**
+  String get agentsPresetVoice;
+
+  /// No description provided for @agentsPresetCloserTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Turns conversations into confirmed orders'**
+  String get agentsPresetCloserTagline;
+
+  /// No description provided for @agentsPresetCloser1.
+  ///
+  /// In en, this message translates to:
+  /// **'Guides the customer from question to confirmed order'**
+  String get agentsPresetCloser1;
+
+  /// No description provided for @agentsPresetCloser2.
+  ///
+  /// In en, this message translates to:
+  /// **'Quotes delivery per wilaya and closes with the full total'**
+  String get agentsPresetCloser2;
+
+  /// No description provided for @agentsPresetCloser3.
+  ///
+  /// In en, this message translates to:
+  /// **'Understands photos and voice notes'**
+  String get agentsPresetCloser3;
+
+  /// No description provided for @agentsPresetSupportTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Answers fast, escalates problems to you'**
+  String get agentsPresetSupportTagline;
+
+  /// No description provided for @agentsPresetSupport1.
+  ///
+  /// In en, this message translates to:
+  /// **'Handles product and order questions politely'**
+  String get agentsPresetSupport1;
+
+  /// No description provided for @agentsPresetSupport2.
+  ///
+  /// In en, this message translates to:
+  /// **'Escalates complaints and refunds to a human'**
+  String get agentsPresetSupport2;
+
+  /// No description provided for @agentsPresetSupport3.
+  ///
+  /// In en, this message translates to:
+  /// **'Calm, accurate, and to the point'**
+  String get agentsPresetSupport3;
+
+  /// No description provided for @agentsPresetAdvisorTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Helps customers pick the right product'**
+  String get agentsPresetAdvisorTagline;
+
+  /// No description provided for @agentsPresetAdvisor1.
+  ///
+  /// In en, this message translates to:
+  /// **'Compares options and explains differences'**
+  String get agentsPresetAdvisor1;
+
+  /// No description provided for @agentsPresetAdvisor2.
+  ///
+  /// In en, this message translates to:
+  /// **'Matches a customer photo to your catalog'**
+  String get agentsPresetAdvisor2;
+
+  /// No description provided for @agentsPresetAdvisor3.
+  ///
+  /// In en, this message translates to:
+  /// **'Great for catalogs with variants and specs'**
+  String get agentsPresetAdvisor3;
+
+  /// No description provided for @agentsPresetExpressTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Ultra-fast replies for high message volume'**
+  String get agentsPresetExpressTagline;
+
+  /// No description provided for @agentsPresetExpress1.
+  ///
+  /// In en, this message translates to:
+  /// **'Short, quick answers for busy pages'**
+  String get agentsPresetExpress1;
+
+  /// No description provided for @agentsPresetExpress2.
+  ///
+  /// In en, this message translates to:
+  /// **'Lowest credit use — text and voice only'**
+  String get agentsPresetExpress2;
+
+  /// No description provided for @agentsPresetExpress3.
+  ///
+  /// In en, this message translates to:
+  /// **'Still places and cancels orders'**
+  String get agentsPresetExpress3;
+
+  /// No description provided for @agentsPresetUse.
+  ///
+  /// In en, this message translates to:
+  /// **'Use this agent  →'**
+  String get agentsPresetUse;
+
+  /// No description provided for @agentsPresetOwn.
+  ///
+  /// In en, this message translates to:
+  /// **'Prefer to build your own?'**
+  String get agentsPresetOwn;
+
+  /// No description provided for @agentsPresetScratch.
+  ///
+  /// In en, this message translates to:
+  /// **'Start from scratch'**
+  String get agentsPresetScratch;
+
+  /// No description provided for @agentsCreatedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Agent created'**
+  String get agentsCreatedToast;
+
+  /// 15b — Partir de zéro, the full agent form. The web's AgentForm.tsx is hardcoded English and has no i18n keys; section names follow it, the rest is ours and unapproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Set up an agent to answer your conversations. Only the name is required — everything else has a default.'**
+  String get agentFormSubtitle;
+
+  /// No description provided for @agentFormBasics.
+  ///
+  /// In en, this message translates to:
+  /// **'Basic information'**
+  String get agentFormBasics;
+
+  /// No description provided for @agentFormDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get agentFormDescription;
+
+  /// No description provided for @agentFormDescriptionPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Briefly describe what this agent does…'**
+  String get agentFormDescriptionPlaceholder;
+
+  /// No description provided for @agentFormInstructions.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom instructions'**
+  String get agentFormInstructions;
+
+  /// No description provided for @agentFormInstructionsPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'How to respond, what to avoid, how to handle certain cases…'**
+  String get agentFormInstructionsPlaceholder;
+
+  /// No description provided for @agentFormInstructionsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'These instructions guide the agent’s behavior in conversations.'**
+  String get agentFormInstructionsHint;
+
+  /// No description provided for @agentFormAdvanced.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced settings'**
+  String get agentFormAdvanced;
+
+  /// No description provided for @agentFormAdvancedHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional — sensible defaults apply.'**
+  String get agentFormAdvancedHint;
+
+  /// No description provided for @agentFormBehavior.
+  ///
+  /// In en, this message translates to:
+  /// **'Behavior'**
+  String get agentFormBehavior;
+
+  /// No description provided for @agentFormBehaviorSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Closing · Human handoff'**
+  String get agentFormBehaviorSummary;
+
+  /// No description provided for @agentFormClosing.
+  ///
+  /// In en, this message translates to:
+  /// **'Conversation closing'**
+  String get agentFormClosing;
+
+  /// No description provided for @agentFormClosingPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Examples:\n• After an order: “Thank you! Your order is on its way.”\n• Customer says bye: “Thanks for chatting, come back anytime!”\n• Angry customer: “Sorry — let me get a human to help you.”'**
+  String get agentFormClosingPlaceholder;
+
+  /// No description provided for @agentFormClosingHint.
+  ///
+  /// In en, this message translates to:
+  /// **'When and how the AI closes conversations. If empty, it uses sensible defaults (thanks after an order, answers goodbyes).'**
+  String get agentFormClosingHint;
+
+  /// No description provided for @agentFormHandoff.
+  ///
+  /// In en, this message translates to:
+  /// **'Human intervention rules'**
+  String get agentFormHandoff;
+
+  /// No description provided for @agentFormHandoffPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Examples:\n• Refund or return → stop the AI, notify me\n• Discount request → let me handle it\n• Complaint → transfer the conversation to me'**
+  String get agentFormHandoffPlaceholder;
+
+  /// No description provided for @agentFormHandoffHint.
+  ///
+  /// In en, this message translates to:
+  /// **'When the AI should stop and let a human take over. Normal greetings (slm, cava, hi) are always handled by the AI.'**
+  String get agentFormHandoffHint;
+
+  /// No description provided for @agentFormDisplay.
+  ///
+  /// In en, this message translates to:
+  /// **'Product display'**
+  String get agentFormDisplay;
+
+  /// No description provided for @agentFormDisplayDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'Default style'**
+  String get agentFormDisplayDefault;
+
+  /// No description provided for @agentFormDisplayCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom'**
+  String get agentFormDisplayCustom;
+
+  /// No description provided for @agentFormDisplayHint.
+  ///
+  /// In en, this message translates to:
+  /// **'How the AI presents products. Tap a tag to insert it — the AI fills in real product data.'**
+  String get agentFormDisplayHint;
+
+  /// No description provided for @agentFormTemplate.
+  ///
+  /// In en, this message translates to:
+  /// **'Template'**
+  String get agentFormTemplate;
+
+  /// No description provided for @agentFormTemplatePlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the tags above or type here…'**
+  String get agentFormTemplatePlaceholder;
+
+  /// No description provided for @agentFormTagCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Product card'**
+  String get agentFormTagCard;
+
+  /// No description provided for @agentFormTagName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get agentFormTagName;
+
+  /// No description provided for @agentFormTagPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Price (DA)'**
+  String get agentFormTagPrice;
+
+  /// No description provided for @agentFormTagDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get agentFormTagDescription;
+
+  /// No description provided for @agentFormTagStock.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock qty'**
+  String get agentFormTagStock;
+
+  /// No description provided for @agentFormTagNewLine.
+  ///
+  /// In en, this message translates to:
+  /// **'↵ New line'**
+  String get agentFormTagNewLine;
+
+  /// No description provided for @agentFormPreview.
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get agentFormPreview;
+
+  /// No description provided for @agentFormPreviewLive.
+  ///
+  /// In en, this message translates to:
+  /// **'Live preview'**
+  String get agentFormPreviewLive;
+
+  /// No description provided for @agentFormPreviewCustomer.
+  ///
+  /// In en, this message translates to:
+  /// **'Show me your products'**
+  String get agentFormPreviewCustomer;
+
+  /// No description provided for @agentFormPreviewDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'Here’s what we have!\n[PRODUCT_CARD]\nWould you like to order?'**
+  String get agentFormPreviewDefault;
+
+  /// No description provided for @agentFormPreviewSampleName.
+  ///
+  /// In en, this message translates to:
+  /// **'Sample product'**
+  String get agentFormPreviewSampleName;
+
+  /// No description provided for @agentFormPreviewSampleDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'A great product'**
+  String get agentFormPreviewSampleDescription;
+
+  /// No description provided for @agentFormModel.
+  ///
+  /// In en, this message translates to:
+  /// **'AI model'**
+  String get agentFormModel;
+
+  /// No description provided for @agentFormModelSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'{model} · {temperature} · {tokens} tokens'**
+  String agentFormModelSummary(String model, String temperature, int tokens);
+
+  /// No description provided for @agentFormModelPicker.
+  ///
+  /// In en, this message translates to:
+  /// **'Model'**
+  String get agentFormModelPicker;
+
+  /// The web's costPer1000Label. usd arrives with its dollar sign.
+  ///
+  /// In en, this message translates to:
+  /// **'≈ {usd} / 1000 msgs'**
+  String agentFormModelCost(String usd);
+
+  /// No description provided for @agentFormModelsLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading available models…'**
+  String get agentFormModelsLoading;
+
+  /// No description provided for @agentFormModelsUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'AI models are temporarily unavailable. Please try again later.'**
+  String get agentFormModelsUnavailable;
+
+  /// No description provided for @agentFormTraitBestQuality.
+  ///
+  /// In en, this message translates to:
+  /// **'Best quality'**
+  String get agentFormTraitBestQuality;
+
+  /// No description provided for @agentFormTraitFastAffordable.
+  ///
+  /// In en, this message translates to:
+  /// **'Fast & affordable'**
+  String get agentFormTraitFastAffordable;
+
+  /// No description provided for @agentFormTraitLongContext128k.
+  ///
+  /// In en, this message translates to:
+  /// **'128k context'**
+  String get agentFormTraitLongContext128k;
+
+  /// No description provided for @agentFormTraitLegacyFast.
+  ///
+  /// In en, this message translates to:
+  /// **'Legacy, fast'**
+  String get agentFormTraitLegacyFast;
+
+  /// No description provided for @agentFormTraitBestBalanced.
+  ///
+  /// In en, this message translates to:
+  /// **'Best balanced'**
+  String get agentFormTraitBestBalanced;
+
+  /// No description provided for @agentFormTraitFastCheap.
+  ///
+  /// In en, this message translates to:
+  /// **'Fast & cheap'**
+  String get agentFormTraitFastCheap;
+
+  /// No description provided for @agentFormTraitMostCapable.
+  ///
+  /// In en, this message translates to:
+  /// **'Most capable'**
+  String get agentFormTraitMostCapable;
+
+  /// No description provided for @agentFormTraitLatestFast.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest, fast'**
+  String get agentFormTraitLatestFast;
+
+  /// No description provided for @agentFormTraitLongContext1m.
+  ///
+  /// In en, this message translates to:
+  /// **'1M context'**
+  String get agentFormTraitLongContext1m;
+
+  /// No description provided for @agentFormTraitBestOpenSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Best open-source'**
+  String get agentFormTraitBestOpenSource;
+
+  /// No description provided for @agentFormTraitUltraFast.
+  ///
+  /// In en, this message translates to:
+  /// **'Ultra fast'**
+  String get agentFormTraitUltraFast;
+
+  /// No description provided for @agentFormTraitMixtureOfExperts.
+  ///
+  /// In en, this message translates to:
+  /// **'MoE, 32k context'**
+  String get agentFormTraitMixtureOfExperts;
+
+  /// No description provided for @agentFormTraitReasoning.
+  ///
+  /// In en, this message translates to:
+  /// **'Reasoning model'**
+  String get agentFormTraitReasoning;
+
+  /// No description provided for @agentFormTemperature.
+  ///
+  /// In en, this message translates to:
+  /// **'Temperature'**
+  String get agentFormTemperature;
+
+  /// No description provided for @agentFormPrecise.
+  ///
+  /// In en, this message translates to:
+  /// **'Precise'**
+  String get agentFormPrecise;
+
+  /// No description provided for @agentFormCreative.
+  ///
+  /// In en, this message translates to:
+  /// **'Creative'**
+  String get agentFormCreative;
+
+  /// No description provided for @agentFormMaxTokens.
+  ///
+  /// In en, this message translates to:
+  /// **'Max tokens'**
+  String get agentFormMaxTokens;
+
+  /// No description provided for @agentFormMaxTokensHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum response length · 100 – 4096'**
+  String get agentFormMaxTokensHint;
+
+  /// No description provided for @agentFormImages.
+  ///
+  /// In en, this message translates to:
+  /// **'Image recognition'**
+  String get agentFormImages;
+
+  /// No description provided for @agentFormImagesHint.
+  ///
+  /// In en, this message translates to:
+  /// **'The AI sees customer photos and compares them with your products. 5 credits per image (vs 1 for text).'**
+  String get agentFormImagesHint;
+
+  /// No description provided for @agentFormVoice.
+  ///
+  /// In en, this message translates to:
+  /// **'Voice notes'**
+  String get agentFormVoice;
+
+  /// No description provided for @agentFormVoiceHint.
+  ///
+  /// In en, this message translates to:
+  /// **'The AI transcribes voice notes (AR, FR, EN, Darja). 3 credits per note. When off, the agent asks for a text instead.'**
+  String get agentFormVoiceHint;
+
+  /// No description provided for @agentFormDelay.
+  ///
+  /// In en, this message translates to:
+  /// **'Response delay'**
+  String get agentFormDelay;
+
+  /// No description provided for @agentFormDelayValue.
+  ///
+  /// In en, this message translates to:
+  /// **'{seconds} s'**
+  String agentFormDelayValue(int seconds);
+
+  /// No description provided for @agentFormDelayMax.
+  ///
+  /// In en, this message translates to:
+  /// **'10 s'**
+  String get agentFormDelayMax;
+
+  /// No description provided for @agentFormDelayHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Waits for more messages before replying — customers often send several short ones, and this combines them.'**
+  String get agentFormDelayHint;
+
+  /// No description provided for @agentFormPages.
+  ///
+  /// In en, this message translates to:
+  /// **'Connected pages'**
+  String get agentFormPages;
+
+  /// No description provided for @agentFormPagesHint.
+  ///
+  /// In en, this message translates to:
+  /// **'The pages this agent answers on. Each page can only have one agent.'**
+  String get agentFormPagesHint;
+
+  /// No description provided for @agentFormPagesSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'{selected} of {total} selected'**
+  String agentFormPagesSummary(int selected, int total);
+
+  /// No description provided for @agentFormPagesCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{selected} of {total}'**
+  String agentFormPagesCount(int selected, int total);
+
+  /// No description provided for @agentFormPagesNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No pages connected'**
+  String get agentFormPagesNone;
+
+  /// No description provided for @agentFormPagesEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No pages connected yet. Connect a Facebook or Instagram page first, then link it to this agent.'**
+  String get agentFormPagesEmpty;
+
+  /// No description provided for @agentFormPageTaken.
+  ///
+  /// In en, this message translates to:
+  /// **'Already on {agent}'**
+  String agentFormPageTaken(String agent);
+
+  /// No description provided for @agentFormPageActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get agentFormPageActive;
+
+  /// No description provided for @agentFormPageInactive.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get agentFormPageInactive;
+
+  /// No description provided for @agentFormSelectAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Select all'**
+  String get agentFormSelectAll;
+
+  /// No description provided for @agentFormClear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get agentFormClear;
+
+  /// No description provided for @agentFormProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Products'**
+  String get agentFormProducts;
+
+  /// No description provided for @agentFormSellAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Sell all products'**
+  String get agentFormSellAll;
+
+  /// No description provided for @agentFormSellAllHint.
+  ///
+  /// In en, this message translates to:
+  /// **'The agent knows your entire catalog. Turn off to choose.'**
+  String get agentFormSellAllHint;
+
+  /// No description provided for @agentFormProductsAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All products'**
+  String get agentFormProductsAll;
+
+  /// No description provided for @agentFormProductsChosen.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No product chosen} =1{1 product chosen} other{{count} products chosen}}'**
+  String agentFormProductsChosen(int count);
+
+  /// No description provided for @agentFormProductSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get agentFormProductSearch;
+
+  /// No description provided for @agentFormProductSearchPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Search products…'**
+  String get agentFormProductSearchPlaceholder;
+
+  /// No description provided for @agentFormProductsNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No products available'**
+  String get agentFormProductsNone;
+
+  /// No description provided for @agentFormProductsNoMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'No products match your search'**
+  String get agentFormProductsNoMatch;
+
+  /// 15c — the agent form in edit mode. The web says Edit Agent / Update your AI agent configuration; the rest is ours, unapproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit agent'**
+  String get agentFormEditTitle;
+
+  /// No description provided for @agentFormEditSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Update your AI agent configuration. Changes apply to the next messages.'**
+  String get agentFormEditSubtitle;
+
+  /// No description provided for @agentFormEditAdvancedHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a section to change it.'**
+  String get agentFormEditAdvancedHint;
+
+  /// No description provided for @agentFormActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get agentFormActive;
+
+  /// No description provided for @agentFormActiveHint.
+  ///
+  /// In en, this message translates to:
+  /// **'The agent responds to messages on its pages while active.'**
+  String get agentFormActiveHint;
+
+  /// No description provided for @agentFormSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get agentFormSave;
+
+  /// No description provided for @agentFormSavedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Agent updated'**
+  String get agentFormSavedToast;
+
+  /// No description provided for @agentFormSavedMergedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Agent updated — instructions added on the web were kept'**
+  String get agentFormSavedMergedToast;
+
+  /// No description provided for @agentFormLeaveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave without saving?'**
+  String get agentFormLeaveTitle;
+
+  /// No description provided for @agentFormLeaveBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your changes to {name} will be lost.'**
+  String agentFormLeaveBody(String name);
+
+  /// Leave sheet body when backing out of a dirty Add product form. Ours, unapproved.
+  ///
+  /// In en, this message translates to:
+  /// **'The product you started will be lost.'**
+  String get productFormLeaveBody;
+
+  /// Leave sheet body when backing out of a conversation with text in the composer. Ours, unapproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Your unsent reply will be lost.'**
+  String get conversationLeaveBody;
+
+  /// Leave sheet body when backing out of agent details with unsaved instructions or a typed resolve instruction. Ours, unapproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Your changes to the instructions will be lost.'**
+  String get agentDetailsLeaveBody;
+
+  /// Leave sheet body when closing the generate-agent sheet on its preview. Ours, unapproved.
+  ///
+  /// In en, this message translates to:
+  /// **'The generated agent will be discarded.'**
+  String get agentGenerateLeaveBody;
+
+  /// Leave sheet body when backing out of the app from tutorial step T4 with typed values. Ours, unapproved.
+  ///
+  /// In en, this message translates to:
+  /// **'The agent you started will be lost.'**
+  String get tutorialAgentLeaveBody;
+
+  /// Leave sheet title before abandoning the Chargily checkout web view. Ours, unapproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave the payment page?'**
+  String get checkoutLeaveTitle;
+
+  /// Leave sheet body before abandoning the Chargily checkout web view. Ours, unapproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Your payment is not finished.'**
+  String get checkoutLeaveBody;
+
+  /// No description provided for @agentFormKeepEditing.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep editing'**
+  String get agentFormKeepEditing;
+
+  /// No description provided for @agentFormLeave.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave without saving'**
+  String get agentFormLeave;
+
+  /// No description provided for @agentsDetailsEditAgent.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit agent'**
+  String get agentsDetailsEditAgent;
+
+  /// 12 / 13 — the pages screen. pages.* and pageCard.* are the web's i18n verbatim; empty states, relative times and the disconnect sheet are ours (the web hardcodes English there), unapproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Connected channels'**
+  String get pagesEyebrow;
+
+  /// No description provided for @pagesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pages & inboxes'**
+  String get pagesTitle;
+
+  /// No description provided for @pagesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Each connected page has its own inbox, stock and tailored AI agent.'**
+  String get pagesSubtitle;
+
+  /// No description provided for @pagesStatTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total pages'**
+  String get pagesStatTotal;
+
+  /// No description provided for @pagesStatPlanLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'Plan limit'**
+  String get pagesStatPlanLimit;
+
+  /// No description provided for @pagesFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All Platforms'**
+  String get pagesFilterAll;
+
+  /// No description provided for @pagesEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No pages connected'**
+  String get pagesEmptyTitle;
+
+  /// No description provided for @pagesEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect your pages to start managing them with AI.'**
+  String get pagesEmptyBody;
+
+  /// No description provided for @pagesEmptyPlatformTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No {platform} pages'**
+  String pagesEmptyPlatformTitle(String platform);
+
+  /// No description provided for @pagesEmptyPlatformBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect your {platform} pages to get started.'**
+  String pagesEmptyPlatformBody(String platform);
+
+  /// No description provided for @pagesDisconnectTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Disconnect page?'**
+  String get pagesDisconnectTitle;
+
+  /// No description provided for @pagesDisconnectBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You won’t receive messages from {name} anymore and the AI agent will stop replying there.'**
+  String pagesDisconnectBody(String name);
+
+  /// No description provided for @pagesDisconnectConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Disconnect'**
+  String get pagesDisconnectConfirm;
+
+  /// No description provided for @pagesDisconnectedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Page disconnected'**
+  String get pagesDisconnectedToast;
+
+  /// No description provided for @pageCardAiOn.
+  ///
+  /// In en, this message translates to:
+  /// **'AI on'**
+  String get pageCardAiOn;
+
+  /// No description provided for @pageCardAiOff.
+  ///
+  /// In en, this message translates to:
+  /// **'AI off'**
+  String get pageCardAiOff;
+
+  /// No description provided for @pageCardStatConvos.
+  ///
+  /// In en, this message translates to:
+  /// **'Convos'**
+  String get pageCardStatConvos;
+
+  /// No description provided for @pageCardStatMsgs7d.
+  ///
+  /// In en, this message translates to:
+  /// **'Msgs 7d'**
+  String get pageCardStatMsgs7d;
+
+  /// No description provided for @pageCardStatUnread.
+  ///
+  /// In en, this message translates to:
+  /// **'Unread'**
+  String get pageCardStatUnread;
+
+  /// No description provided for @pageCardStatStock.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock'**
+  String get pageCardStatStock;
+
+  /// No description provided for @pageCardStatActive.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} active'**
+  String pageCardStatActive(int n);
+
+  /// No description provided for @pageCardStatIn.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} in'**
+  String pageCardStatIn(int n);
+
+  /// No description provided for @pageCardStatNeedsReply.
+  ///
+  /// In en, this message translates to:
+  /// **'needs reply'**
+  String get pageCardStatNeedsReply;
+
+  /// No description provided for @pageCardStatProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'products'**
+  String get pageCardStatProducts;
+
+  /// No description provided for @pageCardAgentReady.
+  ///
+  /// In en, this message translates to:
+  /// **'AI agent ready'**
+  String get pageCardAgentReady;
+
+  /// No description provided for @pageCardAgentTailored.
+  ///
+  /// In en, this message translates to:
+  /// **'Tailored to this page’s inbox.'**
+  String get pageCardAgentTailored;
+
+  /// No description provided for @pageCardAgentNotReady.
+  ///
+  /// In en, this message translates to:
+  /// **'No tailored agent yet'**
+  String get pageCardAgentNotReady;
+
+  /// No description provided for @pageCardAgentNotReadyHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Generate one from this page’s recent conversations.'**
+  String get pageCardAgentNotReadyHint;
+
+  /// No description provided for @pageCardAgentGenerate.
+  ///
+  /// In en, this message translates to:
+  /// **'Generate'**
+  String get pageCardAgentGenerate;
+
+  /// No description provided for @pageCardAgentRegenerate.
+  ///
+  /// In en, this message translates to:
+  /// **'Regenerate'**
+  String get pageCardAgentRegenerate;
+
+  /// No description provided for @pageCardActionInbox.
+  ///
+  /// In en, this message translates to:
+  /// **'Inbox'**
+  String get pageCardActionInbox;
+
+  /// No description provided for @pageCardActionStock.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock'**
+  String get pageCardActionStock;
+
+  /// No description provided for @pageCardActionConfigure.
+  ///
+  /// In en, this message translates to:
+  /// **'Configure'**
+  String get pageCardActionConfigure;
+
+  /// No description provided for @pageCardActionDisconnect.
+  ///
+  /// In en, this message translates to:
+  /// **'Disconnect'**
+  String get pageCardActionDisconnect;
+
+  /// No description provided for @pageCardNoActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'No activity yet'**
+  String get pageCardNoActivity;
+
+  /// No description provided for @pageCardNow.
+  ///
+  /// In en, this message translates to:
+  /// **'just now'**
+  String get pageCardNow;
+
+  /// No description provided for @pageCardMinutesAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} min ago'**
+  String pageCardMinutesAgo(int n);
+
+  /// No description provided for @pageCardHoursAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} h ago'**
+  String pageCardHoursAgo(int n);
+
+  /// No description provided for @pageCardDaysAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} d ago'**
+  String pageCardDaysAgo(int n);
+
+  /// The web's agentGen.* verbatim — its GenerateAgentModal, as a sheet.
+  ///
+  /// In en, this message translates to:
+  /// **'Generate AI agent from inbox'**
+  String get agentGenTitle;
+
+  /// No description provided for @agentGenSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'We’ll read the recent conversations on {pageName} and draft a tailored agent.'**
+  String agentGenSubtitle(String pageName);
+
+  /// No description provided for @agentGenWhatTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What this does'**
+  String get agentGenWhatTitle;
+
+  /// No description provided for @agentGenWhat1.
+  ///
+  /// In en, this message translates to:
+  /// **'Reads up to 25 recent conversations on this page (we don’t store any new copy)'**
+  String get agentGenWhat1;
+
+  /// No description provided for @agentGenWhat2.
+  ///
+  /// In en, this message translates to:
+  /// **'Detects what you sell, the languages your customers use, and the most common questions'**
+  String get agentGenWhat2;
+
+  /// No description provided for @agentGenWhat3.
+  ///
+  /// In en, this message translates to:
+  /// **'Drafts a personality, tone, response length, and custom instructions tailored to your business'**
+  String get agentGenWhat3;
+
+  /// No description provided for @agentGenWhat4.
+  ///
+  /// In en, this message translates to:
+  /// **'You preview, edit, and apply — nothing is changed until you tap Apply'**
+  String get agentGenWhat4;
+
+  /// No description provided for @agentGenStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Read inbox & generate'**
+  String get agentGenStart;
+
+  /// No description provided for @agentGenPhaseReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Reading recent conversations…'**
+  String get agentGenPhaseReading;
+
+  /// No description provided for @agentGenPhaseAnalyzing.
+  ///
+  /// In en, this message translates to:
+  /// **'Understanding context — products, language, tone…'**
+  String get agentGenPhaseAnalyzing;
+
+  /// No description provided for @agentGenPhaseDrafting.
+  ///
+  /// In en, this message translates to:
+  /// **'Drafting your tailored AI agent…'**
+  String get agentGenPhaseDrafting;
+
+  /// No description provided for @agentGenPhaseSubhint.
+  ///
+  /// In en, this message translates to:
+  /// **'This usually takes 10–30 seconds.'**
+  String get agentGenPhaseSubhint;
+
+  /// No description provided for @agentGenStepRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Read'**
+  String get agentGenStepRead;
+
+  /// No description provided for @agentGenStepAnalyze.
+  ///
+  /// In en, this message translates to:
+  /// **'Analyze'**
+  String get agentGenStepAnalyze;
+
+  /// No description provided for @agentGenStepDraft.
+  ///
+  /// In en, this message translates to:
+  /// **'Draft'**
+  String get agentGenStepDraft;
+
+  /// No description provided for @agentGenSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Business summary'**
+  String get agentGenSummary;
+
+  /// No description provided for @agentGenSampled.
+  ///
+  /// In en, this message translates to:
+  /// **'{conversations} conversations · {messages} messages'**
+  String agentGenSampled(int conversations, int messages);
+
+  /// No description provided for @agentGenLanguages.
+  ///
+  /// In en, this message translates to:
+  /// **'Languages'**
+  String get agentGenLanguages;
+
+  /// No description provided for @agentGenTopQuestions.
+  ///
+  /// In en, this message translates to:
+  /// **'Top questions'**
+  String get agentGenTopQuestions;
+
+  /// No description provided for @agentGenPersonality.
+  ///
+  /// In en, this message translates to:
+  /// **'Personality'**
+  String get agentGenPersonality;
+
+  /// No description provided for @agentGenTone.
+  ///
+  /// In en, this message translates to:
+  /// **'Tone'**
+  String get agentGenTone;
+
+  /// No description provided for @agentGenLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Length'**
+  String get agentGenLength;
+
+  /// No description provided for @agentGenInstructions.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom instructions'**
+  String get agentGenInstructions;
+
+  /// No description provided for @agentGenEditHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit anything before applying. These instructions are saved on this page’s AI settings.'**
+  String get agentGenEditHint;
+
+  /// No description provided for @agentGenChars.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} chars'**
+  String agentGenChars(int n);
+
+  /// No description provided for @agentGenDiscard.
+  ///
+  /// In en, this message translates to:
+  /// **'Discard'**
+  String get agentGenDiscard;
+
+  /// No description provided for @agentGenApply.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply to {pageName}'**
+  String agentGenApply(String pageName);
+
+  /// No description provided for @agentGenApplying.
+  ///
+  /// In en, this message translates to:
+  /// **'Applying settings…'**
+  String get agentGenApplying;
+
+  /// No description provided for @agentGenCreated.
+  ///
+  /// In en, this message translates to:
+  /// **'AI agent created and linked to {pageName}'**
+  String agentGenCreated(String pageName);
+
+  /// No description provided for @agentGenUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'AI agent updated for {pageName}'**
+  String agentGenUpdated(String pageName);
+
+  /// No description provided for @agentGenApplyFail.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not apply settings'**
+  String get agentGenApplyFail;
+
+  /// No description provided for @agentGenToneBalanced.
+  ///
+  /// In en, this message translates to:
+  /// **'Balanced'**
+  String get agentGenToneBalanced;
+
+  /// No description provided for @agentGenToneFormal.
+  ///
+  /// In en, this message translates to:
+  /// **'Formal'**
+  String get agentGenToneFormal;
+
+  /// No description provided for @agentGenToneCasual.
+  ///
+  /// In en, this message translates to:
+  /// **'Casual'**
+  String get agentGenToneCasual;
+
+  /// No description provided for @agentGenToneEnthusiastic.
+  ///
+  /// In en, this message translates to:
+  /// **'Enthusiastic'**
+  String get agentGenToneEnthusiastic;
+
+  /// No description provided for @agentGenLengthShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Short'**
+  String get agentGenLengthShort;
+
+  /// No description provided for @agentGenLengthMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get agentGenLengthMedium;
+
+  /// No description provided for @agentGenLengthDetailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Detailed'**
+  String get agentGenLengthDetailed;
+
+  /// No description provided for @agentsNewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New agent'**
+  String get agentsNewTitle;
+
+  /// No description provided for @commonYes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get commonYes;
+
+  /// No description provided for @commonNo.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get commonNo;
+
+  /// No description provided for @menuCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'Categories'**
+  String get menuCategories;
+
+  /// No description provided for @categoriesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Categories'**
+  String get categoriesTitle;
+
+  /// No description provided for @categoriesCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 category} other{{count} categories}}'**
+  String categoriesCount(int count);
+
+  /// No description provided for @categoriesSearchPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Search categories...'**
+  String get categoriesSearchPlaceholder;
+
+  /// No description provided for @categoriesFilters.
+  ///
+  /// In en, this message translates to:
+  /// **'Filters'**
+  String get categoriesFilters;
+
+  /// The Filters chip once filters are applied.
+  ///
+  /// In en, this message translates to:
+  /// **'Filters · {count}'**
+  String categoriesFiltersActive(int count);
+
+  /// No description provided for @categoriesSection.
+  ///
+  /// In en, this message translates to:
+  /// **'All categories'**
+  String get categoriesSection;
+
+  /// No description provided for @categoriesProductCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{0 products} =1{1 product} other{{count} products}}'**
+  String categoriesProductCount(int count);
+
+  /// No description provided for @categoriesEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No Categories'**
+  String get categoriesEmptyTitle;
+
+  /// No description provided for @categoriesEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Create categories to organize your products'**
+  String get categoriesEmptyBody;
+
+  /// No description provided for @categoriesNoMatchBody.
+  ///
+  /// In en, this message translates to:
+  /// **'No categories match your search or filters.'**
+  String get categoriesNoMatchBody;
+
+  /// No description provided for @categoriesFilterMin.
+  ///
+  /// In en, this message translates to:
+  /// **'Products · min'**
+  String get categoriesFilterMin;
+
+  /// No description provided for @categoriesFilterMax.
+  ///
+  /// In en, this message translates to:
+  /// **'Products · max'**
+  String get categoriesFilterMax;
+
+  /// No description provided for @categoriesFilterRangeInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Must be at least the minimum'**
+  String get categoriesFilterRangeInvalid;
+
+  /// No description provided for @categoriesFilterHasDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Has description'**
+  String get categoriesFilterHasDescription;
+
+  /// No description provided for @categoriesFilterColorsSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} selected'**
+  String categoriesFilterColorsSelected(int count);
+
+  /// No description provided for @categoriesFilterApply.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply filters'**
+  String get categoriesFilterApply;
+
+  /// No description provided for @categoriesFilterClear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear all'**
+  String get categoriesFilterClear;
+
+  /// No description provided for @categoryAddTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Category'**
+  String get categoryAddTitle;
+
+  /// No description provided for @categoryEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Category'**
+  String get categoryEditTitle;
+
+  /// No description provided for @categoryName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get categoryName;
+
+  /// No description provided for @categoryNamePlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., Electronics'**
+  String get categoryNamePlaceholder;
+
+  /// No description provided for @categoryDescriptionPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional description'**
+  String get categoryDescriptionPlaceholder;
+
+  /// No description provided for @categoryColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Color'**
+  String get categoryColor;
+
+  /// No description provided for @categoryColorCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom colour'**
+  String get categoryColorCustom;
+
+  /// No description provided for @categoryColorHex.
+  ///
+  /// In en, this message translates to:
+  /// **'Hex code'**
+  String get categoryColorHex;
+
+  /// No description provided for @categoryColorInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Six hex digits, e.g. EC4899'**
+  String get categoryColorInvalid;
+
+  /// No description provided for @categoryColorApply.
+  ///
+  /// In en, this message translates to:
+  /// **'Use this colour'**
+  String get categoryColorApply;
+
+  /// No description provided for @categoryCreate.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Category'**
+  String get categoryCreate;
+
+  /// No description provided for @categoryUpdate.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Category'**
+  String get categoryUpdate;
+
+  /// No description provided for @categoryNameTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'At least 2 characters'**
+  String get categoryNameTooShort;
+
+  /// No description provided for @categoryNameTaken.
+  ///
+  /// In en, this message translates to:
+  /// **'You already have a category with this name'**
+  String get categoryNameTaken;
+
+  /// No description provided for @categoryAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'Category added'**
+  String get categoryAdded;
+
+  /// No description provided for @categoryUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Category updated'**
+  String get categoryUpdated;
+
+  /// No description provided for @categoryDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Category deleted'**
+  String get categoryDeleted;
+
+  /// No description provided for @categoryDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Category'**
+  String get categoryDeleteTitle;
+
+  /// No description provided for @categoryDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete {name}?'**
+  String categoryDeleteBody(String name);
+
+  /// No description provided for @categoryDeleteNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{This category has 1 product.} other{This category has {count} products.}}'**
+  String categoryDeleteNotice(int count);
+
+  /// No description provided for @categoryDeleteNoticeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'They will become uncategorized.'**
+  String get categoryDeleteNoticeBody;
+
+  /// No description provided for @menuClients.
+  ///
+  /// In en, this message translates to:
+  /// **'Clients'**
+  String get menuClients;
+
+  /// No description provided for @clientsEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'SALES'**
+  String get clientsEyebrow;
+
+  /// No description provided for @clientsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Clients'**
+  String get clientsTitle;
+
+  /// No description provided for @clientsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Customers saved from AI conversations and confirmed orders'**
+  String get clientsSubtitle;
+
+  /// No description provided for @clientsStatTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Clients'**
+  String get clientsStatTotal;
+
+  /// No description provided for @clientsStatActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get clientsStatActive;
+
+  /// No description provided for @clientsStatWithOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'With Orders'**
+  String get clientsStatWithOrders;
+
+  /// No description provided for @clientsStatTotalSpent.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Spent'**
+  String get clientsStatTotalSpent;
+
+  /// No description provided for @clientsSearchName.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by name or email...'**
+  String get clientsSearchName;
+
+  /// No description provided for @clientsSearchPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by phone...'**
+  String get clientsSearchPhone;
+
+  /// No description provided for @clientsSection.
+  ///
+  /// In en, this message translates to:
+  /// **'All clients'**
+  String get clientsSection;
+
+  /// No description provided for @clientsSourceAi.
+  ///
+  /// In en, this message translates to:
+  /// **'AI Chat'**
+  String get clientsSourceAi;
+
+  /// No description provided for @clientsSourceManual.
+  ///
+  /// In en, this message translates to:
+  /// **'Manual'**
+  String get clientsSourceManual;
+
+  /// No description provided for @clientsOrderCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{0 orders} =1{1 order} other{{count} orders}}'**
+  String clientsOrderCount(int count);
+
+  /// No description provided for @clientsConversationCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 conversation} other{{count} conversations}}'**
+  String clientsConversationCount(int count);
+
+  /// No description provided for @clientsEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No clients'**
+  String get clientsEmptyTitle;
+
+  /// No description provided for @clientsEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Clients appear here automatically when the AI chatbot confirms an order, or add them manually.'**
+  String get clientsEmptyBody;
+
+  /// No description provided for @clientsNoMatchBody.
+  ///
+  /// In en, this message translates to:
+  /// **'No clients match your search or filters.'**
+  String get clientsNoMatchBody;
+
+  /// No description provided for @clientsFilterStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get clientsFilterStatus;
+
+  /// No description provided for @clientsFilterActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get clientsFilterActive;
+
+  /// No description provided for @clientsFilterInactive.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get clientsFilterInactive;
+
+  /// No description provided for @clientsFilterSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Source'**
+  String get clientsFilterSource;
+
+  /// No description provided for @clientsFilterOrdersMin.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders · min'**
+  String get clientsFilterOrdersMin;
+
+  /// No description provided for @clientsFilterOrdersMax.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders · max'**
+  String get clientsFilterOrdersMax;
+
+  /// No description provided for @clientsFilterSpentMin.
+  ///
+  /// In en, this message translates to:
+  /// **'Spent (DA) · min'**
+  String get clientsFilterSpentMin;
+
+  /// No description provided for @clientsFilterSpentMax.
+  ///
+  /// In en, this message translates to:
+  /// **'Spent (DA) · max'**
+  String get clientsFilterSpentMax;
+
+  /// No description provided for @dateFrom.
+  ///
+  /// In en, this message translates to:
+  /// **'From date'**
+  String get dateFrom;
+
+  /// No description provided for @dateTo.
+  ///
+  /// In en, this message translates to:
+  /// **'To date'**
+  String get dateTo;
+
+  /// No description provided for @dateClear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear date'**
+  String get dateClear;
+
+  /// No description provided for @datePickerToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get datePickerToday;
+
+  /// No description provided for @clientAddTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Client'**
+  String get clientAddTitle;
+
+  /// No description provided for @clientEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Client'**
+  String get clientEditTitle;
+
+  /// No description provided for @clientCreate.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Client'**
+  String get clientCreate;
+
+  /// No description provided for @clientUpdate.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Client'**
+  String get clientUpdate;
+
+  /// No description provided for @clientNamePlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Client name'**
+  String get clientNamePlaceholder;
+
+  /// No description provided for @clientPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get clientPhone;
+
+  /// No description provided for @clientAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get clientAddress;
+
+  /// No description provided for @clientAddressPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Client address'**
+  String get clientAddressPlaceholder;
+
+  /// No description provided for @clientNotes.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get clientNotes;
+
+  /// No description provided for @clientNotesPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional notes'**
+  String get clientNotesPlaceholder;
+
+  /// No description provided for @clientErrNoLetters.
+  ///
+  /// In en, this message translates to:
+  /// **'Must contain at least one letter or number'**
+  String get clientErrNoLetters;
+
+  /// No description provided for @clientErrPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone must be 8-15 digits (e.g. 0555 12 34 56)'**
+  String get clientErrPhone;
+
+  /// No description provided for @clientErrPhoneTaken.
+  ///
+  /// In en, this message translates to:
+  /// **'A client already exists with this phone ({name})'**
+  String clientErrPhoneTaken(String name);
+
+  /// No description provided for @clientAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'Client added'**
+  String get clientAdded;
+
+  /// No description provided for @clientUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Client updated'**
+  String get clientUpdated;
+
+  /// No description provided for @clientDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Client deleted'**
+  String get clientDeleted;
+
+  /// No description provided for @clientDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Client'**
+  String get clientDeleteTitle;
+
+  /// No description provided for @clientDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete {name}?'**
+  String clientDeleteBody(String name);
+
+  /// No description provided for @clientDeleteNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{This client has 1 order linked.} other{This client has {count} orders linked.}}'**
+  String clientDeleteNotice(int count);
+
+  /// No description provided for @clientDetailEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'CLIENT DETAILS'**
+  String get clientDetailEyebrow;
+
+  /// No description provided for @clientDetailTotalOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Orders'**
+  String get clientDetailTotalOrders;
+
+  /// No description provided for @clientDetailLastOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Order'**
+  String get clientDetailLastOrder;
+
+  /// No description provided for @clientDetailMetrics.
+  ///
+  /// In en, this message translates to:
+  /// **'AI conversation metrics'**
+  String get clientDetailMetrics;
+
+  /// No description provided for @clientDetailConversations.
+  ///
+  /// In en, this message translates to:
+  /// **'Conversations'**
+  String get clientDetailConversations;
+
+  /// No description provided for @clientDetailMessages.
+  ///
+  /// In en, this message translates to:
+  /// **'Messages'**
+  String get clientDetailMessages;
+
+  /// No description provided for @clientDetailAiResponses.
+  ///
+  /// In en, this message translates to:
+  /// **'AI responses'**
+  String get clientDetailAiResponses;
+
+  /// No description provided for @clientDetailClientMessages.
+  ///
+  /// In en, this message translates to:
+  /// **'Client messages'**
+  String get clientDetailClientMessages;
+
+  /// No description provided for @clientDetailLastMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Last message'**
+  String get clientDetailLastMessage;
+
+  /// No description provided for @clientDetailHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Conversation history'**
+  String get clientDetailHistory;
+
+  /// No description provided for @clientDetailMsgs.
+  ///
+  /// In en, this message translates to:
+  /// **'MSGS'**
+  String get clientDetailMsgs;
+
+  /// No description provided for @clientDetailFromAi.
+  ///
+  /// In en, this message translates to:
+  /// **'AI:'**
+  String get clientDetailFromAi;
+
+  /// No description provided for @clientDetailFromClient.
+  ///
+  /// In en, this message translates to:
+  /// **'Client:'**
+  String get clientDetailFromClient;
+
+  /// No description provided for @clientViewOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'View Orders'**
+  String get clientViewOrders;
+
+  /// No description provided for @clientOrdersSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders are not available on mobile yet'**
+  String get clientOrdersSoon;
+
+  /// No description provided for @menuSuppliers.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppliers'**
+  String get menuSuppliers;
+
+  /// No description provided for @suppliersEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'PURCHASES'**
+  String get suppliersEyebrow;
+
+  /// No description provided for @suppliersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppliers'**
+  String get suppliersTitle;
+
+  /// No description provided for @suppliersCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 supplier} other{{count} suppliers}}'**
+  String suppliersCount(int count);
+
+  /// No description provided for @suppliersStatTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Suppliers'**
+  String get suppliersStatTotal;
+
+  /// No description provided for @suppliersStatWithPurchases.
+  ///
+  /// In en, this message translates to:
+  /// **'With Purchases'**
+  String get suppliersStatWithPurchases;
+
+  /// No description provided for @suppliersSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search suppliers...'**
+  String get suppliersSearch;
+
+  /// No description provided for @suppliersSection.
+  ///
+  /// In en, this message translates to:
+  /// **'All suppliers'**
+  String get suppliersSection;
+
+  /// No description provided for @suppliersPurchaseCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{0 purchases} =1{1 purchase} other{{count} purchases}}'**
+  String suppliersPurchaseCount(int count);
+
+  /// No description provided for @suppliersEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No Suppliers'**
+  String get suppliersEmptyTitle;
+
+  /// No description provided for @suppliersEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Add suppliers to manage your purchases'**
+  String get suppliersEmptyBody;
+
+  /// No description provided for @suppliersNoMatchBody.
+  ///
+  /// In en, this message translates to:
+  /// **'No suppliers match your search or filters.'**
+  String get suppliersNoMatchBody;
+
+  /// No description provided for @suppliersFilterPurchasesMin.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchases · min'**
+  String get suppliersFilterPurchasesMin;
+
+  /// No description provided for @suppliersFilterPurchasesMax.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchases · max'**
+  String get suppliersFilterPurchasesMax;
+
+  /// No description provided for @supplierActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get supplierActive;
+
+  /// No description provided for @supplierInactive.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get supplierInactive;
+
+  /// No description provided for @supplierAddTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Supplier'**
+  String get supplierAddTitle;
+
+  /// No description provided for @supplierEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Supplier'**
+  String get supplierEditTitle;
+
+  /// No description provided for @supplierCreate.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Supplier'**
+  String get supplierCreate;
+
+  /// No description provided for @supplierUpdate.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Supplier'**
+  String get supplierUpdate;
+
+  /// No description provided for @supplierNamePlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Supplier name'**
+  String get supplierNamePlaceholder;
+
+  /// No description provided for @supplierAddressPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Supplier address'**
+  String get supplierAddressPlaceholder;
+
+  /// No description provided for @supplierErrNameTaken.
+  ///
+  /// In en, this message translates to:
+  /// **'You already have a supplier with this name'**
+  String get supplierErrNameTaken;
+
+  /// No description provided for @supplierAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'Supplier added'**
+  String get supplierAdded;
+
+  /// No description provided for @supplierUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Supplier updated'**
+  String get supplierUpdated;
+
+  /// No description provided for @supplierDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Supplier deleted'**
+  String get supplierDeleted;
+
+  /// No description provided for @supplierDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Supplier'**
+  String get supplierDeleteTitle;
+
+  /// No description provided for @supplierDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete {name}?'**
+  String supplierDeleteBody(String name);
+
+  /// No description provided for @supplierDeleteNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{This supplier has 1 purchase linked.} other{This supplier has {count} purchases linked.}}'**
+  String supplierDeleteNotice(int count);
+
+  /// No description provided for @supplierDetailEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'SUPPLIER DETAILS'**
+  String get supplierDetailEyebrow;
+
+  /// No description provided for @supplierDetailPurchases.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchases'**
+  String get supplierDetailPurchases;
+
+  /// No description provided for @supplierDetailMemberSince.
+  ///
+  /// In en, this message translates to:
+  /// **'Member Since'**
+  String get supplierDetailMemberSince;
+
+  /// No description provided for @supplierViewPurchases.
+  ///
+  /// In en, this message translates to:
+  /// **'View Purchases'**
+  String get supplierViewPurchases;
+
+  /// No description provided for @supplierPurchasesSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchases are not available on mobile yet'**
+  String get supplierPurchasesSoon;
+
+  /// No description provided for @supplierNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'This supplier no longer exists.'**
+  String get supplierNotFound;
+
+  /// No description provided for @ordersEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'SALES'**
+  String get ordersEyebrow;
+
+  /// No description provided for @ordersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders'**
+  String get ordersTitle;
+
+  /// No description provided for @ordersCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 order} other{{count} orders}}'**
+  String ordersCount(int count);
+
+  /// No description provided for @ordersStatTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total orders'**
+  String get ordersStatTotal;
+
+  /// No description provided for @ordersStatPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get ordersStatPending;
+
+  /// No description provided for @ordersStatDelivered.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered'**
+  String get ordersStatDelivered;
+
+  /// No description provided for @ordersStatValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Total value'**
+  String get ordersStatValue;
+
+  /// No description provided for @ordersSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by order #, client, phone, product...'**
+  String get ordersSearch;
+
+  /// No description provided for @ordersSection.
+  ///
+  /// In en, this message translates to:
+  /// **'All orders'**
+  String get ordersSection;
+
+  /// No description provided for @ordersSelectAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Select all'**
+  String get ordersSelectAll;
+
+  /// No description provided for @ordersNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New order'**
+  String get ordersNew;
+
+  /// No description provided for @ordersEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No orders yet'**
+  String get ordersEmptyTitle;
+
+  /// No description provided for @ordersEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders appear from AI chatbot confirmations, or create them manually.'**
+  String get ordersEmptyBody;
+
+  /// No description provided for @ordersNoMatchBody.
+  ///
+  /// In en, this message translates to:
+  /// **'No orders match your search or filters.'**
+  String get ordersNoMatchBody;
+
+  /// No description provided for @orderStatusAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get orderStatusAll;
+
+  /// No description provided for @orderStatusPending.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get orderStatusPending;
+
+  /// No description provided for @orderStatusConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirmed'**
+  String get orderStatusConfirmed;
+
+  /// No description provided for @orderStatusPreparing.
+  ///
+  /// In en, this message translates to:
+  /// **'Preparing'**
+  String get orderStatusPreparing;
+
+  /// No description provided for @orderStatusShipped.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipped'**
+  String get orderStatusShipped;
+
+  /// No description provided for @orderStatusDelivered.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered'**
+  String get orderStatusDelivered;
+
+  /// No description provided for @orderStatusCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get orderStatusCancelled;
+
+  /// No description provided for @orderStatusReturned.
+  ///
+  /// In en, this message translates to:
+  /// **'Returned'**
+  String get orderStatusReturned;
+
+  /// No description provided for @orderConfirmNotCalled.
+  ///
+  /// In en, this message translates to:
+  /// **'Not called'**
+  String get orderConfirmNotCalled;
+
+  /// No description provided for @orderConfirmNoAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'No answer'**
+  String get orderConfirmNoAnswer;
+
+  /// No description provided for @orderConfirmConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirmed'**
+  String get orderConfirmConfirmed;
+
+  /// No description provided for @orderConfirmRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get orderConfirmRejected;
+
+  /// No description provided for @orderConfirmWithCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{label} ({count})'**
+  String orderConfirmWithCount(String label, int count);
+
+  /// No description provided for @orderSourceAi.
+  ///
+  /// In en, this message translates to:
+  /// **'AI'**
+  String get orderSourceAi;
+
+  /// No description provided for @orderSourceAiLong.
+  ///
+  /// In en, this message translates to:
+  /// **'AI chatbot'**
+  String get orderSourceAiLong;
+
+  /// No description provided for @orderSourceManual.
+  ///
+  /// In en, this message translates to:
+  /// **'Manual'**
+  String get orderSourceManual;
+
+  /// No description provided for @paymentStatusPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid'**
+  String get paymentStatusPaid;
+
+  /// No description provided for @paymentStatusPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get paymentStatusPending;
+
+  /// No description provided for @paymentStatusPartial.
+  ///
+  /// In en, this message translates to:
+  /// **'Partial'**
+  String get paymentStatusPartial;
+
+  /// No description provided for @ordersRowItems.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 item} other{{count} items}}'**
+  String ordersRowItems(int count);
+
+  /// No description provided for @ordersRowMeta.
+  ///
+  /// In en, this message translates to:
+  /// **'{items}  ·  PAID {paid}  ·  REMAINING {remaining}'**
+  String ordersRowMeta(String items, String paid, String remaining);
+
+  /// No description provided for @ordersRowNoRemaining.
+  ///
+  /// In en, this message translates to:
+  /// **'–'**
+  String get ordersRowNoRemaining;
+
+  /// No description provided for @orderActionCallConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Call & confirm'**
+  String get orderActionCallConfirm;
+
+  /// No description provided for @orderActionRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get orderActionRetry;
+
+  /// No description provided for @orderActionPrepare.
+  ///
+  /// In en, this message translates to:
+  /// **'Prepare'**
+  String get orderActionPrepare;
+
+  /// No description provided for @orderActionMarkShipped.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark shipped'**
+  String get orderActionMarkShipped;
+
+  /// No description provided for @orderActionMarkDelivered.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark delivered'**
+  String get orderActionMarkDelivered;
+
+  /// No description provided for @orderActionOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get orderActionOpen;
+
+  /// No description provided for @orderActionMarkReturned.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark returned'**
+  String get orderActionMarkReturned;
+
+  /// No description provided for @orderActionDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete order'**
+  String get orderActionDelete;
+
+  /// No description provided for @ordersSelectedCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 order selected} other{{count} orders selected}}'**
+  String ordersSelectedCount(int count);
+
+  /// No description provided for @ordersClearSelection.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get ordersClearSelection;
+
+  /// No description provided for @ordersBulkConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm all'**
+  String get ordersBulkConfirm;
+
+  /// No description provided for @ordersBulkPrepare.
+  ///
+  /// In en, this message translates to:
+  /// **'Start preparing all'**
+  String get ordersBulkPrepare;
+
+  /// No description provided for @ordersBulkShip.
+  ///
+  /// In en, this message translates to:
+  /// **'Ship all'**
+  String get ordersBulkShip;
+
+  /// No description provided for @ordersBulkDeliver.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark all delivered'**
+  String get ordersBulkDeliver;
+
+  /// No description provided for @ordersBulkReturn.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark all returned'**
+  String get ordersBulkReturn;
+
+  /// No description provided for @ordersBulkCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel all'**
+  String get ordersBulkCancel;
+
+  /// No description provided for @ordersBulkNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No bulk action available for this selection'**
+  String get ordersBulkNone;
+
+  /// No description provided for @ordersBulkFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'{failed} of {total} orders could not be updated'**
+  String ordersBulkFailed(int failed, int total);
+
+  /// No description provided for @ordersFilters.
+  ///
+  /// In en, this message translates to:
+  /// **'Filters'**
+  String get ordersFilters;
+
+  /// No description provided for @ordersFiltersActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Filters · {count}'**
+  String ordersFiltersActive(int count);
+
+  /// No description provided for @ordersFilterStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Order status'**
+  String get ordersFilterStatus;
+
+  /// No description provided for @ordersFilterStatusAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All statuses'**
+  String get ordersFilterStatusAll;
+
+  /// No description provided for @ordersFilterConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirmation'**
+  String get ordersFilterConfirmation;
+
+  /// No description provided for @ordersFilterPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment status'**
+  String get ordersFilterPayment;
+
+  /// No description provided for @ordersFilterAny.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get ordersFilterAny;
+
+  /// No description provided for @ordersFilterHasRemaining.
+  ///
+  /// In en, this message translates to:
+  /// **'Has remaining balance'**
+  String get ordersFilterHasRemaining;
+
+  /// No description provided for @ordersFilterPaymentDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Disabled — \"Has remaining\" is active'**
+  String get ordersFilterPaymentDisabled;
+
+  /// No description provided for @ordersFilterTotalMin.
+  ///
+  /// In en, this message translates to:
+  /// **'Total amount (DA) · min'**
+  String get ordersFilterTotalMin;
+
+  /// No description provided for @ordersFilterTotalMax.
+  ///
+  /// In en, this message translates to:
+  /// **'Total amount (DA) · max'**
+  String get ordersFilterTotalMax;
+
+  /// No description provided for @ordersFilterApply.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply filters'**
+  String get ordersFilterApply;
+
+  /// No description provided for @ordersFilterClear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear all'**
+  String get ordersFilterClear;
+
+  /// No description provided for @orderEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'Order'**
+  String get orderEyebrow;
+
+  /// No description provided for @orderStepReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Review'**
+  String get orderStepReview;
+
+  /// No description provided for @orderStepCall.
+  ///
+  /// In en, this message translates to:
+  /// **'Call outcome'**
+  String get orderStepCall;
+
+  /// No description provided for @orderStepResult.
+  ///
+  /// In en, this message translates to:
+  /// **'Result'**
+  String get orderStepResult;
+
+  /// No description provided for @orderCallsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{no calls} =1{1 call} other{{count} calls}}'**
+  String orderCallsCount(int count);
+
+  /// No description provided for @orderClientSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer'**
+  String get orderClientSection;
+
+  /// No description provided for @orderEditContact.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get orderEditContact;
+
+  /// No description provided for @orderEditContactDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get orderEditContactDone;
+
+  /// No description provided for @orderFieldName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get orderFieldName;
+
+  /// No description provided for @orderFieldPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get orderFieldPhone;
+
+  /// No description provided for @orderFieldAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get orderFieldAddress;
+
+  /// No description provided for @orderFieldRegion.
+  ///
+  /// In en, this message translates to:
+  /// **'Region'**
+  String get orderFieldRegion;
+
+  /// No description provided for @orderNoPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'no phone'**
+  String get orderNoPhone;
+
+  /// No description provided for @orderNoAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'no address'**
+  String get orderNoAddress;
+
+  /// No description provided for @orderPhoneHint.
+  ///
+  /// In en, this message translates to:
+  /// **'0555 12 34 56'**
+  String get orderPhoneHint;
+
+  /// No description provided for @orderAddressHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Wilaya, commune, street, building...'**
+  String get orderAddressHint;
+
+  /// No description provided for @orderContactSavedWithCall.
+  ///
+  /// In en, this message translates to:
+  /// **'Edits are saved when you log the call outcome.'**
+  String get orderContactSavedWithCall;
+
+  /// No description provided for @orderStopdeskChip.
+  ///
+  /// In en, this message translates to:
+  /// **'Stopdesk (agency pickup)'**
+  String get orderStopdeskChip;
+
+  /// No description provided for @orderItemsSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Items'**
+  String get orderItemsSection;
+
+  /// No description provided for @orderUnitLine.
+  ///
+  /// In en, this message translates to:
+  /// **'×{qty} · {price} / unit'**
+  String orderUnitLine(int qty, String price);
+
+  /// No description provided for @orderTotalLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get orderTotalLabel;
+
+  /// No description provided for @orderPaidLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid'**
+  String get orderPaidLabel;
+
+  /// No description provided for @orderRemainingLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining'**
+  String get orderRemainingLabel;
+
+  /// No description provided for @orderNotesSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get orderNotesSection;
+
+  /// No description provided for @orderAttemptsSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous attempts'**
+  String get orderAttemptsSection;
+
+  /// No description provided for @orderCallHistorySection.
+  ///
+  /// In en, this message translates to:
+  /// **'Call history'**
+  String get orderCallHistorySection;
+
+  /// No description provided for @orderLogCall.
+  ///
+  /// In en, this message translates to:
+  /// **'Log call outcome'**
+  String get orderLogCall;
+
+  /// No description provided for @orderAlreadyConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Already confirmed'**
+  String get orderAlreadyConfirmed;
+
+  /// No description provided for @orderClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get orderClose;
+
+  /// No description provided for @orderReadOnlyNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'This order is {status} — call logging is disabled.'**
+  String orderReadOnlyNotice(String status);
+
+  /// No description provided for @orderReadOnlyResell.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a new order to re-sell.'**
+  String get orderReadOnlyResell;
+
+  /// No description provided for @orderCallQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'How did the call go?'**
+  String get orderCallQuestion;
+
+  /// No description provided for @orderCallSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'We’ll log the attempt and update the order accordingly.'**
+  String get orderCallSubtitle;
+
+  /// No description provided for @orderOutcomeConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirmed'**
+  String get orderOutcomeConfirmed;
+
+  /// No description provided for @orderOutcomeConfirmedHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer wants the order — we’ll mark it ready to ship.'**
+  String get orderOutcomeConfirmedHint;
+
+  /// No description provided for @orderOutcomeNoAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'No answer'**
+  String get orderOutcomeNoAnswer;
+
+  /// No description provided for @orderOutcomeNoAnswerHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Logged as attempt — stays in pending queue.'**
+  String get orderOutcomeNoAnswerHint;
+
+  /// No description provided for @orderOutcomeBusy.
+  ///
+  /// In en, this message translates to:
+  /// **'Busy'**
+  String get orderOutcomeBusy;
+
+  /// No description provided for @orderOutcomeBusyHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again later — stays in pending queue.'**
+  String get orderOutcomeBusyHint;
+
+  /// No description provided for @orderOutcomeVoicemail.
+  ///
+  /// In en, this message translates to:
+  /// **'Voicemail'**
+  String get orderOutcomeVoicemail;
+
+  /// No description provided for @orderOutcomeVoicemailHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Logged as attempt — stays in pending queue.'**
+  String get orderOutcomeVoicemailHint;
+
+  /// No description provided for @orderOutcomeRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get orderOutcomeRejected;
+
+  /// No description provided for @orderOutcomeRejectedHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer doesn’t want it — order will be cancelled.'**
+  String get orderOutcomeRejectedHint;
+
+  /// No description provided for @orderCallNotesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes (optional, for your records)'**
+  String get orderCallNotesLabel;
+
+  /// No description provided for @orderCallNotesHintConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirmed delivery time / delivery instructions / payment...'**
+  String get orderCallNotesHintConfirmed;
+
+  /// No description provided for @orderCallNotesHintRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Why did the customer reject?'**
+  String get orderCallNotesHintRejected;
+
+  /// No description provided for @orderCallNotesHintOther.
+  ///
+  /// In en, this message translates to:
+  /// **'What happened?'**
+  String get orderCallNotesHintOther;
+
+  /// No description provided for @orderSaveOutcome.
+  ///
+  /// In en, this message translates to:
+  /// **'Save outcome'**
+  String get orderSaveOutcome;
+
+  /// No description provided for @orderBackToReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get orderBackToReview;
+
+  /// No description provided for @orderNoAddressWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'This order has no delivery address yet.'**
+  String get orderNoAddressWarning;
+
+  /// No description provided for @orderNoAddressBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Go back to Review and edit the customer card before confirming.'**
+  String get orderNoAddressBody;
+
+  /// No description provided for @orderResultConfirmedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Order confirmed'**
+  String get orderResultConfirmedTitle;
+
+  /// No description provided for @orderResultConfirmedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready to send to your delivery provider.'**
+  String get orderResultConfirmedBody;
+
+  /// No description provided for @orderResultCancelledTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Order cancelled'**
+  String get orderResultCancelledTitle;
+
+  /// No description provided for @orderResultCancelledBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock is restored. The recorded payment is rolled back — any actual refund is still yours to make.'**
+  String get orderResultCancelledBody;
+
+  /// No description provided for @orderResultAttemptTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Attempt logged'**
+  String get orderResultAttemptTitle;
+
+  /// No description provided for @orderResultAttemptBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Attempt #{count} recorded. Stays in your pending queue.'**
+  String orderResultAttemptBody(int count);
+
+  /// No description provided for @orderNextSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Next: prepare & ship'**
+  String get orderNextSection;
+
+  /// No description provided for @orderNextBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Send this order to your delivery provider, or mark it as preparing while you pack it.'**
+  String get orderNextBody;
+
+  /// No description provided for @orderSendToDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Send to delivery'**
+  String get orderSendToDelivery;
+
+  /// No description provided for @orderSendToDeliverySoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Yalidine / ZR — coming soon'**
+  String get orderSendToDeliverySoon;
+
+  /// No description provided for @orderMarkPreparing.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as preparing'**
+  String get orderMarkPreparing;
+
+  /// No description provided for @orderDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get orderDone;
+
+  /// No description provided for @orderReturnTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as returned'**
+  String get orderReturnTitle;
+
+  /// No description provided for @orderReturnBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to mark order {number} as returned? Stock will be restored and the payment rolled back.'**
+  String orderReturnBody(String number);
+
+  /// No description provided for @orderReturnNoticeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'The refund is not automatic'**
+  String get orderReturnNoticeTitle;
+
+  /// No description provided for @orderReturnNoticeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Money already collected must be given back to the customer and entered as a caisse expense.'**
+  String get orderReturnNoticeBody;
+
+  /// No description provided for @orderDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete order'**
+  String get orderDeleteTitle;
+
+  /// No description provided for @orderDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete order {number}? Stock will be restored.'**
+  String orderDeleteBody(String number);
+
+  /// No description provided for @orderDeleteNoticeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The order, its lines and its call history are gone for good.'**
+  String get orderDeleteNoticeBody;
+
+  /// No description provided for @newOrderTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New order'**
+  String get newOrderTitle;
+
+  /// No description provided for @newOrderClientSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Client'**
+  String get newOrderClientSection;
+
+  /// No description provided for @newOrderSearchClient.
+  ///
+  /// In en, this message translates to:
+  /// **'Search a client'**
+  String get newOrderSearchClient;
+
+  /// No description provided for @newOrderSearchClientHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search client by name or phone...'**
+  String get newOrderSearchClientHint;
+
+  /// No description provided for @newOrderNoClients.
+  ///
+  /// In en, this message translates to:
+  /// **'No clients found'**
+  String get newOrderNoClients;
+
+  /// No description provided for @newOrderOrType.
+  ///
+  /// In en, this message translates to:
+  /// **'Or type'**
+  String get newOrderOrType;
+
+  /// No description provided for @newOrderClientName.
+  ///
+  /// In en, this message translates to:
+  /// **'Client name'**
+  String get newOrderClientName;
+
+  /// No description provided for @newOrderClientPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get newOrderClientPhone;
+
+  /// No description provided for @newOrderDeliveryAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery address'**
+  String get newOrderDeliveryAddress;
+
+  /// No description provided for @newOrderWilaya.
+  ///
+  /// In en, this message translates to:
+  /// **'Wilaya'**
+  String get newOrderWilaya;
+
+  /// No description provided for @newOrderWilayaHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Select wilaya…'**
+  String get newOrderWilayaHint;
+
+  /// No description provided for @newOrderCommune.
+  ///
+  /// In en, this message translates to:
+  /// **'Commune'**
+  String get newOrderCommune;
+
+  /// No description provided for @newOrderCommuneHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Commune (optional)'**
+  String get newOrderCommuneHint;
+
+  /// No description provided for @newOrderStopdesk.
+  ///
+  /// In en, this message translates to:
+  /// **'Stopdesk (agency pickup — cheaper)'**
+  String get newOrderStopdesk;
+
+  /// No description provided for @newOrderProductsSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Products'**
+  String get newOrderProductsSection;
+
+  /// No description provided for @newOrderAddProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Add products'**
+  String get newOrderAddProducts;
+
+  /// No description provided for @newOrderProductHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search product by name or SKU…'**
+  String get newOrderProductHint;
+
+  /// No description provided for @newOrderNoProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'No products found'**
+  String get newOrderNoProducts;
+
+  /// No description provided for @newOrderVariantCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 variant} other{{count} variants}}'**
+  String newOrderVariantCount(int count);
+
+  /// No description provided for @newOrderInStock.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} in stock'**
+  String newOrderInStock(int count);
+
+  /// No description provided for @newOrderOutOfStock.
+  ///
+  /// In en, this message translates to:
+  /// **'Out of stock'**
+  String get newOrderOutOfStock;
+
+  /// No description provided for @newOrderQty.
+  ///
+  /// In en, this message translates to:
+  /// **'Qty'**
+  String get newOrderQty;
+
+  /// No description provided for @newOrderUnitPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Price (DA)'**
+  String get newOrderUnitPrice;
+
+  /// No description provided for @newOrderLineTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get newOrderLineTotal;
+
+  /// No description provided for @newOrderNoLines.
+  ///
+  /// In en, this message translates to:
+  /// **'Search and select products above to add them'**
+  String get newOrderNoLines;
+
+  /// No description provided for @newOrderNotesSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Remark / Notes'**
+  String get newOrderNotesSection;
+
+  /// No description provided for @newOrderNotes.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get newOrderNotes;
+
+  /// No description provided for @newOrderNotesHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a note for this order…'**
+  String get newOrderNotesHint;
+
+  /// No description provided for @newOrderSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Order summary'**
+  String get newOrderSummary;
+
+  /// No description provided for @newOrderSubtotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Subtotal'**
+  String get newOrderSubtotal;
+
+  /// No description provided for @newOrderDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery'**
+  String get newOrderDelivery;
+
+  /// No description provided for @newOrderTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get newOrderTotal;
+
+  /// No description provided for @newOrderPayInFull.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid in full'**
+  String get newOrderPayInFull;
+
+  /// No description provided for @newOrderAmountPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount paid (DA)'**
+  String get newOrderAmountPaid;
+
+  /// No description provided for @newOrderCodHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave at 0 for COD — payment is recorded automatically on delivery.'**
+  String get newOrderCodHint;
+
+  /// No description provided for @newOrderRemainingDebt.
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining (debt)'**
+  String get newOrderRemainingDebt;
+
+  /// No description provided for @newOrderFullyPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Fully paid'**
+  String get newOrderFullyPaid;
+
+  /// No description provided for @newOrderPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment'**
+  String get newOrderPayment;
+
+  /// No description provided for @newOrderStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Order status'**
+  String get newOrderStatus;
+
+  /// No description provided for @newOrderPaymentMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment method'**
+  String get newOrderPaymentMethod;
+
+  /// No description provided for @paymentMethodCash.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash'**
+  String get paymentMethodCash;
+
+  /// No description provided for @paymentMethodCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Card'**
+  String get paymentMethodCard;
+
+  /// No description provided for @paymentMethodTransfer.
+  ///
+  /// In en, this message translates to:
+  /// **'Bank transfer'**
+  String get paymentMethodTransfer;
+
+  /// No description provided for @paymentMethodCcp.
+  ///
+  /// In en, this message translates to:
+  /// **'CCP'**
+  String get paymentMethodCcp;
+
+  /// No description provided for @newOrderSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Create order'**
+  String get newOrderSubmit;
+
+  /// No description provided for @newOrderStockReserved.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock is reserved as soon as the order is created, even a pending one.'**
+  String get newOrderStockReserved;
+
+  /// No description provided for @newOrderErrNoItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Add at least one product'**
+  String get newOrderErrNoItems;
+
+  /// No description provided for @newOrderErrName.
+  ///
+  /// In en, this message translates to:
+  /// **'Client name is required'**
+  String get newOrderErrName;
+
+  /// No description provided for @newOrderErrPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'A phone number is required to contact the client'**
+  String get newOrderErrPhone;
+
+  /// No description provided for @newOrderErrWilaya.
+  ///
+  /// In en, this message translates to:
+  /// **'Wilaya (delivery region) is required'**
+  String get newOrderErrWilaya;
+
+  /// No description provided for @newOrderErrAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery address is required for home delivery (or pick Stopdesk)'**
+  String get newOrderErrAddress;
+
+  /// No description provided for @newOrderErrStock.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} — only {count} left in stock'**
+  String newOrderErrStock(String name, int count);
+
+  /// No description provided for @orderCreatedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Order created'**
+  String get orderCreatedToast;
+
+  /// No description provided for @orderCallLoggedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Call outcome saved'**
+  String get orderCallLoggedToast;
+
+  /// No description provided for @orderStatusChangedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Order updated'**
+  String get orderStatusChangedToast;
+
+  /// No description provided for @orderReturnedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Order marked as returned'**
+  String get orderReturnedToast;
+
+  /// No description provided for @orderDeletedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Order deleted'**
+  String get orderDeletedToast;
+
+  /// No description provided for @newOrderDraftLinesDropped.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 line from your draft could not be restored: the product is gone or out of stock.} other{{count} lines from your draft could not be restored: the products are gone or out of stock.}}'**
+  String newOrderDraftLinesDropped(int count);
+
+  /// No description provided for @productsFilterPriceMin.
+  ///
+  /// In en, this message translates to:
+  /// **'Selling price (DA) · min'**
+  String get productsFilterPriceMin;
+
+  /// No description provided for @productsFilterPriceMax.
+  ///
+  /// In en, this message translates to:
+  /// **'Selling price (DA) · max'**
+  String get productsFilterPriceMax;
+
+  /// No description provided for @productsFilterCostMin.
+  ///
+  /// In en, this message translates to:
+  /// **'Cost price (DA) · min'**
+  String get productsFilterCostMin;
+
+  /// No description provided for @productsFilterCostMax.
+  ///
+  /// In en, this message translates to:
+  /// **'Cost price (DA) · max'**
+  String get productsFilterCostMax;
+
+  /// No description provided for @productsFilterQtyMin.
+  ///
+  /// In en, this message translates to:
+  /// **'Quantity · min'**
+  String get productsFilterQtyMin;
+
+  /// No description provided for @productsFilterQtyMax.
+  ///
+  /// In en, this message translates to:
+  /// **'Quantity · max'**
+  String get productsFilterQtyMax;
+
+  /// No description provided for @productsFilterProfitMin.
+  ///
+  /// In en, this message translates to:
+  /// **'Net profit (DA) · min'**
+  String get productsFilterProfitMin;
+
+  /// No description provided for @productsFilterProfitMax.
+  ///
+  /// In en, this message translates to:
+  /// **'Net profit (DA) · max'**
+  String get productsFilterProfitMax;
+
+  /// No description provided for @productsFilterMarginMin.
+  ///
+  /// In en, this message translates to:
+  /// **'Margin (%) · min'**
+  String get productsFilterMarginMin;
+
+  /// No description provided for @productsFilterMarginMax.
+  ///
+  /// In en, this message translates to:
+  /// **'Margin (%) · max'**
+  String get productsFilterMarginMax;
+
+  /// No description provided for @productsSectionInactive.
+  ///
+  /// In en, this message translates to:
+  /// **'INACTIVE PRODUCTS'**
+  String get productsSectionInactive;
+
+  /// No description provided for @menuDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery'**
+  String get menuDelivery;
+
+  /// No description provided for @deliveryEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'SALES'**
+  String get deliveryEyebrow;
+
+  /// No description provided for @deliveryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery'**
+  String get deliveryTitle;
+
+  /// No description provided for @deliverySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Send orders to delivery companies and track shipments'**
+  String get deliverySubtitle;
+
+  /// No description provided for @deliveryFeesAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Fees'**
+  String get deliveryFeesAction;
+
+  /// No description provided for @deliveryProvidersAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Providers'**
+  String get deliveryProvidersAction;
+
+  /// No description provided for @deliveryRefresh.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh'**
+  String get deliveryRefresh;
+
+  /// No description provided for @deliveryStatReady.
+  ///
+  /// In en, this message translates to:
+  /// **'READY TO SHIP'**
+  String get deliveryStatReady;
+
+  /// No description provided for @deliveryStatShipped.
+  ///
+  /// In en, this message translates to:
+  /// **'SHIPPED'**
+  String get deliveryStatShipped;
+
+  /// No description provided for @deliveryStatInTransit.
+  ///
+  /// In en, this message translates to:
+  /// **'IN TRANSIT'**
+  String get deliveryStatInTransit;
+
+  /// No description provided for @deliveryStatDelivered.
+  ///
+  /// In en, this message translates to:
+  /// **'DELIVERED'**
+  String get deliveryStatDelivered;
+
+  /// No description provided for @deliverySearchLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'SEARCH'**
+  String get deliverySearchLabel;
+
+  /// No description provided for @deliverySearchPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Search orders...'**
+  String get deliverySearchPlaceholder;
+
+  /// No description provided for @deliveryTabAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get deliveryTabAll;
+
+  /// No description provided for @deliveryTabReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready'**
+  String get deliveryTabReady;
+
+  /// No description provided for @deliveryTabSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Sent'**
+  String get deliveryTabSent;
+
+  /// No description provided for @deliveryTabInTransit.
+  ///
+  /// In en, this message translates to:
+  /// **'In Transit'**
+  String get deliveryTabInTransit;
+
+  /// No description provided for @deliveryTabDelivered.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered'**
+  String get deliveryTabDelivered;
+
+  /// No description provided for @deliveryOrdersSection.
+  ///
+  /// In en, this message translates to:
+  /// **'ORDERS'**
+  String get deliveryOrdersSection;
+
+  /// No description provided for @deliveryPillNotSent.
+  ///
+  /// In en, this message translates to:
+  /// **'NOT SENT'**
+  String get deliveryPillNotSent;
+
+  /// No description provided for @deliveryPillSent.
+  ///
+  /// In en, this message translates to:
+  /// **'SENT'**
+  String get deliveryPillSent;
+
+  /// No description provided for @deliveryPillInTransit.
+  ///
+  /// In en, this message translates to:
+  /// **'IN TRANSIT'**
+  String get deliveryPillInTransit;
+
+  /// No description provided for @deliveryPillDelivered.
+  ///
+  /// In en, this message translates to:
+  /// **'DELIVERED'**
+  String get deliveryPillDelivered;
+
+  /// No description provided for @deliveryMetaLine.
+  ///
+  /// In en, this message translates to:
+  /// **'PROVIDER {provider}  ·  TRACKING {tracking}'**
+  String deliveryMetaLine(String provider, String tracking);
+
+  /// No description provided for @deliverySend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get deliverySend;
+
+  /// No description provided for @deliveryTrack.
+  ///
+  /// In en, this message translates to:
+  /// **'Track'**
+  String get deliveryTrack;
+
+  /// No description provided for @deliveryLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Label'**
+  String get deliveryLabel;
+
+  /// No description provided for @deliveryEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No orders'**
+  String get deliveryEmptyTitle;
+
+  /// No description provided for @deliveryEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders show up here, ready to be sent to a delivery company.'**
+  String get deliveryEmptyBody;
+
+  /// No description provided for @deliveryNoMatchTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No matches'**
+  String get deliveryNoMatchTitle;
+
+  /// No description provided for @deliveryNoMatchBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Try another word or another tab.'**
+  String get deliveryNoMatchBody;
+
+  /// No description provided for @deliverySendTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Send {order} to Delivery'**
+  String deliverySendTitle(String order);
+
+  /// No description provided for @deliveryClient.
+  ///
+  /// In en, this message translates to:
+  /// **'Client'**
+  String get deliveryClient;
+
+  /// No description provided for @deliveryPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get deliveryPhone;
+
+  /// No description provided for @deliveryAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get deliveryAddress;
+
+  /// No description provided for @deliveryTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get deliveryTotal;
+
+  /// No description provided for @deliveryProviderLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'DELIVERY PROVIDER'**
+  String get deliveryProviderLabel;
+
+  /// No description provided for @deliveryProviderDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} (Default)'**
+  String deliveryProviderDefault(String name);
+
+  /// No description provided for @deliveryDestination.
+  ///
+  /// In en, this message translates to:
+  /// **'DESTINATION WILAYA'**
+  String get deliveryDestination;
+
+  /// No description provided for @deliveryChooseWilaya.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a wilaya'**
+  String get deliveryChooseWilaya;
+
+  /// No description provided for @deliveryStopdesk.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop desk delivery'**
+  String get deliveryStopdesk;
+
+  /// No description provided for @deliveryNote.
+  ///
+  /// In en, this message translates to:
+  /// **'NOTE'**
+  String get deliveryNote;
+
+  /// No description provided for @deliveryNotePlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional note for the delivery company...'**
+  String get deliveryNotePlaceholder;
+
+  /// No description provided for @deliveryRates.
+  ///
+  /// In en, this message translates to:
+  /// **'ESTIMATED RATES'**
+  String get deliveryRates;
+
+  /// No description provided for @deliveryRateHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home Delivery'**
+  String get deliveryRateHome;
+
+  /// No description provided for @deliveryRateStopdesk.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop Desk'**
+  String get deliveryRateStopdesk;
+
+  /// No description provided for @deliveryConfirmSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm & Send'**
+  String get deliveryConfirmSend;
+
+  /// No description provided for @deliveryNoProviders.
+  ///
+  /// In en, this message translates to:
+  /// **'No delivery providers configured'**
+  String get deliveryNoProviders;
+
+  /// No description provided for @deliveryAddProvider.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Provider'**
+  String get deliveryAddProvider;
+
+  /// No description provided for @deliverySentToast.
+  ///
+  /// In en, this message translates to:
+  /// **'{order} sent to {provider}'**
+  String deliverySentToast(String order, String provider);
+
+  /// No description provided for @deliveryTrackTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tracking — {order}'**
+  String deliveryTrackTitle(String order);
+
+  /// No description provided for @deliveryCourierResponse.
+  ///
+  /// In en, this message translates to:
+  /// **'COURIER RESPONSE · {provider}'**
+  String deliveryCourierResponse(String provider);
+
+  /// No description provided for @deliveryTrackEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'The courier returned no information.'**
+  String get deliveryTrackEmpty;
+
+  /// No description provided for @deliveryLabelNotReady.
+  ///
+  /// In en, this message translates to:
+  /// **'The courier has not produced a label yet.'**
+  String get deliveryLabelNotReady;
+
+  /// No description provided for @deliveryLabelOpenFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'The label could not be opened on this phone.'**
+  String get deliveryLabelOpenFailed;
+
+  /// No description provided for @deliveryFeesEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'DELIVERY'**
+  String get deliveryFeesEyebrow;
+
+  /// No description provided for @deliveryFeesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery Fees'**
+  String get deliveryFeesTitle;
+
+  /// No description provided for @deliveryFeesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Set your shipping price per wilaya. Used automatically when creating orders and by the AI agent for Messenger quotes.'**
+  String get deliveryFeesSubtitle;
+
+  /// No description provided for @deliveryFeesFillMissing.
+  ///
+  /// In en, this message translates to:
+  /// **'Fill missing'**
+  String get deliveryFeesFillMissing;
+
+  /// No description provided for @deliveryFeesResetAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all to defaults'**
+  String get deliveryFeesResetAll;
+
+  /// No description provided for @deliveryFeesSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search wilaya…'**
+  String get deliveryFeesSearch;
+
+  /// No description provided for @deliveryFeesSection.
+  ///
+  /// In en, this message translates to:
+  /// **'WILAYAS'**
+  String get deliveryFeesSection;
+
+  /// No description provided for @deliveryFeesDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'DEFAULT'**
+  String get deliveryFeesDefault;
+
+  /// No description provided for @deliveryFeesCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'CUSTOM'**
+  String get deliveryFeesCustom;
+
+  /// No description provided for @deliveryFeesHome.
+  ///
+  /// In en, this message translates to:
+  /// **'HOME (DA)'**
+  String get deliveryFeesHome;
+
+  /// No description provided for @deliveryFeesStopdesk.
+  ///
+  /// In en, this message translates to:
+  /// **'STOPDESK (DA)'**
+  String get deliveryFeesStopdesk;
+
+  /// No description provided for @deliveryFeesReturn.
+  ///
+  /// In en, this message translates to:
+  /// **'RETURN (DA)'**
+  String get deliveryFeesReturn;
+
+  /// No description provided for @deliveryFeesReset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get deliveryFeesReset;
+
+  /// No description provided for @deliveryFeesResetAllTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all to defaults'**
+  String get deliveryFeesResetAllTitle;
+
+  /// No description provided for @deliveryFeesResetAllBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Overwrite all your custom prices with system defaults?'**
+  String get deliveryFeesResetAllBody;
+
+  /// No description provided for @deliveryFeesSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'{wilaya} fees saved'**
+  String deliveryFeesSaved(String wilaya);
+
+  /// No description provided for @deliveryFeesResetDone.
+  ///
+  /// In en, this message translates to:
+  /// **'{wilaya} is back to the default fees'**
+  String deliveryFeesResetDone(String wilaya);
+
+  /// No description provided for @deliveryFeesFilled.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{Nothing to fill: every wilaya already has its fees} =1{1 wilaya filled} other{{count} wilayas filled}}'**
+  String deliveryFeesFilled(int count);
+
+  /// No description provided for @deliveryFeesResetAllDone.
+  ///
+  /// In en, this message translates to:
+  /// **'All fees are back to the defaults'**
+  String get deliveryFeesResetAllDone;
+
+  /// No description provided for @deliveryProvidersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery Providers'**
+  String get deliveryProvidersTitle;
+
+  /// No description provided for @deliveryProvidersSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Configure delivery companies for shipping orders'**
+  String get deliveryProvidersSubtitle;
+
+  /// No description provided for @deliveryProvidersSection.
+  ///
+  /// In en, this message translates to:
+  /// **'PROVIDERS'**
+  String get deliveryProvidersSection;
+
+  /// No description provided for @deliveryDefaultBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'DEFAULT'**
+  String get deliveryDefaultBadge;
+
+  /// No description provided for @deliveryCardProvider.
+  ///
+  /// In en, this message translates to:
+  /// **'Provider:'**
+  String get deliveryCardProvider;
+
+  /// No description provided for @deliveryCardSender.
+  ///
+  /// In en, this message translates to:
+  /// **'Sender:'**
+  String get deliveryCardSender;
+
+  /// No description provided for @deliveryCardPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone:'**
+  String get deliveryCardPhone;
+
+  /// No description provided for @deliveryCardWilaya.
+  ///
+  /// In en, this message translates to:
+  /// **'Wilaya:'**
+  String get deliveryCardWilaya;
+
+  /// No description provided for @deliveryEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get deliveryEdit;
+
+  /// No description provided for @deliveryProvidersEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No providers configured'**
+  String get deliveryProvidersEmptyTitle;
+
+  /// No description provided for @deliveryProvidersEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a delivery provider to start shipping orders'**
+  String get deliveryProvidersEmptyBody;
+
+  /// No description provided for @deliveryDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Provider'**
+  String get deliveryDeleteTitle;
+
+  /// No description provided for @deliveryDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to remove this delivery provider? This cannot be undone.'**
+  String get deliveryDeleteBody;
+
+  /// No description provided for @deliveryProviderDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} deleted'**
+  String deliveryProviderDeleted(String name);
+
+  /// No description provided for @deliveryFormAddTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Provider'**
+  String get deliveryFormAddTitle;
+
+  /// No description provided for @deliveryFormEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Delivery Provider'**
+  String get deliveryFormEditTitle;
+
+  /// No description provided for @deliveryFormCourier.
+  ///
+  /// In en, this message translates to:
+  /// **'DELIVERY PROVIDER'**
+  String get deliveryFormCourier;
+
+  /// No description provided for @deliveryFormChooseCourier.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a provider'**
+  String get deliveryFormChooseCourier;
+
+  /// No description provided for @deliveryFormDisplayName.
+  ///
+  /// In en, this message translates to:
+  /// **'DISPLAY NAME'**
+  String get deliveryFormDisplayName;
+
+  /// No description provided for @deliveryFormCredentials.
+  ///
+  /// In en, this message translates to:
+  /// **'API CREDENTIALS'**
+  String get deliveryFormCredentials;
+
+  /// No description provided for @deliveryFormUnchanged.
+  ///
+  /// In en, this message translates to:
+  /// **'(unchanged — enter to update)'**
+  String get deliveryFormUnchanged;
+
+  /// No description provided for @deliveryFormTest.
+  ///
+  /// In en, this message translates to:
+  /// **'Test Credentials'**
+  String get deliveryFormTest;
+
+  /// No description provided for @deliveryFormTestOk.
+  ///
+  /// In en, this message translates to:
+  /// **'Credentials are valid — connected to {name}.'**
+  String deliveryFormTestOk(String name);
+
+  /// No description provided for @deliveryFormTestFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} refused the connection: {reason}'**
+  String deliveryFormTestFailed(String name, String reason);
+
+  /// No description provided for @deliveryFormSender.
+  ///
+  /// In en, this message translates to:
+  /// **'SENDER INFORMATION'**
+  String get deliveryFormSender;
+
+  /// No description provided for @deliveryFormSenderName.
+  ///
+  /// In en, this message translates to:
+  /// **'SENDER NAME'**
+  String get deliveryFormSenderName;
+
+  /// No description provided for @deliveryFormSenderPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'SENDER PHONE'**
+  String get deliveryFormSenderPhone;
+
+  /// No description provided for @deliveryFormSenderAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'SENDER ADDRESS'**
+  String get deliveryFormSenderAddress;
+
+  /// No description provided for @deliveryFormSenderWilaya.
+  ///
+  /// In en, this message translates to:
+  /// **'SENDER WILAYA'**
+  String get deliveryFormSenderWilaya;
+
+  /// No description provided for @deliveryFormSetDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'Set as default provider'**
+  String get deliveryFormSetDefault;
+
+  /// No description provided for @deliveryFormAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Provider'**
+  String get deliveryFormAdd;
+
+  /// No description provided for @deliveryFormUpdate.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get deliveryFormUpdate;
+
+  /// No description provided for @deliveryProviderAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} added'**
+  String deliveryProviderAdded(String name);
+
+  /// No description provided for @deliveryProviderUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} updated'**
+  String deliveryProviderUpdated(String name);
+
+  /// No description provided for @deliveryFormAllTaken.
+  ///
+  /// In en, this message translates to:
+  /// **'Every supported provider is already configured.'**
+  String get deliveryFormAllTaken;
+
+  /// No description provided for @deliveryDeleteNoticeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders already sent'**
+  String get deliveryDeleteNoticeTitle;
+
+  /// No description provided for @deliveryDeleteNoticeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Those sent with {name} keep their tracking number, but can no longer be tracked or have their label printed.'**
+  String deliveryDeleteNoticeBody(String name);
+
+  /// No description provided for @deliveryDeleteNoticeDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'This is your default provider: choose another one afterwards.'**
+  String get deliveryDeleteNoticeDefault;
+
+  /// No description provided for @deliveryProviderAlreadyGone.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} had already been deleted'**
+  String deliveryProviderAlreadyGone(String name);
+
+  /// No description provided for @menuSales.
+  ///
+  /// In en, this message translates to:
+  /// **'Sales'**
+  String get menuSales;
+
+  /// No description provided for @salesEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'SALES'**
+  String get salesEyebrow;
+
+  /// No description provided for @salesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sales'**
+  String get salesTitle;
+
+  /// No description provided for @salesCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 sale} other{{count} sales}}'**
+  String salesCount(int count);
+
+  /// No description provided for @salesPeriodToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get salesPeriodToday;
+
+  /// No description provided for @salesPeriodWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'Week'**
+  String get salesPeriodWeek;
+
+  /// No description provided for @salesPeriodMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Month'**
+  String get salesPeriodMonth;
+
+  /// No description provided for @salesPeriodYear.
+  ///
+  /// In en, this message translates to:
+  /// **'Year'**
+  String get salesPeriodYear;
+
+  /// No description provided for @salesStatTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total sales'**
+  String get salesStatTotal;
+
+  /// No description provided for @salesStatRevenue.
+  ///
+  /// In en, this message translates to:
+  /// **'Revenue'**
+  String get salesStatRevenue;
+
+  /// No description provided for @salesStatAverage.
+  ///
+  /// In en, this message translates to:
+  /// **'Avg order value'**
+  String get salesStatAverage;
+
+  /// No description provided for @salesStatPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get salesStatPending;
+
+  /// No description provided for @salesSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search sales…'**
+  String get salesSearch;
+
+  /// No description provided for @salesQuickAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get salesQuickAll;
+
+  /// No description provided for @salesQuickPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid'**
+  String get salesQuickPaid;
+
+  /// No description provided for @salesQuickRemaining.
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining'**
+  String get salesQuickRemaining;
+
+  /// No description provided for @salesSection.
+  ///
+  /// In en, this message translates to:
+  /// **'All sales'**
+  String get salesSection;
+
+  /// No description provided for @salesView.
+  ///
+  /// In en, this message translates to:
+  /// **'View'**
+  String get salesView;
+
+  /// No description provided for @salesNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New sale'**
+  String get salesNew;
+
+  /// No description provided for @salesEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No sales'**
+  String get salesEmptyTitle;
+
+  /// No description provided for @salesEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Record your first sale to track revenue'**
+  String get salesEmptyBody;
+
+  /// No description provided for @salesNoMatchBody.
+  ///
+  /// In en, this message translates to:
+  /// **'No sale matches these filters.'**
+  String get salesNoMatchBody;
+
+  /// No description provided for @salesFilterMethodAny.
+  ///
+  /// In en, this message translates to:
+  /// **'All methods'**
+  String get salesFilterMethodAny;
+
+  /// No description provided for @saleStatusPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid'**
+  String get saleStatusPaid;
+
+  /// No description provided for @saleStatusPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get saleStatusPending;
+
+  /// No description provided for @saleStatusPartial.
+  ///
+  /// In en, this message translates to:
+  /// **'Partial'**
+  String get saleStatusPartial;
+
+  /// No description provided for @saleDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete sale'**
+  String get saleDeleteTitle;
+
+  /// No description provided for @saleDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete sale {number}?'**
+  String saleDeleteBody(String number);
+
+  /// No description provided for @saleDeleteNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'This action cannot be undone. Stock quantities will be restored.'**
+  String get saleDeleteNotice;
+
+  /// No description provided for @saleDeletedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Sale {number} deleted'**
+  String saleDeletedToast(String number);
+
+  /// No description provided for @saleAlreadyGone.
+  ///
+  /// In en, this message translates to:
+  /// **'Sale {number} had already been deleted'**
+  String saleAlreadyGone(String number);
+
+  /// No description provided for @saleEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'SALE'**
+  String get saleEyebrow;
+
+  /// No description provided for @saleFieldCustomer.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer'**
+  String get saleFieldCustomer;
+
+  /// No description provided for @saleFieldPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get saleFieldPhone;
+
+  /// No description provided for @saleFieldDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get saleFieldDate;
+
+  /// No description provided for @saleFieldMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment method'**
+  String get saleFieldMethod;
+
+  /// No description provided for @saleFieldItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Items'**
+  String get saleFieldItems;
+
+  /// No description provided for @saleWalkIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Walk-in customer'**
+  String get saleWalkIn;
+
+  /// No description provided for @saleItemsSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Items'**
+  String get saleItemsSection;
+
+  /// No description provided for @saleLineMeta.
+  ///
+  /// In en, this message translates to:
+  /// **'×{qty}  ·  {price}'**
+  String saleLineMeta(int qty, String price);
+
+  /// No description provided for @saleLineDiscount.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount {amount}'**
+  String saleLineDiscount(String amount);
+
+  /// No description provided for @saleSubtotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Subtotal'**
+  String get saleSubtotal;
+
+  /// No description provided for @saleDiscount.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount'**
+  String get saleDiscount;
+
+  /// No description provided for @saleTax.
+  ///
+  /// In en, this message translates to:
+  /// **'Tax'**
+  String get saleTax;
+
+  /// No description provided for @saleTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get saleTotal;
+
+  /// No description provided for @salePaymentStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment status'**
+  String get salePaymentStatus;
+
+  /// No description provided for @saleMarkPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as paid'**
+  String get saleMarkPaid;
+
+  /// No description provided for @saleEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get saleEdit;
+
+  /// No description provided for @saleMarkedPaidToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Sale marked as paid'**
+  String get saleMarkedPaidToast;
+
+  /// No description provided for @saleEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit sale {number}'**
+  String saleEditTitle(String number);
+
+  /// No description provided for @saleEditSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Update payment and notes. Items and prices cannot be changed once a sale is recorded.'**
+  String get saleEditSubtitle;
+
+  /// No description provided for @saleMethodHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a method'**
+  String get saleMethodHint;
+
+  /// No description provided for @saleEditPartialMissing.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the amount received'**
+  String get saleEditPartialMissing;
+
+  /// No description provided for @saleEditPartialTooHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'Must be below the total ({total}) — otherwise choose “Paid”'**
+  String saleEditPartialTooHigh(String total);
+
+  /// No description provided for @saleEditCaisse.
+  ///
+  /// In en, this message translates to:
+  /// **'The cash register will go from {from} to {to}.'**
+  String saleEditCaisse(String from, String to);
+
+  /// No description provided for @saleEditSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get saleEditSave;
+
+  /// No description provided for @saleUpdatedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Sale updated'**
+  String get saleUpdatedToast;
+
+  /// No description provided for @saleEditLeaveBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your changes will be lost.'**
+  String get saleEditLeaveBody;
+
+  /// No description provided for @newSaleNotesHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a note for this sale…'**
+  String get newSaleNotesHint;
+
+  /// No description provided for @newSaleSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment summary'**
+  String get newSaleSummary;
+
+  /// No description provided for @newSaleFullyPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Fully paid'**
+  String get newSaleFullyPaid;
+
+  /// No description provided for @newSaleStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get newSaleStatus;
+
+  /// No description provided for @newSalePayInFull.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid in full'**
+  String get newSalePayInFull;
+
+  /// No description provided for @newSaleChangeDue.
+  ///
+  /// In en, this message translates to:
+  /// **'Change due: {amount}'**
+  String newSaleChangeDue(String amount);
+
+  /// No description provided for @newSaleSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete sale'**
+  String get newSaleSubmit;
+
+  /// No description provided for @newSaleStockNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock is deducted as soon as the sale is recorded.'**
+  String get newSaleStockNote;
+
+  /// No description provided for @newSaleErrPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Incomplete phone number'**
+  String get newSaleErrPhone;
+
+  /// No description provided for @newSaleCreatedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Sale {number} recorded'**
+  String newSaleCreatedToast(String number);
+
+  /// No description provided for @newSaleDateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sale date'**
+  String get newSaleDateTitle;
+
+  /// No description provided for @newSaleLeaveBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The sale you started will be lost.'**
+  String get newSaleLeaveBody;
+
+  /// No description provided for @menuPurchases.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchases'**
+  String get menuPurchases;
+
+  /// No description provided for @menuMovements.
+  ///
+  /// In en, this message translates to:
+  /// **'Movements'**
+  String get menuMovements;
+
+  /// No description provided for @purchasesEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'PURCHASES'**
+  String get purchasesEyebrow;
+
+  /// No description provided for @purchasesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchases'**
+  String get purchasesTitle;
+
+  /// No description provided for @purchasesCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 purchase} other{{count} purchases}}'**
+  String purchasesCount(int count);
+
+  /// No description provided for @purchasesStatTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total purchases'**
+  String get purchasesStatTotal;
+
+  /// No description provided for @purchasesStatSpent.
+  ///
+  /// In en, this message translates to:
+  /// **'Total spent'**
+  String get purchasesStatSpent;
+
+  /// No description provided for @purchasesStatToReceive.
+  ///
+  /// In en, this message translates to:
+  /// **'To receive'**
+  String get purchasesStatToReceive;
+
+  /// No description provided for @purchasesStatReceived.
+  ///
+  /// In en, this message translates to:
+  /// **'Received'**
+  String get purchasesStatReceived;
+
+  /// No description provided for @purchasesSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search purchases…'**
+  String get purchasesSearch;
+
+  /// No description provided for @purchasesQuickAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get purchasesQuickAll;
+
+  /// No description provided for @purchasesQuickPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid'**
+  String get purchasesQuickPaid;
+
+  /// No description provided for @purchasesQuickToPay.
+  ///
+  /// In en, this message translates to:
+  /// **'To pay'**
+  String get purchasesQuickToPay;
+
+  /// No description provided for @purchasesSection.
+  ///
+  /// In en, this message translates to:
+  /// **'All purchases'**
+  String get purchasesSection;
+
+  /// No description provided for @purchasesRowMeta.
+  ///
+  /// In en, this message translates to:
+  /// **'{items}  ·  PAID {paid}  ·  TO PAY {remaining}'**
+  String purchasesRowMeta(String items, String paid, String remaining);
+
+  /// No description provided for @purchasesReceive.
+  ///
+  /// In en, this message translates to:
+  /// **'Receive'**
+  String get purchasesReceive;
+
+  /// No description provided for @purchasesNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New purchase'**
+  String get purchasesNew;
+
+  /// No description provided for @purchasesEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No purchases'**
+  String get purchasesEmptyTitle;
+
+  /// No description provided for @purchasesEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Record your first purchase from a supplier'**
+  String get purchasesEmptyBody;
+
+  /// No description provided for @purchasesNoMatchBody.
+  ///
+  /// In en, this message translates to:
+  /// **'No purchase matches these filters.'**
+  String get purchasesNoMatchBody;
+
+  /// No description provided for @purchasesFilterStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Fulfillment status'**
+  String get purchasesFilterStatus;
+
+  /// No description provided for @purchasesFilterSupplierAny.
+  ///
+  /// In en, this message translates to:
+  /// **'All suppliers'**
+  String get purchasesFilterSupplierAny;
+
+  /// No description provided for @purchasesFilterHasRemaining.
+  ///
+  /// In en, this message translates to:
+  /// **'Still owed to supplier'**
+  String get purchasesFilterHasRemaining;
+
+  /// No description provided for @purchaseStatusPending.
+  ///
+  /// In en, this message translates to:
+  /// **'To receive'**
+  String get purchaseStatusPending;
+
+  /// No description provided for @purchaseStatusPartial.
+  ///
+  /// In en, this message translates to:
+  /// **'Partly received'**
+  String get purchaseStatusPartial;
+
+  /// No description provided for @purchaseStatusReceived.
+  ///
+  /// In en, this message translates to:
+  /// **'Received'**
+  String get purchaseStatusReceived;
+
+  /// No description provided for @purchaseStatusCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get purchaseStatusCancelled;
+
+  /// No description provided for @purchasePayPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Unpaid'**
+  String get purchasePayPending;
+
+  /// No description provided for @purchasePayPartial.
+  ///
+  /// In en, this message translates to:
+  /// **'Partly paid'**
+  String get purchasePayPartial;
+
+  /// No description provided for @purchasePayPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid'**
+  String get purchasePayPaid;
+
+  /// No description provided for @purchaseDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete purchase'**
+  String get purchaseDeleteTitle;
+
+  /// No description provided for @purchaseDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete purchase {number}?'**
+  String purchaseDeleteBody(String number);
+
+  /// No description provided for @purchaseDeleteNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'This action cannot be undone.'**
+  String get purchaseDeleteNotice;
+
+  /// No description provided for @purchaseDeletedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase {number} deleted'**
+  String purchaseDeletedToast(String number);
+
+  /// No description provided for @purchaseAlreadyGone.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase {number} had already been deleted'**
+  String purchaseAlreadyGone(String number);
+
+  /// No description provided for @purchaseEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'PURCHASE'**
+  String get purchaseEyebrow;
+
+  /// No description provided for @purchaseFieldSupplier.
+  ///
+  /// In en, this message translates to:
+  /// **'Supplier'**
+  String get purchaseFieldSupplier;
+
+  /// No description provided for @purchaseFieldReceiving.
+  ///
+  /// In en, this message translates to:
+  /// **'Receiving'**
+  String get purchaseFieldReceiving;
+
+  /// No description provided for @purchaseFieldPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment'**
+  String get purchaseFieldPayment;
+
+  /// No description provided for @purchaseFieldPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount paid'**
+  String get purchaseFieldPaid;
+
+  /// No description provided for @purchaseFieldRemaining.
+  ///
+  /// In en, this message translates to:
+  /// **'Still to pay'**
+  String get purchaseFieldRemaining;
+
+  /// No description provided for @purchaseFieldReceivedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Received on'**
+  String get purchaseFieldReceivedOn;
+
+  /// No description provided for @purchaseNoSupplier.
+  ///
+  /// In en, this message translates to:
+  /// **'No supplier'**
+  String get purchaseNoSupplier;
+
+  /// No description provided for @purchaseLineMeta.
+  ///
+  /// In en, this message translates to:
+  /// **'Ordered {ordered}  ·  Received {received}  ·  Cost {cost} / unit'**
+  String purchaseLineMeta(int ordered, int received, String cost);
+
+  /// No description provided for @purchaseMarkPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as paid'**
+  String get purchaseMarkPaid;
+
+  /// No description provided for @purchaseMarkedPaidToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase marked as paid'**
+  String get purchaseMarkedPaidToast;
+
+  /// No description provided for @purchaseReceiveDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Receive delivery'**
+  String get purchaseReceiveDelivery;
+
+  /// No description provided for @purchaseCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel purchase'**
+  String get purchaseCancel;
+
+  /// No description provided for @purchaseCancelKeep.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep purchase'**
+  String get purchaseCancelKeep;
+
+  /// No description provided for @purchaseCancelBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase {number} will be cancelled.'**
+  String purchaseCancelBody(String number);
+
+  /// No description provided for @purchaseCancelNoticeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What will happen'**
+  String get purchaseCancelNoticeTitle;
+
+  /// No description provided for @purchaseCancelStock.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 unit already received will be taken out of stock.} other{{count} units already received will be taken out of stock.}}'**
+  String purchaseCancelStock(int count);
+
+  /// No description provided for @purchaseCancelMoney.
+  ///
+  /// In en, this message translates to:
+  /// **'The {amount} payment will be removed from the cash register. Record the supplier’s refund yourself.'**
+  String purchaseCancelMoney(String amount);
+
+  /// No description provided for @purchaseCancelFinal.
+  ///
+  /// In en, this message translates to:
+  /// **'A cancelled purchase can no longer be received or paid.'**
+  String get purchaseCancelFinal;
+
+  /// No description provided for @purchaseCancelledToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase {number} cancelled'**
+  String purchaseCancelledToast(String number);
+
+  /// No description provided for @receiveBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the quantity the supplier delivered for each item. Stock will be updated automatically.'**
+  String get receiveBody;
+
+  /// No description provided for @receiveLineMeta.
+  ///
+  /// In en, this message translates to:
+  /// **'Ordered {ordered}  ·  Already received {received}'**
+  String receiveLineMeta(int ordered, int received);
+
+  /// No description provided for @receiveNowLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Received now'**
+  String get receiveNowLabel;
+
+  /// No description provided for @receiveToCome.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} to receive'**
+  String receiveToCome(int count);
+
+  /// No description provided for @receiveComplete.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete'**
+  String get receiveComplete;
+
+  /// No description provided for @receiveOver.
+  ///
+  /// In en, this message translates to:
+  /// **'At most {count}'**
+  String receiveOver(int count);
+
+  /// No description provided for @receiveSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm receipt'**
+  String get receiveSubmit;
+
+  /// No description provided for @receiveNothing.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter at least one quantity'**
+  String get receiveNothing;
+
+  /// No description provided for @receivedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Receipt recorded · stock updated'**
+  String get receivedToast;
+
+  /// No description provided for @newPurchaseSearchSupplier.
+  ///
+  /// In en, this message translates to:
+  /// **'Search supplier'**
+  String get newPurchaseSearchSupplier;
+
+  /// No description provided for @newPurchaseSearchSupplierHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search supplier by name or phone…'**
+  String get newPurchaseSearchSupplierHint;
+
+  /// No description provided for @newPurchaseNoSuppliers.
+  ///
+  /// In en, this message translates to:
+  /// **'No supplier found'**
+  String get newPurchaseNoSuppliers;
+
+  /// No description provided for @newPurchaseUnitCost.
+  ///
+  /// In en, this message translates to:
+  /// **'Unit cost (DA)'**
+  String get newPurchaseUnitCost;
+
+  /// No description provided for @newPurchaseNotesHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a note for this purchase…'**
+  String get newPurchaseNotesHint;
+
+  /// No description provided for @newPurchaseSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment to supplier'**
+  String get newPurchaseSummary;
+
+  /// No description provided for @newPurchaseAmountPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount paid to supplier (DA)'**
+  String get newPurchaseAmountPaid;
+
+  /// No description provided for @newPurchaseFullyPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Fully paid'**
+  String get newPurchaseFullyPaid;
+
+  /// No description provided for @newPurchasePayInFull.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay in full'**
+  String get newPurchasePayInFull;
+
+  /// No description provided for @newPurchaseOverpaid.
+  ///
+  /// In en, this message translates to:
+  /// **'More than the total: only {total} will be recorded.'**
+  String newPurchaseOverpaid(String total);
+
+  /// No description provided for @newPurchaseStockNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock is added when the delivery is received.'**
+  String get newPurchaseStockNote;
+
+  /// No description provided for @newPurchaseSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Save purchase'**
+  String get newPurchaseSubmit;
+
+  /// No description provided for @newPurchaseCreatedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase {number} saved'**
+  String newPurchaseCreatedToast(String number);
+
+  /// No description provided for @newPurchaseDateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase date'**
+  String get newPurchaseDateTitle;
+
+  /// No description provided for @newPurchaseLeaveBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The purchase you started will be lost.'**
+  String get newPurchaseLeaveBody;
+
+  /// No description provided for @movementsEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'STOCK'**
+  String get movementsEyebrow;
+
+  /// No description provided for @movementsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock movements'**
+  String get movementsTitle;
+
+  /// No description provided for @movementsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Audit trail of all stock changes'**
+  String get movementsSubtitle;
+
+  /// No description provided for @movementsSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Movements'**
+  String get movementsSection;
+
+  /// No description provided for @movementsEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No movements'**
+  String get movementsEmptyTitle;
+
+  /// No description provided for @movementsEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock movements will appear here when products are added, sold, or adjusted'**
+  String get movementsEmptyBody;
+
+  /// No description provided for @movementsNoMatchBody.
+  ///
+  /// In en, this message translates to:
+  /// **'No movement matches these filters.'**
+  String get movementsNoMatchBody;
+
+  /// No description provided for @movementsFilterType.
+  ///
+  /// In en, this message translates to:
+  /// **'Movement type'**
+  String get movementsFilterType;
+
+  /// No description provided for @movementsFilterTypeAny.
+  ///
+  /// In en, this message translates to:
+  /// **'All types'**
+  String get movementsFilterTypeAny;
+
+  /// No description provided for @movementsFilterProduct.
+  ///
+  /// In en, this message translates to:
+  /// **'Product'**
+  String get movementsFilterProduct;
+
+  /// No description provided for @movementsFilterProductAny.
+  ///
+  /// In en, this message translates to:
+  /// **'All products'**
+  String get movementsFilterProductAny;
+
+  /// No description provided for @movementReasonSale.
+  ///
+  /// In en, this message translates to:
+  /// **'Sale {number}'**
+  String movementReasonSale(String number);
+
+  /// No description provided for @movementReasonSaleDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Sale {number} deleted'**
+  String movementReasonSaleDeleted(String number);
+
+  /// No description provided for @movementReasonPurchase.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase received {number}'**
+  String movementReasonPurchase(String number);
+
+  /// No description provided for @movementReasonPurchaseCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase {number} cancelled'**
+  String movementReasonPurchaseCancelled(String number);
+
+  /// No description provided for @movementReasonOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Order {number}'**
+  String movementReasonOrder(String number);
+
+  /// No description provided for @movementReasonOrderCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled order {number}'**
+  String movementReasonOrderCancelled(String number);
+
+  /// No description provided for @movementReasonOrderReturned.
+  ///
+  /// In en, this message translates to:
+  /// **'Returned order {number}'**
+  String movementReasonOrderReturned(String number);
+
+  /// No description provided for @movementReasonOrderDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Deleted order {number}'**
+  String movementReasonOrderDeleted(String number);
+
+  /// No description provided for @movementReasonInitial.
+  ///
+  /// In en, this message translates to:
+  /// **'Initial stock'**
+  String get movementReasonInitial;
+
+  /// No description provided for @movementReasonVariantDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Variant deleted'**
+  String get movementReasonVariantDeleted;
+
+  /// No description provided for @saleDeleteMoney.
+  ///
+  /// In en, this message translates to:
+  /// **'The {amount} already received will be removed from the cash register.'**
+  String saleDeleteMoney(String amount);
+
+  /// No description provided for @menuCaisse.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash register'**
+  String get menuCaisse;
+
+  /// No description provided for @caisseEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'FINANCES'**
+  String get caisseEyebrow;
+
+  /// No description provided for @caisseTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash register'**
+  String get caisseTitle;
+
+  /// No description provided for @caisseSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash register & treasury management'**
+  String get caisseSubtitle;
+
+  /// No description provided for @caissePeriodToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get caissePeriodToday;
+
+  /// No description provided for @caissePeriodWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'This week'**
+  String get caissePeriodWeek;
+
+  /// No description provided for @caissePeriodMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'This month'**
+  String get caissePeriodMonth;
+
+  /// No description provided for @caissePeriodYear.
+  ///
+  /// In en, this message translates to:
+  /// **'This year'**
+  String get caissePeriodYear;
+
+  /// No description provided for @caisseStatBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Balance'**
+  String get caisseStatBalance;
+
+  /// No description provided for @caisseStatIncome.
+  ///
+  /// In en, this message translates to:
+  /// **'Total income'**
+  String get caisseStatIncome;
+
+  /// No description provided for @caisseStatExpense.
+  ///
+  /// In en, this message translates to:
+  /// **'Total expenses'**
+  String get caisseStatExpense;
+
+  /// No description provided for @caisseStatCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Transactions'**
+  String get caisseStatCount;
+
+  /// No description provided for @caisseSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search reference or description…'**
+  String get caisseSearch;
+
+  /// No description provided for @caisseSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Transactions'**
+  String get caisseSection;
+
+  /// No description provided for @caisseEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No transactions found'**
+  String get caisseEmptyTitle;
+
+  /// No description provided for @caisseEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid sales, orders and purchases appear here automatically. Add your other money in and out.'**
+  String get caisseEmptyBody;
+
+  /// No description provided for @caisseNoMatchBody.
+  ///
+  /// In en, this message translates to:
+  /// **'No transaction matches these filters.'**
+  String get caisseNoMatchBody;
+
+  /// No description provided for @caisseTypeIncome.
+  ///
+  /// In en, this message translates to:
+  /// **'Income'**
+  String get caisseTypeIncome;
+
+  /// No description provided for @caisseTypeExpense.
+  ///
+  /// In en, this message translates to:
+  /// **'Expense'**
+  String get caisseTypeExpense;
+
+  /// No description provided for @caisseCatSale.
+  ///
+  /// In en, this message translates to:
+  /// **'Sale'**
+  String get caisseCatSale;
+
+  /// No description provided for @caisseCatOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Order'**
+  String get caisseCatOrder;
+
+  /// No description provided for @caisseCatPurchase.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase'**
+  String get caisseCatPurchase;
+
+  /// No description provided for @caisseCatRent.
+  ///
+  /// In en, this message translates to:
+  /// **'Rent'**
+  String get caisseCatRent;
+
+  /// No description provided for @caisseCatSalary.
+  ///
+  /// In en, this message translates to:
+  /// **'Salary'**
+  String get caisseCatSalary;
+
+  /// No description provided for @caisseCatUtilities.
+  ///
+  /// In en, this message translates to:
+  /// **'Utilities'**
+  String get caisseCatUtilities;
+
+  /// No description provided for @caisseCatMarketing.
+  ///
+  /// In en, this message translates to:
+  /// **'Marketing'**
+  String get caisseCatMarketing;
+
+  /// No description provided for @caisseCatShipping.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipping'**
+  String get caisseCatShipping;
+
+  /// No description provided for @caisseCatOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get caisseCatOther;
+
+  /// No description provided for @caisseRef.
+  ///
+  /// In en, this message translates to:
+  /// **'Ref. {reference}'**
+  String caisseRef(String reference);
+
+  /// No description provided for @caisseAuto.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto'**
+  String get caisseAuto;
+
+  /// No description provided for @caisseManual.
+  ///
+  /// In en, this message translates to:
+  /// **'Manual'**
+  String get caisseManual;
+
+  /// No description provided for @caisseAutoSale.
+  ///
+  /// In en, this message translates to:
+  /// **'Sale {number}'**
+  String caisseAutoSale(String number);
+
+  /// No description provided for @caisseAutoOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Order {number}'**
+  String caisseAutoOrder(String number);
+
+  /// No description provided for @caisseAutoPurchase.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase {number}'**
+  String caisseAutoPurchase(String number);
+
+  /// No description provided for @caisseFilterType.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get caisseFilterType;
+
+  /// No description provided for @caisseFilterCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get caisseFilterCategory;
+
+  /// No description provided for @caisseFilterCategoryAny.
+  ///
+  /// In en, this message translates to:
+  /// **'All categories'**
+  String get caisseFilterCategoryAny;
+
+  /// No description provided for @caisseAddTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add transaction'**
+  String get caisseAddTitle;
+
+  /// No description provided for @caisseEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit transaction'**
+  String get caisseEditTitle;
+
+  /// No description provided for @caisseFieldAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount (DA)'**
+  String get caisseFieldAmount;
+
+  /// No description provided for @caisseFieldReference.
+  ///
+  /// In en, this message translates to:
+  /// **'Reference'**
+  String get caisseFieldReference;
+
+  /// No description provided for @caisseReferenceHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. Invoice #123'**
+  String get caisseReferenceHint;
+
+  /// No description provided for @caisseFieldDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get caisseFieldDescription;
+
+  /// No description provided for @caisseDescriptionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Details about this transaction'**
+  String get caisseDescriptionHint;
+
+  /// No description provided for @caisseFieldDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get caisseFieldDate;
+
+  /// No description provided for @caisseAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get caisseAdd;
+
+  /// No description provided for @caisseUpdate.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get caisseUpdate;
+
+  /// No description provided for @caisseErrAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter an amount'**
+  String get caisseErrAmount;
+
+  /// No description provided for @caisseErrAmountPositive.
+  ///
+  /// In en, this message translates to:
+  /// **'The amount must be above 0'**
+  String get caisseErrAmountPositive;
+
+  /// No description provided for @caisseAddedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Transaction added'**
+  String get caisseAddedToast;
+
+  /// No description provided for @caisseUpdatedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Transaction updated'**
+  String get caisseUpdatedToast;
+
+  /// No description provided for @caisseDeletedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Transaction deleted'**
+  String get caisseDeletedToast;
+
+  /// No description provided for @caisseAlreadyGone.
+  ///
+  /// In en, this message translates to:
+  /// **'This transaction had already been deleted'**
+  String get caisseAlreadyGone;
+
+  /// No description provided for @caisseDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete transaction'**
+  String get caisseDeleteTitle;
+
+  /// No description provided for @caisseDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this transaction?'**
+  String get caisseDeleteBody;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

@@ -193,6 +193,9 @@ void main() {
 
     setUp(() async {
       prefs = await PrefsStorage.load();
+      // The steps are only reachable while the tutorial is owed: the router
+      // sends a merchant who has finished it home from any tutorial path.
+      await prefs.setTutorialPending(true);
       stockMode = StockModeViewModel(prefs: prefs);
       router = AppRouter(session: session, push: NoopPushService());
       session.debugSetUser(

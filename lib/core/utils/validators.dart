@@ -43,6 +43,10 @@ enum FieldError {
   /// A selling price below the cost price. The backend refuses it:
   /// *"Selling price must be greater than or equal to cost price"*.
   belowCostPrice,
+
+  /// A confirmation that does not repeat the value it confirms — the second
+  /// password on the reset screen.
+  mismatch,
 }
 
 typedef FieldValidator = FieldError? Function(String value);
@@ -88,6 +92,16 @@ class Validators {
     if (value.length < passwordMinLength) return FieldError.tooShort;
     return null;
   }
+
+  /// The confirmation of another field: present, and exactly the same text.
+  ///
+  /// Cross-field like [sellingPrice], so it takes the other field's text
+  /// rather than being a bare [FieldValidator]. Not trimmed, for the same
+  /// reason as [newPassword].
+  static FieldValidator matches(String Function() otherText) => (String value) {
+        if (value.isEmpty) return FieldError.required;
+        return value == otherText() ? null : FieldError.mismatch;
+      };
 
   /// A name. The backend asks only for non-empty; trimmed here so a field
   /// holding only spaces does not pass.
@@ -140,6 +154,36 @@ class Validators {
         final cost = parseAmount(costPriceText());
         if (cost == null) return null;
         return parseAmount(value)! < cost ? FieldError.belowCostPrice : null;
+      };
+
+  /// A variant's cost or selling price: optional, and legitimately zero.
+  ///
+  /// The variant endpoint clamps its numbers to `>= 0` and has neither the
+  /// above-zero nor the selling-above-cost rule of the product itself (live
+  /// docs); the web's editor starts every row at `0`. Only something
+  /// unreadable is wrong.
+  static FieldError? optionalAmount(String value) {
+    if (value.trim().isEmpty) return null;
+    final amount = parseAmount(value);
+    if (amount == null) return FieldError.notANumber;
+    if (amount < 0) return FieldError.mustBePositive;
+    return null;
+  }
+
+  /// A variant's selling price: [optionalAmount], and not below the cost.
+  ///
+  /// The variant endpoint does not enforce this (live docs), but a price
+  /// under cost is a typo on a variant as much as on the product, whose own
+  /// [sellingPrice] refuses it. Equal is allowed — a new row is `0` and `0`.
+  /// Quiet while the cost is empty or unreadable, as [sellingPrice] is.
+  static FieldValidator optionalSellingPrice(String Function() costPriceText) =>
+      (String value) {
+        final own = optionalAmount(value);
+        if (own != null) return own;
+        final cost = parseAmount(costPriceText());
+        final asked = parseAmount(value);
+        if (cost == null || asked == null) return null;
+        return asked < cost ? FieldError.belowCostPrice : null;
       };
 
   /// The low-stock alert threshold: optional, and legitimately zero.
