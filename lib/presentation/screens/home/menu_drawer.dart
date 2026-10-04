@@ -348,6 +348,15 @@ class _MenuDrawerState extends State<MenuDrawer> {
                   iconColor: AppColors.accentClients,
                   onTap: () => _open(Routes.clients),
                 ),
+                // Cross-sell / up-sell — right after Clients, as in the web's
+                // stock group.
+                MenuSubrow(
+                  depth: 2,
+                  icon: AppIcons.bolt,
+                  label: l10n.menuCrossSell,
+                  iconColor: AppColors.live,
+                  onTap: () => _open(Routes.recommendations),
+                ),
                 // The cash register — before Commandes, as in the web's stock
                 // group, and in both stock modes like every row here.
                 MenuSubrow(

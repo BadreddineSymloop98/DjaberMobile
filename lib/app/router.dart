@@ -48,6 +48,7 @@ import '../presentation/screens/purchases/movements_screen.dart';
 import '../presentation/screens/purchases/new_purchase_screen.dart';
 import '../presentation/screens/purchases/purchase_detail_screen.dart';
 import '../presentation/screens/purchases/purchases_screen.dart';
+import '../presentation/screens/recommendations/recommendations_screen.dart';
 import '../presentation/screens/sales/edit_sale_screen.dart';
 import '../presentation/screens/sales/new_sale_screen.dart';
 import '../presentation/screens/sales/sale_detail_screen.dart';
@@ -587,6 +588,11 @@ class AppRouter {
         path: Routes.movements,
         parentNavigatorKey: _rootKey,
         builder: (_, _) => const BackScope(fallback: Routes.home, child: MovementsScreen()),
+      ),
+      GoRoute(
+        path: Routes.recommendations,
+        parentNavigatorKey: _rootKey,
+        builder: (_, _) => const BackScope(fallback: Routes.home, child: RecommendationsScreen()),
       ),
       GoRoute(
         path: Routes.caisse,

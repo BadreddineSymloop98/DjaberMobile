@@ -5175,4 +5175,191 @@ class L10nFr extends L10n {
   @override
   String get caisseDeleteBody =>
       'Voulez-vous vraiment supprimer cette transaction ?';
+
+  @override
+  String get menuCrossSell => 'Ventes croisées';
+
+  @override
+  String get recoEyebrow => 'VENTES';
+
+  @override
+  String get recoTitle => 'Vente croisée / Montée en gamme';
+
+  @override
+  String get recoSubtitle =>
+      'Recommandations de produits par IA pour booster les ventes';
+
+  @override
+  String get recoStatRules => 'Total des règles';
+
+  @override
+  String recoStatActive(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count actives',
+      one: '1 active',
+      zero: '0 active',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recoStatImpressions => 'Impressions';
+
+  @override
+  String get recoStatImpressionsNote => 'Fois affichées';
+
+  @override
+  String get recoStatConversions => 'Conversions';
+
+  @override
+  String recoStatRate(String rate) {
+    return 'Taux $rate';
+  }
+
+  @override
+  String get recoStatRevenue => 'Chiffre d’affaires';
+
+  @override
+  String get recoStatRevenueNote => 'Depuis la vente croisée';
+
+  @override
+  String get recoSearch => 'Rechercher des produits…';
+
+  @override
+  String get recoTypeAll => 'Tous les types';
+
+  @override
+  String get recoFilterCross => 'Vente croisée';
+
+  @override
+  String get recoFilterUp => 'Montée en gamme';
+
+  @override
+  String get recoTagCross => 'Vente croisée';
+
+  @override
+  String get recoTagUp => 'Montée en gamme';
+
+  @override
+  String get recoStatusAll => 'Toutes';
+
+  @override
+  String get recoStatusActive => 'Actives';
+
+  @override
+  String get recoStatusInactive => 'Inactives';
+
+  @override
+  String get recoSection => 'Recommandations';
+
+  @override
+  String recoShown(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count recommandations affichées',
+      one: '1 recommandation affichée',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recoActive => 'Active';
+
+  @override
+  String recoImpressions(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count impressions',
+      one: '1 impression',
+      zero: '0 impression',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recoConversions(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count conversions',
+      one: '1 conversion',
+      zero: '0 conversion',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recoGenerate => 'Générer des recommandations';
+
+  @override
+  String get recoGenerateNow => 'Générer maintenant';
+
+  @override
+  String get recoAnalyzing => 'Analyse en cours…';
+
+  @override
+  String recoGeneratedToast(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count recommandations mises à jour',
+      one: '1 recommandation mise à jour',
+      zero: 'Aucune nouvelle recommandation trouvée',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recoEmptyTitle => 'Aucune recommandation pour le moment';
+
+  @override
+  String get recoEmptyBody =>
+      'Touchez « Générer maintenant » pour analyser vos produits';
+
+  @override
+  String get recoNoMatchBody =>
+      'Aucune recommandation ne correspond à ces critères.';
+
+  @override
+  String get recoDeleteAsk => 'Supprimer ?';
+
+  @override
+  String get recoYes => 'Oui';
+
+  @override
+  String get recoNo => 'Non';
+
+  @override
+  String get recoDeleteHint =>
+      'Elle peut revenir à la prochaine génération — désactivez-la pour la masquer.';
+
+  @override
+  String get recoDeletedToast => 'Recommandation supprimée';
+
+  @override
+  String get recoAlreadyGone => 'Cette recommandation avait déjà été supprimée';
+
+  @override
+  String recoReasonBought(int count, String percent) {
+    return 'Souvent achetés ensemble ($count fois, $percent des commandes)';
+  }
+
+  @override
+  String recoReasonPremium(String percent) {
+    return 'Alternative haut de gamme, même catégorie (+$percent de prix)';
+  }
+
+  @override
+  String recoReasonSimilar(String percent) {
+    return 'Description de produit similaire ($percent de correspondance)';
+  }
+
+  @override
+  String recoReasonRelated(String percent) {
+    return 'Produits liés ($percent de description commune)';
+  }
 }

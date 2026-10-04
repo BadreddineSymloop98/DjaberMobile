@@ -9056,6 +9056,264 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Are you sure you want to delete this transaction?'**
   String get caisseDeleteBody;
+
+  /// No description provided for @menuCrossSell.
+  ///
+  /// In en, this message translates to:
+  /// **'Cross-sell'**
+  String get menuCrossSell;
+
+  /// No description provided for @recoEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'SALES'**
+  String get recoEyebrow;
+
+  /// No description provided for @recoTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cross-sell / Up-sell'**
+  String get recoTitle;
+
+  /// No description provided for @recoSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'AI-powered product recommendations to boost sales'**
+  String get recoSubtitle;
+
+  /// No description provided for @recoStatRules.
+  ///
+  /// In en, this message translates to:
+  /// **'Total rules'**
+  String get recoStatRules;
+
+  /// No description provided for @recoStatActive.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} active'**
+  String recoStatActive(int count);
+
+  /// No description provided for @recoStatImpressions.
+  ///
+  /// In en, this message translates to:
+  /// **'Impressions'**
+  String get recoStatImpressions;
+
+  /// No description provided for @recoStatImpressionsNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Times shown'**
+  String get recoStatImpressionsNote;
+
+  /// No description provided for @recoStatConversions.
+  ///
+  /// In en, this message translates to:
+  /// **'Conversions'**
+  String get recoStatConversions;
+
+  /// No description provided for @recoStatRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate {rate}'**
+  String recoStatRate(String rate);
+
+  /// No description provided for @recoStatRevenue.
+  ///
+  /// In en, this message translates to:
+  /// **'Revenue'**
+  String get recoStatRevenue;
+
+  /// No description provided for @recoStatRevenueNote.
+  ///
+  /// In en, this message translates to:
+  /// **'From cross-sell'**
+  String get recoStatRevenueNote;
+
+  /// No description provided for @recoSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search products…'**
+  String get recoSearch;
+
+  /// No description provided for @recoTypeAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All types'**
+  String get recoTypeAll;
+
+  /// No description provided for @recoFilterCross.
+  ///
+  /// In en, this message translates to:
+  /// **'Cross-sell'**
+  String get recoFilterCross;
+
+  /// No description provided for @recoFilterUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Up-sell'**
+  String get recoFilterUp;
+
+  /// No description provided for @recoTagCross.
+  ///
+  /// In en, this message translates to:
+  /// **'Cross-sell'**
+  String get recoTagCross;
+
+  /// No description provided for @recoTagUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Up-sell'**
+  String get recoTagUp;
+
+  /// No description provided for @recoStatusAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get recoStatusAll;
+
+  /// No description provided for @recoStatusActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get recoStatusActive;
+
+  /// No description provided for @recoStatusInactive.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get recoStatusInactive;
+
+  /// No description provided for @recoSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommendations'**
+  String get recoSection;
+
+  /// No description provided for @recoShown.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Showing 1 recommendation} other{Showing {count} recommendations}}'**
+  String recoShown(int count);
+
+  /// No description provided for @recoActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get recoActive;
+
+  /// No description provided for @recoImpressions.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 impression} other{{count} impressions}}'**
+  String recoImpressions(int count);
+
+  /// No description provided for @recoConversions.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 conversion} other{{count} conversions}}'**
+  String recoConversions(int count);
+
+  /// No description provided for @recoGenerate.
+  ///
+  /// In en, this message translates to:
+  /// **'Generate recommendations'**
+  String get recoGenerate;
+
+  /// No description provided for @recoGenerateNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Generate now'**
+  String get recoGenerateNow;
+
+  /// No description provided for @recoAnalyzing.
+  ///
+  /// In en, this message translates to:
+  /// **'Analyzing…'**
+  String get recoAnalyzing;
+
+  /// No description provided for @recoGeneratedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No new recommendation found} =1{1 recommendation updated} other{{count} recommendations updated}}'**
+  String recoGeneratedToast(int count);
+
+  /// No description provided for @recoEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No recommendations yet'**
+  String get recoEmptyTitle;
+
+  /// No description provided for @recoEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap “Generate now” to analyze your products'**
+  String get recoEmptyBody;
+
+  /// No description provided for @recoNoMatchBody.
+  ///
+  /// In en, this message translates to:
+  /// **'No recommendation matches these filters.'**
+  String get recoNoMatchBody;
+
+  /// No description provided for @recoDeleteAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete?'**
+  String get recoDeleteAsk;
+
+  /// No description provided for @recoYes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get recoYes;
+
+  /// No description provided for @recoNo.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get recoNo;
+
+  /// No description provided for @recoDeleteHint.
+  ///
+  /// In en, this message translates to:
+  /// **'It may come back on the next generation — deactivate it to hide it for good.'**
+  String get recoDeleteHint;
+
+  /// No description provided for @recoDeletedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommendation deleted'**
+  String get recoDeletedToast;
+
+  /// No description provided for @recoAlreadyGone.
+  ///
+  /// In en, this message translates to:
+  /// **'This recommendation had already been deleted'**
+  String get recoAlreadyGone;
+
+  /// No description provided for @recoReasonBought.
+  ///
+  /// In en, this message translates to:
+  /// **'Often bought together ({count} times, {percent} of orders)'**
+  String recoReasonBought(int count, String percent);
+
+  /// No description provided for @recoReasonPremium.
+  ///
+  /// In en, this message translates to:
+  /// **'Premium alternative in the same category (+{percent} price)'**
+  String recoReasonPremium(String percent);
+
+  /// No description provided for @recoReasonSimilar.
+  ///
+  /// In en, this message translates to:
+  /// **'Similar product description ({percent} match)'**
+  String recoReasonSimilar(String percent);
+
+  /// No description provided for @recoReasonRelated.
+  ///
+  /// In en, this message translates to:
+  /// **'Related products ({percent} description match)'**
+  String recoReasonRelated(String percent);
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

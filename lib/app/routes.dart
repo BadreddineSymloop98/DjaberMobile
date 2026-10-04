@@ -195,6 +195,10 @@ class Routes {
   /// order). Adding and editing are sheets, not routes.
   static const caisse = '/caisse';
 
+  /// `Ventes croisées` — from the drawer, after Clients (the web stock group's
+  /// order). Delete is confirmed in the card, not a route.
+  static const recommendations = '/recommendations';
+
   static const notifications = '/notifications';
   static const settings = '/settings';
 

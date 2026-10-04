@@ -129,6 +129,12 @@ class Api {
   static const caisseStats = '/api/user-stock/caisse/stats';
   static String caisseTransaction(String id) => '/api/user-stock/caisse/$id';
 
+  // ---- Cross-sell / up-sell recommendations ----
+  static const crossSell = '/api/user-stock/cross-sell';
+  static const crossSellStats = '/api/user-stock/cross-sell/stats';
+  static const crossSellGenerate = '/api/user-stock/cross-sell/generate';
+  static String crossSellItem(String id) => '/api/user-stock/cross-sell/$id';
+
   // ---- Clients & suppliers ----
   static const clients = '/api/user-stock/clients';
   static String client(String id) => '/api/user-stock/clients/$id';

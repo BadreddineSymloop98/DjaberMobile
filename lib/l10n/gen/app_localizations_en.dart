@@ -5125,4 +5125,180 @@ class L10nEn extends L10n {
   @override
   String get caisseDeleteBody =>
       'Are you sure you want to delete this transaction?';
+
+  @override
+  String get menuCrossSell => 'Cross-sell';
+
+  @override
+  String get recoEyebrow => 'SALES';
+
+  @override
+  String get recoTitle => 'Cross-sell / Up-sell';
+
+  @override
+  String get recoSubtitle =>
+      'AI-powered product recommendations to boost sales';
+
+  @override
+  String get recoStatRules => 'Total rules';
+
+  @override
+  String recoStatActive(int count) {
+    return '$count active';
+  }
+
+  @override
+  String get recoStatImpressions => 'Impressions';
+
+  @override
+  String get recoStatImpressionsNote => 'Times shown';
+
+  @override
+  String get recoStatConversions => 'Conversions';
+
+  @override
+  String recoStatRate(String rate) {
+    return 'Rate $rate';
+  }
+
+  @override
+  String get recoStatRevenue => 'Revenue';
+
+  @override
+  String get recoStatRevenueNote => 'From cross-sell';
+
+  @override
+  String get recoSearch => 'Search products…';
+
+  @override
+  String get recoTypeAll => 'All types';
+
+  @override
+  String get recoFilterCross => 'Cross-sell';
+
+  @override
+  String get recoFilterUp => 'Up-sell';
+
+  @override
+  String get recoTagCross => 'Cross-sell';
+
+  @override
+  String get recoTagUp => 'Up-sell';
+
+  @override
+  String get recoStatusAll => 'All';
+
+  @override
+  String get recoStatusActive => 'Active';
+
+  @override
+  String get recoStatusInactive => 'Inactive';
+
+  @override
+  String get recoSection => 'Recommendations';
+
+  @override
+  String recoShown(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Showing $count recommendations',
+      one: 'Showing 1 recommendation',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recoActive => 'Active';
+
+  @override
+  String recoImpressions(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count impressions',
+      one: '1 impression',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recoConversions(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count conversions',
+      one: '1 conversion',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recoGenerate => 'Generate recommendations';
+
+  @override
+  String get recoGenerateNow => 'Generate now';
+
+  @override
+  String get recoAnalyzing => 'Analyzing…';
+
+  @override
+  String recoGeneratedToast(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count recommendations updated',
+      one: '1 recommendation updated',
+      zero: 'No new recommendation found',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recoEmptyTitle => 'No recommendations yet';
+
+  @override
+  String get recoEmptyBody => 'Tap “Generate now” to analyze your products';
+
+  @override
+  String get recoNoMatchBody => 'No recommendation matches these filters.';
+
+  @override
+  String get recoDeleteAsk => 'Delete?';
+
+  @override
+  String get recoYes => 'Yes';
+
+  @override
+  String get recoNo => 'No';
+
+  @override
+  String get recoDeleteHint =>
+      'It may come back on the next generation — deactivate it to hide it for good.';
+
+  @override
+  String get recoDeletedToast => 'Recommendation deleted';
+
+  @override
+  String get recoAlreadyGone => 'This recommendation had already been deleted';
+
+  @override
+  String recoReasonBought(int count, String percent) {
+    return 'Often bought together ($count times, $percent of orders)';
+  }
+
+  @override
+  String recoReasonPremium(String percent) {
+    return 'Premium alternative in the same category (+$percent price)';
+  }
+
+  @override
+  String recoReasonSimilar(String percent) {
+    return 'Similar product description ($percent match)';
+  }
+
+  @override
+  String recoReasonRelated(String percent) {
+    return 'Related products ($percent description match)';
+  }
 }

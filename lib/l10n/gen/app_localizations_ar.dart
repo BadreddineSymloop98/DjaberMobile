@@ -5139,4 +5139,176 @@ class L10nAr extends L10n {
 
   @override
   String get caisseDeleteBody => 'هل تريد فعلًا حذف هذه المعاملة؟';
+
+  @override
+  String get menuCrossSell => 'البيع التكميلي';
+
+  @override
+  String get recoEyebrow => 'المبيعات';
+
+  @override
+  String get recoTitle => 'البيع المتقاطع / الترقية';
+
+  @override
+  String get recoSubtitle =>
+      'توصيات منتجات مدعومة بالذكاء الاصطناعي لزيادة المبيعات';
+
+  @override
+  String get recoStatRules => 'إجمالي القواعد';
+
+  @override
+  String recoStatActive(int count) {
+    return '$count نشطة';
+  }
+
+  @override
+  String get recoStatImpressions => 'الظهور';
+
+  @override
+  String get recoStatImpressionsNote => 'مرات الظهور';
+
+  @override
+  String get recoStatConversions => 'التحويلات';
+
+  @override
+  String recoStatRate(String rate) {
+    return 'المعدل $rate';
+  }
+
+  @override
+  String get recoStatRevenue => 'الإيرادات';
+
+  @override
+  String get recoStatRevenueNote => 'من البيع المتقاطع';
+
+  @override
+  String get recoSearch => 'ابحث في المنتجات…';
+
+  @override
+  String get recoTypeAll => 'كل الأنواع';
+
+  @override
+  String get recoFilterCross => 'البيع المتقاطع';
+
+  @override
+  String get recoFilterUp => 'الترقية';
+
+  @override
+  String get recoTagCross => 'بيع متقاطع';
+
+  @override
+  String get recoTagUp => 'ترقية';
+
+  @override
+  String get recoStatusAll => 'الكل';
+
+  @override
+  String get recoStatusActive => 'النشطة';
+
+  @override
+  String get recoStatusInactive => 'المعطّلة';
+
+  @override
+  String get recoSection => 'التوصيات';
+
+  @override
+  String recoShown(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'عرض $count توصيات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recoActive => 'نشطة';
+
+  @override
+  String recoImpressions(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ظهورًا',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recoConversions(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count تحويلًا',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recoGenerate => 'توليد التوصيات';
+
+  @override
+  String get recoGenerateNow => 'التوليد الآن';
+
+  @override
+  String get recoAnalyzing => 'جارٍ التحليل…';
+
+  @override
+  String recoGeneratedToast(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'تم تحديث $count توصية',
+      zero: 'لم يتم العثور على توصيات جديدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recoEmptyTitle => 'لا توجد توصيات بعد';
+
+  @override
+  String get recoEmptyBody => 'اضغط «التوليد الآن» لتحليل منتجاتك';
+
+  @override
+  String get recoNoMatchBody => 'لا توجد توصية تطابق هذه المعايير.';
+
+  @override
+  String get recoDeleteAsk => 'حذف؟';
+
+  @override
+  String get recoYes => 'نعم';
+
+  @override
+  String get recoNo => 'لا';
+
+  @override
+  String get recoDeleteHint =>
+      'قد تعود عند التوليد القادم — عطّلها لإخفائها نهائيًا.';
+
+  @override
+  String get recoDeletedToast => 'تم حذف التوصية';
+
+  @override
+  String get recoAlreadyGone => 'كانت هذه التوصية محذوفة مسبقًا';
+
+  @override
+  String recoReasonBought(int count, String percent) {
+    return 'يُشترَيان معًا غالبًا ($count مرات، $percent من الطلبات)';
+  }
+
+  @override
+  String recoReasonPremium(String percent) {
+    return 'بديل أرقى من نفس الفئة (+$percent في السعر)';
+  }
+
+  @override
+  String recoReasonSimilar(String percent) {
+    return 'وصف منتج مشابه (تطابق $percent)';
+  }
+
+  @override
+  String recoReasonRelated(String percent) {
+    return 'منتجات مرتبطة (تطابق الوصف $percent)';
+  }
 }
