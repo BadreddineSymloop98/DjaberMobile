@@ -20,20 +20,31 @@ import 'icon_square_button.dart';
 /// The optional trailing slot carries a count on `À traiter` and an action on
 /// `Vos pages`; the frame sets both in `Label/Section` at `text/primary`.
 class SectionLabel extends StatelessWidget {
-  const SectionLabel({super.key, required this.label, this.trailing, this.onTrailingTap});
+  const SectionLabel({
+    super.key,
+    required this.label,
+    this.trailing,
+    this.onTrailingTap,
+    this.nested = false,
+  });
 
   final String label;
   final String? trailing;
   final VoidCallback? onTrailingTap;
 
+  /// Inside content already padded to the 16 gutter: only the 4 that makes
+  /// up the label's 20 is added, instead of indenting it twice.
+  final bool nested;
+
   @override
   Widget build(BuildContext context) {
     final trailingText = trailing;
+    final side = nested ? AppSpacing.gutter - AppSpacing.gutterTight : AppSpacing.gutter;
     return Padding(
       padding: EdgeInsets.fromLTRB(
-        AppSpacing.gutter, // 20 — the label gutter, wider than the content's 16
+        side, // 20 — the label gutter, wider than the content's 16
         AppSpacing.xxs, // 2
-        AppSpacing.gutter,
+        side,
         AppSpacing.md, // 12
       ),
       child: Row(
@@ -291,6 +302,8 @@ class AppListRow extends StatelessWidget {
     required this.meta,
     this.value,
     this.unit,
+    this.titleColor,
+    this.valueColor,
     this.unitColor,
     this.onTap,
   });
@@ -299,6 +312,15 @@ class AppListRow extends StatelessWidget {
   final String meta;
   final String? value;
   final String? unit;
+
+  /// Tints the title. Used for a destructive action row — the details
+  /// screen's *Supprimer le produit*, which the Figma's delete sheet colours
+  /// the same way.
+  final Color? titleColor;
+
+  /// Tints the value. `16 — Aperçu du stock` mutes a stock exit, as the web
+  /// greys `out`.
+  final Color? valueColor;
 
   /// Tints the label under the value. Used by `17 — Produits` to put
   /// `accent/alert` on `RUPTURE`: a product with no stock cannot be sold, and
@@ -321,8 +343,14 @@ class AppListRow extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(title, style: AppText.title,
-                      maxLines: 1, overflow: TextOverflow.ellipsis),
+                  Text(
+                    title,
+                    style: titleColor == null
+                        ? AppText.title
+                        : AppText.title.copyWith(color: titleColor),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                   SizedBox(height: AppSpacing.xxs), // 2
                   Text(meta.toUpperCase(), style: AppText.labelMeta,
                       maxLines: 1, overflow: TextOverflow.ellipsis),
@@ -336,7 +364,12 @@ class AppListRow extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if (value != null)
-                    Text(value!, style: AppText.numeralS),
+                    Text(
+                      value!,
+                      style: valueColor == null
+                          ? AppText.numeralS
+                          : AppText.numeralS.copyWith(color: valueColor),
+                    ),
                   if (unit != null) ...[
                     SizedBox(height: AppSpacing.xxs),
                     Text(

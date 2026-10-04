@@ -109,11 +109,14 @@ void main() {
     /// What leaving the app does: the boot gate drops on pause, the splash
     /// plays on return, and then hands back.
     Future<void> leaveAndReturn(WidgetTester tester) async {
-      session.resetBoot();
+      session.replaySplash();
       await playSplash(tester);
     }
 
-    testWidgets('sign-up comes back as sign-up, with all but the password',
+    // The password stays in its field: the replay no longer tears the form
+    // down (`SplashReplayOverlay`). What is pinned is that the draft store,
+    // which outlives the screen, never holds it.
+    testWidgets('sign-up comes back as sign-up, and no password is kept aside',
         (tester) async {
       await pumpApp(tester);
       expect(location(), Routes.login);
@@ -131,10 +134,11 @@ void main() {
       expect(textAt(tester, 0), 'Sara');
       expect(textAt(tester, 1), 'Benali');
       expect(textAt(tester, 2), 'sara@djaber.test');
-      expect(textAt(tester, 3), isEmpty, reason: 'a password is never kept');
+      expect(textAt(tester, 3), 'motdepasse1', reason: 'the field was never torn down');
+      expect(drafts.read('signup').values, isNot(contains('motdepasse1')));
     });
 
-    testWidgets('login keeps the address, never the password', (tester) async {
+    testWidgets('login keeps the address, and no password is kept aside', (tester) async {
       await pumpApp(tester);
 
       await tester.enterText(find.byType(TextField).at(0), 'sara@djaber.test');
@@ -145,7 +149,8 @@ void main() {
 
       expect(location(), Routes.login);
       expect(textAt(tester, 0), 'sara@djaber.test');
-      expect(textAt(tester, 1), isEmpty);
+      expect(textAt(tester, 1), 'motdepasse1', reason: 'the field was never torn down');
+      expect(drafts.read('login').values, isNot(contains('motdepasse1')));
     });
 
     testWidgets('forgot-password comes back with its address', (tester) async {

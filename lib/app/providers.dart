@@ -10,11 +10,21 @@ import '../core/storage/prefs_storage.dart';
 import '../core/storage/secure_storage.dart';
 import '../data/repositories/agent_repository.dart';
 import '../data/repositories/auth_repository.dart';
+import '../data/repositories/billing_repository.dart';
+import '../data/repositories/caisse_repository.dart';
 import '../data/repositories/catalogue_repository.dart';
+import '../data/repositories/client_repository.dart';
 import '../data/repositories/dashboard_repository.dart';
+import '../data/repositories/delivery_repository.dart';
+import '../data/repositories/inbox_repository.dart';
 import '../data/repositories/notification_repository.dart';
+import '../data/repositories/order_repository.dart';
 import '../data/repositories/page_repository.dart';
 import '../data/repositories/product_repository.dart';
+import '../data/repositories/purchase_repository.dart';
+import '../data/repositories/recommendation_repository.dart';
+import '../data/repositories/sale_repository.dart';
+import '../data/repositories/supplier_repository.dart';
 import '../presentation/viewmodels/form_draft_store.dart';
 import '../presentation/viewmodels/locale_view_model.dart';
 import '../presentation/viewmodels/session_view_model.dart';
@@ -73,6 +83,34 @@ class AppProviders {
         create: (context) =>
             CatalogueRepository(api: context.read<ApiClient>()),
       ),
+      Provider<CaisseRepository>(
+        create: (context) => CaisseRepository(api: context.read<ApiClient>()),
+      ),
+      Provider<ClientRepository>(
+        create: (context) => ClientRepository(api: context.read<ApiClient>()),
+      ),
+      Provider<DeliveryRepository>(
+        create: (context) => DeliveryRepository(api: context.read<ApiClient>()),
+      ),
+      Provider<OrderRepository>(
+        create: (context) => OrderRepository(api: context.read<ApiClient>()),
+      ),
+      // Purchases and the stock ledger — one file, two repositories.
+      Provider<PurchaseRepository>(
+        create: (context) => PurchaseRepository(api: context.read<ApiClient>()),
+      ),
+      Provider<MovementRepository>(
+        create: (context) => MovementRepository(api: context.read<ApiClient>()),
+      ),
+      Provider<RecommendationRepository>(
+        create: (context) => RecommendationRepository(api: context.read<ApiClient>()),
+      ),
+      Provider<SaleRepository>(
+        create: (context) => SaleRepository(api: context.read<ApiClient>()),
+      ),
+      Provider<SupplierRepository>(
+        create: (context) => SupplierRepository(api: context.read<ApiClient>()),
+      ),
       Provider<AgentRepository>(
         create: (context) => AgentRepository(api: context.read<ApiClient>()),
       ),
@@ -83,9 +121,17 @@ class AppProviders {
         create: (context) =>
             DashboardRepository(api: context.read<ApiClient>()),
       ),
+      // Conversations, replies, status and sync — `10` and `10b`.
+      Provider<InboxRepository>(
+        create: (context) => InboxRepository(api: context.read<ApiClient>()),
+      ),
       Provider<NotificationRepository>(
         create: (context) =>
             NotificationRepository(api: context.read<ApiClient>()),
+      ),
+      // Plans and checkout — `11 — Paramètres`.
+      Provider<BillingRepository>(
+        create: (context) => BillingRepository(api: context.read<ApiClient>()),
       ),
       Provider<AuthRepository>(
         create: (context) => AuthRepository(

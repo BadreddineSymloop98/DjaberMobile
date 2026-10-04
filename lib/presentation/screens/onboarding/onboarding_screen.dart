@@ -9,6 +9,7 @@ import '../../theme/app_colors.dart';
 import '../../theme/app_spacing.dart';
 import '../../theme/app_typography.dart';
 import '../../viewmodels/session_view_model.dart';
+import '../../widgets/back_scope.dart';
 import '../../widgets/rise_fade.dart';
 import 'onboarding_artwork.dart';
 
@@ -149,7 +150,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     ];
     final isLast = _page == slides.length - 1;
 
-    return Scaffold(
+    // Back steps back a slide, agreeing with the swipe. On the first slide the
+    // intercept is inactive and the route's root scope asks to leave.
+    return BackIntercept(
+      active: _page > 0,
+      onBack: () {
+        _controller.previousPage(
+          duration: AppDuration.slow,
+          curve: Curves.easeOutCubic,
+        );
+        return false;
+      },
+      child: Scaffold(
       backgroundColor: AppColors.ink,
       body: SafeArea(
         child: Column(
@@ -177,6 +189,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
           ],
         ),
+      ),
       ),
     );
   }
