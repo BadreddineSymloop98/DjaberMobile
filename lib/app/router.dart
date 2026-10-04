@@ -8,6 +8,7 @@ import '../core/utils/logger.dart';
 import '../data/models/agent.dart';
 import '../data/models/delivery.dart';
 import '../data/models/order.dart';
+import '../data/models/purchase.dart';
 import '../data/models/sale.dart';
 import '../data/models/supplier.dart';
 import '../l10n/gen/app_localizations.dart';
@@ -42,6 +43,10 @@ import '../presentation/screens/products/edit_product_screen.dart';
 import '../presentation/screens/products/product_detail_screen.dart';
 import '../presentation/screens/products/product_expenses_screen.dart';
 import '../presentation/screens/products/products_screen.dart';
+import '../presentation/screens/purchases/movements_screen.dart';
+import '../presentation/screens/purchases/new_purchase_screen.dart';
+import '../presentation/screens/purchases/purchase_detail_screen.dart';
+import '../presentation/screens/purchases/purchases_screen.dart';
 import '../presentation/screens/sales/edit_sale_screen.dart';
 import '../presentation/screens/sales/new_sale_screen.dart';
 import '../presentation/screens/sales/sale_detail_screen.dart';
@@ -553,6 +558,34 @@ class AppRouter {
             initial: state.extra is Sale ? state.extra! as Sale : null,
           ),
         ),
+      ),
+      // `Achats` and its screens, then `Mouvements`. `new` before `:id`.
+      GoRoute(
+        path: Routes.purchases,
+        parentNavigatorKey: _rootKey,
+        builder: (_, _) => const BackScope(fallback: Routes.home, child: PurchasesScreen()),
+      ),
+      GoRoute(
+        path: Routes.purchaseNew,
+        parentNavigatorKey: _rootKey,
+        builder: (_, _) => const BackScope(fallback: Routes.purchases, child: NewPurchaseScreen()),
+      ),
+      GoRoute(
+        path: Routes.purchase,
+        parentNavigatorKey: _rootKey,
+        builder: (_, state) => BackScope(
+          fallback: Routes.purchases,
+          child: PurchaseDetailScreen(
+            purchaseId: state.pathParameters['id']!,
+            // The list hands its row over so the screen draws at once.
+            initial: state.extra is Purchase ? state.extra! as Purchase : null,
+          ),
+        ),
+      ),
+      GoRoute(
+        path: Routes.movements,
+        parentNavigatorKey: _rootKey,
+        builder: (_, _) => const BackScope(fallback: Routes.home, child: MovementsScreen()),
       ),
       GoRoute(
         path: Routes.notifications,

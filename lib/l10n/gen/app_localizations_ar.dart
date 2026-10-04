@@ -4601,4 +4601,363 @@ class L10nAr extends L10n {
 
   @override
   String get newSaleLeaveBody => 'ستفقد المبيعة التي بدأتها.';
+
+  @override
+  String get menuPurchases => 'المشتريات';
+
+  @override
+  String get menuMovements => 'الحركات';
+
+  @override
+  String get purchasesEyebrow => 'المشتريات';
+
+  @override
+  String get purchasesTitle => 'المشتريات';
+
+  @override
+  String purchasesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count عملية شراء',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get purchasesStatTotal => 'إجمالي المشتريات';
+
+  @override
+  String get purchasesStatSpent => 'إجمالي الإنفاق';
+
+  @override
+  String get purchasesStatToReceive => 'بانتظار الاستلام';
+
+  @override
+  String get purchasesStatReceived => 'مستلمة';
+
+  @override
+  String get purchasesSearch => 'ابحث في المشتريات…';
+
+  @override
+  String get purchasesQuickAll => 'الكل';
+
+  @override
+  String get purchasesQuickPaid => 'مدفوعة';
+
+  @override
+  String get purchasesQuickToPay => 'للدفع';
+
+  @override
+  String get purchasesSection => 'كل المشتريات';
+
+  @override
+  String purchasesRowMeta(String items, String paid, String remaining) {
+    return '$items  ·  المدفوع $paid  ·  المتبقي للدفع $remaining';
+  }
+
+  @override
+  String get purchasesReceive => 'استلام';
+
+  @override
+  String get purchasesNew => 'شراء جديد';
+
+  @override
+  String get purchasesEmptyTitle => 'لا توجد مشتريات';
+
+  @override
+  String get purchasesEmptyBody => 'سجّل أول عملية شراء من مورد';
+
+  @override
+  String get purchasesNoMatchBody => 'لا توجد عملية شراء تطابق هذه المعايير.';
+
+  @override
+  String get purchasesFilterStatus => 'حالة الاستلام';
+
+  @override
+  String get purchasesFilterSupplierAny => 'كل الموردين';
+
+  @override
+  String get purchasesFilterHasRemaining => 'مبلغ متبقٍّ للمورد';
+
+  @override
+  String get purchaseStatusPending => 'بانتظار الاستلام';
+
+  @override
+  String get purchaseStatusPartial => 'مستلم جزئيًا';
+
+  @override
+  String get purchaseStatusReceived => 'مستلم';
+
+  @override
+  String get purchaseStatusCancelled => 'ملغى';
+
+  @override
+  String get purchasePayPending => 'غير مدفوع';
+
+  @override
+  String get purchasePayPartial => 'مدفوع جزئيًا';
+
+  @override
+  String get purchasePayPaid => 'مدفوع';
+
+  @override
+  String get purchaseDeleteTitle => 'حذف الشراء';
+
+  @override
+  String purchaseDeleteBody(String number) {
+    return 'هل تريد فعلًا حذف الشراء $number؟';
+  }
+
+  @override
+  String get purchaseDeleteNotice => 'لا يمكن التراجع عن هذا الإجراء.';
+
+  @override
+  String purchaseDeletedToast(String number) {
+    return 'تم حذف الشراء $number';
+  }
+
+  @override
+  String purchaseAlreadyGone(String number) {
+    return 'كان الشراء $number محذوفًا مسبقًا';
+  }
+
+  @override
+  String get purchaseEyebrow => 'شراء';
+
+  @override
+  String get purchaseFieldSupplier => 'المورد';
+
+  @override
+  String get purchaseFieldReceiving => 'الاستلام';
+
+  @override
+  String get purchaseFieldPayment => 'الدفع';
+
+  @override
+  String get purchaseFieldPaid => 'المبلغ المدفوع';
+
+  @override
+  String get purchaseFieldRemaining => 'المتبقي للدفع';
+
+  @override
+  String get purchaseFieldReceivedOn => 'تاريخ الاستلام';
+
+  @override
+  String get purchaseNoSupplier => 'بدون مورد';
+
+  @override
+  String purchaseLineMeta(int ordered, int received, String cost) {
+    return 'المطلوب $ordered  ·  المستلم $received  ·  التكلفة $cost / وحدة';
+  }
+
+  @override
+  String get purchaseMarkPaid => 'تحديد كمدفوع';
+
+  @override
+  String get purchaseMarkedPaidToast => 'تم تحديد الشراء كمدفوع';
+
+  @override
+  String get purchaseReceiveDelivery => 'استلام الشحنة';
+
+  @override
+  String get purchaseCancel => 'إلغاء الشراء';
+
+  @override
+  String get purchaseCancelKeep => 'الاحتفاظ بالشراء';
+
+  @override
+  String purchaseCancelBody(String number) {
+    return 'سيتم إلغاء الشراء $number.';
+  }
+
+  @override
+  String get purchaseCancelNoticeTitle => 'ما الذي سيحدث';
+
+  @override
+  String purchaseCancelStock(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'ستُسحب $count وحدة مستلمة من المخزون.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String purchaseCancelMoney(String amount) {
+    return 'سيُحذف الدفع البالغ $amount من الصندوق. سجّل استرداد المورد بنفسك.';
+  }
+
+  @override
+  String get purchaseCancelFinal =>
+      'لا يمكن استلام الشراء الملغى أو دفعه بعد ذلك.';
+
+  @override
+  String purchaseCancelledToast(String number) {
+    return 'تم إلغاء الشراء $number';
+  }
+
+  @override
+  String get receiveBody =>
+      'أدخل الكمية التي سلّمها المورد لكل منتج. سيُحدَّث المخزون تلقائيًا.';
+
+  @override
+  String receiveLineMeta(int ordered, int received) {
+    return 'المطلوب $ordered  ·  المستلم سابقًا $received';
+  }
+
+  @override
+  String get receiveNowLabel => 'المستلم الآن';
+
+  @override
+  String receiveToCome(int count) {
+    return '$count بانتظار الاستلام';
+  }
+
+  @override
+  String get receiveComplete => 'مكتمل';
+
+  @override
+  String receiveOver(int count) {
+    return '$count كحد أقصى';
+  }
+
+  @override
+  String get receiveSubmit => 'تأكيد الاستلام';
+
+  @override
+  String get receiveNothing => 'أدخل كمية واحدة على الأقل';
+
+  @override
+  String get receivedToast => 'تم تسجيل الاستلام · تم تحديث المخزون';
+
+  @override
+  String get newPurchaseSearchSupplier => 'ابحث عن مورد';
+
+  @override
+  String get newPurchaseSearchSupplierHint => 'ابحث عن مورد بالاسم أو الهاتف…';
+
+  @override
+  String get newPurchaseNoSuppliers => 'لم يتم العثور على مورد';
+
+  @override
+  String get newPurchaseUnitCost => 'تكلفة الوحدة (دج)';
+
+  @override
+  String get newPurchaseNotesHint => 'أضف ملاحظة لهذا الشراء…';
+
+  @override
+  String get newPurchaseSummary => 'الدفع للمورد';
+
+  @override
+  String get newPurchaseAmountPaid => 'المبلغ المدفوع للمورد (دج)';
+
+  @override
+  String get newPurchaseFullyPaid => 'مدفوع بالكامل';
+
+  @override
+  String get newPurchasePayInFull => 'دفع المبلغ كاملًا';
+
+  @override
+  String newPurchaseOverpaid(String total) {
+    return 'أكثر من الإجمالي: سيُسجَّل $total فقط.';
+  }
+
+  @override
+  String get newPurchaseStockNote => 'يُضاف المخزون عند استلام الشحنة.';
+
+  @override
+  String get newPurchaseSubmit => 'تسجيل الشراء';
+
+  @override
+  String newPurchaseCreatedToast(String number) {
+    return 'تم تسجيل الشراء $number';
+  }
+
+  @override
+  String get newPurchaseDateTitle => 'تاريخ الشراء';
+
+  @override
+  String get newPurchaseLeaveBody => 'ستفقد عملية الشراء التي بدأتها.';
+
+  @override
+  String get movementsEyebrow => 'المخزون';
+
+  @override
+  String get movementsTitle => 'حركات المخزون';
+
+  @override
+  String get movementsSubtitle => 'سجل جميع تغييرات المخزون';
+
+  @override
+  String get movementsSection => 'الحركات';
+
+  @override
+  String get movementsEmptyTitle => 'لا توجد حركات';
+
+  @override
+  String get movementsEmptyBody =>
+      'ستظهر حركات المخزون هنا عند إضافة المنتجات أو بيعها أو تعديلها';
+
+  @override
+  String get movementsNoMatchBody => 'لا توجد حركة تطابق هذه المعايير.';
+
+  @override
+  String get movementsFilterType => 'نوع الحركة';
+
+  @override
+  String get movementsFilterTypeAny => 'كل الأنواع';
+
+  @override
+  String get movementsFilterProduct => 'المنتج';
+
+  @override
+  String get movementsFilterProductAny => 'كل المنتجات';
+
+  @override
+  String movementReasonSale(String number) {
+    return 'بيع $number';
+  }
+
+  @override
+  String movementReasonSaleDeleted(String number) {
+    return 'حذف البيع $number';
+  }
+
+  @override
+  String movementReasonPurchase(String number) {
+    return 'استلام شراء $number';
+  }
+
+  @override
+  String movementReasonPurchaseCancelled(String number) {
+    return 'إلغاء الشراء $number';
+  }
+
+  @override
+  String movementReasonOrder(String number) {
+    return 'طلب $number';
+  }
+
+  @override
+  String movementReasonOrderCancelled(String number) {
+    return 'طلب ملغى $number';
+  }
+
+  @override
+  String movementReasonOrderReturned(String number) {
+    return 'طلب مرتجع $number';
+  }
+
+  @override
+  String movementReasonOrderDeleted(String number) {
+    return 'طلب محذوف $number';
+  }
+
+  @override
+  String get movementReasonInitial => 'المخزون الأولي';
+
+  @override
+  String get movementReasonVariantDeleted => 'حذف متغير';
 }

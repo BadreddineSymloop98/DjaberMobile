@@ -180,6 +180,17 @@ class Routes {
   static const saleEdit = '/sales/:id/edit';
   static String saleEditOf(String id) => '/sales/$id/edit';
 
+  /// `Achats` — from the drawer, after Ventes. [purchaseNew] is declared
+  /// before [purchase] in `router.dart`. Receiving is a sheet, not a route.
+  static const purchases = '/purchases';
+  static const purchaseNew = '/purchases/new';
+  static const purchase = '/purchases/:id';
+  static String purchaseOf(String id) => '/purchases/$id';
+
+  /// `Mouvements de stock` — from the drawer, and *Tout voir* on the stock
+  /// overview's recent movements.
+  static const movements = '/movements';
+
   static const notifications = '/notifications';
   static const settings = '/settings';
 

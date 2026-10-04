@@ -18,6 +18,10 @@ class StockMovement {
     this.productName,
     this.reason,
     this.createdAt,
+    this.productId,
+    this.sku,
+    this.reference,
+    this.notes,
   });
 
   final String id;
@@ -31,6 +35,17 @@ class StockMovement {
   final String? reason;
 
   final DateTime? createdAt;
+
+  final String? productId;
+  final String? sku;
+
+  /// The **id** of the sale, purchase or order that wrote it — not its number
+  /// (the number is in [reason]).
+  final String? reference;
+
+  /// The backend's own explanation, when it had to improvise (a vanished
+  /// variant restocked on its parent).
+  final String? notes;
 
   /// Positive in, negative out. An adjustment keeps the sign it was stored with.
   int get signedQuantity => switch (type) {
@@ -52,6 +67,11 @@ class StockMovement {
       },
       quantity: Json.intOf(json['quantity']),
       productName: product is Map<String, dynamic> ? Json.strOrNull(product['name']) : null,
+      productId: Json.strOrNull(json['productId']) ??
+          (product is Map<String, dynamic> ? Json.strOrNull(product['id']) : null),
+      sku: product is Map<String, dynamic> ? Json.strOrNull(product['sku']) : null,
+      reference: Json.strOrNull(json['reference']),
+      notes: Json.strOrNull(json['notes']),
       reason: Json.strOrNull(json['reason']),
       createdAt: Json.dateOrNull(json['createdAt']),
     );

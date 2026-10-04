@@ -8120,6 +8120,606 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'The sale you started will be lost.'**
   String get newSaleLeaveBody;
+
+  /// No description provided for @menuPurchases.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchases'**
+  String get menuPurchases;
+
+  /// No description provided for @menuMovements.
+  ///
+  /// In en, this message translates to:
+  /// **'Movements'**
+  String get menuMovements;
+
+  /// No description provided for @purchasesEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'PURCHASES'**
+  String get purchasesEyebrow;
+
+  /// No description provided for @purchasesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchases'**
+  String get purchasesTitle;
+
+  /// No description provided for @purchasesCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 purchase} other{{count} purchases}}'**
+  String purchasesCount(int count);
+
+  /// No description provided for @purchasesStatTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total purchases'**
+  String get purchasesStatTotal;
+
+  /// No description provided for @purchasesStatSpent.
+  ///
+  /// In en, this message translates to:
+  /// **'Total spent'**
+  String get purchasesStatSpent;
+
+  /// No description provided for @purchasesStatToReceive.
+  ///
+  /// In en, this message translates to:
+  /// **'To receive'**
+  String get purchasesStatToReceive;
+
+  /// No description provided for @purchasesStatReceived.
+  ///
+  /// In en, this message translates to:
+  /// **'Received'**
+  String get purchasesStatReceived;
+
+  /// No description provided for @purchasesSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search purchases…'**
+  String get purchasesSearch;
+
+  /// No description provided for @purchasesQuickAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get purchasesQuickAll;
+
+  /// No description provided for @purchasesQuickPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid'**
+  String get purchasesQuickPaid;
+
+  /// No description provided for @purchasesQuickToPay.
+  ///
+  /// In en, this message translates to:
+  /// **'To pay'**
+  String get purchasesQuickToPay;
+
+  /// No description provided for @purchasesSection.
+  ///
+  /// In en, this message translates to:
+  /// **'All purchases'**
+  String get purchasesSection;
+
+  /// No description provided for @purchasesRowMeta.
+  ///
+  /// In en, this message translates to:
+  /// **'{items}  ·  PAID {paid}  ·  TO PAY {remaining}'**
+  String purchasesRowMeta(String items, String paid, String remaining);
+
+  /// No description provided for @purchasesReceive.
+  ///
+  /// In en, this message translates to:
+  /// **'Receive'**
+  String get purchasesReceive;
+
+  /// No description provided for @purchasesNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New purchase'**
+  String get purchasesNew;
+
+  /// No description provided for @purchasesEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No purchases'**
+  String get purchasesEmptyTitle;
+
+  /// No description provided for @purchasesEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Record your first purchase from a supplier'**
+  String get purchasesEmptyBody;
+
+  /// No description provided for @purchasesNoMatchBody.
+  ///
+  /// In en, this message translates to:
+  /// **'No purchase matches these filters.'**
+  String get purchasesNoMatchBody;
+
+  /// No description provided for @purchasesFilterStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Fulfillment status'**
+  String get purchasesFilterStatus;
+
+  /// No description provided for @purchasesFilterSupplierAny.
+  ///
+  /// In en, this message translates to:
+  /// **'All suppliers'**
+  String get purchasesFilterSupplierAny;
+
+  /// No description provided for @purchasesFilterHasRemaining.
+  ///
+  /// In en, this message translates to:
+  /// **'Still owed to supplier'**
+  String get purchasesFilterHasRemaining;
+
+  /// No description provided for @purchaseStatusPending.
+  ///
+  /// In en, this message translates to:
+  /// **'To receive'**
+  String get purchaseStatusPending;
+
+  /// No description provided for @purchaseStatusPartial.
+  ///
+  /// In en, this message translates to:
+  /// **'Partly received'**
+  String get purchaseStatusPartial;
+
+  /// No description provided for @purchaseStatusReceived.
+  ///
+  /// In en, this message translates to:
+  /// **'Received'**
+  String get purchaseStatusReceived;
+
+  /// No description provided for @purchaseStatusCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get purchaseStatusCancelled;
+
+  /// No description provided for @purchasePayPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Unpaid'**
+  String get purchasePayPending;
+
+  /// No description provided for @purchasePayPartial.
+  ///
+  /// In en, this message translates to:
+  /// **'Partly paid'**
+  String get purchasePayPartial;
+
+  /// No description provided for @purchasePayPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid'**
+  String get purchasePayPaid;
+
+  /// No description provided for @purchaseDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete purchase'**
+  String get purchaseDeleteTitle;
+
+  /// No description provided for @purchaseDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete purchase {number}?'**
+  String purchaseDeleteBody(String number);
+
+  /// No description provided for @purchaseDeleteNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'This action cannot be undone.'**
+  String get purchaseDeleteNotice;
+
+  /// No description provided for @purchaseDeletedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase {number} deleted'**
+  String purchaseDeletedToast(String number);
+
+  /// No description provided for @purchaseAlreadyGone.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase {number} had already been deleted'**
+  String purchaseAlreadyGone(String number);
+
+  /// No description provided for @purchaseEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'PURCHASE'**
+  String get purchaseEyebrow;
+
+  /// No description provided for @purchaseFieldSupplier.
+  ///
+  /// In en, this message translates to:
+  /// **'Supplier'**
+  String get purchaseFieldSupplier;
+
+  /// No description provided for @purchaseFieldReceiving.
+  ///
+  /// In en, this message translates to:
+  /// **'Receiving'**
+  String get purchaseFieldReceiving;
+
+  /// No description provided for @purchaseFieldPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment'**
+  String get purchaseFieldPayment;
+
+  /// No description provided for @purchaseFieldPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount paid'**
+  String get purchaseFieldPaid;
+
+  /// No description provided for @purchaseFieldRemaining.
+  ///
+  /// In en, this message translates to:
+  /// **'Still to pay'**
+  String get purchaseFieldRemaining;
+
+  /// No description provided for @purchaseFieldReceivedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Received on'**
+  String get purchaseFieldReceivedOn;
+
+  /// No description provided for @purchaseNoSupplier.
+  ///
+  /// In en, this message translates to:
+  /// **'No supplier'**
+  String get purchaseNoSupplier;
+
+  /// No description provided for @purchaseLineMeta.
+  ///
+  /// In en, this message translates to:
+  /// **'Ordered {ordered}  ·  Received {received}  ·  Cost {cost} / unit'**
+  String purchaseLineMeta(int ordered, int received, String cost);
+
+  /// No description provided for @purchaseMarkPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as paid'**
+  String get purchaseMarkPaid;
+
+  /// No description provided for @purchaseMarkedPaidToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase marked as paid'**
+  String get purchaseMarkedPaidToast;
+
+  /// No description provided for @purchaseReceiveDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Receive delivery'**
+  String get purchaseReceiveDelivery;
+
+  /// No description provided for @purchaseCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel purchase'**
+  String get purchaseCancel;
+
+  /// No description provided for @purchaseCancelKeep.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep purchase'**
+  String get purchaseCancelKeep;
+
+  /// No description provided for @purchaseCancelBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase {number} will be cancelled.'**
+  String purchaseCancelBody(String number);
+
+  /// No description provided for @purchaseCancelNoticeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What will happen'**
+  String get purchaseCancelNoticeTitle;
+
+  /// No description provided for @purchaseCancelStock.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 unit already received will be taken out of stock.} other{{count} units already received will be taken out of stock.}}'**
+  String purchaseCancelStock(int count);
+
+  /// No description provided for @purchaseCancelMoney.
+  ///
+  /// In en, this message translates to:
+  /// **'The {amount} payment will be removed from the cash register. Record the supplier’s refund yourself.'**
+  String purchaseCancelMoney(String amount);
+
+  /// No description provided for @purchaseCancelFinal.
+  ///
+  /// In en, this message translates to:
+  /// **'A cancelled purchase can no longer be received or paid.'**
+  String get purchaseCancelFinal;
+
+  /// No description provided for @purchaseCancelledToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase {number} cancelled'**
+  String purchaseCancelledToast(String number);
+
+  /// No description provided for @receiveBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the quantity the supplier delivered for each item. Stock will be updated automatically.'**
+  String get receiveBody;
+
+  /// No description provided for @receiveLineMeta.
+  ///
+  /// In en, this message translates to:
+  /// **'Ordered {ordered}  ·  Already received {received}'**
+  String receiveLineMeta(int ordered, int received);
+
+  /// No description provided for @receiveNowLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Received now'**
+  String get receiveNowLabel;
+
+  /// No description provided for @receiveToCome.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} to receive'**
+  String receiveToCome(int count);
+
+  /// No description provided for @receiveComplete.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete'**
+  String get receiveComplete;
+
+  /// No description provided for @receiveOver.
+  ///
+  /// In en, this message translates to:
+  /// **'At most {count}'**
+  String receiveOver(int count);
+
+  /// No description provided for @receiveSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm receipt'**
+  String get receiveSubmit;
+
+  /// No description provided for @receiveNothing.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter at least one quantity'**
+  String get receiveNothing;
+
+  /// No description provided for @receivedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Receipt recorded · stock updated'**
+  String get receivedToast;
+
+  /// No description provided for @newPurchaseSearchSupplier.
+  ///
+  /// In en, this message translates to:
+  /// **'Search supplier'**
+  String get newPurchaseSearchSupplier;
+
+  /// No description provided for @newPurchaseSearchSupplierHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search supplier by name or phone…'**
+  String get newPurchaseSearchSupplierHint;
+
+  /// No description provided for @newPurchaseNoSuppliers.
+  ///
+  /// In en, this message translates to:
+  /// **'No supplier found'**
+  String get newPurchaseNoSuppliers;
+
+  /// No description provided for @newPurchaseUnitCost.
+  ///
+  /// In en, this message translates to:
+  /// **'Unit cost (DA)'**
+  String get newPurchaseUnitCost;
+
+  /// No description provided for @newPurchaseNotesHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a note for this purchase…'**
+  String get newPurchaseNotesHint;
+
+  /// No description provided for @newPurchaseSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment to supplier'**
+  String get newPurchaseSummary;
+
+  /// No description provided for @newPurchaseAmountPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount paid to supplier (DA)'**
+  String get newPurchaseAmountPaid;
+
+  /// No description provided for @newPurchaseFullyPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Fully paid'**
+  String get newPurchaseFullyPaid;
+
+  /// No description provided for @newPurchasePayInFull.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay in full'**
+  String get newPurchasePayInFull;
+
+  /// No description provided for @newPurchaseOverpaid.
+  ///
+  /// In en, this message translates to:
+  /// **'More than the total: only {total} will be recorded.'**
+  String newPurchaseOverpaid(String total);
+
+  /// No description provided for @newPurchaseStockNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock is added when the delivery is received.'**
+  String get newPurchaseStockNote;
+
+  /// No description provided for @newPurchaseSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Save purchase'**
+  String get newPurchaseSubmit;
+
+  /// No description provided for @newPurchaseCreatedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase {number} saved'**
+  String newPurchaseCreatedToast(String number);
+
+  /// No description provided for @newPurchaseDateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase date'**
+  String get newPurchaseDateTitle;
+
+  /// No description provided for @newPurchaseLeaveBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The purchase you started will be lost.'**
+  String get newPurchaseLeaveBody;
+
+  /// No description provided for @movementsEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'STOCK'**
+  String get movementsEyebrow;
+
+  /// No description provided for @movementsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock movements'**
+  String get movementsTitle;
+
+  /// No description provided for @movementsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Audit trail of all stock changes'**
+  String get movementsSubtitle;
+
+  /// No description provided for @movementsSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Movements'**
+  String get movementsSection;
+
+  /// No description provided for @movementsEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No movements'**
+  String get movementsEmptyTitle;
+
+  /// No description provided for @movementsEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock movements will appear here when products are added, sold, or adjusted'**
+  String get movementsEmptyBody;
+
+  /// No description provided for @movementsNoMatchBody.
+  ///
+  /// In en, this message translates to:
+  /// **'No movement matches these filters.'**
+  String get movementsNoMatchBody;
+
+  /// No description provided for @movementsFilterType.
+  ///
+  /// In en, this message translates to:
+  /// **'Movement type'**
+  String get movementsFilterType;
+
+  /// No description provided for @movementsFilterTypeAny.
+  ///
+  /// In en, this message translates to:
+  /// **'All types'**
+  String get movementsFilterTypeAny;
+
+  /// No description provided for @movementsFilterProduct.
+  ///
+  /// In en, this message translates to:
+  /// **'Product'**
+  String get movementsFilterProduct;
+
+  /// No description provided for @movementsFilterProductAny.
+  ///
+  /// In en, this message translates to:
+  /// **'All products'**
+  String get movementsFilterProductAny;
+
+  /// No description provided for @movementReasonSale.
+  ///
+  /// In en, this message translates to:
+  /// **'Sale {number}'**
+  String movementReasonSale(String number);
+
+  /// No description provided for @movementReasonSaleDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Sale {number} deleted'**
+  String movementReasonSaleDeleted(String number);
+
+  /// No description provided for @movementReasonPurchase.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase received {number}'**
+  String movementReasonPurchase(String number);
+
+  /// No description provided for @movementReasonPurchaseCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase {number} cancelled'**
+  String movementReasonPurchaseCancelled(String number);
+
+  /// No description provided for @movementReasonOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Order {number}'**
+  String movementReasonOrder(String number);
+
+  /// No description provided for @movementReasonOrderCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled order {number}'**
+  String movementReasonOrderCancelled(String number);
+
+  /// No description provided for @movementReasonOrderReturned.
+  ///
+  /// In en, this message translates to:
+  /// **'Returned order {number}'**
+  String movementReasonOrderReturned(String number);
+
+  /// No description provided for @movementReasonOrderDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Deleted order {number}'**
+  String movementReasonOrderDeleted(String number);
+
+  /// No description provided for @movementReasonInitial.
+  ///
+  /// In en, this message translates to:
+  /// **'Initial stock'**
+  String get movementReasonInitial;
+
+  /// No description provided for @movementReasonVariantDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Variant deleted'**
+  String get movementReasonVariantDeleted;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

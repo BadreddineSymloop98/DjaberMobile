@@ -20,6 +20,7 @@ import '../data/repositories/notification_repository.dart';
 import '../data/repositories/order_repository.dart';
 import '../data/repositories/page_repository.dart';
 import '../data/repositories/product_repository.dart';
+import '../data/repositories/purchase_repository.dart';
 import '../data/repositories/sale_repository.dart';
 import '../data/repositories/supplier_repository.dart';
 import '../presentation/viewmodels/form_draft_store.dart';
@@ -88,6 +89,13 @@ class AppProviders {
       ),
       Provider<OrderRepository>(
         create: (context) => OrderRepository(api: context.read<ApiClient>()),
+      ),
+      // Purchases and the stock ledger — one file, two repositories.
+      Provider<PurchaseRepository>(
+        create: (context) => PurchaseRepository(api: context.read<ApiClient>()),
+      ),
+      Provider<MovementRepository>(
+        create: (context) => MovementRepository(api: context.read<ApiClient>()),
       ),
       Provider<SaleRepository>(
         create: (context) => SaleRepository(api: context.read<ApiClient>()),

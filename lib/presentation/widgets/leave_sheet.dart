@@ -54,6 +54,9 @@ Future<bool> showDestructiveSheet(
   required String confirmLabel,
   String? noticeTitle,
   String? noticeBody,
+  // When *Annuler* would read as the destructive action itself (*Annuler
+  // l'achat*), the safe button says what it keeps.
+  String? cancelLabel,
 }) async {
   final confirmed = await showModalBottomSheet<bool>(
     context: context,
@@ -123,7 +126,7 @@ Future<bool> showDestructiveSheet(
               SizedBox(height: AppSpacing.sm),
               OutlinedButton(
                 onPressed: () => Navigator.of(sheet).pop(false),
-                child: Text(l10n.commonCancel),
+                child: Text(cancelLabel ?? l10n.commonCancel),
               ),
             ],
           ),

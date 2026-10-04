@@ -381,6 +381,22 @@ class _MenuDrawerState extends State<MenuDrawer> {
                   iconColor: AppColors.accentMoney,
                   onTap: () => _open(Routes.sales),
                 ),
+                // Then Achats and Mouvements — the web stock group's order.
+                MenuSubrow(
+                  depth: 2,
+                  icon: AppIcons.truck,
+                  label: l10n.menuPurchases,
+                  // Money out, on the catalogue side — amber like Fournisseurs.
+                  iconColor: AppColors.accentStarred,
+                  onTap: () => _open(Routes.purchases),
+                ),
+                MenuSubrow(
+                  depth: 2,
+                  icon: AppIcons.history,
+                  label: l10n.menuMovements,
+                  iconColor: AppColors.accentStarred,
+                  onTap: () => _open(Routes.movements),
+                ),
               ],
               MenuSubrow(
                 icon: AppIcons.bot,

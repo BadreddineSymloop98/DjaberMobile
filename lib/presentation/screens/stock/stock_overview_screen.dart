@@ -201,7 +201,12 @@ class _StockOverviewScreenState extends State<StockOverviewScreen> {
         ),
         SizedBox(height: AppSpacing.xxl),
       ],
-      SectionLabel(label: l10n.stockRecentMovements),
+      SectionLabel(
+        label: l10n.stockRecentMovements,
+        // The full ledger, filterable — *Mouvements de stock*.
+        trailing: l10n.commonSeeAll,
+        onTrailingTap: () => GoRouter.of(context).push<void>(Routes.movements),
+      ),
       Padding(
         padding: EdgeInsets.symmetric(horizontal: AppSpacing.gutterTight),
         child: _Movements(rows: overview.movements, tag: tag),

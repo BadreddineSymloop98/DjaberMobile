@@ -171,6 +171,8 @@ class DraftLineCard extends StatefulWidget {
     required this.onRemove,
     required this.onQuantity,
     required this.onPrice,
+    this.priceLabel,
+    this.limitStock = true,
   });
 
   final int index;
@@ -179,6 +181,12 @@ class DraftLineCard extends StatefulWidget {
   final VoidCallback onRemove;
   final ValueChanged<int> onQuantity;
   final ValueChanged<double> onPrice;
+
+  /// The price field's label — a purchase line is a unit **cost**.
+  final String? priceLabel;
+
+  /// False on a purchase: buying more than is in stock is the point.
+  final bool limitStock;
 
   @override
   State<DraftLineCard> createState() => _DraftLineCardState();
@@ -209,7 +217,7 @@ class _DraftLineCardState extends State<DraftLineCard> {
   @override
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
-    final over = widget.line.quantity > widget.line.available;
+    final over = widget.limitStock && widget.line.quantity > widget.line.available;
 
     return Container(
       padding: EdgeInsets.all(AppSpacing.md),
@@ -263,7 +271,7 @@ class _DraftLineCardState extends State<DraftLineCard> {
               SizedBox(width: AppSpacing.sm),
               Expanded(
                 child: AppTextField(
-                  label: l10n.newOrderUnitPrice,
+                  label: widget.priceLabel ?? l10n.newOrderUnitPrice,
                   controller: _price,
                   focusNode: _priceFocus,
                   keyboardType: const TextInputType.numberWithOptions(decimal: true),

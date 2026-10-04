@@ -4627,4 +4627,371 @@ class L10nFr extends L10n {
 
   @override
   String get newSaleLeaveBody => 'La vente commencée sera perdue.';
+
+  @override
+  String get menuPurchases => 'Achats';
+
+  @override
+  String get menuMovements => 'Mouvements';
+
+  @override
+  String get purchasesEyebrow => 'ACHATS';
+
+  @override
+  String get purchasesTitle => 'Achats';
+
+  @override
+  String purchasesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count achats',
+      one: '1 achat',
+      zero: '0 achat',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get purchasesStatTotal => 'Total achats';
+
+  @override
+  String get purchasesStatSpent => 'Total dépensé';
+
+  @override
+  String get purchasesStatToReceive => 'À recevoir';
+
+  @override
+  String get purchasesStatReceived => 'Reçus';
+
+  @override
+  String get purchasesSearch => 'Rechercher des achats…';
+
+  @override
+  String get purchasesQuickAll => 'Tous';
+
+  @override
+  String get purchasesQuickPaid => 'Payés';
+
+  @override
+  String get purchasesQuickToPay => 'À payer';
+
+  @override
+  String get purchasesSection => 'Tous les achats';
+
+  @override
+  String purchasesRowMeta(String items, String paid, String remaining) {
+    return '$items  ·  PAYÉ $paid  ·  RESTE À PAYER $remaining';
+  }
+
+  @override
+  String get purchasesReceive => 'Réceptionner';
+
+  @override
+  String get purchasesNew => 'Nouvel achat';
+
+  @override
+  String get purchasesEmptyTitle => 'Aucun achat';
+
+  @override
+  String get purchasesEmptyBody =>
+      'Enregistrez votre premier achat auprès d’un fournisseur';
+
+  @override
+  String get purchasesNoMatchBody =>
+      'Aucun achat ne correspond à ces critères.';
+
+  @override
+  String get purchasesFilterStatus => 'Statut de réception';
+
+  @override
+  String get purchasesFilterSupplierAny => 'Tous les fournisseurs';
+
+  @override
+  String get purchasesFilterHasRemaining => 'Reste à payer au fournisseur';
+
+  @override
+  String get purchaseStatusPending => 'À recevoir';
+
+  @override
+  String get purchaseStatusPartial => 'Reçu en partie';
+
+  @override
+  String get purchaseStatusReceived => 'Reçu';
+
+  @override
+  String get purchaseStatusCancelled => 'Annulé';
+
+  @override
+  String get purchasePayPending => 'Non payé';
+
+  @override
+  String get purchasePayPartial => 'Payé en partie';
+
+  @override
+  String get purchasePayPaid => 'Payé';
+
+  @override
+  String get purchaseDeleteTitle => 'Supprimer l’achat';
+
+  @override
+  String purchaseDeleteBody(String number) {
+    return 'Voulez-vous vraiment supprimer l’achat $number ?';
+  }
+
+  @override
+  String get purchaseDeleteNotice => 'Cette action est irréversible.';
+
+  @override
+  String purchaseDeletedToast(String number) {
+    return 'Achat $number supprimé';
+  }
+
+  @override
+  String purchaseAlreadyGone(String number) {
+    return 'L’achat $number avait déjà été supprimé';
+  }
+
+  @override
+  String get purchaseEyebrow => 'ACHAT';
+
+  @override
+  String get purchaseFieldSupplier => 'Fournisseur';
+
+  @override
+  String get purchaseFieldReceiving => 'Réception';
+
+  @override
+  String get purchaseFieldPayment => 'Paiement';
+
+  @override
+  String get purchaseFieldPaid => 'Montant payé';
+
+  @override
+  String get purchaseFieldRemaining => 'Reste à payer';
+
+  @override
+  String get purchaseFieldReceivedOn => 'Reçu le';
+
+  @override
+  String get purchaseNoSupplier => 'Sans fournisseur';
+
+  @override
+  String purchaseLineMeta(int ordered, int received, String cost) {
+    return 'Commandé $ordered  ·  Reçu $received  ·  Coût $cost / unité';
+  }
+
+  @override
+  String get purchaseMarkPaid => 'Marquer comme payé';
+
+  @override
+  String get purchaseMarkedPaidToast => 'Achat marqué comme payé';
+
+  @override
+  String get purchaseReceiveDelivery => 'Réceptionner la livraison';
+
+  @override
+  String get purchaseCancel => 'Annuler l’achat';
+
+  @override
+  String get purchaseCancelKeep => 'Garder l’achat';
+
+  @override
+  String purchaseCancelBody(String number) {
+    return 'L’achat $number sera annulé.';
+  }
+
+  @override
+  String get purchaseCancelNoticeTitle => 'Ce qui va se passer';
+
+  @override
+  String purchaseCancelStock(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count unités déjà reçues seront retirées du stock.',
+      one: '1 unité déjà reçue sera retirée du stock.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String purchaseCancelMoney(String amount) {
+    return 'Le paiement de $amount sera retiré de la caisse. Enregistrez vous-même le remboursement du fournisseur.';
+  }
+
+  @override
+  String get purchaseCancelFinal =>
+      'Un achat annulé ne peut plus être réceptionné ni payé.';
+
+  @override
+  String purchaseCancelledToast(String number) {
+    return 'Achat $number annulé';
+  }
+
+  @override
+  String get receiveBody =>
+      'Saisissez la quantité livrée par le fournisseur pour chaque article. Le stock sera mis à jour automatiquement.';
+
+  @override
+  String receiveLineMeta(int ordered, int received) {
+    return 'Commandé $ordered  ·  Déjà reçu $received';
+  }
+
+  @override
+  String get receiveNowLabel => 'Reçu maintenant';
+
+  @override
+  String receiveToCome(int count) {
+    return '$count à recevoir';
+  }
+
+  @override
+  String get receiveComplete => 'Complet';
+
+  @override
+  String receiveOver(int count) {
+    return 'Au plus $count';
+  }
+
+  @override
+  String get receiveSubmit => 'Valider la réception';
+
+  @override
+  String get receiveNothing => 'Saisissez au moins une quantité';
+
+  @override
+  String get receivedToast => 'Réception enregistrée · stock mis à jour';
+
+  @override
+  String get newPurchaseSearchSupplier => 'Rechercher un fournisseur';
+
+  @override
+  String get newPurchaseSearchSupplierHint =>
+      'Rechercher un fournisseur par nom ou téléphone…';
+
+  @override
+  String get newPurchaseNoSuppliers => 'Aucun fournisseur trouvé';
+
+  @override
+  String get newPurchaseUnitCost => 'Coût unitaire (DA)';
+
+  @override
+  String get newPurchaseNotesHint => 'Ajouter une note pour cet achat…';
+
+  @override
+  String get newPurchaseSummary => 'Paiement au fournisseur';
+
+  @override
+  String get newPurchaseAmountPaid => 'Montant versé au fournisseur (DA)';
+
+  @override
+  String get newPurchaseFullyPaid => 'Entièrement payé';
+
+  @override
+  String get newPurchasePayInFull => 'Payer en totalité';
+
+  @override
+  String newPurchaseOverpaid(String total) {
+    return 'Plus que le total : seul $total sera enregistré.';
+  }
+
+  @override
+  String get newPurchaseStockNote =>
+      'Le stock sera ajouté à la réception de la livraison.';
+
+  @override
+  String get newPurchaseSubmit => 'Enregistrer l’achat';
+
+  @override
+  String newPurchaseCreatedToast(String number) {
+    return 'Achat $number enregistré';
+  }
+
+  @override
+  String get newPurchaseDateTitle => 'Date de l’achat';
+
+  @override
+  String get newPurchaseLeaveBody => 'L’achat commencé sera perdu.';
+
+  @override
+  String get movementsEyebrow => 'STOCK';
+
+  @override
+  String get movementsTitle => 'Mouvements de stock';
+
+  @override
+  String get movementsSubtitle => 'Historique de tous les changements de stock';
+
+  @override
+  String get movementsSection => 'Mouvements';
+
+  @override
+  String get movementsEmptyTitle => 'Aucun mouvement';
+
+  @override
+  String get movementsEmptyBody =>
+      'Les mouvements de stock apparaîtront ici quand des produits sont ajoutés, vendus ou ajustés';
+
+  @override
+  String get movementsNoMatchBody =>
+      'Aucun mouvement ne correspond à ces critères.';
+
+  @override
+  String get movementsFilterType => 'Type de mouvement';
+
+  @override
+  String get movementsFilterTypeAny => 'Tous les types';
+
+  @override
+  String get movementsFilterProduct => 'Produit';
+
+  @override
+  String get movementsFilterProductAny => 'Tous les produits';
+
+  @override
+  String movementReasonSale(String number) {
+    return 'Vente $number';
+  }
+
+  @override
+  String movementReasonSaleDeleted(String number) {
+    return 'Vente $number supprimée';
+  }
+
+  @override
+  String movementReasonPurchase(String number) {
+    return 'Réception d’achat $number';
+  }
+
+  @override
+  String movementReasonPurchaseCancelled(String number) {
+    return 'Achat $number annulé';
+  }
+
+  @override
+  String movementReasonOrder(String number) {
+    return 'Commande $number';
+  }
+
+  @override
+  String movementReasonOrderCancelled(String number) {
+    return 'Commande annulée $number';
+  }
+
+  @override
+  String movementReasonOrderReturned(String number) {
+    return 'Commande retournée $number';
+  }
+
+  @override
+  String movementReasonOrderDeleted(String number) {
+    return 'Commande supprimée $number';
+  }
+
+  @override
+  String get movementReasonInitial => 'Stock initial';
+
+  @override
+  String get movementReasonVariantDeleted => 'Variante supprimée';
 }
