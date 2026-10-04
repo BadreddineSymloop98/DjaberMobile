@@ -97,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   physics: const AlwaysScrollableScrollPhysics(),
                   padding: EdgeInsets.only(bottom: AppSpacing.xxxl),
                   children: [
-                    _Header(user: user, onMenu: () => openMenuDrawer(context, connectedPages: model.pages.length)),
+                    HomeHeader(user: user, onMenu: () => openMenuDrawer(context, connectedPages: model.pages.length)),
                     _Greeting(
                       name: user?.greetingName ?? '',
                       locale: locale,
@@ -165,9 +165,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-/// Menu button, wordmark, credits pill.
-class _Header extends StatelessWidget {
-  const _Header({required this.user, required this.onMenu});
+/// Menu button, wordmark, credits pill — home's header, and the one Figma gives
+/// *16s — Services*.
+class HomeHeader extends StatelessWidget {
+  const HomeHeader({super.key, required this.user, required this.onMenu});
 
   final User? user;
   final VoidCallback onMenu;

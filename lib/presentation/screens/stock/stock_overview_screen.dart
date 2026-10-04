@@ -46,7 +46,7 @@ class StockOverviewScreen extends StatefulWidget {
   State<StockOverviewScreen> createState() => _StockOverviewScreenState();
 }
 
-class _StockOverviewScreenState extends State<StockOverviewScreen> {
+class _StockOverviewScreenState extends State<StockOverviewScreen> with RouteAware {
   late final StockOverviewViewModel _model = StockOverviewViewModel(
     dashboard: context.read<DashboardRepository>(),
   );
@@ -67,8 +67,23 @@ class _StockOverviewScreenState extends State<StockOverviewScreen> {
     if (mounted) _model.load();
   }
 
+  /// Pushed on its own (`Routes.stockOverview`, from Services) it is a page of
+  /// the root navigator and hears returns directly; as the tab, the root
+  /// observer never sees its route and this never fires — [shellReturns] does
+  /// that job.
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = ModalRoute.of(context);
+    if (route is PageRoute) appRouteObserver.subscribe(this, route);
+  }
+
+  @override
+  void didPopNext() => _onReturn();
+
   @override
   void dispose() {
+    appRouteObserver.unsubscribe(this);
     shellReturns.removeListener(_onReturn);
     _model.dispose();
     super.dispose();

@@ -192,7 +192,8 @@ void main() {
         findsOneWidget,
       );
 
-      await tester.tap(find.text(l10n.menuServices));
+      // The chevron toggles; the label itself opens *16s — Services*.
+      await tester.tap(servicesChevron(l10n));
       await tester.pumpAndSettle();
 
       expect(find.text(l10n.menuProducts), findsNothing);
@@ -208,7 +209,7 @@ void main() {
         findsNothing,
       );
 
-      await tester.tap(find.text(l10n.menuServices));
+      await tester.tap(servicesChevron(l10n));
       await tester.pumpAndSettle();
       expect(find.text(l10n.menuProducts), findsOneWidget);
     });
@@ -614,3 +615,11 @@ void main() {
     });
   }
 }
+
+/// The Services row's own disclosure — its last icon, the chevron.
+Finder servicesChevron(L10n l10n) => find
+    .descendant(
+      of: find.ancestor(of: find.text(l10n.menuServices), matching: find.byType(MenuRow)),
+      matching: find.byType(AppIcon),
+    )
+    .last;

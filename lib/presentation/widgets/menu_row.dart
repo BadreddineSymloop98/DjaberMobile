@@ -23,7 +23,8 @@ class MenuRow extends StatelessWidget {
     this.count,
     this.onTap,
     this.expanded,
-  });
+    this.onToggle,
+  }) : assert(onToggle == null || expanded != null, 'a split disclosure needs its state');
 
   final List<String> icon;
   final String label;
@@ -46,9 +47,16 @@ class MenuRow extends StatelessWidget {
   /// right when closed. Null keeps the plain "goes somewhere" chevron.
   final bool? expanded;
 
+  /// Splits a group row, as [MenuSubrow] does for Produits: the label goes to
+  /// [onTap]'s destination and the chevron, a hit target of its own, toggles.
+  /// Null keeps the whole row as one tap. Services uses it (2026-10-04): the
+  /// label opens *16s — Services*, the chevron still shows its rows.
+  final VoidCallback? onToggle;
+
   @override
   Widget build(BuildContext context) {
     final isGroup = expanded != null;
+    final chevron = _MenuChevron(down: isGroup && expanded!);
 
     return GestureDetector(
       onTap: onTap,
@@ -56,7 +64,11 @@ class MenuRow extends StatelessWidget {
       child: SizedBox(
         height: 12.31.w, // 48
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppSpacing.md), // 12
+          padding: EdgeInsetsDirectional.only(
+            start: AppSpacing.md, // 12
+            // A split row gives its end padding to the chevron's target.
+            end: onToggle == null ? AppSpacing.md : 0,
+          ),
           child: Row(
             children: [
               AppIcon(
@@ -79,7 +91,18 @@ class MenuRow extends StatelessWidget {
                 SizedBox(width: AppSpacing.sm),
               ] else
                 SizedBox(width: AppSpacing.sm),
-              _MenuChevron(down: isGroup && expanded!),
+              if (onToggle == null)
+                chevron
+              else
+                GestureDetector(
+                  onTap: onToggle,
+                  behavior: HitTestBehavior.opaque,
+                  child: SizedBox(
+                    height: double.infinity,
+                    width: 12.31.w, // 48, the row's height — easy to hit
+                    child: Center(child: chevron),
+                  ),
+                ),
             ],
           ),
         ),

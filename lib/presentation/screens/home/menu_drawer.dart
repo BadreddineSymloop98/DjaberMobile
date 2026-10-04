@@ -295,7 +295,10 @@ class _MenuDrawerState extends State<MenuDrawer> {
               label: l10n.menuServices,
               iconColor: AppColors.textPrimary,
               expanded: _servicesOpen,
-              onTap: () => setState(() => _servicesOpen = !_servicesOpen),
+              // The label opens *16s — Services*; the chevron still shows the
+              // group — the split Produits already has (decided 2026-10-04).
+              onTap: () => _open(Routes.services),
+              onToggle: () => setState(() => _servicesOpen = !_servicesOpen),
             ),
             if (_servicesOpen) ...[
               // Produits is a destination **and** a group, exactly as on the

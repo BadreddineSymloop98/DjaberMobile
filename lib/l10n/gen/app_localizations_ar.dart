@@ -5795,4 +5795,43 @@ class L10nAr extends L10n {
 
   @override
   String get pageCategoryOther => 'أخرى';
+
+  @override
+  String get servicesTitle => 'الخدمات';
+
+  @override
+  String get servicesSubtitle => 'أدر أدوات وخدمات عملك';
+
+  @override
+  String get servicesActive => 'مفعّل';
+
+  @override
+  String get servicesSoon => 'قريبا';
+
+  @override
+  String get servicesOpen => 'فتح';
+
+  @override
+  String get servicesProducts => 'المنتجات';
+
+  @override
+  String get servicesProductsBody => 'أدر مخزون المنتجات والفئات والموردين';
+
+  @override
+  String get servicesSales => 'المبيعات';
+
+  @override
+  String get servicesSalesBody => 'تتبّع المبيعات والفواتير وتحليلات الإيرادات';
+
+  @override
+  String get servicesBot => 'البوت';
+
+  @override
+  String get servicesBotBody => 'روبوت محادثة ذكي لدعم العملاء والأتمتة';
+
+  @override
+  String get servicesCommercial => 'تجاري';
+
+  @override
+  String get servicesCommercialBody => 'حملات إعلانية وأدوات ترويجية';
 }

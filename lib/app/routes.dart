@@ -72,6 +72,12 @@ class Routes {
   /// [inbox], so the Boîte tab stays lit.
   static String inboxFor(String pageId) => '$inbox?pageId=${Uri.encodeQueryComponent(pageId)}';
   static const stock = '/stock';
+
+  /// The same stock overview, **pushed** over the screen that opened it
+  /// rather than switched to as a tab — so back returns there. Services'
+  /// *Produits* card opens it. A tab route cannot be pushed from a root screen
+  /// (it would stack a second shell), hence its own path.
+  static const stockOverview = '/stock-overview';
   static const orders = '/orders';
 
   // ---- Pushed on top of the shell ----
@@ -128,6 +134,9 @@ class Routes {
 
   /// `12 — Pages connectées` (`13 — Connecter une page` when there are none).
   /// Reached from home and from the drawer's *Réseaux sociaux*.
+  /// `16s — Services` — the drawer's *Services* label.
+  static const services = '/services';
+
   static const pages = '/pages';
 
   /// One connected page — *Configurer* on its card. Overview, Messages, AI

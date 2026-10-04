@@ -10040,6 +10040,84 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Other'**
   String get pageCategoryOther;
+
+  /// No description provided for @servicesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Services'**
+  String get servicesTitle;
+
+  /// No description provided for @servicesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage your business tools and services'**
+  String get servicesSubtitle;
+
+  /// No description provided for @servicesActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get servicesActive;
+
+  /// No description provided for @servicesSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Soon'**
+  String get servicesSoon;
+
+  /// No description provided for @servicesOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get servicesOpen;
+
+  /// No description provided for @servicesProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Products'**
+  String get servicesProducts;
+
+  /// No description provided for @servicesProductsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage your product inventory, categories, and suppliers'**
+  String get servicesProductsBody;
+
+  /// No description provided for @servicesSales.
+  ///
+  /// In en, this message translates to:
+  /// **'Sales'**
+  String get servicesSales;
+
+  /// No description provided for @servicesSalesBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Track sales, invoices, and revenue analytics'**
+  String get servicesSalesBody;
+
+  /// No description provided for @servicesBot.
+  ///
+  /// In en, this message translates to:
+  /// **'Bot'**
+  String get servicesBot;
+
+  /// No description provided for @servicesBotBody.
+  ///
+  /// In en, this message translates to:
+  /// **'AI-powered chatbot for customer support and automation'**
+  String get servicesBotBody;
+
+  /// No description provided for @servicesCommercial.
+  ///
+  /// In en, this message translates to:
+  /// **'Commercial'**
+  String get servicesCommercial;
+
+  /// No description provided for @servicesCommercialBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Advertising campaigns and promotional tools'**
+  String get servicesCommercialBody;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

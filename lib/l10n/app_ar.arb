@@ -1751,5 +1751,18 @@
   "pageCategoryAccessories": "إكسسوارات",
   "pageCategoryHome": "منزل",
   "pageCategoryKids": "أطفال",
-  "pageCategoryOther": "أخرى"
+  "pageCategoryOther": "أخرى",
+  "servicesTitle": "الخدمات",
+  "servicesSubtitle": "أدر أدوات وخدمات عملك",
+  "servicesActive": "مفعّل",
+  "servicesSoon": "قريبا",
+  "servicesOpen": "فتح",
+  "servicesProducts": "المنتجات",
+  "servicesProductsBody": "أدر مخزون المنتجات والفئات والموردين",
+  "servicesSales": "المبيعات",
+  "servicesSalesBody": "تتبّع المبيعات والفواتير وتحليلات الإيرادات",
+  "servicesBot": "البوت",
+  "servicesBotBody": "روبوت محادثة ذكي لدعم العملاء والأتمتة",
+  "servicesCommercial": "تجاري",
+  "servicesCommercialBody": "حملات إعلانية وأدوات ترويجية"
 }

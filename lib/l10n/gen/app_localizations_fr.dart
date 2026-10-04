@@ -5864,4 +5864,47 @@ class L10nFr extends L10n {
 
   @override
   String get pageCategoryOther => 'Autre';
+
+  @override
+  String get servicesTitle => 'Services';
+
+  @override
+  String get servicesSubtitle => 'Gérez vos outils et services';
+
+  @override
+  String get servicesActive => 'Actif';
+
+  @override
+  String get servicesSoon => 'Bientôt';
+
+  @override
+  String get servicesOpen => 'Ouvrir';
+
+  @override
+  String get servicesProducts => 'Produits';
+
+  @override
+  String get servicesProductsBody =>
+      'Gérez votre inventaire, catégories et fournisseurs';
+
+  @override
+  String get servicesSales => 'Ventes';
+
+  @override
+  String get servicesSalesBody =>
+      'Suivez les ventes, factures et analyses de revenus';
+
+  @override
+  String get servicesBot => 'Bot';
+
+  @override
+  String get servicesBotBody =>
+      'Chatbot IA pour support client et automatisation';
+
+  @override
+  String get servicesCommercial => 'Commercial';
+
+  @override
+  String get servicesCommercialBody =>
+      'Campagnes publicitaires et outils promotionnels';
 }

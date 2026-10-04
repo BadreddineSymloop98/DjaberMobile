@@ -1751,5 +1751,18 @@
   "pageCategoryAccessories": "Accessoires",
   "pageCategoryHome": "Maison",
   "pageCategoryKids": "Enfants",
-  "pageCategoryOther": "Autre"
+  "pageCategoryOther": "Autre",
+  "servicesTitle": "Services",
+  "servicesSubtitle": "Gérez vos outils et services",
+  "servicesActive": "Actif",
+  "servicesSoon": "Bientôt",
+  "servicesOpen": "Ouvrir",
+  "servicesProducts": "Produits",
+  "servicesProductsBody": "Gérez votre inventaire, catégories et fournisseurs",
+  "servicesSales": "Ventes",
+  "servicesSalesBody": "Suivez les ventes, factures et analyses de revenus",
+  "servicesBot": "Bot",
+  "servicesBotBody": "Chatbot IA pour support client et automatisation",
+  "servicesCommercial": "Commercial",
+  "servicesCommercialBody": "Campagnes publicitaires et outils promotionnels"
 }

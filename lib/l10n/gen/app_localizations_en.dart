@@ -5787,4 +5787,47 @@ class L10nEn extends L10n {
 
   @override
   String get pageCategoryOther => 'Other';
+
+  @override
+  String get servicesTitle => 'Services';
+
+  @override
+  String get servicesSubtitle => 'Manage your business tools and services';
+
+  @override
+  String get servicesActive => 'Active';
+
+  @override
+  String get servicesSoon => 'Soon';
+
+  @override
+  String get servicesOpen => 'Open';
+
+  @override
+  String get servicesProducts => 'Products';
+
+  @override
+  String get servicesProductsBody =>
+      'Manage your product inventory, categories, and suppliers';
+
+  @override
+  String get servicesSales => 'Sales';
+
+  @override
+  String get servicesSalesBody =>
+      'Track sales, invoices, and revenue analytics';
+
+  @override
+  String get servicesBot => 'Bot';
+
+  @override
+  String get servicesBotBody =>
+      'AI-powered chatbot for customer support and automation';
+
+  @override
+  String get servicesCommercial => 'Commercial';
+
+  @override
+  String get servicesCommercialBody =>
+      'Advertising campaigns and promotional tools';
 }

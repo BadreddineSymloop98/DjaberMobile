@@ -33,6 +33,7 @@ import '../presentation/screens/delivery/delivery_providers_screen.dart';
 import '../presentation/screens/delivery/delivery_screen.dart';
 import '../presentation/screens/home/home_screen.dart';
 import '../presentation/screens/home/home_shell.dart';
+import '../presentation/screens/home/services_screen.dart';
 import '../presentation/screens/inbox/conversation_screen.dart';
 import '../presentation/screens/inbox/inbox_screen.dart';
 import '../presentation/screens/onboarding/onboarding_screen.dart';
@@ -378,6 +379,16 @@ class AppRouter {
         parentNavigatorKey: _rootKey,
         builder: (_, _) =>
             const BackScope(fallback: Routes.home, child: AgentsScreen()),
+      ),
+      GoRoute(
+        path: Routes.stockOverview,
+        parentNavigatorKey: _rootKey,
+        builder: (_, _) => const BackScope(fallback: Routes.stock, child: StockOverviewScreen()),
+      ),
+      GoRoute(
+        path: Routes.services,
+        parentNavigatorKey: _rootKey,
+        builder: (_, _) => const BackScope(fallback: Routes.home, child: ServicesScreen()),
       ),
       GoRoute(
         path: Routes.pages,

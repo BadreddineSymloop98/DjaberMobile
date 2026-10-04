@@ -2303,5 +2303,18 @@
   "pageCategoryAccessories": "Accessories",
   "pageCategoryHome": "Home",
   "pageCategoryKids": "Kids",
-  "pageCategoryOther": "Other"
+  "pageCategoryOther": "Other",
+  "servicesTitle": "Services",
+  "servicesSubtitle": "Manage your business tools and services",
+  "servicesActive": "Active",
+  "servicesSoon": "Soon",
+  "servicesOpen": "Open",
+  "servicesProducts": "Products",
+  "servicesProductsBody": "Manage your product inventory, categories, and suppliers",
+  "servicesSales": "Sales",
+  "servicesSalesBody": "Track sales, invoices, and revenue analytics",
+  "servicesBot": "Bot",
+  "servicesBotBody": "AI-powered chatbot for customer support and automation",
+  "servicesCommercial": "Commercial",
+  "servicesCommercialBody": "Advertising campaigns and promotional tools"
 }
